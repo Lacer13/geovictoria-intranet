@@ -3,11 +3,11 @@ import ActiveBreak from './ActiveBreak';
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-const GamePage = ({ triggerNavigation }) => {
+const GamePage = () => {
   const navigate = useNavigate();
 
   const handleBack = () => {
-    triggerNavigation('/');
+    navigate('/');
   };
 
   return (
