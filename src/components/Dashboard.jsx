@@ -39,33 +39,6 @@ const Dashboard = ({ triggerNavigation }) => {
     <div className="container" style={{ marginTop: '1rem' }}>
       <div className="bento-grid">
         
-        {/* Accesos Rápidos (Bento Span 3 - fila completa arriba) */}
-        <div className="bento-span-3 grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem' }}>
-          <div className="glass-panel glass-panel-hover animate-fade-in" style={{ padding: '1.5rem', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: '1rem', animationDelay: '0.1s' }} onClick={() => navigate('/organigrama')}>
-            <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(0, 86, 179, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#3388ff' }}>
-              <Users size={24} />
-            </div>
-            <h3 style={{ margin: 0, color: 'var(--text-main)' }}>Organigrama</h3>
-            <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.9rem' }}>Estructura de GeoVictoria Perú</p>
-          </div>
-          
-          <div className="glass-panel glass-panel-hover animate-fade-in" style={{ padding: '1.5rem', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: '1rem', animationDelay: '0.2s' }} onClick={() => navigate('/directorio')}>
-            <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(255, 71, 87, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ff4757' }}>
-              <LifeBuoy size={24} />
-            </div>
-            <h3 style={{ margin: 0, color: 'var(--text-main)' }}>Directorio de Ayuda</h3>
-            <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.9rem' }}>Contactos para incidencias internas</p>
-          </div>
-
-          <div className="glass-panel glass-panel-hover animate-fade-in" style={{ padding: '1.5rem', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: '1rem', animationDelay: '0.3s' }} onClick={() => navigate('/wiki')}>
-            <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(0, 196, 204, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#00c4cc' }}>
-              <BookOpen size={24} />
-            </div>
-            <h3 style={{ margin: 0, color: 'var(--text-main)' }}>Wiki Corporativa</h3>
-            <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.9rem' }}>Documentación y procesos clave</p>
-          </div>
-        </div>
-
         {/* Noticias (Bento Span 2) */}
         <div className="glass-panel bento-span-2 animate-fade-in" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
