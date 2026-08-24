@@ -9,6 +9,8 @@ import { db } from '../firebase';
 const Dashboard = ({ triggerNavigation }) => {
   const navigate = useNavigate();
   const [leaderboard, setLeaderboard] = useState([]);
+  const [news, setNews] = useState([]);
+  const [loadingNews, setLoadingNews] = useState(true);
 
   useEffect(() => {
     const fetchLeaderboard = async () => {
@@ -22,18 +24,36 @@ const Dashboard = ({ triggerNavigation }) => {
         setLeaderboard(scores);
       } catch (e) {
         console.error("Error fetching leaderboard: ", e);
-        const localScores = JSON.parse(localStorage.getItem('geoLeaderboard') || '[]');
-        setLeaderboard(localScores.slice(0, 5));
       }
     };
+    
+    const fetchNews = async () => {
+      try {
+        const q = query(collection(db, "news"), orderBy("timestamp", "desc"), limit(5));
+        const querySnapshot = await getDocs(q);
+        const newsItems = [];
+        querySnapshot.forEach((doc) => {
+          newsItems.push({ id: doc.id, ...doc.data() });
+        });
+        setNews(newsItems);
+      } catch (e) {
+        console.error("Error fetching news: ", e);
+      } finally {
+        setLoadingNews(false);
+      }
+    };
+
     fetchLeaderboard();
+    fetchNews();
   }, []);
 
-  const news = [
-    { type: 'logro', icon: <Star color="#ffa502" size={20} />, title: 'Hito alcanzado', desc: '¡Alcanzamos 5,000 clientes activos en la región!', date: 'Hace 2 horas' },
-    { type: 'anuncio', icon: <Megaphone color="#1e90ff" size={20} />, title: 'Mantenimiento', desc: 'Mantenimiento de servidores programado para el sábado.', date: 'Ayer' },
-    { type: 'cumpleaños', icon: <Calendar color="#ff4757" size={20} />, title: 'Celebración', desc: 'Cumpleaños de Laura (Ventas) y Carlos (IT).', date: 'Ayer' },
-  ];
+  const renderIconForNews = (type) => {
+    switch (type) {
+      case 'logro': return <Star color="#ffa502" size={20} />;
+      case 'cumpleaños': return <Calendar color="#ff4757" size={20} />;
+      default: return <Megaphone color="#1e90ff" size={20} />;
+    }
+  };
 
   return (
     <div className="container" style={{ marginTop: '1rem' }}>
@@ -46,13 +66,22 @@ const Dashboard = ({ triggerNavigation }) => {
             <h2 style={{ color: 'var(--text-main)', margin: 0 }}>Noticias GeoVictoria</h2>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {news.map((item, index) => (
-              <div key={index} style={{ background: 'rgba(0,0,0,0.05)', padding: '1rem', borderRadius: '8px', borderLeft: '3px solid var(--geo-secondary)' }}>
-                <span style={{ fontSize: '0.8rem', color: 'var(--geo-secondary)' }}>{item.date}</span>
-                <h4 style={{ color: 'var(--text-main)', margin: '0.3rem 0' }}>{item.title}</h4>
-                <p style={{ color: 'var(--text-muted)', margin: 0, fontSize: '0.9rem' }}>{item.desc}</p>
-              </div>
-            ))}
+            {loadingNews ? (
+              <p style={{ color: 'var(--text-muted)' }}>Cargando noticias...</p>
+            ) : news.length === 0 ? (
+              <p style={{ color: 'var(--text-muted)' }}>No hay noticias recientes.</p>
+            ) : (
+              news.map((item) => (
+                <div key={item.id} style={{ background: 'rgba(0,0,0,0.05)', padding: '1rem', borderRadius: '8px', borderLeft: '3px solid var(--geo-secondary)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.3rem' }}>
+                    {renderIconForNews(item.type)}
+                    <h4 style={{ color: 'var(--text-main)', margin: 0 }}>{item.title}</h4>
+                  </div>
+                  <span style={{ fontSize: '0.8rem', color: 'var(--geo-secondary)' }}>{item.date}</span>
+                  <p style={{ color: 'var(--text-muted)', margin: '0.5rem 0 0 0', fontSize: '0.9rem' }}>{item.desc}</p>
+                </div>
+              ))
+            )}
           </div>
         </div>
 
