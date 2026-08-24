@@ -8,6 +8,8 @@ import HelpDirectory from './components/HelpDirectory';
 import Wiki from './components/Wiki';
 import Admin from './components/Admin';
 
+import DynamicHeader from './components/DynamicHeader';
+
 const AppContent = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -18,7 +20,7 @@ const AppContent = () => {
     setTimeout(() => {
       navigate(path);
       setIsLoading(false); 
-    }, 2500); // 2.5 segundos de animación de carga
+    }, 2500); // 2.5 segundos de animacin de carga
   };
 
   if (isLoading) {
@@ -27,16 +29,8 @@ const AppContent = () => {
 
   return (
     <>
-      {/* Header global (se oculta en el juego) */}
-      {location.pathname !== '/juego' && (
-        <header style={{ padding: '1.5rem 2rem', display: 'flex', alignItems: 'center', gap: '1rem', borderBottom: '1px solid rgba(255,255,255,0.1)', background: 'rgba(11,15,25,0.8)', backdropFilter: 'blur(10px)', position: 'sticky', top: 0, zIndex: 100 }}>
-          <img src="/Logo geovictoria.png?v=2" alt="GeoVictoria" style={{ height: '40px' }} />
-          <div>
-            <h1 style={{ color: 'white', margin: 0, fontSize: '1.5rem', fontWeight: 'bold' }}>Portal de Soporte Interno</h1>
-            <p style={{ color: 'var(--geo-secondary)', margin: 0, fontSize: '0.9rem' }}>Centro de Recursos y Ayuda</p>
-          </div>
-        </header>
-      )}
+      {/* Header global (se oculta en el juego y admin opcionalmente, pero lo dejaremos para todos menos juego) */}
+      {location.pathname !== '/juego' && <DynamicHeader />}
 
       {/* Contenido principal con las rutas */}
       <main className="animate-fade-in" style={{ padding: location.pathname === '/juego' ? '0' : '0 0 2rem 0', height: location.pathname === '/juego' ? '100vh' : 'auto' }}>
