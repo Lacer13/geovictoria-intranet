@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Sun, Moon, Sunset, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-const DynamicHeader = () => {
+const DynamicHeader = ({ isLightMode, toggleTheme }) => {
   const navigate = useNavigate();
   const [time, setTime] = useState(new Date());
 
@@ -44,17 +44,16 @@ const DynamicHeader = () => {
       position: 'sticky', 
       top: '1rem', 
       zIndex: 100,
-      background: 'rgba(26, 34, 53, 0.85)', // Un poco más opaco para legibilidad al hacer scroll
+      background: 'var(--glass-bg)',
       borderRadius: '20px',
-      borderBottom: '1px solid rgba(255,255,255,0.15)'
+      borderBottom: '1px solid var(--glass-border)'
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', cursor: 'pointer' }} onClick={() => navigate('/')}>
-        <img src="/Logo geovictoria.png?v=2" alt="GeoVictoria" style={{ height: '45px', filter: 'drop-shadow(0 0 8px rgba(0,196,204,0.3))' }} />
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Icon size={20} color={iconColor} className="animate-fade-in" />
-            <h1 style={{ color: 'white', margin: 0, fontSize: '1.3rem', fontWeight: '600' }}>
-              {greeting}, <span style={{ color: 'var(--geo-secondary)' }}>Equipo</span>
+            <h1 style={{ color: 'var(--text-main)', margin: 0, fontSize: '1.3rem', fontWeight: '600' }}>
+              {greeting}, <span style={{ color: 'var(--geo-primary-light)' }}>Equipo</span>
             </h1>
           </div>
           <p style={{ color: 'var(--text-muted)', margin: 0, fontSize: '0.85rem', textTransform: 'capitalize' }}>
@@ -63,11 +62,33 @@ const DynamicHeader = () => {
         </div>
       </div>
 
-      <div className="glass-panel" style={{ padding: '0.5rem 1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', borderRadius: '12px', background: 'rgba(0,0,0,0.2)' }}>
-        <Clock size={16} color="var(--geo-primary-light)" />
-        <span style={{ color: 'white', fontWeight: '500', fontFamily: 'monospace', fontSize: '1.1rem' }}>
-          {formatTime(time)}
-        </span>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <button 
+          onClick={toggleTheme}
+          style={{
+            background: 'rgba(0,0,0,0.1)',
+            border: '1px solid var(--border-color)',
+            borderRadius: '50%',
+            width: '40px',
+            height: '40px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            color: 'var(--text-main)',
+            transition: 'all var(--transition-fast)'
+          }}
+          title={isLightMode ? "Cambiar a Modo Oscuro" : "Cambiar a Modo Claro"}
+        >
+          {isLightMode ? <Moon size={18} /> : <Sun size={18} />}
+        </button>
+
+        <div className="glass-panel" style={{ padding: '0.5rem 1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', borderRadius: '12px', background: 'rgba(0,0,0,0.1)' }}>
+          <Clock size={16} color="var(--geo-primary-light)" />
+          <span style={{ color: 'var(--text-main)', fontWeight: '500', fontFamily: 'monospace', fontSize: '1.1rem' }}>
+            {formatTime(time)}
+          </span>
+        </div>
       </div>
     </header>
   );

@@ -10,40 +10,67 @@ import Admin from './components/Admin';
 
 import DynamicHeader from './components/DynamicHeader';
 
+import Sidebar from './components/Sidebar';
+
 const AppContent = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isLightMode, setIsLightMode] = useState(() => localStorage.getItem('geoTheme') === 'light');
   const navigate = useNavigate();
   const location = useLocation();
+
+  const toggleTheme = () => {
+    const newMode = !isLightMode;
+    setIsLightMode(newMode);
+    localStorage.setItem('geoTheme', newMode ? 'light' : 'dark');
+    if (newMode) {
+      document.body.classList.add('light-mode');
+    } else {
+      document.body.classList.remove('light-mode');
+    }
+  };
+
+  React.useEffect(() => {
+    if (isLightMode) {
+      document.body.classList.add('light-mode');
+    }
+  }, [isLightMode]);
 
   const triggerNavigation = (path) => {
     setIsLoading(true);
     setTimeout(() => {
       navigate(path);
       setIsLoading(false); 
-    }, 2500); // 2.5 segundos de animacin de carga
+    }, 2500);
   };
 
   if (isLoading) {
     return <LoadingScreen onComplete={() => {}} />;
   }
 
-  return (
-    <>
-      {/* Header global (se oculta en el juego y admin opcionalmente, pero lo dejaremos para todos menos juego) */}
-      {location.pathname !== '/juego' && <DynamicHeader />}
+  const isGameRoute = location.pathname === '/juego';
 
-      {/* Contenido principal con las rutas */}
-      <main className="animate-fade-in" style={{ padding: location.pathname === '/juego' ? '0' : '0 0 2rem 0', height: location.pathname === '/juego' ? '100vh' : 'auto' }}>
-        <Routes>
-          <Route path="/" element={<Dashboard triggerNavigation={triggerNavigation} />} />
-          <Route path="/juego" element={<GamePage />} />
-          <Route path="/organigrama" element={<OrgChart />} />
-          <Route path="/directorio" element={<HelpDirectory />} />
-          <Route path="/wiki" element={<Wiki />} />
-          <Route path="/admin" element={<Admin />} />
-        </Routes>
-      </main>
-    </>
+  return (
+    <div style={{ display: 'flex', minHeight: '100vh', width: '100vw', overflowX: 'hidden' }}>
+      {/* Sidebar Fijo */}
+      {!isGameRoute && <Sidebar />}
+
+      {/* Contenedor Principal (Main) */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', width: isGameRoute ? '100%' : 'calc(100% - 260px)' }}>
+        
+        {!isGameRoute && <DynamicHeader isLightMode={isLightMode} toggleTheme={toggleTheme} />}
+
+        <main className="animate-fade-in" style={{ padding: isGameRoute ? '0' : '0 1rem 2rem 1rem', flex: 1 }}>
+          <Routes>
+            <Route path="/" element={<Dashboard triggerNavigation={triggerNavigation} />} />
+            <Route path="/juego" element={<GamePage />} />
+            <Route path="/organigrama" element={<OrgChart />} />
+            <Route path="/directorio" element={<HelpDirectory />} />
+            <Route path="/wiki" element={<Wiki />} />
+            <Route path="/admin" element={<Admin />} />
+          </Routes>
+        </main>
+      </div>
+    </div>
   );
 };
 
