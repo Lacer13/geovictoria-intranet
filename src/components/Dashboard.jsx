@@ -42,26 +42,29 @@ const Dashboard = ({ triggerNavigation }) => {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
         
         {/* Accesos Rápidos (Ahora son 3) */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-          <div className="glass-panel" style={{ padding: '1.2rem', display: 'flex', flexDirection: 'column', gap: '0.8rem', cursor: 'pointer', transition: 'transform 0.2s ease' }} onClick={() => navigate('/organigrama')} onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'} onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}>
-            <div style={{ background: 'rgba(0,196,204,0.1)', padding: '0.8rem', borderRadius: '12px', width: 'fit-content' }}>
-              <Users color="var(--geo-secondary)" size={24} />
+        <div className="grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
+          <div className="glass-panel glass-panel-hover animate-fade-in" style={{ padding: '1.5rem', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: '1rem', animationDelay: '0.1s' }} onClick={() => navigate('/organigrama')}>
+            <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(0, 86, 179, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#3388ff' }}>
+              <Users size={24} />
             </div>
-            <h3 style={{ color: 'white', margin: 0, fontSize: '1.1rem' }}>Organigrama</h3>
+            <h3 style={{ margin: 0, color: 'white' }}>Organigrama</h3>
+            <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.9rem' }}>Conoce la estructura de GeoVictoria Perú</p>
+          </div>
+          
+          <div className="glass-panel glass-panel-hover animate-fade-in" style={{ padding: '1.5rem', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: '1rem', animationDelay: '0.2s' }} onClick={() => navigate('/directorio')}>
+            <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(255, 71, 87, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ff4757' }}>
+              <LifeBuoy size={24} />
+            </div>
+            <h3 style={{ margin: 0, color: 'white' }}>Directorio de Ayuda</h3>
+            <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.9rem' }}>Contactos para resolver incidencias internas</p>
           </div>
 
-          <div className="glass-panel" style={{ padding: '1.2rem', display: 'flex', flexDirection: 'column', gap: '0.8rem', cursor: 'pointer', transition: 'transform 0.2s ease' }} onClick={() => navigate('/directorio')} onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'} onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}>
-            <div style={{ background: 'rgba(0,196,204,0.1)', padding: '0.8rem', borderRadius: '12px', width: 'fit-content' }}>
-              <LifeBuoy color="var(--geo-secondary)" size={24} />
+          <div className="glass-panel glass-panel-hover animate-fade-in" style={{ padding: '1.5rem', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: '1rem', animationDelay: '0.3s' }} onClick={() => navigate('/wiki')}>
+            <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(0, 196, 204, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#00c4cc' }}>
+              <BookOpen size={24} />
             </div>
-            <h3 style={{ color: 'white', margin: 0, fontSize: '1.1rem' }}>Soporte Interno</h3>
-          </div>
-
-          <div className="glass-panel" style={{ padding: '1.2rem', display: 'flex', flexDirection: 'column', gap: '0.8rem', cursor: 'pointer', transition: 'transform 0.2s ease' }} onClick={() => navigate('/wiki')} onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'} onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}>
-            <div style={{ background: 'rgba(0,196,204,0.1)', padding: '0.8rem', borderRadius: '12px', width: 'fit-content' }}>
-              <BookOpen color="var(--geo-secondary)" size={24} />
-            </div>
-            <h3 style={{ color: 'white', margin: 0, fontSize: '1.1rem' }}>Base de Conocimiento</h3>
+            <h3 style={{ margin: 0, color: 'white' }}>Wiki Corporativa</h3>
+            <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.9rem' }}>Documentación y procesos clave</p>
           </div>
         </div>
 

@@ -39,7 +39,7 @@ const AppContent = () => {
       )}
 
       {/* Contenido principal con las rutas */}
-      <main style={{ padding: location.pathname === '/juego' ? '0' : '0 0 2rem 0', height: location.pathname === '/juego' ? '100vh' : 'auto' }}>
+      <main className="animate-fade-in" style={{ padding: location.pathname === '/juego' ? '0' : '0 0 2rem 0', height: location.pathname === '/juego' ? '100vh' : 'auto' }}>
         <Routes>
           <Route path="/" element={<Dashboard triggerNavigation={triggerNavigation} />} />
           <Route path="/juego" element={<GamePage />} />

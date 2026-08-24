@@ -70,6 +70,13 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid var(--glass-border);
   border-radius: 16px;
   box-shadow: var(--shadow-card);
+  transition: all var(--transition-normal);
+}
+
+.glass-panel-hover:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), var(--glow-primary);
 }
 
 /* Button Styles */
@@ -84,9 +91,13 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
   font-size: 1rem;
   cursor: pointer;
-  transition: all var(--transition-normal);
+  transition: all var(--transition-fast);
   border: none;
   outline: none;
+}
+
+.btn:active {
+  transform: scale(0.95) !important;
 }
 
 .btn-primary {
@@ -109,6 +120,7 @@ h1, h2, h3, h4, h5, h6 {
 .btn-secondary:hover {
   background: rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 /* Inputs */
@@ -173,12 +185,22 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(15px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .animate-fade-in {
-  animation: fadeIn var(--transition-slow) forwards;
+  animation: fadeIn var(--transition-slow) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pulse-glow {
+  0% { box-shadow: 0 0 10px rgba(0, 86, 179, 0.3); }
+  50% { box-shadow: 0 0 25px rgba(0, 86, 179, 0.7); }
+  100% { box-shadow: 0 0 10px rgba(0, 86, 179, 0.3); }
+}
+
+.glow-effect {
+  animation: pulse-glow 3s infinite;
 }
 
 @keyframes float {
