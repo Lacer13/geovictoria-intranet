@@ -3,15 +3,21 @@ import React, { useState, useEffect } from 'react';
 const LoadingScreen = ({ onComplete }) => {
   const [fadeOut, setFadeOut] = useState(false);
 
+  const handleVideoEnded = () => {
+    setFadeOut(true);
+    setTimeout(() => onComplete(), 800);
+  };
+
+  // Respaldo de seguridad (por si el video falla en cargar)
   useEffect(() => {
-    // The video is around 5-10 seconds, we can hide it after 3.5s or listen to the ended event.
     const timer = setTimeout(() => {
-      setFadeOut(true);
-      setTimeout(() => onComplete(), 800); // wait for fade transition
-    }, 4000);
+      if (!fadeOut) {
+        handleVideoEnded();
+      }
+    }, 10000); 
     
     return () => clearTimeout(timer);
-  }, [onComplete]);
+  }, [fadeOut, onComplete]);
 
   return (
     <div className={`loading-screen ${fadeOut ? 'fade-out' : ''}`}>
@@ -20,6 +26,7 @@ const LoadingScreen = ({ onComplete }) => {
         autoPlay 
         muted 
         playsInline
+        onEnded={handleVideoEnded}
       >
         <source src="/Nuevo Video VictorIA.mp4" type="video/mp4" />
         Tu navegador no soporta videos.
