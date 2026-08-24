@@ -11,6 +11,7 @@ import Admin from './components/Admin';
 import DynamicHeader from './components/DynamicHeader';
 
 import Sidebar from './components/Sidebar';
+import { Toaster } from 'react-hot-toast';
 
 const AppContent = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -83,6 +84,24 @@ const App = () => {
 
   return (
     <Router>
+      <Toaster 
+        position="top-right"
+        toastOptions={{
+          style: {
+            background: 'var(--glass-bg)',
+            color: 'var(--text-main)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid var(--glass-border)',
+            borderRadius: '12px',
+          },
+          success: {
+            iconTheme: {
+              primary: 'var(--geo-secondary)',
+              secondary: 'white',
+            },
+          },
+        }} 
+      />
       <AppContent />
     </Router>
   );

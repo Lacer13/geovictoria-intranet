@@ -3,6 +3,7 @@ import { ArrowLeft, Lock, Inbox, Trash2, Megaphone, Plus, Star, Calendar } from 
 import { useNavigate } from 'react-router-dom';
 import { collection, getDocs, deleteDoc, doc, addDoc } from 'firebase/firestore';
 import { db } from '../firebase';
+import toast from 'react-hot-toast';
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -64,30 +65,62 @@ const Admin = () => {
     }
   };
 
-  const handleDeleteFeedback = async (msgId) => {
-    if(window.confirm('¿Estás seguro de eliminar este reporte?')) {
-      if (db && msgId) {
-        try {
-          await deleteDoc(doc(db, "feedbacks", msgId));
-          loadMessages();
-        } catch (err) {
-          console.error("Error eliminando documento:", err);
-        }
-      }
-    }
+  const handleDeleteFeedback = (msgId) => {
+    toast((t) => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <p style={{ margin: 0 }}>¿Estás seguro de eliminar este reporte?</p>
+        <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end' }}>
+          <button className="btn" onClick={() => toast.dismiss(t.id)} style={{ padding: '0.5rem', fontSize: '0.9rem' }}>Cancelar</button>
+          <button 
+            className="btn btn-primary" 
+            style={{ padding: '0.5rem', fontSize: '0.9rem', background: '#ff4757', borderColor: '#ff4757' }}
+            onClick={async () => {
+              toast.dismiss(t.id);
+              if (db && msgId) {
+                try {
+                  await deleteDoc(doc(db, "feedbacks", msgId));
+                  loadMessages();
+                  toast.success("Reporte eliminado.");
+                } catch (err) {
+                  toast.error("Error eliminando documento.");
+                }
+              }
+            }}
+          >
+            Eliminar
+          </button>
+        </div>
+      </div>
+    ), { duration: Infinity });
   };
 
-  const handleDeleteNews = async (newsId) => {
-    if(window.confirm('¿Estás seguro de eliminar esta noticia?')) {
-      if (db && newsId) {
-        try {
-          await deleteDoc(doc(db, "news", newsId));
-          loadNews();
-        } catch (err) {
-          console.error("Error eliminando noticia:", err);
-        }
-      }
-    }
+  const handleDeleteNews = (newsId) => {
+    toast((t) => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <p style={{ margin: 0 }}>¿Estás seguro de eliminar esta noticia?</p>
+        <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end' }}>
+          <button className="btn" onClick={() => toast.dismiss(t.id)} style={{ padding: '0.5rem', fontSize: '0.9rem' }}>Cancelar</button>
+          <button 
+            className="btn btn-primary" 
+            style={{ padding: '0.5rem', fontSize: '0.9rem', background: '#ff4757', borderColor: '#ff4757' }}
+            onClick={async () => {
+              toast.dismiss(t.id);
+              if (db && newsId) {
+                try {
+                  await deleteDoc(doc(db, "news", newsId));
+                  loadNews();
+                  toast.success("Noticia eliminada.");
+                } catch (err) {
+                  toast.error("Error eliminando noticia.");
+                }
+              }
+            }}
+          >
+            Eliminar
+          </button>
+        </div>
+      </div>
+    ), { duration: Infinity });
   };
 
   const handleAddNews = async (e) => {
@@ -105,10 +138,10 @@ const Admin = () => {
       setNewsTitle('');
       setNewsDesc('');
       loadNews();
-      alert("Noticia publicada exitosamente.");
+      toast.success("Noticia publicada exitosamente.");
     } catch (err) {
       console.error("Error agregando noticia:", err);
-      alert("Hubo un error al publicar la noticia.");
+      toast.error("Hubo un error al publicar la noticia.");
     }
   };
 
