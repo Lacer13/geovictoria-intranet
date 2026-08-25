@@ -632,7 +632,7 @@ const ActiveBreak = ({ isFullscreen = false }) => {
         ctx.fillStyle = '#ffffff';
         ctx.font = 'bold 12px monospace';
         ctx.textAlign = 'center';
-        ctx.fillText(`💀 JEFE: ${Math.max(0, b.hp)}/${b.maxHp}`, b.x + b.width/2, b.y + bBobY - 45);
+        ctx.fillText(`JEFE: ${Math.max(0, b.hp)}/${b.maxHp}`, b.x + b.width/2, b.y + bBobY - 45);
       }
 
       // Floating Texts
