@@ -251,11 +251,11 @@ const ActiveBreak = ({ isFullscreen = false }) => {
       if (keys.current.ArrowDown) targetDy = 1;
       if (keys.current.JoyY !== 0) targetDy = -keys.current.JoyY; // JoyY is positive up, we need negative up
 
-      if (targetDy < 0 && state.player.y > -state.player.height/2) {
+      if (targetDy < 0 && state.player.y > state.player.height/2) {
         state.player.y += targetDy * state.player.speed;
         state.player.dy = targetDy;
       }
-      if (targetDy > 0 && state.player.y < canvas.height - state.player.height/2 - 120) {
+      if (targetDy > 0 && state.player.y < canvas.height - state.player.height/2 - 60) {
         state.player.y += targetDy * state.player.speed;
         state.player.dy = targetDy;
       }
@@ -326,7 +326,7 @@ const ActiveBreak = ({ isFullscreen = false }) => {
         const b = state.boss;
         b.y += b.dy;
         // Boss también respeta límite inferior
-        if (b.y <= 20 || b.y + b.height >= canvas.height - 120) b.dy *= -1;
+        if (b.y <= 20 || b.y + b.height >= canvas.height - 60) b.dy *= -1;
         if (b.hitFlash > 0) b.hitFlash--;
 
         if (state.frames - b.lastShot > 70) {
@@ -550,10 +550,10 @@ const ActiveBreak = ({ isFullscreen = false }) => {
         ctx.font = '20px Arial';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        if (pu.type === 'heal') ctx.fillText('+', 0, 0);
-        else if (pu.type === 'shield') ctx.fillText('S', 0, 0);
-        else if (pu.type === 'spread') ctx.fillText('^', 0, 4);
-        else if (pu.type === 'bomb') ctx.fillText('B', 0, 2);
+        if (pu.type === 'heal') ctx.fillText('❤️', 0, 0);
+        else if (pu.type === 'shield') ctx.fillText('🛡️', 0, 0);
+        else if (pu.type === 'spread') ctx.fillText('✨', 0, 0);
+        else if (pu.type === 'bomb') ctx.fillText('💣', 0, 0);
         else {
           // Dibujo de "Dos balas" en lugar de emoji
           ctx.fillStyle = '#ffffff';
@@ -611,13 +611,28 @@ const ActiveBreak = ({ isFullscreen = false }) => {
         ctx.restore();
 
         // CORRECCIÓN: Dibujar barra de vida del Boss
-        ctx.fillStyle = 'rgba(255,0,0,0.5)';
-        ctx.fillRect(b.x, b.y + bBobY - 20, b.width, 10);
-        ctx.fillStyle = '#2ed573';
-        ctx.fillRect(b.x, b.y + bBobY - 20, b.width * (b.hp / b.maxHp), 10);
-        ctx.strokeStyle = '#fff';
-        ctx.lineWidth = 1;
-        ctx.strokeRect(b.x, b.y + bBobY - 20, b.width, 10);
+        ctx.fillStyle = 'rgba(0,0,0,0.8)';
+        ctx.fillRect(b.x - 10, b.y + bBobY - 35, b.width + 20, 24);
+        
+        ctx.fillStyle = 'rgba(255,71,87,0.3)'; // Fondo rojo oscuro
+        ctx.fillRect(b.x - 6, b.y + bBobY - 31, b.width + 12, 16);
+        
+        // Gradiente para la vida
+        const hpGradient = ctx.createLinearGradient(b.x, 0, b.x + b.width, 0);
+        hpGradient.addColorStop(0, '#ff4757');
+        hpGradient.addColorStop(1, '#ff6b81');
+        
+        ctx.fillStyle = hpGradient;
+        ctx.fillRect(b.x - 6, b.y + bBobY - 31, (b.width + 12) * (Math.max(0, b.hp) / b.maxHp), 16);
+        
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(b.x - 6, b.y + bBobY - 31, b.width + 12, 16);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 12px monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText(`💀 JEFE: ${Math.max(0, b.hp)}/${b.maxHp}`, b.x + b.width/2, b.y + bBobY - 45);
       }
 
       // Floating Texts
@@ -719,7 +734,7 @@ const ActiveBreak = ({ isFullscreen = false }) => {
       {/* Controles Móviles Flotantes */}
       {gameState === 'playing' && (
         <div style={{ position: 'absolute', bottom: '2rem', left: '2rem', right: '2rem', display: 'flex', justifyContent: 'space-between', padding: '0', zIndex: 10 }}>
-          <div style={{ display: 'flex', alignItems: 'flex-end', opacity: 0.8 }}>
+          <div style={{ display: 'flex', alignItems: 'flex-end', opacity: 0.5 }}>
             <Joystick 
               size={120} 
               baseColor="rgba(255,255,255,0.1)" 
