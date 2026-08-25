@@ -251,11 +251,11 @@ const ActiveBreak = ({ isFullscreen = false }) => {
       if (keys.current.ArrowDown) targetDy = 1;
       if (keys.current.JoyY !== 0) targetDy = -keys.current.JoyY; // JoyY is positive up, we need negative up
 
-      if (targetDy < 0 && state.player.y > state.player.height/2) {
+      if (targetDy < 0 && state.player.y > 0) {
         state.player.y += targetDy * state.player.speed;
         state.player.dy = targetDy;
       }
-      if (targetDy > 0 && state.player.y < canvas.height - state.player.height/2) {
+      if (targetDy > 0 && state.player.y < canvas.height - state.player.height - 60) {
         state.player.y += targetDy * state.player.speed;
         state.player.dy = targetDy;
       }
@@ -326,7 +326,7 @@ const ActiveBreak = ({ isFullscreen = false }) => {
         const b = state.boss;
         b.y += b.dy;
         // Boss también respeta límite inferior
-        if (b.y <= 20 || b.y + b.height >= canvas.height - 20) b.dy *= -1;
+        if (b.y <= 20 || b.y + b.height >= canvas.height - 60) b.dy *= -1;
         if (b.hitFlash > 0) b.hitFlash--;
 
         if (state.frames - b.lastShot > 70) {
@@ -725,7 +725,7 @@ const ActiveBreak = ({ isFullscreen = false }) => {
       )}
 
       <div style={{ 
-        position: 'relative', width: '100%', margin: '0', background: '#000', overflow: 'hidden', flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: 'inset 0 0 50px rgba(0,196,204,0.1)'
+        position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: '#000', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center'
       }}>
         <canvas 
           ref={canvasRef} 
@@ -772,14 +772,16 @@ const ActiveBreak = ({ isFullscreen = false }) => {
       {/* Panel de Controles Inferior (Fuera del Canvas) */}
       {gameState === 'playing' && (
         <div style={{ 
-          height: '160px', 
-          background: '#050810', 
-          borderTop: '2px solid rgba(0,196,204,0.3)', 
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          width: '100%',
+          height: '180px', 
+          background: 'linear-gradient(to top, rgba(5,8,16,1) 0%, rgba(5,8,16,0.8) 60%, rgba(5,8,16,0) 100%)', 
           display: 'flex', 
           justifyContent: 'space-between', 
-          alignItems: 'center',
-          padding: '0 2rem',
-          boxShadow: '0 -10px 30px rgba(0,0,0,0.5)',
+          alignItems: 'flex-end',
+          padding: '1.5rem 2rem',
           zIndex: 10 
         }}>
           <div style={{ opacity: 0.8, transform: 'scale(0.9)', transformOrigin: 'left center' }}>
