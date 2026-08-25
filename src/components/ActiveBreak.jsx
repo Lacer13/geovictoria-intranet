@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Gamepad2, Play, Trophy, RefreshCw, ArrowUp, ArrowDown, Crosshair, Heart, Save } from 'lucide-react';
+import { Joystick } from 'react-joystick-component';
 
 import { collection, addDoc, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
@@ -59,7 +60,7 @@ const ActiveBreak = ({ isFullscreen = false }) => {
   const CH = isFullscreen ? 450 : 300;
 
   const stateRef = useRef({
-    player: { x: 50, y: CH/2, width: 120, height: 120, speed: 7, hp: 3, dy: 0, tilt: 0, state: 'idle', stateTimer: 0, shieldTimer: 0, doubleLaserTimer: 0 },
+    player: { x: 50, y: CH/2, width: 120, height: 120, speed: 7, hp: 3, dx: 0, dy: 0, tilt: 0, state: 'idle', stateTimer: 0, shieldTimer: 0, doubleLaserTimer: 0, spreadTimer: 0 },
     lasers: [],
     enemies: [],
     particles: [],
@@ -73,12 +74,14 @@ const ActiveBreak = ({ isFullscreen = false }) => {
     cameraShake: 0 
   });
 
-  const keys = useRef({ ArrowUp: false, ArrowDown: false, Space: false });
+  const keys = useRef({ ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false, Space: false, JoyX: 0, JoyY: 0 });
 
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.code === 'ArrowUp' || e.code === 'KeyW') keys.current.ArrowUp = true;
       if (e.code === 'ArrowDown' || e.code === 'KeyS') keys.current.ArrowDown = true;
+      if (e.code === 'ArrowLeft' || e.code === 'KeyA') keys.current.ArrowLeft = true;
+      if (e.code === 'ArrowRight' || e.code === 'KeyD') keys.current.ArrowRight = true;
       if (e.code === 'Space') {
         keys.current.Space = true;
         fireLaser();
@@ -88,6 +91,8 @@ const ActiveBreak = ({ isFullscreen = false }) => {
     const handleKeyUp = (e) => {
       if (e.code === 'ArrowUp' || e.code === 'KeyW') keys.current.ArrowUp = false;
       if (e.code === 'ArrowDown' || e.code === 'KeyS') keys.current.ArrowDown = false;
+      if (e.code === 'ArrowLeft' || e.code === 'KeyA') keys.current.ArrowLeft = false;
+      if (e.code === 'ArrowRight' || e.code === 'KeyD') keys.current.ArrowRight = false;
       if (e.code === 'Space') keys.current.Space = false;
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -105,20 +110,31 @@ const ActiveBreak = ({ isFullscreen = false }) => {
     p.state = 'shooting';
     p.stateTimer = 15;
 
-    if (p.doubleLaserTimer > 0) {
-      // Disparo Doble
+    if (p.spreadTimer > 0) {
+      // Disparo Abanico (3 lasers)
       stateRef.current.lasers.push({
-        x: p.x + p.width - 20, y: p.y + p.height / 2 - 15, width: 25, height: 4, speed: 15, color: '#ffea00'
+        x: p.x + p.width - 20, y: p.y + p.height / 2, width: 25, height: 6, speed: 15, vy: 0, color: '#9c88ff'
       });
       stateRef.current.lasers.push({
-        x: p.x + p.width - 20, y: p.y + p.height / 2 + 15, width: 25, height: 4, speed: 15, color: '#ffea00'
+        x: p.x + p.width - 20, y: p.y + p.height / 2 - 10, width: 25, height: 4, speed: 14, vy: -3, color: '#9c88ff'
+      });
+      stateRef.current.lasers.push({
+        x: p.x + p.width - 20, y: p.y + p.height / 2 + 10, width: 25, height: 4, speed: 14, vy: 3, color: '#9c88ff'
+      });
+    } else if (p.doubleLaserTimer > 0) {
+      // Disparo Doble
+      stateRef.current.lasers.push({
+        x: p.x + p.width - 20, y: p.y + p.height / 2 - 15, width: 25, height: 4, speed: 15, vy: 0, color: '#ffea00'
+      });
+      stateRef.current.lasers.push({
+        x: p.x + p.width - 20, y: p.y + p.height / 2 + 15, width: 25, height: 4, speed: 15, vy: 0, color: '#ffea00'
       });
     } else {
       // Disparo Normal
       stateRef.current.lasers.push({
         x: p.x + p.width - 20,
         y: p.y + p.height / 2 + Math.sin(stateRef.current.frames * 0.1) * 3,
-        width: 25, height: 4, speed: 15, color: '#00ffff'
+        width: 25, height: 4, speed: 15, vy: 0, color: '#00ffff'
       });
     }
   };
@@ -152,7 +168,7 @@ const ActiveBreak = ({ isFullscreen = false }) => {
   };
 
   const spawnPowerup = (x, y) => {
-    const types = ['heal', 'shield', 'laser'];
+    const types = ['heal', 'shield', 'laser', 'spread', 'bomb'];
     const type = types[Math.floor(Math.random() * types.length)];
     stateRef.current.powerups.push({
       x, y, width: 40, height: 40, type, bobOffset: Math.random() * Math.PI * 2
@@ -203,6 +219,7 @@ const ActiveBreak = ({ isFullscreen = false }) => {
       if (state.cameraShake > 0) state.cameraShake *= 0.9;
       if (state.player.shieldTimer > 0) state.player.shieldTimer--;
       if (state.player.doubleLaserTimer > 0) state.player.doubleLaserTimer--;
+      if (state.player.spreadTimer > 0) state.player.spreadTimer--;
 
       if (state.player.state !== 'idle') {
         state.player.stateTimer--;
@@ -210,15 +227,37 @@ const ActiveBreak = ({ isFullscreen = false }) => {
       }
 
       // Movement bounds (Limitado abajo para no chocar con controles táctiles)
+      state.player.dx = 0;
       state.player.dy = 0;
-      if (keys.current.ArrowUp && state.player.y > -state.player.height/2) {
-        state.player.y -= state.player.speed;
-        state.player.dy = -1;
+      
+      // X Movement
+      let targetDx = 0;
+      if (keys.current.ArrowLeft) targetDx = -1;
+      if (keys.current.ArrowRight) targetDx = 1;
+      if (keys.current.JoyX !== 0) targetDx = keys.current.JoyX;
+
+      if (targetDx < 0 && state.player.x > 0) {
+        state.player.x += targetDx * state.player.speed;
+        state.player.dx = targetDx;
       }
-      // CORRECCIÓN: Limitar Y máxima para no superponer los controles móviles
-      if (keys.current.ArrowDown && state.player.y < canvas.height - state.player.height/2 - 120) {
-        state.player.y += state.player.speed;
-        state.player.dy = 1;
+      if (targetDx > 0 && state.player.x < canvas.width/2) {
+        state.player.x += targetDx * state.player.speed;
+        state.player.dx = targetDx;
+      }
+
+      // Y Movement
+      let targetDy = 0;
+      if (keys.current.ArrowUp) targetDy = -1;
+      if (keys.current.ArrowDown) targetDy = 1;
+      if (keys.current.JoyY !== 0) targetDy = -keys.current.JoyY; // JoyY is positive up, we need negative up
+
+      if (targetDy < 0 && state.player.y > -state.player.height/2) {
+        state.player.y += targetDy * state.player.speed;
+        state.player.dy = targetDy;
+      }
+      if (targetDy > 0 && state.player.y < canvas.height - state.player.height/2 - 120) {
+        state.player.y += targetDy * state.player.speed;
+        state.player.dy = targetDy;
       }
 
       state.player.tilt += (state.player.dy * -0.2 - state.player.tilt) * 0.15;
@@ -235,7 +274,8 @@ const ActiveBreak = ({ isFullscreen = false }) => {
       // Lasers
       state.lasers.forEach((l, i) => {
         l.x += l.speed;
-        if (l.x > canvas.width || l.x < -50) state.lasers.splice(i, 1);
+        if (l.vy) l.y += l.vy;
+        if (l.x > canvas.width || l.x < -50 || l.y < -50 || l.y > canvas.height + 50) state.lasers.splice(i, 1);
       });
 
       // Powerups Update & Collision
@@ -259,6 +299,19 @@ const ActiveBreak = ({ isFullscreen = false }) => {
           } else if (pu.type === 'laser') {
             state.player.doubleLaserTimer = 600; // 10 secs
             addFloatingText(state.player.x, state.player.y, "LÁSER DUAL", "#ffa502");
+          } else if (pu.type === 'spread') {
+            state.player.spreadTimer = 600; // 10 secs
+            addFloatingText(state.player.x, state.player.y, "ABANICO", "#9c88ff");
+          } else if (pu.type === 'bomb') {
+            addFloatingText(state.player.x, state.player.y, "¡BOMBA!", "#ff4757");
+            state.cameraShake = 30;
+            // Destruir enemigos menores
+            state.enemies.forEach(e => {
+              createExplosion(e.x + e.width/2, e.y + e.height/2, '#ffaa00', 15);
+              state.score += 10;
+            });
+            setScore(state.score);
+            state.enemies = []; // limpiar todos
           }
         }
         if (pu.x < -50) state.powerups.splice(pui, 1);
@@ -477,11 +530,15 @@ const ActiveBreak = ({ isFullscreen = false }) => {
         
         ctx.shadowBlur = 15;
         if (pu.type === 'heal') {
-          ctx.shadowColor = '#ff4757'; ctx.fillStyle = '#ff4757';
+          ctx.shadowColor = '#2ed573'; ctx.fillStyle = '#2ed573';
         } else if (pu.type === 'shield') {
           ctx.shadowColor = '#1e90ff'; ctx.fillStyle = '#1e90ff';
-        } else {
+        } else if (pu.type === 'laser') {
           ctx.shadowColor = '#ffa502'; ctx.fillStyle = '#ffa502';
+        } else if (pu.type === 'spread') {
+          ctx.shadowColor = '#9c88ff'; ctx.fillStyle = '#9c88ff';
+        } else if (pu.type === 'bomb') {
+          ctx.shadowColor = '#ff4757'; ctx.fillStyle = '#ff4757';
         }
         
         ctx.beginPath();
@@ -493,11 +550,12 @@ const ActiveBreak = ({ isFullscreen = false }) => {
         ctx.font = '20px Arial';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        if (pu.type === 'heal') ctx.fillText('❤️', 0, 0);
-        else if (pu.type === 'shield') ctx.fillText('🛡️', 0, 0);
+        if (pu.type === 'heal') ctx.fillText('+', 0, 0);
+        else if (pu.type === 'shield') ctx.fillText('S', 0, 0);
+        else if (pu.type === 'spread') ctx.fillText('^', 0, 4);
+        else if (pu.type === 'bomb') ctx.fillText('B', 0, 2);
         else {
           // Dibujo de "Dos balas" en lugar de emoji
-          ctx.shadowBlur = 0;
           ctx.fillStyle = '#ffffff';
           ctx.fillRect(-6, -8, 3, 16); // Bala izquierda
           ctx.fillRect(3, -8, 3, 16);  // Bala derecha
@@ -657,29 +715,28 @@ const ActiveBreak = ({ isFullscreen = false }) => {
           </div>
         )}
       </div>
-
+      
       {/* Controles Móviles Flotantes */}
       {gameState === 'playing' && (
         <div style={{ position: 'absolute', bottom: '2rem', left: '2rem', right: '2rem', display: 'flex', justifyContent: 'space-between', padding: '0', zIndex: 10 }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            <button 
-              className="btn" 
-              style={{ width: '70px', height: '70px', padding: 0, borderRadius: '50%', background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.2)', color: 'white' }}
-              onPointerDown={(e) => { e.preventDefault(); keys.current.ArrowUp = true; }}
-              onPointerUp={(e) => { e.preventDefault(); keys.current.ArrowUp = false; }}
-              onPointerLeave={() => keys.current.ArrowUp = false}
-            >
-              <ArrowUp size={32} />
-            </button>
-            <button 
-              className="btn" 
-              style={{ width: '70px', height: '70px', padding: 0, borderRadius: '50%', background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.2)', color: 'white' }}
-              onPointerDown={(e) => { e.preventDefault(); keys.current.ArrowDown = true; }}
-              onPointerUp={(e) => { e.preventDefault(); keys.current.ArrowDown = false; }}
-              onPointerLeave={() => keys.current.ArrowDown = false}
-            >
-              <ArrowDown size={32} />
-            </button>
+          <div style={{ display: 'flex', alignItems: 'flex-end', opacity: 0.8 }}>
+            <Joystick 
+              size={120} 
+              baseColor="rgba(255,255,255,0.1)" 
+              stickColor="rgba(0,196,204,0.6)" 
+              move={(e) => {
+                // e.x, e.y are normalized from -1 to 1 but with physics interpolation
+                // It can go a bit above 1. Let's clamp or use it directly.
+                // React-joystick-component `move` event returns x and y coordinates relative to center, or we can use e.x and e.y which are distance values.
+                // Actually `e.x` and `e.y` are distances. To get normalized (-1 to 1):
+                keys.current.JoyX = e.x / 60; 
+                keys.current.JoyY = e.y / 60;
+              }} 
+              stop={() => {
+                keys.current.JoyX = 0;
+                keys.current.JoyY = 0;
+              }} 
+            />
           </div>
           
           <div style={{ display: 'flex', alignItems: 'flex-end' }}>
