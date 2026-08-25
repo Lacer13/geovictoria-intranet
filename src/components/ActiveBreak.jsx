@@ -255,7 +255,7 @@ const ActiveBreak = ({ isFullscreen = false }) => {
         state.player.y += targetDy * state.player.speed;
         state.player.dy = targetDy;
       }
-      if (targetDy > 0 && state.player.y < canvas.height - state.player.height/2 - 60) {
+      if (targetDy > 0 && state.player.y < canvas.height - state.player.height/2 - 120) {
         state.player.y += targetDy * state.player.speed;
         state.player.dy = targetDy;
       }
@@ -326,7 +326,7 @@ const ActiveBreak = ({ isFullscreen = false }) => {
         const b = state.boss;
         b.y += b.dy;
         // Boss también respeta límite inferior
-        if (b.y <= 20 || b.y + b.height >= canvas.height - 60) b.dy *= -1;
+        if (b.y <= 20 || b.y + b.height >= canvas.height - 120) b.dy *= -1;
         if (b.hitFlash > 0) b.hitFlash--;
 
         if (state.frames - b.lastShot > 70) {
