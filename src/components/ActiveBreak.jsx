@@ -255,7 +255,7 @@ const ActiveBreak = ({ isFullscreen = false }) => {
         state.player.y += targetDy * state.player.speed;
         state.player.dy = targetDy;
       }
-      if (targetDy > 0 && state.player.y < canvas.height - state.player.height/2 - 120) {
+      if (targetDy > 0 && state.player.y < canvas.height - state.player.height/2) {
         state.player.y += targetDy * state.player.speed;
         state.player.dy = targetDy;
       }
@@ -326,7 +326,7 @@ const ActiveBreak = ({ isFullscreen = false }) => {
         const b = state.boss;
         b.y += b.dy;
         // Boss también respeta límite inferior
-        if (b.y <= 20 || b.y + b.height >= canvas.height - 120) b.dy *= -1;
+        if (b.y <= 20 || b.y + b.height >= canvas.height - 20) b.dy *= -1;
         if (b.hitFlash > 0) b.hitFlash--;
 
         if (state.frames - b.lastShot > 70) {
@@ -456,24 +456,56 @@ const ActiveBreak = ({ isFullscreen = false }) => {
         ctx.translate((Math.random() - 0.5) * state.cameraShake, (Math.random() - 0.5) * state.cameraShake);
       }
 
-      // Parallax
+      // Parallax Stars
       ctx.fillStyle = 'rgba(255,255,255,0.8)';
       for(let i=0; i<30; i++) {
         let starX = ((i * 123 + state.frames * 0.2) % canvas.width);
         ctx.globalAlpha = 0.3;
-        ctx.fillRect(canvas.width - starX, (i * 97) % canvas.height, 1, 1);
+        ctx.fillRect(canvas.width - starX, (i * 97) % (canvas.height * 0.7), 1, 1);
       }
       for(let i=0; i<15; i++) {
         let starX = ((i * 347 + state.frames * 1.5) % canvas.width);
         ctx.globalAlpha = Math.random() > 0.1 ? 0.8 : 0.2; 
-        ctx.fillRect(canvas.width - starX, (i * 113) % canvas.height, 2, 2);
+        ctx.fillRect(canvas.width - starX, (i * 113) % (canvas.height * 0.7), 2, 2);
       }
-      ctx.globalAlpha = 0.05; ctx.fillStyle = '#00c4cc';
-      for(let i=0; i<5; i++) {
-        let lineX = ((i * 500 + state.frames * 4) % (canvas.width * 2));
-        ctx.fillRect(canvas.width - lineX, (i * 80) % canvas.height, 150, 4);
-      }
+
+      // 3D Synthwave Floor Grid
       ctx.globalAlpha = 1;
+      const horizon = canvas.height * 0.6;
+      const numLines = 15;
+      
+      // Gradient for grid glow
+      const gridGradient = ctx.createLinearGradient(0, horizon, 0, canvas.height);
+      gridGradient.addColorStop(0, 'rgba(0, 196, 204, 0)');
+      gridGradient.addColorStop(1, 'rgba(0, 196, 204, 0.4)');
+      
+      ctx.strokeStyle = gridGradient;
+      ctx.lineWidth = 2;
+
+      // Vertical perspective lines scrolling left
+      const gridSpacingX = 80;
+      const speed = 3;
+      const xOffset = (state.frames * speed) % gridSpacingX;
+      
+      ctx.beginPath();
+      for (let i = -5; i < canvas.width / gridSpacingX + 5; i++) {
+        let xBottom = (i * gridSpacingX) - xOffset;
+        let xTop = canvas.width / 2 + (xBottom - canvas.width / 2) * 0.1; // Vanishing point logic
+        ctx.moveTo(xTop, horizon);
+        ctx.lineTo(xBottom, canvas.height);
+      }
+      ctx.stroke();
+
+      // Horizontal depth lines
+      ctx.beginPath();
+      for (let i = 0; i < numLines; i++) {
+        // Logarithmic spacing for perspective
+        let z = (i + (state.frames * speed) / 200) % numLines;
+        let yPos = horizon + Math.pow(z / numLines, 2.5) * (canvas.height - horizon);
+        ctx.moveTo(0, yPos);
+        ctx.lineTo(canvas.width, yPos);
+      }
+      ctx.stroke();
 
       // Particles
       ctx.globalCompositeOperation = 'lighter';
@@ -552,8 +584,14 @@ const ActiveBreak = ({ isFullscreen = false }) => {
         ctx.textBaseline = 'middle';
         if (pu.type === 'heal') ctx.fillText('❤️', 0, 0);
         else if (pu.type === 'shield') ctx.fillText('🛡️', 0, 0);
-        else if (pu.type === 'spread') ctx.fillText('✨', 0, 0);
         else if (pu.type === 'bomb') ctx.fillText('💣', 0, 0);
+        else if (pu.type === 'spread') {
+          // 3 Balas en abanico
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(-8, -8, 3, 16);
+          ctx.fillRect(-1.5, -8, 3, 16);
+          ctx.fillRect(5, -8, 3, 16);
+        }
         else {
           // Dibujo de "Dos balas" en lugar de emoji
           ctx.fillStyle = '#ffffff';
@@ -731,10 +769,20 @@ const ActiveBreak = ({ isFullscreen = false }) => {
         )}
       </div>
       
-      {/* Controles Móviles Flotantes */}
+      {/* Panel de Controles Inferior (Fuera del Canvas) */}
       {gameState === 'playing' && (
-        <div style={{ position: 'absolute', bottom: '2rem', left: '2rem', right: '2rem', display: 'flex', justifyContent: 'space-between', padding: '0', zIndex: 10 }}>
-          <div style={{ display: 'flex', alignItems: 'flex-end', opacity: 0.5 }}>
+        <div style={{ 
+          height: '160px', 
+          background: '#050810', 
+          borderTop: '2px solid rgba(0,196,204,0.3)', 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center',
+          padding: '0 2rem',
+          boxShadow: '0 -10px 30px rgba(0,0,0,0.5)',
+          zIndex: 10 
+        }}>
+          <div style={{ opacity: 0.8, transform: 'scale(0.9)', transformOrigin: 'left center' }}>
             <Joystick 
               size={120} 
               baseColor="rgba(255,255,255,0.1)" 
