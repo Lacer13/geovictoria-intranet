@@ -207,7 +207,7 @@ const ActiveBreak = ({ isFullscreen = false }) => {
     const ctx = canvas.getContext('2d');
     let animationId;
     
-    const playerImg = new Image(); playerImg.src = '/Sprinn nuevo Victoria.png';
+    const playerImg = new Image(); playerImg.src = '/victoria_st_spritesheet.png';
     const bossImg = new Image(); bossImg.src = '/Boss.png';
     const enemyImg = new Image(); enemyImg.src = '/Robot combatiente.png';
 
@@ -536,15 +536,24 @@ const ActiveBreak = ({ isFullscreen = false }) => {
       }
 
       if (playerImg.complete && playerImg.width > 0) {
-        // CORRECCIÓN: Volver a 2x2 para VictorIA
-        const cols = 2; const rows = 2;
+        // Sprite Sheet 5x4
+        const cols = 5; const rows = 4;
         const frameWidth = playerImg.width / cols;
         const frameHeight = playerImg.height / rows;
         
-        let col = 0; let row = 0;
-        if (state.player.state === 'idle') { col = 0; row = 0; }
-        else if (state.player.state === 'shooting') { col = 1; row = 0; }
-        else if (state.player.state === 'damage') { col = 0; row = 1; }
+        // Animación a 60fps (cambio cada 6 frames)
+        const frameIndex = Math.floor(state.frames / 6) % cols;
+        let col = frameIndex; 
+        let row = 0; // 0 = idle/fly
+
+        if (state.player.state === 'idle') { row = 0; }
+        else if (state.player.state === 'shooting') { row = 1; }
+        else if (state.player.state === 'damage') { row = 2; }
+        else if (state.player.state === 'dead') { 
+          row = 3; 
+          // Stop at last frame for death
+          col = Math.min(cols - 1, Math.floor(state.frames / 8));
+        }
 
         ctx.drawImage(
           playerImg, 
@@ -736,7 +745,7 @@ const ActiveBreak = ({ isFullscreen = false }) => {
 
         {gameState === 'idle' && (
           <div className="flex-center animate-fade-in" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', flexDirection: 'column', padding: '2rem', textAlign: 'center', background: 'linear-gradient(to bottom, rgba(11,15,25,0.9), rgba(26,34,53,0.9))' }}>
-            <img src="/Sprinn nuevo Victoria.png" alt="VictorIA" style={{ width: '120px', height: '120px', objectFit: 'none', objectPosition: 'left center', marginBottom: '1rem', filter: 'drop-shadow(0 0 20px rgba(0,255,255,0.5))' }} className="animate-float" />
+            <div style={{ width: '120px', height: '120px', marginBottom: '1rem', backgroundImage: 'url("/victoria_st_spritesheet.png")', backgroundSize: '500% 400%', backgroundPosition: '0% 0%', filter: 'drop-shadow(0 0 20px rgba(0,255,255,0.5))' }} className="animate-float" />
             <h1 style={{ color: 'white', marginBottom: '0.5rem', fontSize: '3rem', letterSpacing: '4px', textShadow: '0 0 20px rgba(0,196,204,0.5)' }}>VICTOR<span style={{color: 'var(--geo-secondary)'}}>IA</span></h1>
             <p style={{ color: 'var(--text-muted)', marginBottom: '2rem', fontSize: '1.2rem', maxWidth: '400px' }}>Sobrevive al asalto cibernético.<br/>Usa las flechas para volar y espacio para disparar.</p>
             <button onClick={resetGame} className="btn btn-primary" style={{ padding: '1rem 3rem', fontSize: '1.2rem', boxShadow: '0 0 30px rgba(0,196,204,0.5)' }}>
