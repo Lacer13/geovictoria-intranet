@@ -559,8 +559,8 @@ const ActiveBreak = ({ isFullscreen = false }) => {
           const frameWidth = playerImg.width / cols;
           const frameHeight = playerImg.height / rows;
           
-          // Animación a 60fps (cambio cada 6 frames)
-          const frameIndex = Math.floor(state.frames / 6) % cols;
+          // Animación a 60fps (cambio cada 4 frames para mayor fluidez)
+          const frameIndex = Math.floor(state.frames / 4) % cols;
           let col = frameIndex; 
           let row = 0; // 0 = idle/fly
 
@@ -805,7 +805,7 @@ const ActiveBreak = ({ isFullscreen = false }) => {
                   >
                     <div style={{ 
                       width: '80px', height: '80px', marginBottom: '0.5rem', 
-                      backgroundImage: url(), 
+                      backgroundImage: `url(${char.src})`, 
                       backgroundSize: char.type === 'spritesheet' ? '500% 400%' : 'contain', 
                       backgroundPosition: '0% 0%', backgroundRepeat: 'no-repeat',
                       filter: !isUnlocked ? 'grayscale(100%)' : 'drop-shadow(0 0 10px rgba(0,255,255,0.5))' 
