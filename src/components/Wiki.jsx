@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft,
@@ -28,6 +28,9 @@ export default function Wiki() {
   const [onlySaved, setOnlySaved] = useState(false);
   const [saved, setSaved] = useState(loadBookmarks);
   const articleId = params.get("articulo");
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, [articleId]);
   const article = articles.find((a) => a.id === articleId);
   const toggleSave = (id) => {
     const value = saved.includes(id)

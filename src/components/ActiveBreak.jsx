@@ -1498,6 +1498,10 @@ const ActiveBreak = ({ isFullscreen = false }) => {
           <div style={{ display: "flex", alignItems: "flex-end" }}>
             <button
               className="btn"
+              aria-label="Disparar"
+              onClick={(event) => {
+                if (event.detail === 0) fireLaser();
+              }}
               style={{
                 width: "100px",
                 height: "100px",
