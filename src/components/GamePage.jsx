@@ -1,23 +1,29 @@
-import React from 'react';
-import ActiveBreak from './ActiveBreak';
-import { ArrowLeft } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import ActiveBreak from "./ActiveBreak";
+import { ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const GamePage = () => {
   const navigate = useNavigate();
 
   const handleBack = () => {
-    navigate('/');
+    navigate("/");
   };
 
   return (
-    <div style={{ width: '100vw', height: '100vh', background: '#0b0f19', display: 'flex', flexDirection: 'column' }}>
+    <div className="game-page">
       {/* Header / Back Button */}
-      <div style={{ padding: '1rem 2rem', display: 'flex', alignItems: 'center' }}>
-        <button 
+      <div className="game-page-header">
+        <button
           onClick={handleBack}
-          className="btn btn-secondary" 
-          style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(255,255,255,0.1)', border: 'none' }}
+          className="btn btn-secondary"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            background: "rgba(255,255,255,0.1)",
+            border: "none",
+          }}
         >
           <ArrowLeft size={20} />
           Volver al Portal
@@ -25,8 +31,12 @@ const GamePage = () => {
       </div>
 
       {/* Game Container */}
-      <div style={{ flex: 1, padding: '0 2rem 2rem 2rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <div style={{ width: '100%', maxWidth: '1000px', height: '100%', maxHeight: '600px' }}>
+      <p className="game-instructions">
+        Una pausa con VictorIA · Muévete con las flechas o WASD y dispara con
+        espacio. En tu teléfono, usa los controles táctiles.
+      </p>
+      <div className="game-page-content">
+        <div className="game-stage">
           <ActiveBreak isFullscreen={true} />
         </div>
       </div>

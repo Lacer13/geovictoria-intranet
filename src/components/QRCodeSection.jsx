@@ -1,66 +1,62 @@
-import React, { useState } from 'react';
-import { QRCodeSVG } from 'qrcode.react';
-import { Share2, Download } from 'lucide-react';
+import { useRef } from "react";
+import { QRCodeSVG } from "qrcode.react";
+import { Copy, Download, Share2 } from "lucide-react";
+import toast from "react-hot-toast";
 
-const QRCodeSection = () => {
-  // En un entorno real, esta sería la URL del dominio gratuito.
-  const [url] = useState('https://geovictoria-interno.vercel.app');
-
-  const handleDownload = () => {
-    const svg = document.getElementById('qr-code-svg');
-    const svgData = new XMLSerializer().serializeToString(svg);
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    const img = new Image();
-    
-    img.onload = () => {
-      canvas.width = img.width;
-      canvas.height = img.height;
-      ctx.fillStyle = 'white';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, 0, 0);
-      const pngFile = canvas.toDataURL('image/png');
-      const downloadLink = document.createElement('a');
-      downloadLink.download = 'GeoVictoria-Portal-QR.png';
-      downloadLink.href = `${pngFile}`;
-      downloadLink.click();
-    };
-    img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
+export default function QRCodeSection() {
+  const ref = useRef(null);
+  const url = window.location.origin;
+  const download = () => {
+    const svg = ref.current?.querySelector("svg");
+    if (!svg) return;
+    const blob = new Blob([new XMLSerializer().serializeToString(svg)], {
+      type: "image/svg+xml;charset=utf-8",
+    });
+    const objectUrl = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.download = "GeoVictoria-Intranet-QR.svg";
+    link.href = objectUrl;
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
   };
-
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      toast.success("Enlace copiado");
+    } catch {
+      toast.error(
+        "No pudimos copiar el enlace. Cópialo desde la barra de direcciones.",
+      );
+    }
+  };
   return (
-    <div className="glass-panel" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem', width: '100%', justifyContent: 'flex-start' }}>
-        <Share2 size={24} color="var(--geo-primary-light)" />
-        <h3 style={{ color: 'var(--text-main)', margin: 0 }}>Comparte el Portal</h3>
+    <section className="panel qr-panel">
+      <div>
+        <span className="quick-icon blue">
+          <Share2 size={22} />
+        </span>
+        <h2>Nuestro espacio, más cerca.</h2>
+        <p>Escanea el QR para abrir esta intranet en tu teléfono.</p>
+        <div className="qr-actions">
+          <button onClick={download} className="btn btn-secondary">
+            <Download size={16} /> Descargar QR
+          </button>
+          <button onClick={copy} className="text-link">
+            <Copy size={15} /> Copiar enlace
+          </button>
+        </div>
+        <small>El QR apunta a la dirección actual de esta intranet.</small>
       </div>
-      
-      <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
-        Escanea este código o descárgalo para pegarlo en la oficina.
-      </p>
-
-      <div style={{ background: 'white', padding: '1rem', borderRadius: '12px', marginBottom: '1.5rem' }}>
-        <QRCodeSVG 
-          id="qr-code-svg"
-          value={url} 
-          size={150} 
-          fgColor="#003d82" // geo-primary-dark
-          imageSettings={{
-            src: "/Logo geovictoria.png",
-            x: undefined,
-            y: undefined,
-            height: 30,
-            width: 30,
-            excavate: true,
-          }}
+      <div ref={ref} className="qr-code">
+        <QRCodeSVG
+          value={url}
+          size={152}
+          marginSize={3}
+          fgColor="#244c3e"
+          level="M"
+          title="Código QR de esta intranet"
         />
       </div>
-
-      <button onClick={handleDownload} className="btn btn-secondary" style={{ width: '100%' }}>
-        <Download size={18} /> Descargar QR
-      </button>
-    </div>
+    </section>
   );
-};
-
-export default QRCodeSection;
+}

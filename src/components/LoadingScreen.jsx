@@ -1,44 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-const LoadingScreen = ({ onComplete }) => {
+export default function LoadingScreen({ onComplete }) {
   const [fadeOut, setFadeOut] = useState(false);
-
-  const handleVideoEnded = () => {
-    setFadeOut(true);
-    setTimeout(() => onComplete(), 800);
-  };
-
-  // Respaldo de seguridad (por si el video falla en cargar)
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!fadeOut) {
-        handleVideoEnded();
-      }
-    }, 10000); 
-    
+    const timer = setTimeout(
+      fadeOut ? onComplete : () => setFadeOut(true),
+      fadeOut ? 800 : 10000,
+    );
     return () => clearTimeout(timer);
   }, [fadeOut, onComplete]);
-
   return (
-    <div className={`loading-screen ${fadeOut ? 'fade-out' : ''}`}>
-      <video 
-        className="loading-video" 
-        autoPlay 
-        muted 
+    <div
+      className={`loading-screen ${fadeOut ? "fade-out" : ""}`}
+      role="status"
+    >
+      <video
+        className="loading-video"
+        autoPlay
+        muted
         playsInline
-        onEnded={handleVideoEnded}
+        onEnded={() => setFadeOut(true)}
+        onError={() => setFadeOut(true)}
       >
         <source src="/Nuevo Video VictorIA.mp4" type="video/mp4" />
-        Tu navegador no soporta videos.
       </video>
-      <h2 className="animate-fade-in" style={{ color: 'var(--geo-primary-light)', marginTop: '1rem' }}>
-        Iniciando Soporte Interno...
-      </h2>
-      <p className="animate-fade-in" style={{ animationDelay: '0.5s', color: 'var(--text-muted)' }}>
-        VictorIA te da la bienvenida
-      </p>
+      <h2>VictorIA te da la bienvenida</h2>
+      <p>Preparando tu espacio…</p>
+      <button className="btn btn-secondary" onClick={onComplete}>
+        Continuar
+      </button>
     </div>
   );
-};
-
-export default LoadingScreen;
+}

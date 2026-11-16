@@ -1,0 +1,33 @@
+name: Verificar intranet
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: intranet-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - run: npm ci --ignore-scripts
+      - run: npm test
+      - run: npm run build
+      - name: Verificar reglas sin acceder a producción
+        run: npx --yes firebase-tools@15.34.1 emulators:exec --only firestore --project demo-geovictoria --config firebase.emulator.json "npm run test:rules"

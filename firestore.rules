@@ -1,0 +1,59 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
+    function text(value, max) {
+      return value is string && value.size() > 0 && value.size() <= max;
+    }
+    match /news/{id} {
+      allow read: if true;
+      allow create, update: if isAdmin()
+        && request.resource.data.keys().hasOnly(['title', 'desc', 'type', 'date', 'timestamp'])
+        && text(request.resource.data.title, 100)
+        && text(request.resource.data.desc, 10000)
+        && request.resource.data.type in ['anuncio', 'logro', 'cumpleaños']
+        && text(request.resource.data.date, 100)
+        && text(request.resource.data.timestamp, 50);
+      allow delete: if isAdmin();
+    }
+    match /directory/{id} {
+      allow read: if true;
+      allow create, update: if isAdmin()
+        && request.resource.data.keys().hasOnly(['department', 'name', 'email', 'color'])
+        && text(request.resource.data.department, 100)
+        && text(request.resource.data.name, 100)
+        && text(request.resource.data.email, 254)
+        && request.resource.data.email.matches('^[^@ ]+@[^@ ]+[.][^@ ]+$')
+        && request.resource.data.color.matches('^#[0-9a-fA-F]{6}$');
+      allow delete: if isAdmin();
+    }
+    match /feedbacks/{id} {
+      allow read, delete: if isAdmin();
+      allow create: if request.resource.data.keys().hasOnly(['isAnonymous', 'name', 'department', 'message', 'date', 'createdAt'])
+        && request.resource.data.isAnonymous is bool
+        && text(request.resource.data.name, 100)
+        && request.resource.data.department is string
+        && request.resource.data.department.size() <= 100
+        && (!request.resource.data.isAnonymous || (request.resource.data.name == 'Anónimo' && request.resource.data.department == ''))
+        && text(request.resource.data.message, 5000)
+        && text(request.resource.data.date, 50)
+        && request.resource.data.createdAt == request.time;
+      allow update: if false;
+    }
+    match /leaderboard/{id} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasOnly(['name', 'score', 'date'])
+        && text(request.resource.data.name, 50)
+        && request.resource.data.score is int
+        && request.resource.data.score >= 0 && request.resource.data.score <= 10000000
+        && text(request.resource.data.date, 50);
+      allow delete: if isAdmin();
+      allow update: if false;
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

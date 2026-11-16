@@ -1,125 +1,261 @@
-import React, { useState } from 'react';
-import { Send, CheckCircle, Loader, ShieldAlert } from 'lucide-react';
+import { useEffect, useRef, useState } from "react";
+import {
+  collection,
+  doc,
+  serverTimestamp,
+  setDoc,
+  waitForPendingWrites,
+} from "firebase/firestore";
+import {
+  CheckCircle2,
+  HeartHandshake,
+  LoaderCircle,
+  Send,
+  ShieldCheck,
+} from "lucide-react";
+import { db } from "../firebase";
 
-import { collection, addDoc } from 'firebase/firestore';
-import { db } from '../firebase';
-
-const FeedbackForm = () => {
-  const [formData, setFormData] = useState({ name: '', department: '', message: '' });
-  const [isAnonymous, setIsAnonymous] = useState(false);
-  const [status, setStatus] = useState('idle'); 
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!formData.message) return;
-    
-    setStatus('loading');
-
-    const payload = {
-      isAnonymous: isAnonymous,
-      name: isAnonymous ? "Anónimo" : formData.name,
-      department: isAnonymous ? "" : formData.department,
-      message: formData.message,
-      date: new Date().toISOString()
+export default function FeedbackForm() {
+  const [data, setData] = useState({ name: "", department: "", message: "" });
+  const [anonymous, setAnonymous] = useState(false);
+  const [status, setStatus] = useState("idle");
+  const [error, setError] = useState("");
+  const [slow, setSlow] = useState(false);
+  const alive = useRef(true);
+  const sending = useRef(false);
+  useEffect(() => {
+    alive.current = true;
+    return () => {
+      alive.current = false;
     };
-
+  }, []);
+  const submit = async (e) => {
+    e.preventDefault();
+    if (sending.current) return;
+    if (!data.message.trim() || (!anonymous && !data.name.trim())) {
+      setError("Completa los campos con información válida.");
+      return;
+    }
+    if (!navigator.onLine) {
+      setError(
+        "Necesitas conexión para enviar tu mensaje. Tu texto sigue aquí.",
+      );
+      return;
+    }
+    sending.current = true;
+    setStatus("loading");
+    setError("");
+    setSlow(false);
+    const timer = setTimeout(() => {
+      if (alive.current) setSlow(true);
+    }, 10000);
     try {
-      if (db) {
-        // Modo Producción: Guardar en Firebase
-        await addDoc(collection(db, "feedbacks"), payload);
-      } else {
-        // Modo Desarrollo: Guardar en LocalStorage si aún no hay llaves
-        console.warn("Firebase no configurado. Usando LocalStorage temporalmente.");
-        const existingMessages = JSON.parse(localStorage.getItem('geoFeedback') || '[]');
-        existingMessages.push(payload);
-        localStorage.setItem('geoFeedback', JSON.stringify(existingMessages));
+      const ref = doc(collection(db, "feedbacks"));
+      await setDoc(ref, {
+        isAnonymous: anonymous,
+        name: anonymous ? "Anónimo" : data.name.trim(),
+        department: anonymous ? "" : data.department,
+        message: data.message.trim(),
+        date: new Date().toISOString(),
+        createdAt: serverTimestamp(),
+      });
+      await waitForPendingWrites(db);
+      if (alive.current) {
+        setStatus("success");
+        setData({ name: "", department: "", message: "" });
       }
-
-      setStatus('success');
-      setFormData({ name: '', department: '', message: '' });
-      setIsAnonymous(false);
-      setTimeout(() => setStatus('idle'), 4000);
-    } catch (err) {
-      console.error("Error guardando reporte:", err);
-      setStatus('idle');
+    } catch {
+      if (alive.current) {
+        setStatus("idle");
+        setError(
+          "No pudimos enviar tu mensaje. Conservamos tu texto para que vuelvas a intentarlo.",
+        );
+      }
+    } finally {
+      clearTimeout(timer);
+      sending.current = false;
+      if (alive.current) setSlow(false);
     }
   };
-
   return (
-    <div className="glass-panel" style={{ padding: '2rem', borderTop: '4px solid #ff4757' }}>
-      <h2 style={{ color: 'white', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <ShieldAlert color="#ff4757" /> 
-        Canal de Solicitudes y Reportes
-      </h2>
-      
-      <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
-        Usa este canal para reportar quejas de la oficina, situaciones de abuso, o solicitar apoyo. 
-        Toda la información será enviada directamente y de forma confidencial a Gerencia.
-      </p>
-
-      {status === 'success' ? (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', padding: '2rem 0', color: '#2ed573' }}>
-          <CheckCircle size={48} />
-          <h3 style={{ margin: 0 }}>¡Reporte Enviado!</h3>
-          <p style={{ color: 'var(--text-muted)', textAlign: 'center', fontSize: '0.9rem' }}>La información ha sido enviada al correo de gerencia de forma segura.</p>
-        </div>
-      ) : (
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-            <input 
-              type="checkbox" 
-              id="anonimo" 
-              checked={isAnonymous} 
-              onChange={(e) => setIsAnonymous(e.target.checked)}
-              style={{ cursor: 'pointer' }}
-            />
-            <label htmlFor="anonimo" style={{ color: 'white', cursor: 'pointer', fontSize: '0.9rem' }}>
-              Enviar de forma 100% anónima
-            </label>
+    <div className="feedback-page page-enter">
+      <div className="page-heading">
+        <span className="eyebrow">UN MEJOR LUGAR SE CONSTRUYE ESCUCHANDO</span>
+        <h1>Tu voz nos importa.</h1>
+        <p>
+          Comparte una idea, pide apoyo o cuéntanos algo que debemos mejorar.
+        </p>
+      </div>
+      <div className="feedback-layout">
+        <section className="panel feedback-form">
+          <div className="panel-heading">
+            <h2>
+              <HeartHandshake size={21} /> Te escuchamos
+            </h2>
+            <span className="department-pill">Canal de solicitudes</span>
           </div>
-
-          {!isAnonymous && (
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-              <input 
-                type="text" 
-                placeholder="Tu Nombre" 
-                className="input-field"
-                value={formData.name}
-                onChange={(e) => setFormData({...formData, name: e.target.value})}
-                required={!isAnonymous}
-              />
-              <select 
-                className="input-field"
-                value={formData.department}
-                onChange={(e) => setFormData({...formData, department: e.target.value})}
-                required={!isAnonymous}
+          {status === "success" ? (
+            <div className="feedback-success" role="status">
+              <CheckCircle2 size={52} />
+              <h2>Gracias por compartirlo.</h2>
+              <p>
+                Tu mensaje se guardó en el buzón de solicitudes para su revisión
+                por Administración.
+              </p>
+              <button
+                className="btn btn-forest"
+                onClick={() => {
+                  setStatus("idle");
+                  setAnonymous(false);
+                }}
               >
-                <option value="" disabled>Tu Departamento...</option>
-                <option value="Operaciones">Operaciones</option>
-                <option value="Finanzas">Finanzas</option>
-                <option value="IT">IT / Tecnología</option>
-                <option value="RRHH">Recursos Humanos</option>
-              </select>
+                Enviar otro mensaje
+              </button>
             </div>
+          ) : (
+            <form onSubmit={submit}>
+              <label className="anonymous-option">
+                <input
+                  type="checkbox"
+                  checked={anonymous}
+                  onChange={(e) => setAnonymous(e.target.checked)}
+                  disabled={status === "loading"}
+                />
+                <span>
+                  <strong>Prefiero no incluir mi nombre</strong>
+                  <small>Tu nombre y área no se añadirán al mensaje.</small>
+                </span>
+                <ShieldCheck size={21} />
+              </label>
+              {!anonymous && (
+                <div className="form-two-columns">
+                  <div className="input-group">
+                    <label htmlFor="feedback-name">
+                      Tu nombre <span>*</span>
+                    </label>
+                    <input
+                      id="feedback-name"
+                      className="input-field"
+                      autoComplete="name"
+                      required
+                      maxLength={100}
+                      value={data.name}
+                      onChange={(e) =>
+                        setData({ ...data, name: e.target.value })
+                      }
+                      placeholder="¿Cómo te llamas?"
+                      disabled={status === "loading"}
+                    />
+                  </div>
+                  <div className="input-group">
+                    <label htmlFor="feedback-department">
+                      Tu área <span>*</span>
+                    </label>
+                    <select
+                      id="feedback-department"
+                      className="input-field"
+                      required
+                      value={data.department}
+                      onChange={(e) =>
+                        setData({ ...data, department: e.target.value })
+                      }
+                      disabled={status === "loading"}
+                    >
+                      <option value="">Selecciona tu área</option>
+                      {[
+                        "Administración",
+                        "Comercial",
+                        "Operaciones",
+                        "Finanzas y Cobranzas",
+                        "Tecnología",
+                        "Recursos Humanos",
+                        "Otra área",
+                      ].map((d) => (
+                        <option key={d}>{d}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              )}
+              <div className="input-group">
+                <label htmlFor="feedback-message">
+                  ¿Qué te gustaría compartir? <span>*</span>
+                </label>
+                <textarea
+                  id="feedback-message"
+                  className="input-field"
+                  rows={7}
+                  required
+                  maxLength={5000}
+                  value={data.message}
+                  onChange={(e) =>
+                    setData({ ...data, message: e.target.value })
+                  }
+                  placeholder="Cuéntanos el contexto y cómo podemos ayudarte…"
+                  disabled={status === "loading"}
+                />
+                <span className="field-caption">
+                  Evita incluir contraseñas o datos bancarios.
+                  <span>{data.message.length}/5000</span>
+                </span>
+              </div>
+              {error && (
+                <p className="form-error" role="alert">
+                  {error}
+                </p>
+              )}
+              {slow && (
+                <p className="inline-notice" role="status">
+                  La conexión está tardando. Tu envío sigue en proceso; mantén
+                  esta página abierta.
+                </p>
+              )}
+              <button
+                className="btn btn-forest"
+                type="submit"
+                disabled={status === "loading"}
+              >
+                {status === "loading" ? (
+                  <LoaderCircle size={17} className="animate-spin" />
+                ) : (
+                  <Send size={17} />
+                )}
+                {status === "loading"
+                  ? "Enviando mensaje…"
+                  : "Enviar mi mensaje"}
+              </button>
+            </form>
           )}
-          
-          <textarea 
-            placeholder="Describe detalladamente la situación, queja o solicitud..." 
-            className="input-field"
-            style={{ height: '120px', resize: 'vertical' }}
-            value={formData.message}
-            onChange={(e) => setFormData({...formData, message: e.target.value})}
-            required
-          />
-          <button type="submit" className="btn btn-primary" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem', background: '#ff4757', borderColor: '#ff4757', boxShadow: '0 0 20px rgba(255, 71, 87, 0.4)' }} disabled={status === 'loading'}>
-            {status === 'loading' ? <Loader className="animate-spin" size={20} /> : <Send size={20} />}
-            {status === 'loading' ? 'Enviando...' : 'Enviar Reporte Confidencial'}
-          </button>
-        </form>
-      )}
+        </section>
+        <aside className="feedback-aside">
+          <span className="quick-icon green">
+            <ShieldCheck size={26} />
+          </span>
+          <h2>Un espacio para expresarte.</h2>
+          <p>
+            Los mensajes se guardan en el buzón de la intranet para su revisión
+            por el equipo administrador.
+          </p>
+          <div>
+            <strong>Comparte con tranquilidad</strong>
+            <p>
+              La opción sin nombre omite tu nombre y área del reporte. Incluye
+              solo los datos necesarios para explicar tu solicitud.
+            </p>
+          </div>
+          <div>
+            <strong>¿Esperas una respuesta?</strong>
+            <p>
+              Si deseas que puedan contactarte, incluye un correo de trabajo en
+              tu mensaje.
+            </p>
+          </div>
+          <small>
+            Este formulario no envía correos automáticos ni sustituye los
+            canales de atención urgente de tu organización.
+          </small>
+        </aside>
+      </div>
     </div>
   );
-};
-
-export default FeedbackForm;
+}

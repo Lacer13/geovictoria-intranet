@@ -1,87 +1,92 @@
-import React from 'react';
-import { ArrowLeft, Users, UserCircle, Briefcase, ChevronDown } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { ArrowRight, Building2, Network, Users } from "lucide-react";
+import { usePortal } from "../context/portal";
+import { DataState } from "./Dashboard";
 
-const OrgChart = () => {
-  const navigate = useNavigate();
-
-  const DepartmentCard = ({ title, head, team, color }) => (
-    <div className="glass-panel animate-fade-in" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', borderTop: `4px solid ${color}`, minWidth: '250px' }}>
-      <div style={{ background: 'rgba(255,255,255,0.05)', padding: '1rem', borderRadius: '50%', marginBottom: '0.5rem' }}>
-        <Briefcase color={color} size={32} />
-      </div>
-      <h3 style={{ color: 'white', margin: 0, fontSize: '1.2rem', textAlign: 'center' }}>{title}</h3>
-      <div style={{ background: 'rgba(0,0,0,0.3)', padding: '0.8rem', borderRadius: '8px', width: '100%', textAlign: 'center' }}>
-        <p style={{ color: 'var(--geo-secondary)', fontWeight: 'bold', margin: '0 0 0.2rem 0', fontSize: '0.9rem' }}>Director/Gerente</p>
-        <p style={{ color: 'white', margin: 0 }}>{head}</p>
-      </div>
-      <div style={{ width: '100%' }}>
-        <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <Users size={14} /> Equipo Principal:
-        </p>
-        <ul style={{ color: 'white', fontSize: '0.9rem', paddingLeft: '1.5rem', margin: 0 }}>
-          {team.map((member, i) => (
-            <li key={i} style={{ marginBottom: '0.3rem' }}>{member}</li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
-
+export default function OrgChart() {
+  const { directory } = usePortal();
+  const groups = Object.entries(
+    directory.data.reduce((all, c) => {
+      const key = c.department || "Equipo";
+      (all[key] ||= []).push(c);
+      return all;
+    }, {}),
+  ).sort(([a], [b]) => a.localeCompare(b, "es"));
   return (
-    <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-        <button className="btn btn-secondary" onClick={() => navigate('/')} style={{ padding: '0.5rem' }}>
-          <ArrowLeft size={24} />
-        </button>
+    <div className="page-enter">
+      <div className="page-heading">
+        <span className="eyebrow">MUCHAS PERSONAS. UN MISMO PROPÓSITO.</span>
+        <h1>Conoce a quienes lo hacen posible.</h1>
+        <p>Explora nuestras áreas y encuentra sus contactos de referencia.</p>
+      </div>
+      <section className="team-intro">
+        <div className="team-emblem">
+          <Network size={38} strokeWidth={1.3} />
+        </div>
         <div>
-          <h1 style={{ color: 'white', margin: 0 }}>Organigrama GeoVictoria</h1>
-          <p style={{ color: 'var(--text-muted)', margin: 0 }}>Estructura organizativa de la empresa</p>
+          <span className="eyebrow">GEOVICTORIA PERÚ</span>
+          <h2>Un equipo que conecta equipos.</h2>
+          <p>La colaboración empieza por saber con quién contar.</p>
         </div>
+        <span className="team-stat">
+          <strong>{groups.length}</strong> áreas publicadas
+        </span>
+      </section>
+      <div className="inline-notice">
+        <Building2 size={17} />
+        <span>
+          Vista por áreas basada en el directorio vigente. Los contactos no
+          implican una relación de jefatura.
+        </span>
       </div>
-
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem' }}>
-        
-        {/* CEO / Gerencia General */}
-        <div className="glass-panel animate-float" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', background: 'linear-gradient(135deg, rgba(0,196,204,0.2) 0%, rgba(11,15,25,0.8) 100%)', border: '1px solid var(--geo-secondary)' }}>
-          <UserCircle size={64} color="var(--geo-secondary)" style={{ marginBottom: '1rem' }} />
-          <h2 style={{ color: 'white', margin: '0 0 0.5rem 0' }}>Gerencia General</h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', margin: 0 }}>Juan Pérez (CEO)</p>
-        </div>
-
-        <ChevronDown size={32} color="var(--text-muted)" />
-
-        {/* Departamentos */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '2rem', width: '100%' }}>
-          <DepartmentCard 
-            title="Operaciones" 
-            head="María González" 
-            team={["Coordinadores de Terreno", "Logística", "Supervisores"]} 
-            color="#2ed573" 
-          />
-          <DepartmentCard 
-            title="Finanzas y Facturación" 
-            head="Carlos Rodríguez" 
-            team={["Analista Contable", "Ejecutivos de Cobranza", "Nóminas"]} 
-            color="#ffa502" 
-          />
-          <DepartmentCard 
-            title="Soporte y Tecnología" 
-            head="Ana Martínez" 
-            team={["Mesa de Ayuda (Helpdesk)", "Desarrollo", "Infraestructura"]} 
-            color="#1e90ff" 
-          />
-          <DepartmentCard 
-            title="Recursos Humanos" 
-            head="Luis Fernández" 
-            team={["Reclutamiento", "Clima Laboral", "Capacitación"]} 
-            color="#ff4757" 
-          />
-        </div>
-
+      {directory.status !== "ready" && (
+        <section className="panel">
+          <DataState resource={directory} />
+        </section>
+      )}
+      <div className="team-grid">
+        {groups.map(([department, people], i) => (
+          <section className="panel team-card" key={department}>
+            <span
+              className={`quick-icon ${["blue", "green", "purple", "coral"][i % 4]}`}
+            >
+              <Users size={22} />
+            </span>
+            <h2>{department}</h2>
+            <p className="muted">
+              {people.length}{" "}
+              {people.length === 1
+                ? "contacto de referencia"
+                : "contactos de referencia"}
+            </p>
+            <div className="team-people">
+              {people.map((person) => (
+                <div key={person.id}>
+                  <span className="mini-avatar">
+                    {String(person.name || "?").charAt(0)}
+                  </span>
+                  <strong>{person.name}</strong>
+                </div>
+              ))}
+            </div>
+            <Link
+              className="text-link"
+              to={`/directorio?q=${encodeURIComponent(department)}`}
+            >
+              Conectar con el área <ArrowRight size={14} />
+            </Link>
+          </section>
+        ))}
       </div>
+      {directory.status === "ready" && groups.length === 0 && (
+        <div className="panel empty-state">
+          <Users size={32} />
+          <h2>Estamos preparando esta vista del equipo</h2>
+          <p>
+            Las áreas aparecerán cuando se publiquen contactos en el directorio.
+          </p>
+        </div>
+      )}
     </div>
   );
-};
-
-export default OrgChart;
+}

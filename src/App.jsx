@@ -1,110 +1,179 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import Dashboard from './components/Dashboard';
-import GamePage from './components/GamePage';
-import LoadingScreen from './components/LoadingScreen';
-import OrgChart from './components/OrgChart';
-import HelpDirectory from './components/HelpDirectory';
-import Wiki from './components/Wiki';
-import Admin from './components/Admin';
+import {
+  Component,
+  lazy,
+  Suspense,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
+import {
+  BrowserRouter,
+  Link,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import { Heart, LoaderCircle, TriangleAlert } from "lucide-react";
+import Dashboard from "./components/Dashboard";
+import Sidebar from "./components/Sidebar";
+import DynamicHeader from "./components/DynamicHeader";
+import ChristmasEffects from "./components/ChristmasEffects";
+import { PortalProvider } from "./context/PortalContext";
+import { readPreference, savePreference } from "./lib/preferences";
 
-import DynamicHeader from './components/DynamicHeader';
+const GamePage = lazy(() => import("./components/GamePage"));
+const OrgChart = lazy(() => import("./components/OrgChart"));
+const HelpDirectory = lazy(() => import("./components/HelpDirectory"));
+const Wiki = lazy(() => import("./components/Wiki"));
+const Admin = lazy(() => import("./components/Admin"));
+const Christmas = lazy(() => import("./components/Christmas"));
+const FeedbackForm = lazy(() => import("./components/FeedbackForm"));
 
-import Sidebar from './components/Sidebar';
-import { Toaster } from 'react-hot-toast';
-
-const AppContent = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isLightMode, setIsLightMode] = useState(() => localStorage.getItem('geoTheme') === 'light');
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const toggleTheme = () => {
-    const newMode = !isLightMode;
-    setIsLightMode(newMode);
-    localStorage.setItem('geoTheme', newMode ? 'light' : 'dark');
-    if (newMode) {
-      document.body.classList.add('light-mode');
-    } else {
-      document.body.classList.remove('light-mode');
-    }
-  };
-
-  React.useEffect(() => {
-    if (isLightMode) {
-      document.body.classList.add('light-mode');
-    }
-  }, [isLightMode]);
-
-  const triggerNavigation = (path) => {
-    setIsLoading(true);
-    setTimeout(() => {
-      navigate(path);
-      setIsLoading(false); 
-    }, 2500);
-  };
-
-  if (isLoading) {
-    return <LoadingScreen onComplete={() => {}} />;
+class ErrorBoundary extends Component {
+  state = { failed: false };
+  static getDerivedStateFromError() {
+    return { failed: true };
   }
+  render() {
+    if (this.state.failed)
+      return (
+        <div className="page-error">
+          <TriangleAlert size={36} />
+          <h1>No pudimos abrir esta página</h1>
+          <p>Recarga la intranet para volver a intentarlo.</p>
+          <button
+            className="btn btn-primary"
+            onClick={() => window.location.reload()}
+          >
+            Recargar
+          </button>
+        </div>
+      );
+    return this.props.children;
+  }
+}
 
-  const isGameRoute = location.pathname === '/juego';
-
+function AppContent() {
+  const [isLightMode, setLightMode] = useState(
+    () => readPreference("geoTheme", "light") !== "dark",
+  );
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [festive, setFestive] = useState(
+    () => readPreference("geoChristmasMotion", "on") !== "off",
+  );
+  const toggleFestive = () =>
+    setFestive((value) => {
+      savePreference("geoChristmasMotion", value ? "off" : "on");
+      return !value;
+    });
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
+  const location = useLocation();
+  const game = location.pathname === "/juego";
+  useEffect(() => {
+    document.body.classList.toggle("light-mode", isLightMode);
+    document.documentElement.style.colorScheme = isLightMode ? "light" : "dark";
+    savePreference("geoTheme", isLightMode ? "light" : "dark");
+  }, [isLightMode]);
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+    document.getElementById("main-content")?.focus({ preventScroll: true });
+  }, [location.pathname]);
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', width: '100vw', overflowX: 'hidden' }}>
-      {/* Sidebar Fijo */}
-      {!isGameRoute && <Sidebar />}
-
-      {/* Contenedor Principal (Main) */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', width: isGameRoute ? '100%' : 'calc(100% - 260px)' }}>
-        
-        {!isGameRoute && <DynamicHeader isLightMode={isLightMode} toggleTheme={toggleTheme} />}
-
-        <main className="animate-fade-in" style={{ padding: isGameRoute ? '0' : '0 1rem 2rem 1rem', flex: 1 }}>
-          <Routes>
-            <Route path="/" element={<Dashboard triggerNavigation={triggerNavigation} />} />
-            <Route path="/juego" element={<GamePage />} />
-            <Route path="/organigrama" element={<OrgChart />} />
-            <Route path="/directorio" element={<HelpDirectory />} />
-            <Route path="/wiki" element={<Wiki />} />
-            <Route path="/admin" element={<Admin />} />
-          </Routes>
+    <div className={game ? "game-shell" : "app-shell"}>
+      <a href="#main-content" className="skip-link">
+        Saltar al contenido
+      </a>
+      {!game && <Sidebar open={menuOpen} onClose={closeMenu} />}
+      <div className="app-body" inert={menuOpen || undefined}>
+        {!game && <ChristmasEffects enabled={festive} />}
+        {!game && (
+          <DynamicHeader
+            isLightMode={isLightMode}
+            toggleTheme={() => setLightMode((v) => !v)}
+            festive={festive}
+            toggleFestive={toggleFestive}
+            onMenu={() => setMenuOpen((v) => !v)}
+            menuOpen={menuOpen}
+          />
+        )}
+        <main
+          id="main-content"
+          className={game ? "game-main" : "main-content"}
+          tabIndex={-1}
+        >
+          <ErrorBoundary key={location.pathname}>
+            <Suspense
+              fallback={
+                <div className="route-loading" role="status">
+                  <LoaderCircle className="animate-spin" /> Abriendo tu espacio…
+                </div>
+              }
+            >
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/juego" element={<GamePage />} />
+                <Route path="/organigrama" element={<OrgChart />} />
+                <Route path="/directorio" element={<HelpDirectory />} />
+                <Route path="/wiki" element={<Wiki />} />
+                <Route path="/navidad" element={<Christmas />} />
+                <Route path="/solicitudes" element={<FeedbackForm />} />
+                <Route path="/admin" element={<Admin />} />
+                <Route
+                  path="*"
+                  element={
+                    <div className="page-error">
+                      <span className="eyebrow">
+                        404 · TE AYUDAMOS A VOLVER
+                      </span>
+                      <h1>Esta página no está por aquí</h1>
+                      <p>
+                        Encuentra tus herramientas en el inicio de la intranet.
+                      </p>
+                      <Link to="/" className="btn btn-primary">
+                        Volver al inicio
+                      </Link>
+                    </div>
+                  }
+                />
+              </Routes>
+            </Suspense>
+          </ErrorBoundary>
         </main>
+        {!game && (
+          <footer className="app-footer">
+            <span>
+              GeoVictoria <span className="footer-dot">·</span> Conectados somos
+              más.
+            </span>
+            <span>
+              Hecho para nuestro equipo <Heart size={12} />{" "}
+              <span className="footer-dot">·</span> Perú
+            </span>
+          </footer>
+        )}
       </div>
     </div>
   );
-};
+}
 
-const App = () => {
-  const [initialLoading, setInitialLoading] = useState(true);
-
-  if (initialLoading) {
-    return <LoadingScreen onComplete={() => setInitialLoading(false)} />;
-  }
-
+export default function App() {
   return (
-    <Router>
-      <Toaster 
-        position="top-right"
-        toastOptions={{
-          style: {
-            background: 'var(--glass-bg)',
-            color: 'var(--text-main)',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid var(--glass-border)',
-            borderRadius: '12px',
-          },
-          success: {
-            iconTheme: {
-              primary: 'var(--geo-secondary)',
-              secondary: 'white',
+    <BrowserRouter>
+      <PortalProvider>
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            style: {
+              background: "var(--surface-color)",
+              color: "var(--text-main)",
+              border: "1px solid var(--border-color)",
+              borderRadius: "12px",
             },
-          },
-        }} 
-      />
-      <AppContent />
-    </Router>
+          }}
+        />
+        <AppContent />
+      </PortalProvider>
+    </BrowserRouter>
   );
-};
-
-export default App;
+}

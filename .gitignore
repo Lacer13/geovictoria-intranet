@@ -10,6 +10,11 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+.firebase/
+*-debug.log
+test-results/
+artifacts/
+pnpm-lock.yaml
 *.local
 
 # Editor directories and files

@@ -7,10 +7,10 @@ const firebaseConfig = {
   projectId: "geovictoria-intranet-peru",
   storageBucket: "geovictoria-intranet-peru.firebasestorage.app",
   messagingSenderId: "306325710647",
-  appId: "1:306325710647:web:eb54e5795d8904087c1cb2"
+  appId: "1:306325710647:web:eb54e5795d8904087c1cb2",
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export { db };
+export { app, db };
