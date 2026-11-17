@@ -56,13 +56,22 @@ const pages = [
     icon: Gift,
   },
   {
+    title: "Amigo secreto",
+    detail: "Sorteo navideño, invitación y regalos",
+    path: "/amigo-secreto",
+    icon: Gift,
+  },
+  {
     title: "Pausa activa",
     detail: "Un respiro con VictorIA",
     path: "/juego",
     icon: Gift,
   },
 ];
-const routeNames = Object.fromEntries(pages.map((p) => [p.path, p.title]));
+const routeNames = {
+  ...Object.fromEntries(pages.map((p) => [p.path, p.title])),
+  "/amigo-secreto/ver": "Tu invitación privada",
+};
 
 export default function DynamicHeader({
   isLightMode,

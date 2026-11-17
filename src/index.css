@@ -4526,3 +4526,1022 @@ select.input-field {
     padding: 0 20px;
   }
 }
+
+/* Secret Santa: private invitations and administrator workspace. */
+.sidebar {
+  overflow-y: auto;
+}
+.sidebar nav {
+  flex-shrink: 0;
+}
+.santa-welcome {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  justify-content: space-between;
+  background: var(--hero-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 38px 40px;
+  color: var(--hero-text);
+  overflow: hidden;
+}
+.santa-welcome > div:first-child {
+  max-width: 560px;
+}
+.santa-welcome h2 {
+  font-size: 42px;
+  line-height: 1.25;
+  margin: 23px 0 18px;
+  color: var(--hero-text);
+}
+.santa-welcome em {
+  font-style: normal;
+  color: #ad7b62;
+}
+.santa-welcome p {
+  font-size: 14px;
+  line-height: 1.9;
+  color: color-mix(in srgb, var(--hero-text) 75%, transparent);
+  max-width: 480px;
+  margin-bottom: 25px;
+}
+.santa-welcome small {
+  display: block;
+  font-size: 11px;
+  margin-top: 12px;
+  color: var(--hero-text);
+  opacity: 0.7;
+}
+.santa-gift-art {
+  width: 235px;
+  min-height: 230px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  color: #9c8161;
+  transform: rotate(-9deg);
+}
+.santa-gift-art:before {
+  content: "";
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 1px dashed #c5b69755;
+  position: absolute;
+}
+.santa-gift-art > svg:last-child {
+  position: absolute;
+  right: 30px;
+  bottom: 20px;
+  color: #b77f6e;
+}
+.santa-gift-art span {
+  position: absolute;
+  left: 12px;
+  top: 10px;
+  font-size: 45px;
+}
+.santa-gift-art i {
+  position: absolute;
+  right: 8px;
+  top: 30px;
+  font-size: 30px;
+  font-style: normal;
+  color: #bda26e;
+}
+.santa-how {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 26px;
+}
+.santa-how article {
+  padding: 28px;
+}
+.santa-how article > svg {
+  color: var(--forest);
+  margin-bottom: 25px;
+}
+.santa-how h2 {
+  font-size: 19px;
+  margin-bottom: 13px;
+}
+.santa-how p {
+  font-size: 13px;
+  line-height: 1.9;
+}
+.santa-reveal-page {
+  max-width: 740px;
+  margin: 10px auto;
+}
+.santa-reveal {
+  max-width: 720px;
+  margin: 25px auto;
+  padding: 42px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.santa-reveal > .eyebrow {
+  font-size: 10px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.santa-reveal-emblem {
+  position: relative;
+  display: flex;
+  width: 110px;
+  height: 110px;
+  align-items: center;
+  justify-content: center;
+  background: var(--forest-bg);
+  border-radius: 50%;
+  margin: 32px 0 25px;
+  color: var(--forest);
+}
+.santa-reveal-emblem > i {
+  font-size: 22px;
+  font-style: normal;
+  position: absolute;
+  right: 4px;
+  top: 0;
+  color: #c5a66b;
+  animation: star-shimmer 4s ease-in-out infinite;
+}
+.santa-reveal h1 {
+  font-size: 30px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.santa-reveal > p {
+  font-size: 14px;
+  line-height: 1.9;
+  margin: 15px 0 28px;
+  max-width: 450px;
+}
+.santa-reveal > .btn {
+  font-size: 13px;
+}
+.santa-reveal > small {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: var(--text-muted);
+  font-size: 11px;
+  margin-top: 30px;
+  line-height: 1.8;
+}
+.santa-recipient {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  justify-content: center;
+  padding: 27px 12px;
+  width: 100%;
+  border-radius: 11px;
+  background: var(--forest-bg);
+  margin: 0 0 26px;
+  color: var(--forest);
+  animation: card-arrive 0.5s ease;
+}
+.santa-recipient strong {
+  font-size: 30px;
+  line-height: 1.5;
+  font-family: var(--font-heading);
+  letter-spacing: -0.7px;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+.santa-recipient > span {
+  font-size: 28px;
+  color: #b69a68;
+}
+.santa-reveal-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  gap: 20px;
+  margin-bottom: 25px;
+  text-align: left;
+}
+.santa-reveal-details span {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.santa-reveal-details strong {
+  font-size: 13px;
+  font-weight: 550;
+  overflow-wrap: anywhere;
+}
+.santa-reveal .santa-card-notes {
+  font-size: 13px;
+  text-align: left;
+  white-space: pre-wrap;
+  border-top: 1px solid var(--border-color);
+  padding-top: 20px;
+  margin: 0 0 25px;
+  width: 100%;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.santa-missing {
+  min-height: 420px;
+  justify-content: center;
+}
+.santa-missing > svg {
+  color: var(--forest);
+  margin-bottom: 25px;
+}
+.santa-missing > .text-link {
+  margin-top: 20px;
+}
+.santa-admin-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+.santa-admin-heading h2 {
+  font-size: 27px;
+  margin: 7px 0;
+}
+.santa-admin-heading p {
+  font-size: 12px;
+  line-height: 1.8;
+}
+.santa-admin-heading > div:last-child {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.santa-admin-heading .btn {
+  font-size: 11px;
+}
+.santa-mail-notice {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: var(--cream);
+  border: 1px solid var(--border-color);
+  border-radius: 9px;
+  padding: 17px 20px;
+  margin-bottom: 24px;
+  color: var(--forest);
+}
+.santa-mail-notice > div {
+  flex: 1;
+}
+.santa-mail-notice strong {
+  font-size: 12px;
+  font-weight: 600;
+}
+.santa-mail-notice p {
+  font-size: 11px;
+  line-height: 1.8;
+  margin-top: 4px;
+}
+.santa-mail-notice.configured {
+  background: var(--forest-bg);
+}
+.santa-mail-notice > .text-link {
+  font-size: 11px;
+  flex-shrink: 0;
+}
+.santa-admin-layout {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.santa-events-nav {
+  padding: 18px 12px;
+  position: sticky;
+  top: 98px;
+}
+.santa-events-nav h3 {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  padding: 0 5px;
+  margin-bottom: 15px;
+}
+.santa-events-nav > p {
+  font-size: 11px;
+  line-height: 1.85;
+  padding: 5px;
+}
+.santa-events-nav > button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9px;
+  width: 100%;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  text-align: left;
+  padding: 12px 10px;
+  margin-bottom: 5px;
+}
+.santa-events-nav > button.active {
+  background: var(--forest-bg);
+  color: var(--forest);
+  border-color: color-mix(in srgb, var(--forest) 15%, transparent);
+}
+.santa-events-nav strong {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+  line-height: 1.7;
+}
+.santa-events-nav small {
+  font-size: 10px;
+  display: block;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.santa-events-nav > button > svg {
+  opacity: 0.5;
+}
+.santa-workspace {
+  min-width: 0;
+}
+.santa-draft,
+.santa-results {
+  padding: 25px;
+}
+.santa-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 27px;
+}
+.santa-section-heading > .quick-icon {
+  margin: 0;
+  flex-shrink: 0;
+}
+.santa-section-heading > div {
+  flex: 1;
+  min-width: 0;
+}
+.santa-section-heading h3 {
+  font-size: 20px;
+  overflow-wrap: anywhere;
+}
+.santa-section-heading p {
+  font-size: 11px;
+  line-height: 1.8;
+  margin-top: 5px;
+}
+.santa-section-heading > .department-pill {
+  flex-shrink: 0;
+}
+.santa-draft fieldset,
+.santa-mail-settings fieldset {
+  border: 0;
+  min-width: 0;
+}
+.santa-draft input,
+.santa-draft textarea {
+  font-size: 13px;
+}
+.santa-roster-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 26px 0 16px;
+}
+.santa-roster-heading h4 {
+  font-size: 14px;
+  font-weight: 650;
+}
+.santa-roster-heading h4 > span {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-left: 8px;
+}
+.santa-roster-heading > .text-link {
+  font-size: 10px;
+}
+.santa-roster {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin-bottom: 18px;
+}
+.santa-person-input {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) minmax(0, 1.2fr) 29px;
+  gap: 8px;
+  align-items: center;
+}
+.santa-person-input > span {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+.santa-person-input .input-field {
+  padding: 10px;
+  font-size: 11px;
+}
+.santa-person-input > .icon-button {
+  width: 29px;
+}
+.santa-draft-actions {
+  border-top: 1px solid var(--border-color);
+  margin-top: 25px;
+  padding-top: 22px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.santa-draft-actions .btn {
+  font-size: 12px;
+}
+.santa-draft form > .field-caption {
+  font-size: 10px;
+  line-height: 1.8;
+  margin-top: 15px;
+  display: block;
+}
+.santa-bulk {
+  padding: 17px;
+  background: var(--muted-surface);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 20px;
+}
+.santa-bulk > label {
+  display: block;
+  font-size: 11px;
+  margin-bottom: 10px;
+}
+.santa-bulk > .btn {
+  font-size: 10px;
+  margin-top: 10px;
+}
+.santa-bulk textarea {
+  font-size: 12px !important;
+}
+.santa-confirm-description {
+  font-size: 13px;
+  line-height: 1.9;
+  margin-top: 17px;
+}
+.santa-review-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  font-size: 12px;
+  line-height: 1.9;
+  margin: 20px 0;
+  color: var(--text-main);
+}
+.santa-review-checkbox input {
+  accent-color: var(--forest);
+  margin-top: 5px;
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+}
+.santa-result-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--border-color);
+  background: var(--forest-bg);
+  padding: 22px 12px;
+  border-radius: 9px;
+  margin-bottom: 22px;
+  gap: 9px;
+}
+.santa-result-summary > div {
+  text-align: center;
+}
+.santa-result-summary strong {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  display: block;
+  color: var(--forest);
+}
+.santa-result-summary span {
+  font-size: 10px;
+  line-height: 1.9;
+  color: var(--text-muted);
+  display: block;
+}
+.santa-send-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  flex-wrap: wrap;
+  margin-bottom: 26px;
+}
+.santa-send-toolbar .btn {
+  font-size: 11px;
+}
+.santa-send-toolbar > span {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+.santa-send-toolbar > div {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 12px;
+}
+.santa-recovery-heading {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-content: space-between;
+  margin: 26px 0 19px;
+}
+.santa-recovery-heading h4 {
+  font-size: 15px;
+}
+.santa-recovery-heading p {
+  font-size: 11px;
+  line-height: 1.9;
+  margin-top: 6px;
+}
+.santa-recovery-heading > .btn {
+  font-size: 10px;
+  flex-shrink: 0;
+  padding: 9px;
+}
+.santa-delivery-list {
+  max-height: 660px;
+  overflow-y: auto;
+  margin-top: 16px;
+  padding-right: 4px;
+}
+.santa-delivery-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 19px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+.santa-person-summary {
+  flex: 1;
+  min-width: 145px;
+}
+.santa-person-summary > strong {
+  font-size: 13px;
+  display: block;
+  overflow-wrap: anywhere;
+  font-weight: 600;
+}
+.santa-person-summary > span {
+  font-size: 11px;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 4px;
+  overflow-wrap: anywhere;
+}
+.santa-target {
+  font-size: 11px;
+  line-height: 1.8;
+  margin-top: 10px;
+  color: var(--forest);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.santa-target > strong {
+  font-weight: 550;
+}
+.santa-delivery-status {
+  font-size: 9px;
+  border-radius: 15px;
+  padding: 5px 8px;
+  background: var(--muted-surface);
+  color: var(--text-muted);
+  max-width: 140px;
+  text-align: center;
+}
+.santa-delivery-status.accepted {
+  background: var(--forest-bg);
+  color: var(--forest);
+}
+.santa-delivery-status.failed,
+.santa-delivery-status.uncertain {
+  background: var(--coral-soft);
+  color: #b5725d;
+}
+.santa-delivery-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.santa-delivery-actions > .btn {
+  font-size: 10px;
+  padding: 7px 10px;
+  min-height: 32px;
+}
+.santa-delivery-error {
+  width: 100%;
+  font-size: 10px;
+  line-height: 1.8;
+  color: #b5725d;
+}
+.santa-result-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 24px;
+}
+.santa-result-footer > .text-link {
+  font-size: 11px;
+}
+.santa-result-footer > .text-link:last-child {
+  margin-left: auto;
+}
+.santa-private-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  color: var(--text-muted);
+  font-size: 10px;
+  line-height: 1.9;
+  margin-top: 20px;
+}
+.santa-private-note > svg {
+  margin-top: 3px;
+}
+.santa-settings-modal {
+  width: min(100%, 650px);
+}
+.santa-mail-settings > p,
+.santa-mail-settings li {
+  font-size: 12px;
+  line-height: 1.9;
+}
+.santa-mail-settings ol {
+  padding-left: 20px;
+  margin: 20px 0;
+}
+.santa-mail-settings li {
+  margin-bottom: 12px;
+}
+.santa-mail-settings a {
+  color: var(--forest);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.santa-mail-settings code {
+  background: var(--muted-surface);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-size: 10px;
+  overflow-wrap: anywhere;
+}
+.santa-mail-settings li .text-link {
+  font-size: 11px;
+  display: block;
+  margin-top: 7px;
+}
+.santa-mail-settings .local-save-caption {
+  font-size: 10px;
+  line-height: 1.9;
+  border-top: 1px solid var(--border-color);
+  padding-top: 20px;
+  margin-bottom: 0;
+}
+@media (max-width: 1190px) {
+  .santa-admin-heading {
+    flex-direction: column;
+    align-items: start;
+  }
+  .santa-admin-layout {
+    grid-template-columns: 1fr;
+  }
+  .santa-events-nav {
+    position: static;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    align-items: stretch;
+  }
+  .santa-events-nav h3 {
+    display: none;
+  }
+  .santa-events-nav > button {
+    min-width: 180px;
+    max-width: 245px;
+    flex-shrink: 0;
+    margin: 0;
+  }
+  .santa-events-nav > p {
+    min-width: 170px;
+  }
+  .santa-recovery-heading p {
+    max-width: 350px;
+  }
+  .santa-welcome h2 {
+    font-size: 36px;
+  }
+  .santa-gift-art {
+    width: 170px;
+  }
+  .santa-gift-art:before {
+    width: 170px;
+    height: 170px;
+  }
+  .santa-welcome {
+    padding: 30px;
+  }
+  .santa-how article {
+    padding: 23px;
+  }
+  .santa-how h2 {
+    font-size: 17px;
+  }
+  .santa-how p {
+    font-size: 12px;
+  }
+}
+@media (max-width: 720px) {
+  .santa-welcome {
+    padding: 27px;
+    position: relative;
+    display: block;
+  }
+  .santa-welcome > div:first-child {
+    position: relative;
+    z-index: 1;
+  }
+  .santa-welcome h2 {
+    font-size: 35px;
+  }
+  .santa-welcome p {
+    font-size: 13px;
+    max-width: 100%;
+  }
+  .santa-welcome .btn {
+    font-size: 12px;
+  }
+  .santa-gift-art {
+    position: absolute;
+    right: -15px;
+    bottom: -50px;
+    opacity: 0.1;
+  }
+  .santa-how {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .santa-how article {
+    padding: 25px;
+  }
+  .santa-how h2 {
+    font-size: 20px;
+  }
+  .santa-how p {
+    font-size: 13px;
+  }
+  .santa-how article > svg {
+    margin-bottom: 18px;
+  }
+  .santa-reveal {
+    padding: 30px 23px;
+  }
+  .santa-reveal h1 {
+    font-size: 27px;
+  }
+  .santa-reveal > p {
+    font-size: 13px;
+  }
+  .santa-recipient {
+    padding: 24px 12px;
+    gap: 10px;
+  }
+  .santa-recipient strong {
+    font-size: 27px;
+  }
+  .santa-recipient > span {
+    font-size: 22px;
+  }
+  .santa-reveal-details {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .santa-reveal > small {
+    font-size: 10px;
+    align-items: flex-start;
+  }
+  .santa-reveal-emblem {
+    width: 95px;
+    height: 95px;
+  }
+  .santa-admin-heading h2 {
+    font-size: 25px;
+  }
+  .santa-admin-heading > div:last-child {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .santa-admin-heading .btn {
+    font-size: 12px;
+  }
+  .santa-mail-notice {
+    padding: 17px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .santa-mail-notice > svg {
+    display: none;
+  }
+  .santa-mail-notice p {
+    font-size: 11px;
+  }
+  .santa-mail-notice > .text-link {
+    width: 100%;
+    font-size: 11px;
+  }
+  .santa-mail-notice strong {
+    font-size: 12px;
+  }
+  .santa-draft,
+  .santa-results {
+    padding: 20px;
+  }
+  .santa-section-heading {
+    flex-wrap: wrap;
+    gap: 11px;
+  }
+  .santa-section-heading h3 {
+    font-size: 18px;
+  }
+  .santa-section-heading > .department-pill {
+    margin-left: 52px;
+  }
+  .santa-draft input,
+  .santa-draft textarea {
+    font-size: 16px;
+  }
+  .santa-person-input {
+    grid-template-columns: 22px minmax(0, 1fr) 29px;
+    gap: 8px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .santa-person-input > input:first-of-type {
+    grid-column: 2;
+  }
+  .santa-person-input > input:last-of-type {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .santa-person-input > .icon-button {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    align-self: center;
+  }
+  .santa-person-input .input-field {
+    font-size: 16px;
+    padding: 10px;
+  }
+  .santa-person-input > span {
+    font-size: 11px;
+  }
+  .santa-roster-heading {
+    align-items: start;
+    flex-direction: column;
+    gap: 11px;
+  }
+  .santa-roster-heading > .text-link {
+    font-size: 12px;
+  }
+  .santa-draft-actions {
+    flex-direction: column;
+  }
+  .santa-draft-actions > .btn {
+    font-size: 13px;
+    width: 100%;
+  }
+  .santa-bulk > label {
+    font-size: 12px;
+  }
+  .santa-bulk textarea {
+    font-size: 14px !important;
+  }
+  .santa-draft form > .field-caption {
+    font-size: 11px;
+  }
+  .santa-result-summary {
+    padding: 19px 9px;
+    gap: 8px;
+  }
+  .santa-result-summary strong {
+    font-size: 28px;
+  }
+  .santa-result-summary span {
+    font-size: 10px;
+    line-height: 1.9;
+  }
+  .santa-send-toolbar {
+    align-items: start;
+    flex-direction: column;
+  }
+  .santa-send-toolbar > .btn {
+    width: 100%;
+    font-size: 12px;
+  }
+  .santa-send-toolbar > span {
+    font-size: 10px;
+  }
+  .santa-recovery-heading {
+    align-items: start;
+    flex-direction: column;
+    gap: 13px;
+  }
+  .santa-recovery-heading h4 {
+    font-size: 17px;
+  }
+  .santa-recovery-heading p {
+    font-size: 12px;
+  }
+  .santa-recovery-heading > .btn {
+    font-size: 11px;
+  }
+  .santa-delivery-list {
+    max-height: none;
+    padding: 0;
+  }
+  .santa-delivery-row {
+    gap: 13px;
+  }
+  .santa-person-summary {
+    min-width: 100%;
+    flex-basis: 100%;
+  }
+  .santa-person-summary > strong {
+    font-size: 14px;
+  }
+  .santa-person-summary > span {
+    font-size: 12px;
+  }
+  .santa-delivery-actions {
+    margin-left: auto;
+  }
+  .santa-delivery-status {
+    font-size: 9px;
+    max-width: 130px;
+  }
+  .santa-delivery-actions > .btn {
+    font-size: 11px;
+  }
+  .santa-private-note {
+    font-size: 11px;
+  }
+  .santa-target {
+    font-size: 12px;
+    flex-wrap: wrap;
+  }
+  .santa-result-footer {
+    align-items: start;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .santa-result-footer > .text-link:last-child {
+    margin-left: 0;
+  }
+  .santa-mail-settings > p,
+  .santa-mail-settings li {
+    font-size: 13px;
+  }
+  .santa-mail-settings .local-save-caption {
+    font-size: 11px;
+  }
+  .santa-mail-settings li .text-link {
+    font-size: 12px;
+  }
+  .santa-review-checkbox {
+    font-size: 12px;
+  }
+  .santa-review-checkbox input {
+    width: 17px;
+    height: 17px;
+  }
+  .santa-settings-modal .modal-actions {
+    flex-wrap: wrap;
+  }
+}

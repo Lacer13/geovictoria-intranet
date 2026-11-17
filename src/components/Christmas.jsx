@@ -219,6 +219,19 @@ export default function Christmas() {
           </span>
         </div>
       </section>
+      <div className="help-banner">
+        <Gift size={25} />
+        <div>
+          <strong>Un nombre, un regalo y mucha ilusión.</strong>
+          <p>
+            Organiza el amigo secreto del equipo o descubre cómo consultar tu
+            invitación.
+          </p>
+        </div>
+        <Link to="/amigo-secreto" className="text-link">
+          Nuestro amigo secreto <ArrowRight size={15} />
+        </Link>
+      </div>
       <QRCodeSection />
       <div className="help-banner">
         <Sparkles size={22} />

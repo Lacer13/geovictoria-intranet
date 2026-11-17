@@ -11,6 +11,7 @@ import {
   MessageSquare,
   Settings,
   Sparkles,
+  Shuffle,
   Users,
   X,
 } from "lucide-react";
@@ -118,6 +119,16 @@ export default function Sidebar({ open, onClose }) {
             <Gift size={19} strokeWidth={1.7} />
             <span>Navidad en equipo</span>
             <span className="new-badge">Especial</span>
+          </NavLink>
+          <NavLink
+            to="/amigo-secreto"
+            className={({ isActive }) =>
+              `nav-item christmas-nav ${isActive ? "active" : ""}`
+            }
+          >
+            <Shuffle size={19} strokeWidth={1.7} />
+            <span>Amigo secreto</span>
+            <span className="new-badge">Nuevo</span>
           </NavLink>
           <NavLink to="/juego" className="nav-item">
             <Gamepad2 size={19} strokeWidth={1.7} />

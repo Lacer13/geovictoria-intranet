@@ -1,6 +1,6 @@
 # GeoVictoria Perú · Nuestro espacio
 
-Intranet en React y Vite con Firestore. Incluye inicio, comunicados, directorio, vista de áreas, guías con favoritos, buzón de solicitudes, especial navideño y la pausa activa de VictorIA.
+Intranet en React y Vite con Firestore. Incluye inicio, comunicados, directorio, vista de áreas, guías con favoritos, buzón de solicitudes, especial navideño, amigo secreto y la pausa activa de VictorIA.
 
 ## Desarrollo
 
@@ -63,13 +63,21 @@ Las reglas restringen la lectura y eliminación de reportes a administradores, v
 
 La configuración web de Firebase identifica el proyecto existente; no es una credencial de servidor. La protección depende de las reglas y de Authentication. No guardar archivos de cuentas de servicio en este repositorio.
 
+## Amigo secreto y correo sin dominio propio
+
+Desde **Administración → Amigo secreto** se pueden guardar grupos de 2 a 100 personas, importar una lista de nombres/correos, sortear y enviar las asignaciones. Nadie se asigna a sí mismo; cada persona da y recibe un regalo. Una vez sorteado, el grupo y las parejas quedan fijos. Los reenvíos conservan el resultado original.
+
+**Configurar correo** guía la conexión de Gmail u Outlook mediante EmailJS e incluye la plantilla HTML para copiar. No requiere dominio propio ni cambiar el plan de Firebase. La conexión de la cuenta y la autorización del proveedor las realiza su titular; la aplicación no incluye una cuenta de envío preconfigurada ni solicita contraseñas SMTP. Solo se guardan los tres identificadores públicos de EmailJS en una colección accesible a administradores.
+
+El panel registra cada intento y permite consultar el respaldo, descargarlo o recuperar el enlace privado de una persona. Los correos requieren confirmación del administrador; guardar o sortear no los envía. Consulta [la guía de configuración y operación](docs/amigo-secreto.md).
+
 ## Pruebas
 
 ```sh
 npm test
 ```
 
-Comprueba la fecha de Lima alrededor de medianoche, el cambio de año de la cuenta regresiva, búsquedas sin acentos, almacenamiento bloqueado y exportación de calendario.
+Comprueba fechas de Lima, búsquedas, preferencias, calendario, asignaciones del sorteo, importación, exportación segura y manejo de errores del proveedor de correo.
 
 Para probar las reglas se necesita Java 21 y el emulador oficial:
 
@@ -79,7 +87,7 @@ npx --yes firebase-tools@15.34.1 emulators:exec \
   --config firebase.emulator.json "npm run test:rules"
 ```
 
-Para probar visualmente los flujos sin datos reales, inicia los emuladores `auth,firestore` con el mismo proyecto y ejecuta `VITE_USE_FIREBASE_EMULATORS=true npm run dev`. Este modo solo existe durante desarrollo: la compilación de producción siempre utiliza el proyecto real.
+Para probar visualmente los flujos sin datos reales, inicia los emuladores `auth,firestore` con el mismo proyecto y ejecuta `VITE_USE_FIREBASE_EMULATORS=true npm run dev`. Este modo simula los envíos de amigo secreto sin contactar a EmailJS y solo existe durante desarrollo: la compilación de producción siempre utiliza el proyecto real.
 
 Las pruebas rechazan ejecutarse sin `FIRESTORE_EMULATOR_HOST` y usan exclusivamente `demo-geovictoria`. Verifican lectura del buzón, permisos ordinarios/administrativos, validación de reportes, recursos públicos, ranking, denegación de colecciones no definidas, invitaciones con correo verificado, revocación inmediata y protección de la cuenta principal. La integración de GitHub ejecuta pruebas y compilación sin credenciales de producción.
 

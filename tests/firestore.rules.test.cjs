@@ -1,4 +1,5 @@
 const { before, after, test } = require("node:test");
+const assert = require("node:assert/strict");
 const { readFileSync } = require("node:fs");
 const { createRequire } = require("node:module");
 const sdkRequire = createRequire(
@@ -275,4 +276,337 @@ test("revoking membership denies subsequent protected requests and is reversible
     }),
   );
   await assertSucceeds(getDocs(collection(other, "feedbacks")));
+});
+
+const { writeBatch } = sdkRequire("firebase/firestore");
+const santaAdmin = () =>
+  env
+    .authenticatedContext("santa-organizer", {
+      admin: true,
+      email: "organizer@example.test",
+      email_verified: true,
+    })
+    .firestore();
+let santaToken = 1000;
+function santaDraftData(count = 3) {
+  const ids = Array.from({ length: count }, (_, i) =>
+    (i + 1).toString(16).padStart(32, "0"),
+  );
+  return {
+    title: "Intercambio de prueba",
+    exchangeDate: "2026-12-24",
+    budget: "S/ 50",
+    notes: "Solo en emulador",
+    participantIds: ids,
+    people: Object.fromEntries(
+      ids.map((id, i) => [
+        id,
+        { name: `Persona ${i + 1}`, email: `santa${i + 1}@example.test` },
+      ]),
+    ),
+    assignments: {},
+    status: "draft",
+    revision: 0,
+    createdBy: "santa-organizer",
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+  };
+}
+function santaDrawBatch(
+  db,
+  id,
+  event,
+  { invalid = false, extraField = false } = {},
+) {
+  const assignments = Object.fromEntries(
+    event.participantIds.map((giver, i) => [
+      giver,
+      {
+        recipientId:
+          event.participantIds[(i + 1) % event.participantIds.length],
+        cardId: (santaToken++).toString(16).padStart(64, "0"),
+      },
+    ]),
+  );
+  const batch = writeBatch(db);
+  batch.update(doc(db, "secretSantaEvents", id), {
+    assignments,
+    status: "drawn",
+    revision: 1,
+    drawnAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+  });
+  for (const [index, giver] of event.participantIds.entries()) {
+    const pair = assignments[giver];
+    const card = {
+      eventId: id,
+      giverId: giver,
+      giverName: event.people[giver].name,
+      recipientId: pair.recipientId,
+      recipientName: event.people[pair.recipientId].name,
+      title: event.title,
+      exchangeDate: event.exchangeDate,
+      budget: event.budget,
+      notes: event.notes,
+      createdAt: serverTimestamp(),
+    };
+    if (invalid && index === 0) card.recipientId = giver;
+    if (extraField && index === 0) card.recipientEmail = "private@example.test";
+    batch.set(doc(db, "secretSantaCards", pair.cardId), card);
+  }
+  return { batch, assignments };
+}
+let publicSantaId;
+let publicSantaPairs;
+let publicSantaPeople;
+test("only administrators can create and read Santa rosters or email settings", async () => {
+  const admin = santaAdmin(),
+    visitor = env.unauthenticatedContext().firestore();
+  const event = santaDraftData();
+  await assertFails(
+    setDoc(doc(visitor, "secretSantaEvents", "public-attempt"), event),
+  );
+  await assertSucceeds(
+    setDoc(doc(admin, "secretSantaEvents", "saved-roster"), event),
+  );
+  await assertFails(getDoc(doc(visitor, "secretSantaEvents", "saved-roster")));
+  await assertFails(getDocs(collection(visitor, "secretSantaEvents")));
+  const settings = {
+    enabled: true,
+    serviceId: "service_demo",
+    templateId: "template_demo",
+    publicKey: "public_demo",
+    updatedBy: "santa-organizer",
+    updatedAt: serverTimestamp(),
+  };
+  await assertSucceeds(
+    setDoc(doc(admin, "portalSettings", "secretSantaEmail"), settings),
+  );
+  await assertFails(getDoc(doc(visitor, "portalSettings", "secretSantaEmail")));
+  await assertFails(
+    setDoc(doc(admin, "portalSettings", "secretSantaEmail"), {
+      ...settings,
+      smtpPassword: "must-not-be-stored",
+    }),
+  );
+});
+test("draft saves require a new revision and at most 100 unique participant IDs", async () => {
+  const admin = santaAdmin();
+  await assertFails(
+    updateDoc(doc(admin, "secretSantaEvents", "saved-roster"), {
+      title: "Stale change",
+      revision: 0,
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertSucceeds(
+    updateDoc(doc(admin, "secretSantaEvents", "saved-roster"), {
+      title: "Updated title",
+      revision: 1,
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertFails(
+    setDoc(
+      doc(admin, "secretSantaEvents", "too-many-people"),
+      santaDraftData(101),
+    ),
+  );
+  const duplicate = santaDraftData(2);
+  duplicate.participantIds.push(duplicate.participantIds[0]);
+  await assertFails(
+    setDoc(doc(admin, "secretSantaEvents", "duplicate-ids"), duplicate),
+  );
+});
+test("a malformed card rejects the whole draw without publishing partial results", async () => {
+  const admin = santaAdmin();
+  const event = santaDraftData();
+  await assertSucceeds(
+    setDoc(doc(admin, "secretSantaEvents", "invalid-draw"), event),
+  );
+  const { batch, assignments } = santaDrawBatch(admin, "invalid-draw", event, {
+    invalid: true,
+  });
+  await assertFails(batch.commit());
+  const retained = await getDoc(
+    doc(admin, "secretSantaEvents", "invalid-draw"),
+  );
+  assert.equal(retained.data().status, "draft");
+  for (const pair of Object.values(assignments))
+    assert.equal(
+      (await getDoc(doc(admin, "secretSantaCards", pair.cardId))).exists(),
+      false,
+    );
+});
+test("public cards cannot include participant email addresses", async () => {
+  const admin = santaAdmin();
+  const event = santaDraftData();
+  await setDoc(doc(admin, "secretSantaEvents", "no-email-leak"), event);
+  const { batch } = santaDrawBatch(admin, "no-email-leak", event, {
+    extraField: true,
+  });
+  await assertFails(batch.commit());
+});
+test("a complete atomic draw exposes only a private card, never a roster or list of cards", async () => {
+  const admin = santaAdmin();
+  const visitor = env.unauthenticatedContext().firestore();
+  const event = santaDraftData();
+  publicSantaId = "complete-draw";
+  publicSantaPeople = event;
+  await setDoc(doc(admin, "secretSantaEvents", publicSantaId), event);
+  const { batch, assignments } = santaDrawBatch(admin, publicSantaId, event);
+  publicSantaPairs = assignments;
+  await assertSucceeds(batch.commit());
+  const first = event.participantIds[0];
+  const card = await assertSucceeds(
+    getDoc(doc(visitor, "secretSantaCards", assignments[first].cardId)),
+  );
+  assert.equal(
+    card.data().recipientName,
+    event.people[assignments[first].recipientId].name,
+  );
+  assert.equal("recipientEmail" in card.data(), false);
+  await assertFails(getDocs(collection(visitor, "secretSantaCards")));
+  await assertFails(getDocs(collection(admin, "secretSantaCards")));
+  await assertFails(getDoc(doc(visitor, "secretSantaEvents", publicSantaId)));
+  await assertFails(
+    getDoc(doc(visitor, "secretSantaCards", "guessable-short-id")),
+  );
+});
+test("drawn rosters, pairings and cards are immutable even for administrators", async () => {
+  const admin = santaAdmin();
+  const ref = doc(admin, "secretSantaEvents", publicSantaId);
+  await assertFails(
+    updateDoc(ref, {
+      title: "Changed after sending",
+      revision: 2,
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertFails(
+    updateDoc(ref, {
+      status: "draft",
+      revision: 2,
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertFails(
+    updateDoc(ref, {
+      assignments: {},
+      revision: 2,
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  const card = doc(
+    admin,
+    "secretSantaCards",
+    Object.values(publicSantaPairs)[0].cardId,
+  );
+  await assertFails(updateDoc(card, { recipientName: "Changed result" }));
+  await assertFails(deleteDoc(card));
+  await assertFails(deleteDoc(ref));
+});
+test("archiving disables private links and restoring retains the same result", async () => {
+  const admin = santaAdmin();
+  const visitor = env.unauthenticatedContext().firestore();
+  const ref = doc(admin, "secretSantaEvents", publicSantaId);
+  const token = Object.values(publicSantaPairs)[0].cardId;
+  const before = (await getDoc(doc(visitor, "secretSantaCards", token))).data();
+  await assertSucceeds(
+    updateDoc(ref, {
+      status: "archived",
+      revision: 2,
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertFails(getDoc(doc(visitor, "secretSantaCards", token)));
+  await assertSucceeds(
+    updateDoc(ref, {
+      status: "drawn",
+      revision: 3,
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  assert.deepEqual(
+    (await getDoc(doc(visitor, "secretSantaCards", token))).data(),
+    before,
+  );
+});
+test("email attempts require an exclusive sending state and cannot overwrite active attempts", async () => {
+  const admin = santaAdmin();
+  const giver = publicSantaPeople.participantIds[0];
+  const ref = doc(
+    admin,
+    "secretSantaEvents",
+    publicSantaId,
+    "deliveries",
+    giver,
+  );
+  const attempt = {
+    state: "sending",
+    attemptId: "a".repeat(32),
+    attempts: 1,
+    startedAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+    provider: "emailjs",
+    lastError: "",
+  };
+  await assertFails(setDoc(ref, { ...attempt, state: "accepted" }));
+  await assertSucceeds(setDoc(ref, attempt));
+  await assertFails(
+    setDoc(ref, { ...attempt, attemptId: "b".repeat(32), attempts: 2 }),
+  );
+  await assertSucceeds(
+    updateDoc(ref, { state: "accepted", updatedAt: serverTimestamp() }),
+  );
+  await assertFails(
+    updateDoc(ref, {
+      lastError: "Changed receipt",
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertSucceeds(
+    setDoc(ref, { ...attempt, attemptId: "c".repeat(32), attempts: 2 }),
+  );
+  await assertSucceeds(
+    updateDoc(ref, {
+      state: "uncertain",
+      lastError: "Network result unknown",
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  const visitor = env.unauthenticatedContext().firestore();
+  await assertFails(
+    getDoc(
+      doc(visitor, "secretSantaEvents", publicSantaId, "deliveries", giver),
+    ),
+  );
+  await assertFails(
+    setDoc(
+      doc(
+        admin,
+        "secretSantaEvents",
+        publicSantaId,
+        "deliveries",
+        "not-a-participant",
+      ),
+      attempt,
+    ),
+  );
+});
+test("the maximum group can be stored atomically within Firestore rule access limits", async () => {
+  const admin = santaAdmin();
+  const event = santaDraftData(100);
+  await assertSucceeds(
+    setDoc(doc(admin, "secretSantaEvents", "large-draw"), event),
+  );
+  const { batch } = santaDrawBatch(admin, "large-draw", event);
+  await assertSucceeds(batch.commit());
+  assert.equal(
+    Object.keys(
+      (await getDoc(doc(admin, "secretSantaEvents", "large-draw"))).data()
+        .assignments,
+    ).length,
+    100,
+  );
 });

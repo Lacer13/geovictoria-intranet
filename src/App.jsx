@@ -30,6 +30,12 @@ const Wiki = lazy(() => import("./components/Wiki"));
 const Admin = lazy(() => import("./components/Admin"));
 const Christmas = lazy(() => import("./components/Christmas"));
 const FeedbackForm = lazy(() => import("./components/FeedbackForm"));
+const SecretSanta = lazy(() => import("./components/SecretSanta"));
+const SecretSantaReveal = lazy(() =>
+  import("./components/SecretSanta").then((module) => ({
+    default: module.SecretSantaReveal,
+  })),
+);
 
 class ErrorBoundary extends Component {
   state = { failed: false };
@@ -82,7 +88,16 @@ function AppContent() {
   }, [location.pathname]);
   return (
     <div className={game ? "game-shell" : "app-shell"}>
-      <a href="#main-content" className="skip-link">
+      <a
+        href="#main-content"
+        className="skip-link"
+        onClick={(event) => {
+          event.preventDefault();
+          const main = document.getElementById("main-content");
+          main?.focus({ preventScroll: true });
+          main?.scrollIntoView({ block: "start" });
+        }}
+      >
         Saltar al contenido
       </a>
       {!game && <Sidebar open={menuOpen} onClose={closeMenu} />}
@@ -124,6 +139,11 @@ function AppContent() {
                 <Route path="/directorio" element={<HelpDirectory />} />
                 <Route path="/wiki" element={<Wiki />} />
                 <Route path="/navidad" element={<Christmas />} />
+                <Route path="/amigo-secreto" element={<SecretSanta />} />
+                <Route
+                  path="/amigo-secreto/ver"
+                  element={<SecretSantaReveal />}
+                />
                 <Route path="/solicitudes" element={<FeedbackForm />} />
                 <Route path="/admin" element={<Admin />} />
                 <Route

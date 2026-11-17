@@ -15,6 +15,8 @@ dist-ssr
 test-results/
 artifacts/
 pnpm-lock.yaml
+.pnpm-store/
+pnpm-workspace.yaml
 *.local
 
 # Editor directories and files

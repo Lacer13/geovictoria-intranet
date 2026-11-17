@@ -9,7 +9,9 @@ import {
   Calendar,
   Users,
   ShieldCheck,
+  Gift,
 } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
 import {
   collection,
   getDocs,
@@ -24,8 +26,10 @@ import { onIdTokenChanged, signOut, getIdTokenResult } from "firebase/auth";
 import toast from "react-hot-toast";
 import AdminLogin from "./AdminLogin";
 import AdminManagers from "./AdminManagers";
+import SecretSantaAdmin from "./SecretSantaAdmin";
 
 const Admin = () => {
+  const [params] = useSearchParams();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [email, setEmail] = useState("");
   const [unverifiedUser, setUnverifiedUser] = useState(null);
@@ -34,7 +38,9 @@ const Admin = () => {
   const [dataError, setDataError] = useState("");
   const [dataLoading, setDataLoading] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [activeTab, setActiveTab] = useState("feedbacks"); // 'feedbacks', 'news', 'directory'
+  const [activeTab, setActiveTab] = useState(() =>
+    params.get("seccion") === "amigo-secreto" ? "santa" : "feedbacks",
+  );
 
   // Data states
   const [messages, setMessages] = useState([]);
@@ -539,9 +545,16 @@ const Admin = () => {
         >
           <ShieldCheck size={18} /> Administradores
         </button>
+        <button
+          className={`btn ${activeTab === "santa" ? "btn-forest" : "btn-secondary"}`}
+          onClick={() => setActiveTab("santa")}
+        >
+          <Gift size={18} /> Amigo secreto
+        </button>
       </div>
 
       {activeTab === "admins" && <AdminManagers />}
+      {activeTab === "santa" && <SecretSantaAdmin />}
 
       {/* Tab Content: Feedbacks */}
       {activeTab === "feedbacks" && (
