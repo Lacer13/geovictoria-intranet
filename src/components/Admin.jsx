@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import {
-  ArrowLeft,
   Lock,
   Inbox,
   Trash2,
@@ -9,6 +8,7 @@ import {
   Star,
   Calendar,
   Users,
+  ShieldCheck,
 } from "lucide-react";
 import {
   collection,
@@ -16,21 +16,19 @@ import {
   deleteDoc,
   doc,
   addDoc,
+  onSnapshot,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { auth } from "../auth";
-import {
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signOut,
-  getIdTokenResult,
-} from "firebase/auth";
+import { onIdTokenChanged, signOut, getIdTokenResult } from "firebase/auth";
 import toast from "react-hot-toast";
+import AdminLogin from "./AdminLogin";
+import AdminManagers from "./AdminManagers";
 
 const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [unverifiedUser, setUnverifiedUser] = useState(null);
   const [error, setError] = useState("");
   const [authLoading, setAuthLoading] = useState(true);
   const [dataError, setDataError] = useState("");
@@ -121,59 +119,97 @@ const Admin = () => {
   }, []);
 
   useEffect(() => {
-    let active = true;
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      try {
-        if (user) {
-          const token = await getIdTokenResult(user);
-          if (!active) return;
-          if (token.claims.admin === true) {
-            setEmail(user.email || "");
-            setDataLoading(true);
-            setDataError("");
-            setIsAuthenticated(true);
-            await Promise.all([loadMessages(), loadNews(), loadDirectory()]);
-            if (active) setDataLoading(false);
-          } else {
-            setIsAuthenticated(false);
-            setError("Esta cuenta no tiene permisos de administración.");
-            await signOut(auth);
-          }
-        } else if (active) {
+    let mounted = true;
+    let generation = 0;
+    let stopRole = () => {};
+    const unsubscribe = onIdTokenChanged(auth, async (user) => {
+      const current = ++generation;
+      stopRole();
+      stopRole = () => {};
+      const valid = () => mounted && current === generation;
+      const grant = async () => {
+        if (!valid()) return;
+        setEmail(user.email || "");
+        setUnverifiedUser(null);
+        setDataLoading(true);
+        setDataError("");
+        setError("");
+        setIsAuthenticated(true);
+        setAuthLoading(false);
+        await Promise.all([loadMessages(), loadNews(), loadDirectory()]);
+        if (valid()) setDataLoading(false);
+      };
+      if (!user) {
+        if (valid()) {
           setIsAuthenticated(false);
+          setUnverifiedUser(null);
           setMessages([]);
           setNews([]);
           setDirectory([]);
+          setAuthLoading(false);
         }
+        return;
+      }
+      try {
+        const token = await getIdTokenResult(user);
+        if (!valid()) return;
+        if (token.claims.admin === true) {
+          await grant();
+          return;
+        }
+        if (!user.emailVerified) {
+          setIsAuthenticated(false);
+          setUnverifiedUser(user);
+          setError("");
+          setAuthLoading(false);
+          return;
+        }
+        if (!user.email) throw new Error("An email is required");
+        stopRole = onSnapshot(
+          doc(db, "administrators", user.email.toLowerCase()),
+          (snapshot) => {
+            if (!valid()) return;
+            const role = snapshot.data();
+            if (
+              snapshot.exists() &&
+              role.active === true &&
+              ["owner", "admin"].includes(role.role)
+            )
+              void grant();
+            else {
+              setIsAuthenticated(false);
+              setError(
+                "Este correo no tiene acceso de administrador. Solicita autorización al responsable del portal.",
+              );
+              setAuthLoading(false);
+              void signOut(auth);
+            }
+          },
+          () => {
+            if (valid()) {
+              setIsAuthenticated(false);
+              setError(
+                "No pudimos comprobar los permisos. Vuelve a iniciar sesión.",
+              );
+              setAuthLoading(false);
+            }
+          },
+        );
       } catch {
-        if (active)
-          setError(
-            "No pudimos verificar los permisos. Vuelve a iniciar sesión.",
-          );
-      } finally {
-        if (active) setAuthLoading(false);
+        if (valid()) {
+          setIsAuthenticated(false);
+          setError("No pudimos verificar tu acceso. Vuelve a intentarlo.");
+          setAuthLoading(false);
+        }
       }
     });
     return () => {
-      active = false;
+      mounted = false;
+      generation++;
+      stopRole();
       unsubscribe();
     };
   }, [loadMessages, loadNews, loadDirectory]);
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setAuthLoading(true);
-    setError("");
-    try {
-      await signInWithEmailAndPassword(auth, email.trim(), password);
-      setPassword("");
-    } catch {
-      setError(
-        "No pudimos iniciar sesión. Verifica tus credenciales y tu conexión.",
-      );
-      setAuthLoading(false);
-    }
-  };
 
   const handleDeleteFeedback = (msgId) => {
     toast(
@@ -394,63 +430,11 @@ const Admin = () => {
 
   if (!isAuthenticated) {
     return (
-      <section className="panel admin-login page-enter">
-        <span className="quick-icon green">
-          <Lock size={24} />
-        </span>
-        <span className="eyebrow">ADMINISTRACIÓN</span>
-        <h1>Cuidamos este espacio.</h1>
-        <p>
-          Ingresa con tu cuenta autorizada para gestionar los comunicados,
-          contactos y solicitudes del equipo.
-        </p>
-        <form onSubmit={handleLogin}>
-          <div className="input-group">
-            <label htmlFor="admin-email">Correo de trabajo</label>
-            <input
-              id="admin-email"
-              type="email"
-              autoComplete="username"
-              placeholder="nombre@geovictoria.com"
-              className="input-field"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              disabled={authLoading}
-            />
-          </div>
-          <div className="input-group">
-            <label htmlFor="admin-password">Contraseña</label>
-            <input
-              id="admin-password"
-              type="password"
-              autoComplete="current-password"
-              className="input-field"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              disabled={authLoading}
-            />
-          </div>
-          {error && (
-            <p className="form-error" role="alert">
-              {error}
-            </p>
-          )}
-          <button
-            type="submit"
-            className="btn btn-forest"
-            disabled={authLoading}
-          >
-            {authLoading ? "Verificando acceso…" : "Entrar a administración"}
-            <ArrowLeft size={15} style={{ transform: "rotate(180deg)" }} />
-          </button>
-        </form>
-        <p style={{ marginTop: 20, fontSize: 10 }}>
-          Si necesitas acceso o recuperar tu cuenta, consulta con el responsable
-          de la intranet.
-        </p>
-      </section>
+      <AdminLogin
+        loading={authLoading}
+        accessError={error}
+        unverifiedUser={unverifiedUser}
+      />
     );
   }
 
@@ -549,7 +533,15 @@ const Admin = () => {
         >
           <Users size={18} /> Directorio de Soporte
         </button>
+        <button
+          className={`btn ${activeTab === "admins" ? "btn-forest" : "btn-secondary"}`}
+          onClick={() => setActiveTab("admins")}
+        >
+          <ShieldCheck size={18} /> Administradores
+        </button>
       </div>
+
+      {activeTab === "admins" && <AdminManagers />}
 
       {/* Tab Content: Feedbacks */}
       {activeTab === "feedbacks" && (

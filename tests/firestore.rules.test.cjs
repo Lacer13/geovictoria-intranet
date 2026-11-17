@@ -136,3 +136,143 @@ test("unknown collections deny every read and write", async () => {
   await assertFails(setDoc(doc(db, "private", "unknown"), { test: true }));
   await assertFails(getDoc(doc(db, "private", "unknown")));
 });
+
+const delegatedEmail = "delegado@example.test";
+const anotherEmail = "otro@example.test";
+const membership = (email) => ({
+  email,
+  role: "admin",
+  active: true,
+  createdBy: "root-owner",
+  createdAt: serverTimestamp(),
+});
+test("a verified invited administrator receives permissions without custom claims", async () => {
+  const root = env
+    .authenticatedContext("root-owner", {
+      admin: true,
+      email: "owner@example.test",
+      email_verified: true,
+    })
+    .firestore();
+  await assertSucceeds(
+    setDoc(
+      doc(root, "administrators", delegatedEmail),
+      membership(delegatedEmail),
+    ),
+  );
+  const delegated = env
+    .authenticatedContext("delegated", {
+      email: delegatedEmail,
+      email_verified: true,
+    })
+    .firestore();
+  await assertSucceeds(getDocs(collection(delegated, "feedbacks")));
+  await assertSucceeds(setDoc(doc(delegated, "news", "delegated-news"), news));
+});
+test("an unverified email or uninvited account cannot become an administrator", async () => {
+  const unverified = env
+    .authenticatedContext("unverified", {
+      email: delegatedEmail,
+      email_verified: false,
+    })
+    .firestore();
+  const outsider = env
+    .authenticatedContext("outsider", {
+      email: "outsider@example.test",
+      email_verified: true,
+    })
+    .firestore();
+  await assertFails(getDocs(collection(unverified, "feedbacks")));
+  await assertFails(getDoc(doc(unverified, "administrators", delegatedEmail)));
+  await assertFails(getDocs(collection(outsider, "feedbacks")));
+  await assertFails(
+    setDoc(doc(outsider, "administrators", "outsider@example.test"), {
+      ...membership("outsider@example.test"),
+      createdBy: "outsider",
+    }),
+  );
+});
+test("delegated administrators can invite others but cannot assign owner privileges", async () => {
+  const delegated = env
+    .authenticatedContext("delegated", {
+      email: delegatedEmail,
+      email_verified: true,
+    })
+    .firestore();
+  await assertSucceeds(
+    setDoc(doc(delegated, "administrators", anotherEmail), {
+      ...membership(anotherEmail),
+      createdBy: "delegated",
+    }),
+  );
+  await assertFails(
+    setDoc(doc(delegated, "administrators", "newowner@example.test"), {
+      ...membership("newowner@example.test"),
+      createdBy: "delegated",
+      role: "owner",
+    }),
+  );
+  await assertFails(
+    updateDoc(doc(delegated, "administrators", anotherEmail), {
+      role: "owner",
+      updatedAt: serverTimestamp(),
+    }),
+  );
+});
+test("the principal account and an administrators own access are protected", async () => {
+  await env.withSecurityRulesDisabled(async (context) => {
+    await setDoc(
+      doc(context.firestore(), "administrators", "owner@example.test"),
+      { ...membership("owner@example.test"), role: "owner" },
+    );
+  });
+  const delegated = env
+    .authenticatedContext("delegated", {
+      email: delegatedEmail,
+      email_verified: true,
+    })
+    .firestore();
+  await assertFails(
+    updateDoc(doc(delegated, "administrators", "owner@example.test"), {
+      active: false,
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertFails(
+    updateDoc(doc(delegated, "administrators", delegatedEmail), {
+      active: false,
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertFails(deleteDoc(doc(delegated, "administrators", anotherEmail)));
+});
+test("revoking membership denies subsequent protected requests and is reversible", async () => {
+  const delegated = env
+    .authenticatedContext("delegated", {
+      email: delegatedEmail,
+      email_verified: true,
+    })
+    .firestore();
+  const other = env
+    .authenticatedContext("other", {
+      email: anotherEmail,
+      email_verified: true,
+    })
+    .firestore();
+  await assertSucceeds(getDocs(collection(other, "feedbacks")));
+  await assertSucceeds(
+    updateDoc(doc(delegated, "administrators", anotherEmail), {
+      active: false,
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertFails(getDocs(collection(other, "feedbacks")));
+  await assertFails(setDoc(doc(other, "news", "revoked-news"), news));
+  await assertSucceeds(
+    updateDoc(doc(delegated, "administrators", anotherEmail), {
+      active: true,
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertSucceeds(getDocs(collection(other, "feedbacks")));
+});

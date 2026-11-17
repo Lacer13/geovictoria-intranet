@@ -4377,3 +4377,152 @@ select.input-field {
     transform: none;
   }
 }
+
+/* Administrative access and invitation management. */
+.admin-activation {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+.admin-login-options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 20px 0;
+}
+.admin-login-options .text-link {
+  font-size: 12px;
+}
+.admin-login-caption {
+  margin-top: 22px;
+  font-size: 11px !important;
+}
+.admin-login > .inline-notice {
+  font-size: 12px;
+  line-height: 1.8;
+}
+.admin-management-heading {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  margin-bottom: 20px;
+}
+.admin-management-heading .quick-icon {
+  margin: 0;
+}
+.admin-management-heading h2 {
+  font-size: 24px;
+}
+.admin-management-heading p {
+  font-size: 13px;
+  margin-top: 5px;
+}
+.admin-invite {
+  padding: 25px;
+  margin-bottom: 20px;
+}
+.admin-invite h3 {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.admin-invite > p {
+  font-size: 12px;
+  line-height: 1.9;
+  margin: 12px 0 20px;
+  max-width: 650px;
+}
+.admin-invite form {
+  display: flex;
+  align-items: end;
+  gap: 15px;
+}
+.admin-invite .input-group {
+  flex: 1;
+  margin-bottom: 0;
+}
+.admin-invite .input-group > span {
+  font-size: 12px;
+}
+.admin-invite .btn {
+  min-height: 44px;
+  font-size: 12px;
+}
+.admin-members {
+  padding: 5px 24px;
+}
+.admin-members > p {
+  padding: 25px 0;
+  font-size: 13px;
+}
+.admin-member {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 21px 0;
+}
+.admin-member + .admin-member {
+  border-top: 1px solid var(--border-color);
+}
+.admin-member > .quick-icon {
+  margin: 0;
+  flex-shrink: 0;
+}
+.admin-member > div:nth-child(2) {
+  flex: 1;
+  min-width: 0;
+}
+.admin-member strong {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+  font-weight: 600;
+}
+.admin-member p {
+  font-size: 11px;
+  margin-top: 5px;
+}
+.admin-member-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.admin-member-actions .btn {
+  font-size: 11px;
+}
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 25px;
+}
+@media (max-width: 720px) {
+  .admin-invite {
+    padding: 22px;
+  }
+  .admin-invite form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .admin-management-heading h2 {
+    font-size: 21px;
+  }
+  .admin-member {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .admin-member-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  .admin-member strong {
+    font-size: 13px;
+  }
+  .admin-member p {
+    font-size: 11px;
+  }
+  .admin-members {
+    padding: 0 20px;
+  }
+}

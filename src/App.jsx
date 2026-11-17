@@ -19,6 +19,7 @@ import Dashboard from "./components/Dashboard";
 import Sidebar from "./components/Sidebar";
 import DynamicHeader from "./components/DynamicHeader";
 import ChristmasEffects from "./components/ChristmasEffects";
+import { isLocalDemo } from "./firebase";
 import { PortalProvider } from "./context/PortalContext";
 import { readPreference, savePreference } from "./lib/preferences";
 
@@ -102,6 +103,12 @@ function AppContent() {
           className={game ? "game-main" : "main-content"}
           tabIndex={-1}
         >
+          {isLocalDemo && (
+            <div className="inline-notice" role="status">
+              Entorno de pruebas local · Datos de ejemplo sin conexión a
+              producción
+            </div>
+          )}
           <ErrorBoundary key={location.pathname}>
             <Suspense
               fallback={

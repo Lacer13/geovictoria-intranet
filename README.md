@@ -37,14 +37,27 @@ Los reportes se guardan en Firestore; **no se envían correos automáticos**. La
 
 ## Administración y requisitos para producción
 
-La contraseña administrativa incrustada en JavaScript fue eliminada. Administración utiliza Firebase Authentication y exige un token con el custom claim booleano `admin: true`.
+La contraseña administrativa incrustada en JavaScript fue eliminada. Administración utiliza Firebase Authentication. La cuenta principal conserva el custom claim `admin: true`; los administradores adicionales acceden mediante un registro activo en `administrators/{correo-en-minúsculas}` y un correo verificado. Crear una cuenta no concede permisos por sí solo.
 
 Antes de publicar esta versión en producción, el responsable de Firebase debe:
 
-1. Habilitar el proveedor **Correo electrónico/contraseña** en Authentication y crear o habilitar la cuenta administradora. No existe registro público de administradores.
+1. Habilitar el proveedor **Correo electrónico/contraseña** en Authentication y crear o habilitar la cuenta principal. No existe concesión pública de permisos de administrador.
 2. Asignar `admin: true` al UID autorizado desde un entorno de confianza con Firebase Admin SDK. Nunca se asignan permisos desde el navegador ni se incluyen credenciales del servidor en el repositorio. La cuenta debe cerrar sesión y volver a entrar tras cambiar sus claims.
-3. Revisar y desplegar `firestore.rules`. El bloqueo visual de una ruta no protege la base de datos por sí solo. Las reglas del repositorio no sustituyen las reglas activas hasta su despliegue.
-4. Publicar Hosting después de verificar el acceso de esa cuenta.
+3. Publicar un registro principal con `role: "owner"` en `administrators/{correo}` desde un entorno de confianza. Este registro no puede modificarse ni eliminarse desde el panel web.
+4. Revisar y desplegar `firestore.rules`. El bloqueo visual de una ruta no protege la base de datos por sí solo. Las reglas del repositorio no sustituyen las reglas activas hasta su despliegue.
+5. Publicar Hosting después de verificar la configuración de esa cuenta.
+
+### Añadir y retirar administradores
+
+Desde **Administración → Administradores**, una persona autorizada puede:
+
+- Autorizar un correo de trabajo y copiar su enlace de activación.
+- Retirar el acceso de otros administradores y reactivarlo después.
+- Consultar la cuenta principal y su estado protegido.
+
+La persona invitada crea su propia cuenta desde el enlace, verifica su correo y vuelve a ingresar. Si ya tiene una cuenta o se ha preparado su acceso sin contraseña, utiliza **Activar o recuperar acceso**. Los enlaces de verificación y recuperación se solicitan expresamente desde la pantalla; autorizar a alguien no envía correos automáticamente. No se comparte una contraseña entre administradores.
+
+Los administradores no pueden desactivar la cuenta principal ni su propio acceso, asignarse el rol `owner`, modificar los campos de una autorización o eliminar registros de autorización. Las reglas comprueban la pertenencia activa en cada operación protegida. La pantalla también escucha los cambios de acceso para cerrar la sesión si se revoca una autorización.
 
 Las reglas restringen la lectura y eliminación de reportes a administradores, validan campos y tamaños, restringen la edición de noticias/contactos y bloquean colecciones desconocidas. Noticias, contactos y ranking **siguen siendo de lectura pública**, conforme al acceso de la aplicación actual. El ranking admite puntajes enviados por clientes; no es una competencia con validación de servidor ni un sistema antifraude. Una intranet privada para todos los colaboradores requeriría añadir identidad corporativa y adaptar estas lecturas.
 
@@ -66,7 +79,9 @@ npx --yes firebase-tools@15.34.1 emulators:exec \
   --config firebase.emulator.json "npm run test:rules"
 ```
 
-Las pruebas rechazan ejecutarse sin `FIRESTORE_EMULATOR_HOST` y usan exclusivamente `demo-geovictoria`. Verifican lectura del buzón, permisos ordinarios/administrativos, validación de reportes, recursos públicos, ranking y denegación de colecciones no definidas. La integración de GitHub ejecuta pruebas y compilación sin credenciales de producción.
+Para probar visualmente los flujos sin datos reales, inicia los emuladores `auth,firestore` con el mismo proyecto y ejecuta `VITE_USE_FIREBASE_EMULATORS=true npm run dev`. Este modo solo existe durante desarrollo: la compilación de producción siempre utiliza el proyecto real.
+
+Las pruebas rechazan ejecutarse sin `FIRESTORE_EMULATOR_HOST` y usan exclusivamente `demo-geovictoria`. Verifican lectura del buzón, permisos ordinarios/administrativos, validación de reportes, recursos públicos, ranking, denegación de colecciones no definidas, invitaciones con correo verificado, revocación inmediata y protección de la cuenta principal. La integración de GitHub ejecuta pruebas y compilación sin credenciales de producción.
 
 ## Publicación en Firebase
 
