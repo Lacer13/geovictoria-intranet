@@ -1,50 +1,59 @@
-# Bienvenida navideña de VictorIA
+# Bienvenida navideña de VictorIA · v4
 
-## Diseño y recursos finales
+## Diseño y animación
 
-VictorIA conserva su cabeza y dos manos flotantes, sin torso, brazos ni cuello. Su identidad mantiene casco amarillo, rostro blanco, ojos azules, auriculares, dos antenas y gorro navideño. La escena incluye trineo rojo y dorado, regalos y bosque nevado.
+VictorIA conserva la cabeza y dos manos flotantes, sin torso, brazos ni cuello. Mantiene casco amarillo, rostro blanco, ojos azules, auriculares, dos antenas y gorro navideño. El trineo rojo y dorado lleva regalos y una mano apoyada en el borde.
 
-Se generan tres escenas completas y coherentes: saludo abierto, variación de la mano y guiño. No se recortan partes del personaje del video original ni se eliminan fondos grises. El encuadre del reproductor conserva toda la escena también en móvil.
+La entrada de 3,2 segundos desplaza el trineo desde el fondo hasta el primer plano, aumenta su tamaño y desacelera suavemente. Después hay un pequeño balanceo de asentamiento. La cabeza se inclina y hace pequeños gestos alegres; la otra mano saluda de forma independiente. Copos en distintas profundidades, una sombra suave y una breve estela de destellos completan la escena.
 
-- `public/victoria-navidad-pose-a.webp`, `public/victoria-navidad-pose-b.webp`, `public/victoria-navidad-pose-c.webp`: poses completas de la escena.
-- `public/victoria-navidad-saludo-v3.mp4`: video H.264/AAC, 1280 × 720, 24 fps, 12 segundos, con `faststart`.
-- `public/victoria-navidad-saludo-v3.jpg`: imagen de espera del video terminado.
-- `public/victoria-navidad-saludo-v3.vtt`: subtítulo descriptivo de la música.
+El video usa animación de capas 2D, no un modelo 3D ni una simulación de labios. No interpola imágenes completas ni deforma la anatomía. Cada pieza tiene un área de transparencia alrededor: sus límites se encuentran en esa zona vacía, con toda la cabeza, las antenas y los dedos dentro. El encuadre conserva los elementos completos durante toda la llegada, también en móvil.
 
-La música es una composición instrumental creada para esta bienvenida: celesta, arpegios y cascabeles sintetizados; no utiliza muestras ni grabaciones externas y no contiene voz. Su fuente está en `scripts/christmas-music.mjs`.
+## Medios finales
 
-## Cómo volver a verlo
+- `public/victoria-navidad-rig-v4.webp`: atlas RGBA de 2172 × 724 generado con ImageGen integrado. Contiene cabeza, trineo con mano apoyada y mano de saludo separados.
+- `public/victoria-navidad-fondo.webp`: bosque navideño aprobado.
+- `public/victoria-navidad-saludo-v4.mp4`: video H.264/AAC, 1280 × 720, 30 fps, 14 segundos, `yuv420p` y `faststart`.
+- `public/victoria-navidad-saludo-v4.jpg`: imagen de espera extraída del video a los 6,2 segundos.
+- `public/victoria-navidad-saludo-v4.vtt`: descripción de la música y las acciones, activada inicialmente.
 
-**Video de VictorIA** permanece en el menú de todas las secciones. En **Mi inicio** hay una tarjeta con miniatura y el botón **Ver video de VictorIA**, antes del banner navideño. El menú móvil conserva el mismo acceso.
+El usuario prefiere incorporar su propia voz más adelante diciendo «¡Jo, jo, jo! ¡Feliz Navidad!». Esta publicación contiene únicamente la composición instrumental original de celesta, arpegios y cascabeles sintetizados de `scripts/christmas-music.mjs`, con salida progresiva al final. No se incluye voz sintética ni grabaciones musicales externas. La prueba de voz sintética quedó fuera de los recursos publicados.
 
-La bienvenida automática aparece una vez por sesión al abrir el inicio. Comienza sin sonido; **Ver con música** lo reinicia con audio mediante un clic. Se puede pausar, avanzar y repetir. Al terminar permanece abierta con el personaje visible. **Entrar a mi intranet**, **Saltar bienvenida** o Escape la cierran y devuelven el foco al control anterior.
+## Reproductor y acceso
 
-Se respeta movimiento reducido y la preferencia de pausar efectos. Los enlaces privados y Administración no abren una bienvenida automática, pero el acceso manual funciona sin cambiar de página.
+**Video de VictorIA** permanece en el menú de todas las secciones y en el menú móvil. En **Mi inicio**, el banner navideño ofrece **Ver saludo de VictorIA**.
 
-## Render
+Comienza sin sonido. **Ver con música** lo reinicia con música después de un clic. Se puede pausar, silenciar, activar u ocultar subtítulos, avanzar y repetir. Al terminar permanece abierto con el personaje visible. **Entrar a mi intranet**, **Saltar bienvenida** o Escape lo cierran y restauran el foco.
 
-Requiere Node y FFmpeg con libx264/drawtext. No son dependencias nuevas del sitio ni del despliegue: los medios finales ya están versionados.
+Se respeta movimiento reducido y la preferencia de pausar efectos: el video espera una reproducción manual. La bienvenida automática aparece una vez por sesión en el inicio. Se actualiza la clave de sesión a v4, pero se conserva la preferencia previa de no mostrarla automáticamente durante esta Navidad. Los enlaces privados y Administración abren directamente.
 
-Ejecuta `node scripts/render-christmas-welcome.mjs`. Puedes indicar `FFMPEG_PATH`, `FONT_PATH` o `WELCOME_OUTPUT`. El script intercala las poses completas mediante interpolación de movimiento, añade copos y la música original, y elimina únicamente sus archivos temporales. No altera las imágenes ni los videos originales del proyecto. Para actualizar la imagen de espera, extrae un fotograma del MP4 terminado.
+## Render reproducible
 
-## Generación de imágenes
+Requiere Node y FFmpeg con libx264, libwebp y drawtext. No añade dependencias al sitio; los medios finales están versionados. Ejecuta:
 
-Se utilizó ImageGen integrado siguiendo la habilidad `imagegen`. Estos son los prompts de las poses definitivas, con la escena completa como referencia. Las capas y pruebas descartadas no forman parte del reproductor.
-
-### Pose A: cabeza y manos flotantes
-
-```text
-Use case: precise-object-edit. Keep this entire finished Christmas illustration exactly as it is, EXCEPT REMOVE the robot's torso, chest, neck, shoulders, upper arms and forearms. VictorIA's approved design is ONLY A FLOATING HEAD AND TWO FLOATING HANDS: NO BODY, NO TORSO, NO SHOULDERS, NO ARMS, NO NECK. Preserve the complete round robot head, yellow helmet, white silver face, both cyan eyes, smile, blue earpieces, two whole black antennae and red Santa hat EXACTLY unchanged in their current positions. Preserve both COMPLETE white robotic hands, every finger, each SOLID OPAQUE PALM and their small closed blue wrist cuffs, in the exact same positions. The right hand is raised waving and the other hand rests near the front rim. Make the hands intentionally float independently, with no arm or forearm attached and clean finished blue cuff ends, no cut-off stump appearance. Remove all visible body and arm material between the head and hands and fill those former body regions naturally with the red velvet seat, cushions or the background that belongs behind them. Preserve the exact same camera, full 16:9 canvas, scene geometry, sleigh including complete gold runners, presents, forest, moon, snow, lighting and all decorations. No other changes. Never erase parts of a palm or the face, never create transparency within any robot part. Return the whole complete illustration with the floating-head-and-hands mascot only.
+```sh
+FFMPEG_PATH=/ruta/a/ffmpeg node scripts/render-christmas-welcome.mjs
 ```
 
-### Pose B: saludo
+También admite `FONT_PATH` y `WELCOME_OUTPUT`. Por defecto produce el MP4 y la imagen de espera v4. Los archivos temporales se eliminan al terminar.
 
-```text
-Animation keyframe B, precise minimal edit. Preserve the supplied full Christmas scene EXACTLY: same fixed 16:9 camera, background, moon, snow, forest lights, sleigh, gold runners, presents, floating robot head, both black antennae, yellow helmet, blue earpieces, Santa hat, face and the lower floating hand, all the same positions and sizes. Change ONLY the raised floating hand on the VIEWER'S RIGHT: rotate the ENTIRE complete hand and small blue cuff about 12 degrees inward toward the head, keeping its palm facing us and all five COMPLETE solid white fingers and the entire opaque palm visible, without touching the hat pompom. Both eyes remain open. VictorIA is ONLY A FLOATING HEAD AND TWO FLOATING HANDS: NO torso, NO body, NO neck, NO shoulders, NO arms and NO forearms. Never connect the hands to a body. No transparent holes in the hands or face, no cropping and no missing robot parts. Do not change any other area or the camera. Return the whole finished frame.
+### Incorporar la voz del usuario después
+
+Se admite una grabación local mediante `WELCOME_VOICE`, sin servicio de pago ni credenciales:
+
+```sh
+WELCOME_VOICE=/ruta/a/grabacion.m4a FFMPEG_PATH=/ruta/a/ffmpeg node scripts/render-christmas-welcome.mjs
 ```
 
-### Pose C: guiño
+La grabación comienza a los 4 segundos, después de la llegada. Debe caber antes del cierre a los 14 segundos. El render normaliza su volumen y baja automáticamente la música cuando detecta la voz. Cuando se incorpore la grabación aprobada, también habrá que actualizar el archivo VTT con las palabras y los tiempos reales, y el texto del botón del reproductor para indicar que incluye voz. No se solicita grabarla ahora ni se imita su voz.
+
+No se modifican las poses ni el video v3 aprobado. Se conservan como recursos anteriores.
+
+## Prompt del atlas final · herramienta integrada ImageGen
+
+Referencia: `public/victoria-navidad-pose-a.webp`. Se utilizó el modo integrado con `transparent_background: true`, sin CLI ni claves API.
 
 ```text
-Animation keyframe C, precise minimal edit. Keep the supplied full Christmas scene EXACTLY unchanged: same fixed 16:9 camera and composition, every snowflake, background, moon, trees, lights, sleigh and gold runners, gifts, complete floating robot head, yellow helmet, two complete antennae, blue earpieces, Santa hat and both floating hands in the exact same positions. Change ONLY the expression to one friendly wink: close the eye on the VIEWER'S RIGHT into a cheerful curved eyelid while the other cyan eye remains open and the smile stays warm. The raised floating hand remains complete with all five whole white fingers and SOLID OPAQUE PALM. VictorIA has ONLY A FLOATING HEAD AND TWO FLOATING HANDS: NO body, torso, neck, shoulders, arms or forearms. No missing parts, no transparent holes, no cropping, no other changes. Return the entire finished frame.
+Use case: stylized-concept. Asset type: production animation SPRITE ATLAS with THREE SEPARATE RIG PARTS for the exact approved VictorIA Christmas mascot in reference. Wide panoramic canvas, ideally 3072 x 1024 (3:1). GENUINE TRANSPARENT BACKGROUND. Divide canvas mentally into THREE EQUAL VERTICAL COLUMNS, no drawn borders or labels. COLUMN 1: ONLY the complete floating robot HEAD, frontal same slight three-quarter perspective as reference: whole red Santa hat and white pompom, BOTH complete black antennae, yellow helmet, blue ear pieces, white silver face, two friendly cyan eyes and smiling mouth. NO neck, body, arms or hands in column 1. COLUMN 2: ONLY the entire reference red and gold SLEIGH WITH GIFTS, velvet cushions and the one lower resting floating robot hand at its front rim. Both WHOLE gold runners fully visible. NO HEAD, no antennae, no hat and no raised waving hand in this column. Empty open space above cushions. COLUMN 3: ONLY the complete raised white robotic WAVING HAND, open palm facing us, all five entire fingers, all joints and the WHOLE solid opaque palm and small blue closed wrist cuff. No forearm or arm. Each of these THREE objects must be independently centered and ENTIRELY WITHIN ITS OWN COLUMN with generous transparent padding 8% around every object. There MUST be generous empty transparent space separating all THREE columns so a video renderer can take each rectangular column without cutting any part. The objects must NEVER overlap the column boundaries. Keep exact approved reference 3D rendering, materials, red white gold blue palette and lighting. VictorIA is ONLY A FLOATING HEAD AND TWO FLOATING HANDS, no torso, neck, shoulders, arms or forearms, ever. Solid opaque head and palms, no holes. Cutout edges must be clean, NO ambient glow, NO soft colored glow, NO background shadows, NO forest, NO sky, NO snow, NO floor, NO background color, NO text, NO labels, NO extra sprites or characters, NO grid, NO checkerboard. Only the three specified isolated rig parts on real transparency.
 ```
+
+El resultado tiene columnas de anchos distintos. El render utiliza los límites reales de las piezas y reduce únicamente el halo de transparencia tenue del margen; no elimina partes sólidas del personaje. La primera prueba de un trineo completo con fondo transparente se descartó: el atlas ofrece movimiento independiente más controlado.

@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import {
   ArrowRight,
+  Captions,
   Gift,
   Pause,
   Play,
@@ -20,15 +21,16 @@ export default function LoadingScreen({ onComplete, motionAllowed = true }) {
     !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const [paused, setPaused] = useState(!autoplay);
   const [muted, setMuted] = useState(true);
+  const [captioned, setCaptioned] = useState(true);
   const [progress, setProgress] = useState(0);
   const [failed, setFailed] = useState(false);
   const [ended, setEnded] = useState(false);
-  const replay = (withMusic = false) => {
+  const replay = (withSound = false) => {
     if (!video.current) return;
     video.current.currentTime = 0;
     setProgress(0);
     setEnded(false);
-    if (withMusic) {
+    if (withSound) {
       video.current.muted = false;
       setMuted(false);
     }
@@ -46,6 +48,12 @@ export default function LoadingScreen({ onComplete, motionAllowed = true }) {
     video.current.muted = !video.current.muted;
     setMuted(video.current.muted);
   };
+  const toggleCaptions = () => {
+    const enabled = !captioned;
+    setCaptioned(enabled);
+    const track = video.current?.textTracks?.[0];
+    if (track) track.mode = enabled ? "showing" : "hidden";
+  };
   return (
     <Modal
       title="La Navidad llega con VictorIA"
@@ -59,15 +67,15 @@ export default function LoadingScreen({ onComplete, motionAllowed = true }) {
           muted={muted}
           playsInline
           preload="auto"
-          poster="/victoria-navidad-saludo-v3.jpg"
-          aria-label="VictorIA llega en un trineo, saluda con la mano y guiña un ojo, con música navideña de campanas"
+          poster="/victoria-navidad-saludo-v4.jpg"
+          aria-label="VictorIA llega en su trineo y saluda con la mano, con música navideña de campanas."
           onPlay={() => setPaused(false)}
           onPause={() => setPaused(true)}
           onTimeUpdate={() =>
             setProgress(
               Math.min(
                 100,
-                (video.current.currentTime / (video.current.duration || 12)) *
+                (video.current.currentTime / (video.current.duration || 14)) *
                   100,
               ),
             )
@@ -82,12 +90,13 @@ export default function LoadingScreen({ onComplete, motionAllowed = true }) {
             setPaused(true);
           }}
         >
-          <source src="/victoria-navidad-saludo-v3.mp4" type="video/mp4" />
+          <source src="/victoria-navidad-saludo-v4.mp4" type="video/mp4" />
           <track
             kind="captions"
-            src="/victoria-navidad-saludo-v3.vtt"
+            src="/victoria-navidad-saludo-v4.vtt"
             srcLang="es"
             label="Español"
+            default
           />
         </video>
         <div className="victoria-welcome-shade" />
@@ -100,7 +109,7 @@ export default function LoadingScreen({ onComplete, motionAllowed = true }) {
             <br />
             La magia ya llegó.
           </h2>
-          <p>Un saludo de VictorIA, con música navideña.</p>
+          <p>VictorIA trae un saludo especial para ti.</p>
           <div className="victoria-welcome-actions">
             {!failed && (
               <button
@@ -142,7 +151,16 @@ export default function LoadingScreen({ onComplete, motionAllowed = true }) {
               }
             >
               {muted ? <VolumeX size={17} /> : <Volume2 size={17} />}
-              <span>{muted ? "Activar música" : "Con música"}</span>
+              <span>{muted ? "Activar sonido" : "Con sonido"}</span>
+            </button>
+            <button
+              aria-label={
+                captioned ? "Ocultar subtítulos" : "Mostrar subtítulos"
+              }
+              aria-pressed={captioned}
+              onClick={toggleCaptions}
+            >
+              <Captions size={17} />
             </button>
           </div>
         )}
@@ -175,7 +193,7 @@ export default function LoadingScreen({ onComplete, motionAllowed = true }) {
             : ended
               ? "¡Feliz Navidad, equipo!"
               : muted
-                ? "Activa la música para escuchar el saludo."
+                ? "Activa el sonido para escuchar la música."
                 : paused
                   ? "Video en pausa."
                   : "Disfruta el saludo."}

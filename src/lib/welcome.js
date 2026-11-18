@@ -8,7 +8,7 @@ export function setWelcomeDismissed(value) {
   savePreference(DISMISS_KEY, value ? "on" : "off");
 }
 
-const WELCOME_KEY = "geoVictoriaChristmasWelcome2026v3";
+const WELCOME_KEY = "geoVictoriaChristmasWelcome2026v4";
 
 export function shouldShowWelcome(pathname) {
   if (pathname !== "/" || isWelcomeDismissed()) return false;

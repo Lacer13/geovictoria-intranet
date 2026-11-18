@@ -6809,6 +6809,15 @@ select.input-field {
   object-fit: cover;
   display: block;
 }
+.victoria-welcome-stage > video::cue {
+  color: white;
+  background-color: #102b23e8;
+  font-size: 16px;
+}
+.victoria-video-controls > button[aria-pressed="true"] {
+  border-color: #f4d37b;
+  color: #f4d37b;
+}
 .victoria-welcome-shade {
   position: absolute;
   inset: 0;
