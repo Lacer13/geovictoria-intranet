@@ -1,6 +1,7 @@
 {
   "firestore": { "rules": "firestore.rules" },
   "hosting": {
+    "site": "geovictoria-intranet-peru",
     "public": "dist",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "headers": [
