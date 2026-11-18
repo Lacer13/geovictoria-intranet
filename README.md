@@ -80,6 +80,10 @@ La preparación separa los detalles del intercambio y las personas. Señala corr
 
 La bienvenida v4 anima por separado el trineo, la cabeza y la mano de VictorIA. Conserva su cabeza y dos manos flotantes sin torso, con una llegada desde el fondo, desaceleración, balanceo, nieve y destellos. Por pedido del usuario, la voz propia se grabará después: «¡Jo, jo, jo! ¡Feliz Navidad!». Mientras tanto se publica con música original de campanas, celesta y cascabeles. Comienza sin sonido; **Ver con música** lo reinicia con audio. Tiene subtítulos en español que pueden ocultarse, y al terminar permanece abierto para repetirlo. Con movimiento reducido o los efectos pausados, espera a que la persona pulse reproducir. Las fuentes, prompts y el proceso de render están en [la guía del video](docs/victoria-navidad.md).
 
+## Roadmap del videojuego
+
+La propuesta [VictorIA: Operación Estrella](docs/roadmap-videojuego.md) organiza la evolución desde el arcade actual: estabilidad y UX, mini historia navideña, prototipo de arena 1 vs 1, equipos pequeños y piloto hasta 5 vs 5. Incluye criterios de salida, arquitectura propuesta y decisiones de capacidad y alojamiento pendientes. Es planificación; las funciones futuras todavía no están implementadas.
+
 ## Concurso en vivo
 
 El menú **Concurso en vivo** permite entrar por QR o código de sala. Desde **Administración → Concurso en vivo**, prepara siete preguntas y un bonus doble, edita las opciones y sus tiempos, abre el registro y dirige la exposición. Los aciertos suman de 7 a 497 puntos según rapidez, en múltiplos de siete; el bonus duplica el premio con el mismo tope de 497 y los totales también son múltiplos de siete. La pantalla independiente de proyección muestra los nombres en vivo, las preguntas, la clasificación entre rondas y el ganador con podio navideño. Las respuestas son únicas y el servidor valida el plazo. Se puede recuperar la participación al recargar, duplicar las preguntas para otra exposición y descargar los resultados CSV antes de archivar. [Guía de preparación y operación](docs/concurso-en-vivo.md).
