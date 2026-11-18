@@ -4,6 +4,7 @@ import {
   Gift,
   Pause,
   Play,
+  RotateCcw,
   Snowflake,
   Volume2,
   VolumeX,
@@ -19,9 +20,23 @@ export default function LoadingScreen({ onComplete, motionAllowed = true }) {
   const [muted, setMuted] = useState(true);
   const [progress, setProgress] = useState(0);
   const [failed, setFailed] = useState(false);
+  const [ended, setEnded] = useState(false);
+  const replay = (withMusic = false) => {
+    if (!video.current) return;
+    video.current.currentTime = 0;
+    setProgress(0);
+    setEnded(false);
+    if (withMusic) {
+      video.current.muted = false;
+      setMuted(false);
+    }
+    video.current.play().catch(() => setPaused(true));
+  };
   const togglePlayback = () => {
     if (!video.current) return;
-    if (video.current.paused) video.current.play().catch(() => setPaused(true));
+    if (ended) replay();
+    else if (video.current.paused)
+      video.current.play().catch(() => setPaused(true));
     else video.current.pause();
   };
   const toggleSound = () => {
@@ -42,26 +57,36 @@ export default function LoadingScreen({ onComplete, motionAllowed = true }) {
           muted={muted}
           playsInline
           preload="auto"
-          poster="/victoria-navidad-poster.jpg"
-          aria-label="VictorIA llega en un trineo entre copos de nieve para darte la bienvenida"
+          poster="/victoria-navidad-saludo-v3.jpg"
+          aria-label="VictorIA llega en un trineo, saluda con la mano y guiña un ojo, con música navideña de campanas"
           onPlay={() => setPaused(false)}
           onPause={() => setPaused(true)}
           onTimeUpdate={() =>
             setProgress(
               Math.min(
                 100,
-                (video.current.currentTime / (video.current.duration || 10)) *
+                (video.current.currentTime / (video.current.duration || 12)) *
                   100,
               ),
             )
           }
-          onEnded={onComplete}
+          onEnded={() => {
+            setEnded(true);
+            setPaused(true);
+            setProgress(100);
+          }}
           onError={() => {
             setFailed(true);
             setPaused(true);
           }}
         >
-          <source src="/victoria-navidad.mp4" type="video/mp4" />
+          <source src="/victoria-navidad-saludo-v3.mp4" type="video/mp4" />
+          <track
+            kind="captions"
+            src="/victoria-navidad-saludo-v3.vtt"
+            srcLang="es"
+            label="Español"
+          />
         </video>
         <div className="victoria-welcome-shade" />
         <div className="victoria-welcome-copy">
@@ -73,10 +98,28 @@ export default function LoadingScreen({ onComplete, motionAllowed = true }) {
             <br />
             La magia ya llegó.
           </h2>
-          <p>VictorIA trae un saludo y muchas ganas de celebrar contigo.</p>
-          <button className="btn victoria-enter" onClick={onComplete}>
-            Entrar a mi intranet <ArrowRight size={16} />
-          </button>
+          <p>
+            VictorIA te saluda desde su trineo. Dale play y escucha la magia de
+            las campanas.
+          </p>
+          <div className="victoria-welcome-actions">
+            {!failed && (
+              <button
+                className="btn victoria-listen"
+                onClick={() => replay(true)}
+              >
+                <Volume2 size={16} />{" "}
+                {ended
+                  ? "Repetir con música"
+                  : muted
+                    ? "Ver con música"
+                    : "Volver a ver desde el inicio"}
+              </button>
+            )}
+            <button className="btn victoria-enter" onClick={onComplete}>
+              Entrar a mi intranet <ArrowRight size={16} />
+            </button>
+          </div>
         </div>
         <button className="victoria-skip" onClick={onComplete}>
           Saltar bienvenida <ArrowRight size={14} />
@@ -100,24 +143,50 @@ export default function LoadingScreen({ onComplete, motionAllowed = true }) {
               }
             >
               {muted ? <VolumeX size={17} /> : <Volume2 size={17} />}
-              <span>{muted ? "Activar sonido" : "Con sonido"}</span>
+              <span>{muted ? "Activar música" : "Con música"}</span>
             </button>
           </div>
         )}
-        <div className="victoria-video-progress" aria-hidden="true">
-          <span style={{ width: `${progress}%` }} />
-        </div>
+        {!failed && (
+          <label className="victoria-video-seek">
+            <span className="sr-only">Avance del video de VictorIA</span>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              step="1"
+              value={Number.isFinite(progress) ? progress : 0}
+              onChange={(e) => {
+                if (!video.current?.duration) return;
+                const value = Number(e.target.value);
+                video.current.currentTime =
+                  (video.current.duration * value) / 100;
+                setProgress(value);
+                setEnded(false);
+              }}
+            />
+          </label>
+        )}
       </div>
       <div className="victoria-welcome-foot">
         <Gift size={16} />
         <span>
           {failed
             ? "El video no está disponible. Puedes entrar a tu intranet."
-            : paused
-              ? "Una pausa para recibirte. Reproduce el saludo cuando quieras."
-              : "Conectados, hacemos esta Navidad más especial."}
+            : ended
+              ? "¡Feliz Navidad! Puedes repetir el saludo o entrar a la intranet."
+              : muted
+                ? "Se abre sin sonido. Pulsa «Ver con música» para escucharlo completo."
+                : paused
+                  ? "Una pausa para recibirte. Reproduce el saludo cuando quieras."
+                  : "Conectados, hacemos esta Navidad más especial."}
         </span>
-        <small>Puedes volver a verlo desde Mi inicio.</small>
+        {!failed && (
+          <button className="victoria-repeat" onClick={() => replay()}>
+            <RotateCcw size={14} /> Volver a ver el saludo
+          </button>
+        )}
+        <small>Siempre disponible en el menú: Video de VictorIA.</small>
       </div>
     </Modal>
   );

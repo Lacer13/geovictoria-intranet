@@ -354,6 +354,27 @@ export default function Dashboard({ onWelcome }) {
           </span>
         </div>
       </div>
+      <section
+        className="victoria-replay-card"
+        aria-labelledby="victoria-replay-title"
+      >
+        <button
+          className="victoria-replay-thumbnail"
+          onClick={onWelcome}
+          aria-label="Reproducir saludo navideño de VictorIA"
+        >
+          <img src="/victoria-navidad-saludo-v3.jpg" alt="" />
+          <PlayCircle size={29} />
+        </button>
+        <div>
+          <span>EL SALUDO NAVIDEÑO DEL EQUIPO</span>
+          <h2 id="victoria-replay-title">VictorIA tiene un saludo para ti</h2>
+          <p>Saluda desde su trineo y celebra con música de campanas.</p>
+        </div>
+        <button className="btn btn-forest" onClick={onWelcome}>
+          <PlayCircle size={17} /> Ver video de VictorIA
+        </button>
+      </section>
       <section className="christmas-hero">
         <div className="hero-copy">
           <span className="season-pill">
@@ -375,9 +396,6 @@ export default function Dashboard({ onWelcome }) {
           <span className="hero-footnote">
             <Heart size={12} /> Cada persona hace especial este lugar.
           </span>
-          <button className="welcome-replay" onClick={onWelcome}>
-            <PlayCircle size={16} /> Ver saludo de VictorIA
-          </button>
         </div>
         <ChristmasArt className="hero-art" />
         <span className="hero-edition">EDICIÓN NAVIDEÑA / {year}</span>

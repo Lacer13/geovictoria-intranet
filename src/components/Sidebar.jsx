@@ -8,6 +8,7 @@ import {
   Gift,
   Home,
   LifeBuoy,
+  PlayCircle,
   MessageSquare,
   Settings,
   Sparkles,
@@ -23,7 +24,7 @@ const links = [
   { to: "/wiki", icon: BookOpen, label: "Centro de conocimiento" },
   { to: "/solicitudes", icon: MessageSquare, label: "Te escuchamos" },
 ];
-export default function Sidebar({ open, onClose }) {
+export default function Sidebar({ open, onClose, onWelcome }) {
   const drawer = useRef(null);
   useEffect(() => {
     if (!open) return;
@@ -110,6 +111,15 @@ export default function Sidebar({ open, onClose }) {
           <p className="nav-caption nav-caption-space">
             CONECTAMOS TAMBIÉN AQUÍ
           </p>
+          <button
+            type="button"
+            className="nav-item victoria-video-nav"
+            onClick={onWelcome}
+          >
+            <PlayCircle size={19} strokeWidth={1.7} />
+            <span>Video de VictorIA</span>
+            <span className="victoria-video-badge">Ver</span>
+          </button>
           <NavLink
             to="/navidad"
             className={({ isActive }) =>

@@ -1,4 +1,4 @@
-const WELCOME_KEY = "geoVictoriaChristmasWelcome2026";
+const WELCOME_KEY = "geoVictoriaChristmasWelcome2026v3";
 
 export function shouldShowWelcome(pathname) {
   if (pathname !== "/") return false;

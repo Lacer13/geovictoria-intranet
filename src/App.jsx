@@ -85,6 +85,10 @@ function AppContent() {
       return !value;
     });
   const closeMenu = useCallback(() => setMenuOpen(false), []);
+  const openWelcome = useCallback(() => {
+    setMenuOpen(false);
+    setWelcomeOpen(true);
+  }, []);
   const game = location.pathname === "/juego";
   useEffect(() => {
     document.body.classList.toggle("light-mode", isLightMode);
@@ -92,10 +96,10 @@ function AppContent() {
     savePreference("geoTheme", isLightMode ? "light" : "dark");
   }, [isLightMode]);
   useEffect(() => {
-    if (welcomeOpen) return;
+    if (document.querySelector(".victoria-welcome-modal")) return;
     window.scrollTo({ top: 0 });
     document.getElementById("main-content")?.focus({ preventScroll: true });
-  }, [location.pathname, welcomeOpen]);
+  }, [location.pathname]);
   return (
     <div className={game ? "game-shell" : "app-shell"}>
       <a
@@ -110,7 +114,9 @@ function AppContent() {
       >
         Saltar al contenido
       </a>
-      {!game && <Sidebar open={menuOpen} onClose={closeMenu} />}
+      {!game && (
+        <Sidebar open={menuOpen} onClose={closeMenu} onWelcome={openWelcome} />
+      )}
       <div className="app-body" inert={menuOpen || undefined}>
         {!game && <ChristmasEffects enabled={festive} />}
         {!game && (
@@ -145,7 +151,7 @@ function AppContent() {
               <Routes>
                 <Route
                   path="/"
-                  element={<Dashboard onWelcome={() => setWelcomeOpen(true)} />}
+                  element={<Dashboard onWelcome={openWelcome} />}
                 />
                 <Route path="/juego" element={<GamePage />} />
                 <Route path="/organigrama" element={<OrgChart />} />
@@ -193,7 +199,7 @@ function AppContent() {
           </footer>
         )}
       </div>
-      {welcomeOpen && location.pathname === "/" && (
+      {welcomeOpen && (
         <LoadingScreen onComplete={closeWelcome} motionAllowed={festive} />
       )}
     </div>

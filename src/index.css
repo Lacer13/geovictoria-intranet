@@ -7149,3 +7149,263 @@ select.input-field {
     padding: 15px;
   }
 }
+
+/* The welcome has a permanent entry point and explicit audio/replay controls. */
+.sidebar .victoria-video-nav {
+  width: 100%;
+  border: 1px solid #ddbd724f;
+  background: #d0aa4b15;
+  color: #ffe1a2;
+  text-align: left;
+}
+.sidebar .victoria-video-nav:hover {
+  background: #d0aa4b28;
+  color: #fff6dc;
+}
+.victoria-video-badge {
+  margin-left: auto;
+  border-radius: 4px;
+  padding: 2px 6px;
+  background: #e4c477;
+  color: #193d2b;
+  font-size: 9px;
+  font-weight: 650;
+}
+.victoria-replay-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--festive-red);
+  border-radius: 12px;
+  padding: 17px 20px;
+  margin: 0 0 22px;
+  box-shadow: var(--shadow-card);
+}
+.victoria-replay-thumbnail {
+  position: relative;
+  width: 112px;
+  height: 76px;
+  flex-shrink: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 8px;
+  background: #0b3528;
+}
+.victoria-replay-thumbnail > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: 68% center;
+  opacity: 0.8;
+}
+.victoria-replay-thumbnail > svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff5da;
+  filter: drop-shadow(0 2px 5px #0008);
+}
+.victoria-replay-card > div {
+  flex: 1;
+  min-width: 0;
+}
+.victoria-replay-card > div > span {
+  display: block;
+  color: var(--festive-red);
+  font-size: 8px;
+  font-weight: 650;
+  letter-spacing: 1.2px;
+  margin-bottom: 5px;
+}
+.victoria-replay-card h2 {
+  font-size: 18px;
+  line-height: 1.4;
+}
+.victoria-replay-card p {
+  font-size: 11px;
+  line-height: 1.8;
+  margin-top: 5px;
+}
+.victoria-replay-card > .btn {
+  font-size: 12px;
+  min-height: 43px;
+  flex-shrink: 0;
+}
+.victoria-welcome-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 22px;
+  align-items: flex-start;
+}
+.victoria-welcome-actions .btn {
+  min-height: 40px;
+  font-size: 11px;
+}
+.victoria-listen {
+  background: #e8c87c;
+  color: #173b2a;
+  border-color: #f1d99d;
+  font-weight: 650;
+}
+.victoria-listen:hover {
+  background: #f3d998;
+}
+.victoria-welcome-actions .victoria-enter {
+  margin-top: 0;
+  background: #092b2180;
+  color: #fff4d9;
+  border-color: #d5c09280;
+}
+.victoria-repeat {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  padding: 7px 10px;
+  border: 1px solid #c7b47c60;
+  color: #f0d49a;
+  background: #ffffff08;
+  border-radius: 7px;
+  font-size: 10px;
+  margin-left: auto;
+}
+.victoria-welcome-foot > small {
+  width: 100%;
+  margin-left: 26px;
+}
+.victoria-welcome-foot > span {
+  flex: 1;
+}
+.victoria-video-seek {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  height: 17px;
+}
+.victoria-video-seek > input {
+  width: 100%;
+  height: 5px;
+  accent-color: #efcc7d;
+  margin: 0;
+  cursor: pointer;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.victoria-welcome-copy h2 {
+  font-size: clamp(28px, 3.7vw, 43px);
+}
+.victoria-welcome-copy p {
+  font-size: 12px;
+}
+@media (max-width: 1040px) {
+  .victoria-replay-card {
+    flex-wrap: wrap;
+  }
+  .victoria-replay-card > .btn {
+    margin-left: 130px;
+  }
+  .victoria-welcome-copy {
+    padding: 35px 30px;
+  }
+  .victoria-welcome-copy h2 {
+    margin: 14px 0 10px;
+  }
+  .victoria-welcome-copy p {
+    font-size: 11px;
+  }
+  .victoria-welcome-actions {
+    margin-top: 16px;
+    gap: 8px;
+  }
+}
+@media (max-width: 720px) {
+  .victoria-replay-card {
+    display: grid;
+    grid-template-columns: 76px minmax(0, 1fr);
+    gap: 13px;
+    padding: 16px;
+  }
+  .victoria-replay-thumbnail {
+    width: 76px;
+    height: 76px;
+  }
+  .victoria-replay-card > div > span {
+    font-size: 7px;
+    letter-spacing: 0.8px;
+  }
+  .victoria-replay-card h2 {
+    font-size: 16px;
+  }
+  .victoria-replay-card p {
+    font-size: 11px;
+  }
+  .victoria-replay-card > .btn {
+    grid-column: 1 / -1;
+    margin: 0;
+    width: 100%;
+    min-height: 44px;
+    font-size: 13px;
+  }
+  .victoria-welcome-stage {
+    min-height: 550px;
+    height: min(77dvh, 570px);
+  }
+  .victoria-welcome-stage > video {
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+    object-position: center;
+    top: 57px;
+  }
+  .victoria-welcome-copy {
+    padding: 0 24px;
+    bottom: 24px;
+  }
+  .victoria-welcome-copy h2 {
+    font-size: 29px;
+  }
+  .victoria-welcome-copy p {
+    font-size: 12px;
+    max-width: 250px;
+  }
+  .victoria-welcome-actions {
+    width: 100%;
+    gap: 9px;
+    margin-top: 17px;
+    align-items: stretch;
+  }
+  .victoria-welcome-actions .btn {
+    width: 100%;
+    min-height: 43px;
+    font-size: 12px;
+  }
+  .victoria-repeat {
+    margin-left: 24px;
+    min-height: 35px;
+    font-size: 11px;
+  }
+  .victoria-welcome-foot {
+    padding: 14px 19px;
+    gap: 9px;
+  }
+  .victoria-welcome-foot > small {
+    margin-left: 24px;
+    font-size: 10px;
+  }
+}

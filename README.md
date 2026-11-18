@@ -18,7 +18,7 @@ npm run preview
 
 ## Experiencia y Navidad
 
-- Navegación inmediata; las rutas secundarias se cargan bajo demanda. VictorIA recibe al equipo con una bienvenida navideña de 10 segundos al abrir el inicio una vez por sesión. Se puede saltar, pausar, escuchar o repetir desde **Mi inicio**. Las invitaciones privadas y Administración abren directamente.
+- Navegación inmediata; las rutas secundarias se cargan bajo demanda. VictorIA recibe al equipo con un saludo navideño de 12 segundos al abrir el inicio una vez por sesión. Se puede saltar, pausar, avanzar y repetir desde la tarjeta **Ver video de VictorIA** del inicio o el botón **Video de VictorIA** del menú de cualquier sección. Las invitaciones privadas y Administración abren directamente.
 - Paleta de verde abeto, rojo arándano y dorado con fondos cálidos; también disponible en modo oscuro.
 - Búsqueda global: personas disponibles, secciones y guías. Atajo `Ctrl + K` / `⌘ + K`.
 - Navegación móvil con control de foco; formularios etiquetados y acceso por teclado.
@@ -74,7 +74,7 @@ El panel registra cada intento y permite consultar el respaldo, descargarlo o re
 
 La preparación separa los detalles del intercambio y las personas. Señala correos incompletos o repetidos y avisa antes de descartar cambios al cambiar de sorteo. La entrega tiene un resumen, progreso y filtros por pendientes, aceptados y envíos que requieren revisión. Los participantes pueden pegar su enlace desde la página pública para abrir su invitación.
 
-La bienvenida de VictorIA combina ilustraciones generadas con animación de trineo, cámara y nieve; conserva el audio del saludo original y comienza silenciada. Con movimiento reducido o los efectos pausados, espera a que la persona pulse reproducir. Las fuentes, prompts y el proceso de render están en [la guía del video](docs/victoria-navidad.md).
+La bienvenida anima varias escenas completas de VictorIA, con su cabeza y manos flotantes, saludo y guiño en el trineo navideño. Las poses se generan completas para conservar la palma, los dedos y el rostro; no se recorta al personaje del video de estudio. La música es una composición instrumental de campanas, celesta y cascabeles creada para el video. Comienza sin sonido; **Ver con música** lo reinicia con audio. Al terminar permanece abierto para repetirlo. Con movimiento reducido o los efectos pausados, espera a que la persona pulse reproducir. Las fuentes, prompts y el proceso de render están en [la guía del video](docs/victoria-navidad.md).
 
 ## Pruebas
 

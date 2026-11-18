@@ -1,78 +1,117 @@
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { existsSync } from "node:fs";
+import { existsSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { writeChristmasMusic } from "./christmas-music.mjs";
 
-// Requires FFmpeg with libx264 and drawtext; no credentials or external API calls.
+// Every input is a complete scene. No chroma key, alpha extraction or body masks.
 const root = fileURLToPath(new URL("../", import.meta.url));
 const ffmpeg = process.env.FFMPEG_PATH || "ffmpeg";
-const duration = 10;
+const duration = 12;
+const temporary = mkdtempSync(join(tmpdir(), "geovictoria-welcome-"));
+const music = join(temporary, "christmas-music.wav");
+const timeline = join(temporary, "poses.ffconcat");
 const font =
   process.env.FONT_PATH ||
   (existsSync("/System/Library/Fonts/Supplemental/Arial.ttf")
     ? "/System/Library/Fonts/Supplemental/Arial.ttf"
     : "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf");
-const filters = [
-  "[0:v]scale=1344:756,crop=1280:720:x='32+16*sin(t/4)':y=18,setsar=1[forest]",
-  "[1:v]scale=890:-1,format=rgba[sleigh]",
-  "[forest][sleigh]overlay=x='if(lt(t,1.7),1280-950*(1-pow(1-t/1.7,3)),if(lt(t,8.3),330+9*sin(t*1.5),330-1300*pow((t-8.3)/1.7,2)))':y='155+8*sin(t*2.2)'[scene0]",
+const poses = [
+  "a",
+  "a",
+  "b",
+  "a",
+  "b",
+  "a",
+  "b",
+  "a",
+  "c",
+  "c",
+  "a",
+  "b",
+  "a",
+  "b",
+  "a",
+  "b",
+  "a",
+  "c",
+  "c",
+  "a",
+  "b",
+  "a",
+  "a",
+  "a",
+  "a",
+  "a",
 ];
-// Foreground flakes move independently of the camera and the sleigh.
-for (let i = 0; i < 34; i++) {
-  const x = (i * 137 + 31) % 1280;
-  const y = (i * 97 + 13) % 720;
+const entries = poses
+  .map(
+    (pose) =>
+      `file '${join(root, `public/victoria-navidad-pose-${pose}.webp`).replaceAll("'", "'\\''")}'\nduration 0.5`,
+  )
+  .join("\n");
+writeFileSync(timeline, "ffconcat version 1.0\n" + entries + "\n");
+writeChristmasMusic(music, duration);
+const filters = [
+  "[0:v]fps=2,scale=1280:720,setsar=1,minterpolate=fps=24:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1[scene0]",
+];
+for (let i = 0; i < 28; i++) {
+  const x = (i * 137 + 31) % 1280,
+    y = (i * 97 + 13) % 720;
   filters.push(
-    `[scene${i}]drawtext=fontfile='${font}':text='·':fontcolor=white@${i % 3 === 0 ? ".75" : ".4"}:fontsize=${i % 3 === 0 ? 29 : 18}:x='mod(${x}+t*${i % 2 ? 13 : -9}+1280,1280)':y='mod(${y}+t*${28 + (i % 27)},780)-30'[scene${i + 1}]`,
+    `[scene${i}]drawtext=fontfile='${font}':text='·':fontcolor=white@${i % 3 === 0 ? ".65" : ".35"}:fontsize=${i % 3 === 0 ? 25 : 16}:x='mod(${x}+t*${i % 2 ? 13 : -9}+1280,1280)':y='mod(${y}+t*${28 + (i % 27)},780)-30'[scene${i + 1}]`,
   );
 }
-filters.push("[scene34]fade=t=in:d=0.35,format=yuv420p[out]");
-const args = [
-  "-hide_banner",
-  "-loglevel",
-  "warning",
-  "-y",
-  "-loop",
-  "1",
-  "-framerate",
-  "24",
-  "-i",
-  "public/victoria-navidad-fondo.webp",
-  "-loop",
-  "1",
-  "-framerate",
-  "24",
-  "-i",
-  "public/victoria-navidad-trineo.webp",
-  "-i",
-  "public/Nuevo Video VictorIA.mp4",
-  "-filter_complex",
-  filters.join(";"),
-  "-map",
-  "[out]",
-  "-map",
-  "2:a:0",
-  "-af",
-  "afade=t=out:st=9.5:d=0.5",
-  "-t",
-  String(duration),
-  "-r",
-  "24",
-  "-c:v",
-  "libx264",
-  "-preset",
-  "medium",
-  "-crf",
-  "26",
-  "-c:a",
-  "aac",
-  "-b:a",
-  "96k",
-  "-movflags",
-  "+faststart",
-  "public/victoria-navidad.mp4",
-];
-const result = spawnSync(ffmpeg, args, { cwd: root, stdio: "inherit" });
-if (result.error) throw result.error;
-if (result.status !== 0) process.exit(result.status || 1);
-console.log(
-  "Christmas welcome rendered: 1280 × 720, 24 fps, 10 seconds; original greeting audio retained.",
-);
+filters.push("[scene28]format=yuv420p[out]");
+try {
+  const result = spawnSync(
+    ffmpeg,
+    [
+      "-hide_banner",
+      "-loglevel",
+      "warning",
+      "-y",
+      "-f",
+      "concat",
+      "-safe",
+      "0",
+      "-i",
+      timeline,
+      "-i",
+      music,
+      "-filter_complex",
+      filters.join(";"),
+      "-map",
+      "[out]",
+      "-map",
+      "1:a:0",
+      "-t",
+      String(duration),
+      "-r",
+      "24",
+      "-c:v",
+      "libx264",
+      "-preset",
+      "medium",
+      "-crf",
+      "24",
+      "-c:a",
+      "aac",
+      "-b:a",
+      "128k",
+      "-movflags",
+      "+faststart",
+      process.env.WELCOME_OUTPUT || "public/victoria-navidad-saludo-v3.mp4",
+    ],
+    { cwd: root, stdio: "inherit" },
+  );
+  if (result.error) throw result.error;
+  if (result.status !== 0) process.exitCode = result.status || 1;
+  else
+    console.log(
+      "Rendered complete-scene greeting: floating head and hands, 12 seconds, 1280 × 720, 24 fps, original Christmas music.",
+    );
+} finally {
+  rmSync(temporary, { recursive: true, force: true });
+}
