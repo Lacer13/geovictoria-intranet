@@ -2,13 +2,17 @@
 
 ## Activar correo sin dominio propio
 
-1. El titular crea su cuenta en [EmailJS](https://dashboard.emailjs.com/sign-up) y conecta su Gmail u Outlook desde **Email Services**. Debe revisar y autorizar personalmente el acceso a su correo.
+1. El titular crea su cuenta en [EmailJS](https://dashboard.emailjs.com/sign-up) y conecta su Outlook desde **Email Services → Add New Service → Outlook 365** (Gmail también es compatible). Debe revisar y autorizar personalmente el acceso a su correo.
 2. Crea una plantilla en **Email Templates**. En **To Email** coloca `{{to_email}}`, en **To Name** coloca `{{to_name}}` y como asunto `🎁 Tu amigo secreto · {{event_title}}`. Usa el remitente de la cuenta conectada; no configures destinatarios adicionales, CC ni BCC que expongan las asignaciones.
 3. En la intranet, entra en **Administración → Amigo secreto → Configurar correo**. Pulsa **Copiar contenido HTML** y pégalo en el editor de código de la plantilla de EmailJS. Guarda la plantilla.
 4. En la seguridad de EmailJS, autoriza el origen `https://geovictoria-intranet-peru.web.app`. Si utilizas otro dominio de Hosting, autorízalo también. Mantén deshabilitado el uso de clave privada obligatorio para este flujo desde el navegador.
 5. Copia el **Service ID**, **Template ID** y **Public Key** en el formulario de la intranet, marca **Habilitar envíos automáticos desde el panel** y guarda. No ingreses contraseñas, tokens OAuth ni claves privadas.
-6. Verifica la cuota en EmailJS. A fecha 16 de noviembre de 2026, su [plan gratuito](https://www.emailjs.com/pricing/) ofrece 200 solicitudes al mes. Los reenvíos también consumen cuota; el proveedor puede cambiar sus límites.
-7. Realiza primero un sorteo pequeño con personas informadas y direcciones bajo tu control. Confirma el envío y revisa recepción, spam y el historial de EmailJS. Guardar los identificadores no verifica la conexión; el primer envío real la comprueba.
+6. Verifica la cuota vigente en el [panel y plan de EmailJS](https://www.emailjs.com/pricing/). Las pruebas y los reenvíos consumen solicitudes. Revisa también las condiciones de la cuenta Outlook conectada; una cuenta personal está orientada a volúmenes pequeños.
+7. Sin cerrar **Configurar correo**, pulsa **Enviar prueba a mi correo**. La confirmación muestra el destinatario: únicamente el administrador conectado. La prueba usa contenido ficticio claramente identificado y un enlace a la página de Amigo secreto, sin clave privada ni datos de participantes. No genera sorteos.
+8. Si el proveedor acepta la solicitud, abre Outlook y comprueba bandeja de entrada, spam y el contenido del mensaje. Marca la recepción solo después de recibirlo. Esa confirmación se mantiene únicamente en la sesión del diálogo y no certifica envíos posteriores. Ante un resultado incierto, revisa el historial antes de repetir la prueba; el panel aplica una espera mínima de un minuto entre intentos.
+9. Realiza después un sorteo pequeño con personas informadas y direcciones bajo tu control. Comprueba recuperación y reenvío manteniendo las mismas parejas. Guardar los identificadores o recibir una respuesta del proveedor no garantiza entrega en la bandeja.
+
+La conexión de Outlook la autoriza el titular de la cuenta. Si Microsoft exige consentimiento organizativo, debe intervenir el administrador de Microsoft 365. La aplicación no crea esa cuenta ni acepta términos o permisos en nombre del usuario. Una configuración modificada debe guardarse antes de probarla; si otro administrador la cambia, se exige recargarla.
 
 EmailJS permite [conectar servicios personales de correo](https://www.emailjs.com/docs/user-guide/connecting-email-services/). Los identificadores públicos están pensados para aplicaciones web; la restricción de origen y una plantilla limitada ayudan a reducir abuso. El proveedor recibe el correo del participante, su nombre, la asignación y los detalles incluidos en la plantilla. La aplicación no lee tu buzón.
 

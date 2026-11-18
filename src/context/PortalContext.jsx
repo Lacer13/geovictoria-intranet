@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   collection,
   limit,
@@ -9,6 +9,13 @@ import {
 import { db } from "../firebase";
 
 import { PortalContext } from "./portal";
+import { readPreference, savePreference } from "../lib/preferences";
+import {
+  NEWS_READ_KEY,
+  isPublicationRead,
+  parseReadNews,
+  publicationVersion,
+} from "../lib/news";
 
 function useCollection(name, sort, count) {
   const [state, setState] = useState({ data: [], status: "loading" });
@@ -53,11 +60,40 @@ function useCollection(name, sort, count) {
 }
 
 export function PortalProvider({ children }) {
-  const news = useCollection("news", "timestamp", 30);
+  const news = useCollection("news", "timestamp");
   const leaderboard = useCollection("leaderboard", "score", 5);
   const directory = useCollection("directory");
+  const [readNews, setReadNews] = useState(() =>
+    parseReadNews(readPreference(NEWS_READ_KEY, "{}")),
+  );
+  const markNewsRead = useCallback((items) => {
+    setReadNews((previous) => {
+      const next = Object.fromEntries(
+        Object.entries({
+          ...previous,
+          ...Object.fromEntries(
+            items.map((item) => [item.id, publicationVersion(item)]),
+          ),
+        }).slice(-1000),
+      );
+      savePreference(NEWS_READ_KEY, JSON.stringify(next));
+      return next;
+    });
+  }, []);
+  const unreadNews = news.data.filter(
+    (item) => !isPublicationRead(item, readNews),
+  );
   return (
-    <PortalContext.Provider value={{ news, leaderboard, directory }}>
+    <PortalContext.Provider
+      value={{
+        news,
+        leaderboard,
+        directory,
+        readNews,
+        unreadNews,
+        markNewsRead,
+      }}
+    >
       {children}
     </PortalContext.Provider>
   );

@@ -12,7 +12,7 @@ export default function Modal({ title, children, onClose, className = "" }) {
     const focusable = () =>
       [
         ...dialog.querySelectorAll(
-          'button, a[href], input, select, textarea, [tabindex="0"]',
+          'button, a[href], input, select, textarea, summary, [tabindex="0"]',
         ),
       ].filter((el) => !el.disabled && el.getClientRects().length);
     (

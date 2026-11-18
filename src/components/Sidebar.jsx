@@ -20,7 +20,7 @@ const links = [
   { to: "/", icon: Home, label: "Mi inicio", end: true },
   { to: "/organigrama", icon: Users, label: "Nuestro equipo" },
   { to: "/directorio", icon: LifeBuoy, label: "Directorio de ayuda" },
-  { to: "/wiki", icon: BookOpen, label: "Centro de conocimiento" },
+  { to: "/wiki", icon: BookOpen, label: "Guías y recursos" },
   { to: "/solicitudes", icon: MessageSquare, label: "Te escuchamos" },
 ];
 export default function Sidebar({ open, onClose, onWelcome }) {

@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import {
   Bell,
+  CheckCheck,
+  LayoutGrid,
+  Megaphone,
   BookOpen,
   ChevronRight,
   Command,
-  Gift,
   Menu,
   Moon,
   Search,
@@ -15,62 +17,20 @@ import {
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Modal from "./Modal";
 import { usePortal } from "../context/portal";
-import { normalize } from "../lib/preferences";
+import { buildSearchIndex, portalPages, searchIndex } from "../lib/search";
+import { isPublicationRead } from "../lib/news";
 import { articles } from "../data/knowledge";
 
-const pages = [
-  {
-    title: "Mi inicio",
-    detail: "Tu espacio de trabajo",
-    path: "/",
-    icon: Search,
-  },
-  {
-    title: "Nuestro equipo",
-    detail: "Organigrama y áreas",
-    path: "/organigrama",
-    icon: Users,
-  },
-  {
-    title: "Directorio de ayuda",
-    detail: "Personas y contactos",
-    path: "/directorio",
-    icon: Users,
-  },
-  {
-    title: "Centro de conocimiento",
-    detail: "Guías y recursos",
-    path: "/wiki",
-    icon: BookOpen,
-  },
-  {
-    title: "Te escuchamos",
-    detail: "Solicitudes y reportes",
-    path: "/solicitudes",
-    icon: BookOpen,
-  },
-  {
-    title: "Navidad en equipo",
-    detail: "Nuestro especial navideño",
-    path: "/navidad",
-    icon: Gift,
-  },
-  {
-    title: "Amigo secreto",
-    detail: "Sorteo navideño, invitación y regalos",
-    path: "/amigo-secreto",
-    icon: Gift,
-  },
-  {
-    title: "Pausa activa",
-    detail: "Un respiro con VictorIA",
-    path: "/juego",
-    icon: Gift,
-  },
-];
+const resultIcons = {
+  Secciones: LayoutGrid,
+  Guías: BookOpen,
+  Personas: Users,
+  Publicaciones: Megaphone,
+};
 const routeNames = {
-  ...Object.fromEntries(pages.map((p) => [p.path, p.title])),
+  ...Object.fromEntries(portalPages.map((p) => [p.path, p.title])),
   "/amigo-secreto/ver": "Tu invitación privada",
+  "/buscar": "Búsqueda",
 };
 
 export default function DynamicHeader({
@@ -86,7 +46,7 @@ export default function DynamicHeader({
   const [term, setTerm] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  const { directory, news } = usePortal();
+  const { directory, news, unreadNews, readNews, markNewsRead } = usePortal();
   const closeSearch = useCallback(() => setSearchOpen(false), []);
   const closeNotifications = useCallback(() => setNotificationsOpen(false), []);
   useEffect(() => {
@@ -99,27 +59,16 @@ export default function DynamicHeader({
     document.addEventListener("keydown", handleKey);
     return () => document.removeEventListener("keydown", handleKey);
   }, []);
-  const allResults = [
-    ...pages,
-    ...articles.map((a) => ({
-      title: a.title,
-      detail: a.category,
-      path: `/wiki?articulo=${a.id}`,
-      icon: BookOpen,
-    })),
-    ...directory.data.map((c) => ({
-      title: c.name,
-      detail: c.department,
-      path: `/directorio?q=${encodeURIComponent(c.name)}`,
-      icon: Users,
-    })),
-  ];
+  const index = buildSearchIndex({
+    articles,
+    directory: directory.data,
+    news: news.data,
+  });
+  const matches = searchIndex(index, term);
   const results = (
     term.trim()
-      ? allResults.filter((r) =>
-          normalize(`${r.title} ${r.detail}`).includes(normalize(term)),
-        )
-      : pages
+      ? matches
+      : matches.filter((result) => result.type === "Secciones")
   ).slice(0, 8);
   const go = (path) => {
     setSearchOpen(false);
@@ -191,7 +140,11 @@ export default function DynamicHeader({
             aria-label="Abrir novedades"
           >
             <Bell size={19} />
-            {news.data.length > 0 && <span />}
+            {unreadNews.length > 0 && (
+              <span className="unread-count" aria-hidden="true">
+                {unreadNews.length > 99 ? "99+" : unreadNews.length}
+              </span>
+            )}
           </button>
           <span
             className="avatar header-avatar"
@@ -214,19 +167,24 @@ export default function DynamicHeader({
               aria-label="Buscar en la intranet"
               value={term}
               onChange={(e) => setTerm(e.target.value)}
-              placeholder="Personas, herramientas, guías…"
+              placeholder="Personas, guías o publicaciones…"
             />
           </div>
           <p className="search-caption">
-            {term ? "RESULTADOS" : "EXPLORA TU INTRANET"}
+            {term.trim() ? `${matches.length} RESULTADOS` : "ACCESOS DIRECTOS"}
           </p>
           <div className="search-results">
             {results.map((r, i) => (
               <button key={`${r.path}-${i}`} onClick={() => go(r.path)}>
-                <r.icon size={19} />
+                {(() => {
+                  const Icon = resultIcons[r.type];
+                  return <Icon size={19} />;
+                })()}
                 <span>
                   <strong>{r.title}</strong>
-                  <small>{r.detail}</small>
+                  <small>
+                    {r.type} · {r.detail}
+                  </small>
                 </span>
                 <ChevronRight size={16} />
               </button>
@@ -247,6 +205,33 @@ export default function DynamicHeader({
               </div>
             )}
           </div>
+          {(directory.status === "error" || news.status === "error") && (
+            <p className="form-error" role="status">
+              No se pudieron cargar algunos contactos o publicaciones.{" "}
+              <button
+                className="text-link"
+                onClick={() => {
+                  directory.retry();
+                  news.retry();
+                }}
+              >
+                Reintentar
+              </button>
+            </p>
+          )}
+          <button
+            className="btn btn-forest search-all"
+            onClick={() =>
+              go(
+                `/buscar${term.trim() ? `?q=${encodeURIComponent(term.trim())}` : ""}`,
+              )
+            }
+          >
+            {term.trim()
+              ? `Ver todos los resultados (${matches.length})`
+              : "Explorar toda la intranet"}{" "}
+            <ChevronRight size={16} />
+          </button>
           <div className="search-hint">
             <kbd>esc</kbd> para cerrar{" "}
             <span>Tu equipo, a una búsqueda de distancia.</span>
@@ -255,19 +240,21 @@ export default function DynamicHeader({
       )}
       {notificationsOpen && (
         <Modal title="Novedades de tu equipo" onClose={closeNotifications}>
-          <div className="notification-season">
-            <Gift size={24} />
-            <div>
-              <strong>Ya se siente la Navidad</strong>
-              <p>Descubre nuestro espacio para celebrar juntos.</p>
-              <Link
-                to="/navidad"
-                onClick={closeNotifications}
+          <div className="notification-summary">
+            <p>
+              {unreadNews.length
+                ? `${unreadNews.length} sin leer`
+                : "Estás al día"}
+            </p>
+            {unreadNews.length > 0 && (
+              <button
                 className="text-link"
+                onClick={() => markNewsRead(news.data)}
               >
-                Ver especial navideño →
-              </Link>
-            </div>
+                <CheckCheck size={15} />
+                Marcar todas como leídas
+              </button>
+            )}
           </div>
           {news.status === "loading" ? (
             <p className="muted">Buscando las últimas publicaciones…</p>
@@ -282,15 +269,35 @@ export default function DynamicHeader({
             <p className="muted">Estás al día. No hay nuevos comunicados.</p>
           ) : (
             <div className="notification-list">
-              {news.data.slice(0, 8).map((n) => (
-                <article key={n.id}>
-                  <small>{n.date}</small>
+              {news.data.slice(0, 5).map((n) => (
+                <Link
+                  className="notification-item"
+                  key={n.id}
+                  to={`/novedades?publicacion=${encodeURIComponent(n.id)}`}
+                  onClick={closeNotifications}
+                >
+                  <small>
+                    {n.date}
+                    {!isPublicationRead(n, readNews) && (
+                      <span className="new-badge">Sin leer</span>
+                    )}
+                  </small>
                   <h3>{n.title}</h3>
-                  <p>{n.desc}</p>
-                </article>
+                  <ChevronRight size={16} />
+                </Link>
               ))}
             </div>
           )}
+          <Link
+            to="/novedades"
+            className="btn btn-forest search-all"
+            onClick={closeNotifications}
+          >
+            Ver todas las publicaciones <ChevronRight size={16} />
+          </Link>
+          <p className="local-save-caption">
+            Las lecturas se guardan en este navegador.
+          </p>
         </Modal>
       )}
     </>

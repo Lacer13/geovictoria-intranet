@@ -15,7 +15,12 @@ import {
   randomHex,
   validMailSettings,
 } from "./secretSanta";
-import { MailRequestError, requestSantaEmail } from "./secretSantaEmail";
+import {
+  MailRequestError,
+  mailSettingsVersion,
+  requestSantaEmail,
+  santaTestEmailParams,
+} from "./secretSantaEmail";
 
 export async function saveSantaDraft(eventId, form, rows, expectedRevision) {
   const roster = normalizeRoster(rows);
@@ -221,4 +226,26 @@ export async function getSantaCard(token) {
   const snapshot = await getDocFromServer(doc(db, "secretSantaCards", token));
   if (!snapshot.exists()) throw new Error("Enlace no disponible.");
   return snapshot.data();
+}
+
+// A connection test never reads a roster or creates assignments.
+export async function sendSantaTestEmail(expectedSettings) {
+  const user = auth.currentUser;
+  if (!user?.email)
+    throw new Error("Inicia sesión para enviar una prueba a tu propio correo.");
+  const snapshot = await getDocFromServer(
+    doc(db, "portalSettings", "secretSantaEmail"),
+  );
+  const settings = snapshot.data();
+  if (!validMailSettings(settings))
+    throw new Error("Guarda una configuración habilitada antes de probar.");
+  if (mailSettingsVersion(settings) !== mailSettingsVersion(expectedSettings))
+    throw new Error(
+      "La configuración cambió. Cierra y vuelve a abrir Configurar correo antes de probar.",
+    );
+  const params = santaTestEmailParams(user.email, window.location.origin);
+  const result = isLocalDemo
+    ? { state: "accepted", provider: "demo" }
+    : await requestSantaEmail(settings, params);
+  return { ...result, to: params.to_email };
 }

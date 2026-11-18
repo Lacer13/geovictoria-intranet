@@ -30,6 +30,8 @@ const OrgChart = lazy(() => import("./components/OrgChart"));
 const HelpDirectory = lazy(() => import("./components/HelpDirectory"));
 const Wiki = lazy(() => import("./components/Wiki"));
 const Admin = lazy(() => import("./components/Admin"));
+const SearchPage = lazy(() => import("./components/SearchPage"));
+const NewsPage = lazy(() => import("./components/NewsPage"));
 const Christmas = lazy(() => import("./components/Christmas"));
 const FeedbackForm = lazy(() => import("./components/FeedbackForm"));
 const SecretSanta = lazy(() => import("./components/SecretSanta"));
@@ -157,6 +159,8 @@ function AppContent() {
                 <Route path="/organigrama" element={<OrgChart />} />
                 <Route path="/directorio" element={<HelpDirectory />} />
                 <Route path="/wiki" element={<Wiki />} />
+                <Route path="/buscar" element={<SearchPage />} />
+                <Route path="/novedades" element={<NewsPage />} />
                 <Route path="/navidad" element={<Christmas />} />
                 <Route path="/amigo-secreto" element={<SecretSanta />} />
                 <Route

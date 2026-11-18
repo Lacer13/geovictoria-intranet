@@ -101,7 +101,9 @@ const CHARACTERS = [
     id: "victoria_classic",
     name: "VictorIA (Clásica)",
     src: "/Sprinn nuevo Victoria.png",
-    type: "static",
+    type: "poses",
+    cols: 2,
+    rows: 2,
     cost: 0,
     desc: "La IA original. Confiable.",
   },
@@ -869,6 +871,23 @@ const ActiveBreak = ({ isFullscreen = false }) => {
             state.player.width,
             state.player.height,
           );
+        } else if (selectedChar.type === "poses") {
+          const pose =
+            { idle: 0, shooting: 1, damage: 2, dead: 3 }[state.player.state] ??
+            0;
+          const width = playerImg.width / 2;
+          const height = playerImg.height / 2;
+          ctx.drawImage(
+            playerImg,
+            (pose % 2) * width,
+            Math.floor(pose / 2) * height,
+            width,
+            height,
+            -state.player.width / 2,
+            -state.player.height / 2,
+            state.player.width,
+            state.player.height,
+          );
         } else {
           // Static Image
           ctx.drawImage(
@@ -1280,9 +1299,10 @@ const ActiveBreak = ({ isFullscreen = false }) => {
                         width: "80px",
                         height: "80px",
                         marginBottom: "0.5rem",
-                        backgroundImage: `url(${char.src})`,
-                        backgroundSize:
-                          char.type === "spritesheet" ? "500% 400%" : "contain",
+                        backgroundImage: `url("${char.src}")`,
+                        backgroundSize: char.cols
+                          ? `${char.cols * 100}% ${char.rows * 100}%`
+                          : "contain",
                         backgroundPosition: "0% 0%",
                         backgroundRepeat: "no-repeat",
                         filter: !isUnlocked

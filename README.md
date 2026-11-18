@@ -18,10 +18,13 @@ npm run preview
 
 ## Experiencia y Navidad
 
-- Navegación inmediata; las rutas secundarias se cargan bajo demanda. VictorIA recibe al equipo con un saludo navideño de 12 segundos al abrir el inicio una vez por sesión. Se puede saltar, pausar, avanzar y repetir desde la tarjeta **Ver video de VictorIA** del inicio o el botón **Video de VictorIA** del menú de cualquier sección. Las invitaciones privadas y Administración abren directamente.
+- Navegación inmediata; las rutas secundarias se cargan bajo demanda. VictorIA recibe al equipo con un saludo navideño de 12 segundos al abrir el inicio una vez por sesión. Se puede saltar, pausar, avanzar y repetir desde **Ver saludo de VictorIA** del inicio o **Video de VictorIA** del menú. La opción **No mostrar automáticamente durante esta Navidad** conserva el acceso manual y se recuerda en este navegador. Las invitaciones privadas y Administración abren directamente.
 - Paleta navideña tradicional: rojo Santa, blanco nieve, verde pino y dorado cálido. Menú rojo, banners verdes, ilustraciones con regalos y estrellas doradas, guirnalda de pino y luces; variante oscura en tonos de bosque.
 - Interfaz concisa: accesos rápidos al inicio, video integrado en el banner navideño y ayuda desplegable. Navidad muestra las acciones antes que los detalles; los formularios conservan sus datos al plegarse.
-- Búsqueda global: personas disponibles, secciones y guías. Atajo `Ctrl + K` / `⌘ + K`.
+- Búsqueda global por varias palabras, sin distinción de tildes: personas y correos, secciones, contenido completo de guías y publicaciones. El diálogo muestra ocho accesos y permite abrir todos los resultados, filtrarlos por tipo y cargar más. Atajo `Ctrl + K` / `⌘ + K`.
+- Novedades con página propia, filtros y contador de publicaciones sin leer. Las lecturas se guardan por navegador; una edición de contenido vuelve a marcar la publicación como pendiente. No se afirma sincronización entre cuentas ni dispositivos.
+- Administración permite crear y editar noticias/contactos sin cambiar su identificador ni la fecha original de una publicación. Las transacciones detectan ediciones simultáneas y el editor avisa antes de descartar cambios.
+- Favicon SVG cuadrado con el símbolo GeoVictoria, sin el texto del logo completo. La miniatura de VictorIA Clásica utiliza una URL CSS válida para el nombre de archivo con espacios.
 - Navegación móvil con control de foco; formularios etiquetados y acceso por teclado.
 - Modos claro y oscuro, favoritos y preferencias guardados en el navegador. La intranet funciona aunque el almacenamiento de preferencias esté bloqueado.
 - Copos de nieve, luces intermitentes, árbol y destellos animados. El botón del copo permite pausar los efectos. Se respeta `prefers-reduced-motion` y se reducen las partículas en móviles.
@@ -69,7 +72,7 @@ La configuración web de Firebase identifica el proyecto existente; no es una cr
 
 Desde **Administración → Amigo secreto** se pueden guardar grupos de 2 a 100 personas, importar una lista de nombres/correos, sortear y enviar las asignaciones. Nadie se asigna a sí mismo; cada persona da y recibe un regalo. Una vez sorteado, el grupo y las parejas quedan fijos. Los reenvíos conservan el resultado original.
 
-**Configurar correo** guía la conexión de Gmail u Outlook mediante EmailJS e incluye la plantilla HTML para copiar. No requiere dominio propio ni cambiar el plan de Firebase. La conexión de la cuenta y la autorización del proveedor las realiza su titular; la aplicación no incluye una cuenta de envío preconfigurada ni solicita contraseñas SMTP. Solo se guardan los tres identificadores públicos de EmailJS en una colección accesible a administradores.
+**Configurar correo** guía la conexión de Gmail u Outlook mediante EmailJS e incluye la plantilla HTML para copiar. No requiere dominio propio ni cambiar el plan de Firebase. El flujo incluye guía para Outlook 365, copia de plantilla/asunto y una prueba con confirmación enviada solo al correo del administrador conectado. La prueba no lee participantes ni genera asignaciones. Una configuración sin guardar no puede probarse. Se distinguen aceptación del proveedor y confirmación manual de recepción, esta última solo en la sesión del diálogo. La conexión de la cuenta y la autorización del proveedor las realiza su titular; la aplicación no incluye una cuenta de envío preconfigurada ni solicita contraseñas SMTP. Solo se guardan los tres identificadores públicos de EmailJS en una colección accesible a administradores.
 
 El panel registra cada intento y permite consultar el respaldo, descargarlo o recuperar el enlace privado de una persona. Los correos requieren confirmación del administrador; guardar o sortear no los envía. Consulta [la guía de configuración y operación](docs/amigo-secreto.md).
 
@@ -83,7 +86,7 @@ La bienvenida anima varias escenas completas de VictorIA, con su cabeza y manos 
 npm test
 ```
 
-Comprueba fechas de Lima, búsquedas, preferencias, calendario, asignaciones del sorteo, importación, exportación segura y manejo de errores del proveedor de correo.
+Comprueba fechas de Lima, búsquedas de contenido y correos, lecturas por revisión, validación de edición, preferencias de bienvenida, calendario, asignaciones del sorteo, importación, exportación segura y manejo de errores del proveedor de correo.
 
 Para probar las reglas se necesita Java 21 y el emulador oficial:
 

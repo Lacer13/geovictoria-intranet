@@ -10,9 +10,11 @@ import {
   VolumeX,
 } from "lucide-react";
 import Modal from "./Modal";
+import { isWelcomeDismissed, setWelcomeDismissed } from "../lib/welcome";
 
 export default function LoadingScreen({ onComplete, motionAllowed = true }) {
   const video = useRef(null);
+  const [hideFuture, setHideFuture] = useState(isWelcomeDismissed);
   const autoplay =
     motionAllowed &&
     !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -183,7 +185,18 @@ export default function LoadingScreen({ onComplete, motionAllowed = true }) {
             <RotateCcw size={14} /> Volver a ver el saludo
           </button>
         )}
-        <small>Reábrelo desde el menú: Video de VictorIA.</small>
+        <label className="welcome-preference">
+          <input
+            type="checkbox"
+            checked={hideFuture}
+            onChange={(e) => {
+              setHideFuture(e.target.checked);
+              setWelcomeDismissed(e.target.checked);
+            }}
+          />
+          No mostrar automáticamente durante esta Navidad
+        </label>
+        <small>Siempre disponible en el menú: Video de VictorIA.</small>
       </div>
     </Modal>
   );

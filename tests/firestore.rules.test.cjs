@@ -610,3 +610,39 @@ test("the maximum group can be stored atomically within Firestore rule access li
     100,
   );
 });
+
+test("editing published content keeps authorization checks and field constraints", async () => {
+  const admin = env
+    .authenticatedContext("content-editor", { admin: true })
+    .firestore();
+  const visitor = env.unauthenticatedContext().firestore();
+  const ref = doc(admin, "news", "editable-content");
+  await assertSucceeds(setDoc(ref, news));
+  await assertSucceeds(
+    updateDoc(ref, { title: "Título corregido", desc: "Contenido corregido" }),
+  );
+  assert.equal((await getDoc(ref)).data().timestamp, news.timestamp);
+  await assertFails(
+    updateDoc(doc(visitor, "news", "editable-content"), {
+      title: "No autorizado",
+    }),
+  );
+  await assertFails(updateDoc(ref, { title: "" }));
+  await assertFails(updateDoc(ref, { internalSecret: "must-not-be-public" }));
+  const contact = doc(admin, "directory", "editable-contact");
+  await setDoc(contact, {
+    name: "Nombre",
+    department: "Área",
+    email: "valid@example.test",
+    color: "#135e40",
+  });
+  await assertSucceeds(
+    updateDoc(contact, { name: "Nombre corregido", email: "new@example.test" }),
+  );
+  await assertFails(
+    updateDoc(doc(visitor, "directory", "editable-contact"), {
+      name: "Intruso",
+    }),
+  );
+  await assertFails(updateDoc(contact, { email: "invalid" }));
+});

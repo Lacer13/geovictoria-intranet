@@ -200,7 +200,6 @@ export function MiniCalendar() {
 function NewsPanel() {
   const { news } = usePortal();
   const [filter, setFilter] = useState("Todo");
-  const [expanded, setExpanded] = useState(false);
   const items = news.data.filter(
     (n) =>
       filter === "Todo" ||
@@ -210,14 +209,9 @@ function NewsPanel() {
     <section className="panel news-panel">
       <div className="panel-heading">
         <h2>Lo que está pasando</h2>
-        {items.length > 3 && (
-          <button
-            className="text-link small"
-            onClick={() => setExpanded((v) => !v)}
-          >
-            {expanded ? "Ver menos" : "Ver todo"} <ArrowRight size={14} />
-          </button>
-        )}
+        <Link className="text-link small" to="/novedades">
+          Ver todas <ArrowRight size={14} />
+        </Link>
       </div>
       {news.data.length > 0 && (
         <div className="tabs" role="tablist" aria-label="Filtrar novedades">
@@ -235,7 +229,7 @@ function NewsPanel() {
         </div>
       )}
       <div className="news-content">
-        {(expanded ? items : items.slice(0, 3)).map((item) => (
+        {items.slice(0, 3).map((item) => (
           <article className="news-item" key={item.id}>
             <span
               className={`news-icon ${item.type === "logro" ? "gold" : "blue"}`}
@@ -258,12 +252,12 @@ function NewsPanel() {
                 <span>·</span> {item.date}
               </span>
               <h3>{item.title}</h3>
-              {item.desc && (
-                <details className="inline-details news-details">
-                  <summary>Leer publicación</summary>
-                  <p>{item.desc}</p>
-                </details>
-              )}
+              <Link
+                className="text-link small"
+                to={`/novedades?publicacion=${encodeURIComponent(item.id)}`}
+              >
+                Leer publicación <ArrowRight size={14} />
+              </Link>
             </div>
           </article>
         ))}
