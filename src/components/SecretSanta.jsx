@@ -7,8 +7,6 @@ import {
   Heart,
   Link2,
   LockKeyhole,
-  Mail,
-  Sparkles,
 } from "lucide-react";
 import {
   CARD_PATTERN,
@@ -36,29 +34,20 @@ export default function SecretSanta() {
   return (
     <div className="page-enter santa-public">
       <div className="page-heading">
-        <span className="eyebrow">UN REGALO. UNA SONRISA. UN SECRETO.</span>
-        <h1>La ilusión de regalar, en equipo.</h1>
-        <p>Nuestro amigo secreto de Navidad ya tiene su propio espacio.</p>
+        <h1>Amigo secreto</h1>
       </div>
       <section className="santa-welcome">
         <div>
-          <span className="season-pill">
-            <span /> AMIGO SECRETO GEOVICTORIA
-          </span>
           <h2>
-            Alguien va a sonreír
-            <br />
-            gracias a <em>ti.</em>
+            Tu próxima <em>sorpresa.</em>
           </h2>
-          <p>
-            La organización registra al equipo y realiza el sorteo. Cada persona
-            recibe por correo su asignación y un enlace privado para volver a
-            consultarla.
-          </p>
+          <p>Abre el enlace de tu correo y descubre a quién le regalarás.</p>
           <div className="santa-welcome-actions">
             <button
               className="btn btn-forest"
               onClick={() => setInvitationOpen((value) => !value)}
+              aria-expanded={invitationOpen}
+              aria-controls="santa-invitation-panel"
             >
               <Gift size={16} /> Abrir mi invitación
             </button>
@@ -70,8 +59,7 @@ export default function SecretSanta() {
             </Link>
           </div>
           <small>
-            <LockKeyhole size={12} /> Cada resultado es privado. La organización
-            gestiona el grupo.
+            <LockKeyhole size={12} /> Tu enlace es privado. No lo compartas.
           </small>
         </div>
         <div className="santa-gift-art" aria-hidden="true">
@@ -84,15 +72,12 @@ export default function SecretSanta() {
       {invitationOpen && (
         <section
           className="panel santa-open-invitation"
+          id="santa-invitation-panel"
           aria-label="Abrir una invitación privada"
         >
           <div>
             <Link2 size={23} />
-            <h2>Tu sorpresa está a un enlace de distancia.</h2>
-            <p>
-              Pega la invitación que recibiste por correo. Solo se abrirá tu
-              asignación.
-            </p>
+            <h2>Pega tu invitación</h2>
           </div>
           <form onSubmit={openInvitation}>
             <label htmlFor="santa-invitation-url">Tu enlace privado</label>
@@ -127,51 +112,41 @@ export default function SecretSanta() {
               </p>
             )}
           </form>
-          <small>
-            ¿No tienes el enlace o no lo encuentras? Pide a la organización que
-            lo recupere para ti.
-          </small>
+          <small>¿No lo tienes? Pide a la organización que lo reenvíe.</small>
         </section>
       )}
-      <div className="santa-how">
-        <article className="panel">
-          <Mail />
-          <h2>Revisa tu correo</h2>
-          <p>
-            Cuando la organización envíe el sorteo, encontrarás a quién le
-            regalarás. Revisa también correo no deseado.
-          </p>
-        </article>
-        <article className="panel">
-          <Link2 />
-          <h2>Guarda tu enlace</h2>
-          <p>
-            El correo incluye una invitación privada. Ábrela cuando quieras
-            recordar tu asignación.
-          </p>
-        </article>
-        <article className="panel">
-          <LockKeyhole />
-          <h2>Conserva la sorpresa</h2>
-          <p>
-            Tu enlace permite ver tu resultado. Compártelo solo si quieres
-            revelar tu amigo secreto.
-          </p>
-        </article>
-      </div>
-      <div className="help-banner">
-        <Sparkles size={22} />
-        <div>
-          <strong>¿No encuentras tu invitación?</strong>
-          <p>
-            La organización conserva las asignaciones y puede reenviar tu correo
-            o recuperar tu enlace.
-          </p>
-        </div>
-        <Link to="/directorio" className="text-link">
-          Contactar al equipo <ArrowRight size={15} />
-        </Link>
-      </div>
+      <section className="santa-help" aria-labelledby="santa-help-title">
+        <h2 id="santa-help-title">Ayuda con tu invitación</h2>
+        <details className="disclosure panel">
+          <summary>¿Dónde encuentro mi enlace?</summary>
+          <div className="disclosure-body">
+            <p>
+              Busca el correo del sorteo, también en correo no deseado. Puedes
+              abrir la invitación directamente desde ahí.
+            </p>
+          </div>
+        </details>
+        <details className="disclosure panel">
+          <summary>¿Puedo volver a ver mi resultado?</summary>
+          <div className="disclosure-body">
+            <p>
+              Sí. Guarda tu enlace para consultarlo cuando quieras. Solo quien
+              tenga ese enlace puede ver tu asignación.
+            </p>
+          </div>
+        </details>
+        <details className="disclosure panel">
+          <summary>Perdí mi invitación</summary>
+          <div className="disclosure-body">
+            <p>
+              La organización puede recuperar tu enlace o reenviar el correo.
+            </p>
+            <Link to="/directorio" className="text-link">
+              Contactar al equipo <ArrowRight size={15} />
+            </Link>
+          </div>
+        </details>
+      </section>
     </div>
   );
 }

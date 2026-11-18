@@ -80,28 +80,21 @@ export default function FeedbackForm() {
   return (
     <div className="feedback-page page-enter">
       <div className="page-heading">
-        <span className="eyebrow">UN MEJOR LUGAR SE CONSTRUYE ESCUCHANDO</span>
-        <h1>Tu voz nos importa.</h1>
-        <p>
-          Comparte una idea, pide apoyo o cuéntanos algo que debemos mejorar.
-        </p>
+        <h1>Te escuchamos</h1>
+        <p>Envía una idea o solicita apoyo.</p>
       </div>
       <div className="feedback-layout">
         <section className="panel feedback-form">
           <div className="panel-heading">
             <h2>
-              <HeartHandshake size={21} /> Te escuchamos
+              <HeartHandshake size={21} /> Tu mensaje
             </h2>
-            <span className="department-pill">Canal de solicitudes</span>
           </div>
           {status === "success" ? (
             <div className="feedback-success" role="status">
               <CheckCircle2 size={52} />
               <h2>Gracias por compartirlo.</h2>
-              <p>
-                Tu mensaje se guardó en el buzón de solicitudes para su revisión
-                por Administración.
-              </p>
+              <p>Administración revisará tu mensaje.</p>
               <button
                 className="btn btn-forest"
                 onClick={() => {
@@ -122,8 +115,7 @@ export default function FeedbackForm() {
                   disabled={status === "loading"}
                 />
                 <span>
-                  <strong>Prefiero no incluir mi nombre</strong>
-                  <small>Tu nombre y área no se añadirán al mensaje.</small>
+                  <strong>Enviar sin nombre ni área</strong>
                 </span>
                 <ShieldCheck size={21} />
               </label>
@@ -231,29 +223,21 @@ export default function FeedbackForm() {
           <span className="quick-icon green">
             <ShieldCheck size={26} />
           </span>
-          <h2>Un espacio para expresarte.</h2>
+          <h2>Lo revisa Administración</h2>
           <p>
-            Los mensajes se guardan en el buzón de la intranet para su revisión
-            por el equipo administrador.
+            Si necesitas respuesta, incluye tu correo de trabajo en el mensaje.
           </p>
-          <div>
-            <strong>Comparte con tranquilidad</strong>
+          <details className="inline-details">
+            <summary>Privacidad y alcance</summary>
             <p>
               La opción sin nombre omite tu nombre y área del reporte. Incluye
-              solo los datos necesarios para explicar tu solicitud.
+              solo los datos necesarios.
             </p>
-          </div>
-          <div>
-            <strong>¿Esperas una respuesta?</strong>
             <p>
-              Si deseas que puedan contactarte, incluye un correo de trabajo en
-              tu mensaje.
+              Este buzón no envía correos automáticos ni sustituye los canales
+              de atención urgente.
             </p>
-          </div>
-          <small>
-            Este formulario no envía correos automáticos ni sustituye los
-            canales de atención urgente de tu organización.
-          </small>
+          </details>
         </aside>
       </div>
     </div>

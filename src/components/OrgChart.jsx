@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Building2, Network, Users } from "lucide-react";
+import { ArrowRight, Building2, Users } from "lucide-react";
 import { usePortal } from "../context/portal";
 import { DataState } from "./Dashboard";
 
@@ -15,29 +15,12 @@ export default function OrgChart() {
   return (
     <div className="page-enter">
       <div className="page-heading">
-        <span className="eyebrow">MUCHAS PERSONAS. UN MISMO PROPÓSITO.</span>
-        <h1>Conoce a quienes lo hacen posible.</h1>
-        <p>Explora nuestras áreas y encuentra sus contactos de referencia.</p>
+        <h1>Nuestro equipo</h1>
+        <p>{groups.length} áreas · Explora sus contactos de referencia.</p>
       </div>
-      <section className="team-intro">
-        <div className="team-emblem">
-          <Network size={38} strokeWidth={1.3} />
-        </div>
-        <div>
-          <span className="eyebrow">GEOVICTORIA PERÚ</span>
-          <h2>Un equipo que conecta equipos.</h2>
-          <p>La colaboración empieza por saber con quién contar.</p>
-        </div>
-        <span className="team-stat">
-          <strong>{groups.length}</strong> áreas publicadas
-        </span>
-      </section>
       <div className="inline-notice">
         <Building2 size={17} />
-        <span>
-          Vista por áreas basada en el directorio vigente. Los contactos no
-          implican una relación de jefatura.
-        </span>
+        <span>Vista por áreas; no representa relaciones de jefatura.</span>
       </div>
       {directory.status !== "ready" && (
         <section className="panel">

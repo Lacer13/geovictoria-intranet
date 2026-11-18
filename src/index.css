@@ -7428,3 +7428,256 @@ select.input-field {
     font-size: 10px;
   }
 }
+
+/* Keep daily actions visible and reveal supporting text on demand. */
+.dashboard .welcome-row {
+  margin-bottom: 24px;
+}
+.dashboard .quick-section {
+  margin-bottom: 24px;
+}
+.dashboard .quick-section .section-title {
+  margin: 0 0 12px;
+}
+.dashboard .quick-card {
+  padding: 18px;
+}
+.dashboard .quick-card p {
+  margin-top: 4px;
+}
+.compact-season-hero {
+  min-height: 238px;
+  margin-bottom: 24px;
+}
+.compact-season-hero .hero-copy {
+  padding: 28px 32px;
+  max-width: 68%;
+}
+.compact-season-hero .hero-copy h2 {
+  font-size: clamp(28px, 2.4vw, 36px);
+  margin: 14px 0 10px;
+  max-width: 540px;
+}
+.compact-season-hero .hero-copy p {
+  font-size: 12px;
+  margin-bottom: 18px;
+}
+.compact-season-hero .hero-art {
+  width: 43%;
+  height: 100%;
+}
+.season-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.hero-copy .season-actions .btn {
+  font-size: 12px;
+  min-height: 42px;
+  gap: 8px;
+}
+.hero-copy .season-video-button {
+  background: #ffffff12;
+  border-color: #ffffff70;
+  color: #ffffff;
+}
+.hero-copy .season-video-button:hover {
+  background: #ffffff24;
+}
+.season-actions > .text-link {
+  color: #ffffff;
+  min-height: 42px;
+}
+.news-details {
+  margin-top: 8px;
+}
+.inline-details > summary {
+  cursor: pointer;
+  color: var(--forest);
+  font-weight: 600;
+  font-size: 12px;
+  padding: 8px 0;
+}
+.inline-details > p {
+  margin: 8px 0 12px;
+  line-height: 1.8;
+}
+.disclosure {
+  border-radius: 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.disclosure > summary {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 24px;
+  min-height: 64px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 15px;
+  font-weight: 650;
+  color: var(--text-main);
+}
+.disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+.disclosure > summary::after {
+  content: "+";
+  margin-left: auto;
+  color: var(--forest);
+  font-size: 23px;
+  line-height: 1;
+  font-weight: 400;
+}
+.disclosure[open] > summary::after {
+  content: "−";
+}
+.disclosure > summary > svg {
+  color: var(--forest);
+}
+.disclosure > summary small {
+  display: block;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 4px;
+}
+.disclosure > summary:hover {
+  background: var(--muted-surface);
+}
+.disclosure > summary:focus-visible {
+  outline-offset: -4px;
+}
+.disclosure[open] > summary {
+  border-bottom: 1px solid var(--border-color);
+}
+.disclosure-body {
+  padding: 22px 24px;
+}
+.disclosure-body > p {
+  max-width: 70ch;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.disclosure-body > .text-link {
+  margin-top: 12px;
+}
+.seasonal-disclosure .greeting-builder {
+  margin: 0;
+}
+.seasonal-disclosure .input-group:first-child {
+  margin-top: 0;
+}
+.seasonal-disclosure .christmas-ideas {
+  margin-top: 0;
+}
+.seasonal-disclosure .idea-card {
+  padding: 20px;
+  box-shadow: none;
+}
+.seasonal-disclosure .idea-top {
+  margin-bottom: 12px;
+}
+.seasonal-disclosure .local-save-caption {
+  margin-bottom: 0;
+}
+.seasonal-disclosure .qr-panel {
+  border: 0;
+  box-shadow: none;
+  margin: 0;
+}
+.seasonal-suggestion {
+  margin-top: 16px;
+}
+.santa-help {
+  margin-top: 28px;
+}
+.santa-help > h2 {
+  font-size: 17px;
+  margin-bottom: 14px;
+}
+.santa-help .disclosure > summary {
+  font-size: 14px;
+}
+.santa-public .santa-welcome {
+  padding: 30px 32px;
+}
+.santa-public .santa-welcome h2 {
+  font-size: clamp(29px, 3vw, 38px);
+  margin-top: 0;
+}
+.santa-public .santa-gift-art {
+  min-height: 180px;
+}
+.knowledge-card > p {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.feedback-aside .inline-details {
+  margin-top: 14px;
+}
+@media (max-width: 1040px) {
+  .compact-season-hero .hero-copy {
+    max-width: 74%;
+  }
+  .compact-season-hero .hero-art {
+    width: 42%;
+    right: -30px;
+    opacity: 0.55;
+  }
+}
+@media (max-width: 720px) {
+  .dashboard .welcome-row {
+    margin-bottom: 20px;
+  }
+  .dashboard .quick-card {
+    padding: 15px;
+  }
+  .compact-season-hero {
+    min-height: 280px;
+  }
+  .compact-season-hero .hero-copy {
+    max-width: 100%;
+    padding: 24px;
+  }
+  .compact-season-hero .hero-copy h2 {
+    font-size: 29px;
+    max-width: 330px;
+  }
+  .compact-season-hero .hero-copy p {
+    font-size: 12px;
+    max-width: 290px;
+  }
+  .compact-season-hero .hero-art {
+    width: 65%;
+    height: 75%;
+    top: auto;
+    bottom: -25px;
+    right: -65px;
+    opacity: 0.16;
+  }
+  .season-actions {
+    gap: 10px;
+  }
+  .hero-copy .season-actions .btn {
+    min-height: 44px;
+    font-size: 11px;
+  }
+  .disclosure > summary {
+    padding: 18px;
+    font-size: 14px;
+  }
+  .disclosure-body {
+    padding: 20px 18px;
+  }
+  .santa-public .santa-welcome {
+    padding: 26px;
+  }
+  .santa-public .santa-gift-art {
+    opacity: 0.08;
+  }
+}

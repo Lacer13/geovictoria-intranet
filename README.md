@@ -20,6 +20,7 @@ npm run preview
 
 - Navegación inmediata; las rutas secundarias se cargan bajo demanda. VictorIA recibe al equipo con un saludo navideño de 12 segundos al abrir el inicio una vez por sesión. Se puede saltar, pausar, avanzar y repetir desde la tarjeta **Ver video de VictorIA** del inicio o el botón **Video de VictorIA** del menú de cualquier sección. Las invitaciones privadas y Administración abren directamente.
 - Paleta navideña tradicional: rojo Santa, blanco nieve, verde pino y dorado cálido. Menú rojo, banners verdes, ilustraciones con regalos y estrellas doradas, guirnalda de pino y luces; variante oscura en tonos de bosque.
+- Interfaz concisa: accesos rápidos al inicio, video integrado en el banner navideño y ayuda desplegable. Navidad muestra las acciones antes que los detalles; los formularios conservan sus datos al plegarse.
 - Búsqueda global: personas disponibles, secciones y guías. Atajo `Ctrl + K` / `⌘ + K`.
 - Navegación móvil con control de foco; formularios etiquetados y acceso por teclado.
 - Modos claro y oscuro, favoritos y preferencias guardados en el navegador. La intranet funciona aunque el almacenamiento de preferencias esté bloqueado.

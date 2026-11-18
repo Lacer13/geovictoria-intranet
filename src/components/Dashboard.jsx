@@ -10,7 +10,6 @@ import {
   ChevronRight,
   Coffee,
   Gift,
-  Heart,
   LifeBuoy,
   Megaphone,
   MessageCircle,
@@ -30,29 +29,29 @@ import {
 const quickLinks = [
   {
     to: "/directorio",
-    title: "¿Necesitas una mano?",
-    text: "Encuentra a la persona indicada",
+    title: "Directorio",
+    text: "Personas y contactos",
     icon: LifeBuoy,
     color: "blue",
   },
   {
     to: "/wiki",
-    title: "Aprende y resuelve",
-    text: "Guías, recursos y respuestas",
+    title: "Guías y recursos",
+    text: "Resuelve tus dudas",
     icon: BookOpen,
     color: "green",
   },
   {
     to: "/organigrama",
-    title: "Conoce a tu equipo",
-    text: "Las personas que lo hacen posible",
+    title: "Nuestro equipo",
+    text: "Áreas y personas",
     icon: Users,
     color: "purple",
   },
   {
     to: "/solicitudes",
-    title: "Tu voz nos importa",
-    text: "Comparte una solicitud o reporte",
+    title: "Solicitudes",
+    text: "Ideas y apoyo",
     icon: MessageCircle,
     color: "coral",
   },
@@ -85,7 +84,6 @@ export function DataState({ resource, empty, compact = false }) {
         <Sparkles size={22} />
       </span>
       <strong>{empty}</strong>
-      <p>Las novedades del equipo aparecerán aquí.</p>
     </div>
   );
 }
@@ -203,7 +201,6 @@ function NewsPanel() {
   const { news } = usePortal();
   const [filter, setFilter] = useState("Todo");
   const [expanded, setExpanded] = useState(false);
-  const showSeason = filter !== "Comunicados";
   const items = news.data.filter(
     (n) =>
       filter === "Todo" ||
@@ -213,49 +210,31 @@ function NewsPanel() {
     <section className="panel news-panel">
       <div className="panel-heading">
         <h2>Lo que está pasando</h2>
-        <button
-          className="text-link small"
-          onClick={() => setExpanded((v) => !v)}
-        >
-          {expanded ? "Ver menos" : "Ver todo"} <ArrowRight size={14} />
-        </button>
-      </div>
-      <div className="tabs" role="tablist" aria-label="Filtrar novedades">
-        {["Todo", "Comunicados", "Cultura y equipo"].map((f) => (
+        {items.length > 3 && (
           <button
-            role="tab"
-            aria-selected={filter === f}
-            key={f}
-            onClick={() => setFilter(f)}
-            className={filter === f ? "active" : ""}
+            className="text-link small"
+            onClick={() => setExpanded((v) => !v)}
           >
-            {f}
+            {expanded ? "Ver menos" : "Ver todo"} <ArrowRight size={14} />
           </button>
-        ))}
-      </div>
-      <div className="news-content">
-        {showSeason && (
-          <Link to="/navidad" className="season-news">
-            <div className="season-news-art">
-              <Gift size={36} strokeWidth={1.2} />
-              <span aria-hidden="true">✦</span>
-              <i aria-hidden="true">✧</i>
-            </div>
-            <div>
-              <span className="category-label">
-                CULTURA Y EQUIPO <span>·</span> ESPECIAL NAVIDEÑO
-              </span>
-              <h3>El mejor regalo es ser parte de este equipo</h3>
-              <p>
-                Hagamos espacio para agradecer, compartir y celebrar todo lo que
-                construimos juntos.
-              </p>
-              <span className="text-link">
-                Vivamos la Navidad <ArrowRight size={14} />
-              </span>
-            </div>
-          </Link>
         )}
+      </div>
+      {news.data.length > 0 && (
+        <div className="tabs" role="tablist" aria-label="Filtrar novedades">
+          {["Todo", "Comunicados", "Cultura y equipo"].map((f) => (
+            <button
+              role="tab"
+              aria-selected={filter === f}
+              key={f}
+              onClick={() => setFilter(f)}
+              className={filter === f ? "active" : ""}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+      )}
+      <div className="news-content">
         {(expanded ? items : items.slice(0, 3)).map((item) => (
           <article className="news-item" key={item.id}>
             <span
@@ -279,7 +258,12 @@ function NewsPanel() {
                 <span>·</span> {item.date}
               </span>
               <h3>{item.title}</h3>
-              <p>{item.desc}</p>
+              {item.desc && (
+                <details className="inline-details news-details">
+                  <summary>Leer publicación</summary>
+                  <p>{item.desc}</p>
+                </details>
+              )}
             </div>
           </article>
         ))}
@@ -289,7 +273,7 @@ function NewsPanel() {
             compact
             empty={
               filter === "Todo"
-                ? "Todo listo para las próximas novedades"
+                ? "Aún no hay novedades"
                 : "Sin publicaciones en esta categoría"
             }
           />
@@ -300,8 +284,7 @@ function NewsPanel() {
           <BookOpen size={15} />
         </span>
         <span>
-          ¿Primera vez por aquí?{" "}
-          <strong>Te acompañamos en tus primeros pasos.</strong>
+          <strong>Guía de bienvenida</strong>
         </span>
         <ArrowUpRight size={16} />
       </Link>
@@ -330,17 +313,12 @@ export default function Dashboard({ onWelcome }) {
     <div className="dashboard page-enter">
       <div className="welcome-row">
         <div>
-          <div className="eyebrow welcome-eyebrow">
-            <span className="tiny-sparkle">✳</span> UN NUEVO DÍA PARA HACERLO
-            JUNTOS
-          </div>
           <h1>
             {greeting}, equipo{" "}
             <span className="greeting-spark" aria-hidden="true">
               ✧
             </span>
           </h1>
-          <p>Tu gente, tus herramientas y un poquito de espíritu navideño.</p>
         </div>
         <div className="today-date">
           <CalendarDays size={16} />
@@ -354,56 +332,9 @@ export default function Dashboard({ onWelcome }) {
           </span>
         </div>
       </div>
-      <section
-        className="victoria-replay-card"
-        aria-labelledby="victoria-replay-title"
-      >
-        <button
-          className="victoria-replay-thumbnail"
-          onClick={onWelcome}
-          aria-label="Reproducir saludo navideño de VictorIA"
-        >
-          <img src="/victoria-navidad-saludo-v3.jpg" alt="" />
-          <PlayCircle size={29} />
-        </button>
-        <div>
-          <span>EL SALUDO NAVIDEÑO DEL EQUIPO</span>
-          <h2 id="victoria-replay-title">VictorIA tiene un saludo para ti</h2>
-          <p>Saluda desde su trineo y celebra con música de campanas.</p>
-        </div>
-        <button className="btn btn-forest" onClick={onWelcome}>
-          <PlayCircle size={17} /> Ver video de VictorIA
-        </button>
-      </section>
-      <section className="christmas-hero">
-        <div className="hero-copy">
-          <span className="season-pill">
-            <span /> NAVIDAD EN GEOVICTORIA
-          </span>
-          <h2>
-            La magia está en
-            <br />
-            lo que <em>hacemos juntos.</em>
-          </h2>
-          <p>
-            Cerramos el año con gratitud, nuevas historias
-            <br className="desktop-break" /> y muchas razones para celebrar en
-            equipo.
-          </p>
-          <Link to="/navidad" className="btn btn-forest">
-            Descubre nuestra Navidad <ArrowRight size={16} />
-          </Link>
-          <span className="hero-footnote">
-            <Heart size={12} /> Cada persona hace especial este lugar.
-          </span>
-        </div>
-        <ChristmasArt className="hero-art" />
-        <span className="hero-edition">EDICIÓN NAVIDEÑA / {year}</span>
-      </section>
       <section className="quick-section" aria-labelledby="quick-title">
         <div className="section-title">
-          <h2 id="quick-title">A un clic de lo que necesitas</h2>
-          <span>Menos vueltas. Más conexiones.</span>
+          <h2 id="quick-title">Accesos rápidos</h2>
         </div>
         <div className="quick-links">
           {quickLinks.map(({ to, title, text, icon: Icon, color }) => (
@@ -418,6 +349,27 @@ export default function Dashboard({ onWelcome }) {
           ))}
         </div>
       </section>
+      <section className="christmas-hero compact-season-hero">
+        <div className="hero-copy">
+          <span className="season-pill">
+            <span /> NAVIDAD EN GEOVICTORIA
+          </span>
+          <h2>
+            Una Navidad para <em>compartir.</em>
+          </h2>
+          <p>Celebra con tu equipo y prepara una sorpresa.</p>
+          <div className="season-actions">
+            <Link to="/navidad" className="btn btn-forest">
+              Explorar Navidad <ArrowRight size={16} />
+            </Link>
+            <button className="btn season-video-button" onClick={onWelcome}>
+              <PlayCircle size={18} /> Ver saludo de VictorIA
+            </button>
+          </div>
+        </div>
+        <ChristmasArt className="hero-art" />
+        <span className="hero-edition">EDICIÓN NAVIDEÑA / {year}</span>
+      </section>
       <div className="dashboard-columns">
         <div className="dashboard-primary">
           <NewsPanel />
@@ -427,12 +379,11 @@ export default function Dashboard({ onWelcome }) {
               <span>✦</span>
             </span>
             <div>
-              <span className="category-label">UN MOMENTO PARA TI</span>
-              <h3>Respira. Desconecta. Vuelve con energía.</h3>
-              <p>Una pausa pequeña puede cambiar tu día. VictorIA te espera.</p>
+              <h3>¿Una pausa?</h3>
+              <p>Recarga energías con VictorIA.</p>
             </div>
             <Link to="/juego" className="btn btn-secondary">
-              Hagamos una pausa <ArrowUpRight size={15} />
+              Jugar <ArrowUpRight size={15} />
             </Link>
           </section>
         </div>
@@ -444,7 +395,7 @@ export default function Dashboard({ onWelcome }) {
             <div className="countdown-icon">
               <Gift size={18} />
             </div>
-            <span>LA CUENTA REGRESIVA MÁS BONITA</span>
+            <span>NAVIDAD</span>
             <div className="countdown-number">
               {days === 0 ? (
                 "¡Hoy!"
@@ -455,11 +406,7 @@ export default function Dashboard({ onWelcome }) {
                 </>
               )}
             </div>
-            <p>
-              {days === 0
-                ? "¡Feliz Navidad, equipo!"
-                : "para compartir la magia de Navidad"}
-            </p>
+            <p>{days === 0 ? "¡Feliz Navidad, equipo!" : "para Navidad"}</p>
             <button
               onClick={() => downloadChristmasCalendar(year)}
               className="text-link"
@@ -496,11 +443,11 @@ export default function Dashboard({ onWelcome }) {
               <DataState
                 resource={leaderboard}
                 compact
-                empty="El próximo récord puede ser tuyo"
+                empty="Aún no hay récords"
               />
             )}
             <Link to="/juego" className="leaderboard-link">
-              Explorar la pausa activa <ArrowRight size={14} />
+              Ver juego <ArrowRight size={14} />
             </Link>
           </section>
         </aside>

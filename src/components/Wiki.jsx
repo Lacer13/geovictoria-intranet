@@ -106,9 +106,8 @@ export default function Wiki() {
   return (
     <div className="page-enter">
       <div className="page-heading">
-        <span className="eyebrow">EL CONOCIMIENTO SE COMPARTE</span>
-        <h1>Respuestas para avanzar juntos.</h1>
-        <p>Guías prácticas para tu día a día, sin dar tantas vueltas.</p>
+        <h1>Guías y recursos</h1>
+        <p>Encuentra respuestas para tu día a día.</p>
       </div>
       {articleId && (
         <div className="inline-notice">

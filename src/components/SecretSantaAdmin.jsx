@@ -85,9 +85,9 @@ function SantaWorkflow({ drawn = false }) {
   return (
     <ol className="santa-workflow" aria-label="Pasos del intercambio">
       {[
-        [Users, "Prepara el grupo", "Detalles y participantes"],
-        [Shuffle, "Guarda el sorteo", "Una pareja para cada persona"],
-        [Mail, "Entrega la sorpresa", "Correo y recuperación"],
+        [Users, "Grupo", "Detalles y participantes"],
+        [Shuffle, "Sorteo", "Una pareja para cada persona"],
+        [Mail, "Envío", "Correo y recuperación"],
       ].map(([Icon, title, caption], index) => (
         <li
           key={title}
@@ -212,14 +212,9 @@ export default function SecretSantaAdmin() {
     <section className="santa-admin">
       <div className="santa-admin-heading">
         <div>
-          <span className="santa-organizer-label">
-            <Sparkles size={13} /> TALLER DE NAVIDAD · ORGANIZACIÓN
-          </span>
           <h2>Amigo secreto de Navidad</h2>
-          <p>Un pequeño regalo. Una gran manera de conectar.</p>
           <span className="santa-hero-caption">
-            <LockKeyhole size={13} /> Tú organizas. Cada persona descubre su
-            sorpresa en privado.
+            <LockKeyhole size={13} /> Asignaciones privadas y recuperables.
           </span>
         </div>
         <div className="santa-admin-art" aria-hidden="true">
@@ -230,7 +225,7 @@ export default function SecretSantaAdmin() {
       </div>
       <div className="santa-module-toolbar">
         <div>
-          <strong>Tu mesa de organización</strong>
+          <strong>Sorteos</strong>
           <span>
             {events.length}{" "}
             {events.length === 1 ? "sorteo guardado" : "sorteos guardados"}
@@ -259,15 +254,18 @@ export default function SecretSantaAdmin() {
               ? "Prueba local: los envíos se simulan"
               : validMailSettings(settings)
                 ? "Identificadores de EmailJS guardados"
-                : "Conecta tu cuenta para enviar correos automáticamente"}
+                : "Correo pendiente de configurar"}
           </strong>
-          <p>
-            {isLocalDemo
-              ? "No se enviará ningún correo real desde este entorno."
-              : validMailSettings(settings)
-                ? "El proveedor confirmará cada envío. Aceptado no significa entregado en la bandeja del destinatario."
-                : "Puedes utilizar Gmail u Outlook mediante EmailJS, sin dominio propio. El sorteo y sus enlaces se guardan aunque el correo esté pendiente."}
-          </p>
+          <details className="inline-details">
+            <summary>Detalles del envío</summary>
+            <p>
+              {isLocalDemo
+                ? "No se enviará ningún correo real desde este entorno."
+                : validMailSettings(settings)
+                  ? "El proveedor confirmará cada envío. Aceptado no significa entregado en la bandeja del destinatario."
+                  : "Puedes utilizar Gmail u Outlook mediante EmailJS, sin dominio propio. El sorteo y sus enlaces se guardan aunque el correo esté pendiente."}
+            </p>
+          </details>
         </div>
         {!validMailSettings(settings) && (
           <button className="text-link" onClick={() => setMailOpen(true)}>
@@ -565,13 +563,8 @@ function SantaDraft({ event, onSaved, onReload, onDirtyChange }) {
         </span>
         <div>
           <h3 ref={stepHeading} tabIndex={-1}>
-            {step === 1 ? "Dale forma al intercambio" : "Reunamos al equipo"}
+            {step === 1 ? "Detalles del intercambio" : "Participantes"}
           </h3>
-          <p>
-            {step === 1
-              ? "Los detalles que harán especial este regalo."
-              : "Cada nombre suma una sorpresa. Revisa también los correos."}
-          </p>
         </div>
         <span className="department-pill">Borrador</span>
       </div>

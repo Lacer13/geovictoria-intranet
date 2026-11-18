@@ -35,7 +35,7 @@ export default function QRCodeSection() {
         <span className="quick-icon blue">
           <Share2 size={22} />
         </span>
-        <h2>Nuestro espacio, más cerca.</h2>
+        <h2>Lleva la intranet contigo</h2>
         <p>Escanea el QR para abrir esta intranet en tu teléfono.</p>
         <div className="qr-actions">
           <button onClick={download} className="btn btn-secondary">
@@ -45,7 +45,6 @@ export default function QRCodeSection() {
             <Copy size={15} /> Copiar enlace
           </button>
         </div>
-        <small>El QR apunta a la dirección actual de esta intranet.</small>
       </div>
       <div ref={ref} className="qr-code">
         <QRCodeSVG

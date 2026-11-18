@@ -11,7 +11,6 @@ import {
   PlayCircle,
   MessageSquare,
   Settings,
-  Sparkles,
   Shuffle,
   Users,
   X,
@@ -85,7 +84,6 @@ export default function Sidebar({ open, onClose, onWelcome }) {
           >
             <X size={20} />
           </button>
-          <span>EL ESPACIO DE NUESTRO EQUIPO</span>
         </div>
         <div className="workspace-label">
           <span className="peru-flag" aria-hidden="true" />
@@ -108,9 +106,7 @@ export default function Sidebar({ open, onClose, onWelcome }) {
               <ChevronRight className="nav-chevron" size={14} />
             </NavLink>
           ))}
-          <p className="nav-caption nav-caption-space">
-            CONECTAMOS TAMBIÉN AQUÍ
-          </p>
+          <p className="nav-caption nav-caption-space">NAVIDAD Y COMUNIDAD</p>
           <button
             type="button"
             className="nav-item victoria-video-nav"
@@ -147,17 +143,6 @@ export default function Sidebar({ open, onClose, onWelcome }) {
           </NavLink>
         </nav>
         <div className="sidebar-bottom">
-          <div className="sidebar-note">
-            <Sparkles size={18} />
-            <p>
-              Lo mejor de este año
-              <br />
-              <strong>lo construimos juntos.</strong>
-            </p>
-            <span className="little-star" aria-hidden="true">
-              ✧
-            </span>
-          </div>
           <NavLink to="/admin" className="nav-item admin-link">
             <Settings size={18} />
             <span>Administración</span>
@@ -166,7 +151,6 @@ export default function Sidebar({ open, onClose, onWelcome }) {
             <span className="avatar">GV</span>
             <div>
               <strong>Hola, equipo</strong>
-              <span>Un mismo propósito.</span>
             </div>
             <span className="online-dot" title="Tu espacio de trabajo" />
           </div>

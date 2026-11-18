@@ -47,8 +47,7 @@ export default function HelpDirectory() {
   return (
     <div className="page-enter">
       <div className="page-heading">
-        <span className="eyebrow">LAS PERSONAS CORRECTAS, MÁS CERCA</span>
-        <h1>Siempre hay alguien para ayudarte.</h1>
+        <h1>Directorio de ayuda</h1>
         <p>Encuentra a tu equipo por nombre, correo o área.</p>
       </div>
       <section className="panel directory-toolbar">
@@ -140,7 +139,6 @@ export default function HelpDirectory() {
               </span>
             </div>
             <h2>{c.name || "Contacto de equipo"}</h2>
-            <p>{c.department}</p>
             <span className="contact-email">
               {c.email || "Correo pendiente de publicación"}
             </span>
@@ -150,7 +148,7 @@ export default function HelpDirectory() {
                   className="btn btn-secondary"
                   href={`mailto:${encodeURIComponent(c.email)}`}
                 >
-                  <Mail size={15} /> Escribir un correo <ArrowUpRightIcon />
+                  <Mail size={15} /> Escribir <ArrowUpRightIcon />
                 </a>
                 <button
                   className="icon-button"
@@ -167,11 +165,7 @@ export default function HelpDirectory() {
       <div className="help-banner">
         <LifeBuoy size={22} />
         <div>
-          <strong>¿Tu consulta necesita otro espacio?</strong>
-          <p>
-            Comparte una solicitud o reporte a través de nuestro canal de
-            escucha.
-          </p>
+          <strong>¿Necesitas apoyo?</strong>
         </div>
         <Link to="/solicitudes" className="text-link">
           Te escuchamos <ArrowRight size={15} />

@@ -19,17 +19,17 @@ const ideas = [
   {
     id: "gracias",
     title: "Regala un gracias",
-    text: "Piensa en alguien que hizo tu año más fácil. Un mensaje pequeño puede significar mucho.",
+    text: "Agradece a alguien que te ayudó este año.",
   },
   {
     id: "conecta",
-    title: "Haz espacio para conectar",
-    text: "Comparte un café o una conversación con alguien con quien no sueles coincidir.",
+    title: "Comparte un café",
+    text: "Conversa con alguien de otra área.",
   },
   {
     id: "comparte",
-    title: "Comparte algo que aprendiste",
-    text: "Una recomendación o una buena idea puede ser el mejor regalo para otra persona.",
+    title: "Regala una idea",
+    text: "Comparte un recurso que te haya servido.",
   },
 ];
 function loadIdeas() {
@@ -45,7 +45,7 @@ export default function Christmas() {
   const [done, setDone] = useState(loadIdeas);
   const [name, setName] = useState("");
   const [message, setMessage] = useState(
-    "Gracias por tu apoyo, tu energía y por hacer de este equipo un lugar especial. ¡Que tengas una Navidad llena de buenos momentos!",
+    "Gracias por ser parte de mi año. ¡Que tengas una Navidad llena de alegría!",
   );
   const toggle = (id) => {
     const next = done.includes(id)
@@ -70,27 +70,14 @@ export default function Christmas() {
     <div className="page-enter">
       <div className="page-heading">
         <span className="eyebrow">ESPECIAL NAVIDEÑO · {year}</span>
-        <h1>La mejor parte del año es compartirlo.</h1>
-        <p>
-          Un espacio para agradecer a las personas que hacen especial nuestro
-          día a día.
-        </p>
+        <h1>Navidad en equipo</h1>
       </div>
-      <section className="christmas-hero christmas-page-hero">
+      <section className="christmas-hero christmas-page-hero compact-season-hero">
         <div className="hero-copy">
-          <span className="season-pill">
-            <span /> NAVIDAD EN EQUIPO
-          </span>
           <h2>
-            Más que un equipo,
-            <br />
-            <em>muchas historias juntas.</em>
+            Compartamos <em>la magia.</em>
           </h2>
-          <p>
-            El mejor regalo es todo lo que construimos
-            <br className="desktop-break" /> cuando conectamos, nos cuidamos y
-            compartimos.
-          </p>
+          <p>Un saludo, un café o un regalo para alguien del equipo.</p>
           <div className="christmas-hero-count">
             <Gift size={20} />
             <span>
@@ -106,143 +93,138 @@ export default function Christmas() {
               )}
             </span>
           </div>
-          <button
-            className="text-link"
-            onClick={() => downloadChristmasCalendar(year)}
-          >
-            <ArrowDownToLine size={14} /> Añadir el 25 de diciembre a mi
-            calendario
-          </button>
-        </div>
-        <ChristmasArt className="hero-art" />
-        <span className="hero-edition">CON GRATITUD, GEOVICTORIA</span>
-      </section>
-      <div className="section-title christmas-section-title">
-        <div>
-          <span className="eyebrow">LA MAGIA EMPIEZA EN LO PEQUEÑO</span>
-          <h2>Tres formas de regalar un buen momento</h2>
-        </div>
-        <span>Ideas para ti · {done.length}/3 completadas</span>
-      </div>
-      <div className="christmas-ideas">
-        {ideas.map((idea, i) => (
-          <article
-            key={idea.id}
-            className={`panel idea-card ${done.includes(idea.id) ? "completed" : ""}`}
-          >
-            <div className="idea-top">
-              <span>0{i + 1}</span>
-              <Sparkles size={23} />
-            </div>
-            <h3>{idea.title}</h3>
-            <p>{idea.text}</p>
+          <div className="season-actions">
+            <Link to="/amigo-secreto" className="btn btn-forest">
+              <Gift size={16} /> Amigo secreto
+            </Link>
             <button
               className="text-link"
-              onClick={() => toggle(idea.id)}
-              aria-pressed={done.includes(idea.id)}
+              onClick={() => downloadChristmasCalendar(year)}
             >
-              {done.includes(idea.id) ? (
-                <>
-                  <Check size={16} /> Un buen momento compartido
-                </>
-              ) : (
-                <>
-                  Me sumo a esta idea <ArrowRight size={15} />
-                </>
-              )}
+              <ArrowDownToLine size={14} /> Guardar fecha
             </button>
-          </article>
-        ))}
-      </div>
-      <p className="local-save-caption">
-        Tus ideas completadas se guardan en este navegador. Son propuestas
-        personales; no son actividades programadas por la empresa.
-      </p>
-      <section className="panel greeting-builder">
-        <div>
-          <span className="quick-icon coral">
-            <Heart size={23} />
-          </span>
-          <span className="eyebrow">PALABRAS QUE ACERCAN</span>
-          <h2>Un gracias también es un regalo.</h2>
-          <p>
-            Prepara un saludo, dale tu toque y compártelo con esa persona que
-            hizo la diferencia.
-          </p>
-          <div className="input-group">
-            <label htmlFor="greeting-name">
-              ¿A quién va dirigido? <span className="muted">(opcional)</span>
-            </label>
-            <input
-              id="greeting-name"
-              className="input-field"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              maxLength={80}
-              placeholder="El nombre de alguien especial en tu equipo"
-            />
           </div>
-          <div className="input-group">
-            <label htmlFor="greeting-text">Tu mensaje</label>
-            <textarea
-              id="greeting-text"
-              className="input-field"
-              rows={4}
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              maxLength={1000}
-            />
-          </div>
-          <button
-            className="btn btn-forest"
-            disabled={!message.trim()}
-            onClick={copy}
-          >
-            <Copy size={16} /> Copiar mi saludo
-          </button>
-          <small className="greeting-privacy">
-            Tu saludo se prepara aquí y lo compartes tú.
-          </small>
         </div>
-        <div className="greeting-preview">
-          <span className="greeting-preview-star">✧</span>
-          <span className="eyebrow">UN DETALLE PARA TI</span>
-          <h3>{name.trim() ? `Para ${name.trim()}` : "Querido equipo,"}</h3>
-          <p>{message || "Tu mensaje aparecerá aquí…"}</p>
-          <span className="greeting-signature">
-            Con cariño,
-            <br />
-            <strong>tu equipo GeoVictoria</strong>
-          </span>
-          <span className="greeting-preview-sprig" aria-hidden="true">
-            ✳
-          </span>
-        </div>
+        <ChristmasArt className="hero-art" />
       </section>
-      <div className="help-banner">
-        <Gift size={25} />
-        <div>
-          <strong>Un nombre, un regalo y mucha ilusión.</strong>
-          <p>
-            Organiza el amigo secreto del equipo o descubre cómo consultar tu
-            invitación.
+      <details
+        className="disclosure panel seasonal-disclosure"
+        id="greeting-creator"
+      >
+        <summary>
+          <Heart size={21} />
+          <span>
+            Crear un saludo<small>Personaliza y copia tu mensaje</small>
+          </span>
+        </summary>
+        <section className="greeting-builder">
+          <div>
+            <div className="input-group">
+              <label htmlFor="greeting-name">
+                ¿A quién va dirigido? <span className="muted">(opcional)</span>
+              </label>
+              <input
+                id="greeting-name"
+                className="input-field"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                maxLength={80}
+                placeholder="Nombre de la persona"
+              />
+            </div>
+            <div className="input-group">
+              <label htmlFor="greeting-text">Tu mensaje</label>
+              <textarea
+                id="greeting-text"
+                className="input-field"
+                rows={4}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                maxLength={1000}
+              />
+            </div>
+            <button
+              className="btn btn-forest"
+              disabled={!message.trim()}
+              onClick={copy}
+            >
+              <Copy size={16} /> Copiar saludo
+            </button>
+            <small className="greeting-privacy">
+              Se copia al portapapeles; tú eliges dónde compartirlo.
+            </small>
+          </div>
+          <div className="greeting-preview">
+            <span className="greeting-preview-star">✧</span>
+            <span className="eyebrow">UN DETALLE PARA TI</span>
+            <h3>{name.trim() ? `Para ${name.trim()}` : "Querido equipo,"}</h3>
+            <p>{message || "Tu mensaje aparecerá aquí…"}</p>
+            <span className="greeting-signature">
+              Con cariño,
+              <br />
+              <strong>tu equipo GeoVictoria</strong>
+            </span>
+            <span className="greeting-preview-sprig" aria-hidden="true">
+              ✳
+            </span>
+          </div>
+        </section>
+      </details>
+      <details className="disclosure panel seasonal-disclosure">
+        <summary>
+          <Sparkles size={21} />
+          <span>
+            Ideas para celebrar<small>{done.length}/3 completadas</small>
+          </span>
+        </summary>
+        <div className="disclosure-body">
+          <div className="christmas-ideas">
+            {ideas.map((idea, i) => (
+              <article
+                key={idea.id}
+                className={`panel idea-card ${done.includes(idea.id) ? "completed" : ""}`}
+              >
+                <div className="idea-top">
+                  <span>0{i + 1}</span>
+                  <Sparkles size={23} />
+                </div>
+                <h3>{idea.title}</h3>
+                <p>{idea.text}</p>
+                <button
+                  className="text-link"
+                  onClick={() => toggle(idea.id)}
+                  aria-pressed={done.includes(idea.id)}
+                >
+                  {done.includes(idea.id) ? (
+                    <>
+                      <Check size={16} /> Completado
+                    </>
+                  ) : (
+                    <>
+                      Marcar como hecho <ArrowRight size={15} />
+                    </>
+                  )}
+                </button>
+              </article>
+            ))}
+          </div>
+          <p className="local-save-caption">
+            Ideas personales. Tu avance se guarda en este navegador.
           </p>
         </div>
-        <Link to="/amigo-secreto" className="text-link">
-          Nuestro amigo secreto <ArrowRight size={15} />
-        </Link>
-      </div>
-      <QRCodeSection />
-      <div className="help-banner">
-        <Sparkles size={22} />
-        <div>
-          <strong>¿Tienes una idea para celebrar en equipo?</strong>
-          <p>Nos encantará conocer tu propuesta.</p>
-        </div>
-        <Link to="/solicitudes" className="text-link">
-          Compartir mi idea <ArrowRight size={15} />
-        </Link>
-      </div>
+      </details>
+      <details className="disclosure panel seasonal-disclosure">
+        <summary>
+          <ArrowRight size={21} />
+          <span>
+            Abrir en mi celular<small>Escanea o comparte el QR</small>
+          </span>
+        </summary>
+        <QRCodeSection />
+      </details>
+      <Link to="/solicitudes" className="text-link seasonal-suggestion">
+        Proponer una actividad <ArrowRight size={15} />
+      </Link>
     </div>
   );
 }

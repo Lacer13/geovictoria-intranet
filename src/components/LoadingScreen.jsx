@@ -98,10 +98,7 @@ export default function LoadingScreen({ onComplete, motionAllowed = true }) {
             <br />
             La magia ya llegó.
           </h2>
-          <p>
-            VictorIA te saluda desde su trineo. Dale play y escucha la magia de
-            las campanas.
-          </p>
+          <p>Un saludo de VictorIA, con música navideña.</p>
           <div className="victoria-welcome-actions">
             {!failed && (
               <button
@@ -172,21 +169,21 @@ export default function LoadingScreen({ onComplete, motionAllowed = true }) {
         <Gift size={16} />
         <span>
           {failed
-            ? "El video no está disponible. Puedes entrar a tu intranet."
+            ? "Video no disponible. Puedes continuar."
             : ended
-              ? "¡Feliz Navidad! Puedes repetir el saludo o entrar a la intranet."
+              ? "¡Feliz Navidad, equipo!"
               : muted
-                ? "Se abre sin sonido. Pulsa «Ver con música» para escucharlo completo."
+                ? "Activa la música para escuchar el saludo."
                 : paused
-                  ? "Una pausa para recibirte. Reproduce el saludo cuando quieras."
-                  : "Conectados, hacemos esta Navidad más especial."}
+                  ? "Video en pausa."
+                  : "Disfruta el saludo."}
         </span>
         {!failed && (
           <button className="victoria-repeat" onClick={() => replay()}>
             <RotateCcw size={14} /> Volver a ver el saludo
           </button>
         )}
-        <small>Siempre disponible en el menú: Video de VictorIA.</small>
+        <small>Reábrelo desde el menú: Video de VictorIA.</small>
       </div>
     </Modal>
   );
