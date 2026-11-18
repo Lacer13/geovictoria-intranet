@@ -6782,8 +6782,13 @@ select.input-field {
 .santa-workflow li.current {
   box-shadow: inset 0 -3px var(--festive-red);
 }
+.modal-backdrop:has(> .victoria-welcome-modal) {
+  align-items: safe center;
+  padding: 20px;
+}
 .victoria-welcome-modal {
-  width: min(1080px, 100%);
+  width: min(1080px, 100%, calc((100dvh - 180px) * 16 / 9));
+  flex-shrink: 0;
   padding: 0;
   overflow: hidden;
   border: 1px solid #d2b36880;
@@ -7393,6 +7398,12 @@ select.input-field {
   .victoria-welcome-stage {
     min-height: 550px;
     height: min(77dvh, 570px);
+  }
+  .modal-backdrop:has(> .victoria-welcome-modal) {
+    padding: 12px;
+  }
+  .victoria-welcome-modal {
+    width: 100%;
   }
   .victoria-welcome-stage > video {
     height: auto;
