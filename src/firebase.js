@@ -25,6 +25,11 @@ const app = initializeApp(
     : firebaseConfig,
 );
 const db = getFirestore(app);
-if (isLocalDemo) connectFirestoreEmulator(db, "127.0.0.1", 8188);
+if (isLocalDemo)
+  connectFirestoreEmulator(
+    db,
+    "127.0.0.1",
+    Number(import.meta.env.VITE_FIRESTORE_EMULATOR_PORT || 8188),
+  );
 
 export { app, db, isLocalDemo };

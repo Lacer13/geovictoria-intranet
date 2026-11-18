@@ -7,6 +7,7 @@ import {
   Users,
   ShieldCheck,
   Gift,
+  Trophy,
 } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import {
@@ -24,6 +25,7 @@ import AdminLogin from "./AdminLogin";
 import AdminManagers from "./AdminManagers";
 import SecretSantaAdmin from "./SecretSantaAdmin";
 import ContentManager from "./ContentManager";
+import QuizAdmin from "./QuizAdmin";
 
 const Admin = () => {
   const [params] = useSearchParams();
@@ -35,7 +37,11 @@ const Admin = () => {
   const [dataError, setDataError] = useState("");
   const [dataLoading, setDataLoading] = useState(false);
   const [activeTab, setActiveTab] = useState(() =>
-    params.get("seccion") === "amigo-secreto" ? "santa" : "feedbacks",
+    params.get("seccion") === "concurso"
+      ? "quiz"
+      : params.get("seccion") === "amigo-secreto"
+        ? "santa"
+        : "feedbacks",
   );
 
   // Data states
@@ -433,6 +439,7 @@ const Admin = () => {
           <option value="directory">Directorio de soporte</option>
           <option value="admins">Administradores</option>
           <option value="santa">Amigo secreto</option>
+          <option value="quiz">Concurso en vivo</option>
         </select>
       </label>
       <div className="admin-tabs" aria-label="Secciones de administración">
@@ -471,10 +478,18 @@ const Admin = () => {
         >
           <Gift size={18} /> Amigo secreto
         </button>
+        <button
+          className={`btn ${activeTab === "quiz" ? "btn-forest" : "btn-secondary"}`}
+          onClick={() => setActiveTab("quiz")}
+          aria-pressed={activeTab === "quiz"}
+        >
+          <Trophy size={18} /> Concurso en vivo
+        </button>
       </div>
 
       {activeTab === "admins" && <AdminManagers />}
       {activeTab === "santa" && <SecretSantaAdmin />}
+      {activeTab === "quiz" && <QuizAdmin />}
 
       {/* Tab Content: Feedbacks */}
       {activeTab === "feedbacks" && (

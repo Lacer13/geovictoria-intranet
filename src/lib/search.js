@@ -25,6 +25,11 @@ export const portalPages = [
   },
   { title: "Pausa activa", detail: "Un respiro con VictorIA", path: "/juego" },
   {
+    title: "Concurso en vivo",
+    detail: "Exposiciones, preguntas, QR, competencia y bonus navideño",
+    path: "/concurso",
+  },
+  {
     title: "Novedades",
     detail: "Comunicados, logros y celebraciones",
     path: "/novedades",

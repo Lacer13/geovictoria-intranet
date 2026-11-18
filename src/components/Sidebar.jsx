@@ -12,6 +12,7 @@ import {
   MessageSquare,
   Settings,
   Shuffle,
+  Trophy,
   Users,
   X,
 } from "lucide-react";
@@ -134,6 +135,16 @@ export default function Sidebar({ open, onClose, onWelcome }) {
           >
             <Shuffle size={19} strokeWidth={1.7} />
             <span>Amigo secreto</span>
+            <span className="new-badge">Nuevo</span>
+          </NavLink>
+          <NavLink
+            to="/concurso"
+            className={({ isActive }) =>
+              `nav-item christmas-nav ${isActive ? "active" : ""}`
+            }
+          >
+            <Trophy size={19} strokeWidth={1.7} />
+            <span>Concurso en vivo</span>
             <span className="new-badge">Nuevo</span>
           </NavLink>
           <NavLink to="/juego" className="nav-item">

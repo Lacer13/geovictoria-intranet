@@ -129,6 +129,135 @@ service cloud.firestore {
       allow create: if isAdmin() && cardMatchesDraw();
       allow update, delete: if false;
     }
+    // Live quiz: private authoring, public stage, capability-protected answers.
+    function quizCode(code) { return code.matches('^[A-HJ-NP-Z2-9]{8}$'); }
+    function quizOptions(options) {
+      return options is list && options.size() == 4
+        && options[0] is string && options[0].size() <= 150
+        && options[1] is string && options[1].size() <= 150
+        && options[2] is string && options[2].size() <= 150
+        && options[3] is string && options[3].size() <= 150;
+    }
+    function quizQuestion(q) {
+      return q is map && q.keys().hasOnly(['prompt', 'options', 'correctIndex', 'seconds'])
+        && q.prompt is string && q.prompt.size() <= 500
+        && q.options is list && q.options.size() == 4
+        && q.correctIndex is int && q.correctIndex >= -1 && q.correctIndex <= 3
+        && q.seconds is int && q.seconds >= 10 && q.seconds <= 90;
+    }
+    match /quizEvents/{code} {
+      function validEvent(d) {
+        return quizCode(code) && d.keys().hasOnly(['title', 'questions', 'status', 'revision', 'createdBy', 'createdAt', 'updatedAt'])
+          && text(d.title, 100) && d.questions is list && d.questions.size() == 8
+          && quizQuestion(d.questions[0]) && quizQuestion(d.questions[1])
+          && quizQuestion(d.questions[2]) && quizQuestion(d.questions[3])
+          && quizQuestion(d.questions[4]) && quizQuestion(d.questions[5])
+          && quizQuestion(d.questions[6]) && quizQuestion(d.questions[7])
+          && d.status in ['draft', 'live', 'finished', 'archived']
+          && d.revision is int && d.updatedAt == request.time;
+      }
+      allow read: if isAdmin();
+      allow create: if isAdmin() && validEvent(request.resource.data)
+        && request.resource.data.status == 'draft' && request.resource.data.revision == 0
+        && request.resource.data.createdBy == request.auth.uid && request.resource.data.createdAt == request.time;
+      allow update: if isAdmin() && validEvent(request.resource.data)
+        && request.resource.data.createdBy == resource.data.createdBy
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.revision == resource.data.revision + 1
+        && ((resource.data.status == 'draft' && request.resource.data.status == 'draft')
+          || (request.resource.data.questions == resource.data.questions && request.resource.data.title == resource.data.title
+            && ((resource.data.status == 'draft' && request.resource.data.status == 'live')
+              || (resource.data.status == 'live' && request.resource.data.status == 'finished')
+              || (resource.data.status != 'archived' && request.resource.data.status == 'archived'))));
+      allow delete: if false;
+    }
+    match /quizRooms/{code} {
+      function room() { return get(/databases/$(database)/documents/quizRooms/$(code)).data; }
+      function active() { return quizCode(code) && room().status != 'archived'; }
+      function lobby() { return quizCode(code) && room().status == 'lobby'; }
+      function validRoom(d) {
+        return quizCode(code) && d.keys().hasOnly(['title', 'status', 'questionIndex', 'question', 'startedAt', 'correctIndex', 'answerCounts', 'leaderboard', 'createdBy', 'createdAt', 'updatedAt'])
+          && text(d.title, 100) && d.status in ['lobby', 'question', 'closing', 'reveal', 'ranking', 'finished', 'archived']
+          && d.questionIndex is int && d.questionIndex >= -1 && d.questionIndex <= 7
+          && d.leaderboard is list && d.leaderboard.size() <= 200
+          && d.answerCounts is list && d.answerCounts.size() == 4
+          && d.updatedAt == request.time
+          && (d.question == null || (d.question is map && d.question.keys().hasOnly(['prompt', 'options', 'seconds', 'bonus'])
+            && text(d.question.prompt, 500) && quizOptions(d.question.options)
+            && d.question.seconds is int && d.question.seconds >= 10 && d.question.seconds <= 90 && d.question.bonus is bool))
+          && ((d.status in ['lobby', 'question', 'closing', 'archived'] && d.correctIndex == null)
+            || (d.status in ['reveal', 'ranking', 'finished'] && d.correctIndex is int && d.correctIndex >= 0 && d.correctIndex <= 3));
+      }
+      allow get: if quizCode(code);
+      allow list: if isAdmin();
+      allow create: if isAdmin() && validRoom(request.resource.data)
+        && getAfter(/databases/$(database)/documents/quizEvents/$(code)).data.status == 'live'
+        && request.resource.data.status == 'lobby' && request.resource.data.questionIndex == -1
+        && request.resource.data.question == null && request.resource.data.startedAt == null
+        && request.resource.data.leaderboard.size() == 0 && request.resource.data.createdAt == request.time;
+      allow update: if isAdmin() && validRoom(request.resource.data)
+        && request.resource.data.createdAt == resource.data.createdAt && request.resource.data.createdBy == resource.data.createdBy;
+      allow delete: if false;
+      match /players/{playerId} {
+        allow read: if isAdmin() || active();
+        allow create: if lobby() && playerId.matches('^[a-f0-9]{32}$')
+          && request.resource.data.keys().hasOnly(['name', 'joinedAt'])
+          && text(request.resource.data.name, 32) && request.resource.data.name.size() >= 2
+          && request.resource.data.name.matches('^[^/\n\r]+$') && request.resource.data.joinedAt == request.time
+          && getAfter(/databases/$(database)/documents/quizRooms/$(code)/credentials/$(playerId)).data.createdAt == request.time
+          && getAfter(/databases/$(database)/documents/quizRooms/$(code)/names/$(request.resource.data.name.lower())).data.playerId == playerId
+          && getAfter(/databases/$(database)/documents/quizRooms/$(code)/stats/registration).data.lastPlayerId == playerId
+          && getAfter(/databases/$(database)/documents/quizRooms/$(code)/stats/registration).data.count == get(/databases/$(database)/documents/quizRooms/$(code)/stats/registration).data.count + 1;
+        allow update, delete: if false;
+      }
+      match /credentials/{playerId} {
+        allow read: if isAdmin();
+        allow create: if lobby() && playerId.matches('^[a-f0-9]{32}$')
+          && request.resource.data.keys().hasOnly(['token', 'createdAt'])
+          && request.resource.data.token.matches('^[a-f0-9]{64}$') && request.resource.data.createdAt == request.time
+          && getAfter(/databases/$(database)/documents/quizRooms/$(code)/players/$(playerId)).data.joinedAt == request.time;
+        allow update, delete: if false;
+      }
+      match /names/{nameKey} {
+        allow get: if isAdmin() || active();
+        allow list: if isAdmin();
+        allow create: if lobby() && request.resource.data.keys().hasOnly(['playerId', 'createdAt'])
+          && request.resource.data.createdAt == request.time
+          && nameKey == getAfter(/databases/$(database)/documents/quizRooms/$(code)/players/$(request.resource.data.playerId)).data.name.lower()
+          && getAfter(/databases/$(database)/documents/quizRooms/$(code)/players/$(request.resource.data.playerId)).data.joinedAt == request.time;
+        allow update, delete: if false;
+      }
+      match /stats/registration {
+        allow read: if isAdmin() || active();
+        allow create: if isAdmin() && request.resource.data.keys().hasOnly(['count', 'lastPlayerId', 'updatedAt'])
+          && request.resource.data.count == 0 && request.resource.data.lastPlayerId == '' && request.resource.data.updatedAt == request.time;
+        allow update: if lobby() && request.resource.data.keys().hasOnly(['count', 'lastPlayerId', 'updatedAt'])
+          && request.resource.data.count is int && request.resource.data.count == resource.data.count + 1
+          && request.resource.data.count <= 200 && request.resource.data.updatedAt == request.time
+          && getAfter(/databases/$(database)/documents/quizRooms/$(code)/players/$(request.resource.data.lastPlayerId)).data.joinedAt == request.time;
+        allow delete: if false;
+      }
+      match /rounds/{index} {
+        allow read, create, update: if isAdmin();
+        allow delete: if false;
+        match /answers/{token} {
+          // A 256-bit capability stays only in its owner's browser, never in a QR or player list.
+          allow get: if isAdmin() || (active() && token.matches('^[a-f0-9]{64}$'));
+          allow list: if isAdmin();
+          allow create: if quizCode(code) && token.matches('^[a-f0-9]{64}$')
+            && request.resource.data.keys().hasOnly(['playerId', 'selectedIndex', 'submittedAt'])
+            && request.resource.data.playerId.matches('^[a-f0-9]{32}$')
+            && get(/databases/$(database)/documents/quizRooms/$(code)/credentials/$(request.resource.data.playerId)).data.token == token
+            && request.resource.data.selectedIndex is int && request.resource.data.selectedIndex >= 0 && request.resource.data.selectedIndex <= 3
+            && request.resource.data.submittedAt == request.time
+            && room().status == 'question' && string(room().questionIndex) == index
+            && get(/databases/$(database)/documents/quizRooms/$(code)/rounds/$(index)).data.closedAt == null
+            && request.time >= get(/databases/$(database)/documents/quizRooms/$(code)/rounds/$(index)).data.startedAt
+            && request.time < get(/databases/$(database)/documents/quizRooms/$(code)/rounds/$(index)).data.startedAt + duration.value(get(/databases/$(database)/documents/quizRooms/$(code)/rounds/$(index)).data.seconds, 's');
+          allow update, delete: if false;
+        }
+      }
+    }
     match /administrators/{email} {
       allow read: if isAdmin() || (
         request.auth != null &&

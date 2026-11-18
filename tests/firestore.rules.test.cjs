@@ -30,6 +30,7 @@ before(async () => {
     projectId: "demo-geovictoria",
     firestore: { rules: readFileSync("firestore.rules", "utf8") },
   });
+  await env.clearFirestore();
 });
 after(async () => {
   await env?.cleanup();

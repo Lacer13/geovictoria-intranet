@@ -35,6 +35,13 @@ const NewsPage = lazy(() => import("./components/NewsPage"));
 const Christmas = lazy(() => import("./components/Christmas"));
 const FeedbackForm = lazy(() => import("./components/FeedbackForm"));
 const SecretSanta = lazy(() => import("./components/SecretSanta"));
+const Quiz = lazy(() => import("./components/Quiz"));
+const QuizRoom = lazy(() =>
+  import("./components/Quiz").then((m) => ({ default: m.QuizRoom })),
+);
+const QuizScreen = lazy(() =>
+  import("./components/Quiz").then((m) => ({ default: m.QuizScreen })),
+);
 const SecretSantaReveal = lazy(() =>
   import("./components/SecretSanta").then((module) => ({
     default: module.SecretSantaReveal,
@@ -92,6 +99,8 @@ function AppContent() {
     setWelcomeOpen(true);
   }, []);
   const game = location.pathname === "/juego";
+  const projection = location.pathname.startsWith("/concurso/pantalla/");
+  const immersive = game || projection;
   useEffect(() => {
     document.body.classList.toggle("light-mode", isLightMode);
     document.documentElement.style.colorScheme = isLightMode ? "light" : "dark";
@@ -103,7 +112,9 @@ function AppContent() {
     document.getElementById("main-content")?.focus({ preventScroll: true });
   }, [location.pathname]);
   return (
-    <div className={game ? "game-shell" : "app-shell"}>
+    <div
+      className={`${game ? "game-shell" : projection ? "quiz-projection-shell" : "app-shell"} ${!festive ? "quiz-motion-off" : ""}`}
+    >
       <a
         href="#main-content"
         className="skip-link"
@@ -116,12 +127,12 @@ function AppContent() {
       >
         Saltar al contenido
       </a>
-      {!game && (
+      {!immersive && (
         <Sidebar open={menuOpen} onClose={closeMenu} onWelcome={openWelcome} />
       )}
       <div className="app-body" inert={menuOpen || undefined}>
-        {!game && <ChristmasEffects enabled={festive} />}
-        {!game && (
+        {!immersive && <ChristmasEffects enabled={festive} />}
+        {!immersive && (
           <DynamicHeader
             isLightMode={isLightMode}
             toggleTheme={() => setLightMode((v) => !v)}
@@ -133,7 +144,13 @@ function AppContent() {
         )}
         <main
           id="main-content"
-          className={game ? "game-main" : "main-content"}
+          className={
+            game
+              ? "game-main"
+              : projection
+                ? "quiz-projection-main"
+                : "main-content"
+          }
           tabIndex={-1}
         >
           {isLocalDemo && (
@@ -162,6 +179,12 @@ function AppContent() {
                 <Route path="/buscar" element={<SearchPage />} />
                 <Route path="/novedades" element={<NewsPage />} />
                 <Route path="/navidad" element={<Christmas />} />
+                <Route path="/concurso" element={<Quiz />} />
+                <Route
+                  path="/concurso/pantalla/:code"
+                  element={<QuizScreen />}
+                />
+                <Route path="/concurso/:code" element={<QuizRoom />} />
                 <Route path="/amigo-secreto" element={<SecretSanta />} />
                 <Route
                   path="/amigo-secreto/ver"
@@ -190,7 +213,7 @@ function AppContent() {
             </Suspense>
           </ErrorBoundary>
         </main>
-        {!game && (
+        {!immersive && (
           <footer className="app-footer">
             <span>
               GeoVictoria <span className="footer-dot">·</span> Conectados somos

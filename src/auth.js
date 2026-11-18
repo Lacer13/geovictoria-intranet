@@ -5,4 +5,8 @@ import { app, isLocalDemo } from "./firebase";
 export const auth = getAuth(app);
 auth.languageCode = "es";
 if (isLocalDemo)
-  connectAuthEmulator(auth, "http://127.0.0.1:9099", { disableWarnings: true });
+  connectAuthEmulator(
+    auth,
+    `http://127.0.0.1:${Number(import.meta.env.VITE_AUTH_EMULATOR_PORT || 9099)}`,
+    { disableWarnings: true },
+  );

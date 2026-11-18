@@ -92,7 +92,11 @@ export default function DynamicHeader({
           <ChevronRight size={13} />
           <strong>
             {routeNames[location.pathname] ||
-              (location.pathname === "/admin" ? "Administración" : "Página")}
+              (location.pathname.startsWith("/concurso/")
+                ? "Concurso en vivo"
+                : location.pathname === "/admin"
+                  ? "Administración"
+                  : "Página")}
           </strong>
         </div>
         <div className="topbar-actions">
