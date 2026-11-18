@@ -1,32 +1,35 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Manrope:wght@400;500;600;650;700;750;800&display=swap");
 
 :root {
-  --geo-primary: #2773b8;
-  --geo-primary-light: #73b5ef;
-  --geo-primary-dark: #16508a;
+  --geo-primary: #ef97a0;
+  --geo-primary-light: #ffc0c4;
+  --geo-primary-dark: #a8263a;
   --geo-secondary: #78baa4;
   --geo-accent: #d87e72;
   --geo-success: #78baa4;
-  --bg-color: #151e1b;
-  --surface-color: #1e2925;
-  --surface-color-hover: #293630;
-  --text-main: #ecf0eb;
-  --text-muted: #a5b6ac;
-  --border-color: #35423b;
+  --bg-color: #0b201a;
+  --surface-color: #132e25;
+  --surface-color-hover: #1d3c30;
+  --text-main: #faf4e7;
+  --text-muted: #b3c6b9;
+  --border-color: #355044;
   --glass-bg: var(--surface-color);
   --glass-border: var(--border-color);
   --shadow-card: 0 3px 15px #0000000a;
-  --forest: #9dcbb7;
-  --forest-bg: #293d32;
-  --cream: #28352d;
-  --hero-bg: #293b30;
+  --forest: #a5d6b3;
+  --forest-bg: #1e4230;
+  --cream: #3a3223;
+  --hero-bg: #123e2e;
   --hero-text: #f2efe5;
-  --muted-surface: #25322b;
-  --blue-soft: #253848;
+  --muted-surface: #19362b;
+  --blue-soft: #492b32;
   --green-soft: #294237;
   --purple-soft: #38324b;
   --coral-soft: #493730;
   --gold-soft: #493e2b;
+  --festive-red: #f0a2a6;
+  --festive-gold: #e2bd6d;
+  --festive-evergreen: #123d2d;
   --font-heading: "Manrope", sans-serif;
   --font-body: "DM Sans", sans-serif;
   --transition-fast: 0.18s ease;
@@ -36,26 +39,28 @@
   --glow-secondary: 0 4px 15px #78baa422;
 }
 body.light-mode {
-  --geo-primary: #2576b7;
-  --geo-primary-light: #2576b7;
-  --geo-secondary: #3e7861;
-  --bg-color: #f7f8fa;
+  --geo-primary: #ac2439;
+  --geo-primary-light: #c53849;
+  --geo-secondary: #216141;
+  --bg-color: #fbf8f1;
   --surface-color: #fff;
-  --surface-color-hover: #f7f9f8;
-  --text-main: #252f32;
-  --text-muted: #778188;
-  --border-color: #e9ecee;
-  --forest: #305b49;
-  --forest-bg: #edf3ee;
-  --cream: #f8f4e9;
-  --hero-bg: #f3f0e6;
-  --hero-text: #2e493d;
-  --muted-surface: #f7f8f9;
-  --blue-soft: #ecf3fb;
+  --surface-color-hover: #faf6ee;
+  --text-main: #25392e;
+  --text-muted: #66776b;
+  --border-color: #e9e2d5;
+  --forest: #185536;
+  --forest-bg: #eaf3e9;
+  --cream: #fbf2df;
+  --hero-bg: #164b35;
+  --hero-text: #fff8e7;
+  --muted-surface: #f7f6f0;
+  --blue-soft: #faebed;
   --green-soft: #edf5ef;
   --purple-soft: #f2effa;
   --coral-soft: #fbefeb;
-  --gold-soft: #faf3e5;
+  --gold-soft: #fbf0d5;
+  --festive-red: #ac2439;
+  --festive-gold: #9b6e1e;
   --shadow-card: 0 3px 15px #202c3503;
 }
 * {
@@ -2242,6 +2247,9 @@ select.input-field {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
+}
+.admin-section-select {
+  display: none;
 }
 .admin-tabs {
   display: flex;
@@ -5543,5 +5551,1601 @@ select.input-field {
   }
   .santa-settings-modal .modal-actions {
     flex-wrap: wrap;
+  }
+}
+
+/* Secret Santa: a guided, readable organizer workspace. */
+.santa-admin-heading {
+  position: relative;
+  overflow: hidden;
+  padding: 28px 32px;
+  border: 1px solid color-mix(in srgb, var(--forest) 16%, transparent);
+  border-radius: 16px;
+  background: linear-gradient(115deg, var(--forest-bg), var(--cream));
+  min-height: 190px;
+  margin-bottom: 22px;
+}
+.santa-admin-heading > div:first-child {
+  position: relative;
+  z-index: 1;
+  max-width: 76%;
+}
+.santa-organizer-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--forest);
+  font-size: 9px;
+  letter-spacing: 1.4px;
+  font-weight: 650;
+}
+.santa-admin-heading h2 {
+  font-size: clamp(24px, 2.7vw, 35px);
+  letter-spacing: -1.2px;
+  line-height: 1.25;
+  margin: 12px 0 9px;
+}
+.santa-admin-heading p {
+  font-size: 14px;
+}
+.santa-hero-caption {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--text-muted);
+  margin-top: 16px;
+  font-size: 10px;
+}
+.santa-admin-heading > .santa-admin-art {
+  position: absolute;
+  display: block;
+  right: 35px;
+  bottom: 22px;
+  color: var(--forest);
+  opacity: 0.7;
+  transform: rotate(-12deg);
+}
+.santa-admin-art > span {
+  position: absolute;
+  top: -20px;
+  left: -25px;
+  font-size: 35px;
+  color: var(--festive-gold, #b39148);
+}
+.santa-admin-art > i {
+  position: absolute;
+  top: 20px;
+  right: -20px;
+  font-size: 18px;
+  color: var(--festive-red, #a8353f);
+  font-style: normal;
+}
+.santa-module-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin: 24px 0;
+}
+.santa-module-toolbar > div {
+  display: flex;
+  gap: 10px;
+}
+.santa-module-toolbar > div:first-child {
+  flex-direction: column;
+  gap: 3px;
+}
+.santa-module-toolbar strong {
+  font-size: 14px;
+  font-weight: 650;
+}
+.santa-module-toolbar span {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.santa-module-toolbar .btn {
+  font-size: 12px;
+  min-height: 42px;
+}
+.santa-workflow {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 0 24px;
+  padding: 0;
+}
+.santa-workflow li {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 15px 16px;
+  background: var(--surface-color);
+  color: var(--text-muted);
+  min-width: 0;
+  position: relative;
+}
+.santa-workflow li > span {
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
+  background: var(--muted-surface);
+  flex-shrink: 0;
+}
+.santa-workflow li.current {
+  border-color: color-mix(in srgb, var(--forest) 35%, transparent);
+  box-shadow: inset 0 -3px var(--forest);
+  color: var(--forest);
+}
+.santa-workflow li.current > span,
+.santa-workflow li.complete > span {
+  background: var(--forest-bg);
+  color: var(--forest);
+}
+.santa-workflow strong {
+  font-size: 11px;
+  display: block;
+  font-weight: 650;
+}
+.santa-workflow small {
+  font-size: 9px;
+  display: block;
+  margin-top: 3px;
+  color: var(--text-muted);
+}
+.santa-workflow b {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-size: 9px;
+  font-weight: 450;
+  opacity: 0.5;
+}
+.santa-mail-notice {
+  padding: 14px 18px;
+  border-radius: 10px;
+  margin-bottom: 22px;
+}
+.santa-admin-layout {
+  grid-template-columns: 230px minmax(0, 1fr);
+}
+.santa-event-filter {
+  display: block;
+  font-size: 10px;
+  color: var(--text-muted);
+  padding: 0 6px 12px;
+}
+.santa-event-filter select {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--border-color);
+  background: var(--surface-color);
+  color: var(--text-main);
+  border-radius: 7px;
+  margin-top: 5px;
+  padding: 8px;
+  font-size: 11px;
+}
+.santa-events-nav > button {
+  position: relative;
+  padding: 13px 12px;
+  border-color: var(--border-color);
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+.santa-events-nav > button:hover {
+  border-color: color-mix(in srgb, var(--forest) 35%, transparent);
+  background: var(--muted-surface);
+}
+.santa-events-nav small {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 8px 0;
+}
+.santa-events-nav em {
+  font-style: normal;
+  font-size: 9px;
+  border-radius: 5px;
+  padding: 3px 7px;
+  background: var(--muted-surface);
+  color: var(--text-muted);
+  display: inline-block;
+}
+.santa-events-nav .event-drawn em {
+  color: var(--forest);
+  background: var(--forest-bg);
+}
+.santa-events-nav .active em {
+  background: var(--surface-color);
+}
+.santa-first-event {
+  min-height: 430px;
+  padding: 48px 28px;
+  background: radial-gradient(
+    ellipse at 50% 0,
+    var(--cream),
+    var(--surface-color) 65%
+  );
+}
+.santa-empty-gift {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100px;
+  height: 100px;
+  background: var(--forest-bg);
+  color: var(--forest);
+  border-radius: 28px;
+  margin: 0 auto 25px;
+  transform: rotate(-7deg);
+}
+.santa-empty-gift i {
+  position: absolute;
+  color: var(--festive-gold, #b39148);
+  right: -9px;
+  top: -13px;
+  font-size: 35px;
+  font-style: normal;
+}
+.santa-first-event h3 {
+  font-size: 28px;
+  letter-spacing: -0.7px;
+  margin-top: 10px;
+}
+.santa-first-event > p {
+  max-width: 380px;
+  margin: 12px auto;
+  font-size: 13px;
+  line-height: 1.9;
+}
+.santa-empty-facts {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 22px 0 28px;
+}
+.santa-empty-facts span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+.santa-draft,
+.santa-results {
+  border-radius: 14px;
+  padding: 28px;
+}
+.santa-draft-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+  margin: -5px -28px 26px;
+  padding: 0 28px;
+  gap: 25px;
+}
+.santa-draft-tabs > button {
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: 12px 0 15px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.santa-draft-tabs > button.active {
+  border-color: var(--forest);
+  color: var(--forest);
+  font-weight: 650;
+}
+.santa-draft-tabs > button > span {
+  font-size: 9px;
+  border-radius: 5px;
+  padding: 3px 5px;
+  background: var(--muted-surface);
+}
+.santa-draft-tabs b {
+  border-radius: 20px;
+  background: var(--forest-bg);
+  padding: 1px 7px;
+  font-size: 10px;
+  font-weight: 500;
+}
+.santa-detail-tip,
+.santa-ready-note,
+.santa-draft-recap {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--muted-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 15px 17px;
+}
+.santa-detail-tip > svg,
+.santa-ready-note > svg {
+  flex-shrink: 0;
+  color: var(--forest);
+  margin-top: 3px;
+}
+.santa-detail-tip p,
+.santa-ready-note p {
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--text-muted);
+}
+.santa-draft-recap {
+  align-items: center;
+  background: var(--cream);
+}
+.santa-draft-recap > svg {
+  color: var(--forest);
+  flex-shrink: 0;
+}
+.santa-draft-recap > div {
+  flex: 1;
+  min-width: 0;
+}
+.santa-draft-recap strong {
+  font-size: 12px;
+  display: block;
+  overflow-wrap: anywhere;
+}
+.santa-draft-recap span {
+  font-size: 10px;
+  display: block;
+  margin-top: 3px;
+  color: var(--text-muted);
+}
+.santa-draft-recap .text-link {
+  font-size: 10px;
+  flex-shrink: 0;
+}
+.santa-import-button {
+  font-size: 10px;
+  padding: 8px 10px;
+  min-height: 36px;
+}
+.santa-bulk p {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin: 0 0 12px;
+  line-height: 1.8;
+}
+.santa-roster {
+  gap: 10px;
+  max-height: 620px;
+  overflow-y: auto;
+  padding: 3px;
+}
+.santa-person-input {
+  grid-template-columns: 28px minmax(0, 1fr) minmax(0, 1.2fr) 32px;
+  padding: 13px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 9px;
+  background: var(--surface-color);
+}
+.santa-person-input > span {
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  background: var(--forest-bg);
+  color: var(--forest);
+  border-radius: 7px;
+}
+.santa-person-input.has-error {
+  border-color: var(--festive-red, #b4434b);
+  background: var(--coral-soft);
+}
+.santa-row-issue {
+  grid-column: 2 / -1;
+  font-size: 10px;
+  color: var(--festive-red, #b4434b);
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  margin-top: 3px;
+}
+.santa-row-issue svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.santa-add-person {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 13px;
+  border: 1px dashed color-mix(in srgb, var(--forest) 35%, transparent);
+  border-radius: 9px;
+  background: var(--forest-bg);
+  font-size: 12px;
+  color: var(--forest);
+  transition: background 0.18s;
+}
+.santa-add-person:hover {
+  background: color-mix(in srgb, var(--forest-bg), var(--forest) 9%);
+}
+.santa-roster-help {
+  font-size: 10px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 12px 0 23px;
+}
+.santa-ready-note {
+  margin-top: 22px;
+}
+.santa-ready-note.ready {
+  background: var(--forest-bg);
+  border-color: color-mix(in srgb, var(--forest) 18%, transparent);
+}
+.santa-ready-note strong {
+  font-size: 12px;
+  color: var(--forest);
+}
+.santa-ready-note p {
+  margin-top: 4px;
+}
+.santa-draft-actions {
+  align-items: center;
+  gap: 16px;
+}
+.santa-draft-actions > div {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.santa-save-status {
+  color: var(--forest);
+  font-size: 10px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.santa-save-status.unsaved {
+  color: var(--text-muted);
+}
+.santa-event-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 9px;
+  border-radius: 20px;
+  background: var(--forest-bg);
+  color: var(--forest);
+  font-size: 10px;
+}
+.santa-event-status.archived {
+  color: var(--text-muted);
+  background: var(--muted-surface);
+}
+.santa-result-summary {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  background: transparent;
+  border: 0;
+  padding: 0;
+  gap: 10px;
+}
+.santa-result-summary > div {
+  border: 1px solid var(--border-color);
+  border-radius: 11px;
+  padding: 17px 10px;
+  text-align: left;
+  background: var(--muted-surface);
+}
+.santa-result-summary > div:nth-child(2) {
+  background: var(--forest-bg);
+}
+.santa-result-summary > div > svg {
+  color: var(--forest);
+  opacity: 0.7;
+  margin-bottom: 9px;
+}
+.santa-result-summary strong {
+  font-size: 30px;
+  line-height: 1.2;
+}
+.santa-result-summary span {
+  margin-top: 6px;
+  font-size: 10px;
+}
+.santa-delivery-progress {
+  margin: 0 0 25px;
+}
+.santa-delivery-progress > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 11px;
+  margin-bottom: 9px;
+}
+.santa-delivery-progress strong {
+  font-weight: 550;
+  color: var(--forest);
+}
+.santa-delivery-progress progress {
+  width: 100%;
+  height: 6px;
+  border: 0;
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--muted-surface);
+  accent-color: var(--forest);
+}
+.santa-delivery-progress progress::-webkit-progress-bar {
+  background: var(--muted-surface);
+  border-radius: 10px;
+}
+.santa-delivery-progress progress::-webkit-progress-value {
+  background: var(--forest);
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+.santa-delivery-progress small {
+  display: block;
+  font-size: 10px;
+  line-height: 1.8;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+.santa-delivery-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+.santa-next-action {
+  display: flex;
+  gap: 13px;
+  align-items: flex-start;
+  padding: 19px 20px;
+  background: var(--forest-bg);
+  border: 1px solid color-mix(in srgb, var(--forest) 15%, transparent);
+  border-radius: 11px 11px 0 0;
+}
+.santa-action-icon {
+  display: grid;
+  place-items: center;
+  width: 39px;
+  height: 39px;
+  flex-shrink: 0;
+  color: var(--forest);
+  background: var(--surface-color);
+  border-radius: 11px;
+}
+.santa-next-action strong {
+  display: block;
+  font-size: 13px;
+  color: var(--forest);
+}
+.santa-next-action p {
+  color: var(--text-muted);
+  font-size: 11px;
+  line-height: 1.8;
+  margin-top: 5px;
+}
+.santa-next-action.needs-review {
+  background: var(--gold-soft);
+}
+.santa-send-toolbar {
+  padding: 16px 20px;
+  border: 1px solid var(--border-color);
+  border-top: 0;
+  border-radius: 0 0 11px 11px;
+  background: var(--surface-color);
+  gap: 10px;
+}
+.santa-send-toolbar .text-link {
+  font-size: 11px;
+}
+.santa-backup-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--gold-soft);
+  border: 1px solid var(--border-color);
+  padding: 13px;
+  border-radius: 9px;
+  margin-bottom: 17px;
+}
+.santa-backup-notice > svg {
+  flex-shrink: 0;
+  color: var(--festive-gold, #a58235);
+  margin-top: 3px;
+}
+.santa-backup-notice p {
+  font-size: 11px;
+  line-height: 1.8;
+  flex: 1;
+}
+.santa-backup-notice .text-link {
+  font-size: 10px;
+  flex-shrink: 0;
+}
+.santa-delivery-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.santa-delivery-filters {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.santa-delivery-filters > button {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  padding: 7px 10px;
+  border-radius: 7px;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+.santa-delivery-filters > button.active {
+  background: var(--forest-bg);
+  border-color: color-mix(in srgb, var(--forest) 25%, transparent);
+  color: var(--forest);
+}
+.santa-delivery-filters span {
+  font-size: 9px;
+  padding: 1px 5px;
+  background: var(--muted-surface);
+  border-radius: 4px;
+}
+.santa-list-count {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 10px;
+  color: var(--text-muted);
+  padding: 16px 0 0;
+}
+.santa-list-count .text-link {
+  font-size: 10px;
+}
+.santa-delivery-list {
+  margin-top: 7px;
+}
+.santa-delivery-row {
+  padding: 17px 0;
+  gap: 11px;
+}
+.santa-person-avatar {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 11px;
+  background: var(--cream);
+  color: var(--forest);
+  font-size: 11px;
+  font-weight: 650;
+  text-transform: uppercase;
+}
+.santa-delivery-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 9px;
+}
+.santa-delivery-status > svg {
+  flex-shrink: 0;
+}
+.santa-delivery-actions > .icon-button {
+  display: flex;
+  gap: 5px;
+  width: auto;
+  min-width: 40px;
+  padding: 8px;
+  font-size: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+}
+.santa-delivery-actions > .btn {
+  min-height: 35px;
+}
+.santa-no-matches {
+  text-align: center;
+  padding: 35px 15px;
+  color: var(--text-muted);
+}
+.santa-no-matches > svg {
+  color: var(--forest);
+  margin-bottom: 12px;
+}
+.santa-no-matches strong {
+  display: block;
+  color: var(--text-main);
+  font-size: 13px;
+}
+.santa-no-matches p {
+  font-size: 11px;
+  margin: 5px 0 15px;
+}
+.santa-no-matches .text-link {
+  font-size: 11px;
+}
+@media (max-width: 1190px) {
+  .santa-admin-layout {
+    grid-template-columns: 1fr;
+  }
+  .santa-events-nav {
+    max-height: 240px;
+    padding: 13px;
+  }
+  .santa-event-filter {
+    min-width: 180px;
+    max-width: 190px;
+    padding: 4px 8px;
+    flex-shrink: 0;
+  }
+  .santa-workflow li {
+    padding: 14px 12px;
+    gap: 9px;
+  }
+  .santa-workflow small {
+    font-size: 9px;
+  }
+  .santa-events-nav > button {
+    margin: 0;
+  }
+}
+@media (max-width: 720px) {
+  .santa-admin-heading {
+    min-height: 210px;
+    padding: 24px;
+  }
+  .santa-admin-heading > div:first-child {
+    max-width: 100%;
+  }
+  .santa-admin-heading h2 {
+    font-size: 28px;
+    max-width: 240px;
+  }
+  .santa-admin-heading p {
+    font-size: 12px;
+    max-width: 220px;
+  }
+  .santa-organizer-label {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+  .santa-admin-heading > .santa-admin-art {
+    opacity: 0.13;
+    right: 18px;
+    bottom: 22px;
+  }
+  .santa-hero-caption {
+    font-size: 10px;
+    max-width: 240px;
+    align-items: flex-start;
+  }
+  .santa-hero-caption svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .santa-module-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 13px;
+  }
+  .santa-module-toolbar > div:last-child {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .santa-module-toolbar .btn {
+    font-size: 11px;
+    padding: 10px 9px;
+  }
+  .santa-workflow {
+    gap: 7px;
+  }
+  .santa-workflow li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 9px;
+    padding: 14px 10px;
+  }
+  .santa-workflow strong {
+    font-size: 10px;
+    line-height: 1.7;
+  }
+  .santa-workflow small {
+    display: none;
+  }
+  .santa-workflow li > span {
+    width: 29px;
+    height: 29px;
+    border-radius: 8px;
+  }
+  .santa-workflow li > span > svg {
+    width: 16px;
+  }
+  .santa-mail-notice {
+    margin-bottom: 18px;
+  }
+  .santa-draft,
+  .santa-results {
+    padding: 22px 17px;
+  }
+  .santa-draft-tabs {
+    margin: 0 -17px 23px;
+    padding: 0 17px;
+    gap: 20px;
+  }
+  .santa-draft-tabs > button {
+    font-size: 12px;
+    gap: 6px;
+  }
+  .santa-section-heading {
+    gap: 10px;
+  }
+  .santa-section-heading h3 {
+    font-size: 19px;
+  }
+  .santa-section-heading .department-pill {
+    margin-left: 0;
+  }
+  .santa-draft .input-field {
+    font-size: 16px;
+  }
+  .santa-draft-recap {
+    flex-wrap: wrap;
+    padding: 14px;
+    gap: 9px;
+  }
+  .santa-draft-recap .text-link {
+    margin-left: 28px;
+  }
+  .santa-draft-recap span {
+    line-height: 1.8;
+  }
+  .santa-roster-heading {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .santa-roster-heading h4 {
+    font-size: 13px;
+  }
+  .santa-person-input {
+    grid-template-columns: 25px minmax(0, 1fr) 30px;
+    padding: 13px 9px;
+  }
+  .santa-person-input > input:first-of-type {
+    grid-column: 2;
+  }
+  .santa-person-input > input:last-of-type {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .santa-person-input > .icon-button {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+  }
+  .santa-row-issue {
+    grid-column: 2 / -1;
+    font-size: 11px;
+  }
+  .santa-draft-actions {
+    align-items: stretch;
+  }
+  .santa-draft-actions > div {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .santa-save-status {
+    font-size: 11px;
+  }
+  .santa-draft-actions .btn {
+    width: 100%;
+    min-height: 44px;
+  }
+  .santa-detail-tip p,
+  .santa-ready-note p {
+    font-size: 12px;
+  }
+  .santa-result-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .santa-result-summary > div {
+    padding: 17px;
+  }
+  .santa-result-summary strong {
+    font-size: 28px;
+  }
+  .santa-result-summary span {
+    font-size: 11px;
+  }
+  .santa-delivery-progress > div {
+    font-size: 11px;
+  }
+  .santa-delivery-progress small {
+    font-size: 11px;
+  }
+  .santa-next-action {
+    padding: 17px 14px;
+    gap: 10px;
+  }
+  .santa-next-action strong {
+    font-size: 13px;
+  }
+  .santa-next-action p {
+    font-size: 12px;
+  }
+  .santa-send-toolbar {
+    padding: 15px 14px;
+  }
+  .santa-send-toolbar .btn {
+    width: 100%;
+    font-size: 12px;
+    min-height: 44px;
+  }
+  .santa-send-toolbar > span {
+    font-size: 11px;
+  }
+  .santa-delivery-filters {
+    gap: 5px;
+  }
+  .santa-delivery-filters > button {
+    padding: 8px;
+    min-height: 36px;
+  }
+  .santa-recovery-heading {
+    align-items: flex-start;
+  }
+  .santa-recovery-heading h4 {
+    font-size: 16px;
+  }
+  .santa-recovery-heading p {
+    font-size: 12px;
+  }
+  .santa-backup-notice {
+    flex-wrap: wrap;
+  }
+  .santa-backup-notice p {
+    font-size: 12px;
+  }
+  .santa-backup-notice .text-link {
+    margin-left: 27px;
+  }
+  .santa-person-summary {
+    min-width: 170px;
+  }
+  .santa-delivery-status {
+    margin-left: 47px;
+    font-size: 10px;
+  }
+  .santa-delivery-actions {
+    margin-left: auto;
+  }
+  .santa-delivery-row {
+    column-gap: 10px;
+    row-gap: 13px;
+  }
+  .santa-delivery-actions > .icon-button,
+  .santa-delivery-actions > .btn {
+    min-height: 40px;
+  }
+  .santa-list-count {
+    font-size: 11px;
+  }
+  .santa-first-event {
+    padding: 35px 20px;
+  }
+  .santa-first-event h3 {
+    font-size: 24px;
+  }
+  .santa-empty-facts {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .santa-empty-facts span {
+    font-size: 11px;
+  }
+}
+
+/* Evergreen, cranberry and warm gold carry the season throughout the portal. */
+.sidebar {
+  background: linear-gradient(165deg, #123d2d, #092b21);
+  color: #fff8e8;
+  border-right-color: #274e3c;
+  --text-main: #fff8e8;
+  --text-muted: #c4d5c8;
+  --border-color: #40614e;
+  --muted-surface: #204d39;
+  --forest: #e7cf8c;
+  --forest-bg: #244e35;
+  --blue-soft: #7c2333;
+  --geo-primary: #ffe1a2;
+}
+.sidebar-brand > a {
+  display: block;
+  background: #fff;
+  padding: 12px 10px;
+  border-radius: 9px;
+  margin: 0 -6px;
+}
+.sidebar-brand img {
+  display: block;
+}
+.sidebar .nav-caption {
+  color: #a9c1af;
+}
+.sidebar .nav-item {
+  color: #d2e1d5;
+}
+.sidebar .nav-item:hover {
+  color: #fff9e9;
+  background: #24533d;
+}
+.sidebar .nav-item.active {
+  background: #8c2639;
+  color: #fff8e7;
+  box-shadow: 0 3px 12px #03180e35;
+}
+.sidebar .nav-item.active:before {
+  background: #e9bf62;
+}
+.sidebar .christmas-nav {
+  color: #f0dca3;
+}
+.sidebar .new-badge {
+  background: #b13a48;
+  color: #fff5e7;
+}
+.sidebar .workspace-label {
+  background: #ffffff06;
+}
+.sidebar .workspace-badge {
+  background: #cfaa4f;
+  color: #193d2b;
+  font-weight: 650;
+}
+.sidebar .sidebar-note {
+  background: linear-gradient(120deg, #244e36, #345637);
+  border-color: #77905a40;
+}
+.sidebar .sidebar-note p,
+.sidebar .sidebar-note > svg {
+  color: #f0dcab;
+}
+.sidebar .avatar {
+  background: #efd79d;
+  color: #254932;
+  border-color: #244d37;
+}
+.sidebar .icon-button {
+  color: #fff8e8;
+}
+.topbar {
+  border-bottom: 2px solid
+    color-mix(in srgb, var(--festive-gold) 35%, var(--border-color));
+  background: color-mix(in srgb, var(--surface-color) 95%, var(--cream));
+}
+.header-avatar {
+  background: var(--coral-soft);
+  color: var(--festive-red);
+}
+.new-badge {
+  color: var(--festive-red);
+}
+.btn-primary {
+  background: #ac2439;
+  color: #fff;
+}
+.btn-primary:hover {
+  background: #8c1c31;
+}
+.btn-forest {
+  background: #175537;
+  border-color: #175537;
+  color: #fffaf0;
+}
+.btn-forest:hover {
+  background: #103e29;
+}
+.christmas-hero {
+  box-shadow: 0 12px 32px #173b1f0c;
+}
+.hero-copy h2 em {
+  color: #f0ca7c;
+}
+.hero-copy .btn-forest {
+  background: #b12a3d;
+  border-color: #d1575e;
+  color: #fff9e9;
+}
+.hero-copy .btn-forest:hover {
+  background: #c63749;
+}
+.hero-copy .season-pill {
+  color: #f2d594;
+  border-color: #e6cc8d66;
+}
+.hero-copy .season-pill > span {
+  background: #ed9b94;
+}
+.welcome-replay {
+  background: none;
+  border: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10px;
+  color: #f0d49a;
+  padding: 0;
+  margin-top: 15px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.welcome-replay:hover {
+  color: #fff5dc;
+}
+.countdown-card {
+  background: linear-gradient(140deg, #8f2638, #6e1d2d);
+  color: #fff3d8;
+  border-color: #a9434f;
+}
+.countdown-card strong,
+.countdown-card > p,
+.countdown-card .text-link,
+.countdown-card > span {
+  color: #fff3d8;
+}
+.quick-icon.blue {
+  color: var(--festive-red);
+  background: var(--coral-soft);
+}
+.quick-icon.purple {
+  color: var(--festive-gold);
+  background: var(--gold-soft);
+}
+.santa-welcome {
+  background: linear-gradient(125deg, var(--forest-bg), var(--cream));
+  border-color: color-mix(in srgb, var(--forest) 18%, transparent);
+}
+.santa-gift-art {
+  color: var(--festive-red);
+}
+.santa-gift-art > span,
+.santa-gift-art > i {
+  color: var(--festive-gold);
+}
+.santa-gift-art:before {
+  border-color: color-mix(in srgb, var(--festive-gold) 23%, transparent);
+}
+.santa-reveal {
+  background: radial-gradient(
+    ellipse at 50% 0,
+    var(--cream),
+    var(--surface-color) 70%
+  );
+  border-top: 4px solid var(--festive-red);
+}
+.santa-reveal-emblem {
+  color: var(--festive-red);
+  background: var(--coral-soft);
+}
+.santa-reveal-emblem > i {
+  color: var(--festive-gold);
+}
+.santa-recipient {
+  border: 1px solid color-mix(in srgb, var(--festive-gold) 30%, transparent);
+  background: var(--forest-bg);
+}
+.santa-recipient > span {
+  color: var(--festive-gold);
+}
+.santa-admin-heading {
+  border-top: 3px solid var(--festive-red);
+}
+.santa-mail-notice {
+  border-left: 3px solid var(--festive-gold);
+}
+.santa-workflow li.current {
+  box-shadow: inset 0 -3px var(--festive-red);
+}
+.victoria-welcome-modal {
+  width: min(1080px, 100%);
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #c79c4b80;
+  background: #08271e;
+  border-radius: 20px;
+  color: #fff7e4;
+  box-shadow: 0 30px 120px #0008;
+}
+.victoria-welcome-modal > .modal-heading {
+  display: none;
+}
+.victoria-welcome-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #062c25;
+  isolation: isolate;
+  overflow: hidden;
+}
+.victoria-welcome-stage > video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.victoria-welcome-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    #031b18e6 0%,
+    #031b1880 29%,
+    transparent 62%
+  );
+  pointer-events: none;
+}
+.victoria-welcome-copy {
+  position: absolute;
+  inset: 0 auto 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 50px 40px;
+  width: 46%;
+}
+.victoria-welcome-copy > span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #f0d496;
+  font-size: 10px;
+  letter-spacing: 1.4px;
+}
+.victoria-welcome-copy h2 {
+  font-size: clamp(28px, 3.7vw, 46px);
+  line-height: 1.17;
+  letter-spacing: -1.6px;
+  color: #fff6dd;
+  margin: 20px 0 16px;
+}
+.victoria-welcome-copy p {
+  color: #d2e0d3;
+  font-size: 13px;
+  line-height: 1.8;
+  max-width: 280px;
+}
+.victoria-enter {
+  background: #aa293c;
+  color: #fff6e8;
+  border: 1px solid #dc786f80;
+  margin-top: 25px;
+  font-size: 12px;
+  min-height: 43px;
+}
+.victoria-enter:hover {
+  background: #c13548;
+}
+.victoria-skip {
+  position: absolute;
+  right: 20px;
+  top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid #ffffff42;
+  background: #06271ed9;
+  color: #fff4da;
+  padding: 9px 12px;
+  font-size: 11px;
+  border-radius: 25px;
+}
+.victoria-video-controls {
+  position: absolute;
+  right: 20px;
+  bottom: 19px;
+  display: flex;
+  gap: 8px;
+}
+.victoria-video-controls > button {
+  border: 1px solid #ffffff40;
+  color: #fff5dd;
+  border-radius: 20px;
+  padding: 9px 11px;
+  min-height: 38px;
+  background: #06271edc;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10px;
+}
+.victoria-video-progress {
+  position: absolute;
+  height: 3px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ffffff25;
+}
+.victoria-video-progress > span {
+  display: block;
+  height: 100%;
+  background: #ebc174;
+  transition: width 0.2s linear;
+}
+.victoria-welcome-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 17px 22px;
+  color: #e3ce9d;
+  font-size: 11px;
+  flex-wrap: wrap;
+}
+.victoria-welcome-foot > svg {
+  flex-shrink: 0;
+}
+.victoria-welcome-foot > small {
+  color: #a9bfaf;
+  font-size: 10px;
+  margin-left: auto;
+}
+.victoria-welcome-modal :focus-visible {
+  outline-color: #f0d496;
+}
+.santa-welcome-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.santa-welcome-actions .btn {
+  font-size: 12px;
+}
+.santa-welcome small {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 10px;
+}
+.santa-open-invitation {
+  margin: 20px 0;
+  padding: 28px;
+  border-top: 3px solid var(--festive-gold);
+}
+.santa-open-invitation > div > svg {
+  color: var(--forest);
+  margin-bottom: 12px;
+}
+.santa-open-invitation h2 {
+  font-size: 22px;
+}
+.santa-open-invitation p {
+  font-size: 12px;
+  line-height: 1.8;
+  margin: 8px 0 20px;
+}
+.santa-open-invitation form > label {
+  display: block;
+  font-size: 12px;
+  font-weight: 550;
+  margin-bottom: 8px;
+}
+.santa-open-invitation form > div {
+  display: flex;
+  gap: 10px;
+}
+.santa-open-invitation .input-field {
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+}
+.santa-open-invitation > small {
+  display: block;
+  font-size: 11px;
+  line-height: 1.9;
+  color: var(--text-muted);
+  margin-top: 17px;
+}
+.santa-mail-settings ol {
+  list-style: none;
+  padding: 0;
+  counter-reset: mail-setup;
+}
+.santa-mail-settings li {
+  counter-increment: mail-setup;
+  position: relative;
+  padding: 16px 17px 16px 53px;
+  background: var(--muted-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.santa-mail-settings li:before {
+  content: counter(mail-setup);
+  position: absolute;
+  top: 17px;
+  left: 15px;
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--forest-bg);
+  color: var(--forest);
+  font-size: 12px;
+  font-weight: 650;
+}
+.santa-mail-settings fieldset {
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+}
+.santa-mail-settings .modal-actions {
+  margin-top: 20px;
+}
+@media (max-width: 720px) {
+  .sidebar-brand > a {
+    max-width: 190px;
+  }
+  .sidebar-brand > .icon-button {
+    right: -3px;
+  }
+  .admin-tabs {
+    display: none;
+  }
+  .admin-section-select {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--text-muted);
+    font-size: 11px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .admin-section-select select {
+    color: var(--text-main);
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 9px;
+    padding: 13px;
+    font-size: 16px;
+    width: 100%;
+  }
+  .victoria-welcome-modal {
+    border-radius: 15px;
+  }
+  .victoria-welcome-stage {
+    aspect-ratio: auto;
+    height: min(72dvh, 610px);
+    min-height: 475px;
+  }
+  .victoria-welcome-stage > video {
+    position: absolute;
+    top: 30px;
+    height: 62%;
+    width: 100%;
+    object-position: 67% center;
+  }
+  .victoria-welcome-shade {
+    background: linear-gradient(
+      0deg,
+      #08271e 12%,
+      #08271eeb 25%,
+      transparent 62%
+    );
+  }
+  .victoria-welcome-copy {
+    inset: auto 0 35px;
+    width: 100%;
+    padding: 0 24px;
+    align-items: center;
+    text-align: center;
+  }
+  .victoria-welcome-copy > span {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+  .victoria-welcome-copy h2 {
+    font-size: 31px;
+    margin: 13px 0 10px;
+    line-height: 1.15;
+  }
+  .victoria-welcome-copy p {
+    font-size: 12px;
+    max-width: 260px;
+  }
+  .victoria-enter {
+    margin-top: 18px;
+    width: 100%;
+    min-height: 43px;
+  }
+  .victoria-skip {
+    right: 12px;
+    top: 12px;
+    font-size: 10px;
+  }
+  .victoria-video-controls {
+    right: 12px;
+    bottom: auto;
+    top: 57px;
+  }
+  .victoria-video-controls > button {
+    min-height: 36px;
+    padding: 8px;
+  }
+  .victoria-video-controls span {
+    display: none;
+  }
+  .victoria-welcome-foot {
+    padding: 15px 20px;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 10px;
+  }
+  .victoria-welcome-foot > span {
+    flex: 1;
+  }
+  .victoria-welcome-foot > small {
+    margin-left: 24px;
+    flex-basis: calc(100% - 24px);
+  }
+  .welcome-replay {
+    font-size: 11px;
+  }
+  .santa-welcome-actions {
+    flex-direction: column;
+  }
+  .santa-welcome-actions .btn {
+    width: 100%;
+    min-height: 44px;
+  }
+  .santa-welcome small {
+    align-items: flex-start;
+    line-height: 1.8;
+    font-size: 11px;
+  }
+  .santa-welcome small svg {
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .santa-open-invitation {
+    padding: 23px 20px;
+  }
+  .santa-open-invitation h2 {
+    font-size: 21px;
+  }
+  .santa-open-invitation form > div {
+    flex-direction: column;
+  }
+  .santa-open-invitation .input-field {
+    font-size: 16px;
+  }
+  .santa-open-invitation .btn {
+    min-height: 44px;
+  }
+  .santa-mail-settings fieldset {
+    padding: 15px;
   }
 }

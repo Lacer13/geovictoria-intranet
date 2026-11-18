@@ -22,6 +22,8 @@ import ChristmasEffects from "./components/ChristmasEffects";
 import { isLocalDemo } from "./firebase";
 import { PortalProvider } from "./context/PortalContext";
 import { readPreference, savePreference } from "./lib/preferences";
+import { rememberWelcome, shouldShowWelcome } from "./lib/welcome";
+import LoadingScreen from "./components/LoadingScreen";
 
 const GamePage = lazy(() => import("./components/GamePage"));
 const OrgChart = lazy(() => import("./components/OrgChart"));
@@ -62,6 +64,14 @@ class ErrorBoundary extends Component {
 }
 
 function AppContent() {
+  const location = useLocation();
+  const [welcomeOpen, setWelcomeOpen] = useState(() =>
+    shouldShowWelcome(location.pathname),
+  );
+  const closeWelcome = useCallback(() => {
+    rememberWelcome();
+    setWelcomeOpen(false);
+  }, []);
   const [isLightMode, setLightMode] = useState(
     () => readPreference("geoTheme", "light") !== "dark",
   );
@@ -75,7 +85,6 @@ function AppContent() {
       return !value;
     });
   const closeMenu = useCallback(() => setMenuOpen(false), []);
-  const location = useLocation();
   const game = location.pathname === "/juego";
   useEffect(() => {
     document.body.classList.toggle("light-mode", isLightMode);
@@ -83,9 +92,10 @@ function AppContent() {
     savePreference("geoTheme", isLightMode ? "light" : "dark");
   }, [isLightMode]);
   useEffect(() => {
+    if (welcomeOpen) return;
     window.scrollTo({ top: 0 });
     document.getElementById("main-content")?.focus({ preventScroll: true });
-  }, [location.pathname]);
+  }, [location.pathname, welcomeOpen]);
   return (
     <div className={game ? "game-shell" : "app-shell"}>
       <a
@@ -133,7 +143,10 @@ function AppContent() {
               }
             >
               <Routes>
-                <Route path="/" element={<Dashboard />} />
+                <Route
+                  path="/"
+                  element={<Dashboard onWelcome={() => setWelcomeOpen(true)} />}
+                />
                 <Route path="/juego" element={<GamePage />} />
                 <Route path="/organigrama" element={<OrgChart />} />
                 <Route path="/directorio" element={<HelpDirectory />} />
@@ -180,6 +193,9 @@ function AppContent() {
           </footer>
         )}
       </div>
+      {welcomeOpen && location.pathname === "/" && (
+        <LoadingScreen onComplete={closeWelcome} motionAllowed={festive} />
+      )}
     </div>
   );
 }

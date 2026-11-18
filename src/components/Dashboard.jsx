@@ -14,6 +14,7 @@ import {
   LifeBuoy,
   Megaphone,
   MessageCircle,
+  PlayCircle,
   Sparkles,
   Trophy,
   Users,
@@ -308,7 +309,7 @@ function NewsPanel() {
   );
 }
 
-export default function Dashboard() {
+export default function Dashboard({ onWelcome }) {
   const [now, setNow] = useState(() => new Date());
   useEffect(() => {
     const timer = setInterval(() => setNow(new Date()), 60000);
@@ -374,6 +375,9 @@ export default function Dashboard() {
           <span className="hero-footnote">
             <Heart size={12} /> Cada persona hace especial este lugar.
           </span>
+          <button className="welcome-replay" onClick={onWelcome}>
+            <PlayCircle size={16} /> Ver saludo de VictorIA
+          </button>
         </div>
         <ChristmasArt className="hero-art" />
         <span className="hero-edition">EDICIÓN NAVIDEÑA / {year}</span>

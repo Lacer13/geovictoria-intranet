@@ -9,10 +9,28 @@ import {
   normalizeRoster,
   parseParticipantLines,
   privateSantaLink,
+  readPrivateSantaToken,
   randomInt,
   safeCSV,
   validMailSettings,
 } from "../src/lib/secretSanta.js";
+
+test("opening an invitation accepts only a complete link on the current intranet", () => {
+  const origin = "https://intranet.example.test";
+  const token = "a".repeat(64);
+  const link = privateSantaLink(origin, token);
+  assert.equal(readPrivateSantaToken(`  ${link}  `, origin), token);
+  for (const invalid of [
+    link.replace(origin, "https://evil.test"),
+    "javascript:alert(1)",
+    link.replace("/ver#", "/ver?token=#"),
+    link.replace("/ver#", "/#"),
+    "a".repeat(64),
+    link.slice(0, -1),
+  ]) {
+    assert.equal(readPrivateSantaToken(invalid, origin), null);
+  }
+});
 
 test("every draw is a complete permutation without self-assignment", () => {
   for (const size of [2, 3, 4, 10, 25, 100]) {

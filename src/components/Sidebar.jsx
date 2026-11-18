@@ -89,7 +89,7 @@ export default function Sidebar({ open, onClose }) {
         <div className="workspace-label">
           <span className="peru-flag" aria-hidden="true" />
           <span>GeoVictoria Perú</span>
-          <span className="workspace-badge">Intranet</span>
+          <span className="workspace-badge">Navidad</span>
         </div>
         <nav aria-label="Navegación principal">
           <p className="nav-caption">TU DÍA A DÍA</p>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   ArrowRight,
@@ -10,10 +10,29 @@ import {
   Mail,
   Sparkles,
 } from "lucide-react";
-import { CARD_PATTERN, readableExchangeDate } from "../lib/secretSanta";
+import {
+  CARD_PATTERN,
+  readPrivateSantaToken,
+  readableExchangeDate,
+} from "../lib/secretSanta";
 import { getSantaCard } from "../lib/secretSantaStore";
 
 export default function SecretSanta() {
+  const navigate = useNavigate();
+  const [invitationOpen, setInvitationOpen] = useState(false);
+  const [invitation, setInvitation] = useState("");
+  const [error, setError] = useState("");
+  const openInvitation = (e) => {
+    e.preventDefault();
+    const token = readPrivateSantaToken(invitation, window.location.origin);
+    if (!token) {
+      setError(
+        "Pega el enlace completo de esta intranet, tal como aparece en tu correo.",
+      );
+      return;
+    }
+    navigate(`/amigo-secreto/ver#${token}`);
+  };
   return (
     <div className="page-enter santa-public">
       <div className="page-heading">
@@ -36,10 +55,24 @@ export default function SecretSanta() {
             recibe por correo su asignación y un enlace privado para volver a
             consultarla.
           </p>
-          <Link className="btn btn-forest" to="/admin?seccion=amigo-secreto">
-            Organizar un sorteo <ArrowRight size={16} />
-          </Link>
-          <small>La gestión está reservada a administradores.</small>
+          <div className="santa-welcome-actions">
+            <button
+              className="btn btn-forest"
+              onClick={() => setInvitationOpen((value) => !value)}
+            >
+              <Gift size={16} /> Abrir mi invitación
+            </button>
+            <Link
+              className="btn btn-secondary"
+              to="/admin?seccion=amigo-secreto"
+            >
+              Organizar un sorteo <ArrowRight size={16} />
+            </Link>
+          </div>
+          <small>
+            <LockKeyhole size={12} /> Cada resultado es privado. La organización
+            gestiona el grupo.
+          </small>
         </div>
         <div className="santa-gift-art" aria-hidden="true">
           <span>✧</span>
@@ -48,6 +81,58 @@ export default function SecretSanta() {
           <Heart size={25} />
         </div>
       </section>
+      {invitationOpen && (
+        <section
+          className="panel santa-open-invitation"
+          aria-label="Abrir una invitación privada"
+        >
+          <div>
+            <Link2 size={23} />
+            <h2>Tu sorpresa está a un enlace de distancia.</h2>
+            <p>
+              Pega la invitación que recibiste por correo. Solo se abrirá tu
+              asignación.
+            </p>
+          </div>
+          <form onSubmit={openInvitation}>
+            <label htmlFor="santa-invitation-url">Tu enlace privado</label>
+            <div>
+              <input
+                id="santa-invitation-url"
+                type="url"
+                className="input-field"
+                placeholder={`${window.location.origin}/amigo-secreto/ver#…`}
+                value={invitation}
+                onChange={(e) => {
+                  setInvitation(e.target.value);
+                  setError("");
+                }}
+                autoFocus
+                required
+                autoComplete="off"
+                aria-describedby={error ? "santa-invitation-error" : undefined}
+                aria-invalid={!!error}
+              />
+              <button className="btn btn-forest" type="submit">
+                Abrir invitación <ArrowRight size={15} />
+              </button>
+            </div>
+            {error && (
+              <p
+                className="form-error"
+                role="alert"
+                id="santa-invitation-error"
+              >
+                {error}
+              </p>
+            )}
+          </form>
+          <small>
+            ¿No tienes el enlace o no lo encuentras? Pide a la organización que
+            lo recupere para ti.
+          </small>
+        </section>
+      )}
       <div className="santa-how">
         <article className="panel">
           <Mail />

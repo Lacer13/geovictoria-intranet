@@ -135,6 +135,21 @@ export function privateSantaLink(origin, token) {
   url.hash = token;
   return url.href;
 }
+export function readPrivateSantaToken(value, origin) {
+  try {
+    const url = new URL(value.trim());
+    if (
+      url.origin !== new URL(origin).origin ||
+      url.pathname !== "/amigo-secreto/ver" ||
+      url.search ||
+      !CARD_PATTERN.test(url.hash.slice(1))
+    )
+      return null;
+    return url.hash.slice(1);
+  } catch {
+    return null;
+  }
+}
 export function readableExchangeDate(value) {
   return value
     ? new Date(`${value}T12:00:00-05:00`).toLocaleDateString("es-PE", {

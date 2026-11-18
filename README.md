@@ -18,7 +18,8 @@ npm run preview
 
 ## Experiencia y Navidad
 
-- Navegación inmediata; las rutas secundarias se cargan bajo demanda, sin video de espera obligatorio.
+- Navegación inmediata; las rutas secundarias se cargan bajo demanda. VictorIA recibe al equipo con una bienvenida navideña de 10 segundos al abrir el inicio una vez por sesión. Se puede saltar, pausar, escuchar o repetir desde **Mi inicio**. Las invitaciones privadas y Administración abren directamente.
+- Paleta de verde abeto, rojo arándano y dorado con fondos cálidos; también disponible en modo oscuro.
 - Búsqueda global: personas disponibles, secciones y guías. Atajo `Ctrl + K` / `⌘ + K`.
 - Navegación móvil con control de foco; formularios etiquetados y acceso por teclado.
 - Modos claro y oscuro, favoritos y preferencias guardados en el navegador. La intranet funciona aunque el almacenamiento de preferencias esté bloqueado.
@@ -70,6 +71,10 @@ Desde **Administración → Amigo secreto** se pueden guardar grupos de 2 a 100 
 **Configurar correo** guía la conexión de Gmail u Outlook mediante EmailJS e incluye la plantilla HTML para copiar. No requiere dominio propio ni cambiar el plan de Firebase. La conexión de la cuenta y la autorización del proveedor las realiza su titular; la aplicación no incluye una cuenta de envío preconfigurada ni solicita contraseñas SMTP. Solo se guardan los tres identificadores públicos de EmailJS en una colección accesible a administradores.
 
 El panel registra cada intento y permite consultar el respaldo, descargarlo o recuperar el enlace privado de una persona. Los correos requieren confirmación del administrador; guardar o sortear no los envía. Consulta [la guía de configuración y operación](docs/amigo-secreto.md).
+
+La preparación separa los detalles del intercambio y las personas. Señala correos incompletos o repetidos y avisa antes de descartar cambios al cambiar de sorteo. La entrega tiene un resumen, progreso y filtros por pendientes, aceptados y envíos que requieren revisión. Los participantes pueden pegar su enlace desde la página pública para abrir su invitación.
+
+La bienvenida de VictorIA combina ilustraciones generadas con animación de trineo, cámara y nieve; conserva el audio del saludo original y comienza silenciada. Con movimiento reducido o los efectos pausados, espera a que la persona pulse reproducir. Las fuentes, prompts y el proceso de render están en [la guía del video](docs/victoria-navidad.md).
 
 ## Pruebas
 

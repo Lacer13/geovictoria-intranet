@@ -462,10 +462,11 @@ const Admin = () => {
                 gap: "0.5rem",
               }}
             >
-              <Lock color="#ffa502" /> Panel de Administración
+              <Lock color="var(--festive-gold)" /> Panel de Administración
             </h1>
             <p style={{ color: "var(--text-muted)", margin: 0 }}>
-              Conectado como: <span style={{ color: "#ffa502" }}>{email}</span>
+              Conectado como:{" "}
+              <span style={{ color: "var(--forest)" }}>{email}</span>
             </p>
           </div>
         </div>
@@ -504,50 +505,52 @@ const Admin = () => {
       )}
 
       {/* Tabs */}
-      <div className="admin-tabs">
+      <label className="admin-section-select">
+        Sección de administración
+        <select
+          value={activeTab}
+          onChange={(e) => setActiveTab(e.target.value)}
+        >
+          <option value="feedbacks">Buzón de reportes</option>
+          <option value="news">Noticias</option>
+          <option value="directory">Directorio de soporte</option>
+          <option value="admins">Administradores</option>
+          <option value="santa">Amigo secreto</option>
+        </select>
+      </label>
+      <div className="admin-tabs" aria-label="Secciones de administración">
         <button
           onClick={() => setActiveTab("feedbacks")}
-          className="btn"
-          style={{
-            background:
-              activeTab === "feedbacks"
-                ? "var(--geo-primary-light)"
-                : "transparent",
-            color: activeTab === "feedbacks" ? "white" : "var(--text-muted)",
-          }}
+          className={`btn ${activeTab === "feedbacks" ? "btn-forest" : "btn-secondary"}`}
+          aria-pressed={activeTab === "feedbacks"}
         >
           <Inbox size={18} /> Buzón de Reportes
         </button>
         <button
           onClick={() => setActiveTab("news")}
-          className="btn"
-          style={{
-            background:
-              activeTab === "news" ? "var(--geo-secondary)" : "transparent",
-            color: activeTab === "news" ? "white" : "var(--text-muted)",
-          }}
+          className={`btn ${activeTab === "news" ? "btn-forest" : "btn-secondary"}`}
+          aria-pressed={activeTab === "news"}
         >
           <Megaphone size={18} /> Gestor de Noticias
         </button>
         <button
           onClick={() => setActiveTab("directory")}
-          className="btn"
-          style={{
-            background: activeTab === "directory" ? "#ffa502" : "transparent",
-            color: activeTab === "directory" ? "white" : "var(--text-muted)",
-          }}
+          className={`btn ${activeTab === "directory" ? "btn-forest" : "btn-secondary"}`}
+          aria-pressed={activeTab === "directory"}
         >
           <Users size={18} /> Directorio de Soporte
         </button>
         <button
           className={`btn ${activeTab === "admins" ? "btn-forest" : "btn-secondary"}`}
           onClick={() => setActiveTab("admins")}
+          aria-pressed={activeTab === "admins"}
         >
           <ShieldCheck size={18} /> Administradores
         </button>
         <button
           className={`btn ${activeTab === "santa" ? "btn-forest" : "btn-secondary"}`}
           onClick={() => setActiveTab("santa")}
+          aria-pressed={activeTab === "santa"}
         >
           <Gift size={18} /> Amigo secreto
         </button>
