@@ -2,6 +2,9 @@ import { randomHex } from "./secretSanta.js";
 
 export const QUIZ_QUESTIONS = 8;
 export const QUIZ_LIMIT = 200;
+export const QUIZ_SCORE_STEP = 7;
+export const QUIZ_MAX_POINTS =
+  Math.floor(500 / QUIZ_SCORE_STEP) * QUIZ_SCORE_STEP;
 export const quizJoinUrl = (code) =>
   `${window.location.origin}/concurso/${code}`;
 export const validQuizCode = (value) => /^[A-HJ-NP-Z2-9]{8}$/.test(value || "");
@@ -86,14 +89,22 @@ export function quizQuestionReady(question) {
 export function quizPoints(correct, elapsedMs, seconds, bonus = false) {
   if (
     !correct ||
+    !Number.isFinite(seconds) ||
+    seconds <= 0 ||
     !Number.isFinite(elapsedMs) ||
     elapsedMs < 0 ||
     elapsedMs >= seconds * 1000
   )
     return 0;
-  return (
-    Math.round(1000 - (500 * elapsedMs) / (seconds * 1000)) * (bonus ? 2 : 1)
+  // Quantize the speed reward before applying the integer bonus multiplier.
+  // 500 is not divisible by seven: valid base awards run from 7 to 497.
+  const steps = Math.max(
+    1,
+    Math.round(
+      (QUIZ_MAX_POINTS / QUIZ_SCORE_STEP) * (1 - elapsedMs / (seconds * 1000)),
+    ),
   );
+  return Math.min(QUIZ_MAX_POINTS, steps * QUIZ_SCORE_STEP * (bonus ? 2 : 1));
 }
 export function milliseconds(value) {
   if (typeof value?.toMillis === "function") return value.toMillis();
@@ -147,8 +158,16 @@ export function rankQuizPlayers(players, rounds) {
     for (const r of round.results || []) {
       const p = totals.get(r.id);
       if (!p) continue;
-      p.points += r.points;
-      if (r.correct) {
+      // Recalculate prior rounds from their recorded time, so a resumed game
+      // cannot mix the previous scale with the current multiples of seven.
+      const points = quizPoints(
+        r.correct,
+        r.elapsedMs,
+        round.seconds,
+        round.bonus,
+      );
+      p.points += points;
+      if (points > 0) {
         p.correct++;
         p.elapsedMs += r.elapsedMs;
       }

@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { useQuizClock } from "../lib/quizHooks";
-import { quizJoinUrl } from "../lib/quiz";
+import { quizJoinUrl, QUIZ_MAX_POINTS, QUIZ_SCORE_STEP } from "../lib/quiz";
 
 const letters = ["A", "B", "C", "D"];
 export function QuizRoster({ players }) {
@@ -147,7 +147,7 @@ export default function QuizStage({
                 </em>
               </h2>
               <p>
-                7 preguntas + 1 bonus doble.
+                7 preguntas + 1 bonus doble (tope {QUIZ_MAX_POINTS}).
                 <br />
                 Acierta y responde rápido para sumar más.
               </p>
@@ -252,8 +252,10 @@ export default function QuizStage({
           )}
           {room.status === "question" && (
             <p className="quiz-soft">
-              Responde desde tu celular. Solo los aciertos suman: 500–1000
-              puntos{q.bonus ? ", multiplicados por dos" : ""}.
+              Responde desde tu celular. Solo los aciertos suman:{" "}
+              {QUIZ_SCORE_STEP * (q.bonus ? 2 : 1)}–{QUIZ_MAX_POINTS} puntos, en
+              múltiplos de {QUIZ_SCORE_STEP}
+              {q.bonus ? " · Bonus ×2 con tope de 497" : ""}.
             </p>
           )}
         </>

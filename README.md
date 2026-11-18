@@ -82,7 +82,7 @@ La bienvenida v4 anima por separado el trineo, la cabeza y la mano de VictorIA. 
 
 ## Concurso en vivo
 
-El menú **Concurso en vivo** permite entrar por QR o código de sala. Desde **Administración → Concurso en vivo**, prepara siete preguntas y un bonus doble, edita las opciones y sus tiempos, abre el registro y dirige la exposición. La pantalla independiente de proyección muestra los nombres en vivo, las preguntas, la clasificación entre rondas y el ganador con podio navideño. Las respuestas son únicas y el servidor valida el plazo. Se puede recuperar la participación al recargar, duplicar las preguntas para otra exposición y descargar los resultados CSV antes de archivar. [Guía de preparación y operación](docs/concurso-en-vivo.md).
+El menú **Concurso en vivo** permite entrar por QR o código de sala. Desde **Administración → Concurso en vivo**, prepara siete preguntas y un bonus doble, edita las opciones y sus tiempos, abre el registro y dirige la exposición. Los aciertos suman de 7 a 497 puntos según rapidez, en múltiplos de siete; el bonus duplica el premio con el mismo tope de 497 y los totales también son múltiplos de siete. La pantalla independiente de proyección muestra los nombres en vivo, las preguntas, la clasificación entre rondas y el ganador con podio navideño. Las respuestas son únicas y el servidor valida el plazo. Se puede recuperar la participación al recargar, duplicar las preguntas para otra exposición y descargar los resultados CSV antes de archivar. [Guía de preparación y operación](docs/concurso-en-vivo.md).
 
 ## Pruebas y comprobaciones
 

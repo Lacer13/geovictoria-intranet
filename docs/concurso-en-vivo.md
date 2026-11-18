@@ -32,12 +32,16 @@ Si se pierde la conexión al cerrar una pregunta, la sala puede permanecer en «
 
 ## Puntaje y empates
 
-- Correcta: `redondear(1000 − 500 × milisegundos / tiempo disponible en milisegundos)`.
-- Bonus: multiplica el resultado por dos.
+- Correcta: `7 × máximo(1, redondear(71 × (1 − milisegundos / tiempo disponible en milisegundos)))`. Cuanto más rápida, más puntos.
+- El rango solicitado de 1 a 500 se concreta en **7 a 497**, los múltiplos de siete que caben en ese intervalo. Ejemplos en una pregunta de 30 segundos: al inicio, 497; a los 15 segundos, 252; justo antes de cerrar, 7.
+- Bonus: multiplica el resultado por dos con **tope de 497**, de **14 a 497** puntos, también múltiplos de siete. Por ejemplo, 126 se convierte en 252; 252 se convierte en 497 por el tope.
+- La clasificación y el CSV suman los premios sin redondeos adicionales. El máximo de siete preguntas y un bonus es **3976 puntos**, múltiplo de siete.
 - Incorrecta, ausente o fuera de plazo: cero puntos.
 - Desempate: más aciertos, después menos tiempo acumulado en respuestas correctas. Una igualdad exacta conserva una posición compartida y se anuncia como empate en la cima.
 
 La rapidez se mide al llegar la respuesta al servidor. La latencia de la red influye; conviene que todos tengan una conexión estable. Una respuesta no puede modificarse ni recibir un tiempo o puntaje enviado por el participante.
+
+Al cerrar cada pregunta se recalculan los premios de las rondas anteriores a partir de su tiempo y acierto guardados, para que una partida reanudada tampoco mezcle escalas en el nuevo total. Los resultados ya publicados de partidas finalizadas se conservan; esta actualización no modifica registros de producción de forma retroactiva.
 
 ## Resultados y cierre
 

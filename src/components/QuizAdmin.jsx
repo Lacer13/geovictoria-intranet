@@ -28,6 +28,8 @@ import {
   milliseconds,
   normalizeQuizDraft,
   quizQuestionReady,
+  QUIZ_MAX_POINTS,
+  QUIZ_SCORE_STEP,
 } from "../lib/quiz";
 import { useQuizClock, useQuizRoom } from "../lib/quizHooks";
 import QuizStage from "./QuizStage";
@@ -431,12 +433,14 @@ function QuizEditor({ event, onDirty }) {
       <details className="quiz-scoring-help">
         <summary>Cómo se calcula el puntaje</summary>
         <p>
-          Un acierto suma de 500 a 1000 puntos según el tiempo que tarde en
-          llegar la respuesta al servidor. El bonus multiplica esos puntos por
-          dos. Los errores y las respuestas ausentes suman cero. Para
-          desempatar: más aciertos y menor tiempo acumulado en respuestas
-          correctas; si persiste el empate, comparten posición. El registro
-          admite hasta 200 participantes y cierra al iniciar la primera
+          Un acierto suma de {QUIZ_SCORE_STEP} a {QUIZ_MAX_POINTS} puntos según
+          el tiempo que tarde en llegar la respuesta al servidor. El bonus
+          duplica esos puntos con tope de {QUIZ_MAX_POINTS}: de{" "}
+          {QUIZ_SCORE_STEP * 2} a {QUIZ_MAX_POINTS}. Cada premio y el total son
+          múltiplos de {QUIZ_SCORE_STEP}. Los errores y las respuestas ausentes
+          suman cero. Para desempatar: más aciertos y menor tiempo acumulado en
+          respuestas correctas; si persiste el empate, comparten posición. El
+          registro admite hasta 200 participantes y cierra al iniciar la primera
           pregunta.
         </p>
       </details>

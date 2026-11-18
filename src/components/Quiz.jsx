@@ -15,6 +15,8 @@ import {
   milliseconds,
   normalizeQuizCode,
   quizPoints,
+  QUIZ_MAX_POINTS,
+  QUIZ_SCORE_STEP,
   readQuizIdentity,
   validQuizCode,
 } from "../lib/quiz";
@@ -64,8 +66,11 @@ export default function Quiz() {
       </form>
       <div className="quiz-entry-facts">
         <span>7 preguntas</span>
-        <span>Bonus ×2</span>
-        <span>Un gran ganador</span>
+        <span>Bonus ×2 · Máx. {QUIZ_MAX_POINTS}</span>
+        <span>
+          {QUIZ_SCORE_STEP}–{QUIZ_MAX_POINTS} pts · Múltiplos de{" "}
+          {QUIZ_SCORE_STEP}
+        </span>
       </div>
       <Link className="text-link" to="/admin?seccion=concurso">
         Soy presentador · Administrar concurso
@@ -260,8 +265,10 @@ function Participant({ code }) {
                 <Snowflake size={40} />
                 <h2>¡Ya estás en la sala!</h2>
                 <p>
-                  El presentador dará inicio. Acierta y responde rápido: cada
-                  pregunta vale hasta 1000 puntos y el bonus vale el doble.
+                  El presentador dará inicio. Acierta y responde rápido: de{" "}
+                  {QUIZ_SCORE_STEP} a {QUIZ_MAX_POINTS} puntos por pregunta,
+                  siempre en múltiplos de {QUIZ_SCORE_STEP}. El bonus duplica el
+                  premio hasta un máximo de {QUIZ_MAX_POINTS}.
                 </p>
               </div>
               <h3>El equipo se está reuniendo</h3>

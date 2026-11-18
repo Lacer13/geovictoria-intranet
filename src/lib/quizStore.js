@@ -257,7 +257,7 @@ export async function closeQuizRound(code, index) {
   const players = playersSnapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
   const leaderboard = rankQuizPlayers(players, [
     ...rounds.filter((r) => r.tallied && r.questionIndex < index),
-    { results: tally.results },
+    { ...current, results: tally.results },
   ]);
   await runTransaction(db, async (t) => {
     const room = (await t.get(quizRoomRef(code))).data();
