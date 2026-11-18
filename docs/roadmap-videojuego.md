@@ -31,6 +31,12 @@ VictorIA conserva su **cabeza y manos flotantes, sin torso ni brazos**. La ident
 
 La historia se cuenta con una introducción breve que pueda saltarse, señales durante el juego y un cierre por misión. La acción sigue siendo el centro de la experiencia.
 
+### Doce personajes, uno por categoría del directorio
+
+El elenco objetivo incorpora un personaje por cada una de las doce categorías del directorio, según la elección del usuario. Todos conservarán la identidad de cabeza y manos flotantes, con nombres, emblemas, accesorios y animaciones reconocibles. Las primeras versiones comparten el kit de juego; las habilidades propias se prueban por roles al introducir equipos. El [catálogo de personajes por área](personajes-por-area.md) contiene las doce propuestas, el proceso de arte/animación y los criterios de aceptación.
+
+Se producirán primero un personaje completo y después tres para validar la estructura compartida. El selector se ampliará por tandas hasta representar las doce categorías en la etapa 5 vs 5. Doce personajes disponibles no significa doce jugadores simultáneos: la capacidad objetivo sigue siendo diez.
+
 ### Una primera campaña pequeña
 
 | Misión                  | Objetivo jugable                                        | Novedad                                                                |
@@ -76,6 +82,7 @@ flowchart LR
 - Decidir dispositivos prioritarios, orientación móvil y tamaño de los controles.
 - Fijar velocidad, alcance, esquiva, tamaño de colisiones y duración de la partida.
 - Inventariar los recursos actuales y definir animaciones de VictorIA y señales de daño/objetivo.
+- Definir las doce fichas de personajes por categoría, su plantilla visual y las piezas que podrán compartir para animación.
 - Probar la arena propuesta con unas pocas personas antes de producir todo el arte.
 
 **Criterio de salida:** el objetivo se entiende y moverse resulta cómodo en una computadora y un teléfono representativos del equipo. Se elige la dirección visual y se estima la siguiente entrega con ese alcance concreto.
@@ -92,6 +99,7 @@ flowchart LR
 - HUD compacto: vidas, objetivo, puntos y mejoras con tiempo restante.
 - Controles táctiles con zona segura, tamaño ajustable y opción de disparo asistido para móvil.
 - Sonidos de impacto, recogida y victoria; controles de volumen y efectos reducidos.
+- Integrar un personaje piloto completo con animaciones de reposo, movimiento, disparo, esquiva, daño, victoria y derrota.
 
 **Criterio de salida:** la misma simulación mantiene velocidad y duración a distintas tasas de render; no quedan teclas activadas tras cambiar de ventana; se puede completar y reiniciar una partida en escritorio y móvil sin controles tapados.
 
@@ -104,6 +112,7 @@ flowchart LR
 - Puntos de control apropiados para sesiones breves.
 - Recompensas cosméticas, pantalla de resultados y motivo para volver a jugar.
 - Separar el progreso casual local de cualquier clasificación competitiva verificada.
+- Completar una primera tanda de tres personajes y validar el selector y la reutilización de animaciones.
 
 **Criterio de salida:** al menos ocho de diez personas del piloto pueden iniciar la primera misión sin ayuda. Se recoge su opinión sobre controles, claridad y ganas de repetir antes de ampliar contenido.
 
@@ -116,6 +125,7 @@ flowchart LR
 - Interpolación de rivales y respuesta local de movimiento con corrección del servidor.
 - Reconexión con ventana de gracia propuesta de quince segundos; caducada, resolución explícita del abandono.
 - Indicador de conexión, límite de mensajes y rechazo de entradas imposibles o repetidas.
+- Adaptar los personajes del piloto a la cámara de la arena, con el mismo kit y tamaño de colisión jugable.
 
 **Criterio de salida:** diez partidas consecutivas entre dos dispositivos con resultado idéntico en ambos; una desconexión y una recarga pueden recuperarse; enviar desde un cliente una posición, daño o puntaje inventado no altera el estado autorizado.
 
@@ -126,6 +136,7 @@ flowchart LR
 - Equipos equilibrados al empezar, emblemas, aliados visibles y reaparición protegida.
 - Entregas y asistencias, mensajes rápidos predefinidos y cámara que mantenga legible el objetivo.
 - Mapa con dos rutas, distribución de recursos y prueba de equilibrio.
+- Ampliar el elenco por tandas y probar habilidades agrupadas por roles; cada incorporación se valida antes de habilitarse en competición.
 - Política visible para abandonar y reconectar. Cambiar de pestaña no pausa la partida de los demás.
 
 **Criterio de salida:** seis personas pueden completar varias partidas, entienden quién lleva la chispa y pueden recuperarse de una baja o desconexión sin bloquear la sala.
@@ -139,6 +150,7 @@ flowchart LR
 - Resultados escritos por el servidor, historial de partidas e idempotencia al guardar.
 - Pruebas con diez personas, latencia simulada y los dispositivos reales del equipo.
 - Medir consumo y definir capacidad de salas simultáneas, alojamiento y presupuesto operativo.
+- Completar los doce personajes por categoría y verificar sus animaciones y efectos dentro de una partida de diez jugadores.
 
 **Criterio de salida:** piloto completo de diez jugadores con ganador consistente, reconexión, rendimiento aceptable y consumo medido. Meta inicial de render: 60 FPS en el equipo de escritorio de referencia y al menos 30 FPS en el móvil elegido; se consideran objetivos de validación, no garantías para cualquier dispositivo.
 
