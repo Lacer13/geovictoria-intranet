@@ -1,66 +1,66 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Manrope:wght@400;500;600;650;700;750;800&display=swap");
 
 :root {
-  --geo-primary: #ef97a0;
-  --geo-primary-light: #ffc0c4;
-  --geo-primary-dark: #a8263a;
-  --geo-secondary: #78baa4;
+  --geo-primary: #ffafbd;
+  --geo-primary-light: #ffd0d9;
+  --geo-primary-dark: #9f1530;
+  --geo-secondary: #ef8da2;
   --geo-accent: #d87e72;
   --geo-success: #78baa4;
-  --bg-color: #0b201a;
-  --surface-color: #132e25;
-  --surface-color-hover: #1d3c30;
-  --text-main: #faf4e7;
-  --text-muted: #b3c6b9;
-  --border-color: #355044;
+  --bg-color: #1d1319;
+  --surface-color: #2b1c24;
+  --surface-color-hover: #39232e;
+  --text-main: #fff8fa;
+  --text-muted: #d3bcc6;
+  --border-color: #563340;
   --glass-bg: var(--surface-color);
   --glass-border: var(--border-color);
   --shadow-card: 0 3px 15px #0000000a;
-  --forest: #a5d6b3;
-  --forest-bg: #1e4230;
-  --cream: #3a3223;
-  --hero-bg: #123e2e;
-  --hero-text: #f2efe5;
-  --muted-surface: #19362b;
-  --blue-soft: #492b32;
-  --green-soft: #294237;
+  --forest: #ffb2c0;
+  --forest-bg: #492633;
+  --cream: #3d2832;
+  --hero-bg: #82172e;
+  --hero-text: #ffffff;
+  --muted-surface: #35232c;
+  --blue-soft: #492633;
+  --green-soft: #492633;
   --purple-soft: #38324b;
-  --coral-soft: #493730;
-  --gold-soft: #493e2b;
-  --festive-red: #f0a2a6;
-  --festive-gold: #e2bd6d;
-  --festive-evergreen: #123d2d;
+  --coral-soft: #492b36;
+  --gold-soft: #3d2933;
+  --festive-red: #ffb2c0;
+  --festive-gold: #f3b7c4;
+  --festive-evergreen: #82172e;
   --font-heading: "Manrope", sans-serif;
   --font-body: "DM Sans", sans-serif;
   --transition-fast: 0.18s ease;
   --transition-normal: 0.25s ease;
   --transition-slow: 0.4s;
-  --glow-primary: 0 4px 15px #2773b822;
-  --glow-secondary: 0 4px 15px #78baa422;
+  --glow-primary: 0 4px 15px #b91c3422;
+  --glow-secondary: 0 4px 15px #b91c3417;
 }
 body.light-mode {
-  --geo-primary: #ac2439;
-  --geo-primary-light: #c53849;
-  --geo-secondary: #216141;
-  --bg-color: #fbf8f1;
+  --geo-primary: #b91c34;
+  --geo-primary-light: #c72540;
+  --geo-secondary: #b91c34;
+  --bg-color: #fafafa;
   --surface-color: #fff;
-  --surface-color-hover: #faf6ee;
-  --text-main: #25392e;
-  --text-muted: #66776b;
-  --border-color: #e9e2d5;
-  --forest: #185536;
-  --forest-bg: #eaf3e9;
-  --cream: #fbf2df;
-  --hero-bg: #164b35;
-  --hero-text: #fff8e7;
-  --muted-surface: #f7f6f0;
-  --blue-soft: #faebed;
-  --green-soft: #edf5ef;
+  --surface-color-hover: #fff3f5;
+  --text-main: #30232a;
+  --text-muted: #75606b;
+  --border-color: #efdfe4;
+  --forest: #b91c34;
+  --forest-bg: #fff0f3;
+  --cream: #fff8fa;
+  --hero-bg: #b91c34;
+  --hero-text: #ffffff;
+  --muted-surface: #faf5f7;
+  --blue-soft: #fff0f3;
+  --green-soft: #fff0f3;
   --purple-soft: #f2effa;
-  --coral-soft: #fbefeb;
-  --gold-soft: #fbf0d5;
-  --festive-red: #ac2439;
-  --festive-gold: #9b6e1e;
+  --coral-soft: #fff0f3;
+  --gold-soft: #fff5f7;
+  --festive-red: #b91c34;
+  --festive-gold: #a82a42;
   --shadow-card: 0 3px 15px #202c3503;
 }
 * {
@@ -1013,7 +1013,7 @@ main:focus {
   height: 61px;
   background: var(--cream);
   border-radius: 10px;
-  color: #b19777;
+  color: var(--forest);
   position: relative;
   flex-shrink: 0;
 }
@@ -2060,7 +2060,7 @@ select.input-field {
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: #10251d66;
+  background: #32101e66;
   backdrop-filter: blur(4px);
   z-index: 100;
   display: flex;
@@ -4170,14 +4170,14 @@ select.input-field {
   opacity: 0;
 }
 .snow-dot {
-  background: #aec2b6;
+  background: #e5a7b7;
   border-radius: 100%;
   box-shadow: 0 0 3px #dce6de66;
 }
 .snow-crystal {
   font-size: var(--size);
   line-height: 1;
-  color: #9fb6aa;
+  color: #d694a8;
   text-shadow: 0 0 4px #fff;
 }
 .festive-toggle.enabled {
@@ -6567,19 +6567,19 @@ select.input-field {
   }
 }
 
-/* Evergreen, cranberry and warm gold carry the season throughout the portal. */
+/* Christmas red and white are the shared palette throughout the portal. */
 .sidebar {
-  background: linear-gradient(165deg, #123d2d, #092b21);
-  color: #fff8e8;
-  border-right-color: #274e3c;
-  --text-main: #fff8e8;
-  --text-muted: #c4d5c8;
-  --border-color: #40614e;
-  --muted-surface: #204d39;
-  --forest: #e7cf8c;
-  --forest-bg: #244e35;
-  --blue-soft: #7c2333;
-  --geo-primary: #ffe1a2;
+  background: linear-gradient(165deg, #b91c34, #87152c);
+  color: #ffffff;
+  border-right-color: #a11930;
+  --text-main: #ffffff;
+  --text-muted: #ffe2e9;
+  --border-color: #d8647a;
+  --muted-surface: #bd314b;
+  --forest: #ffffff;
+  --forest-bg: #ffffff16;
+  --blue-soft: #ffffff;
+  --geo-primary: #ffffff;
 }
 .sidebar-brand > a {
   display: block;
@@ -6592,53 +6592,57 @@ select.input-field {
   display: block;
 }
 .sidebar .nav-caption {
-  color: #a9c1af;
+  color: #ffdbe3;
 }
 .sidebar .nav-item {
-  color: #d2e1d5;
+  color: #fff0f4;
 }
 .sidebar .nav-item:hover {
-  color: #fff9e9;
-  background: #24533d;
+  color: #ffffff;
+  background: #ffffff18;
 }
 .sidebar .nav-item.active {
-  background: #8c2639;
-  color: #fff8e7;
-  box-shadow: 0 3px 12px #03180e35;
+  background: #ffffff;
+  color: #a51630;
+  box-shadow: 0 3px 12px #630f2425;
 }
 .sidebar .nav-item.active:before {
-  background: #e9bf62;
+  background: #ffffff;
 }
 .sidebar .christmas-nav {
-  color: #f0dca3;
+  color: #ffffff;
 }
 .sidebar .new-badge {
-  background: #b13a48;
-  color: #fff5e7;
+  background: #ffffff20;
+  color: #ffffff;
+}
+.sidebar .nav-item.active .new-badge {
+  background: #fff0f3;
+  color: #a51630;
 }
 .sidebar .workspace-label {
   background: #ffffff06;
 }
 .sidebar .workspace-badge {
-  background: #cfaa4f;
-  color: #193d2b;
+  background: #ffffff;
+  color: #a51630;
   font-weight: 650;
 }
 .sidebar .sidebar-note {
-  background: linear-gradient(120deg, #244e36, #345637);
-  border-color: #77905a40;
+  background: #ffffff10;
+  border-color: #ffffff35;
 }
 .sidebar .sidebar-note p,
 .sidebar .sidebar-note > svg {
-  color: #f0dcab;
+  color: #fff2f6;
 }
 .sidebar .avatar {
-  background: #efd79d;
-  color: #254932;
-  border-color: #244d37;
+  background: #ffffff;
+  color: #a51630;
+  border-color: #dc8193;
 }
 .sidebar .icon-button {
-  color: #fff8e8;
+  color: #ffffff;
 }
 .topbar {
   border-bottom: 2px solid
@@ -6653,40 +6657,42 @@ select.input-field {
   color: var(--festive-red);
 }
 .btn-primary {
-  background: #ac2439;
+  background: #b91c34;
   color: #fff;
 }
 .btn-primary:hover {
-  background: #8c1c31;
+  background: #98152d;
 }
 .btn-forest {
-  background: #175537;
-  border-color: #175537;
-  color: #fffaf0;
+  background: #b91c34;
+  border-color: #b91c34;
+  color: #ffffff;
 }
 .btn-forest:hover {
-  background: #103e29;
+  background: #98152d;
 }
 .christmas-hero {
-  box-shadow: 0 12px 32px #173b1f0c;
+  background: linear-gradient(120deg, var(--hero-bg), #94142e);
+  border-color: #c94057;
+  box-shadow: 0 12px 32px #a5163014;
 }
 .hero-copy h2 em {
-  color: #f0ca7c;
+  color: #ffdae4;
 }
 .hero-copy .btn-forest {
-  background: #b12a3d;
-  border-color: #d1575e;
-  color: #fff9e9;
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #a51630;
 }
 .hero-copy .btn-forest:hover {
-  background: #c63749;
+  background: #ffe9ef;
 }
 .hero-copy .season-pill {
-  color: #f2d594;
-  border-color: #e6cc8d66;
+  color: #ffffff;
+  border-color: #ffffff66;
 }
 .hero-copy .season-pill > span {
-  background: #ed9b94;
+  background: #ffffff;
 }
 .welcome-replay {
   background: none;
@@ -6705,15 +6711,15 @@ select.input-field {
   color: #fff5dc;
 }
 .countdown-card {
-  background: linear-gradient(140deg, #8f2638, #6e1d2d);
-  color: #fff3d8;
-  border-color: #a9434f;
+  background: linear-gradient(140deg, #bc203b, #99142d);
+  color: #ffffff;
+  border-color: #c94057;
 }
 .countdown-card strong,
 .countdown-card > p,
 .countdown-card .text-link,
 .countdown-card > span {
-  color: #fff3d8;
+  color: #ffffff;
 }
 .quick-icon.blue {
   color: var(--festive-red);
@@ -6726,6 +6732,10 @@ select.input-field {
 .santa-welcome {
   background: linear-gradient(125deg, var(--forest-bg), var(--cream));
   border-color: color-mix(in srgb, var(--forest) 18%, transparent);
+  --hero-text: var(--text-main);
+}
+.santa-welcome em {
+  color: var(--forest);
 }
 .santa-gift-art {
   color: var(--festive-red);
@@ -6772,10 +6782,10 @@ select.input-field {
   width: min(1080px, 100%);
   padding: 0;
   overflow: hidden;
-  border: 1px solid #c79c4b80;
-  background: #08271e;
+  border: 1px solid #bd294c80;
+  background: #78132c;
   border-radius: 20px;
-  color: #fff7e4;
+  color: #ffffff;
   box-shadow: 0 30px 120px #0008;
 }
 .victoria-welcome-modal > .modal-heading {
@@ -6785,7 +6795,7 @@ select.input-field {
   position: relative;
   width: 100%;
   aspect-ratio: 16/9;
-  background: #062c25;
+  background: #78132c;
   isolation: isolate;
   overflow: hidden;
 }
@@ -6800,8 +6810,8 @@ select.input-field {
   inset: 0;
   background: linear-gradient(
     90deg,
-    #031b18e6 0%,
-    #031b1880 29%,
+    #590d25f5 0%,
+    #590d2590 29%,
     transparent 62%
   );
   pointer-events: none;
@@ -6820,7 +6830,7 @@ select.input-field {
   display: flex;
   align-items: center;
   gap: 7px;
-  color: #f0d496;
+  color: #ffe1ea;
   font-size: 10px;
   letter-spacing: 1.4px;
 }
@@ -6828,11 +6838,11 @@ select.input-field {
   font-size: clamp(28px, 3.7vw, 46px);
   line-height: 1.17;
   letter-spacing: -1.6px;
-  color: #fff6dd;
+  color: #ffffff;
   margin: 20px 0 16px;
 }
 .victoria-welcome-copy p {
-  color: #d2e0d3;
+  color: #ffe7ef;
   font-size: 13px;
   line-height: 1.8;
   max-width: 280px;
@@ -6856,8 +6866,8 @@ select.input-field {
   align-items: center;
   gap: 7px;
   border: 1px solid #ffffff42;
-  background: #06271ed9;
-  color: #fff4da;
+  background: #80162edd;
+  color: #ffffff;
   padding: 9px 12px;
   font-size: 11px;
   border-radius: 25px;
@@ -6871,11 +6881,11 @@ select.input-field {
 }
 .victoria-video-controls > button {
   border: 1px solid #ffffff40;
-  color: #fff5dd;
+  color: #ffffff;
   border-radius: 20px;
   padding: 9px 11px;
   min-height: 38px;
-  background: #06271edc;
+  background: #80162edd;
   display: flex;
   align-items: center;
   gap: 7px;
@@ -6900,7 +6910,8 @@ select.input-field {
   align-items: center;
   gap: 10px;
   padding: 17px 22px;
-  color: #e3ce9d;
+  color: var(--forest);
+  background: var(--surface-color);
   font-size: 11px;
   flex-wrap: wrap;
 }
@@ -6908,12 +6919,12 @@ select.input-field {
   flex-shrink: 0;
 }
 .victoria-welcome-foot > small {
-  color: #a9bfaf;
+  color: var(--text-muted);
   font-size: 10px;
   margin-left: auto;
 }
 .victoria-welcome-modal :focus-visible {
-  outline-color: #f0d496;
+  outline-color: #ef7a94;
 }
 .santa-welcome-actions {
   display: flex;
@@ -7051,8 +7062,8 @@ select.input-field {
   .victoria-welcome-shade {
     background: linear-gradient(
       0deg,
-      #08271e 12%,
-      #08271eeb 25%,
+      #78132c 12%,
+      #78132ceb 25%,
       transparent 62%
     );
   }
@@ -7153,21 +7164,21 @@ select.input-field {
 /* The welcome has a permanent entry point and explicit audio/replay controls. */
 .sidebar .victoria-video-nav {
   width: 100%;
-  border: 1px solid #ddbd724f;
-  background: #d0aa4b15;
-  color: #ffe1a2;
+  border: 1px solid #ffffff65;
+  background: #ffffff16;
+  color: #ffffff;
   text-align: left;
 }
 .sidebar .victoria-video-nav:hover {
-  background: #d0aa4b28;
-  color: #fff6dc;
+  background: #ffffff28;
+  color: #ffffff;
 }
 .victoria-video-badge {
   margin-left: auto;
   border-radius: 4px;
   padding: 2px 6px;
-  background: #e4c477;
-  color: #193d2b;
+  background: #ffffff;
+  color: #a51630;
   font-size: 9px;
   font-weight: 650;
 }
@@ -7192,7 +7203,7 @@ select.input-field {
   overflow: hidden;
   border: 0;
   border-radius: 8px;
-  background: #0b3528;
+  background: #78132c;
 }
 .victoria-replay-thumbnail > img {
   width: 100%;
@@ -7247,28 +7258,28 @@ select.input-field {
   font-size: 11px;
 }
 .victoria-listen {
-  background: #e8c87c;
-  color: #173b2a;
-  border-color: #f1d99d;
+  background: #ffffff;
+  color: #a51630;
+  border-color: #ffffff;
   font-weight: 650;
 }
 .victoria-listen:hover {
-  background: #f3d998;
+  background: #ffe9ef;
 }
 .victoria-welcome-actions .victoria-enter {
   margin-top: 0;
-  background: #092b2180;
-  color: #fff4d9;
-  border-color: #d5c09280;
+  background: #b91c3480;
+  color: #ffffff;
+  border-color: #ffffff80;
 }
 .victoria-repeat {
   display: inline-flex;
   gap: 6px;
   align-items: center;
   padding: 7px 10px;
-  border: 1px solid #c7b47c60;
-  color: #f0d49a;
-  background: #ffffff08;
+  border: 1px solid var(--border-color);
+  color: var(--forest);
+  background: var(--forest-bg);
   border-radius: 7px;
   font-size: 10px;
   margin-left: auto;
@@ -7292,7 +7303,7 @@ select.input-field {
 .victoria-video-seek > input {
   width: 100%;
   height: 5px;
-  accent-color: #efcc7d;
+  accent-color: #ffb4c8;
   margin: 0;
   cursor: pointer;
 }

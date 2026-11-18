@@ -40,7 +40,7 @@ export default function ChristmasEffects({ enabled }) {
                 cy={(i % 4 === 0 ? 5 : i % 2 === 0 ? 9 : 16) + 6}
                 rx="2"
                 ry="3"
-                fill={["#bd8b65", "#7f9d82", "#c77c6a", "#d1b476"][i % 4]}
+                fill={["#df3653", "#fff5f8", "#b91c34", "#f0a8b9"][i % 4]}
               />
             </g>
           ))}
