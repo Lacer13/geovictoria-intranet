@@ -1,4 +1,4 @@
-// Source animation study only. The runtime roster continues using ConectIA v1.
+// Illustrated source poses shared by the original study and playable ConectIA.
 export const CONECTIA_V2_PARTS = {
   headIdle: [0, 0, 418, 418], headAim: [418, 0, 418, 418], headJoy: [836, 0, 418, 418],
   tool: [0, 418, 418, 418], aim: [418, 418, 418, 418], recoil: [836, 418, 418, 418],

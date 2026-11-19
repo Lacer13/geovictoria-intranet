@@ -10,10 +10,12 @@
     "poses:tecnoia": "node scripts/build-pose-sheet.mjs design/characters/tecnoia/poses-v2-borrador-02.manifest.json",
     "sprites:tecnoia-v2": "node scripts/build-tecnoia-v2.mjs",
     "sprites:conectia-v2": "node scripts/build-conectia-v2.mjs",
+    "sprites:conectia-game": "node scripts/build-conectia-game.mjs",
     "sprites:tecnoia-game": "node scripts/build-tecnoia-game.mjs",
     "deploy:preview:tecnoia": "npm test && npm run build && npx --yes firebase-tools@15.34.1 hosting:channel:deploy tecnoia-v2 --expires 7d --no-authorized-domains --project geovictoria-intranet-peru --non-interactive",
+    "deploy:preview:conectia": "npm test && npm run build && npx --yes firebase-tools@15.34.1 hosting:channel:deploy conectia-v2 --expires 7d --no-authorized-domains --project geovictoria-intranet-peru --non-interactive",
     "lint": "oxlint",
-    "test": "node --test tests/portal.test.js tests/secret-santa.test.js tests/secret-santa-email.test.js tests/platform-features.test.js tests/quiz.test.js tests/arcade.test.js tests/guardian-powers.test.js tests/guardian-sprites.test.js tests/sprite-layout.test.js tests/tecnoia-v2.test.js tests/tecnoia-integration.test.js tests/conectia-v2.test.js",
+    "test": "node --test tests/portal.test.js tests/secret-santa.test.js tests/secret-santa-email.test.js tests/platform-features.test.js tests/quiz.test.js tests/arcade.test.js tests/guardian-powers.test.js tests/guardian-sprites.test.js tests/sprite-layout.test.js tests/tecnoia-v2.test.js tests/tecnoia-integration.test.js tests/conectia-v2.test.js tests/conectia-integration.test.js",
     "test:rules": "node --test --test-concurrency=1 tests/firestore.rules.test.cjs tests/quiz.rules.test.cjs",
     "preview": "vite preview"
   },

@@ -86,7 +86,7 @@ try {
   })));
   for (const element of document.querySelectorAll("button,input,select")) element.disabled = false;
   get("play").disabled = get("reduced").checked;
-  get("status").textContent = "Estudio de ConectIA: 90 fotogramas en tres clips. Disparo cada 12 pasos, Ráfaga cada 6; celebración propia de 3 segundos. Integración jugable pendiente.";
+  get("status").textContent = "Estudio original: 90 fotogramas en tres clips. El piloto de /juego ya integra 221 sprites, eventos de disparo, sonido y recuperación ante fallos. Esta página conserva las secuencias fuente.";
   paint(); requestAnimationFrame(loop);
 } catch (error) {
   pause(); for (const element of document.querySelectorAll("button,input,select")) element.disabled = true;

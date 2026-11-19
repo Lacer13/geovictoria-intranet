@@ -1,6 +1,28 @@
-# ConectIA v2 · Estudio de actuación
+# ConectIA v2 · Piloto jugable
 
-19 de noviembre de 2026. Primer hito de ConectIA después de cerrar y publicar el piloto TecnoIA. **Fuente y tres secuencias de estudio producidas; integración jugable pendiente.** El arcade conserva ConectIA v1.
+19 de noviembre de 2026. **ConectIA v2 integrado al selector, partida y resultados en esta rama, con Ráfaga y controles aceptados por el usuario en su teléfono.** [Vista previa jugable](https://geovictoria-intranet-peru--conectia-v2-97yuioz1.web.app/juego), disponible hasta el 26 de noviembre a las 17:20 (Lima). Publicación de producción pendiente.
+
+## Integración jugable actual
+
+El paquete público contiene **221 sprites de 192×192 en dos páginas WebP**, diez clips, miniatura, fuente limpia y metadatos de pivote/boquilla. Incluye reposo, movimiento, disparo normal, Ráfaga, apuntado sostenido, esquiva de presentación, daño, activación de poder, descanso/derrota y la celebración completa de 72 fotogramas. No se concede a ConectIA el poder de esquiva de TecnoIA: conserva Ráfaga.
+
+Cada emisión aceptada conserva su intervalo de 12 o 6 pasos. Cambiar el poder durante una reacción no reinicia ni estira el disparo anterior. La cabeza y la baliza pueden reaccionar al moverse, recibir daño o activar el poder mientras la mano libre dispara horizontalmente. Se alinea el arte con el origen físico anterior y se reutilizan los eventos, sonido deduplicado e interpolación de proyectiles del piloto. Mecánicas, daño, recargas y colisiones se conservan.
+
+El selector demuestra el disparo y la Ráfaga; resultados reproduce «Conexión lograda» una vez durante 3 segundos y sostiene el reposo final. La carga solicita únicamente el personaje elegido. Si falla una hoja, utiliza piezas v2; si falla la fuente y quedan las hojas completas, utiliza atlas, priorizando la emisión; si no queda v2 completo, recupera v1 con proyector de respaldo y reintento. TecnoIA conserva su implementación y los otros diez guardianes siguen en v1.
+
+```sh
+npm run sprites:conectia-game
+npm run dev
+# Abrir /juego, elegir ConectIA.
+```
+
+Recursos: [metadatos](../../../public/characters/conectia/sprites-v2.json), [página 1](../../../public/characters/conectia/sprites-v2-1.webp), [página 2](../../../public/characters/conectia/sprites-v2-2.webp), [fuente](../../../public/characters/conectia/rig-navidad-v2.png) y [registro de vista previa](../../../docs/releases/conectia-v2-preview-2026-11-19.json). El paquete suma aproximadamente 3,44 MB. Las hojas de 2304×3072 y 2304×576 contienen unos 33,6 MB RGBA antes de copias/GPU.
+
+**91 pruebas y build correctos.** Las nueve pruebas de integración cubren cadencias, cambio de poder, 30/60/144 FPS, pausa, movimiento/daño/disparo, boquilla, las 221 celdas y fallos de carga. Una partida completa con Ráfaga llega a victoria y coincide con la simulación v1 en resultado, puntaje, pasos y vidas. Los recursos publicados coinciden por SHA-256 con el build.
+
+El usuario confirmó «Sí, se ve y responde bien» al consultar claridad del disparo al activar Ráfaga y respuesta de controles en su teléfono. Modelo y navegador no informados; no se midieron FPS. La revisión del navegador comprobó selector/poder, partida, Ráfaga, pausa/reanudación y efectos reducidos a 844×390 y 320×568 con controles grandes. A 320 px no hay desbordamiento y los tres controles quedan dentro de la pantalla. [Partida](integracion-v2-rafaga.jpg) y [320 px](integracion-v2-320.jpg). No se envió puntaje al ranking.
+
+## Estudio original conservado
 
 ## Resultado
 
@@ -45,6 +67,6 @@ La petición transparente dejó residuos, por lo que se produjo una fuente opaca
 
 Revisión en navegador local: celebración completa hasta `72/72 · reposo`; disparo normal hasta `12/12 · apuntado`; Ráfaga hasta `6/6 · apuntado`; comparación de seis/doce emisiones, cámara lenta, fondos claro y oscuro, tamaños 112/160/320 y pose reducida. Sin errores ni advertencias de consola. No se probó todavía esta versión en teléfonos reales.
 
-Los metadatos declaran `kind: animation-study` y `productionReady: false`. Pendientes: estados de movimiento, impacto, poder y descanso jugables; carga por personaje y respaldo; eventos de emisión, interpolación, sonido; partida y resultados; validación móvil y publicación individual. Se reutilizará la infraestructura del piloto conservando la actuación propia de ConectIA. No se inicia CierreIA hasta cerrar esos criterios.
+Los metadatos de estas hojas fuente conservan `kind: animation-study` y `productionReady: false`. Los recursos públicos posteriores declaran `kind: playable-pilot` y `productionReady: true`, indicando estructura jugable completa. La integración descrita arriba reutiliza la infraestructura de TecnoIA y conserva la actuación propia de ConectIA. Pendiente de cierre: publicación individual; CierreIA espera.
 
 [Roadmap de animación](../../../docs/roadmap-animacion-guardianes.md).

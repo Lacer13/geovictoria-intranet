@@ -131,6 +131,7 @@ export async function loadAssets(onProgress = () => {}, character = CHARACTERS[0
         atlas.pages.some((p) => !/^[a-zA-Z0-9_-]+\.webp$/.test(p.image))) throw new Error("Invalid character manifest");
       for (const name of ["idle", "moving", "shooting", "aim", "dash", "damage", "power", "defeat", "victory"])
         if (!atlas.clips[name]) throw new Error("Incomplete character animation");
+      if (character.id === "conectia" && !atlas.clips.burst) throw new Error("Missing burst animation");
     } catch { failed.push(character.animation.metadata); atlas = null; }
     report(0.25);
     const base = character.animation.metadata.slice(0, character.animation.metadata.lastIndexOf("/") + 1);

@@ -3,8 +3,7 @@ import { characterPose, rigPose, TECNOIA_PARTS } from "./characters.js";
 import { drawRig } from "./rig.js";
 import { spriteFrame } from "./animation.js";
 import { activePower } from "./powers.js";
-import { drawTecnoiaV2 } from "./tecnoiaV2.js";
-import { sampleTecnoiaGameplay, TECNOIA_GAME_PIVOT } from "./tecnoiaGameplay.js";
+import { characterAnimation } from "./characterAnimation.js";
 import { atlasFrame, drawAtlasFrame } from "./spriteAtlas.js";
 
 function rounded(ctx, x, y, width, height, radius, color) {
@@ -50,20 +49,21 @@ export function drawCharacter(
   ctx.globalAlpha *= rig.alpha;
   if (animation?.version === 2) {
     const view = presentation || { pose, elapsed: seconds };
-    const overlay = (view.armed || view.shotElapsed !== null && view.shotElapsed < 0.2) &&
-      !["shooting", "aim", "victory", "defeat"].includes(view.pose);
+    const implementation = characterAnimation(character);
+    const overlay = (view.armed || view.shotElapsed !== null && view.shotElapsed < (view.shotDuration || 0.2)) &&
+      !["shooting", "burst", "aim", "victory", "defeat"].includes(view.pose);
     const useParts = animation.source && (overlay || !animation.atlas || view.pose === "moving");
     if (useParts) {
-      const sample = sampleTecnoiaGameplay(view.pose, view.elapsed, reduced, view);
-      drawTecnoiaV2(ctx, animation.source, sample, {
-        x: -TECNOIA_GAME_PIVOT.x * size / 320,
-        y: -TECNOIA_GAME_PIVOT.y * size / 320, size,
+      const sample = implementation.sample(view.pose, view.elapsed, reduced, view);
+      implementation.draw(ctx, animation.source, sample, {
+        x: -implementation.pivot.x * size / 320,
+        y: -implementation.pivot.y * size / 320, size,
       });
     } else {
       // If only the atlas survived a source failure, emission takes priority
       // over a head reaction so a visible muzzle remains synchronized.
-      const clip = overlay ? "shooting" : view.pose;
-      const elapsed = overlay ? view.shotElapsed ?? 0.2 : view.elapsed;
+      const clip = overlay ? view.shotClip || "shooting" : view.pose;
+      const elapsed = overlay ? view.shotElapsed ?? view.shotDuration ?? 0.2 : view.elapsed;
       const frame = atlasFrame(animation.atlas, clip, elapsed, reduced);
       drawAtlasFrame(ctx, animation.pages, animation.atlas, clip, elapsed, {
         x: -frame.anchors.pivot.x * size / frame.w,

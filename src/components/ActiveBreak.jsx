@@ -36,7 +36,7 @@ import {
 import { clearInput, useGameInput } from "../game/input.js";
 import { drawGame } from "../game/render.js";
 import { consumeGameEvents } from "../game/emission.js";
-import { tecnoiaPresentation } from "../game/tecnoiaGameplay.js";
+import { characterAnimation } from "../game/characterAnimation.js";
 import { createGameAudio } from "../game/audio.js";
 import {
   readGameProfile,
@@ -305,7 +305,7 @@ export default function ActiveBreak() {
         assets.images,
         character,
         { ...settingsRef.current, actor: actor.current, animation: assets.animation,
-          presentation: assets.animation ? tecnoiaPresentation(game.current, actor.current, clock.alpha) : null },
+          presentation: assets.animation ? characterAnimation(character).present(game.current, actor.current, clock.alpha) : null },
       );
       if (game.current.tick % 6 === 0 || game.current.phase !== "playing")
         setHud(gameSummary(game.current));

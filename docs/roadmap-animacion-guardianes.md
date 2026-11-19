@@ -1,12 +1,12 @@
 # Roadmap de animación · Guardianes con gestos y disparos claros
 
-18 de noviembre de 2026 · Actualizado el 19 de noviembre de 2026. **Estado: piloto TecnoIA v2 cerrado y publicado. ConectIA v2 en estudio: fuente limpia, disparo normal, Ráfaga y celebración propia completos; integración jugable pendiente.**
+18 de noviembre de 2026 · Actualizado el 19 de noviembre de 2026. **Estado: TecnoIA v2 cerrado y publicado. ConectIA v2 integrado con 221 sprites y Ráfaga sincronizada, aceptado en el teléfono del usuario; producción pendiente.**
 
 ## Objetivo
 
 Que cada guardián actúe y se exprese al jugar: que se vea cómo apunta, desde dónde dispara, cómo reacciona y cómo usa su poder. La referencia es la claridad de VictorIA Clásico, conservando el estilo navideño y la identidad aprobada de los doce guardianes.
 
-El trabajo se hará **de uno en uno**, empezando por TecnoIA. Se termina y comprueba un personaje antes de producir el siguiente. Las entregas se registran al final de este documento; producción utiliza TecnoIA v2 y los once guardianes restantes conservan v1.
+El trabajo se hará **de uno en uno**, empezando por TecnoIA. Se termina y comprueba un personaje antes de producir el siguiente. Producción utiliza TecnoIA v2; la vista previa de la rama incorpora también ConectIA v2. Los otros diez guardianes conservan v1.
 
 **Avance del 19 de noviembre:** se preparó la copia local y una [primera lámina de ocho poses de TecnoIA v2](../design/characters/tecnoia/README-v2.md), con proyector en la mano libre y expresiones diferenciadas. Es un borrador para revisión: la limpieza de bordes, las secuencias completas, los anclajes y la integración siguen pendientes. Los recursos jugables v1 se conservan.
 
@@ -208,7 +208,7 @@ Los recursos se publicarán como v2 junto a la v1 existente, con metadatos expl�
 
 El piloto definirá la cantidad final de poses, fotogramas, cuadrícula, tamaño de celdas y presupuesto de carga, partiendo del objetivo de celebración completa de la sección 3.E. No hay un máximo de 4×4 o 7×7; se usarán hojas mayores o varias páginas si la secuencia lo necesita y conserva la definición y el rendimiento. Se medirá el peso de las variantes y su legibilidad antes de repetirlas. No se prometen plazos para los doce personajes sin conocer ese resultado.
 
-**Siguiente acción:** integrar el [estudio de ConectIA v2](../design/characters/conectia/README-v2.md) en el arcade, completar sus estados jugables y verificar la transición entre cadencia normal y Ráfaga durante movimiento, daño y pausa. Reutilizar eventos, anclajes, carga y recuperación del piloto; mantener su vitoreo y pulgar arriba y conservar cadencias/daño. TecnoIA ya está comprobado en producción y el usuario aceptó disparo y controles en su teléfono; esa aceptación no se extiende a la nueva ConectIA. Historia y multijugador continúan en el [roadmap general](roadmap-videojuego.md).
+**Siguiente acción:** integrar el PR y publicar [ConectIA v2 validado](https://geovictoria-intranet-peru--conectia-v2-97yuioz1.web.app/juego). El usuario confirmó claridad del disparo durante Ráfaga y respuesta de controles en su teléfono. La integración conserva el intervalo de cada descarga al activar o terminar el poder, incluso durante movimiento y daño. No iniciar CierreIA hasta comprobar la publicación. Historia y multijugador continúan en el [roadmap general](roadmap-videojuego.md).
 
 ## 8. Primer hito · Poses y extracción (registro histórico)
 
@@ -290,3 +290,17 @@ La revisión de producción comprobó inicio de partida, disparo asistido, pausa
 | Juego y publicación | Pendientes | ConectIA del arcade conserva v1. Faltan estados restantes, eventos/sonido/interpolación, recuperación, partida completa, móvil real y publicación individual. CierreIA espera. |
 
 Los metadatos declaran `kind: animation-study` y `productionReady: false`. El estudio no guarda puntos y no se desplegó sobre producción. Las fuentes, prompts, scripts, hojas, GIF y capturas quedan versionados en la rama de ConectIA.
+
+## 14. ConectIA · Integración jugable y vista previa
+
+| Entrega | Estado del 19 de noviembre | Evidencia |
+| --- | --- | --- |
+| Catálogo y recursos | Integrados | 221 sprites de 192 px, diez clips, dos páginas, fuente limpia y miniatura. [Guía jugable](../design/characters/conectia/README-v2.md), comando `npm run sprites:conectia-game`. |
+| Normal y Ráfaga | Sincronizados | Cada descarga conserva su intervalo aceptado de 12/6 pasos; activar o terminar el poder no estira ni repite la reacción anterior. Sonido una vez por evento. |
+| Movimiento, daño y poder | Compuestos | Cabeza/baliza reaccionan mientras la mano dispara a la derecha. Boquilla e interpolación coinciden con el origen físico anterior; reglas conservadas. |
+| Selección y resultados | Conectados | Demostración de Ráfaga, celebración de 72 fotogramas a 24 FPS, una reproducción de 3 segundos y reposo sostenido. |
+| Carga y respaldo | Comprobados | Solo el guardián elegido; piezas v2, atlas o v1 según el fallo, conservando un proyector visible y reintento. |
+| Verificación técnica | 91 pruebas y build correctos | Nueve pruebas nuevas; incluye partida con Ráfaga hasta victoria, comparada con v1 en resultado/puntaje/pasos/vidas. Se conservan las pruebas de TecnoIA. |
+| Firebase | Vista previa publicada | [Canal ConectIA](https://geovictoria-intranet-peru--conectia-v2-97yuioz1.web.app/juego), vence el 26 de noviembre a las 17:20 (Lima). [Registro y huellas](releases/conectia-v2-preview-2026-11-19.json). |
+| Aceptación móvil | Confirmada por el usuario | «Sí, se ve y responde bien» sobre disparo durante Ráfaga y controles. Modelo/navegador no informados; sin medición de FPS. |
+| Cierre | Pendiente | Revisión e integración del PR y publicación de producción antes de CierreIA. |
