@@ -1,0 +1,66 @@
+{
+  "date": "2026-11-19",
+  "project": "geovictoria-intranet-peru",
+  "channel": "conectia-v2",
+  "url": "https://geovictoria-intranet-peru--conectia-v2-97yuioz1.web.app/juego",
+  "hostingVersion": "9f49c47de6d060b4",
+  "expiresAt": "2026-11-26T22:20:35.013993273Z",
+  "productionDeployed": false,
+  "phoneValidation": "accepted",
+  "resources": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "bytes": 1546,
+      "sha256": "e693d5db877ee5ecb50c9263257f7cbf0a9f8f7c28d554c5cd7d2f7ca3fd625b"
+    },
+    {
+      "path": "assets/GamePage-BHXUru2u.js",
+      "status": 200,
+      "bytes": 65474,
+      "sha256": "970760f3639e2eeebd1294dbd5347820f0253c8ab84964cf841373b9d33e05d9"
+    },
+    {
+      "path": "assets/GamePage-BpzdetKe.css",
+      "status": 200,
+      "bytes": 16446,
+      "sha256": "5615c68bd3904def1819198a3126d8a781ddf403369bfd1e9ae5b1673f41db51"
+    },
+    {
+      "path": "characters/conectia/sprites-v2.json",
+      "status": 200,
+      "bytes": 85865,
+      "sha256": "e4e72114cc283d8dd776d34fb45fbe5db5ef26444bec72518ee7c66915fc1f57"
+    },
+    {
+      "path": "characters/conectia/sprites-v2-1.webp",
+      "status": 200,
+      "bytes": 1863330,
+      "sha256": "b64a40e3efb74487bb6c2b53b023ff978f578789520f31806bda7e0c0136ee1d"
+    },
+    {
+      "path": "characters/conectia/sprites-v2-2.webp",
+      "status": 200,
+      "bytes": 284484,
+      "sha256": "7131a7c4ed85746baaf460007d497507800871b88ad5250282e5702007e664c5"
+    },
+    {
+      "path": "characters/conectia/rig-navidad-v2.png",
+      "status": 200,
+      "bytes": 1184001,
+      "sha256": "191e228d78c8ad94dda62001ec71397dd1f8e98887f5d45ca21414cee43e6106"
+    },
+    {
+      "path": "characters/conectia/portrait-v2.webp",
+      "status": 200,
+      "bytes": 20722,
+      "sha256": "aa4d3a20afbc314d88ec41d6c28352dc1464fd5d3c1c787bf2cb8e6ecabdecd4"
+    }
+  ],
+  "phoneFeedback": {
+    "source": "Confirmación del usuario en el chat",
+    "scope": "Claridad del disparo al activar Ráfaga y respuesta de controles en su teléfono",
+    "device": "No informado",
+    "fpsMeasured": false
+  }
+}

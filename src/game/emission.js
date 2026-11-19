@@ -11,6 +11,7 @@ export function recordShot(state, projectiles, kind = "basic") {
   };
   const event = {
     type: "shot", id: ++state.shotSequence, tick: state.tick, kind, origin,
+    intervalTicks: kind === "basic" ? state.player.shot : null,
     sound: kind === "basic" ? "shoot" : null,
     projectiles: projectiles.map((b) => ({ x: b.x, y: b.y, width: b.width, height: b.height, vx: b.vx, vy: b.vy })),
   };
@@ -19,7 +20,7 @@ export function recordShot(state, projectiles, kind = "basic") {
     emissionX: origin.x - bullet.width / 2, emissionY: origin.y - bullet.height / 2,
     followsEmitter: kind === "basic",
   });
-  state.player.lastShot = { id: event.id, tick: event.tick, kind, origin };
+  state.player.lastShot = { id: event.id, tick: event.tick, kind, origin, intervalTicks: event.intervalTicks };
   state.events.push(event);
   return event;
 }
