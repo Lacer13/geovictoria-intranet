@@ -27,6 +27,23 @@ Referencias: [`Sprinn nuevo Victoria.png`](../public/Sprinn%20nuevo%20Victoria.p
 
 ## 2. Dirección visual propuesta
 
+### Formato de las hojas: qué significa 2×2 o 4×4
+
+Se verificaron los archivos y metadatos de los doce guardianes. La estructura actual es:
+
+| Recurso                          | Distribución                                 | Contenido real                                                                                                   |
+| -------------------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Referencia VictorIA Clásico      | 2 columnas × 2 filas                         | Cuatro poses ilustradas diferentes                                                                               |
+| Atlas de piezas de cada guardián | Composición 2×2, PNG de 1254 × 1254          | Cabeza completa, mano con accesorio, mano abierta y un espacio vacío; no es una secuencia de cuatro fotogramas   |
+| Hoja de animación actual         | 24 columnas × 9 filas, WebP de 3840 × 1440   | 216 espacios de 160 × 160; se usan 184 fotogramas y los espacios restantes quedan libres                         |
+| Celebración actual               | Dos filas de 24 fotogramas dentro de la hoja | 48 fotogramas reproducidos en un bucle de 1,4 segundos, aproximadamente 34,3 fotogramas de animación por segundo |
+
+La frecuencia de una secuencia de animación es distinta de la frecuencia de dibujo del juego. Las dimensiones de la cuadrícula son una forma de empaquetar imágenes; cambiar de 2×2 a 4×4 no determina por sí solo la calidad.
+
+**Para v2 se incorpora el formato 4×4 como plancha de revisión de 16 fotogramas por bloque.** Cada bloque mostrará el personaje completo en poses consecutivas, numeradas y en el orden de reproducción. Se podrán usar varios bloques para una acción. Por ejemplo, una celebración de 48 fotogramas puede revisarse como **tres planchas 4×4**; no se limitará a 16 fotogramas por tener una cuadrícula de cuatro filas y cuatro columnas.
+
+El atlas de distribución para el juego podrá agrupar esos mismos fotogramas de otra forma si mejora el tamaño y la carga. Los metadatos definirán su orden, duración y puntos de anclaje. El atlas de piezas seguirá separado de las hojas de secuencias completas.
+
 **Disparo básico:** un proyector compacto de energía integrado en la **mano libre**, con boquilla circular reconocible. La mano deja de saludar, se orienta hacia la derecha del escenario y adopta una pose de apuntado. La otra mano conserva la llave, maletín, campana o accesorio de su área.
 
 Esta es la propuesta para desarrollar con el piloto, todavía no un recurso producido. El proyector tendrá materiales y colores de cada guardián, manteniendo un funcionamiento común. No se convertirá automáticamente cada accesorio en un arma: por ejemplo, la llave de TecnoIA y el maletín de CierreIA conservarán su lectura original.
@@ -82,9 +99,29 @@ La preparación visual debe ser breve. El destello, el sonido y el proyectil com
 
 ### D. Entrega comprobable del piloto
 
+La entrega incluirá planchas 4×4 para revisar el ciclo de disparo y la celebración, además de sus hojas y metadatos jugables. Una plancha representa el personaje completo en cada celda; no se presentará un atlas de piezas como si fuera una secuencia animada.
+
 TecnoIA v2 tendrá fuentes de las nuevas poses, hoja de sprites, metadatos de animación/anclajes, miniatura coherente y una muestra dentro del juego. La vista previa mostrará el ciclo completo con emisión visual, para que «Disparando» enseñe de dónde sale el proyectil. Esa demostración no guardará puntos ni modificará una partida.
 
 Se probarán primero el disparo individual y continuo, después sus combinaciones con movimiento y esquiva. Solo se extenderá la plantilla cuando se cumplan los criterios de calidad de este documento.
+
+### E. Celebración completa de TecnoIA v2
+
+La celebración es una entrega obligatoria del piloto, con poses y expresiones específicas. Tendrá una secuencia con principio y final:
+
+1. **Entrada:** pasa de la pose de combate a una expresión alegre, relaja el proyector y prepara el gesto.
+2. **Gesto principal:** levanta su llave y acompaña la acción con mirada, cabeza y posición de dedos; conserva el accesorio y las proporciones.
+3. **Saludo:** la mano libre adopta una pose real de saludo, con variaciones de dedos y palma, coordinada con una expresión de celebración.
+4. **Remate:** una pausa breve y legible que permita reconocer la victoria.
+5. **Salida:** baja suavemente las manos y vuelve a una pose tranquila mientras la pantalla de resultados permanece disponible.
+
+**Objetivo inicial:** al menos 48 fotogramas con cambios visibles distribuidos entre esas fases. Se evaluará una secuencia de 48–72 fotogramas a 24 fotogramas de animación por segundo, aproximadamente 2–3 segundos; el piloto fijará los tiempos definitivos. Los fotogramas intermedios se producirán desde poses clave y transiciones coherentes. No basta con repetir o rotar una única mano ni con acelerar un bucle para aumentar la cifra de FPS.
+
+Entrada y salida serán secuencias de una sola reproducción. Si se decide mantener una parte central en bucle, tendrá un enlace continuo y no repetirá toda la entrada. Los botones de resultados seguirán respondiendo durante la animación. En efectos reducidos se mostrará una pose de victoria reconocible sin exigir reproducir la secuencia completa.
+
+La revisión se hará en velocidad normal, en cámara lenta para detectar saltos y al tamaño real dentro del juego. Se comprobarán el inicio, los cambios de gesto, la unión con el reposo, los dedos, el rostro y el encuadre. Se conservará una muestra sin audio para poder valorar el gesto por sí mismo.
+
+**Condición de salida del piloto:** completar y verificar tanto el disparo como esta celebración antes de pasar a ConectIA. Después, cada guardián recibirá su propia secuencia completa siguiendo su personalidad y accesorio; no se copiará el mismo saludo a los doce.
 
 ## 4. Ciclo para cada personaje
 
@@ -137,6 +174,6 @@ Las pruebas automáticas de cantidad de frames, alfa y márgenes se conservarán
 
 Los recursos se publicarán como v2 junto a la v1 existente, con metadatos explícitos por personaje. El catálogo podrá mezclar guardianes v1 y v2 durante el avance. Si falla un recurso nuevo, la recuperación conservará una representación completa y un anclaje válido, sin dibujar un proyector invisible que emita desde otro lugar.
 
-El piloto definirá la cantidad final de poses, fotogramas, tamaño de celdas y presupuesto de carga. Se medirá el peso de las variantes y su legibilidad antes de repetirlas. No se prometen plazos para los doce personajes sin conocer ese resultado.
+El piloto definirá la cantidad final de poses, fotogramas, tamaño de celdas y presupuesto de carga, partiendo de las planchas 4×4 y del objetivo de celebración completa de la sección 3.E. Se medirá el peso de las variantes y su legibilidad antes de repetirlas. No se prometen plazos para los doce personajes sin conocer ese resultado.
 
 **Siguiente acción:** producir la lámina de poses de **TecnoIA v2**, empezando por mano/proyector y expresión de apuntado; después integrar y comprobar su ciclo de disparo. Esta acción sigue pendiente. Historia y multijugador continúan en el [roadmap general](roadmap-videojuego.md); la prioridad inmediata es mejorar la actuación del elenco actual.

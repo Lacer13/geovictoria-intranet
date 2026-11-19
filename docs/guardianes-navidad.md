@@ -34,6 +34,8 @@ Cada carpeta `public/characters/<id>/` contiene:
 - `sprites-v1.json`: coordenadas de los fotogramas, duración y repetición de cada animación, fuente y SHA-256, rectángulos de piezas, poder y celebración.
 - `portrait-v1.webp`: miniatura del personaje completo para el selector.
 
+La composición 2×2 del PNG fuente separa piezas para animar; no limita el juego a cuatro imágenes. La hoja actual ofrece 24 × 9 espacios. En v2, el [roadmap](roadmap-animacion-guardianes.md) incorpora planchas de revisión 4×4 y una celebración con entrada, gesto, remate y salida; esas mejoras siguen pendientes. La secuencia v1 existente tiene 48 fotogramas en un bucle de 1,4 segundos.
+
 Las animaciones incluyen reposo (24), movimiento (24), disparo (12), esquiva (12), impacto (16), activación de poder (24), celebración (48) y descanso/derrota (24). La esquiva se usa como poder jugable de TecnoIA; las otras áreas usan su animación de poder. Los fotogramas se generan combinando las piezas y curvas del rig, con tiempos acordes a la mecánica; no son imágenes idénticas repetidas ni escenas nuevas que cambien de identidad entre fotogramas.
 
 El juego usa las hojas exportadas durante la partida y el rig de mayor resolución en la vista previa. Si falla la hoja, puede recurrir al rig; si faltan ambas imágenes, mantiene un dibujo de respaldo y ofrece reintentar. Se carga la hoja del personaje elegido, con una caché limitada; las doce hojas completas no se descargan al entrar. El selector tiene miniaturas, búsqueda por nombre/área, clásicos separados y vista previa de los gestos.
