@@ -27,7 +27,7 @@ Referencias locales: [`ActiveBreak.jsx`](../src/components/ActiveBreak.jsx), [`G
 
 La Estrella de Navidad mantiene encendidas las luces de Villa Victoria. Una anomalía llamada **Desfase** rompe su energía en fragmentos y descontrola los robots del taller. VictorIA debe recuperarlos, reparar las rutas y poner en marcha el trineo antes de la gran celebración.
 
-VictorIA conserva su **cabeza y manos flotantes, sin torso ni brazos**. La identidad visual combina rojo navideño, verde pino, blanco nieve y dorado. Los indicadores usan también símbolos y formas para distinguir equipos y objetivos.
+VictorIA conserva su **cabeza y manos flotantes, sin torso ni brazos**. La identidad visual combina rojo navideño, verde pino, blanco nieve y dorado. Ningún personaje llevará estrellas en accesorios, emblemas, herramientas ni efectos propios. Los indicadores usan también símbolos y formas para distinguir equipos y objetivos.
 
 La historia se cuenta con una introducción breve que pueda saltarse, señales durante el juego y un cierre por misión. La acción sigue siendo el centro de la experiencia.
 

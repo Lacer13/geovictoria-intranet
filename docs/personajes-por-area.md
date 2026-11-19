@@ -12,6 +12,8 @@ Este documento define propuestas de diseño. Todavía no se han producido doce i
 
 Todos comparten el universo visual de VictorIA: **cabeza y dos manos flotantes, sin torso, cuello ni brazos**, con proporciones y expresiones coherentes. Cada uno tendrá emblema, combinación secundaria de colores, accesorio y efecto reconocibles. Los colores de equipo tendrán una capa de identificación independiente.
 
+**Regla visual confirmada por el usuario:** ningún personaje llevará estrellas en su diseño, accesorios, emblemas, herramientas ni efectos propios. Se aplicará a las doce categorías y a sus variantes futuras.
+
 | Categoría        | Nombre provisional | Identidad visual propuesta                                     | Idea de habilidad para evaluar después                                    |
 | ---------------- | ------------------ | -------------------------------------------------------------- | ------------------------------------------------------------------------- |
 | Administración   | OrdenIA            | Emblema de engranaje y accesorios de organización dorados      | Colocar una baliza que ayude a proteger un objetivo                       |
@@ -19,7 +21,7 @@ Todos comparten el universo visual de VictorIA: **cabeza y dos manos flotantes, 
 | Comercial        | ConectIA           | Emblema de enlace y visor coral                                | Dar un impulso corto de desplazamiento a aliados próximos                 |
 | Country Manager  | Norte              | Emblema de brújula y detalles azul noche/dorado                | Marcar una zona de reunión con protección breve                           |
 | Enterprise       | Bastión            | Visor robusto y emblema hexagonal                              | Proyectar una barrera temporal de alcance limitado                        |
-| Eventos          | FestivIA           | Estrellas, luces y accesorios festivos                         | Crear una zona breve que potencie la recuperación de una habilidad aliada |
+| Eventos          | FestivIA           | Campanillas, luces y cintas festivas                           | Crear una zona breve que potencie la recuperación de una habilidad aliada |
 | Operaciones y ST | TecnoIA            | Evolución de la variante ST, visor azul y herramienta flotante | Reparar un escudo o dispositivo aliado dentro del juego                   |
 | Partners         | AlianIA            | Emblema de dos eslabones y detalles turquesa                   | Compartir una protección temporal con un aliado cercano                   |
 | Preventa         | Prisma             | Visor prismático y emblema de cristal                          | Mostrar trayectorias u objetivos durante unos instantes                   |
@@ -28,6 +30,10 @@ Todos comparten el universo visual de VictorIA: **cabeza y dos manos flotantes, 
 | SMB              | ÁgilIA             | Visor ligero y emblema de rayo, detalles naranja               | Disponer de una esquiva alternativa con una compensación en su recarga    |
 
 Las propuestas representan aportes positivos de cada categoría, sin convertir al personaje en una valoración de sus colaboradores. Son personajes ficticios; se diseñan como miembros del mismo equipo que colabora para recuperar la Estrella de Navidad.
+
+## Primer piloto visual
+
+Ya se preparó un [concepto de TecnoIA, de Operaciones y ST](../design/characters/tecnoia/README.md), con casco azul, engranaje, manos flotantes y una llave de reparación sin estrella. Es la primera referencia visual del elenco; la preparación de piezas y animaciones forma parte de la siguiente entrega.
 
 ## Identidad visual y habilidades son dos entregas distintas
 
