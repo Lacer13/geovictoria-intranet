@@ -6,9 +6,11 @@ Propuesta de producto y desarrollo · 18 de noviembre de 2026.
 
 Este documento propone el alcance. Las funciones descritas como próximas todavía no están implementadas. Cada etapa se valida con una versión jugable antes de ampliar el alcance; las fechas y el presupuesto se estimarán con los resultados del primer prototipo.
 
-## 1. Punto de partida verificado
+**Avance del 18 de noviembre:** la primera entrega jugable de la etapa 1 incorpora controles consistentes, pausa, colisiones y protección tras daño, HUD, audio configurable y el piloto TecnoIA con siete estados de animación. La [ficha de Pausa activa 2.0](pausa-activa-2.md) distingue lo implementado de la validación con dispositivos reales y las etapas pendientes. El mapa/prototipo de arena de la etapa 0 y el multijugador siguen pendientes.
 
-El juego actual es un arcade de disparos lateral en Canvas, integrado en React. Tiene movimiento con teclado y joystick táctil, tres vidas, enemigos, mejoras temporales, un jefe, dos personajes, monedas locales y envío del puntaje a Firestore.
+## 1. Punto de partida verificado antes de Pausa activa 2.0
+
+La revisión inicial encontró un arcade de disparos lateral en Canvas, integrado en React, con movimiento por teclado y joystick táctil, tres vidas, enemigos, mejoras temporales, un jefe, dos personajes, monedas locales y envío del puntaje a Firestore. La tabla conserva los hallazgos que motivaron la etapa 1; el estado posterior está en la ficha de la entrega.
 
 | Hallazgo en el código                                                                          | Consecuencia                                                                                      | Prioridad propuesta                                         |
 | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
@@ -184,4 +186,4 @@ Las decisiones que más cambian el alcance son: priorizar computadora o móvil, 
 
 Empezar por **Pausa activa 2.0**: controles consistentes, pausa, colisiones y daño justos, HUD claro, sonido configurable y estructura preparada para niveles. Después producir la primera misión del bosque como muestra de la historia. Con esa base probada, abrir el prototipo 1 vs 1 y medirlo antes de ampliar equipos.
 
-Cada entrega futura tendrá su cambio revisable en GitHub, comprobaciones correspondientes y publicación de la versión que se haya validado. Este roadmap no modifica el juego desplegado ni contrata infraestructura.
+Cada entrega futura tendrá su cambio revisable en GitHub, comprobaciones correspondientes y publicación de la versión que se haya validado. El roadmap no contrata infraestructura. Las entregas jugables implementadas se registran en su ficha correspondiente.

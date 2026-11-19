@@ -1,6 +1,6 @@
 import React from "react";
 import ActiveBreak from "./ActiveBreak";
-import { ArrowLeft } from "lucide-react";
+import { ChevronLeft, Snowflake } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const GamePage = () => {
@@ -25,19 +25,18 @@ const GamePage = () => {
             border: "none",
           }}
         >
-          <ArrowLeft size={20} />
+          <ChevronLeft size={20} />
           Volver al Portal
         </button>
+        <span className="game-page-season">
+          <Snowflake size={18} /> El taller de Navidad
+        </span>
       </div>
 
       {/* Game Container */}
-      <p className="game-instructions">
-        Una pausa con VictorIA · Muévete con las flechas o WASD y dispara con
-        espacio. En tu teléfono, usa los controles táctiles.
-      </p>
       <div className="game-page-content">
         <div className="game-stage">
-          <ActiveBreak isFullscreen={true} />
+          <ActiveBreak />
         </div>
       </div>
     </div>

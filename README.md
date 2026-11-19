@@ -82,6 +82,8 @@ La bienvenida v4 anima por separado el trineo, la cabeza y la mano de VictorIA. 
 
 ## Roadmap del videojuego
 
+La [primera entrega de Pausa activa 2.0](docs/pausa-activa-2.md) ya incorpora pausa, controles consistentes, protección tras daño, esquiva, interfaz navideña y el piloto animado TecnoIA. El ranking se conserva como casual; la arena multijugador sigue pendiente.
+
 La propuesta [VictorIA: Operación Estrella](docs/roadmap-videojuego.md) organiza la evolución desde el arcade actual: estabilidad y UX, mini historia navideña, prototipo de arena 1 vs 1, equipos pequeños y piloto hasta 5 vs 5. Incluye criterios de salida, arquitectura propuesta y decisiones de capacidad y alojamiento pendientes. Es planificación; las funciones futuras todavía no están implementadas.
 
 El alcance contempla [doce personajes, uno por cada categoría del directorio](docs/personajes-por-area.md), con diseño, piezas y animaciones coherentes. Se plantea producir uno completo, validar tres y ampliar el elenco por tandas; las habilidades especiales se prueban por roles después del kit común.

@@ -31,9 +31,9 @@ Todos comparten el universo visual de VictorIA: **cabeza y dos manos flotantes, 
 
 Las propuestas representan aportes positivos de cada categoría, sin convertir al personaje en una valoración de sus colaboradores. Son personajes ficticios; se diseñan como miembros del mismo equipo que colabora para recuperar la Estrella de Navidad.
 
-## Primer piloto visual
+## Primer piloto visual y animado
 
-Ya se preparó un [concepto de TecnoIA, de Operaciones y ST](../design/characters/tecnoia/README.md), con casco azul, engranaje, manos flotantes y una llave de reparación sin estrella. Es la primera referencia visual del elenco; la preparación de piezas y animaciones forma parte de la siguiente entrega.
+El [piloto TecnoIA, de Operaciones y ST](../design/characters/tecnoia/README.md), conserva casco azul, engranaje, manos flotantes y una llave de reparación sin estrella. Su concepto aprobado ya tiene un atlas de piezas y siete estados de animación integrados en [Pausa activa 2.0](pausa-activa-2.md). Los otros once personajes nuevos siguen pendientes; el selector también conserva los dos personajes históricos.
 
 ## Identidad visual y habilidades son dos entregas distintas
 

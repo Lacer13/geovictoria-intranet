@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "oxlint",
-    "test": "node --test tests/portal.test.js tests/secret-santa.test.js tests/secret-santa-email.test.js tests/platform-features.test.js tests/quiz.test.js",
+    "test": "node --test tests/portal.test.js tests/secret-santa.test.js tests/secret-santa-email.test.js tests/platform-features.test.js tests/quiz.test.js tests/arcade.test.js",
     "test:rules": "node --test --test-concurrency=1 tests/firestore.rules.test.cjs tests/quiz.rules.test.cjs",
     "preview": "vite preview"
   },

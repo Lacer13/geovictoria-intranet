@@ -16,10 +16,12 @@ El concepto muestra cabeza y dos manos flotantes, sin torso ni brazos, casco azu
 - Referencias de familia visual: `public/victoria_st_spritesheet.png` y `public/victoria-navidad-pose-a.webp`.
 - Verificación visual: cabeza, antenas, gorro, manos y herramienta completos dentro del encuadre; estrella retirada de la llave. Se comprobó el canal alfa y la transparencia en las cuatro esquinas.
 
-## Siguiente entrega del piloto
+## Piloto jugable · Pausa activa 2.0
 
-Preparar piezas con centros de giro y márgenes coherentes; después crear y probar animaciones de reposo, movimiento, disparo, esquiva, daño, victoria y derrota. La animación de habilidad se añadirá cuando se implemente su mecánica.
+El [atlas transparente](../../../public/characters/tecnoia/rig-navidad-v1.png) contiene cabeza completa, mano con llave y mano abierta. Fue preparado con ImageGen integrado a partir del concepto aprobado, conservando el personaje sin cuerpo ni estrellas. Su prompt está en [prompt-rig-v1.md](prompt-rig-v1.md).
 
-Este recurso es una referencia de diseño. Su integración jugable se realizará con las piezas y animaciones correspondientes, siguiendo el [catálogo por área](../../../docs/personajes-por-area.md) y el [roadmap](../../../docs/roadmap-videojuego.md).
+El Canvas combina las piezas con centros de giro y transformaciones independientes para siete estados: reposo, movimiento, disparo, esquiva, daño, victoria y derrota. Los rectángulos de origen, con margen y sin cortar antenas ni dedos, están en `src/game/characters.js`; las transformaciones están en `rigPose` y `src/game/render.js`. El atlas se usa sin alterar su alfa y sin generar manualmente cada fotograma. La animación de habilidad propia queda pendiente de implementar esa mecánica.
+
+El concepto original se conserva como referencia. El personaje piloto es seleccionable sin coste en [Pausa activa 2.0](../../../docs/pausa-activa-2.md); los otros once personajes se producirán por tandas, siguiendo el [catálogo por área](../../../docs/personajes-por-area.md) y el [roadmap](../../../docs/roadmap-videojuego.md).
 
 El prompt final de edición está en [prompt-final.md](prompt-final.md).

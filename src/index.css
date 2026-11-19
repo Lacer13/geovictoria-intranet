@@ -4014,7 +4014,12 @@ select.input-field {
 .game-page {
   min-height: 100dvh;
   width: 100%;
-  background: #0b0f19;
+  background: radial-gradient(
+    ellipse at 75% 0%,
+    #214e3e 0,
+    #0b2926 45%,
+    #061d1e 100%
+  );
   display: flex;
   flex-direction: column;
   --text-main: #fff;
@@ -4027,6 +4032,14 @@ select.input-field {
   padding: 20px 28px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+.game-page-season {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #d8deb9;
+  font-size: 14px;
 }
 .game-instructions {
   font-size: 12px;
@@ -4040,13 +4053,11 @@ select.input-field {
   padding: 0 28px 28px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 .game-stage {
   width: 100%;
-  max-width: 1100px;
-  height: min(72vh, 660px);
-  min-height: 450px;
+  max-width: 1120px;
 }
 .game-stage canvas {
   object-fit: contain !important;
@@ -4092,8 +4103,8 @@ select.input-field {
     padding: 0 12px 20px;
   }
   .game-stage {
-    height: 68dvh;
-    min-height: 470px;
+    height: auto;
+    min-height: 0;
   }
   .game-instructions {
     font-size: 11px;
@@ -4103,8 +4114,11 @@ select.input-field {
     min-width: 125px !important;
     padding: 12px !important;
   }
-  .game-stage h1 {
+  .game-stage > :not(.arcade) h1 {
     font-size: 30px !important;
+  }
+  .game-page-season {
+    font-size: 13px;
   }
   .game-stage .mobile-game-controls {
     padding: 20px !important;
