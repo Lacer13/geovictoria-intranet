@@ -82,7 +82,7 @@ La bienvenida v4 anima por separado el trineo, la cabeza y la mano de VictorIA. 
 
 ## Roadmap del videojuego
 
-El [roadmap de animación por personaje](docs/roadmap-animacion-guardianes.md) prioriza TecnoIA v2: nuevas poses de manos/rostro, emisor visible y sincronización entre gesto, sonido y proyectil. Se avanza de uno en uno. El [piloto de TecnoIA](design/characters/tecnoia/README-v2.md) ya tiene borradores de poses y separación automática con revisión a 160/320 px (`npm run poses:tecnoia`); la aprobación del arte, las secuencias completas y la integración jugable v2 siguen pendientes.
+El [roadmap de animación por personaje](docs/roadmap-animacion-guardianes.md) prioriza TecnoIA v2: nuevas poses de manos/rostro, emisor visible y sincronización entre gesto, sonido y proyectil. Se avanza de uno en uno. El [piloto de TecnoIA](design/characters/tecnoia/README-v2.md) ya tiene una fuente con alfa limpio, disparo de 12 fotogramas y celebración de estudio de 60 fotogramas (`npm run sprites:tecnoia-v2`), con anclajes, GIF y revisión en cámara lenta. La integración jugable, los eventos de simulación y los estados restantes de v2 siguen pendientes. Los borradores y la separación inicial se conservan (`npm run poses:tecnoia`).
 
 Los [doce guardianes por área](docs/guardianes-navidad.md) incluyen 2.208 sprites, un poder y una celebración propios. El selector permite buscar por área y probar los movimientos. Los [atlas y prompts de ImageGen](design/characters/README.md) y el exportador `npm run sprites` quedan versionados.
 

@@ -8,8 +8,9 @@
     "build": "vite build",
     "sprites": "node scripts/build-character-sprites.mjs",
     "poses:tecnoia": "node scripts/build-pose-sheet.mjs design/characters/tecnoia/poses-v2-borrador-02.manifest.json",
+    "sprites:tecnoia-v2": "node scripts/build-tecnoia-v2.mjs",
     "lint": "oxlint",
-    "test": "node --test tests/portal.test.js tests/secret-santa.test.js tests/secret-santa-email.test.js tests/platform-features.test.js tests/quiz.test.js tests/arcade.test.js tests/guardian-powers.test.js tests/guardian-sprites.test.js tests/sprite-layout.test.js",
+    "test": "node --test tests/portal.test.js tests/secret-santa.test.js tests/secret-santa-email.test.js tests/platform-features.test.js tests/quiz.test.js tests/arcade.test.js tests/guardian-powers.test.js tests/guardian-sprites.test.js tests/sprite-layout.test.js tests/tecnoia-v2.test.js",
     "test:rules": "node --test --test-concurrency=1 tests/firestore.rules.test.cjs tests/quiz.rules.test.cjs",
     "preview": "vite preview"
   },

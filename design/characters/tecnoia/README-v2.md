@@ -1,6 +1,36 @@
 # TecnoIA v2 · Borrador de poses
 
-19 de noviembre de 2026. Estado: segundo borrador visual y extracción automática verificada; pendiente de aprobación de arte e integración dentro del juego.
+19 de noviembre de 2026. Estado: fuente con alfa limpio, disparo y celebración completa de estudio exportados; integración dentro del juego pendiente.
+
+## Entrega actual · Secuencias de estudio
+
+- [Fuente opaca conservada](rig-v2-fuente-opaca.png), [atlas con alfa local limpio](rig-v2-alpha-local.png) y [rectángulos/procedencia](rig-v2-parts.json).
+- [Celebración animada](revision-v2-secuencias-01/victory.gif) y [sus 60 fotogramas ordenados](revision-v2-secuencias-01/victory-contacto.webp).
+- [Demostración de disparo y salida del proyectil](revision-v2-secuencias-01/disparo-demostracion.gif) y [12 fotogramas de disparo](revision-v2-secuencias-01/shooting-contacto.webp).
+- [Hojas, tiempos y anclajes](revision-v2-secuencias-01/secuencias.json).
+- [Página de revisión interactiva](revision-v2.html) y [prompts completos del proceso](prompt-secuencias-v2-01.md).
+
+La celebración tiene **60 fotogramas a 24 FPS (2,5 s)**: pasa de combate a una expresión alegre, eleva la llave, saluda cambiando la articulación de los dedos, mantiene un remate y vuelve al reposo. El disparo tiene **12 fotogramas a 60 FPS (0,2 s)**, comienza en emisión y recupera el apuntado tras el retroceso. Las formas de la mano y las expresiones vienen de dibujos diferentes; las posiciones se unen mediante curvas. La dirección de la boquilla se mantiene horizontal hacia la derecha.
+
+Los intentos de transparencia de ImageGen seguían dejando residuos. El usuario eligió explícitamente **«Limpiar el alfa con un proceso local»**. Se conservó un render opaco limpio sobre gris y se eliminó únicamente el fondo de color próximo a `[212,223,231]` conectado al borde, con tolerancia 14. El proceso preserva RGB y no borra los blancos del rostro o los dedos. Se revisaron los contornos sobre fondos claro y oscuro, así como los rectángulos completos de cada pieza.
+
+Reproducir fuentes y secuencias:
+
+```sh
+npm run sprites:tecnoia-v2
+# Equivalente:
+node scripts/build-tecnoia-v2.mjs
+```
+
+Para revisar en movimiento: iniciar Vite (`npm run dev`) y abrir `/design/characters/tecnoia/revision-v2.html`. La página permite cambiar clip, reproducir/pausar/reiniciar, avanzar por fotograma, cámara lenta de ¼, tamaños 112/160/320, fondo claro/oscuro e indicador de boquilla. En movimiento reducido se muestra una pose de victoria legible. Se comprobó en Chrome la carga de las páginas, el final en reposo, el final en apuntado, las opciones de tamaño, cámara lenta y movimiento reducido.
+
+Se exportan una hoja de disparo de **1280×960** y otra de celebración de **2560×2560**; solo se registran sus 12 y 60 celdas utilizadas. Cada fotograma tiene anclajes locales de mano/boquilla y pivote; al guardar el proyector, la boquilla pasa a `null`. El lector utiliza los nombres ordenados de cada clip y las páginas de sus metadatos, sin constantes de v1. Los GIF sirven para revisión sin audio: su precisión de centésimas se compensa para conservar 0,2 y 2,5 segundos totales.
+
+**Pendiente:** conectar disparos reales de simulación, sonido e interpolación; completar movimiento, esquiva, impacto y poder; integrar el catálogo/render y comprobar recuperación ante recursos fallidos. El estudio declara `productionReady: false` y no guarda puntos ni cambia partidas. El arcade sigue utilizando v1. La aprobación del piloto exige su verificación jugable completa antes de pasar a otro personaje.
+
+Validación del segundo hito: **69 pruebas correctas** y compilación de producción correcta. Las seis nuevas comprobaciones cubren limpieza de alfa y conservación de colores interiores, procedencia, márgenes de las piezas, fases y final de los clips, boquilla en los píxeles cian exportados y duración/cantidad de fotogramas de los GIF. La anatomía y el gesto requieren además la revisión visual realizada.
+
+## Primer hito conservado · Borradores de ocho poses
 
 ## Recursos
 
@@ -31,7 +61,7 @@ El segundo borrador conserva la sonrisa durante el combate y elimina la numeraci
 | 07 | Pose clave de celebración con llave elevada y saludo |
 | 08 | Descanso |
 
-## Revisión y siguiente entrega
+## Revisión del primer hito (histórico)
 
 Se conserva la cabeza con gorro, dos manos flotantes, llave, paleta azul/dorada y emblema de engranaje. El proyector se coloca en la mano libre.
 
@@ -41,7 +71,7 @@ La cuadrícula 4×2 organiza ocho poses de revisión. No demuestra soporte de cu
 
 Después: corregir contornos y revisar las poses, separar fuentes de manos/rostro, producir las transiciones de disparo y celebración, definir metadatos y anclajes de boquilla, sincronizar eventos de simulación, sonido y render, y verificar las secuencias jugables. Mantener el trabajo en TecnoIA antes de pasar al siguiente guardián.
 
-## Reproducir la separación automática
+## Reproducir la separación del primer hito
 
 Desde la raíz del repositorio:
 

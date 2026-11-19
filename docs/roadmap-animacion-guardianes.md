@@ -1,6 +1,6 @@
 # Roadmap de animación · Guardianes con gestos y disparos claros
 
-18 de noviembre de 2026 · Actualizado el 19 de noviembre de 2026. **Estado: poses en revisión y separación automática implementada; animación jugable v2 pendiente.**
+18 de noviembre de 2026 · Actualizado el 19 de noviembre de 2026. **Estado: fuente con alfa limpio y secuencias de estudio exportadas; integración jugable v2 pendiente.**
 
 ## Objetivo
 
@@ -11,6 +11,8 @@ El trabajo se hará **de uno en uno**, empezando por TecnoIA. Se termina y compr
 **Avance del 19 de noviembre:** se preparó la copia local y una [primera lámina de ocho poses de TecnoIA v2](../design/characters/tecnoia/README-v2.md), con proyector en la mano libre y expresiones diferenciadas. Es un borrador para revisión: la limpieza de bordes, las secuencias completas, los anclajes y la integración siguen pendientes. Los recursos jugables v1 se conservan.
 
 **Continuación del 19 de noviembre:** segundo borrador con expresión de combate más amable; ocho poses extraídas automáticamente y [plancha de revisión a 160/320 px](../design/characters/tecnoia/revision-v2-borrador-02/contacto.webp). El exportador comprueba rectángulos, transparencia en bordes y celdas vacías; el empaquetado admite cuadrículas variables, márgenes, separaciones y páginas. Esto completa una parte de la preparación técnica, no el soporte jugable v2. Persisten halos y píxeles sueltos que requieren otra corrección de arte.
+
+**Segundo hito del 19 de noviembre:** se produjo una fuente separada de tres expresiones y seis manos/accesorios. El usuario autorizó limpiar localmente el alfa después de que ImageGen repitiera los residuos. La fuente opaca y el proceso reproducible se conservan. Se exportaron un disparo de 12 fotogramas y una celebración completa de estudio de 60 fotogramas a 24 FPS (2,5 s), con entrada, llave elevada, saludo articulado, remate y salida. La página de revisión permite reproducción, cámara lenta, tamaños 112/160/320 y movimiento reducido. Todavía no se sustituyen los recursos jugables.
 
 ## 1. Diagnóstico verificado
 
@@ -204,9 +206,9 @@ Los recursos se publicarán como v2 junto a la v1 existente, con metadatos expl�
 
 El piloto definirá la cantidad final de poses, fotogramas, cuadrícula, tamaño de celdas y presupuesto de carga, partiendo del objetivo de celebración completa de la sección 3.E. No hay un máximo de 4×4 o 7×7; se usarán hojas mayores o varias páginas si la secuencia lo necesita y conserva la definición y el rendimiento. Se medirá el peso de las variantes y su legibilidad antes de repetirlas. No se prometen plazos para los doce personajes sin conocer ese resultado.
 
-**Siguiente acción:** corregir los contornos del segundo borrador de **TecnoIA v2** y comprobar dedos, boquilla y continuidad entre apuntado, emisión y retroceso; después separar las fuentes de manos/rostro y producir las transiciones. A continuación, integrar y comprobar el disparo y la celebración completa de 48–72 fotogramas. La implementación jugable v2 sigue pendiente. Historia y multijugador continúan en el [roadmap general](roadmap-videojuego.md); la prioridad inmediata es mejorar la actuación del elenco actual.
+**Siguiente acción:** integrar **TecnoIA v2** con eventos de disparo aceptados por la simulación, consumir esos eventos en animación y sonido, y calcular el origen con el anclaje compartido de boquilla. Conectar el lector por metadatos al catálogo/render, completar los estados restantes y comprobar recuperación v1/v2 si falla un recurso. Revisar después movimiento, esquiva, impacto, poderes, disparo continuo y celebración en una partida real antes de pasar a ConectIA. Historia y multijugador continúan en el [roadmap general](roadmap-videojuego.md).
 
-## 8. Registro de entregas · Piloto TecnoIA v2
+## 8. Primer hito · Poses y extracción (registro histórico)
 
 | Entrega | Estado comprobado el 19 de noviembre | Evidencia / pendiente |
 | --- | --- | --- |
@@ -219,3 +221,18 @@ El piloto definirá la cantidad final de poses, fotogramas, cuadrícula, tamaño
 | Comprobaciones | 63 pruebas y compilación correctas | Se incluyen seis pruebas nuevas de geometría, exportación, alfa y recursos de TecnoIA. Las reglas Firestore se mantienen sin cambios; requieren el emulador para su verificación separada. |
 
 Los metadatos de revisión declaran `kind: key-poses` y `productionReady: false`. Ninguna de estas ocho poses se presenta como una celebración animada completa. Fuentes, prompts, manifiesto y resultados reproducibles se conservan junto a los borradores anteriores y se sincronizan en GitHub.
+
+## 9. Segundo hito · Fuente limpia y secuencias completas de estudio
+
+| Entrega | Estado | Evidencia |
+| --- | --- | --- |
+| Fuente separada | Producida y revisada visualmente | [Atlas limpio](../design/characters/tecnoia/rig-v2-alpha-local.png): tres expresiones, llave, dos poses de proyector, dos manos de saludo y una de descanso. |
+| Limpieza de alfa | Implementada y reproducible, autorizada por el usuario | Relleno desde bordes sobre el fondo gris medido; conserva RGB, blancos interiores y articulaciones oscuras. Se conserva la fuente opaca, parámetros y SHA-256. |
+| Disparo | Secuencia de estudio exportada | 12 fotogramas a 60 FPS, 0,2 s. Emisión inmediata, retroceso y recuperación; boquilla horizontal, medida y comprobada en los sprites. |
+| Celebración | Secuencia completa de estudio exportada | 60 fotogramas a 24 FPS, 2,5 s; varias expresiones y formas de mano, entrada, gesto, saludo, remate y salida. Una reproducción; mantiene reposo al terminar. |
+| Hojas variables y lector | Implementados para la revisión | Dos páginas por clips, con nombres ordenados, rectángulos, anclajes de mano/boquilla y pivote. El lector no presupone 24 columnas ni 160 px. |
+| Evidencia visual | Revisada en Chrome local | Reproducción y final de ambos clips, cámara lenta de disparo, fondos claro/oscuro, tamaños 112/160/320 y pose de victoria con movimiento reducido. GIF y planchas sin audio incluidos. |
+| Comprobaciones | 69 pruebas y compilación correctas | Seis pruebas nuevas verifican limpieza de alfa, procedencia, márgenes, temporización, poses terminales, lectura por páginas y coincidencia de boquilla con píxeles cian. |
+| Integración y estados restantes | Pendientes | Eventos físicos, sonido, interpolación, movimiento, esquiva, daño, poder y recuperación ante fallos. El arcade conserva v1. |
+
+Reproducir: `npm run sprites:tecnoia-v2`. Abrir con Vite `design/characters/tecnoia/revision-v2.html`. Los [metadatos](../design/characters/tecnoia/revision-v2-secuencias-01/secuencias.json) declaran `kind: animation-study` y `productionReady: false`: las secuencias existen, pero no certifican aún una integración jugable terminada. Los GIF tienen temporización de centésimas compensada para conservar la duración total; las hojas y el lector utilizan los FPS originales.

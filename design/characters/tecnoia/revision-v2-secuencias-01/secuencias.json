@@ -1,0 +1,1716 @@
+{
+  "schemaVersion": 2,
+  "kind": "animation-study",
+  "character": "tecnoia",
+  "productionReady": false,
+  "source": "../rig-v2-alpha-local.png",
+  "sourceSha256": "bf510395c08e44204037460b58ed4b1048c9933ce21795bc9d3e39f449ec403c",
+  "cell": 320,
+  "pages": [
+    {
+      "image": "shooting.webp",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "image": "victory.webp",
+      "width": 2560,
+      "height": 2560
+    }
+  ],
+  "frames": {
+    "shooting_00": {
+      "page": 0,
+      "x": 0,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "emisión",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 254,
+          "y": 231
+        },
+        "muzzle": {
+          "x": 294.3,
+          "y": 217.48,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "shooting_01": {
+      "page": 0,
+      "x": 320,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "emisión",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 248.5,
+          "y": 231.5
+        },
+        "muzzle": {
+          "x": 288.8,
+          "y": 217.98,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "shooting_02": {
+      "page": 0,
+      "x": 640,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "retroceso",
+      "head": "headAim",
+      "hand": "recoil",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 243,
+          "y": 232
+        },
+        "muzzle": {
+          "x": 283.04,
+          "y": 220.04,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "shooting_03": {
+      "page": 0,
+      "x": 960,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "retroceso",
+      "head": "headAim",
+      "hand": "recoil",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 244.5,
+          "y": 231.5
+        },
+        "muzzle": {
+          "x": 284.54,
+          "y": 219.54,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "shooting_04": {
+      "page": 0,
+      "x": 0,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "recuperación",
+      "head": "headAim",
+      "hand": "recoil",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 246,
+          "y": 231
+        },
+        "muzzle": {
+          "x": 286.04,
+          "y": 219.04,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "shooting_05": {
+      "page": 0,
+      "x": 320,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "recuperación",
+      "head": "headAim",
+      "hand": "recoil",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 247.55555555555554,
+          "y": 231
+        },
+        "muzzle": {
+          "x": 287.59555555555556,
+          "y": 219.04,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "shooting_06": {
+      "page": 0,
+      "x": 640,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "recuperación",
+      "head": "headAim",
+      "hand": "recoil",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 250.44444444444446,
+          "y": 231
+        },
+        "muzzle": {
+          "x": 290.4844444444445,
+          "y": 219.04,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "shooting_07": {
+      "page": 0,
+      "x": 960,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "recuperación",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 252,
+          "y": 231
+        },
+        "muzzle": {
+          "x": 292.3,
+          "y": 217.48,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "shooting_08": {
+      "page": 0,
+      "x": 0,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "recuperación",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 252.3125,
+          "y": 231
+        },
+        "muzzle": {
+          "x": 292.6125,
+          "y": 217.48,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "shooting_09": {
+      "page": 0,
+      "x": 320,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "recuperación",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 253,
+          "y": 231
+        },
+        "muzzle": {
+          "x": 293.3,
+          "y": 217.48,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "shooting_10": {
+      "page": 0,
+      "x": 640,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "recuperación",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 253.6875,
+          "y": 231
+        },
+        "muzzle": {
+          "x": 293.9875,
+          "y": 217.48,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "shooting_11": {
+      "page": 0,
+      "x": 960,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "apuntado",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 254,
+          "y": 231
+        },
+        "muzzle": {
+          "x": 294.3,
+          "y": 217.48,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "victory_00": {
+      "page": 1,
+      "x": 0,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 254,
+          "y": 231
+        },
+        "muzzle": {
+          "x": 294.3,
+          "y": 217.48,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "victory_01": {
+      "page": 1,
+      "x": 320,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 255.144,
+          "y": 232.872
+        },
+        "muzzle": {
+          "x": 295.444,
+          "y": 219.352,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "victory_02": {
+      "page": 1,
+      "x": 640,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 257.872,
+          "y": 237.336
+        },
+        "muzzle": {
+          "x": 298.172,
+          "y": 223.816,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "victory_03": {
+      "page": 1,
+      "x": 960,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 261.128,
+          "y": 242.664
+        },
+        "muzzle": {
+          "x": 301.428,
+          "y": 229.14399999999998,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "victory_04": {
+      "page": 1,
+      "x": 1280,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 263.856,
+          "y": 247.12800000000001
+        },
+        "muzzle": {
+          "x": 304.156,
+          "y": 233.608,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "victory_05": {
+      "page": 1,
+      "x": 1600,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265,
+          "y": 249
+        },
+        "muzzle": null
+      }
+    },
+    "victory_06": {
+      "page": 1,
+      "x": 1920,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265.22222222222223,
+          "y": 247.59259259259258
+        },
+        "muzzle": null
+      }
+    },
+    "victory_07": {
+      "page": 1,
+      "x": 2240,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265.77777777777777,
+          "y": 244.07407407407408
+        },
+        "muzzle": null
+      }
+    },
+    "victory_08": {
+      "page": 1,
+      "x": 0,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 266.5,
+          "y": 239.5
+        },
+        "muzzle": null
+      }
+    },
+    "victory_09": {
+      "page": 1,
+      "x": 320,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 267.22222222222223,
+          "y": 234.92592592592592
+        },
+        "muzzle": null
+      }
+    },
+    "victory_10": {
+      "page": 1,
+      "x": 640,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 267.77777777777777,
+          "y": 231.4074074074074
+        },
+        "muzzle": null
+      }
+    },
+    "victory_11": {
+      "page": 1,
+      "x": 960,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "gesto",
+      "head": "headJoy",
+      "hand": "waveCurl",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 268,
+          "y": 230
+        },
+        "muzzle": null
+      }
+    },
+    "victory_12": {
+      "page": 1,
+      "x": 1280,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "gesto",
+      "head": "headJoy",
+      "hand": "waveCurl",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 268,
+          "y": 227.85185185185185
+        },
+        "muzzle": null
+      }
+    },
+    "victory_13": {
+      "page": 1,
+      "x": 1600,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "gesto",
+      "head": "headJoy",
+      "hand": "waveCurl",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 268,
+          "y": 222.4814814814815
+        },
+        "muzzle": null
+      }
+    },
+    "victory_14": {
+      "page": 1,
+      "x": 1920,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "gesto",
+      "head": "headJoy",
+      "hand": "waveCurl",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 268,
+          "y": 215.5
+        },
+        "muzzle": null
+      }
+    },
+    "victory_15": {
+      "page": 1,
+      "x": 2240,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "gesto",
+      "head": "headJoy",
+      "hand": "waveCurl",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 268,
+          "y": 208.51851851851853
+        },
+        "muzzle": null
+      }
+    },
+    "victory_16": {
+      "page": 1,
+      "x": 0,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "gesto",
+      "head": "headJoy",
+      "hand": "waveCurl",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 268,
+          "y": 203.14814814814815
+        },
+        "muzzle": null
+      }
+    },
+    "victory_17": {
+      "page": 1,
+      "x": 320,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "saludo",
+      "head": "headJoy",
+      "hand": "waveOpen",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 268,
+          "y": 201
+        },
+        "muzzle": null
+      }
+    },
+    "victory_18": {
+      "page": 1,
+      "x": 640,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "saludo",
+      "head": "headJoy",
+      "hand": "waveOpen",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 267.375,
+          "y": 200.375
+        },
+        "muzzle": null
+      }
+    },
+    "victory_19": {
+      "page": 1,
+      "x": 960,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "saludo",
+      "head": "headJoy",
+      "hand": "waveOpen",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 266,
+          "y": 199
+        },
+        "muzzle": null
+      }
+    },
+    "victory_20": {
+      "page": 1,
+      "x": 1280,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "saludo",
+      "head": "headJoy",
+      "hand": "waveOpen",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 264.625,
+          "y": 197.625
+        },
+        "muzzle": null
+      }
+    },
+    "victory_21": {
+      "page": 1,
+      "x": 1600,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "saludo",
+      "head": "headJoy",
+      "hand": "waveCurl",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 264,
+          "y": 197
+        },
+        "muzzle": null
+      }
+    },
+    "victory_22": {
+      "page": 1,
+      "x": 1920,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "saludo",
+      "head": "headJoy",
+      "hand": "waveCurl",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 264.625,
+          "y": 197.625
+        },
+        "muzzle": null
+      }
+    },
+    "victory_23": {
+      "page": 1,
+      "x": 2240,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "saludo",
+      "head": "headJoy",
+      "hand": "waveCurl",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 266,
+          "y": 199
+        },
+        "muzzle": null
+      }
+    },
+    "victory_24": {
+      "page": 1,
+      "x": 0,
+      "y": 960,
+      "w": 320,
+      "h": 320,
+      "phase": "saludo",
+      "head": "headJoy",
+      "hand": "waveCurl",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 267.375,
+          "y": 200.375
+        },
+        "muzzle": null
+      }
+    },
+    "victory_25": {
+      "page": 1,
+      "x": 320,
+      "y": 960,
+      "w": 320,
+      "h": 320,
+      "phase": "saludo",
+      "head": "headJoy",
+      "hand": "waveOpen",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 268,
+          "y": 201
+        },
+        "muzzle": null
+      }
+    },
+    "victory_26": {
+      "page": 1,
+      "x": 640,
+      "y": 960,
+      "w": 320,
+      "h": 320,
+      "phase": "saludo",
+      "head": "headJoy",
+      "hand": "waveOpen",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 267.375,
+          "y": 200.375
+        },
+        "muzzle": null
+      }
+    },
+    "victory_27": {
+      "page": 1,
+      "x": 960,
+      "y": 960,
+      "w": 320,
+      "h": 320,
+      "phase": "saludo",
+      "head": "headJoy",
+      "hand": "waveOpen",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 266,
+          "y": 199
+        },
+        "muzzle": null
+      }
+    },
+    "victory_28": {
+      "page": 1,
+      "x": 1280,
+      "y": 960,
+      "w": 320,
+      "h": 320,
+      "phase": "saludo",
+      "head": "headJoy",
+      "hand": "waveOpen",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 264.625,
+          "y": 197.625
+        },
+        "muzzle": null
+      }
+    },
+    "victory_29": {
+      "page": 1,
+      "x": 1600,
+      "y": 960,
+      "w": 320,
+      "h": 320,
+      "phase": "saludo",
+      "head": "headJoy",
+      "hand": "waveCurl",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 264,
+          "y": 197
+        },
+        "muzzle": null
+      }
+    },
+    "victory_30": {
+      "page": 1,
+      "x": 1920,
+      "y": 960,
+      "w": 320,
+      "h": 320,
+      "phase": "saludo",
+      "head": "headJoy",
+      "hand": "waveCurl",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 264.625,
+          "y": 198.09375
+        },
+        "muzzle": null
+      }
+    },
+    "victory_31": {
+      "page": 1,
+      "x": 2240,
+      "y": 960,
+      "w": 320,
+      "h": 320,
+      "phase": "saludo",
+      "head": "headJoy",
+      "hand": "waveCurl",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 266,
+          "y": 200.5
+        },
+        "muzzle": null
+      }
+    },
+    "victory_32": {
+      "page": 1,
+      "x": 0,
+      "y": 1280,
+      "w": 320,
+      "h": 320,
+      "phase": "saludo",
+      "head": "headJoy",
+      "hand": "waveCurl",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 267.375,
+          "y": 202.90625
+        },
+        "muzzle": null
+      }
+    },
+    "victory_33": {
+      "page": 1,
+      "x": 320,
+      "y": 1280,
+      "w": 320,
+      "h": 320,
+      "phase": "remate",
+      "head": "headJoy",
+      "hand": "waveOpen",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 268,
+          "y": 204
+        },
+        "muzzle": null
+      }
+    },
+    "victory_34": {
+      "page": 1,
+      "x": 640,
+      "y": 1280,
+      "w": 320,
+      "h": 320,
+      "phase": "remate",
+      "head": "headJoy",
+      "hand": "waveOpen",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 268,
+          "y": 204
+        },
+        "muzzle": null
+      }
+    },
+    "victory_35": {
+      "page": 1,
+      "x": 960,
+      "y": 1280,
+      "w": 320,
+      "h": 320,
+      "phase": "remate",
+      "head": "headJoy",
+      "hand": "waveOpen",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 268,
+          "y": 204
+        },
+        "muzzle": null
+      }
+    },
+    "victory_36": {
+      "page": 1,
+      "x": 1280,
+      "y": 1280,
+      "w": 320,
+      "h": 320,
+      "phase": "remate",
+      "head": "headJoy",
+      "hand": "waveOpen",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 268,
+          "y": 204
+        },
+        "muzzle": null
+      }
+    },
+    "victory_37": {
+      "page": 1,
+      "x": 1600,
+      "y": 1280,
+      "w": 320,
+      "h": 320,
+      "phase": "remate",
+      "head": "headJoy",
+      "hand": "waveOpen",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 268,
+          "y": 204
+        },
+        "muzzle": null
+      }
+    },
+    "victory_38": {
+      "page": 1,
+      "x": 1920,
+      "y": 1280,
+      "w": 320,
+      "h": 320,
+      "phase": "remate",
+      "head": "headJoy",
+      "hand": "waveOpen",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 268,
+          "y": 204
+        },
+        "muzzle": null
+      }
+    },
+    "victory_39": {
+      "page": 1,
+      "x": 2240,
+      "y": 1280,
+      "w": 320,
+      "h": 320,
+      "phase": "remate",
+      "head": "headJoy",
+      "hand": "waveOpen",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 268,
+          "y": 204
+        },
+        "muzzle": null
+      }
+    },
+    "victory_40": {
+      "page": 1,
+      "x": 0,
+      "y": 1600,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headJoy",
+      "hand": "waveOpen",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 268,
+          "y": 204
+        },
+        "muzzle": null
+      }
+    },
+    "victory_41": {
+      "page": 1,
+      "x": 320,
+      "y": 1600,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headJoy",
+      "hand": "waveOpen",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 267.87109375,
+          "y": 205.1171875
+        },
+        "muzzle": null
+      }
+    },
+    "victory_42": {
+      "page": 1,
+      "x": 640,
+      "y": 1600,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headJoy",
+      "hand": "waveOpen",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 267.53125,
+          "y": 208.0625
+        },
+        "muzzle": null
+      }
+    },
+    "victory_43": {
+      "page": 1,
+      "x": 960,
+      "y": 1600,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headJoy",
+      "hand": "waveOpen",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 267.05078125,
+          "y": 212.2265625
+        },
+        "muzzle": null
+      }
+    },
+    "victory_44": {
+      "page": 1,
+      "x": 1280,
+      "y": 1600,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headJoy",
+      "hand": "waveOpen",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 266.5,
+          "y": 217
+        },
+        "muzzle": null
+      }
+    },
+    "victory_45": {
+      "page": 1,
+      "x": 1600,
+      "y": 1600,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headJoy",
+      "hand": "waveOpen",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265.94921875,
+          "y": 221.7734375
+        },
+        "muzzle": null
+      }
+    },
+    "victory_46": {
+      "page": 1,
+      "x": 1920,
+      "y": 1600,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headJoy",
+      "hand": "waveOpen",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265.46875,
+          "y": 225.9375
+        },
+        "muzzle": null
+      }
+    },
+    "victory_47": {
+      "page": 1,
+      "x": 2240,
+      "y": 1600,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headJoy",
+      "hand": "waveOpen",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265.12890625,
+          "y": 228.8828125
+        },
+        "muzzle": null
+      }
+    },
+    "victory_48": {
+      "page": 1,
+      "x": 0,
+      "y": 1920,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headIdle",
+      "hand": "waveCurl",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265,
+          "y": 230
+        },
+        "muzzle": null
+      }
+    },
+    "victory_49": {
+      "page": 1,
+      "x": 320,
+      "y": 1920,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headIdle",
+      "hand": "waveCurl",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265,
+          "y": 230.7201166180758
+        },
+        "muzzle": null
+      }
+    },
+    "victory_50": {
+      "page": 1,
+      "x": 640,
+      "y": 1920,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headIdle",
+      "hand": "waveCurl",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265,
+          "y": 232.57725947521865
+        },
+        "muzzle": null
+      }
+    },
+    "victory_51": {
+      "page": 1,
+      "x": 960,
+      "y": 1920,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headIdle",
+      "hand": "waveCurl",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265,
+          "y": 235.11661807580174
+        },
+        "muzzle": null
+      }
+    },
+    "victory_52": {
+      "page": 1,
+      "x": 1280,
+      "y": 1920,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headIdle",
+      "hand": "waveCurl",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265,
+          "y": 237.88338192419826
+        },
+        "muzzle": null
+      }
+    },
+    "victory_53": {
+      "page": 1,
+      "x": 1600,
+      "y": 1920,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headIdle",
+      "hand": "waveCurl",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265,
+          "y": 240.42274052478135
+        },
+        "muzzle": null
+      }
+    },
+    "victory_54": {
+      "page": 1,
+      "x": 1920,
+      "y": 1920,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headIdle",
+      "hand": "waveCurl",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265,
+          "y": 242.2798833819242
+        },
+        "muzzle": null
+      }
+    },
+    "victory_55": {
+      "page": 1,
+      "x": 2240,
+      "y": 1920,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265,
+          "y": 243
+        },
+        "muzzle": null
+      }
+    },
+    "victory_56": {
+      "page": 1,
+      "x": 0,
+      "y": 2240,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265,
+          "y": 243
+        },
+        "muzzle": null
+      }
+    },
+    "victory_57": {
+      "page": 1,
+      "x": 320,
+      "y": 2240,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265,
+          "y": 243
+        },
+        "muzzle": null
+      }
+    },
+    "victory_58": {
+      "page": 1,
+      "x": 640,
+      "y": 2240,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265,
+          "y": 243
+        },
+        "muzzle": null
+      }
+    },
+    "victory_59": {
+      "page": 1,
+      "x": 960,
+      "y": 2240,
+      "w": 320,
+      "h": 320,
+      "phase": "reposo",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265,
+          "y": 243
+        },
+        "muzzle": null
+      }
+    }
+  },
+  "clips": {
+    "shooting": {
+      "frames": [
+        "shooting_00",
+        "shooting_01",
+        "shooting_02",
+        "shooting_03",
+        "shooting_04",
+        "shooting_05",
+        "shooting_06",
+        "shooting_07",
+        "shooting_08",
+        "shooting_09",
+        "shooting_10",
+        "shooting_11"
+      ],
+      "fps": 60,
+      "duration": 0.2,
+      "loop": false,
+      "label": "Disparo",
+      "reducedFrame": 11
+    },
+    "victory": {
+      "frames": [
+        "victory_00",
+        "victory_01",
+        "victory_02",
+        "victory_03",
+        "victory_04",
+        "victory_05",
+        "victory_06",
+        "victory_07",
+        "victory_08",
+        "victory_09",
+        "victory_10",
+        "victory_11",
+        "victory_12",
+        "victory_13",
+        "victory_14",
+        "victory_15",
+        "victory_16",
+        "victory_17",
+        "victory_18",
+        "victory_19",
+        "victory_20",
+        "victory_21",
+        "victory_22",
+        "victory_23",
+        "victory_24",
+        "victory_25",
+        "victory_26",
+        "victory_27",
+        "victory_28",
+        "victory_29",
+        "victory_30",
+        "victory_31",
+        "victory_32",
+        "victory_33",
+        "victory_34",
+        "victory_35",
+        "victory_36",
+        "victory_37",
+        "victory_38",
+        "victory_39",
+        "victory_40",
+        "victory_41",
+        "victory_42",
+        "victory_43",
+        "victory_44",
+        "victory_45",
+        "victory_46",
+        "victory_47",
+        "victory_48",
+        "victory_49",
+        "victory_50",
+        "victory_51",
+        "victory_52",
+        "victory_53",
+        "victory_54",
+        "victory_55",
+        "victory_56",
+        "victory_57",
+        "victory_58",
+        "victory_59"
+      ],
+      "fps": 24,
+      "duration": 2.5,
+      "loop": false,
+      "label": "Celebración",
+      "reducedFrame": 33
+    }
+  },
+  "reviewNotes": [
+    "Secuencias de estudio: integración en la simulación, sonido y fallback v2 pendientes.",
+    "La vista previa de disparo ilustra el origen; no crea una partida ni guarda puntos."
+  ]
+}
