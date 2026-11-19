@@ -42,6 +42,8 @@ El render interpola posiciones entre pasos de simulación y suaviza la inclinaci
 
 ## Producción y verificación
 
+**Mejora pendiente:** las hojas actuales reutilizan las piezas del rig y no incluyen todavía poses ilustradas de apuntado ni un emisor de disparo vinculado a la mano. El [roadmap de animación v2](roadmap-animacion-guardianes.md) aborda esta limitación personaje por personaje; tener 184 fotogramas no demuestra por sí solo una actuación convincente.
+
 El arte se generó con **ImageGen integrado**, utilizando TecnoIA como referencia de familia visual. Los prompts originales y las ediciones finales de transparencia están en `design/characters/<id>/`. El [índice del arte](../design/characters/README.md) enlaza cada recurso. Los PNG seleccionados se conservan sin retoque en el exportador; Canvas renderiza los fotogramas a partir de sus rectángulos de origen.
 
 Para reproducir las hojas y metadatos:

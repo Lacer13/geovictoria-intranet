@@ -186,6 +186,8 @@ Las decisiones que más cambian el alcance son: priorizar computadora o móvil, 
 
 ## 7. Primera entrega recomendada
 
+**Prioridad posterior a la ampliación del elenco:** mejorar la actuación y el disparo de los guardianes antes de ampliar contenido. El [roadmap de animación v2](roadmap-animacion-guardianes.md) documenta el problema de las poses actuales y propone TecnoIA como primer piloto, seguido de un guardián por entrega. Las mejoras v2 siguen pendientes.
+
 Empezar por **Pausa activa 2.0**: controles consistentes, pausa, colisiones y daño justos, HUD claro, sonido configurable y estructura preparada para niveles. Después producir la primera misión del bosque como muestra de la historia. Con esa base probada, abrir el prototipo 1 vs 1 y medirlo antes de ampliar equipos.
 
 Cada entrega futura tendrá su cambio revisable en GitHub, comprobaciones correspondientes y publicación de la versión que se haya validado. El roadmap no contrata infraestructura. Las entregas jugables implementadas se registran en su ficha correspondiente.

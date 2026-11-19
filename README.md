@@ -82,6 +82,8 @@ La bienvenida v4 anima por separado el trineo, la cabeza y la mano de VictorIA. 
 
 ## Roadmap del videojuego
 
+El [roadmap de animación por personaje](docs/roadmap-animacion-guardianes.md) prioriza TecnoIA v2: nuevas poses de manos/rostro, emisor visible y sincronización entre gesto, sonido y proyectil. Se avanzará de uno en uno, con criterios de calidad por guardián. Es planificación; esas mejoras v2 todavía no están implementadas.
+
 Los [doce guardianes por área](docs/guardianes-navidad.md) incluyen 2.208 sprites, un poder y una celebración propios. El selector permite buscar por área y probar los movimientos. Los [atlas y prompts de ImageGen](design/characters/README.md) y el exportador `npm run sprites` quedan versionados.
 
 La [primera entrega de Pausa activa 2.0](docs/pausa-activa-2.md) ya incorpora pausa, controles consistentes, protección tras daño, esquiva, interfaz navideña y el piloto animado TecnoIA. El ranking se conserva como casual; la arena multijugador sigue pendiente.
