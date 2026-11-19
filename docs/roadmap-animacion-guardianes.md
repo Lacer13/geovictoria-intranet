@@ -27,7 +27,7 @@ Referencias: [`Sprinn nuevo Victoria.png`](../public/Sprinn%20nuevo%20Victoria.p
 
 ## 2. Dirección visual propuesta
 
-### Formato de las hojas: qué significa 2×2 o 4×4
+### Formato de las hojas: cuadrícula flexible por secuencia
 
 Se verificaron los archivos y metadatos de los doce guardianes. La estructura actual es:
 
@@ -40,9 +40,33 @@ Se verificaron los archivos y metadatos de los doce guardianes. La estructura ac
 
 La frecuencia de una secuencia de animación es distinta de la frecuencia de dibujo del juego. Las dimensiones de la cuadrícula son una forma de empaquetar imágenes; cambiar de 2×2 a 4×4 no determina por sí solo la calidad.
 
-**Para v2 se incorpora el formato 4×4 como plancha de revisión de 16 fotogramas por bloque.** Cada bloque mostrará el personaje completo en poses consecutivas, numeradas y en el orden de reproducción. Se podrán usar varios bloques para una acción. Por ejemplo, una celebración de 48 fotogramas puede revisarse como **tres planchas 4×4**; no se limitará a 16 fotogramas por tener una cuadrícula de cuatro filas y cuatro columnas.
+**La cuadrícula de v2 será flexible, según la acción, su resolución y la cantidad de fotogramas.** El usuario autoriza hojas mayores, como 7×7, cuando resulten convenientes; 4×4 es una opción de revisión y no un límite. Cada bloque mostrará el personaje completo en poses consecutivas, numeradas y en el orden de reproducción. Se podrán usar varias hojas para una acción.
+
+| Ejemplo de cuadrícula | Espacios disponibles | Uso posible, sin fijar todavía el formato final                              |
+| --------------------- | -------------------- | ---------------------------------------------------------------------------- |
+| 4×4                   | 16                   | Revisar una parte de la secuencia; tres bloques pueden mostrar 48 fotogramas |
+| 7×7                   | 49                   | Alojar una secuencia de 48 fotogramas y dejar una celda libre                |
+| 8×8                   | 64                   | Alojar, por ejemplo, una secuencia de 60 fotogramas                          |
+| 8×9                   | 72                   | Alojar una secuencia de 72 fotogramas sin exigir una hoja cuadrada           |
+
+La cuadrícula se elegirá después de fijar el gesto y su duración. Se priorizará conservar una resolución suficiente por fotograma: aumentar de 4×4 a 7×7 dentro de una imagen del mismo tamaño reduce el espacio de cada personaje. Una hoja fuente de 1254 × 1254 tampoco se divide exactamente en siete celdas enteras por lado. No se reinterpretará el atlas actual de cabeza/manos como una hoja 7×7 ni se inventarán fotogramas al cortar más celdas.
 
 El atlas de distribución para el juego podrá agrupar esos mismos fotogramas de otra forma si mejora el tamaño y la carga. Los metadatos definirán su orden, duración y puntos de anclaje. El atlas de piezas seguirá separado de las hojas de secuencias completas.
+
+### Separación automática y encuadre de los fotogramas
+
+La separación será automática. No hace falta editar y guardar manualmente una imagen por fotograma para reproducir la animación. En el sistema actual, el exportador dibuja cada fotograma en su celda y escribe sus coordenadas; el juego utiliza un rectángulo de origen de la hoja para mostrarlo. Los archivos individuales podrán exportarse para revisión cuando sean útiles.
+
+El código actual utiliza constantes de 24 columnas y celdas de 160 píxeles. **El soporte de cuadrículas variables para v2 todavía debe implementarse:** no basta con sustituir una imagen por otra 7×7. La entrega del piloto deberá:
+
+1. Definir por hoja su tamaño, filas/columnas, tamaño de celda, márgenes, separación entre celdas y páginas si hay más de una imagen.
+2. Calcular los rectángulos de cada fotograma y registrar solo las celdas que pertenecen a la secuencia; ignorar las sobrantes.
+3. Conservar transparencia, centro de giro, escala y anclajes de mano/boquilla. Mantener margen para que el gorro, las antenas, los dedos y los accesorios no salgan de la celda durante el gesto.
+4. Adaptar exportador, lector y render a los metadatos de cada personaje/hoja, conservando la compatibilidad con los guardianes v1 durante el avance individual.
+5. Comprobar que todos los rectángulos estén dentro de la imagen y no se solapen; revisar que no haya contenido cortado, celdas vacías dentro del clip, saltos de escala o cambios de identidad.
+6. Revisar la secuencia separada, una plancha de contacto y la reproducción real dentro del juego. Si una hoja generada no respeta una cuadrícula uniforme, corregir sus fuentes o usar rectángulos comprobados; no cortar a ciegas según el número de filas anunciado.
+
+Por ejemplo, una hoja regular 7×7 con celdas de 160 × 160, sin margen ni separación, mediría 1120 × 1120. El fotograma 48 —índice 47 empezando por cero— estaría en la columna 5, fila 6, también empezando por cero. La última celda quedaría libre. Este ejemplo verifica la lógica de empaquetado; no fija la resolución ni crea una animación nueva.
 
 **Disparo básico:** un proyector compacto de energía integrado en la **mano libre**, con boquilla circular reconocible. La mano deja de saludar, se orienta hacia la derecha del escenario y adopta una pose de apuntado. La otra mano conserva la llave, maletín, campana o accesorio de su área.
 
@@ -99,7 +123,7 @@ La preparación visual debe ser breve. El destello, el sonido y el proyectil com
 
 ### D. Entrega comprobable del piloto
 
-La entrega incluirá planchas 4×4 para revisar el ciclo de disparo y la celebración, además de sus hojas y metadatos jugables. Una plancha representa el personaje completo en cada celda; no se presentará un atlas de piezas como si fuera una secuencia animada.
+La entrega incluirá planchas secuenciales con la cuadrícula adecuada —4×4, 7×7 u otra— para revisar el ciclo de disparo y la celebración, además de sus hojas y metadatos jugables. Una plancha representa el personaje completo en cada celda; no se presentará un atlas de piezas como si fuera una secuencia animada. Se comprobará la separación automática antes de integrar el personaje.
 
 TecnoIA v2 tendrá fuentes de las nuevas poses, hoja de sprites, metadatos de animación/anclajes, miniatura coherente y una muestra dentro del juego. La vista previa mostrará el ciclo completo con emisión visual, para que «Disparando» enseñe de dónde sale el proyectil. Esa demostración no guardará puntos ni modificará una partida.
 
@@ -174,6 +198,6 @@ Las pruebas automáticas de cantidad de frames, alfa y márgenes se conservarán
 
 Los recursos se publicarán como v2 junto a la v1 existente, con metadatos explícitos por personaje. El catálogo podrá mezclar guardianes v1 y v2 durante el avance. Si falla un recurso nuevo, la recuperación conservará una representación completa y un anclaje válido, sin dibujar un proyector invisible que emita desde otro lugar.
 
-El piloto definirá la cantidad final de poses, fotogramas, tamaño de celdas y presupuesto de carga, partiendo de las planchas 4×4 y del objetivo de celebración completa de la sección 3.E. Se medirá el peso de las variantes y su legibilidad antes de repetirlas. No se prometen plazos para los doce personajes sin conocer ese resultado.
+El piloto definirá la cantidad final de poses, fotogramas, cuadrícula, tamaño de celdas y presupuesto de carga, partiendo del objetivo de celebración completa de la sección 3.E. No hay un máximo de 4×4 o 7×7; se usarán hojas mayores o varias páginas si la secuencia lo necesita y conserva la definición y el rendimiento. Se medirá el peso de las variantes y su legibilidad antes de repetirlas. No se prometen plazos para los doce personajes sin conocer ese resultado.
 
 **Siguiente acción:** producir la lámina de poses de **TecnoIA v2**, empezando por mano/proyector y expresión de apuntado; después integrar y comprobar su ciclo de disparo. Esta acción sigue pendiente. Historia y multijugador continúan en el [roadmap general](roadmap-videojuego.md); la prioridad inmediata es mejorar la actuación del elenco actual.
