@@ -1,12 +1,16 @@
 # Roadmap de animación · Guardianes con gestos y disparos claros
 
-18 de noviembre de 2026 · Plan de mejora solicitado por el usuario. **Estado: diagnóstico realizado; implementación v2 pendiente.**
+18 de noviembre de 2026 · Actualizado el 19 de noviembre de 2026. **Estado: poses en revisión y separación automática implementada; animación jugable v2 pendiente.**
 
 ## Objetivo
 
 Que cada guardián actúe y se exprese al jugar: que se vea cómo apunta, desde dónde dispara, cómo reacciona y cómo usa su poder. La referencia es la claridad de VictorIA Clásico, conservando el estilo navideño y la identidad aprobada de los doce guardianes.
 
-El trabajo se hará **de uno en uno**, empezando por TecnoIA. Se termina y comprueba un personaje antes de producir el siguiente. Esta entrega documenta el plan; no cambia todavía el arte ni el juego publicado.
+El trabajo se hará **de uno en uno**, empezando por TecnoIA. Se termina y comprueba un personaje antes de producir el siguiente. Las entregas se registran al final de este documento; el arcade publicado conserva los recursos v1 hasta validar el piloto completo.
+
+**Avance del 19 de noviembre:** se preparó la copia local y una [primera lámina de ocho poses de TecnoIA v2](../design/characters/tecnoia/README-v2.md), con proyector en la mano libre y expresiones diferenciadas. Es un borrador para revisión: la limpieza de bordes, las secuencias completas, los anclajes y la integración siguen pendientes. Los recursos jugables v1 se conservan.
+
+**Continuación del 19 de noviembre:** segundo borrador con expresión de combate más amable; ocho poses extraídas automáticamente y [plancha de revisión a 160/320 px](../design/characters/tecnoia/revision-v2-borrador-02/contacto.webp). El exportador comprueba rectángulos, transparencia en bordes y celdas vacías; el empaquetado admite cuadrículas variables, márgenes, separaciones y páginas. Esto completa una parte de la preparación técnica, no el soporte jugable v2. Persisten halos y píxeles sueltos que requieren otra corrección de arte.
 
 ## 1. Diagnóstico verificado
 
@@ -200,4 +204,18 @@ Los recursos se publicarán como v2 junto a la v1 existente, con metadatos expl�
 
 El piloto definirá la cantidad final de poses, fotogramas, cuadrícula, tamaño de celdas y presupuesto de carga, partiendo del objetivo de celebración completa de la sección 3.E. No hay un máximo de 4×4 o 7×7; se usarán hojas mayores o varias páginas si la secuencia lo necesita y conserva la definición y el rendimiento. Se medirá el peso de las variantes y su legibilidad antes de repetirlas. No se prometen plazos para los doce personajes sin conocer ese resultado.
 
-**Siguiente acción:** producir la lámina de poses de **TecnoIA v2**, empezando por mano/proyector y expresión de apuntado; después integrar y comprobar su ciclo de disparo. Esta acción sigue pendiente. Historia y multijugador continúan en el [roadmap general](roadmap-videojuego.md); la prioridad inmediata es mejorar la actuación del elenco actual.
+**Siguiente acción:** corregir los contornos del segundo borrador de **TecnoIA v2** y comprobar dedos, boquilla y continuidad entre apuntado, emisión y retroceso; después separar las fuentes de manos/rostro y producir las transiciones. A continuación, integrar y comprobar el disparo y la celebración completa de 48–72 fotogramas. La implementación jugable v2 sigue pendiente. Historia y multijugador continúan en el [roadmap general](roadmap-videojuego.md); la prioridad inmediata es mejorar la actuación del elenco actual.
+
+## 8. Registro de entregas · Piloto TecnoIA v2
+
+| Entrega | Estado comprobado el 19 de noviembre | Evidencia / pendiente |
+| --- | --- | --- |
+| Poses clave | Segundo borrador, en revisión | Ocho acciones; gesto de combate suavizado. Contornos, dedos y orientación de boquilla todavía no aprobados. |
+| Extracción automática | Implementada para revisión | `npm run poses:tecnoia`; ocho PNG transparentes de 320×320 y página de 1280×640, sin retocar el alfa original. |
+| Cuadrículas variables | Geometría y exportador implementados | Comprobados 48 fotogramas en 7×7, 72 en 8×9 y varias páginas con márgenes/separación. Son pruebas geométricas, no arte nuevo de esas secuencias. |
+| Revisión de tamaño | Plancha inspeccionada | Cada pose aparece a 160 y 320 px, sobre fondos oscuro y claro. Persisten halos; las comprobaciones geométricas no los aprueban. |
+| Disparo y celebración completos | Pendientes | Faltan poses intermedias, tiempos, celebración de entrada a salida y aprobación visual. |
+| Anclajes, eventos, lector y render v2 | Pendientes | El exportador actual de v1, la selección de sprites y las reglas del juego no se modifican en esta entrega. |
+| Comprobaciones | 63 pruebas y compilación correctas | Se incluyen seis pruebas nuevas de geometría, exportación, alfa y recursos de TecnoIA. Las reglas Firestore se mantienen sin cambios; requieren el emulador para su verificación separada. |
+
+Los metadatos de revisión declaran `kind: key-poses` y `productionReady: false`. Ninguna de estas ocho poses se presenta como una celebración animada completa. Fuentes, prompts, manifiesto y resultados reproducibles se conservan junto a los borradores anteriores y se sincronizan en GitHub.

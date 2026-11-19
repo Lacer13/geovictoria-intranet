@@ -1,0 +1,219 @@
+{
+  "schemaVersion": 2,
+  "kind": "key-poses",
+  "character": "tecnoia",
+  "productionReady": false,
+  "reviewNotes": [
+    "Borrador: persisten halos de color y píxeles sueltos en el contorno.",
+    "Comprobar dedos y orientación horizontal de la boquilla antes de aprobar.",
+    "Ocho poses clave; no son una secuencia completa de disparo o celebración.",
+    "Pendientes: transiciones, anclajes, eventos de emisión e integración jugable."
+  ],
+  "source": "../poses-v2-borrador-02.png",
+  "sourceManifest": "../poses-v2-borrador-02.manifest.json",
+  "sourceSha256": "9ae08a2b530c8154f788941344d366dae5c68283a66089257cab9b61ebfb732c",
+  "pages": [
+    {
+      "image": "poses-page-1.png",
+      "width": 1280,
+      "height": 640
+    }
+  ],
+  "grid": {
+    "directory": "revision-v2-borrador-02",
+    "columns": 4,
+    "rows": 2,
+    "cellWidth": 320,
+    "cellHeight": 320,
+    "marginX": 0,
+    "marginY": 0,
+    "spacingX": 0,
+    "spacingY": 0
+  },
+  "frames": {
+    "idle": {
+      "page": 0,
+      "x": 0,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "source": {
+        "x": 0,
+        "y": 0,
+        "w": 444,
+        "h": 444
+      },
+      "inspection": {
+        "occupied": 67770,
+        "edgePixels": 0,
+        "bounds": {
+          "x": 28,
+          "y": 29,
+          "w": 357,
+          "h": 365
+        }
+      }
+    },
+    "aim": {
+      "page": 0,
+      "x": 320,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "source": {
+        "x": 444,
+        "y": 0,
+        "w": 443,
+        "h": 444
+      },
+      "inspection": {
+        "occupied": 69465,
+        "edgePixels": 0,
+        "bounds": {
+          "x": 28,
+          "y": 29,
+          "w": 359,
+          "h": 365
+        }
+      }
+    },
+    "emission": {
+      "page": 0,
+      "x": 640,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "source": {
+        "x": 887,
+        "y": 0,
+        "w": 444,
+        "h": 444
+      },
+      "inspection": {
+        "occupied": 69340,
+        "edgePixels": 0,
+        "bounds": {
+          "x": 28,
+          "y": 29,
+          "w": 388,
+          "h": 365
+        }
+      }
+    },
+    "recoil": {
+      "page": 0,
+      "x": 960,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "source": {
+        "x": 1331,
+        "y": 0,
+        "w": 443,
+        "h": 444
+      },
+      "inspection": {
+        "occupied": 68845,
+        "edgePixels": 0,
+        "bounds": {
+          "x": 28,
+          "y": 29,
+          "w": 360,
+          "h": 365
+        }
+      }
+    },
+    "recovery": {
+      "page": 0,
+      "x": 0,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "source": {
+        "x": 0,
+        "y": 444,
+        "w": 444,
+        "h": 443
+      },
+      "inspection": {
+        "occupied": 69746,
+        "edgePixels": 0,
+        "bounds": {
+          "x": 28,
+          "y": 28,
+          "w": 362,
+          "h": 367
+        }
+      }
+    },
+    "dodge": {
+      "page": 0,
+      "x": 320,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "source": {
+        "x": 444,
+        "y": 444,
+        "w": 443,
+        "h": 443
+      },
+      "inspection": {
+        "occupied": 67377,
+        "edgePixels": 0,
+        "bounds": {
+          "x": 48,
+          "y": 28,
+          "w": 317,
+          "h": 361
+        }
+      }
+    },
+    "victory": {
+      "page": 0,
+      "x": 640,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "source": {
+        "x": 887,
+        "y": 444,
+        "w": 444,
+        "h": 443
+      },
+      "inspection": {
+        "occupied": 72763,
+        "edgePixels": 0,
+        "bounds": {
+          "x": 11,
+          "y": 29,
+          "w": 409,
+          "h": 356
+        }
+      }
+    },
+    "rest": {
+      "page": 0,
+      "x": 960,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "source": {
+        "x": 1331,
+        "y": 444,
+        "w": 443,
+        "h": 443
+      },
+      "inspection": {
+        "occupied": 68674,
+        "edgePixels": 0,
+        "bounds": {
+          "x": 28,
+          "y": 28,
+          "w": 366,
+          "h": 367
+        }
+      }
+    }
+  }
+}
