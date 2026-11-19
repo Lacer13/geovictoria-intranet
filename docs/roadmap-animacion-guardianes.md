@@ -1,12 +1,12 @@
 # Roadmap de animación · Guardianes con gestos y disparos claros
 
-18 de noviembre de 2026 · Actualizado el 19 de noviembre de 2026. **Estado: TecnoIA v2 integrado y publicado en vista previa; disparo y controles aceptados por el usuario en su teléfono. Publicación de producción pendiente.**
+18 de noviembre de 2026 · Actualizado el 19 de noviembre de 2026. **Estado: piloto TecnoIA v2 cerrado, integrado en main y publicado en producción; disparo y controles aceptados por el usuario en su teléfono. Siguiente personaje: ConectIA.**
 
 ## Objetivo
 
 Que cada guardián actúe y se exprese al jugar: que se vea cómo apunta, desde dónde dispara, cómo reacciona y cómo usa su poder. La referencia es la claridad de VictorIA Clásico, conservando el estilo navideño y la identidad aprobada de los doce guardianes.
 
-El trabajo se hará **de uno en uno**, empezando por TecnoIA. Se termina y comprueba un personaje antes de producir el siguiente. Las entregas se registran al final de este documento; producción conserva v1 y la vista previa permite jugar con TecnoIA v2.
+El trabajo se hará **de uno en uno**, empezando por TecnoIA. Se termina y comprueba un personaje antes de producir el siguiente. Las entregas se registran al final de este documento; producción utiliza TecnoIA v2 y los once guardianes restantes conservan v1.
 
 **Avance del 19 de noviembre:** se preparó la copia local y una [primera lámina de ocho poses de TecnoIA v2](../design/characters/tecnoia/README-v2.md), con proyector en la mano libre y expresiones diferenciadas. Es un borrador para revisión: la limpieza de bordes, las secuencias completas, los anclajes y la integración siguen pendientes. Los recursos jugables v1 se conservan.
 
@@ -208,7 +208,7 @@ Los recursos se publicarán como v2 junto a la v1 existente, con metadatos expl�
 
 El piloto definirá la cantidad final de poses, fotogramas, cuadrícula, tamaño de celdas y presupuesto de carga, partiendo del objetivo de celebración completa de la sección 3.E. No hay un máximo de 4×4 o 7×7; se usarán hojas mayores o varias páginas si la secuencia lo necesita y conserva la definición y el rendimiento. Se medirá el peso de las variantes y su legibilidad antes de repetirlas. No se prometen plazos para los doce personajes sin conocer ese resultado.
 
-**Siguiente acción:** completar la revisión del PR y preparar la publicación de producción de **TecnoIA v2**. El usuario ya confirmó en su teléfono la claridad del disparo, la visibilidad de los controles y su respuesta. Esa aceptación no incluye mediciones de FPS ni una matriz de dispositivos. Cerrar la publicación y comprobar lo publicado antes de iniciar ConectIA. La integración técnica, los eventos, los estados restantes y la recuperación de recursos ya se implementaron en esta rama. Historia y multijugador continúan en el [roadmap general](roadmap-videojuego.md).
+**Siguiente acción:** iniciar las poses de **ConectIA**, conservando su identidad y accesorio. La primera revisión debe mostrar apuntado, emisión, retroceso y recuperación legibles durante Ráfaga rápida, además de una celebración propia completa. Reutilizar eventos, anclajes, carga y recuperación del piloto; no copiar su actuación ni modificar cadencias o daño. TecnoIA ya está integrado y comprobado en producción. El usuario confirmó en su teléfono la claridad del disparo, la visibilidad de los controles y su respuesta; esa aceptación no incluye mediciones de FPS ni una matriz de dispositivos. Historia y multijugador continúan en el [roadmap general](roadmap-videojuego.md).
 
 ## 8. Primer hito · Poses y extracción (registro histórico)
 
@@ -263,6 +263,16 @@ El piloto se reproduce con `npm run sprites:tecnoia-game` y se abre en `/juego` 
 | Teléfono real | Aceptación del usuario | Confirmó «Sí, se ven y responden bien» al consultar claridad del disparo, visibilidad y respuesta de los controles. Modelo y navegador no informados. |
 | Firebase Hosting | Vista previa publicada y comprobada | [Jugar TecnoIA v2](https://geovictoria-intranet-peru--tecnoia-v2-o55x61si.web.app/juego), canal `tecnoia-v2`, vence el 26 de noviembre de 2026 a las 13:34 (Lima). HTML, CSS del juego, metadatos y ambas hojas coinciden por SHA-256 con la compilación. |
 | Reproducción y trazabilidad | Registradas | `npm run deploy:preview:tecnoia`, [registro público del despliegue](releases/tecnoia-v2-preview-2026-11-19.json) y capturas versionadas. |
-| Producción y siguiente guardián | Pendientes | Revisar e integrar el PR, publicar Hosting de producción y comprobar la versión publicada; después comenzar ConectIA. |
+| Producción y siguiente guardián | Resueltos en el quinto hito | El registro posterior documenta integración, promoción y comprobación de producción. ConectIA queda como siguiente personaje. |
 
 La vista previa utiliza el mismo backend que la aplicación y es temporal. Durante la verificación no se enviaron puntos al ranking. No se cambiaron reglas Firestore ni dominios autorizados de Authentication; producción no se desplegó en este hito.
+
+## 12. Quinto hito · Producción y cierre de TecnoIA
+
+El usuario autorizó integrar y publicar la versión validada. El [PR #1](https://github.com/Lacer13/geovictoria-intranet/pull/1) se integró en `main` con commit `0df51c2fdacd2bf6dc9059586aa671d67d08aa9d`, después de pasar las 77 pruebas, build y reglas Firestore en GitHub Actions. El árbol integrado coincide exactamente con el de la vista previa aceptada.
+
+Se promovió por su ID inmutable la versión de Hosting `0325211ebba82b78` a [producción · /juego](https://geovictoria-intranet-peru.web.app/juego), el 19 de noviembre de 2026 a las 13:44 (Lima). No se recompiló otra variante para publicar. La ruta, los recursos de entrada, el módulo del juego, sus estilos y todos los recursos de TecnoIA v2 responden correctamente y coinciden por SHA-256 con el build validado.
+
+La revisión de producción comprobó inicio de partida, disparo asistido, pausa/reanudación y controles visibles a 844×390; sin errores ni advertencias de consola. Se terminó la partida sin enviar puntos al ranking y se restableció el ajuste de disparo asistido. [Captura](../design/characters/tecnoia/produccion-v2-horizontal.jpg), [QA](qa-tecnoia-v2.md) y [registro de publicación/restauración](releases/tecnoia-v2-production-2026-11-19.json).
+
+**TecnoIA queda cerrado como piloto de animación v2.** El siguiente turno es ConectIA; su nuevo arte y sus secuencias todavía no se han producido. La versión anterior de Hosting está registrada para restauración. No se desplegaron reglas Firestore ni se cambiaron dominios de Authentication.

@@ -1,0 +1,174 @@
+{
+  "date": "2026-11-19",
+  "project": "geovictoria-intranet-peru",
+  "channel": "live",
+  "url": "https://geovictoria-intranet-peru.web.app/juego",
+  "sourceCommit": "15f479115ea5108ee90f7bc357332aa23f89f9a8",
+  "mergeCommit": "0df51c2fdacd2bf6dc9059586aa671d67d08aa9d",
+  "pullRequest": "https://github.com/Lacer13/geovictoria-intranet/pull/1",
+  "hostingVersion": "0325211ebba82b78",
+  "previousHostingVersion": "7d12e5ed6b74488a",
+  "releaseTime": "2026-11-19T18:44:56.447Z",
+  "deployment": "Promoción por ID inmutable de la vista previa validada",
+  "rollbackCommand": "npx --yes firebase-tools@15.34.1 hosting:clone geovictoria-intranet-peru@7d12e5ed6b74488a geovictoria-intranet-peru:live --project geovictoria-intranet-peru --non-interactive",
+  "firestoreRulesDeployed": false,
+  "authenticationDomainsChanged": false,
+  "resources": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "bytes": 1546,
+      "sha256": "a9cc8983e9e00ae3dfc53c6e141105e480e1fed8abfa6da76f16f73c0ca94218",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "assets/GamePage-BpzdetKe.css",
+      "status": 200,
+      "bytes": 16446,
+      "sha256": "5615c68bd3904def1819198a3126d8a781ddf403369bfd1e9ae5b1673f41db51",
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "path": "characters/tecnoia/sprites-v2.json",
+      "status": 200,
+      "bytes": 76288,
+      "sha256": "279a408c8e70e0a4c53c7f976129bf25985bb5aef593f2af96f7554b2e6da312",
+      "contentType": "application/json"
+    },
+    {
+      "path": "characters/tecnoia/sprites-v2-1.webp",
+      "status": 200,
+      "bytes": 1912938,
+      "sha256": "e657231ea7074b2f3a1fc5b513e5e13d020a93802f891e33fbffbc698a96dde9",
+      "contentType": "image/webp"
+    },
+    {
+      "path": "characters/tecnoia/sprites-v2-2.webp",
+      "status": 200,
+      "bytes": 110278,
+      "sha256": "aead7b5198c3ed72ed4424cbc79faaa48a41139a5fdda04b040cc81fb7810db4",
+      "contentType": "image/webp"
+    },
+    {
+      "path": "assets/index-CjjkzlBY.js",
+      "status": 200,
+      "bytes": 59,
+      "sha256": "a87bd0ece526871e19fc9a87f8c4e125540ac2befc0eb45ea8c5ba2b57baac25",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/rolldown-runtime-D2aABDIb.js",
+      "status": 200,
+      "bytes": 680,
+      "sha256": "760907b0f57761fcae7a1113e535296fa7e31deaa87aa6138e19917ae7e00a86",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/react-DbMM3Pz9.js",
+      "status": 200,
+      "bytes": 228576,
+      "sha256": "1aa337c1eaee5d0da619083f58824dc8b374974312d37eff98307fdc9c121acb",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/createLucideIcon-7eCvd4fb.js",
+      "status": 200,
+      "bytes": 1855,
+      "sha256": "9a447768920f4b44d21d49d9834058c8e7f1e45b94254ba1cd748ef70ba09e8a",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/sparkles-Bp2nlqxW.js",
+      "status": 200,
+      "bytes": 822,
+      "sha256": "f4de9244b211374f6fe4a909df24479daf50c6e607081c46bcdd8df8ec865ce3",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/arrow-right-B8hwxgWV.js",
+      "status": 200,
+      "bytes": 283,
+      "sha256": "639de16f192b1911494c961547f0cb25db028866d1d3a423d9929202e19a6b4a",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/firebase-core-zny-qTcr.js",
+      "status": 200,
+      "bytes": 25641,
+      "sha256": "fe13580b8b758dd7d8146074864da2aa0f93a303132a23cd9dc36aa758366ad3",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/firebase-auth-BIVNiNOK.js",
+      "status": 200,
+      "bytes": 88405,
+      "sha256": "778234d22dbd2568898ec2f9f4636619a6a61314eea4bb8e33d624194089d174",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/firebase-S_cIQMS-.js",
+      "status": 200,
+      "bytes": 305575,
+      "sha256": "e8c79274da9c566a7bc089cee2f2253fcc5eafdde111b0b204e75227a9676444",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/geovictoria-intranet-CW9ID7q0.js",
+      "status": 200,
+      "bytes": 223477,
+      "sha256": "8b545968688b59fc80d42a7a8d510074a9248a5d00a050de9d8c185133db1d37",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/geovictoria-intranet-aO8WF6Xb.css",
+      "status": 200,
+      "bytes": 114467,
+      "sha256": "b5694ee421063bc621cd1b01856f573afb3d14766f850628c72552bd326ae7bd",
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "path": "assets/GamePage-CwDnNDWt.js",
+      "status": 200,
+      "bytes": 58972,
+      "sha256": "3812c7ef5ddb6eaed6b41059ebf09f4193b019f1aa0da830b2540ffbd656e9b0",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "characters/tecnoia/portrait-v2.webp",
+      "status": 200,
+      "bytes": 20914,
+      "sha256": "51fee12a63b318de4d9b7b1de43d4a3f9771df5eacc6075cd6a6ec2cf60f15c6",
+      "contentType": "image/webp"
+    },
+    {
+      "path": "characters/tecnoia/rig-navidad-v2.png",
+      "status": 200,
+      "bytes": 1143424,
+      "sha256": "bf510395c08e44204037460b58ed4b1048c9933ce21795bc9d3e39f449ec403c",
+      "contentType": "image/png"
+    }
+  ],
+  "verification": {
+    "route": "/juego",
+    "routeStatus": 200,
+    "resourcesMatchValidatedBuild": true,
+    "securityHeadersPresent": true,
+    "verifiedAt": "2026-11-19T18:45:27.563Z"
+  },
+  "browserVerification": {
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "checks": [
+      "Inicio de partida",
+      "Disparo asistido y proyectiles visibles",
+      "Pausa y reanudación",
+      "Regreso al selector"
+    ],
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "rankingSubmitted": false,
+    "screenshot": "design/characters/tecnoia/produccion-v2-horizontal.jpg"
+  }
+}

@@ -1,6 +1,6 @@
 # TecnoIA v2 · Verificación móvil y vista previa
 
-19 de noviembre de 2026. [Abrir el juego](https://geovictoria-intranet-peru--tecnoia-v2-o55x61si.web.app/juego).
+19 de noviembre de 2026. [Abrir el juego en producción](https://geovictoria-intranet-peru.web.app/juego). Piloto cerrado; PR #1 integrado.
 
 ## Resultado y alcance
 
@@ -34,4 +34,14 @@ npm run deploy:preview:tecnoia
 
 El comando ejecuta pruebas y build y publica solo ese canal durante siete días con Firebase CLI 15.34.1. `--no-authorized-domains` conserva los dominios de Authentication. La vista previa comparte el backend actual; no se desplegaron reglas Firestore ni Hosting de producción.
 
-Siguiente paso del roadmap: revisar e integrar el PR, publicar la versión validada en producción y comprobarla antes de iniciar ConectIA. La aceptación móvil queda registrada; la publicación de producción sigue pendiente.
+## Producción comprobada
+
+Con autorización del usuario, el [PR #1](https://github.com/Lacer13/geovictoria-intranet/pull/1) se integró en main (`0df51c2fdacd2bf6dc9059586aa671d67d08aa9d`). GitHub Actions pasó las 77 pruebas, compilación y reglas Firestore. Se verificó que el árbol integrado coincide con el commit validado `15f479115ea5108ee90f7bc357332aa23f89f9a8`.
+
+Se promovió la versión inmutable `0325211ebba82b78` del mismo sitio al canal `live`, sin recompilar otra variante. Publicada el **19 de noviembre de 2026 a las 13:44 (Lima)**. `/juego` y 19 recursos comprobados devuelven 200: HTML, entradas JS/CSS, módulo/estilos del juego, metadatos, dos hojas, fuente y miniatura. Sus SHA-256 coinciden con el build validado; se conservan los encabezados `nosniff` y `DENY`.
+
+Revisión visual de producción a 844×390: inicio de partida, disparo asistido con proyectiles visibles y puntaje en partida, pausa, reanudación y regreso al selector. Controles laterales completos; sin errores ni advertencias en consola. No se envió el resultado al ranking. Se restableció disparo asistido y el tamaño normal del navegador.
+
+La [captura de producción](../design/characters/tecnoia/produccion-v2-horizontal.jpg) y el [registro público de publicación](releases/tecnoia-v2-production-2026-11-19.json) documentan la entrega. La versión anterior `7d12e5ed6b74488a` y el comando de restauración están registrados allí. No se desplegaron reglas Firestore ni se cambiaron dominios de Authentication.
+
+TecnoIA queda cerrado como piloto de animación. El siguiente paso del roadmap son las poses y la actuación propia de ConectIA, todavía sin implementar.
