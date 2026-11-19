@@ -1,6 +1,8 @@
 # TecnoIA v2 · Piloto jugable
 
-19 de noviembre de 2026. Estado: piloto integrado al selector, la partida y los resultados en esta rama; pendiente de validación en dispositivos reales y publicación en Firebase.
+19 de noviembre de 2026. Estado: piloto integrado al selector, partida y resultados; publicado en vista previa de Firebase, con claridad y respuesta de controles aceptadas por el usuario en su teléfono. Publicación de producción pendiente.
+
+[Jugar la vista previa](https://geovictoria-intranet-peru--tecnoia-v2-o55x61si.web.app/juego) · vence el 26 de noviembre a las 13:34 (Lima). [Verificación móvil y despliegue](../../../docs/qa-tecnoia-v2.md). Capturas: [horizontal](mobile-v2-horizontal.jpg), [320 px con controles grandes](mobile-v2-320-grande.jpg) y [versión publicada](preview-v2-publicado.jpg).
 
 ## Entrega actual · Integración jugable
 
@@ -29,7 +31,7 @@ npm run dev
 
 El conjunto v2 suma aproximadamente **3,26 MB** con fuente, dos hojas, miniatura y metadatos; las hojas contienen 7.520.256 píxeles (unos 30,1 MB RGBA antes de copias/GPU). Se mantienen el límite de caché y la carga por personaje. El rendimiento real en teléfonos debe medirse en el piloto del equipo.
 
-Validación: **77 pruebas correctas** y compilación de producción. Ocho nuevas pruebas de integración cubren cadencias, eventos, poderes, interpolación, pausa/FPS, movimiento/daño/esquiva, las 203 celdas, recuperación ante fallos y una partida completa hasta victoria con animación final que no modifica las reglas. Pendiente: prueba en dispositivos reales, observaciones de actuación y publicación en Firebase antes de cerrar TecnoIA y pasar a ConectIA.
+Validación: **77 pruebas correctas** y compilación de producción. Ocho nuevas pruebas de integración cubren cadencias, eventos, poderes, interpolación, pausa/FPS, movimiento/daño/esquiva, las 203 celdas, recuperación ante fallos y una partida completa hasta victoria con animación final que no modifica las reglas. Se verificaron pantallas móviles por emulación y los recursos publicados por SHA-256; el usuario aceptó disparo y controles en su teléfono. No se midieron FPS en ese dispositivo. Pendientes: revisión del PR y publicación de producción antes de cerrar TecnoIA y pasar a ConectIA.
 
 ## Segundo hito conservado · Secuencias de estudio
 

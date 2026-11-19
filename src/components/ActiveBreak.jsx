@@ -632,6 +632,9 @@ export default function ActiveBreak() {
             {hud.spread > 0 && <span>Abanico {hud.spread}s</span>}
             {settings.autoFire && <span>Disparo asistido</span>}
           </div>
+          <p className="arcade-orientation-hint">
+            Para ver mejor los gestos, juega con el teléfono en horizontal.
+          </p>
           {mode === "playing" && (
             <TouchControls
               input={input}

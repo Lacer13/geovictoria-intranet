@@ -1,12 +1,12 @@
 # Roadmap de animación · Guardianes con gestos y disparos claros
 
-18 de noviembre de 2026 · Actualizado el 19 de noviembre de 2026. **Estado: TecnoIA v2 integrado al juego en esta rama; validación en dispositivos reales y publicación pendientes.**
+18 de noviembre de 2026 · Actualizado el 19 de noviembre de 2026. **Estado: TecnoIA v2 integrado y publicado en vista previa; disparo y controles aceptados por el usuario en su teléfono. Publicación de producción pendiente.**
 
 ## Objetivo
 
 Que cada guardián actúe y se exprese al jugar: que se vea cómo apunta, desde dónde dispara, cómo reacciona y cómo usa su poder. La referencia es la claridad de VictorIA Clásico, conservando el estilo navideño y la identidad aprobada de los doce guardianes.
 
-El trabajo se hará **de uno en uno**, empezando por TecnoIA. Se termina y comprueba un personaje antes de producir el siguiente. Las entregas se registran al final de este documento; el arcade publicado conserva los recursos v1 hasta validar el piloto completo.
+El trabajo se hará **de uno en uno**, empezando por TecnoIA. Se termina y comprueba un personaje antes de producir el siguiente. Las entregas se registran al final de este documento; producción conserva v1 y la vista previa permite jugar con TecnoIA v2.
 
 **Avance del 19 de noviembre:** se preparó la copia local y una [primera lámina de ocho poses de TecnoIA v2](../design/characters/tecnoia/README-v2.md), con proyector en la mano libre y expresiones diferenciadas. Es un borrador para revisión: la limpieza de bordes, las secuencias completas, los anclajes y la integración siguen pendientes. Los recursos jugables v1 se conservan.
 
@@ -208,7 +208,7 @@ Los recursos se publicarán como v2 junto a la v1 existente, con metadatos expl�
 
 El piloto definirá la cantidad final de poses, fotogramas, cuadrícula, tamaño de celdas y presupuesto de carga, partiendo del objetivo de celebración completa de la sección 3.E. No hay un máximo de 4×4 o 7×7; se usarán hojas mayores o varias páginas si la secuencia lo necesita y conserva la definición y el rendimiento. Se medirá el peso de las variantes y su legibilidad antes de repetirlas. No se prometen plazos para los doce personajes sin conocer ese resultado.
 
-**Siguiente acción:** validar el piloto jugable de **TecnoIA v2** en los dispositivos reales del equipo, recoger observaciones sobre actuación y legibilidad y preparar la publicación en Firebase de la versión validada. Cerrar esos criterios antes de iniciar ConectIA. La integración técnica, los eventos, los estados restantes y la recuperación de recursos ya se implementaron en esta rama. Historia y multijugador continúan en el [roadmap general](roadmap-videojuego.md).
+**Siguiente acción:** completar la revisión del PR y preparar la publicación de producción de **TecnoIA v2**. El usuario ya confirmó en su teléfono la claridad del disparo, la visibilidad de los controles y su respuesta. Esa aceptación no incluye mediciones de FPS ni una matriz de dispositivos. Cerrar la publicación y comprobar lo publicado antes de iniciar ConectIA. La integración técnica, los eventos, los estados restantes y la recuperación de recursos ya se implementaron en esta rama. Historia y multijugador continúan en el [roadmap general](roadmap-videojuego.md).
 
 ## 8. Primer hito · Poses y extracción (registro histórico)
 
@@ -252,4 +252,17 @@ Reproducir: `npm run sprites:tecnoia-v2`. Abrir con Vite `design/characters/tecn
 | Verificación | 77 pruebas y compilación correctas | Incluye partida completa de simulación v2 hasta victoria, carga con fallos y lectura/dibujo de todas las celdas. Chrome local: disparo manual/asistido, movimiento, esquiva, pausa, efectos reducidos, derrota y reinicio; sin errores de consola. |
 | Peso y evidencia | Registrados | Aproximadamente 3,26 MB del conjunto v2. [Combate](../design/characters/tecnoia/integracion-v2-combate.jpg) y [resultados](../design/characters/tecnoia/integracion-v2-juego.jpg). |
 
-El piloto se reproduce con `npm run sprites:tecnoia-game` y se abre en `/juego` con Vite. La aceptación en dispositivos reales y el despliegue en Firebase quedan pendientes; no se inicia otro guardián en esta entrega.
+El piloto se reproduce con `npm run sprites:tecnoia-game` y se abre en `/juego` con Vite. El estado posterior de verificación y publicación se registra en el cuarto hito.
+
+## 11. Cuarto hito · Móvil y vista previa publicada
+
+| Entrega | Estado comprobado el 19 de noviembre | Evidencia |
+| --- | --- | --- |
+| Distribución móvil | Corregida | En horizontal, escena central y controles laterales dentro de la pantalla; en vertical estrecho, marcador compacto y botones sin desbordamiento. Se conserva el nombre accesible «Puntos». |
+| Pantallas pequeñas | Revisadas por emulación | 320×568 con controles grandes y 568×320 en horizontal sin desplazamiento; revisión visual adicional a 390×844 y 844×390. [Capturas y matriz](qa-tecnoia-v2.md). |
+| Teléfono real | Aceptación del usuario | Confirmó «Sí, se ven y responden bien» al consultar claridad del disparo, visibilidad y respuesta de los controles. Modelo y navegador no informados. |
+| Firebase Hosting | Vista previa publicada y comprobada | [Jugar TecnoIA v2](https://geovictoria-intranet-peru--tecnoia-v2-o55x61si.web.app/juego), canal `tecnoia-v2`, vence el 26 de noviembre de 2026 a las 13:34 (Lima). HTML, CSS del juego, metadatos y ambas hojas coinciden por SHA-256 con la compilación. |
+| Reproducción y trazabilidad | Registradas | `npm run deploy:preview:tecnoia`, [registro público del despliegue](releases/tecnoia-v2-preview-2026-11-19.json) y capturas versionadas. |
+| Producción y siguiente guardián | Pendientes | Revisar e integrar el PR, publicar Hosting de producción y comprobar la versión publicada; después comenzar ConectIA. |
+
+La vista previa utiliza el mismo backend que la aplicación y es temporal. Durante la verificación no se enviaron puntos al ranking. No se cambiaron reglas Firestore ni dominios autorizados de Authentication; producción no se desplegó en este hito.
