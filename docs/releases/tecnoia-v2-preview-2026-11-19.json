@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-19",
+  "project": "geovictoria-intranet-peru",
+  "channel": "tecnoia-v2",
+  "url": "https://geovictoria-intranet-peru--tecnoia-v2-o55x61si.web.app/juego",
+  "hostingVersion": "0325211ebba82b78",
+  "expiresAt": "2026-11-26T18:34:02.788438750Z",
+  "productionDeployed": false,
+  "phoneFeedback": {
+    "result": "accepted",
+    "scope": "Legibilidad del disparo y controles, y respuesta de los controles",
+    "source": "Confirmación del usuario en el chat; modelo y navegador no especificados"
+  },
+  "resources": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "bytes": 1546,
+      "sha256": "a9cc8983e9e00ae3dfc53c6e141105e480e1fed8abfa6da76f16f73c0ca94218",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "assets/GamePage-BpzdetKe.css",
+      "status": 200,
+      "bytes": 16446,
+      "sha256": "5615c68bd3904def1819198a3126d8a781ddf403369bfd1e9ae5b1673f41db51",
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "path": "characters/tecnoia/sprites-v2.json",
+      "status": 200,
+      "bytes": 76288,
+      "sha256": "279a408c8e70e0a4c53c7f976129bf25985bb5aef593f2af96f7554b2e6da312",
+      "contentType": "application/json"
+    },
+    {
+      "path": "characters/tecnoia/sprites-v2-1.webp",
+      "status": 200,
+      "bytes": 1912938,
+      "sha256": "e657231ea7074b2f3a1fc5b513e5e13d020a93802f891e33fbffbc698a96dde9",
+      "contentType": "image/webp"
+    },
+    {
+      "path": "characters/tecnoia/sprites-v2-2.webp",
+      "status": 200,
+      "bytes": 110278,
+      "sha256": "aead7b5198c3ed72ed4424cbc79faaa48a41139a5fdda04b040cc81fb7810db4",
+      "contentType": "image/webp"
+    }
+  ]
+}

@@ -3,6 +3,9 @@ import { characterPose, rigPose, TECNOIA_PARTS } from "./characters.js";
 import { drawRig } from "./rig.js";
 import { spriteFrame } from "./animation.js";
 import { activePower } from "./powers.js";
+import { drawTecnoiaV2 } from "./tecnoiaV2.js";
+import { sampleTecnoiaGameplay, TECNOIA_GAME_PIVOT } from "./tecnoiaGameplay.js";
+import { atlasFrame, drawAtlasFrame } from "./spriteAtlas.js";
 
 function rounded(ctx, x, y, width, height, radius, color) {
   ctx.fillStyle = color;
@@ -11,7 +14,7 @@ function rounded(ctx, x, y, width, height, radius, color) {
   ctx.fill();
 }
 
-function fallbackRobot(ctx, size, enemy = false) {
+function fallbackRobot(ctx, size, enemy = false, emitter = false) {
   // Recovery art remains a complete head with two floating hands, without a body.
   ctx.save();
   ctx.scale(size / 100, size / 100);
@@ -24,7 +27,7 @@ function fallbackRobot(ctx, size, enemy = false) {
     ctx.fill();
   }
   rounded(ctx, -49, 20, 17, 23, 8, "#e8f3f0");
-  rounded(ctx, 32, 20, 17, 23, 8, "#e8f3f0");
+  rounded(ctx, 32, emitter ? 0 : 20, 17, 23, 8, "#e8f3f0");
   ctx.restore();
 }
 
@@ -38,15 +41,38 @@ export function drawCharacter(
   pose = "idle",
   seconds = 0,
   reduced = false,
-  { sprite = null, lean = 0 } = {},
+  { sprite = null, lean = 0, animation = null, presentation = null, showEmitter = pose === "shooting" } = {},
 ) {
   ctx.save();
   ctx.translate(x, y);
   const rig = rigPose(pose, seconds, reduced);
+  const fallbackEmission = !animation && character.animation?.version === 2 && showEmitter;
   ctx.globalAlpha *= rig.alpha;
-  if (character.type === "rig") {
+  if (animation?.version === 2) {
+    const view = presentation || { pose, elapsed: seconds };
+    const overlay = (view.armed || view.shotElapsed !== null && view.shotElapsed < 0.2) &&
+      !["shooting", "aim", "victory", "defeat"].includes(view.pose);
+    const useParts = animation.source && (overlay || !animation.atlas || view.pose === "moving");
+    if (useParts) {
+      const sample = sampleTecnoiaGameplay(view.pose, view.elapsed, reduced, view);
+      drawTecnoiaV2(ctx, animation.source, sample, {
+        x: -TECNOIA_GAME_PIVOT.x * size / 320,
+        y: -TECNOIA_GAME_PIVOT.y * size / 320, size,
+      });
+    } else {
+      // If only the atlas survived a source failure, emission takes priority
+      // over a head reaction so a visible muzzle remains synchronized.
+      const clip = overlay ? "shooting" : view.pose;
+      const elapsed = overlay ? view.shotElapsed ?? 0.2 : view.elapsed;
+      const frame = atlasFrame(animation.atlas, clip, elapsed, reduced);
+      drawAtlasFrame(ctx, animation.pages, animation.atlas, clip, elapsed, {
+        x: -frame.anchors.pivot.x * size / frame.w,
+        y: -frame.anchors.pivot.y * size / frame.h, width: size, reduced,
+      });
+    }
+  } else if (character.type === "rig") {
     ctx.globalAlpha = 1;
-    ctx.rotate(lean);
+    ctx.rotate(fallbackEmission ? 0 : lean);
     if (sprite?.naturalWidth) {
       const frame = spriteFrame(pose, seconds, reduced);
       ctx.drawImage(
@@ -73,7 +99,7 @@ export function drawCharacter(
         seconds,
         reduced,
       );
-    else fallbackRobot(ctx, size);
+    else fallbackRobot(ctx, size, false, fallbackEmission);
   } else if (image?.naturalWidth) {
     ctx.translate(0, reduced ? 0 : Math.sin(seconds * 5) * size * 0.025);
     ctx.rotate(rig.tilt);
@@ -104,6 +130,14 @@ export function drawCharacter(
       size,
     );
   } else fallbackRobot(ctx, size);
+  if (fallbackEmission) {
+    // A small recovery projector stays visible even if every bitmap failed.
+    // Its muzzle uses the unchanged basic-shot center relative to the actor.
+    const mx = size * 52 / 112, my = size * 7 / 112;
+    rounded(ctx, mx - size * 0.12, my - size * 0.035, size * 0.12, size * 0.07, size * 0.02, "#176cbb");
+    ctx.fillStyle = "#88ffff";
+    ctx.beginPath(); ctx.ellipse(mx, my, size * 0.018, size * 0.03, 0, 0, Math.PI * 2); ctx.fill();
+  }
   ctx.restore();
 }
 
@@ -236,7 +270,7 @@ export function drawGame(
   state,
   images,
   character,
-  { reduced = false, seconds = state.tick / 60, actor = null } = {},
+  { reduced = false, seconds = state.tick / 60, actor = null, animation = null, presentation = null } = {},
 ) {
   ctx.save();
   background(ctx, state.tick, reduced);
@@ -361,7 +395,8 @@ export function drawGame(
     actor?.pose || characterPose(p, state.phase),
     actor?.elapsed ?? seconds,
     reduced,
-    { sprite: images[character.sprite], lean: actor?.lean || 0 },
+    { sprite: images[character.sprite], lean: animation ? 0 : actor?.lean || 0, animation, presentation,
+      showEmitter: Boolean(p.firing || p.shot > 0) },
   );
   if (!reduced)
     for (const particle of state.particles) {

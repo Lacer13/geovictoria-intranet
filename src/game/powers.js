@@ -1,3 +1,4 @@
+import { recordShot } from "./emission.js";
 // Durations and cooldowns are simulation ticks (60 per second).
 export const POWERS = {
   dash: {
@@ -134,8 +135,8 @@ export function activatePower(
     p.dashCooldown = power.cooldown;
   }
   if (power.id === "recover") p.hp = Math.min(3, p.hp + 1);
-  if (power.id === "closing")
-    state.bullets.push({
+  if (power.id === "closing") {
+    const bullet = {
       x: p.x + p.width - 10,
       y: p.y + p.height / 2,
       width: 44,
@@ -145,7 +146,10 @@ export function activatePower(
       enemy: false,
       damage: 4,
       pierce: 1,
-    });
+    };
+    state.bullets.push(bullet);
+    recordShot(state, [bullet], "closing");
+  }
   if (power.id === "barrier")
     state.barrier = {
       x: p.x + p.width + 22,

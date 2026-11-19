@@ -20,3 +20,5 @@ Los once nuevos diseños se crearon con ImageGen integrado a partir del atlas ap
 | ÁgilIA    | SMB              | [PNG](../../public/characters/agilia/rig-navidad-v1.png)   | [WebP](../../public/characters/agilia/sprites-v1.webp) · [JSON](../../public/characters/agilia/sprites-v1.json)     | [ImageGen](agilia/prompt-rig-v1.md)                                                     |
 
 Especificaciones, poderes, celebraciones y reproducción de las hojas: [guía de guardianes](../../docs/guardianes-navidad.md).
+
+El [piloto jugable TecnoIA v2](tecnoia/README-v2.md) incorpora una fuente limpia y 203 sprites, con disparo sincronizado, celebración completa de 60 fotogramas y estados combinables. Está conectado al selector, partida, sonido y resultados de esta rama. Incluye anclajes, recuperación ante fallos, GIF de estudio y revisión en cámara lenta. Pendientes: dispositivos reales y publicación en Firebase. Los primeros borradores de ocho poses se conservan.

@@ -1,5 +1,6 @@
 import { AREA_CHARACTERS } from "./roster.js";
 import { sampleRig } from "./rig.js";
+import { validateAnimationAtlas } from "./spriteAtlas.js";
 export { AREA_CHARACTERS } from "./roster.js";
 
 export const LEGACY_CHARACTERS = [
@@ -56,22 +57,11 @@ export function rigPose(pose, seconds, reduced = false) {
 }
 
 const assetCache = new Map();
-export function loadAssets(
-  onProgress = () => {},
-  character = CHARACTERS[0],
-  { retry = false } = {},
-) {
+const manifestCache = new Map();
+function loadImages(sources, onProgress = () => {}) {
   const images = {};
   const failed = [];
   let complete = 0;
-  const sources = [
-    ...new Set([
-      ...ASSET_SOURCES,
-      character.src,
-      ...(character.sprite ? [character.sprite] : []),
-    ]),
-  ];
-  if (retry) for (const src of sources) assetCache.delete(src);
   return Promise.all(
     sources.map(async (src) => {
       if (!assetCache.has(src)) {
@@ -107,8 +97,61 @@ export function loadAssets(
   ).then(() => {
     for (const key of assetCache.keys()) {
       if (assetCache.size <= 6) break;
-      if (!ASSET_SOURCES.includes(key)) assetCache.delete(key);
+      if (!ASSET_SOURCES.includes(key) && !sources.includes(key)) assetCache.delete(key);
     }
-    return { images, failed, characterId: character.id };
+    return { images, failed };
   });
+}
+
+async function loadManifest(url) {
+  if (!manifestCache.has(url)) manifestCache.set(url, (async () => {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+    try {
+      const response = await fetch(url, { signal: controller.signal });
+      if (!response.ok) throw new Error("Animation metadata unavailable");
+      return validateAnimationAtlas(await response.json());
+    } finally { clearTimeout(timeout); }
+  })());
+  try { return await manifestCache.get(url); }
+  catch (error) { manifestCache.delete(url); throw error; }
+}
+
+export async function loadAssets(onProgress = () => {}, character = CHARACTERS[0], { retry = false } = {}) {
+  let progress = 0;
+  const report = (value) => { progress = Math.max(progress, value); onProgress(progress); };
+  if (retry) { assetCache.clear(); manifestCache.clear(); }
+  const common = await loadImages(ASSET_SOURCES, (p) => report(p * 0.15));
+  const images = common.images, failed = [...common.failed];
+  if (character.animation?.version === 2) {
+    let atlas = null;
+    try {
+      atlas = await loadManifest(character.animation.metadata);
+      if (atlas.character !== character.id || atlas.kind !== "playable-pilot" || !atlas.productionReady ||
+        atlas.pages.some((p) => !/^[a-zA-Z0-9_-]+\.webp$/.test(p.image))) throw new Error("Invalid character manifest");
+      for (const name of ["idle", "moving", "shooting", "aim", "dash", "damage", "power", "defeat", "victory"])
+        if (!atlas.clips[name]) throw new Error("Incomplete character animation");
+    } catch { failed.push(character.animation.metadata); atlas = null; }
+    report(0.25);
+    const base = character.animation.metadata.slice(0, character.animation.metadata.lastIndexOf("/") + 1);
+    const pagePaths = atlas ? atlas.pages.map((p) => base + p.image) : [];
+    const resources = await loadImages([character.animation.src, ...pagePaths], (p) => report(0.25 + p * 0.6));
+    Object.assign(images, resources.images); failed.push(...resources.failed);
+    const source = images[character.animation.src];
+    const sourceValid = source?.naturalWidth === 1254 && source?.naturalHeight === 1254;
+    const pages = atlas ? pagePaths.map((p) => images[p]) : [];
+    const pagesValid = atlas && pages.every((p, i) => p?.naturalWidth === atlas.pages[i].width && p?.naturalHeight === atlas.pages[i].height);
+    if (source && !sourceValid) failed.push(character.animation.src);
+    if (atlas) pages.forEach((p, i) => {
+      if (p && (p.naturalWidth !== atlas.pages[i].width || p.naturalHeight !== atlas.pages[i].height)) failed.push(pagePaths[i]);
+    });
+    if (sourceValid || pagesValid) {
+      report(1);
+      return { images, failed, characterId: character.id,
+        animation: { version: 2, source: sourceValid ? source : null, atlas: pagesValid ? atlas : null, pages: pagesValid ? pages : [] } };
+    }
+  }
+  const legacy = await loadImages([character.src, ...(character.sprite ? [character.sprite] : [])], (p) => report(0.85 + p * 0.15));
+  Object.assign(images, legacy.images); failed.push(...legacy.failed); report(1);
+  return { images, failed: [...new Set(failed)], characterId: character.id, animation: null };
 }

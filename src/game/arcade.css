@@ -646,7 +646,10 @@
 .arcade-touch {
   display: none;
 }
-@media (pointer: coarse), (max-width: 720px) {
+.arcade-orientation-hint {
+  display: none;
+}
+@media (pointer: coarse), (max-width: 720px), (max-width: 1000px) and (max-height: 520px) and (orientation: landscape) {
   .arcade-touch {
     --control-size: 104px;
     display: flex;
@@ -660,6 +663,25 @@
   }
   .arcade-touch.large {
     --control-size: 124px;
+  }
+  .arcade-session > .arcade-status {
+    min-height: 0;
+    padding: 4px 12px;
+    gap: 8px;
+  }
+  .arcade-status > .arcade-power-button,
+  .arcade-status:not(:has(span)) {
+    display: none;
+  }
+  .arcade-score > span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
   .arcade-stick {
     position: relative;
@@ -692,6 +714,7 @@
     display: flex;
     gap: 14px;
     align-items: center;
+    min-width: 0;
   }
   .arcade-fire {
     width: var(--control-size);
@@ -706,6 +729,8 @@
     justify-content: center;
     gap: 5px;
     touch-action: none;
+    flex-shrink: 1;
+    min-width: 64px;
   }
   .arcade-fire span {
     font-size: 13px;
@@ -927,5 +952,120 @@
 @media (max-width: 400px) {
   .arcade-intro h1 {
     font-size: 28px;
+  }
+}
+
+@media (max-width: 720px) and (orientation: portrait) {
+  .arcade-orientation-hint {
+    display: block;
+    margin: 0;
+    padding: 8px 12px 0;
+    color: var(--arcade-muted);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+}
+
+/* A short landscape screen reserves side columns for the hands controlling
+   the game, keeping the whole scene and its controls visible together. */
+@media (max-width: 1000px) and (max-height: 520px) and (orientation: landscape) {
+  .game-page:has(.arcade-session) .game-page-header {
+    display: none;
+  }
+  .game-page:has(.arcade-session) .game-page-content {
+    padding: 4px max(4px, env(safe-area-inset-right)) max(4px, env(safe-area-inset-bottom)) max(4px, env(safe-area-inset-left));
+  }
+  .arcade-session {
+    display: grid;
+    grid-template-columns: clamp(84px, 14vw, 116px) minmax(0, 1fr) clamp(84px, 14vw, 116px);
+    grid-template-rows: 48px minmax(0, 1fr) auto;
+    height: calc(100dvh - 8px - env(safe-area-inset-bottom));
+    border-radius: 12px;
+  }
+  .arcade-hud {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    min-height: 0;
+    padding: 2px 10px;
+    gap: 10px;
+    flex-wrap: nowrap;
+  }
+  .arcade-score strong {
+    font-size: 19px;
+  }
+  .arcade-lives svg {
+    width: 17px;
+    height: 17px;
+  }
+  .arcade-objective {
+    order: 0;
+    flex-basis: auto;
+    font-size: 12px;
+    line-height: 1.25;
+  }
+  .arcade-icon-button {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 5px 8px;
+    font-size: 13px !important;
+  }
+  .arcade-viewport {
+    grid-column: 2;
+    grid-row: 2;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    aspect-ratio: auto;
+  }
+  .arcade-status {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    min-height: 0;
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+  .arcade-status > .arcade-power-button,
+  .arcade-status:not(:has(span)),
+  .arcade-keyboard-hint {
+    display: none;
+  }
+  .arcade-touch,
+  .arcade-touch.large {
+    --control-size: clamp(76px, 11vw, 96px);
+    display: contents;
+  }
+  .arcade-touch.large {
+    --control-size: clamp(80px, 13vw, 108px);
+  }
+  .arcade-stick {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: center;
+    justify-self: center;
+  }
+  .arcade-touch-caption {
+    display: none;
+  }
+  .arcade-touch-actions {
+    grid-column: 3;
+    grid-row: 2;
+    align-self: center;
+    justify-self: center;
+    margin: 0;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .arcade-fire {
+    gap: 3px;
+  }
+  .arcade-fire span {
+    font-size: 12px;
+  }
+  .arcade-dash {
+    min-height: 48px;
+    padding: 5px 8px;
+    border-radius: 12px;
+    gap: 3px;
+    font-size: 12px !important;
   }
 }

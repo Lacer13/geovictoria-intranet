@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TecnoIA v2 · Revisión de animación</title>
+<style>
+  :root { color-scheme:dark; font:16px/1.5 system-ui,sans-serif; background:#0b2028; color:#e3f0f4; }
+  body { max-width:960px; margin:36px auto; padding:0 20px; }
+  h1 { margin-bottom:4px; font-size:clamp(24px,4vw,36px); }
+  p { color:#a9c4cd; margin:4px 0 24px; }
+  canvas { display:block; width:100%; border:1px solid #36535c; border-radius:16px; background:#12333c; }
+  .controls { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:16px 0; }
+  button, select { font:inherit; color:inherit; background:#183e4a; border:1px solid #507583; border-radius:8px; padding:8px 12px; }
+  button { cursor:pointer; } button:focus-visible,select:focus-visible,input:focus-visible { outline:3px solid #76deeb; }
+  input[type=range] { flex:1; min-width:160px; accent-color:#76deeb; }
+  label { display:flex; align-items:center; gap:8px; }
+  output { font-variant-numeric:tabular-nums; min-width:180px; }
+  .status { padding:12px 16px; border-left:3px solid #eac67b; background:#213639; }
+  a { color:#83dce8; }
+</style>
+<h1>TecnoIA v2 · Estudio de animación</h1>
+<p>Estudio original de disparo y celebración. <a href="/juego">Probar el piloto jugable integrado de TecnoIA v2</a>.</p>
+<canvas width="960" height="420" role="img" aria-label="Revisión de TecnoIA: cabeza y dos manos flotantes"></canvas>
+<div class="controls">
+  <label>Acción <select id="clip"><option value="victory">Celebración · 60 fotogramas</option><option value="shooting">Disparo · 12 fotogramas</option></select></label>
+  <button id="play" type="button">Reproducir</button><button id="restart" type="button">Volver al inicio</button>
+  <label>Velocidad <select id="speed"><option value="1">Normal</option><option value="0.25">Cámara lenta · ¼</option></select></label>
+  <label>Tamaño <select id="size"><option>320</option><option>160</option><option>112</option></select> px</label>
+</div>
+<div class="controls">
+  <input id="time" type="range" min="0" max="59" value="0" aria-label="Fotograma">
+  <output id="frame">Cargando…</output>
+</div>
+<div class="controls">
+  <label><input id="reduced" type="checkbox">Movimiento reducido</label>
+  <label><input id="anchor" type="checkbox">Mostrar boquilla</label>
+  <label><input id="light" type="checkbox">Fondo claro</label>
+</div>
+<p class="status" id="status" role="status">Cargando las hojas de revisión…</p>
+<p><a href="README-v2.md">Fuentes y proceso</a> · <a href="../../../docs/roadmap-animacion-guardianes.md">Roadmap</a></p>
+<script type="module" src="../../../src/game/tecnoiaV2Review.js"></script>
+</html>

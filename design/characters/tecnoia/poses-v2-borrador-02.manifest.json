@@ -1,0 +1,31 @@
+{
+  "character": "tecnoia",
+  "source": { "image": "poses-v2-borrador-02.png", "width": 1774, "height": 887 },
+  "output": {
+    "directory": "revision-v2-borrador-02",
+    "columns": 4,
+    "rows": 2,
+    "cellWidth": 320,
+    "cellHeight": 320,
+    "marginX": 0,
+    "marginY": 0,
+    "spacingX": 0,
+    "spacingY": 0
+  },
+  "reviewNotes": [
+    "Borrador: persisten halos de color y píxeles sueltos en el contorno.",
+    "Comprobar dedos y orientación horizontal de la boquilla antes de aprobar.",
+    "Ocho poses clave; no son una secuencia completa de disparo o celebración.",
+    "Pendientes: transiciones, anclajes, eventos de emisión e integración jugable."
+  ],
+  "frames": [
+    { "name": "idle", "label": "Reposo", "page": 0, "x": 0, "y": 0, "w": 444, "h": 444 },
+    { "name": "aim", "label": "Apuntado", "page": 0, "x": 444, "y": 0, "w": 443, "h": 444 },
+    { "name": "emission", "label": "Emisión", "page": 0, "x": 887, "y": 0, "w": 444, "h": 444 },
+    { "name": "recoil", "label": "Retroceso", "page": 0, "x": 1331, "y": 0, "w": 443, "h": 444 },
+    { "name": "recovery", "label": "Recuperación", "page": 0, "x": 0, "y": 444, "w": 444, "h": 443 },
+    { "name": "dodge", "label": "Esquiva", "page": 0, "x": 444, "y": 444, "w": 443, "h": 443 },
+    { "name": "victory", "label": "Celebración", "page": 0, "x": 887, "y": 444, "w": 444, "h": 443 },
+    { "name": "rest", "label": "Descanso", "page": 0, "x": 1331, "y": 444, "w": 443, "h": 443 }
+  ]
+}
