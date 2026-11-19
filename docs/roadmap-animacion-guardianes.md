@@ -1,12 +1,12 @@
 # Roadmap de animación · Guardianes con gestos y disparos claros
 
-18 de noviembre de 2026 · Actualizado el 19 de noviembre de 2026. **Estado: TecnoIA v2 cerrado y publicado. ConectIA v2 integrado con 221 sprites y Ráfaga sincronizada, aceptado en el teléfono del usuario; producción pendiente.**
+18 de noviembre de 2026 · Actualizado el 19 de noviembre de 2026. **Estado: TecnoIA y ConectIA v2 cerrados, integrados en main y publicados en producción, con aceptación móvil del usuario. Siguiente personaje: CierreIA.**
 
 ## Objetivo
 
 Que cada guardián actúe y se exprese al jugar: que se vea cómo apunta, desde dónde dispara, cómo reacciona y cómo usa su poder. La referencia es la claridad de VictorIA Clásico, conservando el estilo navideño y la identidad aprobada de los doce guardianes.
 
-El trabajo se hará **de uno en uno**, empezando por TecnoIA. Se termina y comprueba un personaje antes de producir el siguiente. Producción utiliza TecnoIA v2; la vista previa de la rama incorpora también ConectIA v2. Los otros diez guardianes conservan v1.
+El trabajo se hará **de uno en uno**, empezando por TecnoIA. Se termina y comprueba un personaje antes de producir el siguiente. Producción utiliza TecnoIA y ConectIA v2. Los otros diez guardianes conservan v1.
 
 **Avance del 19 de noviembre:** se preparó la copia local y una [primera lámina de ocho poses de TecnoIA v2](../design/characters/tecnoia/README-v2.md), con proyector en la mano libre y expresiones diferenciadas. Es un borrador para revisión: la limpieza de bordes, las secuencias completas, los anclajes y la integración siguen pendientes. Los recursos jugables v1 se conservan.
 
@@ -208,7 +208,7 @@ Los recursos se publicarán como v2 junto a la v1 existente, con metadatos expl�
 
 El piloto definirá la cantidad final de poses, fotogramas, cuadrícula, tamaño de celdas y presupuesto de carga, partiendo del objetivo de celebración completa de la sección 3.E. No hay un máximo de 4×4 o 7×7; se usarán hojas mayores o varias páginas si la secuencia lo necesita y conserva la definición y el rendimiento. Se medirá el peso de las variantes y su legibilidad antes de repetirlas. No se prometen plazos para los doce personajes sin conocer ese resultado.
 
-**Siguiente acción:** integrar el PR y publicar [ConectIA v2 validado](https://geovictoria-intranet-peru--conectia-v2-97yuioz1.web.app/juego). El usuario confirmó claridad del disparo durante Ráfaga y respuesta de controles en su teléfono. La integración conserva el intervalo de cada descarga al activar o terminar el poder, incluso durante movimiento y daño. No iniciar CierreIA hasta comprobar la publicación. Historia y multijugador continúan en el [roadmap general](roadmap-videojuego.md).
+**Siguiente acción:** preparar las poses propias de **CierreIA**, conservando su maletín y personalidad de Enterprise. Diferenciar el disparo normal de Gran cierre y mantener sus reglas de daño/cadencia. Reutilizar eventos, anclajes y recuperación de los dos personajes terminados, con celebración propia completa. TecnoIA y ConectIA están comprobados en [producción](https://geovictoria-intranet-peru.web.app/juego); las aceptaciones móviles no se extienden automáticamente al siguiente personaje. Historia y multijugador continúan en el [roadmap general](roadmap-videojuego.md).
 
 ## 8. Primer hito · Poses y extracción (registro histórico)
 
@@ -304,3 +304,11 @@ Los metadatos declaran `kind: animation-study` y `productionReady: false`. El es
 | Firebase | Vista previa publicada | [Canal ConectIA](https://geovictoria-intranet-peru--conectia-v2-97yuioz1.web.app/juego), vence el 26 de noviembre a las 17:20 (Lima). [Registro y huellas](releases/conectia-v2-preview-2026-11-19.json). |
 | Aceptación móvil | Confirmada por el usuario | «Sí, se ve y responde bien» sobre disparo durante Ráfaga y controles. Modelo/navegador no informados; sin medición de FPS. |
 | Cierre | Pendiente | Revisión e integración del PR y publicación de producción antes de CierreIA. |
+
+## 15. ConectIA · Publicación y cierre
+
+El usuario aceptó claridad de Ráfaga y respuesta de controles en su teléfono. El [PR #2](https://github.com/Lacer13/geovictoria-intranet/pull/2) se integró en main (`ebdd88b0f6b317c6ab96974ab05388b63ac6d092`) después de pasar 91 pruebas, compilación y reglas Firestore; el árbol integrado coincide con la versión validada.
+
+Se promovió por ID inmutable la versión `9f49c47de6d060b4` a [producción](https://geovictoria-intranet-peru.web.app/juego), el 19 de noviembre de 2026 a las 17:30 (Lima). `/juego` y 19 recursos comprobados responden 200 y coinciden por SHA-256 con el build. La revisión de producción verificó selección, partida, disparo asistido, Ráfaga, pausa/reanudación y salida; sin errores ni advertencias de consola y sin enviar puntos al ranking.
+
+[Captura](../design/characters/conectia/produccion-v2-rafaga.jpg) y [registro con versión anterior y restauración](releases/conectia-v2-production-2026-11-19.json). No se desplegaron reglas Firestore ni se cambiaron dominios de Authentication. **ConectIA queda cerrado; sigue CierreIA.**

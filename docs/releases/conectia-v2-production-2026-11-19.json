@@ -1,0 +1,182 @@
+{
+  "date": "2026-11-19",
+  "project": "geovictoria-intranet-peru",
+  "channel": "live",
+  "url": "https://geovictoria-intranet-peru.web.app/juego",
+  "sourceCommit": "0be93d5bcd73a78242ad50cb4952a6bb95a4dc81",
+  "mergeCommit": "ebdd88b0f6b317c6ab96974ab05388b63ac6d092",
+  "pullRequest": "https://github.com/Lacer13/geovictoria-intranet/pull/2",
+  "hostingVersion": "9f49c47de6d060b4",
+  "previousHostingVersion": "0325211ebba82b78",
+  "releaseTime": "2026-11-19T22:30:46.487Z",
+  "deployment": "Promoción por ID inmutable de la vista previa validada",
+  "rollbackCommand": "npx --yes firebase-tools@15.34.1 hosting:clone geovictoria-intranet-peru@0325211ebba82b78 geovictoria-intranet-peru:live --project geovictoria-intranet-peru --non-interactive",
+  "firestoreRulesDeployed": false,
+  "authenticationDomainsChanged": false,
+  "resources": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "bytes": 1546,
+      "sha256": "e693d5db877ee5ecb50c9263257f7cbf0a9f8f7c28d554c5cd7d2f7ca3fd625b",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "assets/GamePage-BHXUru2u.js",
+      "status": 200,
+      "bytes": 65474,
+      "sha256": "970760f3639e2eeebd1294dbd5347820f0253c8ab84964cf841373b9d33e05d9",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/GamePage-BpzdetKe.css",
+      "status": 200,
+      "bytes": 16446,
+      "sha256": "5615c68bd3904def1819198a3126d8a781ddf403369bfd1e9ae5b1673f41db51",
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "path": "characters/conectia/sprites-v2.json",
+      "status": 200,
+      "bytes": 85865,
+      "sha256": "e4e72114cc283d8dd776d34fb45fbe5db5ef26444bec72518ee7c66915fc1f57",
+      "contentType": "application/json"
+    },
+    {
+      "path": "characters/conectia/sprites-v2-1.webp",
+      "status": 200,
+      "bytes": 1863330,
+      "sha256": "b64a40e3efb74487bb6c2b53b023ff978f578789520f31806bda7e0c0136ee1d",
+      "contentType": "image/webp"
+    },
+    {
+      "path": "characters/conectia/sprites-v2-2.webp",
+      "status": 200,
+      "bytes": 284484,
+      "sha256": "7131a7c4ed85746baaf460007d497507800871b88ad5250282e5702007e664c5",
+      "contentType": "image/webp"
+    },
+    {
+      "path": "characters/conectia/rig-navidad-v2.png",
+      "status": 200,
+      "bytes": 1184001,
+      "sha256": "191e228d78c8ad94dda62001ec71397dd1f8e98887f5d45ca21414cee43e6106",
+      "contentType": "image/png"
+    },
+    {
+      "path": "characters/conectia/portrait-v2.webp",
+      "status": 200,
+      "bytes": 20722,
+      "sha256": "aa4d3a20afbc314d88ec41d6c28352dc1464fd5d3c1c787bf2cb8e6ecabdecd4",
+      "contentType": "image/webp"
+    },
+    {
+      "path": "assets/index-Bp6bemAa.js",
+      "status": 200,
+      "bytes": 59,
+      "sha256": "afd18d3e05ef8b09c5b86722713d6acc224c3e02b326485b991ee37e19642919",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/rolldown-runtime-D2aABDIb.js",
+      "status": 200,
+      "bytes": 680,
+      "sha256": "760907b0f57761fcae7a1113e535296fa7e31deaa87aa6138e19917ae7e00a86",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/react-DbMM3Pz9.js",
+      "status": 200,
+      "bytes": 228576,
+      "sha256": "1aa337c1eaee5d0da619083f58824dc8b374974312d37eff98307fdc9c121acb",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/createLucideIcon-7eCvd4fb.js",
+      "status": 200,
+      "bytes": 1855,
+      "sha256": "9a447768920f4b44d21d49d9834058c8e7f1e45b94254ba1cd748ef70ba09e8a",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/sparkles-Bp2nlqxW.js",
+      "status": 200,
+      "bytes": 822,
+      "sha256": "f4de9244b211374f6fe4a909df24479daf50c6e607081c46bcdd8df8ec865ce3",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/arrow-right-B8hwxgWV.js",
+      "status": 200,
+      "bytes": 283,
+      "sha256": "639de16f192b1911494c961547f0cb25db028866d1d3a423d9929202e19a6b4a",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/firebase-core--QdkDvTg.js",
+      "status": 200,
+      "bytes": 25641,
+      "sha256": "e3ae3ec0225cb122851e68c58970453a643bd9a5ec15aeb8ffbff226d0c981ed",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/firebase-auth-Bie9NmMf.js",
+      "status": 200,
+      "bytes": 88405,
+      "sha256": "44f2df71564b281c260e89b901845d1a0c072f0dfddf2e922f933d267628ea93",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/firebase-CGUNqFfA.js",
+      "status": 200,
+      "bytes": 305575,
+      "sha256": "2a9508b2ba425a941f69db0883e030f547ec606520ca57d45afcd857830f5645",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/geovictoria-intranet-D0RyAMXj.js",
+      "status": 200,
+      "bytes": 223477,
+      "sha256": "571eaff19bef271c6ee2d2417c006042d8d0d7613a487e78a31911af53279afe",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/geovictoria-intranet-aO8WF6Xb.css",
+      "status": 200,
+      "bytes": 114467,
+      "sha256": "b5694ee421063bc621cd1b01856f573afb3d14766f850628c72552bd326ae7bd",
+      "contentType": "text/css; charset=utf-8"
+    }
+  ],
+  "verification": {
+    "route": "/juego",
+    "routeStatus": 200,
+    "resourcesMatchValidatedBuild": true,
+    "securityHeadersPresent": true,
+    "verifiedAt": "2026-11-19T22:31:00.613Z"
+  },
+  "phoneValidation": {
+    "source": "Confirmación del usuario en el chat",
+    "scope": "Claridad del disparo al activar Ráfaga y respuesta de controles en su teléfono",
+    "device": "No informado",
+    "fpsMeasured": false
+  },
+  "browserVerification": {
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "checks": [
+      "Selección de ConectIA",
+      "Partida",
+      "Disparo asistido",
+      "Ráfaga activa y proyectiles visibles",
+      "Pausa y reanudación",
+      "Regreso al selector"
+    ],
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "rankingSubmitted": false,
+    "screenshot": "design/characters/conectia/produccion-v2-rafaga.jpg"
+  }
+}

@@ -34,7 +34,7 @@ Cada carpeta `public/characters/<id>/` contiene:
 - `sprites-v1.json`: coordenadas de los fotogramas, duración y repetición de cada animación, fuente y SHA-256, rectángulos de piezas, poder y celebración.
 - `portrait-v1.webp`: miniatura del personaje completo para el selector.
 
-La composición 2×2 del PNG fuente separa piezas para animar; no limita el juego a cuatro imágenes. La hoja v1 ofrece 24 × 9 espacios. [TecnoIA v2](../design/characters/tecnoia/README-v2.md), integrado en main y publicado en producción, añade una fuente limpia, 203 sprites en páginas variables, emisor sincronizado y una celebración de 60 fotogramas con entrada, gesto, remate y salida al reposo. Se reproduce con `npm run sprites:tecnoia-game`; los once guardianes restantes conservan v1. El [roadmap](roadmap-animacion-guardianes.md) registra su validación móvil, comprobación de producción y cierre del piloto; ConectIA es el siguiente turno. La celebración v1 existente tiene 48 fotogramas en un bucle de 1,4 segundos.
+La composición 2×2 del PNG fuente separa piezas para animar; no limita el juego a cuatro imágenes. La hoja v1 ofrece 24 × 9 espacios. [TecnoIA v2](../design/characters/tecnoia/README-v2.md), integrado en main y publicado en producción, añade una fuente limpia, 203 sprites en páginas variables, emisor sincronizado y una celebración de 60 fotogramas con entrada, gesto, remate y salida al reposo. Se reproduce con `npm run sprites:tecnoia-game`; ConectIA también dispone de v2 y los otros diez guardianes conservan v1. El [roadmap](roadmap-animacion-guardianes.md) registra su validación móvil, comprobación de producción y cierre del piloto; ConectIA es el siguiente turno. La celebración v1 existente tiene 48 fotogramas en un bucle de 1,4 segundos.
 
 Las animaciones incluyen reposo (24), movimiento (24), disparo (12), esquiva (12), impacto (16), activación de poder (24), celebración (48) y descanso/derrota (24). La esquiva se usa como poder jugable de TecnoIA; las otras áreas usan su animación de poder. Los fotogramas se generan combinando las piezas y curvas del rig, con tiempos acordes a la mecánica; no son imágenes idénticas repetidas ni escenas nuevas que cambien de identidad entre fotogramas.
 
@@ -44,7 +44,9 @@ El render interpola posiciones entre pasos de simulación y suaviza la inclinaci
 
 ## Producción y verificación
 
-**Mejora pendiente en los once guardianes v1:** esas hojas reutilizan las piezas del rig y no incluyen todavía poses ilustradas de apuntado ni un emisor de disparo vinculado a la mano. TecnoIA v2 ya incorpora esas mejoras. El [roadmap de animación v2](roadmap-animacion-guardianes.md) continúa personaje por personaje; tener 184 fotogramas no demuestra por sí solo una actuación convincente.
+ConectIA v2 también está integrado en main y publicado: 221 sprites, disparo normal/Ráfaga sincronizados y celebración propia de 72 fotogramas, con baliza y pulgar arriba. El usuario aceptó claridad y controles en su teléfono. [Recursos y publicación](../design/characters/conectia/README-v2.md).
+
+**Mejora pendiente en los diez guardianes v1:** esas hojas reutilizan las piezas del rig y no incluyen todavía poses ilustradas de apuntado ni un emisor de disparo vinculado a la mano. TecnoIA y ConectIA v2 ya incorporan esas mejoras. El [roadmap de animación v2](roadmap-animacion-guardianes.md) continúa con CierreIA; tener 184 fotogramas no demuestra por sí solo una actuación convincente.
 
 El arte se generó con **ImageGen integrado**, utilizando TecnoIA como referencia de familia visual. Los prompts originales y las ediciones finales de transparencia están en `design/characters/<id>/`. El [índice del arte](../design/characters/README.md) enlaza cada recurso. Los PNG seleccionados se conservan sin retoque en el exportador; Canvas renderiza los fotogramas a partir de sus rectángulos de origen.
 

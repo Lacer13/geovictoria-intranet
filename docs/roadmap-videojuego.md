@@ -186,7 +186,7 @@ Las decisiones que más cambian el alcance son: priorizar computadora o móvil, 
 
 ## 7. Primera entrega recomendada
 
-**Prioridad posterior a la ampliación del elenco:** mejorar la actuación y el disparo de los guardianes antes de ampliar contenido. El [roadmap de animación v2](roadmap-animacion-guardianes.md) registra TecnoIA integrado en main y publicado en producción: 203 sprites, emisor sincronizado y celebración completa. El usuario aceptó disparo y controles en su teléfono y se comprobó la versión publicada. El piloto de animación queda cerrado; continúa ConectIA, manteniendo un guardián por entrega. Esto no completa la prueba de ocho de diez personas de la etapa 1 ni las etapas de historia o multijugador.
+**Prioridad posterior a la ampliación del elenco:** mejorar la actuación y el disparo de los guardianes antes de ampliar contenido. El [roadmap de animación v2](roadmap-animacion-guardianes.md) registra TecnoIA integrado en main y publicado en producción: 203 sprites, emisor sincronizado y celebración completa. El usuario aceptó disparo y controles en su teléfono y se comprobó la versión publicada. El piloto de TecnoIA y la entrega de ConectIA están cerrados y publicados, con aceptación móvil. Continúa CierreIA, manteniendo un guardián por entrega. Esto no completa la prueba de ocho de diez personas de la etapa 1 ni las etapas de historia o multijugador.
 
 Empezar por **Pausa activa 2.0**: controles consistentes, pausa, colisiones y daño justos, HUD claro, sonido configurable y estructura preparada para niveles. Después producir la primera misión del bosque como muestra de la historia. Con esa base probada, abrir el prototipo 1 vs 1 y medirlo antes de ampliar equipos.
 

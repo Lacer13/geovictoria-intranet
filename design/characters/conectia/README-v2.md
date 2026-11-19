@@ -1,6 +1,6 @@
 # ConectIA v2 · Piloto jugable
 
-19 de noviembre de 2026. **ConectIA v2 integrado al selector, partida y resultados en esta rama, con Ráfaga y controles aceptados por el usuario en su teléfono.** [Vista previa jugable](https://geovictoria-intranet-peru--conectia-v2-97yuioz1.web.app/juego), disponible hasta el 26 de noviembre a las 17:20 (Lima). Publicación de producción pendiente.
+19 de noviembre de 2026. **ConectIA v2 cerrado, integrado en main y publicado en producción, con Ráfaga y controles aceptados por el usuario en su teléfono.** [Jugar en producción](https://geovictoria-intranet-peru.web.app/juego). [Registro de publicación y restauración](../../../docs/releases/conectia-v2-production-2026-11-19.json).
 
 ## Integración jugable actual
 
@@ -67,6 +67,14 @@ La petición transparente dejó residuos, por lo que se produjo una fuente opaca
 
 Revisión en navegador local: celebración completa hasta `72/72 · reposo`; disparo normal hasta `12/12 · apuntado`; Ráfaga hasta `6/6 · apuntado`; comparación de seis/doce emisiones, cámara lenta, fondos claro y oscuro, tamaños 112/160/320 y pose reducida. Sin errores ni advertencias de consola. No se probó todavía esta versión en teléfonos reales.
 
-Los metadatos de estas hojas fuente conservan `kind: animation-study` y `productionReady: false`. Los recursos públicos posteriores declaran `kind: playable-pilot` y `productionReady: true`, indicando estructura jugable completa. La integración descrita arriba reutiliza la infraestructura de TecnoIA y conserva la actuación propia de ConectIA. Pendiente de cierre: publicación individual; CierreIA espera.
+Los metadatos de estas hojas fuente conservan `kind: animation-study` y `productionReady: false`. Los recursos públicos posteriores declaran `kind: playable-pilot` y `productionReady: true`, indicando estructura jugable completa. La integración descrita arriba reutiliza la infraestructura de TecnoIA y conserva la actuación propia de ConectIA. El cierre posterior se registra en la sección siguiente.
+
+## Publicación y cierre
+
+El [PR #2](https://github.com/Lacer13/geovictoria-intranet/pull/2) se integró en main (`ebdd88b0f6b317c6ab96974ab05388b63ac6d092`) con 91 pruebas, build y reglas Firestore correctos. Se promovió a producción la misma versión inmutable validada, `9f49c47de6d060b4`, el 19 de noviembre a las 17:30 (Lima). La ruta y 19 recursos comprobados coinciden por SHA-256 con el build; se conservan los encabezados de Hosting.
+
+Se comprobó una partida en la URL definitiva a 844×390: selección de ConectIA, disparo asistido, activación de Ráfaga con proyectiles visibles, pausa/reanudación y regreso al selector. Sin errores ni advertencias de consola; no se envió puntaje al ranking. Se restablecieron los ajustes temporales y el tamaño del navegador. [Captura de producción](produccion-v2-rafaga.jpg).
+
+La versión anterior `0325211ebba82b78` y el comando para restaurarla están registrados. No se desplegaron reglas Firestore ni se cambiaron dominios de Authentication. ConectIA queda cerrado; el siguiente personaje es CierreIA.
 
 [Roadmap de animación](../../../docs/roadmap-animacion-guardianes.md).
