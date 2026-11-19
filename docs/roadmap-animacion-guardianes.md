@@ -1,6 +1,6 @@
 # Roadmap de animación · Guardianes con gestos y disparos claros
 
-18 de noviembre de 2026 · Actualizado el 19 de noviembre de 2026. **Estado: fuente con alfa limpio y secuencias de estudio exportadas; integración jugable v2 pendiente.**
+18 de noviembre de 2026 · Actualizado el 19 de noviembre de 2026. **Estado: TecnoIA v2 integrado al juego en esta rama; validación en dispositivos reales y publicación pendientes.**
 
 ## Objetivo
 
@@ -13,6 +13,8 @@ El trabajo se hará **de uno en uno**, empezando por TecnoIA. Se termina y compr
 **Continuación del 19 de noviembre:** segundo borrador con expresión de combate más amable; ocho poses extraídas automáticamente y [plancha de revisión a 160/320 px](../design/characters/tecnoia/revision-v2-borrador-02/contacto.webp). El exportador comprueba rectángulos, transparencia en bordes y celdas vacías; el empaquetado admite cuadrículas variables, márgenes, separaciones y páginas. Esto completa una parte de la preparación técnica, no el soporte jugable v2. Persisten halos y píxeles sueltos que requieren otra corrección de arte.
 
 **Segundo hito del 19 de noviembre:** se produjo una fuente separada de tres expresiones y seis manos/accesorios. El usuario autorizó limpiar localmente el alfa después de que ImageGen repitiera los residuos. La fuente opaca y el proceso reproducible se conservan. Se exportaron un disparo de 12 fotogramas y una celebración completa de estudio de 60 fotogramas a 24 FPS (2,5 s), con entrada, llave elevada, saludo articulado, remate y salida. La página de revisión permite reproducción, cámara lenta, tamaños 112/160/320 y movimiento reducido. Todavía no se sustituyen los recursos jugables.
+
+**Tercer hito del 19 de noviembre:** TecnoIA v2 utiliza 203 sprites y fuente limpia dentro del selector, partida y resultados. La emisión tiene eventos por descarga aceptada, origen compartido, sonido deduplicado e interpolación de nacimiento; se conservan posiciones físicas, cadencias y poderes. Se revisaron combate, pausa/reanudación, derrota y reinicio en Chrome. La celebración completa está conectada a resultados. Los recursos del piloto y las capturas se versionan en GitHub; el despliegue de Firebase y las pruebas en teléfonos reales siguen pendientes.
 
 ## 1. Diagnóstico verificado
 
@@ -206,7 +208,7 @@ Los recursos se publicarán como v2 junto a la v1 existente, con metadatos expl�
 
 El piloto definirá la cantidad final de poses, fotogramas, cuadrícula, tamaño de celdas y presupuesto de carga, partiendo del objetivo de celebración completa de la sección 3.E. No hay un máximo de 4×4 o 7×7; se usarán hojas mayores o varias páginas si la secuencia lo necesita y conserva la definición y el rendimiento. Se medirá el peso de las variantes y su legibilidad antes de repetirlas. No se prometen plazos para los doce personajes sin conocer ese resultado.
 
-**Siguiente acción:** integrar **TecnoIA v2** con eventos de disparo aceptados por la simulación, consumir esos eventos en animación y sonido, y calcular el origen con el anclaje compartido de boquilla. Conectar el lector por metadatos al catálogo/render, completar los estados restantes y comprobar recuperación v1/v2 si falla un recurso. Revisar después movimiento, esquiva, impacto, poderes, disparo continuo y celebración en una partida real antes de pasar a ConectIA. Historia y multijugador continúan en el [roadmap general](roadmap-videojuego.md).
+**Siguiente acción:** validar el piloto jugable de **TecnoIA v2** en los dispositivos reales del equipo, recoger observaciones sobre actuación y legibilidad y preparar la publicación en Firebase de la versión validada. Cerrar esos criterios antes de iniciar ConectIA. La integración técnica, los eventos, los estados restantes y la recuperación de recursos ya se implementaron en esta rama. Historia y multijugador continúan en el [roadmap general](roadmap-videojuego.md).
 
 ## 8. Primer hito · Poses y extracción (registro histórico)
 
@@ -222,7 +224,7 @@ El piloto definirá la cantidad final de poses, fotogramas, cuadrícula, tamaño
 
 Los metadatos de revisión declaran `kind: key-poses` y `productionReady: false`. Ninguna de estas ocho poses se presenta como una celebración animada completa. Fuentes, prompts, manifiesto y resultados reproducibles se conservan junto a los borradores anteriores y se sincronizan en GitHub.
 
-## 9. Segundo hito · Fuente limpia y secuencias completas de estudio
+## 9. Segundo hito · Fuente limpia y secuencias de estudio (registro histórico)
 
 | Entrega | Estado | Evidencia |
 | --- | --- | --- |
@@ -236,3 +238,18 @@ Los metadatos de revisión declaran `kind: key-poses` y `productionReady: false`
 | Integración y estados restantes | Pendientes | Eventos físicos, sonido, interpolación, movimiento, esquiva, daño, poder y recuperación ante fallos. El arcade conserva v1. |
 
 Reproducir: `npm run sprites:tecnoia-v2`. Abrir con Vite `design/characters/tecnoia/revision-v2.html`. Los [metadatos](../design/characters/tecnoia/revision-v2-secuencias-01/secuencias.json) declaran `kind: animation-study` y `productionReady: false`: las secuencias existen, pero no certifican aún una integración jugable terminada. Los GIF tienen temporización de centésimas compensada para conservar la duración total; las hojas y el lector utilizan los FPS originales.
+
+## 10. Tercer hito · Integración jugable de TecnoIA v2
+
+| Entrega | Estado comprobado | Evidencia |
+| --- | --- | --- |
+| Catálogo, carga y dibujo | Integrados | 203 sprites de 192×192 en dos páginas, nueve clips, miniatura nueva, fuente limpia y anclajes. Se solicita solo el personaje elegido. |
+| Eventos y sonido | Integrados | Identificador, paso, origen y proyectiles por descarga; sonido una sola vez. Disparo doble/abanico conservan una reacción; cierre y reflejo también se registran. |
+| Boquilla e interpolación | Comprobadas | El pivote alinea el arte con el centro físico original. Los recién nacidos parten de la boquilla interpolada, también al moverse o esquivar. No se modifican las reglas. |
+| Composición y efectos reducidos | Integrados | Cabeza/llave reaccionan a movimiento, daño y esquiva mientras la mano dispara; orientación siempre a la derecha. Reloj visual monótono al pausar/reanudar. |
+| Recuperación | Comprobada | Piezas v2 si falla una hoja; atlas si falla la fuente; v1 completo si no queda arte v2 utilizable. Proyector de respaldo visible incluso sin bitmaps, aviso y reintento. |
+| Celebración y resultados | Conectados | 60 fotogramas, 24 FPS, 2,5 s, una reproducción y reposo final. Los controles de resultados permanecen disponibles. |
+| Verificación | 77 pruebas y compilación correctas | Incluye partida completa de simulación v2 hasta victoria, carga con fallos y lectura/dibujo de todas las celdas. Chrome local: disparo manual/asistido, movimiento, esquiva, pausa, efectos reducidos, derrota y reinicio; sin errores de consola. |
+| Peso y evidencia | Registrados | Aproximadamente 3,26 MB del conjunto v2. [Combate](../design/characters/tecnoia/integracion-v2-combate.jpg) y [resultados](../design/characters/tecnoia/integracion-v2-juego.jpg). |
+
+El piloto se reproduce con `npm run sprites:tecnoia-game` y se abre en `/juego` con Vite. La aceptación en dispositivos reales y el despliegue en Firebase quedan pendientes; no se inicia otro guardián en esta entrega.

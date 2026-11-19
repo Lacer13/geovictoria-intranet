@@ -32,5 +32,9 @@ export const AREA_CHARACTERS = entries.map(
     cost: 0,
     parts: CHARACTER_PARTS[id],
     power: powerForCharacter(id),
+    ...(id === "tecnoia" ? {
+      thumbnail: "/characters/tecnoia/portrait-v2.webp",
+      animation: { version: 2, metadata: "/characters/tecnoia/sprites-v2.json", src: "/characters/tecnoia/rig-navidad-v2.png" },
+    } : {}),
   }),
 );

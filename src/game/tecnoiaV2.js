@@ -1,5 +1,5 @@
-// TecnoIA v2 animation study. Kept separate from the published v1 roster until
-// the fixed-step firing events and complete fallback are integrated.
+// TecnoIA v2 illustrated parts and source poses, shared by the original study
+// and the playable pilot. Gameplay layering lives in tecnoiaGameplay.js.
 export const TECNOIA_V2_PARTS = {
   headIdle: [32, 12, 400, 390],
   headAim: [442, 12, 400, 390],

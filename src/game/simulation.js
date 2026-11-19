@@ -1,4 +1,5 @@
 import { activatePower, activePower, powerForCharacter } from "./powers.js";
+import { recordShot } from "./emission.js";
 // The arcade advances at 60 fixed steps per second, independently of rendering.
 export const WIDTH = 960;
 export const HEIGHT = 540;
@@ -63,10 +64,12 @@ export function normalizedMovement(input) {
   return length > 1 ? { x: x / length, y: y / length } : { x, y };
 }
 
-export function createGame(characterId = "tecnoia") {
+export function createGame(characterId = "tecnoia", { animationVersion = 1 } = {}) {
   return {
     phase: "playing",
     tick: 0,
+    shotSequence: 0,
+    finishedAt: null,
     score: 0,
     bossSpawned: false,
     boss: null,
@@ -81,6 +84,10 @@ export function createGame(characterId = "tecnoia") {
       facingX: 1,
       facingY: 0,
       shot: 0,
+      animationVersion,
+      firing: false,
+      lastShot: null,
+      hurtAt: -1,
       dash: 0,
       dashCooldown: 0,
       hurt: 0,
@@ -152,11 +159,13 @@ function damage(state, random) {
   p.hp = Math.max(0, p.hp - 1);
   p.grace = DAMAGE_GRACE;
   p.hurt = 22;
+  p.hurtAt = state.tick;
   state.shake = 8;
   state.events.push("damage");
   burst(state, p.x + 56, p.y + 56, "#fb7185", random);
   if (p.hp === 0) {
     state.phase = "gameover";
+    state.finishedAt = state.tick;
     state.events.push("defeat");
   }
   return true;
@@ -214,6 +223,7 @@ function hitBoss(state, amount, random) {
     burst(state, boss.x + 80, boss.y + 80, "#f9dc95", random, 30);
     state.boss = null;
     state.phase = "victory";
+    state.finishedAt = state.tick;
     state.events.push("victory");
   }
 }
@@ -260,11 +270,11 @@ export function stepGame(
   p.x = clamp(p.x + moveX * speed, 4, WIDTH * 0.54 - p.width);
   p.y = clamp(p.y + moveY * speed, 12, HEIGHT - p.height - 20);
 
-  if ((input.fire || autoFire) && p.shot === 0) {
+  p.firing = Boolean(input.fire || autoFire);
+  if (p.firing && p.shot === 0) {
     p.shot = activePower(p, "burst") ? SHOT_COOLDOWN / 2 : SHOT_COOLDOWN;
     const shots = p.spread ? [-2.8, 0, 2.8] : p.dual ? [-1, 1] : [0];
-    for (const shot of shots)
-      state.bullets.push({
+    const emitted = shots.map((shot) => ({
         x: p.x + p.width - 16,
         y: p.y + 60 + (p.dual && !p.spread ? shot * 15 : 0),
         width: 24,
@@ -274,8 +284,9 @@ export function stepGame(
         enemy: false,
         pierce: activePower(p, "pierce") ? 3 : 1,
         guided: activePower(p, "radar"),
-      });
-    state.events.push("shoot");
+      }));
+    state.bullets.push(...emitted);
+    recordShot(state, emitted);
   }
 
   if (!state.bossSpawned && state.tick % 65 === 0)
@@ -367,6 +378,7 @@ export function stepGame(
         bullet.vx = Math.abs(bullet.vx) + 5;
         bullet.vy = 0;
         bullet.pierce = 1;
+        recordShot(state, [bullet], "reflect");
         continue;
       }
       if (overlaps(bullet, inset(p, 26))) {

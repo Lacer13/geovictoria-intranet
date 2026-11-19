@@ -21,4 +21,4 @@ Los once nuevos diseños se crearon con ImageGen integrado a partir del atlas ap
 
 Especificaciones, poderes, celebraciones y reproducción de las hojas: [guía de guardianes](../../docs/guardianes-navidad.md).
 
-El [piloto TecnoIA v2](tecnoia/README-v2.md) tiene una fuente con alfa limpio, un disparo de 12 fotogramas y una celebración de estudio de 60 fotogramas con poses de manos/rostro distintas. Incluye GIF, anclajes y revisión interactiva en cámara lenta; su integración jugable y los estados restantes siguen pendientes. El elenco publicado utiliza v1. Los primeros borradores de ocho poses se conservan.
+El [piloto jugable TecnoIA v2](tecnoia/README-v2.md) incorpora una fuente limpia y 203 sprites, con disparo sincronizado, celebración completa de 60 fotogramas y estados combinables. Está conectado al selector, partida, sonido y resultados de esta rama. Incluye anclajes, recuperación ante fallos, GIF de estudio y revisión en cámara lenta. Pendientes: dispositivos reales y publicación en Firebase. Los primeros borradores de ocho poses se conservan.

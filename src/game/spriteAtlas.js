@@ -1,7 +1,7 @@
 import { validateFrameRects } from "./spriteLayout.js";
 
 export function validateAnimationAtlas(atlas) {
-  if (atlas.schemaVersion !== 2 || !atlas.frames || !atlas.clips)
+  if (atlas.schemaVersion !== 2 || !atlas.frames || !atlas.clips || !Object.keys(atlas.clips).length)
     throw new Error("Expected a version 2 animation atlas");
   validateFrameRects(atlas.pages, Object.entries(atlas.frames).map(([name, f]) => ({ name, ...f })));
   for (const [name, clip] of Object.entries(atlas.clips)) {
@@ -14,6 +14,9 @@ export function validateAnimationAtlas(atlas) {
       if (!Object.hasOwn(atlas.frames, frame)) throw new Error(`${name}: missing frame ${frame}`);
   }
   for (const [name, frame] of Object.entries(atlas.frames)) {
+    const pivot = frame.anchors?.pivot;
+    if (!pivot || ![pivot.x, pivot.y].every(Number.isFinite) || pivot.x < 0 || pivot.x > frame.w || pivot.y < 0 || pivot.y > frame.h)
+      throw new Error(`${name}: invalid sprite pivot`);
     const muzzle = frame.anchors?.muzzle;
     if (muzzle && (![muzzle.x, muzzle.y, muzzle.dx, muzzle.dy].every(Number.isFinite) || muzzle.x < 0 ||
       muzzle.x > frame.w || muzzle.y < 0 || muzzle.y > frame.h || Math.abs(Math.hypot(muzzle.dx, muzzle.dy) - 1) > 1e-8))

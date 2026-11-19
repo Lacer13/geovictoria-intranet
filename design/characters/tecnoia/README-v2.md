@@ -1,8 +1,37 @@
-# TecnoIA v2 · Borrador de poses
+# TecnoIA v2 · Piloto jugable
 
-19 de noviembre de 2026. Estado: fuente con alfa limpio, disparo y celebración completa de estudio exportados; integración dentro del juego pendiente.
+19 de noviembre de 2026. Estado: piloto integrado al selector, la partida y los resultados en esta rama; pendiente de validación en dispositivos reales y publicación en Firebase.
 
-## Entrega actual · Secuencias de estudio
+## Entrega actual · Integración jugable
+
+TecnoIA usa **203 fotogramas jugables**, con reposo, movimiento, disparo, apuntado sostenido, esquiva, impacto, poder, descanso y celebración. Se conecta a la misma simulación de 60 pasos/s: cada descarga aceptada produce un evento con identificador, paso, origen y proyectiles. El consumidor reproduce el sonido una sola vez. El disparo doble y el abanico comparten una reacción por descarga; Gran cierre y Reflejo también registran sus emisiones sin cambiar sus poderes.
+
+El pivote del dibujo alinea la boquilla con el centro original del proyectil de 24×6: `p.x + p.width - 4`, `p.y + 63`. **Se ajusta el arte, no las posiciones físicas, el daño, las recargas o la colisión.** Los proyectiles recién nacidos se interpolan desde esa boquilla junto al movimiento del actor, incluidas las dos ramas de disparo doble. Movimiento, daño y esquiva pueden actuar sobre cabeza/llave mientras la mano libre dispara hacia la derecha. La fase de emisión depende del paso de simulación, no de un bucle del reloj de dibujo.
+
+Recursos del piloto:
+
+- [Metadatos de los 203 sprites](../../../public/characters/tecnoia/sprites-v2.json).
+- [Página 1: 2304×3072](../../../public/characters/tecnoia/sprites-v2-1.webp) y [página 2: 2304×192](../../../public/characters/tecnoia/sprites-v2-2.webp), celdas de 192×192.
+- [Fuente limpia de recuperación](../../../public/characters/tecnoia/rig-navidad-v2.png) y [miniatura](../../../public/characters/tecnoia/portrait-v2.webp).
+- [Captura de combate en Chrome](integracion-v2-combate.jpg) y [resultados de una partida local](integracion-v2-juego.jpg).
+
+La carga solicita únicamente el guardián elegido. Si falla una página o sus metadatos, dibuja las piezas v2 con los mismos anclajes; si falla la fuente y las hojas están completas, usa los sprites, priorizando la emisión sobre la reacción de cabeza. Si no queda ninguna representación v2 completa, recupera v1 y ofrece reintentar. Incluso si fallan todos los bitmaps, conserva cabeza y dos manos completas con un proyector de recuperación visible en el origen físico. Un recurso ausente o de dimensiones incorrectas no bloquea el inicio. Los once guardianes restantes mantienen sus recursos v1.
+
+La celebración de resultados dura 2,5 s y mantiene el reposo final; los botones continúan disponibles. La vista previa «Disparando» incluye la salida visible de un proyectil de demostración, sin guardar puntos. Movimiento reducido conserva apuntado y victoria reconocibles. Se verificaron en Chrome carga, disparo asistido/manual, movimiento, esquiva, pausa/reanudación, ajustes reducidos, derrota, reinicio y celebración desde el selector. Las capturas pertenecen a localhost; no se envió un resultado al ranking.
+
+Reproducir recursos y abrir el piloto:
+
+```sh
+npm run sprites:tecnoia-game
+npm run dev
+# Abrir /juego en el servidor local.
+```
+
+El conjunto v2 suma aproximadamente **3,26 MB** con fuente, dos hojas, miniatura y metadatos; las hojas contienen 7.520.256 píxeles (unos 30,1 MB RGBA antes de copias/GPU). Se mantienen el límite de caché y la carga por personaje. El rendimiento real en teléfonos debe medirse en el piloto del equipo.
+
+Validación: **77 pruebas correctas** y compilación de producción. Ocho nuevas pruebas de integración cubren cadencias, eventos, poderes, interpolación, pausa/FPS, movimiento/daño/esquiva, las 203 celdas, recuperación ante fallos y una partida completa hasta victoria con animación final que no modifica las reglas. Pendiente: prueba en dispositivos reales, observaciones de actuación y publicación en Firebase antes de cerrar TecnoIA y pasar a ConectIA.
+
+## Segundo hito conservado · Secuencias de estudio
 
 - [Fuente opaca conservada](rig-v2-fuente-opaca.png), [atlas con alfa local limpio](rig-v2-alpha-local.png) y [rectángulos/procedencia](rig-v2-parts.json).
 - [Celebración animada](revision-v2-secuencias-01/victory.gif) y [sus 60 fotogramas ordenados](revision-v2-secuencias-01/victory-contacto.webp).
@@ -26,7 +55,7 @@ Para revisar en movimiento: iniciar Vite (`npm run dev`) y abrir `/design/charac
 
 Se exportan una hoja de disparo de **1280×960** y otra de celebración de **2560×2560**; solo se registran sus 12 y 60 celdas utilizadas. Cada fotograma tiene anclajes locales de mano/boquilla y pivote; al guardar el proyector, la boquilla pasa a `null`. El lector utiliza los nombres ordenados de cada clip y las páginas de sus metadatos, sin constantes de v1. Los GIF sirven para revisión sin audio: su precisión de centésimas se compensa para conservar 0,2 y 2,5 segundos totales.
 
-**Pendiente:** conectar disparos reales de simulación, sonido e interpolación; completar movimiento, esquiva, impacto y poder; integrar el catálogo/render y comprobar recuperación ante recursos fallidos. El estudio declara `productionReady: false` y no guarda puntos ni cambia partidas. El arcade sigue utilizando v1. La aprobación del piloto exige su verificación jugable completa antes de pasar a otro personaje.
+**Estado histórico de este estudio:** sus archivos declaran `productionReady: false` y conservan las 72 poses secuenciales originales. La integración posterior está en los recursos públicos descritos arriba; no se reinterpretan estas hojas fuente como el paquete jugable completo.
 
 Validación del segundo hito: **69 pruebas correctas** y compilación de producción correcta. Las seis nuevas comprobaciones cubren limpieza de alfa y conservación de colores interiores, procedencia, márgenes de las piezas, fases y final de los clips, boquilla en los píxeles cian exportados y duración/cantidad de fotogramas de los GIF. La anatomía y el gesto requieren además la revisión visual realizada.
 
@@ -89,7 +118,7 @@ La imagen fuente mide **1774×887**: no se divide exactamente en cuatro columnas
 
 El empaquetador admite celdas rectangulares, filas/columnas variables, márgenes, separación y varias páginas. Las celdas sobrantes no se registran como fotogramas. Las comprobaciones geométricas 7×7 y 8×9 usan datos de prueba; no generan nuevas poses del personaje.
 
-Los archivos de `revision-v2-borrador-02/` son resultados reproducibles de revisión. `poses.json` incluye la huella SHA-256 del PNG fuente y declara `kind: key-poses`, `productionReady: false`. No tiene clips jugables ni anclajes definitivos y no se carga en el catálogo. La lectura y el dibujo de hojas v2 dentro del juego siguen pendientes.
+Los archivos de `revision-v2-borrador-02/` son resultados reproducibles de revisión. `poses.json` incluye la huella SHA-256 del PNG fuente y declara `kind: key-poses`, `productionReady: false`. No tiene clips jugables ni anclajes definitivos y no se carga en el catálogo. El lector y el dibujo actuales utilizan el paquete jugable posterior descrito al inicio de esta guía.
 
 Comprobación realizada: 63 pruebas correctas (57 existentes y seis nuevas) y compilación de producción correcta, mediante los comandos de Node equivalentes a `npm test` y `npm run build`. Se inspeccionó la plancha de contacto; que un borde no esté cortado no demuestra que esté limpio.
 

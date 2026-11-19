@@ -85,7 +85,7 @@ test("resource loading requests only the chosen character and supports a missing
     const progress = [];
     const tecno = await loadAssets(
       (value) => progress.push(value),
-      AREA_CHARACTERS[0],
+      { ...AREA_CHARACTERS[0], animation: null },
       { retry: true },
     );
     assert.equal(tecno.characterId, "tecnoia");

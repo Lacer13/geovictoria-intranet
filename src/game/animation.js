@@ -67,22 +67,26 @@ export function createAnimator() {
     elapsed: 0,
     lean: 0,
     activation: -1,
+    lastShotId: 0,
+    presentationTick: 0,
   };
 }
 export function advanceAnimator(
   actor,
   pose,
   now,
-  { dx = 0, dy = 0, activation = 0, reduced = false } = {},
+  { dx = 0, dy = 0, activation = 0, reduced = false, shotId = 0 } = {},
 ) {
   const changed =
     actor.started === null ||
     actor.pose !== pose ||
-    ((pose === "power" || pose === "dash") && actor.activation !== activation);
+    ((pose === "power" || pose === "dash") && actor.activation !== activation) ||
+    (pose === "shooting" && actor.shotId !== shotId);
   if (changed) {
     actor.started = now;
     actor.pose = pose;
     actor.activation = activation;
+    actor.shotId = shotId;
     actor.elapsed = 0;
   }
   const delta =
@@ -114,6 +118,15 @@ export function interpolateScene(state, previous, alpha) {
   const amount = Math.max(0, Math.min(1, alpha));
   const entity = (e) => {
     const old = previous?.get(e);
+    if (!old && !e.enemy && e.bornAt === state.tick && Number.isFinite(e.emissionX)) {
+      const playerBefore = previous?.get(state.player);
+      const dx = e.followsEmitter && playerBefore ? state.player.x - playerBefore.x : 0;
+      const dy = e.followsEmitter && playerBefore ? state.player.y - playerBefore.y : 0;
+      return { ...e,
+        x: e.emissionX + (e.x - e.emissionX) * amount - dx * (1 - amount),
+        y: e.emissionY + (e.y - e.emissionY) * amount - dy * (1 - amount),
+      };
+    }
     return old
       ? {
           ...e,

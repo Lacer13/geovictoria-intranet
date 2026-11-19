@@ -62,7 +62,7 @@ try {
   })));
   for (const element of document.querySelectorAll("button,input,select")) element.disabled = false;
   get("play").disabled = get("reduced").checked;
-  get("status").textContent = "Fuente con alfa limpio y 72 fotogramas exportados. Pendientes: conectar eventos de la simulación, sonido y recuperación si falla un recurso v2.";
+  get("status").textContent = "Estudio original: 72 fotogramas. El piloto de /juego ya integra 203 sprites, eventos de disparo, sonido y recuperación ante fallos. Esta página conserva la revisión de las secuencias fuente.";
   paint(); requestAnimationFrame(loop);
 } catch (error) {
   pause(); for (const element of document.querySelectorAll("button,input,select")) element.disabled = true;

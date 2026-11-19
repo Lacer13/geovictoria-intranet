@@ -35,6 +35,8 @@ import {
 } from "../game/simulation.js";
 import { clearInput, useGameInput } from "../game/input.js";
 import { drawGame } from "../game/render.js";
+import { consumeGameEvents } from "../game/emission.js";
+import { tecnoiaPresentation } from "../game/tecnoiaGameplay.js";
 import { createGameAudio } from "../game/audio.js";
 import {
   readGameProfile,
@@ -254,7 +256,7 @@ export default function ActiveBreak() {
     if (!assets || assets.characterId !== character.id) return;
     clearInput(input);
     credited.current = false;
-    game.current = createGame(character.id);
+    game.current = createGame(character.id, { animationVersion: assets.animation?.version || 1 });
     actor.current = createAnimator();
     setHud(gameSummary(game.current));
     void audio.current?.unlock();
@@ -283,8 +285,7 @@ export default function ActiveBreak() {
         stepGame(game.current, input.current, {
           autoFire: settingsRef.current.autoFire,
         });
-        for (const event of game.current.events.splice(0))
-          audio.current?.play(event);
+        consumeGameEvents(game.current.events, actor.current, (event) => audio.current?.play(event));
       });
       advanceAnimator(
         actor.current,
@@ -295,6 +296,7 @@ export default function ActiveBreak() {
           dy: game.current.player.dy,
           activation: game.current.player.activation,
           reduced: settingsRef.current.reduced,
+          shotId: game.current.player.lastShot?.id || 0,
         },
       );
       drawGame(
@@ -302,7 +304,8 @@ export default function ActiveBreak() {
         interpolateScene(game.current, previous, clock.alpha),
         assets.images,
         character,
-        { ...settingsRef.current, actor: actor.current },
+        { ...settingsRef.current, actor: actor.current, animation: assets.animation,
+          presentation: assets.animation ? tecnoiaPresentation(game.current, actor.current, clock.alpha) : null },
       );
       if (game.current.tick % 6 === 0 || game.current.phase !== "playing")
         setHud(gameSummary(game.current));
@@ -385,6 +388,7 @@ export default function ActiveBreak() {
                 character={character}
                 image={assets?.images[character.src]}
                 sprite={assets?.images[character.sprite]}
+                animation={assets?.animation}
                 loading={!assets || assets.characterId !== character.id}
                 pose={
                   previewPose === "power" && power.id === "dash"
@@ -661,6 +665,7 @@ export default function ActiveBreak() {
             character={character}
             image={assets?.images[character.src]}
             sprite={assets?.images[character.sprite]}
+            animation={assets?.animation}
             pose={mode === "victory" ? "victory" : "defeat"}
             reduced={settings.reduced}
           />
