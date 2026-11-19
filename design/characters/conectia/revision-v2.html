@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ConectIA v2 · Estudio de animación</title>
+<style>
+  :root { color-scheme:dark; font:16px/1.5 system-ui,sans-serif; background:#0b2028; color:#e3f0f4; }
+  body { max-width:960px; margin:32px auto; padding:0 20px; }
+  h1 { margin-bottom:4px; font-size:clamp(24px,4vw,36px); }
+  p { color:#b5cbd2; margin:4px 0 20px; }
+  canvas { display:block; width:100%; border:1px solid #48636c; border-radius:16px; background:#12333c; }
+  .controls { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:16px 0; }
+  button, select { font:inherit; color:inherit; background:#183e4a; border:1px solid #64818c; border-radius:8px; padding:8px 12px; min-height:44px; }
+  button { cursor:pointer; } button:focus-visible,select:focus-visible,input:focus-visible { outline:3px solid #f49d9c; }
+  input[type=range] { flex:1; min-width:160px; accent-color:#f49d9c; }
+  label { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  output { font-variant-numeric:tabular-nums; min-width:180px; }
+  .status { padding:12px 16px; border-left:3px solid #f49d9c; background:#213639; }
+  a { color:#f7b4ae; }
+</style>
+<h1>ConectIA v2 · Conexión lograda</h1>
+<p>Estudio de disparo, Ráfaga y celebración. Esta revisión no guarda puntos. ConectIA en <a href="/juego">el arcade</a> conserva v1.</p>
+<canvas width="960" height="420" role="img" aria-label="ConectIA: cabeza y dos manos flotantes, baliza y proyector"></canvas>
+<div class="controls">
+  <label>Acción <select id="clip"><option value="victory">Celebración · 72 fotogramas</option><option value="shooting">Disparo normal · 12 fotogramas</option><option value="burst">Ráfaga · 6 fotogramas</option><option value="comparison">Normal frente a Ráfaga · 1,2 s</option></select></label>
+  <button id="play" type="button">Reproducir</button><button id="restart" type="button">Volver al inicio</button>
+  <label>Velocidad <select id="speed"><option value="1">Normal</option><option value="0.25">Cámara lenta · ¼</option></select></label>
+  <label>Tamaño <select id="size"><option>320</option><option>160</option><option>112</option></select> px</label>
+</div>
+<div class="controls"><input id="time" type="range" min="0" max="71" value="0" aria-label="Fotograma"><output id="frame">Cargando…</output></div>
+<div class="controls">
+  <label><input id="reduced" type="checkbox">Movimiento reducido</label>
+  <label><input id="anchor" type="checkbox">Mostrar boquilla</label>
+  <label><input id="light" type="checkbox">Fondo claro</label>
+</div>
+<p class="status" id="status" role="status">Cargando la revisión…</p>
+<p><a href="README-v2.md">Fuentes y proceso</a> · <a href="../../../docs/roadmap-animacion-guardianes.md">Roadmap</a></p>
+<script type="module" src="../../../src/game/conectiaV2Review.js"></script>
+</html>

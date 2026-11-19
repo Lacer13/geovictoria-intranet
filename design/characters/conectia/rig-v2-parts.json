@@ -1,0 +1,75 @@
+{
+  "source": "rig-v2-fuente-opaca.png",
+  "sourceSha256": "47587ad5d363f2a75d51db74d4e812d7f1b59f0b08ad5f3ef8670b3ef1c5b1a2",
+  "image": "rig-v2-alpha-local.png",
+  "method": "color flood fill from perimeter and reviewed beacon-hole seed; RGB preserved",
+  "background": [
+    203,
+    219,
+    230
+  ],
+  "tolerance": 16,
+  "seeds": [
+    [
+      204,
+      470
+    ]
+  ],
+  "parts": {
+    "headIdle": [
+      0,
+      0,
+      418,
+      418
+    ],
+    "headAim": [
+      418,
+      0,
+      418,
+      418
+    ],
+    "headJoy": [
+      836,
+      0,
+      418,
+      418
+    ],
+    "tool": [
+      0,
+      418,
+      418,
+      418
+    ],
+    "aim": [
+      418,
+      418,
+      418,
+      418
+    ],
+    "recoil": [
+      836,
+      418,
+      418,
+      418
+    ],
+    "wave": [
+      0,
+      836,
+      418,
+      418
+    ],
+    "thumbsUp": [
+      418,
+      836,
+      418,
+      418
+    ],
+    "rest": [
+      836,
+      836,
+      418,
+      418
+    ]
+  },
+  "productionReady": false
+}

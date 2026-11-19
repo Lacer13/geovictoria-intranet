@@ -1,0 +1,2162 @@
+{
+  "schemaVersion": 2,
+  "kind": "animation-study",
+  "character": "conectia",
+  "productionReady": false,
+  "source": "../rig-v2-alpha-local.png",
+  "sourceSha256": "191e228d78c8ad94dda62001ec71397dd1f8e98887f5d45ca21414cee43e6106",
+  "cell": 320,
+  "pages": [
+    {
+      "image": "shooting.webp",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "image": "burst.webp",
+      "width": 960,
+      "height": 640
+    },
+    {
+      "image": "victory.webp",
+      "width": 2560,
+      "height": 2880
+    }
+  ],
+  "frames": {
+    "shooting_00": {
+      "page": 0,
+      "x": 0,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "emisión",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 238
+        },
+        "muzzle": {
+          "x": 291.36,
+          "y": 220.72,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "shooting_01": {
+      "page": 0,
+      "x": 320,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "emisión",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 253.5,
+          "y": 238
+        },
+        "muzzle": {
+          "x": 286.86,
+          "y": 220.72,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "shooting_02": {
+      "page": 0,
+      "x": 640,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "retroceso",
+      "head": "headAim",
+      "hand": "recoil",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 249,
+          "y": 238
+        },
+        "muzzle": {
+          "x": 279.24,
+          "y": 220.96,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "shooting_03": {
+      "page": 0,
+      "x": 960,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "retroceso",
+      "head": "headAim",
+      "hand": "recoil",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 250.5,
+          "y": 238
+        },
+        "muzzle": {
+          "x": 280.74,
+          "y": 220.96,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "shooting_04": {
+      "page": 0,
+      "x": 0,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "recuperación",
+      "head": "headAim",
+      "hand": "recoil",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 252,
+          "y": 238
+        },
+        "muzzle": {
+          "x": 282.24,
+          "y": 220.96,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "shooting_05": {
+      "page": 0,
+      "x": 320,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "recuperación",
+      "head": "headAim",
+      "hand": "recoil",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 253.03703703703704,
+          "y": 238
+        },
+        "muzzle": {
+          "x": 283.277037037037,
+          "y": 220.96,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "shooting_06": {
+      "page": 0,
+      "x": 640,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "recuperación",
+      "head": "headAim",
+      "hand": "recoil",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 254.96296296296296,
+          "y": 238
+        },
+        "muzzle": {
+          "x": 285.20296296296294,
+          "y": 220.96,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "shooting_07": {
+      "page": 0,
+      "x": 960,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "recuperación",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 256,
+          "y": 238
+        },
+        "muzzle": {
+          "x": 289.36,
+          "y": 220.72,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "shooting_08": {
+      "page": 0,
+      "x": 0,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "recuperación",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 256.3125,
+          "y": 238
+        },
+        "muzzle": {
+          "x": 289.6725,
+          "y": 220.72,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "shooting_09": {
+      "page": 0,
+      "x": 320,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "recuperación",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 257,
+          "y": 238
+        },
+        "muzzle": {
+          "x": 290.36,
+          "y": 220.72,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "shooting_10": {
+      "page": 0,
+      "x": 640,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "recuperación",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 257.6875,
+          "y": 238
+        },
+        "muzzle": {
+          "x": 291.0475,
+          "y": 220.72,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "shooting_11": {
+      "page": 0,
+      "x": 960,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "apuntado",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 238
+        },
+        "muzzle": {
+          "x": 291.36,
+          "y": 220.72,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "burst_00": {
+      "page": 1,
+      "x": 0,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "emisión",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 238
+        },
+        "muzzle": {
+          "x": 291.36,
+          "y": 220.72,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "burst_01": {
+      "page": 1,
+      "x": 320,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "retroceso",
+      "head": "headAim",
+      "hand": "recoil",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 253,
+          "y": 238
+        },
+        "muzzle": {
+          "x": 283.24,
+          "y": 220.96,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "burst_02": {
+      "page": 1,
+      "x": 640,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "recuperación",
+      "head": "headAim",
+      "hand": "recoil",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 254,
+          "y": 238
+        },
+        "muzzle": {
+          "x": 284.24,
+          "y": 220.96,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "burst_03": {
+      "page": 1,
+      "x": 0,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "recuperación",
+      "head": "headAim",
+      "hand": "recoil",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 255.5,
+          "y": 238
+        },
+        "muzzle": {
+          "x": 285.74,
+          "y": 220.96,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "burst_04": {
+      "page": 1,
+      "x": 320,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "recuperación",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 257,
+          "y": 238
+        },
+        "muzzle": {
+          "x": 290.36,
+          "y": 220.72,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "burst_05": {
+      "page": 1,
+      "x": 640,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "apuntado",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 238
+        },
+        "muzzle": {
+          "x": 291.36,
+          "y": 220.72,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "victory_00": {
+      "page": 2,
+      "x": 0,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 238
+        },
+        "muzzle": {
+          "x": 291.36,
+          "y": 220.72,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "victory_01": {
+      "page": 2,
+      "x": 320,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 238.66666666666666
+        },
+        "muzzle": {
+          "x": 291.36,
+          "y": 221.38666666666666,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "victory_02": {
+      "page": 2,
+      "x": 640,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 240.33333333333334
+        },
+        "muzzle": {
+          "x": 291.36,
+          "y": 223.05333333333334,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "victory_03": {
+      "page": 2,
+      "x": 960,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 242.5
+        },
+        "muzzle": {
+          "x": 291.36,
+          "y": 225.22,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "victory_04": {
+      "page": 2,
+      "x": 1280,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 244.66666666666666
+        },
+        "muzzle": {
+          "x": 291.36,
+          "y": 227.38666666666666,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "victory_05": {
+      "page": 2,
+      "x": 1600,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headAim",
+      "hand": "aim",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 246.33333333333334
+        },
+        "muzzle": {
+          "x": 291.36,
+          "y": 229.05333333333334,
+          "dx": 1,
+          "dy": 0
+        }
+      }
+    },
+    "victory_06": {
+      "page": 2,
+      "x": 1920,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 247
+        },
+        "muzzle": null
+      }
+    },
+    "victory_07": {
+      "page": 2,
+      "x": 2240,
+      "y": 0,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 244.89453125
+        },
+        "muzzle": null
+      }
+    },
+    "victory_08": {
+      "page": 2,
+      "x": 0,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 239.34375
+        },
+        "muzzle": null
+      }
+    },
+    "victory_09": {
+      "page": 2,
+      "x": 320,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 231.49609375
+        },
+        "muzzle": null
+      }
+    },
+    "victory_10": {
+      "page": 2,
+      "x": 640,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 222.5
+        },
+        "muzzle": null
+      }
+    },
+    "victory_11": {
+      "page": 2,
+      "x": 960,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 213.50390625
+        },
+        "muzzle": null
+      }
+    },
+    "victory_12": {
+      "page": 2,
+      "x": 1280,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 205.65625
+        },
+        "muzzle": null
+      }
+    },
+    "victory_13": {
+      "page": 2,
+      "x": 1600,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "entrada",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 200.10546875
+        },
+        "muzzle": null
+      }
+    },
+    "victory_14": {
+      "page": 2,
+      "x": 1920,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 198
+        },
+        "muzzle": null
+      }
+    },
+    "victory_15": {
+      "page": 2,
+      "x": 2240,
+      "y": 320,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 197.140625
+        },
+        "muzzle": null
+      }
+    },
+    "victory_16": {
+      "page": 2,
+      "x": 0,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 194.875
+        },
+        "muzzle": null
+      }
+    },
+    "victory_17": {
+      "page": 2,
+      "x": 320,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 191.671875
+        },
+        "muzzle": null
+      }
+    },
+    "victory_18": {
+      "page": 2,
+      "x": 640,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 188
+        },
+        "muzzle": null
+      }
+    },
+    "victory_19": {
+      "page": 2,
+      "x": 960,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 184.328125
+        },
+        "muzzle": null
+      }
+    },
+    "victory_20": {
+      "page": 2,
+      "x": 1280,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 181.125
+        },
+        "muzzle": null
+      }
+    },
+    "victory_21": {
+      "page": 2,
+      "x": 1600,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 178.859375
+        },
+        "muzzle": null
+      }
+    },
+    "victory_22": {
+      "page": 2,
+      "x": 1920,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 178
+        },
+        "muzzle": null
+      }
+    },
+    "victory_23": {
+      "page": 2,
+      "x": 2240,
+      "y": 640,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 179.25925925925927
+        },
+        "muzzle": null
+      }
+    },
+    "victory_24": {
+      "page": 2,
+      "x": 0,
+      "y": 960,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 182.40740740740742
+        },
+        "muzzle": null
+      }
+    },
+    "victory_25": {
+      "page": 2,
+      "x": 320,
+      "y": 960,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 186.5
+        },
+        "muzzle": null
+      }
+    },
+    "victory_26": {
+      "page": 2,
+      "x": 640,
+      "y": 960,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 190.59259259259258
+        },
+        "muzzle": null
+      }
+    },
+    "victory_27": {
+      "page": 2,
+      "x": 960,
+      "y": 960,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 193.74074074074073
+        },
+        "muzzle": null
+      }
+    },
+    "victory_28": {
+      "page": 2,
+      "x": 1280,
+      "y": 960,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 195
+        },
+        "muzzle": null
+      }
+    },
+    "victory_29": {
+      "page": 2,
+      "x": 1600,
+      "y": 960,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 193.59259259259258
+        },
+        "muzzle": null
+      }
+    },
+    "victory_30": {
+      "page": 2,
+      "x": 1920,
+      "y": 960,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 190.07407407407408
+        },
+        "muzzle": null
+      }
+    },
+    "victory_31": {
+      "page": 2,
+      "x": 2240,
+      "y": 960,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 185.5
+        },
+        "muzzle": null
+      }
+    },
+    "victory_32": {
+      "page": 2,
+      "x": 0,
+      "y": 1280,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 180.92592592592592
+        },
+        "muzzle": null
+      }
+    },
+    "victory_33": {
+      "page": 2,
+      "x": 320,
+      "y": 1280,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 177.4074074074074
+        },
+        "muzzle": null
+      }
+    },
+    "victory_34": {
+      "page": 2,
+      "x": 640,
+      "y": 1280,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 176
+        },
+        "muzzle": null
+      }
+    },
+    "victory_35": {
+      "page": 2,
+      "x": 960,
+      "y": 1280,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258.51851851851853,
+          "y": 177.7037037037037
+        },
+        "muzzle": null
+      }
+    },
+    "victory_36": {
+      "page": 2,
+      "x": 1280,
+      "y": 1280,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 259.81481481481484,
+          "y": 181.96296296296296
+        },
+        "muzzle": null
+      }
+    },
+    "victory_37": {
+      "page": 2,
+      "x": 1600,
+      "y": 1280,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 261.5,
+          "y": 187.5
+        },
+        "muzzle": null
+      }
+    },
+    "victory_38": {
+      "page": 2,
+      "x": 1920,
+      "y": 1280,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 263.18518518518516,
+          "y": 193.03703703703704
+        },
+        "muzzle": null
+      }
+    },
+    "victory_39": {
+      "page": 2,
+      "x": 2240,
+      "y": 1280,
+      "w": 320,
+      "h": 320,
+      "phase": "vitoreo",
+      "head": "headJoy",
+      "hand": "wave",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 264.48148148148147,
+          "y": 197.2962962962963
+        },
+        "muzzle": null
+      }
+    },
+    "victory_40": {
+      "page": 2,
+      "x": 0,
+      "y": 1600,
+      "w": 320,
+      "h": 320,
+      "phase": "conexión",
+      "head": "headJoy",
+      "hand": "thumbsUp",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265,
+          "y": 199
+        },
+        "muzzle": null
+      }
+    },
+    "victory_41": {
+      "page": 2,
+      "x": 320,
+      "y": 1600,
+      "w": 320,
+      "h": 320,
+      "phase": "conexión",
+      "head": "headJoy",
+      "hand": "thumbsUp",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265,
+          "y": 199
+        },
+        "muzzle": null
+      }
+    },
+    "victory_42": {
+      "page": 2,
+      "x": 640,
+      "y": 1600,
+      "w": 320,
+      "h": 320,
+      "phase": "conexión",
+      "head": "headJoy",
+      "hand": "thumbsUp",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265,
+          "y": 199
+        },
+        "muzzle": null
+      }
+    },
+    "victory_43": {
+      "page": 2,
+      "x": 960,
+      "y": 1600,
+      "w": 320,
+      "h": 320,
+      "phase": "conexión",
+      "head": "headJoy",
+      "hand": "thumbsUp",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265,
+          "y": 199
+        },
+        "muzzle": null
+      }
+    },
+    "victory_44": {
+      "page": 2,
+      "x": 1280,
+      "y": 1600,
+      "w": 320,
+      "h": 320,
+      "phase": "conexión",
+      "head": "headJoy",
+      "hand": "thumbsUp",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265,
+          "y": 199
+        },
+        "muzzle": null
+      }
+    },
+    "victory_45": {
+      "page": 2,
+      "x": 1600,
+      "y": 1600,
+      "w": 320,
+      "h": 320,
+      "phase": "conexión",
+      "head": "headJoy",
+      "hand": "thumbsUp",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265,
+          "y": 199
+        },
+        "muzzle": null
+      }
+    },
+    "victory_46": {
+      "page": 2,
+      "x": 1920,
+      "y": 1600,
+      "w": 320,
+      "h": 320,
+      "phase": "conexión",
+      "head": "headJoy",
+      "hand": "thumbsUp",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265,
+          "y": 199
+        },
+        "muzzle": null
+      }
+    },
+    "victory_47": {
+      "page": 2,
+      "x": 2240,
+      "y": 1600,
+      "w": 320,
+      "h": 320,
+      "phase": "remate",
+      "head": "headJoy",
+      "hand": "thumbsUp",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 265,
+          "y": 199
+        },
+        "muzzle": null
+      }
+    },
+    "victory_48": {
+      "page": 2,
+      "x": 0,
+      "y": 1920,
+      "w": 320,
+      "h": 320,
+      "phase": "remate",
+      "head": "headJoy",
+      "hand": "thumbsUp",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 264.8338192419825,
+          "y": 200.0524781341108
+        },
+        "muzzle": null
+      }
+    },
+    "victory_49": {
+      "page": 2,
+      "x": 320,
+      "y": 1920,
+      "w": 320,
+      "h": 320,
+      "phase": "remate",
+      "head": "headJoy",
+      "hand": "thumbsUp",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 264.40524781341105,
+          "y": 202.7667638483965
+        },
+        "muzzle": null
+      }
+    },
+    "victory_50": {
+      "page": 2,
+      "x": 640,
+      "y": 1920,
+      "w": 320,
+      "h": 320,
+      "phase": "remate",
+      "head": "headJoy",
+      "hand": "thumbsUp",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 263.81924198250726,
+          "y": 206.47813411078718
+        },
+        "muzzle": null
+      }
+    },
+    "victory_51": {
+      "page": 2,
+      "x": 960,
+      "y": 1920,
+      "w": 320,
+      "h": 320,
+      "phase": "remate",
+      "head": "headJoy",
+      "hand": "thumbsUp",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 263.18075801749274,
+          "y": 210.52186588921282
+        },
+        "muzzle": null
+      }
+    },
+    "victory_52": {
+      "page": 2,
+      "x": 1280,
+      "y": 1920,
+      "w": 320,
+      "h": 320,
+      "phase": "remate",
+      "head": "headJoy",
+      "hand": "thumbsUp",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 262.59475218658895,
+          "y": 214.2332361516035
+        },
+        "muzzle": null
+      }
+    },
+    "victory_53": {
+      "page": 2,
+      "x": 1600,
+      "y": 1920,
+      "w": 320,
+      "h": 320,
+      "phase": "remate",
+      "head": "headJoy",
+      "hand": "thumbsUp",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 262.1661807580175,
+          "y": 216.9475218658892
+        },
+        "muzzle": null
+      }
+    },
+    "victory_54": {
+      "page": 2,
+      "x": 1920,
+      "y": 1920,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headJoy",
+      "hand": "thumbsUp",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 262,
+          "y": 218
+        },
+        "muzzle": null
+      }
+    },
+    "victory_55": {
+      "page": 2,
+      "x": 2240,
+      "y": 1920,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headJoy",
+      "hand": "thumbsUp",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 261.8628257887517,
+          "y": 218.72016460905348
+        },
+        "muzzle": null
+      }
+    },
+    "victory_56": {
+      "page": 2,
+      "x": 0,
+      "y": 2240,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headJoy",
+      "hand": "thumbsUp",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 261.4951989026063,
+          "y": 220.65020576131687
+        },
+        "muzzle": null
+      }
+    },
+    "victory_57": {
+      "page": 2,
+      "x": 320,
+      "y": 2240,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headJoy",
+      "hand": "thumbsUp",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 260.962962962963,
+          "y": 223.44444444444446
+        },
+        "muzzle": null
+      }
+    },
+    "victory_58": {
+      "page": 2,
+      "x": 640,
+      "y": 2240,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headJoy",
+      "hand": "thumbsUp",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 260.3319615912209,
+          "y": 226.75720164609055
+        },
+        "muzzle": null
+      }
+    },
+    "victory_59": {
+      "page": 2,
+      "x": 960,
+      "y": 2240,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headJoy",
+      "hand": "thumbsUp",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 259.6680384087791,
+          "y": 230.24279835390948
+        },
+        "muzzle": null
+      }
+    },
+    "victory_60": {
+      "page": 2,
+      "x": 1280,
+      "y": 2240,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headJoy",
+      "hand": "thumbsUp",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 259.037037037037,
+          "y": 233.55555555555554
+        },
+        "muzzle": null
+      }
+    },
+    "victory_61": {
+      "page": 2,
+      "x": 1600,
+      "y": 2240,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headJoy",
+      "hand": "thumbsUp",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258.5048010973937,
+          "y": 236.34979423868313
+        },
+        "muzzle": null
+      }
+    },
+    "victory_62": {
+      "page": 2,
+      "x": 1920,
+      "y": 2240,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headJoy",
+      "hand": "thumbsUp",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258.1371742112483,
+          "y": 238.27983539094652
+        },
+        "muzzle": null
+      }
+    },
+    "victory_63": {
+      "page": 2,
+      "x": 2240,
+      "y": 2240,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 239
+        },
+        "muzzle": null
+      }
+    },
+    "victory_64": {
+      "page": 2,
+      "x": 0,
+      "y": 2560,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 238.95703125
+        },
+        "muzzle": null
+      }
+    },
+    "victory_65": {
+      "page": 2,
+      "x": 320,
+      "y": 2560,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 238.84375
+        },
+        "muzzle": null
+      }
+    },
+    "victory_66": {
+      "page": 2,
+      "x": 640,
+      "y": 2560,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 238.68359375
+        },
+        "muzzle": null
+      }
+    },
+    "victory_67": {
+      "page": 2,
+      "x": 960,
+      "y": 2560,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 238.5
+        },
+        "muzzle": null
+      }
+    },
+    "victory_68": {
+      "page": 2,
+      "x": 1280,
+      "y": 2560,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 238.31640625
+        },
+        "muzzle": null
+      }
+    },
+    "victory_69": {
+      "page": 2,
+      "x": 1600,
+      "y": 2560,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 238.15625
+        },
+        "muzzle": null
+      }
+    },
+    "victory_70": {
+      "page": 2,
+      "x": 1920,
+      "y": 2560,
+      "w": 320,
+      "h": 320,
+      "phase": "salida",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 238.04296875
+        },
+        "muzzle": null
+      }
+    },
+    "victory_71": {
+      "page": 2,
+      "x": 2240,
+      "y": 2560,
+      "w": 320,
+      "h": 320,
+      "phase": "reposo",
+      "head": "headIdle",
+      "hand": "rest",
+      "anchors": {
+        "pivot": {
+          "x": 160,
+          "y": 160
+        },
+        "hand": {
+          "x": 258,
+          "y": 238
+        },
+        "muzzle": null
+      }
+    }
+  },
+  "clips": {
+    "shooting": {
+      "frames": [
+        "shooting_00",
+        "shooting_01",
+        "shooting_02",
+        "shooting_03",
+        "shooting_04",
+        "shooting_05",
+        "shooting_06",
+        "shooting_07",
+        "shooting_08",
+        "shooting_09",
+        "shooting_10",
+        "shooting_11"
+      ],
+      "fps": 60,
+      "duration": 0.2,
+      "loop": false,
+      "label": "Disparo normal",
+      "reducedFrame": 11
+    },
+    "burst": {
+      "frames": [
+        "burst_00",
+        "burst_01",
+        "burst_02",
+        "burst_03",
+        "burst_04",
+        "burst_05"
+      ],
+      "fps": 60,
+      "duration": 0.1,
+      "loop": false,
+      "label": "Ráfaga",
+      "reducedFrame": 5
+    },
+    "victory": {
+      "frames": [
+        "victory_00",
+        "victory_01",
+        "victory_02",
+        "victory_03",
+        "victory_04",
+        "victory_05",
+        "victory_06",
+        "victory_07",
+        "victory_08",
+        "victory_09",
+        "victory_10",
+        "victory_11",
+        "victory_12",
+        "victory_13",
+        "victory_14",
+        "victory_15",
+        "victory_16",
+        "victory_17",
+        "victory_18",
+        "victory_19",
+        "victory_20",
+        "victory_21",
+        "victory_22",
+        "victory_23",
+        "victory_24",
+        "victory_25",
+        "victory_26",
+        "victory_27",
+        "victory_28",
+        "victory_29",
+        "victory_30",
+        "victory_31",
+        "victory_32",
+        "victory_33",
+        "victory_34",
+        "victory_35",
+        "victory_36",
+        "victory_37",
+        "victory_38",
+        "victory_39",
+        "victory_40",
+        "victory_41",
+        "victory_42",
+        "victory_43",
+        "victory_44",
+        "victory_45",
+        "victory_46",
+        "victory_47",
+        "victory_48",
+        "victory_49",
+        "victory_50",
+        "victory_51",
+        "victory_52",
+        "victory_53",
+        "victory_54",
+        "victory_55",
+        "victory_56",
+        "victory_57",
+        "victory_58",
+        "victory_59",
+        "victory_60",
+        "victory_61",
+        "victory_62",
+        "victory_63",
+        "victory_64",
+        "victory_65",
+        "victory_66",
+        "victory_67",
+        "victory_68",
+        "victory_69",
+        "victory_70",
+        "victory_71"
+      ],
+      "fps": 24,
+      "duration": 3,
+      "loop": false,
+      "label": "Conexión lograda",
+      "reducedFrame": 43
+    }
+  },
+  "reviewNotes": [
+    "Estudio de actuación, todavía no conectado al arcade.",
+    "Normal: 12 pasos; Ráfaga: 6 pasos. Conserva la mecánica existente de 60 pasos/s.",
+    "Celebración propia de 72 fotogramas a 24 FPS: vitoreo con baliza, pulgar arriba y reposo final."
+  ]
+}
