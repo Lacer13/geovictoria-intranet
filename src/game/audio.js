@@ -32,6 +32,7 @@ export function createGameAudio() {
         hit: [220],
         damage: [140, 95],
         dash: [380, 680],
+        power: [440, 660, 880],
         pickup: [660, 830, 990],
         warning: [330, 330],
         boss: [220, 165],

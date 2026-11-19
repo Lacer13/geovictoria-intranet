@@ -11,7 +11,11 @@ import {
   stepGame,
   WIDTH,
 } from "../src/game/simulation.js";
-import { characterPose, rigPose } from "../src/game/characters.js";
+import {
+  AREA_CHARACTERS,
+  characterPose,
+  rigPose,
+} from "../src/game/characters.js";
 import { readGameProfile } from "../src/game/profile.js";
 
 function seededRandom() {
@@ -286,11 +290,10 @@ test("the profile migration retains previous unlocks and never selects a locked 
     const profile = readGameProfile();
     assert.equal(profile.coins, 730);
     assert.equal(profile.selected, "victoria_st");
-    assert.deepEqual(profile.unlocked.sort(), [
-      "tecnoia",
-      "victoria_classic",
-      "victoria_st",
-    ]);
+    assert.equal(profile.unlocked.length, 14);
+    assert.ok(AREA_CHARACTERS.every((c) => profile.unlocked.includes(c.id)));
+    assert.ok(profile.unlocked.includes("victoria_st"));
+    assert.ok(!profile.unlocked.includes("unknown"));
     saved.set("geo_unlocked_chars", "broken-json");
     assert.equal(readGameProfile().selected, "tecnoia");
     saved.set("geo_total_coins", "9".repeat(400));
@@ -303,7 +306,7 @@ test("the profile migration retains previous unlocks and never selects a locked 
     });
     assert.deepEqual(readGameProfile(), {
       coins: 0,
-      unlocked: ["tecnoia", "victoria_classic"],
+      unlocked: [...AREA_CHARACTERS.map((c) => c.id), "victoria_classic"],
       selected: "tecnoia",
     });
   } finally {

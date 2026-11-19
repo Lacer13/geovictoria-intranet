@@ -1,0 +1,9 @@
+# Prisma · Limpieza final de transparencia
+
+Edición con ImageGen integrado, preservando identidad, anatomía y posiciones. El PNG seleccionado reemplaza el borrador aún no publicado. Recurso final: `public/characters/prisma/rig-navidad-v1.png`.
+
+```text
+Use case: background-extraction. Edit target: the supplied Prisma parts atlas. Correct ONLY the alpha transparency outside the three actual objects. There is unwanted semi-transparent WHITE/GRAY fog and rectangular background haze surrounding the head and the hands. Remove ALL of that background haze and colored fringe COMPLETELY to exact alpha=0, including the large white fog above and beside the head, around the triangular prism hand, between fingers, inside gaps and around the lower waving hand. Do NOT keep any background glow or drop shadow at all.
+Preserve the complete original objects and positions pixel-consistently: the entire floating robot head, BOTH antennae, ENTIRE red-white Santa hat and pompom, friendly white face, cyan eyes, aqua-blue-violet helmet and triangular badge, complete hand gripping the aqua triangular crystal, full crystal geometry and its internal shiny material, every finger, both opaque solid palms and both closed cuffs. Preserve the complete bottom-left five-finger waving hand. No transparent holes in palms, face or cuffs. The material of the prism may stay translucent, but all empty space OUTSIDE its actual triangular surface must be exact alpha zero.
+Keep exact original canvas size and exact separate-part layout, no resizing or repositioning. No new parts, no extra hands, no body, neck, torso, arms or shoulders. NO stars or lightning bolts. Return an exceptionally CLEAN TRANSPARENT production sprite atlas with no fog, halos, rectangles, ground shadows, light rays, glows, dust, text or watermark.
+```

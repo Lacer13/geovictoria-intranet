@@ -2,6 +2,8 @@
 
 18 de noviembre de 2026 · Etapa 1 del [roadmap](roadmap-videojuego.md).
 
+Actualización posterior: la [entrega de guardianes](guardianes-navidad.md) amplía el piloto a doce áreas, con sprites, poderes y celebraciones propios. Esta ficha conserva la descripción de la primera versión de Pausa activa 2.0.
+
 ## Qué incorpora
 
 - TecnoIA, piloto gratuito de Operaciones y ST, con cabeza y dos manos flotantes. Sin cuerpo, brazos ni estrellas. El selector conserva los dos personajes de la edición anterior y sus desbloqueos locales.
@@ -39,4 +41,4 @@ La verificación local pasó 44 pruebas y la compilación de producción. Una pa
 
 Las pruebas de `tests/arcade.test.js` comparan el estado completo de una partida idéntica a 30, 60 y 144 FPS; verifican pausa y límites de recuperación, diagonales, impactos simultáneos, consumo de proyectiles, asistencia, esquiva, aviso del jefe, finalización y reinicio. La revisión visual usa escritorio y tamaños de pantalla móvil en navegador. Una pantalla móvil simulada no sustituye una sesión en los teléfonos reales del equipo.
 
-Antes de cerrar el criterio de salida de la etapa 1 queda el piloto con personas y dispositivos reales. La etapa 0 conserva pendiente el boceto/prototipo de arena y la decisión de cámara. La siguiente entrega de contenido es la primera misión del bosque y después la tanda de tres personajes. Las tres misiones, los otros once personajes nuevos y la arena multijugador todavía están pendientes.
+Antes de cerrar el criterio de salida de la etapa 1 queda el piloto con personas y dispositivos reales. La etapa 0 conserva pendiente el boceto/prototipo de arena y la decisión de cámara. La siguiente entrega de contenido es la primera misión del bosque; las tres misiones y la arena multijugador siguen pendientes. Los doce personajes ya se produjeron en la ampliación de guardianes.

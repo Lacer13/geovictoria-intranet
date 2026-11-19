@@ -9,9 +9,21 @@ import {
   Shield,
   Trophy,
   Volume2,
-  Zap,
 } from "lucide-react";
-import { CHARACTERS, loadAssets } from "../game/characters.js";
+import {
+  CHARACTERS,
+  AREA_CHARACTERS,
+  LEGACY_CHARACTERS,
+  characterPose,
+  loadAssets,
+} from "../game/characters.js";
+import { powerForCharacter } from "../game/powers.js";
+import {
+  createAnimator,
+  advanceAnimator,
+  capturePositions,
+  interpolateScene,
+} from "../game/animation.js";
 import {
   createClock,
   createGame,
@@ -146,10 +158,15 @@ export default function ActiveBreak() {
   const [assets, setAssets] = useState(null);
   const [progress, setProgress] = useState(0);
   const [loadAttempt, setLoadAttempt] = useState(0);
+  const lastLoadAttempt = useRef(0);
   const [notice, setNotice] = useState("");
+  const [catalog, setCatalog] = useState("areas");
+  const [query, setQuery] = useState("");
+  const [previewPose, setPreviewPose] = useState("idle");
   const [pauseReason, setPauseReason] = useState("manual");
   const game = useRef(createGame());
   const input = useRef(emptyInput());
+  const actor = useRef(createAnimator());
   const canvas = useRef(null);
   const resultHeading = useRef(null);
   const audio = useRef(null);
@@ -157,6 +174,17 @@ export default function ActiveBreak() {
   const [hud, setHud] = useState(() => gameSummary(game.current));
   const character =
     CHARACTERS.find((c) => c.id === profile.selected) || CHARACTERS[0];
+  const power = character.power || powerForCharacter(character.id);
+  const normalize = (text) =>
+    text
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+  const filteredCharacters = (
+    catalog === "areas" ? AREA_CHARACTERS : LEGACY_CHARACTERS
+  ).filter((c) =>
+    normalize(c.name + " " + c.area).includes(normalize(query.trim())),
+  );
 
   useEffect(() => {
     if (mode === "victory" || mode === "gameover")
@@ -171,15 +199,21 @@ export default function ActiveBreak() {
     let active = true;
     setProgress(0);
     setAssets(null);
-    loadAssets((p) => {
-      if (active) setProgress(p);
-    }).then((result) => {
+    const retry = lastLoadAttempt.current !== loadAttempt;
+    lastLoadAttempt.current = loadAttempt;
+    loadAssets(
+      (p) => {
+        if (active) setProgress(p);
+      },
+      character,
+      { retry },
+    ).then((result) => {
       if (active) setAssets(result);
     });
     return () => {
       active = false;
     };
-  }, [loadAttempt]);
+  }, [loadAttempt, character]);
   useEffect(() => {
     audio.current = createGameAudio();
     audio.current.setVolume(settingsRef.current.volume);
@@ -197,6 +231,7 @@ export default function ActiveBreak() {
     (reason) => {
       if (modeRef.current !== "playing") return;
       clearInput(input);
+      actor.current.previous = null;
       audio.current?.pause();
       setPauseReason(reason);
       changeMode("paused");
@@ -216,10 +251,11 @@ export default function ActiveBreak() {
   useGameInput(input, mode, pause, resume);
 
   const start = () => {
-    if (!assets) return;
+    if (!assets || assets.characterId !== character.id) return;
     clearInput(input);
     credited.current = false;
-    game.current = createGame();
+    game.current = createGame(character.id);
+    actor.current = createAnimator();
     setHud(gameSummary(game.current));
     void audio.current?.unlock();
     changeMode("playing");
@@ -238,22 +274,35 @@ export default function ActiveBreak() {
     if (mode !== "playing" || !assets || !canvas.current) return;
     const ctx = canvas.current.getContext("2d");
     const clock = createClock();
+    let previous = capturePositions(game.current);
     let frame;
     const loop = (time) => {
       if (modeRef.current !== "playing") return;
       clock.advance(time, () => {
+        previous = capturePositions(game.current);
         stepGame(game.current, input.current, {
           autoFire: settingsRef.current.autoFire,
         });
         for (const event of game.current.events.splice(0))
           audio.current?.play(event);
       });
+      advanceAnimator(
+        actor.current,
+        characterPose(game.current.player, game.current.phase),
+        time / 1000,
+        {
+          dx: game.current.player.dx,
+          dy: game.current.player.dy,
+          activation: game.current.player.activation,
+          reduced: settingsRef.current.reduced,
+        },
+      );
       drawGame(
         ctx,
-        game.current,
+        interpolateScene(game.current, previous, clock.alpha),
         assets.images,
         character,
-        settingsRef.current,
+        { ...settingsRef.current, actor: actor.current },
       );
       if (game.current.tick % 6 === 0 || game.current.phase !== "playing")
         setHud(gameSummary(game.current));
@@ -328,20 +377,41 @@ export default function ActiveBreak() {
                 <span>
                   <Shield size={16} /> Escudo y mejoras
                 </span>
-                <span>
-                  <Zap size={16} /> Esquiva
-                </span>
+                <span>Un poder por área</span>
               </div>
             </div>
             <div className="arcade-hero-character">
               <CharacterPreview
                 character={character}
                 image={assets?.images[character.src]}
+                sprite={assets?.images[character.sprite]}
+                loading={!assets || assets.characterId !== character.id}
+                pose={
+                  previewPose === "power" && power.id === "dash"
+                    ? "dash"
+                    : previewPose
+                }
                 reduced={settings.reduced}
               />
               <span>
                 {character.name} <small>{character.area}</small>
               </span>
+              <label className="arcade-preview-select">
+                Ver movimiento
+                <select
+                  value={previewPose}
+                  onChange={(e) => setPreviewPose(e.target.value)}
+                  aria-label="Movimiento del guardián"
+                >
+                  <option value="idle">Reposo</option>
+                  <option value="moving">Volando</option>
+                  <option value="shooting">Disparando</option>
+                  <option value="power">Usando su poder</option>
+                  <option value="damage">Recibiendo un impacto</option>
+                  <option value="victory">Celebrando</option>
+                  <option value="defeat">Descansando</option>
+                </select>
+              </label>
             </div>
           </div>
           <section
@@ -355,8 +425,42 @@ export default function ActiveBreak() {
                 <small>· progreso en este dispositivo</small>
               </span>
             </div>
-            <div className="arcade-character-list">
-              {CHARACTERS.map((item) => {
+            <div className="arcade-catalog-tools">
+              <div role="group" aria-label="Colección de guardianes">
+                <button
+                  type="button"
+                  aria-pressed={catalog === "areas"}
+                  onClick={() => {
+                    setCatalog("areas");
+                    setQuery("");
+                  }}
+                >
+                  Áreas · 12
+                </button>
+                <button
+                  type="button"
+                  aria-pressed={catalog === "legacy"}
+                  onClick={() => {
+                    setCatalog("legacy");
+                    setQuery("");
+                  }}
+                >
+                  Clásicos · 2
+                </button>
+              </div>
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                aria-label="Buscar área o guardián"
+                placeholder="Buscar área o guardián"
+              />
+            </div>
+            <div
+              className="arcade-character-list"
+              aria-label="Guardianes disponibles"
+            >
+              {filteredCharacters.map((item) => {
                 const unlocked = profile.unlocked.includes(item.id),
                   selected = profile.selected === item.id;
                 return (
@@ -365,24 +469,49 @@ export default function ActiveBreak() {
                     className={`arcade-character-choice ${selected ? "selected" : ""}`}
                     key={item.id}
                     aria-pressed={selected}
+                    aria-label={`${item.name} · ${item.area}${unlocked ? "" : ` · ${item.cost} Data`}`}
                     onClick={() => choose(item)}
+                    style={{ "--guardian-accent": item.accent || "#f4d693" }}
                   >
-                    <span className="arcade-choice-name">
-                      {item.name}
-                      {selected && <Check size={20} />}
+                    {item.thumbnail ? (
+                      <img
+                        className="arcade-choice-portrait"
+                        src={item.thumbnail}
+                        loading="lazy"
+                        decoding="async"
+                        alt=""
+                      />
+                    ) : (
+                      <span className="arcade-choice-legacy" aria-hidden="true">
+                        V
+                      </span>
+                    )}
+                    <span className="arcade-choice-copy">
+                      <span className="arcade-choice-name">
+                        {item.name}
+                        {selected && <Check size={20} />}
+                      </span>
+                      <span className="arcade-choice-area">{item.area}</span>
+                      {!unlocked && (
+                        <small>Desbloquear · {item.cost} Data</small>
+                      )}
                     </span>
-                    <span>{item.area}</span>
-                    <small>
-                      {unlocked
-                        ? item.id === "tecnoia"
-                          ? "Nuevo · incluido"
-                          : "Disponible"
-                        : `Desbloquear · ${item.cost} Data`}
-                    </small>
                   </button>
                 );
               })}
             </div>
+            {filteredCharacters.length === 0 && (
+              <p className="arcade-notice" role="status">
+                No encontramos ese guardián. Prueba con el nombre del área.
+              </p>
+            )}
+            <p className="arcade-selected-power">
+              <strong>{power.name}</strong>
+              <span>{power.description}</span>
+              <small>
+                Shift o botón Poder · recarga {power.cooldown / 60} s
+              </small>
+            </p>
             {notice && (
               <p role="status" className="arcade-notice">
                 {notice}
@@ -407,7 +536,7 @@ export default function ActiveBreak() {
             <div className="arcade-start-row">
               <button
                 className="arcade-button"
-                disabled={!assets}
+                disabled={!assets || assets.characterId !== character.id}
                 onClick={start}
               >
                 <Play size={20} /> Iniciar misión
@@ -415,7 +544,7 @@ export default function ActiveBreak() {
               <p>
                 Flechas o WASD · Espacio para disparar
                 <br />
-                Shift para esquivar · Esc para pausar
+                Shift para tu poder · Esc para pausar
               </p>
             </div>
             <details className="arcade-settings-details">
@@ -469,14 +598,27 @@ export default function ActiveBreak() {
               width={WIDTH}
               height={HEIGHT}
               tabIndex={0}
-              aria-label="Arcade navideño. Muévete con flechas o WASD, dispara con espacio, esquiva con Shift y pausa con Escape."
+              aria-label={`Arcade navideño con ${character.name}. Flechas o WASD para moverte, espacio para disparar, Shift para ${power.name} y Escape para pausar.`}
             />
           </div>
           <div className="arcade-status">
-            <span>
-              <Zap size={16} />
-              {hud.dash ? `Esquiva en ${hud.dash}s` : "Esquiva lista · Shift"}
-            </span>
+            <button
+              type="button"
+              className="arcade-power-button"
+              disabled={hud.powerCooldown > 0 || mode === "paused"}
+              onClick={() => {
+                input.current.power = true;
+              }}
+              aria-label={`Usar ${power.name}${hud.powerCooldown ? `, recarga ${hud.powerCooldown} segundos` : ""}`}
+            >
+              {power.name} ·{" "}
+              {hud.powerCooldown ? `${hud.powerCooldown}s` : "Listo · Shift"}
+            </button>
+            {hud.powerTime > 0 && power.id !== "dash" && (
+              <span>
+                {power.name} · {hud.powerTime}s de efecto
+              </span>
+            )}
             {hud.shield > 0 && (
               <span>
                 <Shield size={16} /> Escudo {hud.shield}s
@@ -489,13 +631,14 @@ export default function ActiveBreak() {
           {mode === "playing" && (
             <TouchControls
               input={input}
-              dash={hud.dash}
+              power={power}
+              cooldown={hud.powerCooldown}
               large={settings.controls === "large"}
             />
           )}
           <p className="arcade-keyboard-hint">
-            Mover: WASD / flechas · Mantén Espacio para disparar · Shift:
-            esquivar · Esc: pausa
+            Mover: WASD / flechas · Mantén Espacio para disparar · Shift: tu
+            poder · Esc: pausa
           </p>
           {mode === "paused" && (
             <PauseDialog
@@ -517,6 +660,7 @@ export default function ActiveBreak() {
           <CharacterPreview
             character={character}
             image={assets?.images[character.src]}
+            sprite={assets?.images[character.sprite]}
             pose={mode === "victory" ? "victory" : "defeat"}
             reduced={settings.reduced}
           />

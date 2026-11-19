@@ -6,13 +6,18 @@ export default function CharacterPreview({
   image,
   pose = "idle",
   reduced = false,
+  sprite = null,
+  loading = false,
 }) {
   const ref = useRef(null);
   useEffect(() => {
     const ctx = ref.current.getContext("2d");
     let frame;
+    let started = null;
     const draw = (time) => {
+      if (started === null) started = time;
       ctx.clearRect(0, 0, 400, 340);
+      if (loading) return;
       drawCharacter(
         ctx,
         character,
@@ -21,14 +26,15 @@ export default function CharacterPreview({
         170,
         295,
         pose,
-        time / 1000,
+        (time - started) / 1000,
         reduced,
+        { sprite: image ? null : sprite },
       );
       if (!reduced) frame = requestAnimationFrame(draw);
     };
-    draw(0);
+    frame = requestAnimationFrame(draw);
     return () => cancelAnimationFrame(frame);
-  }, [character, image, pose, reduced]);
+  }, [character, image, sprite, pose, reduced, loading]);
   return (
     <canvas
       className="arcade-character-preview"

@@ -1,3 +1,4 @@
+import { activatePower, activePower, powerForCharacter } from "./powers.js";
 // The arcade advances at 60 fixed steps per second, independently of rendering.
 export const WIDTH = 960;
 export const HEIGHT = 540;
@@ -10,6 +11,9 @@ export function createClock() {
   let previous = null;
   let accumulator = 0;
   return {
+    get alpha() {
+      return Math.max(0, Math.min(1, accumulator / STEP_MS));
+    },
     advance(now, update) {
       if (previous === null) {
         previous = now;
@@ -40,6 +44,7 @@ export function emptyInput() {
     down: false,
     fire: false,
     dash: false,
+    power: false,
     x: 0,
     y: 0,
   };
@@ -58,7 +63,7 @@ export function normalizedMovement(input) {
   return length > 1 ? { x: x / length, y: y / length } : { x, y };
 }
 
-export function createGame() {
+export function createGame(characterId = "tecnoia") {
   return {
     phase: "playing",
     tick: 0,
@@ -83,6 +88,12 @@ export function createGame() {
       shield: 0,
       dual: 0,
       spread: 0,
+      power: powerForCharacter(characterId).id,
+      powerCooldown: 0,
+      powerTimer: 0,
+      powerAnimation: 0,
+      activation: 0,
+      activatedAt: -1,
     },
     enemies: [],
     bullets: [],
@@ -91,6 +102,7 @@ export function createGame() {
     texts: [],
     events: [],
     shake: 0,
+    barrier: null,
   };
 }
 
@@ -190,6 +202,22 @@ function collect(state, pickup, random) {
   announce(state, labels[pickup.type]);
 }
 
+function hitBoss(state, amount, random) {
+  if (!state.boss || state.phase !== "playing") return;
+  const boss = state.boss;
+  boss.hp = Math.max(0, boss.hp - amount);
+  boss.flash = 5;
+  state.events.push("hit");
+  burst(state, boss.x + 60, boss.y + 70, "#94e4d6", random, 4);
+  if (boss.hp === 0) {
+    state.score += 100;
+    burst(state, boss.x + 80, boss.y + 80, "#f9dc95", random, 30);
+    state.boss = null;
+    state.phase = "victory";
+    state.events.push("victory");
+  }
+}
+
 export function stepGame(
   state,
   input,
@@ -207,6 +235,9 @@ export function stepGame(
     "shield",
     "dual",
     "spread",
+    "powerCooldown",
+    "powerTimer",
+    "powerAnimation",
   ])
     p[key] = Math.max(0, p[key] - 1);
   const direction = normalizedMovement(input);
@@ -217,12 +248,12 @@ export function stepGame(
     p.facingX = p.dx / length;
     p.facingY = p.dy / length;
   }
-  if (input.dash && p.dashCooldown === 0) {
-    p.dash = 10;
-    p.dashCooldown = DASH_COOLDOWN;
-    state.events.push("dash");
-  }
+  if (state.barrier && --state.barrier.life <= 0) state.barrier = null;
+  if (input.power || input.dash)
+    activatePower(state, { announce, defeatEnemy, hitBoss, random });
+  input.power = false;
   input.dash = false;
+  const hostileSpeed = activePower(p, "slow") ? 0.4 : 1;
   const moveX = p.dash ? p.facingX : p.dx;
   const moveY = p.dash ? p.facingY : p.dy;
   const speed = p.dash ? 14 : 5;
@@ -230,7 +261,7 @@ export function stepGame(
   p.y = clamp(p.y + moveY * speed, 12, HEIGHT - p.height - 20);
 
   if ((input.fire || autoFire) && p.shot === 0) {
-    p.shot = SHOT_COOLDOWN;
+    p.shot = activePower(p, "burst") ? SHOT_COOLDOWN / 2 : SHOT_COOLDOWN;
     const shots = p.spread ? [-2.8, 0, 2.8] : p.dual ? [-1, 1] : [0];
     for (const shot of shots)
       state.bullets.push({
@@ -241,6 +272,8 @@ export function stepGame(
         vx: 13,
         vy: p.spread ? shot : 0,
         enemy: false,
+        pierce: activePower(p, "pierce") ? 3 : 1,
+        guided: activePower(p, "radar"),
       });
     state.events.push("shoot");
   }
@@ -274,7 +307,7 @@ export function stepGame(
   }
   if (state.boss) {
     const b = state.boss;
-    b.y = clamp(b.y + b.dy, 50, HEIGHT - b.height - 30);
+    b.y = clamp(b.y + b.dy * hostileSpeed, 50, HEIGHT - b.height - 30);
     if (b.y <= 50 || b.y >= HEIGHT - b.height - 30) b.dy *= -1;
     b.flash = Math.max(0, b.flash - 1);
     b.shot--;
@@ -293,7 +326,7 @@ export function stepGame(
     }
   }
   for (const enemy of state.enemies) {
-    enemy.x -= enemy.speed;
+    enemy.x -= enemy.speed * hostileSpeed;
     enemy.flash = Math.max(0, enemy.flash - 1);
     if (!enemy.dead && overlaps(inset(p, 26), inset(enemy, 16))) {
       enemy.dead = true;
@@ -305,45 +338,64 @@ export function stepGame(
   // Mark spent bullets and defeated enemies first; filter only after collision resolution.
   for (const bullet of state.bullets) {
     if (state.phase !== "playing") break;
-    bullet.x += bullet.vx;
-    bullet.y += bullet.vy;
+    if (bullet.guided && !bullet.enemy) {
+      const targets = [
+        ...state.enemies.filter((e) => !e.dead && e.x > bullet.x),
+        ...(state.boss && state.boss.x > bullet.x ? [state.boss] : []),
+      ];
+      targets.sort(
+        (a, b) =>
+          Math.hypot(a.x - bullet.x, a.y + a.height / 2 - bullet.y) -
+          Math.hypot(b.x - bullet.x, b.y + b.height / 2 - bullet.y),
+      );
+      if (targets[0])
+        bullet.vy = clamp(
+          (targets[0].y + targets[0].height / 2 - bullet.y) * 0.045,
+          -3.5,
+          3.5,
+        );
+    }
+    bullet.x += bullet.vx * (bullet.enemy ? hostileSpeed : 1);
+    bullet.y += bullet.vy * (bullet.enemy ? hostileSpeed : 1);
     if (bullet.enemy) {
+      if (state.barrier && overlaps(bullet, state.barrier)) {
+        bullet.dead = true;
+        continue;
+      }
+      if (activePower(p, "reflect") && overlaps(bullet, inset(p, -12))) {
+        bullet.enemy = false;
+        bullet.vx = Math.abs(bullet.vx) + 5;
+        bullet.vy = 0;
+        bullet.pierce = 1;
+        continue;
+      }
       if (overlaps(bullet, inset(p, 26))) {
         bullet.dead = true;
         damage(state, random);
       }
     } else {
       const enemy = state.enemies.find(
-        (e) => !e.dead && overlaps(bullet, inset(e, 16)),
+        (e) =>
+          !e.dead &&
+          !bullet.targets?.includes(e) &&
+          overlaps(bullet, inset(e, 16)),
       );
       if (enemy) {
-        bullet.dead = true;
+        bullet.pierce = (bullet.pierce || 1) - 1;
+        bullet.dead = bullet.pierce <= 0;
+        (bullet.targets ||= []).push(enemy);
         defeatEnemy(state, enemy, random);
       }
       if (
         !bullet.dead &&
+        !bullet.hitBoss &&
         state.boss &&
         overlaps(bullet, inset(state.boss, 20))
       ) {
-        bullet.dead = true;
-        state.boss.hp--;
-        state.boss.flash = 5;
-        state.events.push("hit");
-        burst(state, bullet.x, bullet.y, "#94e4d6", random, 4);
-        if (state.boss.hp === 0) {
-          state.score += 100;
-          burst(
-            state,
-            state.boss.x + 80,
-            state.boss.y + 80,
-            "#f9dc95",
-            random,
-            30,
-          );
-          state.boss = null;
-          state.phase = "victory";
-          state.events.push("victory");
-        }
+        bullet.hitBoss = true;
+        bullet.pierce = (bullet.pierce || 1) - 1;
+        bullet.dead = bullet.pierce <= 0;
+        hitBoss(state, bullet.damage || 1, random);
       }
     }
     if (
@@ -356,6 +408,15 @@ export function stepGame(
   }
   for (const pickup of state.pickups) {
     pickup.x -= 2;
+    if (activePower(p, "magnet")) {
+      const dx = p.x + p.width / 2 - pickup.x - pickup.width / 2,
+        dy = p.y + p.height / 2 - pickup.y - pickup.height / 2;
+      const distance = Math.hypot(dx, dy);
+      if (distance < 500 && distance > 1) {
+        pickup.x += (dx / distance) * 8;
+        pickup.y += (dy / distance) * 8;
+      }
+    }
     if (state.phase === "playing" && overlaps(inset(p, 14), pickup)) {
       pickup.dead = true;
       collect(state, pickup, random);
@@ -392,5 +453,8 @@ export function gameSummary(state) {
     dual: Math.ceil(p.dual / 60),
     spread: Math.ceil(p.spread / 60),
     boss: state.bossSpawned,
+    power: p.power,
+    powerCooldown: Math.ceil(p.powerCooldown / 60),
+    powerTime: Math.ceil(p.powerTimer / 60),
   };
 }

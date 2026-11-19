@@ -82,6 +82,8 @@ La bienvenida v4 anima por separado el trineo, la cabeza y la mano de VictorIA. 
 
 ## Roadmap del videojuego
 
+Los [doce guardianes por área](docs/guardianes-navidad.md) incluyen 2.208 sprites, un poder y una celebración propios. El selector permite buscar por área y probar los movimientos. Los [atlas y prompts de ImageGen](design/characters/README.md) y el exportador `npm run sprites` quedan versionados.
+
 La [primera entrega de Pausa activa 2.0](docs/pausa-activa-2.md) ya incorpora pausa, controles consistentes, protección tras daño, esquiva, interfaz navideña y el piloto animado TecnoIA. El ranking se conserva como casual; la arena multijugador sigue pendiente.
 
 La propuesta [VictorIA: Operación Estrella](docs/roadmap-videojuego.md) organiza la evolución desde el arcade actual: estabilidad y UX, mini historia navideña, prototipo de arena 1 vs 1, equipos pequeños y piloto hasta 5 vs 5. Incluye criterios de salida, arquitectura propuesta y decisiones de capacidad y alojamiento pendientes. Es planificación; las funciones futuras todavía no están implementadas.

@@ -18,10 +18,12 @@ El concepto muestra cabeza y dos manos flotantes, sin torso ni brazos, casco azu
 
 ## Piloto jugable · Pausa activa 2.0
 
+La ampliación a doce guardianes incorpora ahora también [184 sprites de TecnoIA](../../../public/characters/tecnoia/sprites-v1.webp), con [metadatos](../../../public/characters/tecnoia/sprites-v1.json) y una celebración de 48 fotogramas. La [guía del elenco](../../../docs/guardianes-navidad.md) documenta la versión actual; el texto siguiente conserva el origen del piloto.
+
 El [atlas transparente](../../../public/characters/tecnoia/rig-navidad-v1.png) contiene cabeza completa, mano con llave y mano abierta. Fue preparado con ImageGen integrado a partir del concepto aprobado, conservando el personaje sin cuerpo ni estrellas. Su prompt está en [prompt-rig-v1.md](prompt-rig-v1.md).
 
 El Canvas combina las piezas con centros de giro y transformaciones independientes para siete estados: reposo, movimiento, disparo, esquiva, daño, victoria y derrota. Los rectángulos de origen, con margen y sin cortar antenas ni dedos, están en `src/game/characters.js`; las transformaciones están en `rigPose` y `src/game/render.js`. El atlas se usa sin alterar su alfa y sin generar manualmente cada fotograma. La animación de habilidad propia queda pendiente de implementar esa mecánica.
 
-El concepto original se conserva como referencia. El personaje piloto es seleccionable sin coste en [Pausa activa 2.0](../../../docs/pausa-activa-2.md); los otros once personajes se producirán por tandas, siguiendo el [catálogo por área](../../../docs/personajes-por-area.md) y el [roadmap](../../../docs/roadmap-videojuego.md).
+El concepto original se conserva como referencia. TecnoIA y los otros once guardianes son seleccionables sin coste; el [catálogo por área](../../../docs/personajes-por-area.md) y el [roadmap](../../../docs/roadmap-videojuego.md) reflejan la ampliación completa del arcade.
 
 El prompt final de edición está en [prompt-final.md](prompt-final.md).

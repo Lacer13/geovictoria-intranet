@@ -54,7 +54,7 @@ export function useGameInput(input, mode, onPause, onResume) {
         !event.repeat
       ) {
         event.preventDefault();
-        input.current.dash = true;
+        input.current.power = true;
       }
     };
     const keyup = (event) => {

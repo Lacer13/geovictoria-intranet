@@ -1,5 +1,8 @@
 import { WIDTH, HEIGHT } from "./simulation.js";
 import { characterPose, rigPose, TECNOIA_PARTS } from "./characters.js";
+import { drawRig } from "./rig.js";
+import { spriteFrame } from "./animation.js";
+import { activePower } from "./powers.js";
 
 function rounded(ctx, x, y, width, height, radius, color) {
   ctx.fillStyle = color;
@@ -35,34 +38,42 @@ export function drawCharacter(
   pose = "idle",
   seconds = 0,
   reduced = false,
+  { sprite = null, lean = 0 } = {},
 ) {
   ctx.save();
   ctx.translate(x, y);
   const rig = rigPose(pose, seconds, reduced);
   ctx.globalAlpha *= rig.alpha;
   if (character.type === "rig") {
-    ctx.translate(0, (rig.bob * size) / 1100);
-    ctx.rotate(rig.tilt);
-    ctx.scale((size / 1100) * rig.stretch, size / 1100);
-    if (image?.naturalWidth) {
-      const part = (key, px, py, width, height, angle) => {
-        ctx.save();
-        ctx.translate(px, py);
-        ctx.rotate(angle);
-        ctx.drawImage(
-          image,
-          ...TECNOIA_PARTS[key],
-          -width / 2,
-          -height / 2,
-          width,
-          height,
-        );
-        ctx.restore();
-      };
-      part("head", 0, -110, 820, 754, rig.head);
-      part("tool", -350, 240 + rig.toolY, 310, 488, rig.tool);
-      part("hand", 350, 250 + rig.handY, 400, 420, rig.hand);
-    } else fallbackRobot(ctx, 1000);
+    ctx.globalAlpha = 1;
+    ctx.rotate(lean);
+    if (sprite?.naturalWidth) {
+      const frame = spriteFrame(pose, seconds, reduced);
+      ctx.drawImage(
+        sprite,
+        frame.x,
+        frame.y,
+        frame.width,
+        frame.height,
+        -size / 2,
+        -size / 2,
+        size,
+        size,
+      );
+    } else if (image?.naturalWidth)
+      drawRig(
+        ctx,
+        image,
+        character.parts || TECNOIA_PARTS,
+        character,
+        0,
+        0,
+        size * 0.94,
+        pose,
+        seconds,
+        reduced,
+      );
+    else fallbackRobot(ctx, size);
   } else if (image?.naturalWidth) {
     ctx.translate(0, reduced ? 0 : Math.sin(seconds * 5) * size * 0.025);
     ctx.rotate(rig.tilt);
@@ -225,7 +236,7 @@ export function drawGame(
   state,
   images,
   character,
-  { reduced = false, seconds = state.tick / 60 } = {},
+  { reduced = false, seconds = state.tick / 60, actor = null } = {},
 ) {
   ctx.save();
   background(ctx, state.tick, reduced);
@@ -282,6 +293,49 @@ export function drawGame(
   const p = state.player;
   const centerX = p.x + p.width / 2,
     centerY = p.y + p.height / 2;
+  if (state.barrier) {
+    const b = state.barrier;
+    rounded(ctx, b.x, b.y, b.width, b.height, 8, "#f1dc9bb0");
+    ctx.strokeStyle = "#fff4cc";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(b.x - 4, b.y - 3, b.width + 8, b.height + 6);
+  }
+  if (p.powerTimer > 0 && p.power !== "dash") {
+    ctx.save();
+    ctx.strokeStyle = character.accent || "#e6d0ff";
+    ctx.lineWidth = 3;
+    const age = state.tick - p.activatedAt;
+    let radius = 70;
+    if (p.power === "pulse" || p.power === "calm")
+      radius = reduced
+        ? 90
+        : Math.min(p.power === "pulse" ? 420 : 300, age * 12);
+    if (p.power === "recover")
+      radius = 65 + (reduced ? 0 : Math.sin(age / 7) * 8);
+    if (p.power !== "barrier") {
+      ctx.globalAlpha = 0.65;
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+    if (activePower(p, "reflect")) {
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, 77, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+    if (activePower(p, "magnet"))
+      for (const gift of state.pickups) {
+        if (Math.hypot(gift.x - centerX, gift.y - centerY) < 500) {
+          ctx.setLineDash([5, 9]);
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(centerX, centerY);
+          ctx.lineTo(gift.x + 18, gift.y + 18);
+          ctx.stroke();
+        }
+      }
+    ctx.restore();
+  }
   if (p.shield || p.grace || p.dash) {
     ctx.strokeStyle = p.shield ? "#8ef0e1" : "#fff1c0";
     ctx.lineWidth = p.dash ? 5 : 2;
@@ -304,9 +358,10 @@ export function drawGame(
     centerX,
     centerY,
     p.width,
-    characterPose(p, state.phase),
-    seconds,
+    actor?.pose || characterPose(p, state.phase),
+    actor?.elapsed ?? seconds,
     reduced,
+    { sprite: images[character.sprite], lean: actor?.lean || 0 },
   );
   if (!reduced)
     for (const particle of state.particles) {

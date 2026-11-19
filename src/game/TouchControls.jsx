@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
-import { Crosshair, Move, Zap } from "lucide-react";
+import { Crosshair, Move } from "lucide-react";
 
-export default function TouchControls({ input, dash, large }) {
+export default function TouchControls({ input, power, cooldown, large }) {
   const active = useRef(null);
   const [stick, setStick] = useState({ x: 0, y: 0 });
   const move = (event) => {
@@ -50,19 +50,21 @@ export default function TouchControls({ input, dash, large }) {
           type="button"
           className="arcade-dash"
           aria-label={
-            dash ? `Esquiva recargando, ${dash} segundos` : "Esquivar"
+            cooldown
+              ? `${power.name} recargando, ${cooldown} segundos`
+              : `Usar ${power.name}`
           }
-          disabled={dash > 0}
+          disabled={cooldown > 0}
           onPointerDown={(event) => {
             event.preventDefault();
-            input.current.dash = true;
+            input.current.power = true;
           }}
           onClick={(event) => {
-            if (event.detail === 0) input.current.dash = true;
+            if (event.detail === 0) input.current.power = true;
           }}
         >
-          <Zap size={22} />
-          {dash ? `${dash}s` : "Esquiva"}
+          <span>{power.name}</span>
+          <small>{cooldown ? `${cooldown}s` : "Listo"}</small>
         </button>
         <button
           type="button"

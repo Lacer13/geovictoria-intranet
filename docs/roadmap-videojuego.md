@@ -8,6 +8,8 @@ Este documento propone el alcance. Las funciones descritas como próximas todav�
 
 **Avance del 18 de noviembre:** la primera entrega jugable de la etapa 1 incorpora controles consistentes, pausa, colisiones y protección tras daño, HUD, audio configurable y el piloto TecnoIA con siete estados de animación. La [ficha de Pausa activa 2.0](pausa-activa-2.md) distingue lo implementado de la validación con dispositivos reales y las etapas pendientes. El mapa/prototipo de arena de la etapa 0 y el multijugador siguen pendientes.
 
+**Ampliación del elenco:** a petición del usuario se adelantaron los doce personajes por área, con poderes propios, celebraciones distintas y hojas de sprites reales. La [guía de guardianes](guardianes-navidad.md) recoge la entrega y sus límites; el [catálogo actualizado](personajes-por-area.md) sustituye las fichas conceptuales. No se ha habilitado multijugador ni validado el equilibrio de esos poderes para competición.
+
 ## 1. Punto de partida verificado antes de Pausa activa 2.0
 
 La revisión inicial encontró un arcade de disparos lateral en Canvas, integrado en React, con movimiento por teclado y joystick táctil, tres vidas, enemigos, mejoras temporales, un jefe, dos personajes, monedas locales y envío del puntaje a Firestore. La tabla conserva los hallazgos que motivaron la etapa 1; el estado posterior está en la ficha de la entrega.
@@ -37,7 +39,7 @@ La historia se cuenta con una introducción breve que pueda saltarse, señales d
 
 El elenco objetivo incorpora un personaje por cada una de las doce categorías del directorio, según la elección del usuario. Todos conservarán la identidad de cabeza y manos flotantes, con nombres, emblemas, accesorios y animaciones reconocibles. Las primeras versiones comparten el kit de juego; las habilidades propias se prueban por roles al introducir equipos. El [catálogo de personajes por área](personajes-por-area.md) contiene las doce propuestas, el proceso de arte/animación y los criterios de aceptación.
 
-Se producirán primero un personaje completo y después tres para validar la estructura compartida. El selector se ampliará por tandas hasta representar las doce categorías en la etapa 5 vs 5. Doce personajes disponibles no significa doce jugadores simultáneos: la capacidad objetivo sigue siendo diez.
+El piloto TecnoIA permitió validar la plantilla; por petición del usuario el selector individual ya se amplió a las doce categorías. Para la arena se deberán adaptar y probar sus perspectivas, efectos y habilidades. Doce personajes disponibles no significa doce jugadores simultáneos: la capacidad objetivo sigue siendo diez.
 
 ### Una primera campaña pequeña
 
@@ -114,7 +116,7 @@ flowchart LR
 - Puntos de control apropiados para sesiones breves.
 - Recompensas cosméticas, pantalla de resultados y motivo para volver a jugar.
 - Separar el progreso casual local de cualquier clasificación competitiva verificada.
-- Completar una primera tanda de tres personajes y validar el selector y la reutilización de animaciones.
+- Integrar los personajes ya producidos en las misiones y validar su progresión. El elenco del arcade se adelantó en la entrega de guardianes.
 
 **Criterio de salida:** al menos ocho de diez personas del piloto pueden iniciar la primera misión sin ayuda. Se recoge su opinión sobre controles, claridad y ganas de repetir antes de ampliar contenido.
 
