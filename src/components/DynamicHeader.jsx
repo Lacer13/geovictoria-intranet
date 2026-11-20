@@ -8,10 +8,8 @@ import {
   ChevronRight,
   Command,
   Menu,
-  Moon,
   Search,
-  Snowflake,
-  Sun,
+  SlidersHorizontal,
   Users,
 } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -20,6 +18,7 @@ import { usePortal } from "../context/portal";
 import { buildSearchIndex, portalPages, searchIndex } from "../lib/search";
 import { isPublicationRead } from "../lib/news";
 import { articles } from "../data/knowledge";
+import AppearanceSettings from "./AppearanceSettings";
 
 const resultIcons = {
   Secciones: LayoutGrid,
@@ -36,29 +35,32 @@ const routeNames = {
 export default function DynamicHeader({
   isLightMode,
   toggleTheme,
-  festive,
-  toggleFestive,
+  atmosphere,
+  setAtmosphere,
   onMenu,
   menuOpen,
 }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [appearanceOpen, setAppearanceOpen] = useState(false);
   const [term, setTerm] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   const { directory, news, unreadNews, readNews, markNewsRead } = usePortal();
   const closeSearch = useCallback(() => setSearchOpen(false), []);
   const closeNotifications = useCallback(() => setNotificationsOpen(false), []);
+  const closeAppearance = useCallback(() => setAppearanceOpen(false), []);
   useEffect(() => {
     const handleKey = (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
+        if (menuOpen || appearanceOpen || notificationsOpen) return;
         setSearchOpen((v) => !v);
       }
     };
     document.addEventListener("keydown", handleKey);
     return () => document.removeEventListener("keydown", handleKey);
-  }, []);
+  }, [menuOpen, appearanceOpen, notificationsOpen]);
   const index = buildSearchIndex({
     articles,
     directory: directory.data,
@@ -80,15 +82,22 @@ export default function DynamicHeader({
       <header className="topbar">
         <div className="breadcrumb">
           <button
-            className="icon-button mobile-only"
+            className="icon-button navigation-trigger"
             onClick={onMenu}
-            aria-label="Abrir menú"
+            aria-label="Abrir menú de navegación"
             aria-expanded={menuOpen}
             aria-controls="main-navigation"
           >
             <Menu size={21} />
+            <span>Menú</span>
           </button>
-          <span className="breadcrumb-home">Nuestro espacio</span>
+          <Link
+            to="/"
+            className="breadcrumb-home header-brand"
+            aria-label="GeoVictoria · Inicio"
+          >
+            <img src="/Logo geovictoria.png" alt="" />
+          </Link>
           <ChevronRight size={13} />
           <strong>
             {routeNames[location.pathname] ||
@@ -106,37 +115,19 @@ export default function DynamicHeader({
             onClick={() => setSearchOpen(true)}
           >
             <Search size={16} />
-            <span>¿Qué estás buscando?</span>
+            <span>Buscar en el portal</span>
             <kbd>
               <Command size={11} /> K
             </kbd>
           </button>
           <span className="topbar-divider" />
           <button
-            className={`icon-button festive-toggle ${festive ? "enabled" : ""}`}
-            onClick={toggleFestive}
-            aria-label={
-              festive
-                ? "Pausar animaciones navideñas"
-                : "Activar animaciones navideñas"
-            }
-            aria-pressed={festive}
-            title={
-              festive
-                ? "Pausar animaciones navideñas"
-                : "Activar animaciones navideñas"
-            }
+            className="icon-button appearance-trigger"
+            onClick={() => setAppearanceOpen(true)}
+            aria-label="Ajustar vista y efectos"
+            title="Ajustar vista y efectos"
           >
-            <Snowflake size={18} />
-          </button>
-          <button
-            className="icon-button theme-button"
-            onClick={toggleTheme}
-            aria-label={
-              isLightMode ? "Activar modo oscuro" : "Activar modo claro"
-            }
-          >
-            {isLightMode ? <Moon size={18} /> : <Sun size={18} />}
+            <SlidersHorizontal size={19} />
           </button>
           <button
             className="icon-button notification-button"
@@ -150,14 +141,17 @@ export default function DynamicHeader({
               </span>
             )}
           </button>
-          <span
-            className="avatar header-avatar"
-            aria-label="Equipo GeoVictoria"
-          >
-            GV
-          </span>
         </div>
       </header>
+      {appearanceOpen && (
+        <AppearanceSettings
+          isLightMode={isLightMode}
+          toggleTheme={toggleTheme}
+          atmosphere={atmosphere}
+          setAtmosphere={setAtmosphere}
+          onClose={closeAppearance}
+        />
+      )}
       {searchOpen && (
         <Modal
           title="Encuentra lo que necesitas"

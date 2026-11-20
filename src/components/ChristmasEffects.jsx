@@ -1,15 +1,9 @@
 import { useEffect } from "react";
+import { Snowflake } from "lucide-react";
+import { snowPattern } from "../lib/appearance";
 
-const flakes = Array.from({ length: 42 }, (_, i) => ({
-  left: (i * 37 + 9) % 101,
-  delay: -((i * 7) % 29),
-  duration: 17 + ((i * 3) % 19),
-  size: i % 4 === 0 ? 14 : 3 + (i % 4),
-  drift: (i % 2 ? 1 : -1) * (22 + (i % 50)),
-  symbol: i % 4 === 0,
-}));
-
-export default function ChristmasEffects({ enabled }) {
+export default function ChristmasEffects({ enabled, atmosphere = "soft" }) {
+  const flakes = snowPattern(atmosphere);
   useEffect(() => {
     document.body.classList.toggle("festive-paused", !enabled);
     return () => document.body.classList.remove("festive-paused");
@@ -24,26 +18,26 @@ export default function ChristmasEffects({ enabled }) {
             stroke="currentColor"
             strokeWidth=".8"
           />
-          {Array.from({ length: 25 }, (_, i) => (
+          {Array.from({ length: 17 }, (_, i) => (
             <g
               key={i}
               className="garland-bulb seasonal-motion"
               style={{ "--light-delay": `${-(i % 7) * 0.8}s` }}
             >
               <g
-                transform={`translate(${i * 50}, ${i % 4 === 0 ? 5 : i % 2 === 0 ? 9 : 16})`}
+                transform={`translate(${i * 75}, ${i % 4 === 0 ? 5 : i % 2 === 0 ? 9 : 16})`}
                 fill="#287449"
               >
                 <path d="M-19-3Q-9-9 0 0Q-12 2-19-3ZM-10-7Q0-9 7 1Q-5 0-10-7ZM3-6Q14-5 19 3Q7 4 3-6Z" />
                 <circle cx="0" cy="1" r="2.6" fill="#d91f26" />
               </g>
               <path
-                d={`M${i * 50} ${i % 4 === 0 ? 5 : i % 2 === 0 ? 9 : 16}v5`}
+                d={`M${i * 75} ${i % 4 === 0 ? 5 : i % 2 === 0 ? 9 : 16}v5`}
                 stroke="currentColor"
                 strokeWidth="1"
               />
               <ellipse
-                cx={i * 50}
+                cx={i * 75}
                 cy={(i % 4 === 0 ? 5 : i % 2 === 0 ? 9 : 16) + 6}
                 rx="2.7"
                 ry="4"
@@ -57,7 +51,7 @@ export default function ChristmasEffects({ enabled }) {
         {flakes.map((f, i) => (
           <span
             key={i}
-            className={`snowflake seasonal-motion ${f.symbol ? "snow-crystal" : "snow-dot"}`}
+            className="snowflake seasonal-motion"
             style={{
               "--x": `${f.left}%`,
               "--delay": `${f.delay}s`,
@@ -66,7 +60,7 @@ export default function ChristmasEffects({ enabled }) {
               "--drift": `${f.drift}px`,
             }}
           >
-            {f.symbol ? "❄" : ""}
+            <Snowflake size={f.size} strokeWidth={1.35} />
           </span>
         ))}
       </div>

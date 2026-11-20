@@ -4184,17 +4184,6 @@ select.input-field {
   will-change: transform;
   opacity: 0;
 }
-.snow-dot {
-  background: #ffffff;
-  border-radius: 100%;
-  box-shadow: 0 1px 3px #66857566;
-}
-.snow-crystal {
-  font-size: var(--size);
-  line-height: 1;
-  color: #ffffff;
-  text-shadow: 0 1px 3px #66857599;
-}
 .festive-toggle.enabled {
   color: var(--forest);
   background: var(--forest-bg);

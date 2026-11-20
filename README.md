@@ -25,9 +25,9 @@ npm run preview
 - Novedades con página propia, filtros y contador de publicaciones sin leer. Las lecturas se guardan por navegador; una edición de contenido vuelve a marcar la publicación como pendiente. No se afirma sincronización entre cuentas ni dispositivos.
 - Administración permite crear y editar noticias/contactos sin cambiar su identificador ni la fecha original de una publicación. Las transacciones detectan ediciones simultáneas y el editor avisa antes de descartar cambios.
 - Favicon SVG cuadrado con el símbolo GeoVictoria, sin el texto del logo completo. La miniatura de VictorIA Clásica utiliza una URL CSS válida para el nombre de archivo con espacios.
-- Navegación móvil con control de foco; formularios etiquetados y acceso por teclado.
+- Navegación desde **Menú** tanto en computadora como en móvil: el panel se abre sobre la página y deja todo el ancho libre al cerrarse. Escape, Tab y Shift+Tab permiten recorrer y cerrar la navegación; Administración permanece accesible al pie. Formularios etiquetados y acceso por teclado.
 - Modos claro y oscuro, favoritos y preferencias guardados en el navegador. La intranet funciona aunque el almacenamiento de preferencias esté bloqueado.
-- Copos de nieve, luces intermitentes, árbol y destellos animados. El botón del copo permite pausar los efectos. Se respeta `prefers-reduced-motion` y se reducen las partículas en móviles.
+- **Ajustar vista y efectos** agrupa tema claro/oscuro y ambiente Suave, Festivo o Decoración quieta. La nevada utiliza copos SVG de seis brazos, con menos densidad por defecto y en móviles. Se conserva una pausa anterior y se respeta `prefers-reduced-motion`. [Interfaz y comprobaciones](docs/ui-navegacion-nieve.md).
 - Cuenta regresiva y calendario con fechas de Lima. El evento descargable `.ics` corresponde al 25 de diciembre; no se inventan actividades corporativas.
 - Ideas personales para compartir y un mural navideño con saludos en tiempo real, firma o publicación anónima, destinatario opcional y fecha. Administración puede ocultar y restaurar mensajes. [Funcionamiento del mural](docs/mural-navidad.md).
 - El QR corresponde al origen actual de la intranet, no a un dominio fijo de ejemplo.
