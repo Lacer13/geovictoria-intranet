@@ -1069,3 +1069,48 @@
     font-size: 12px !important;
   }
 }
+.game-mode-tabs, .campaign-mode {
+  display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 20px;
+}
+.game-mode-tabs button, .campaign-mode button {
+  font: inherit; border: 1px solid #50786c; background: #102f2c; color: #d2e4dd; border-radius: 12px; padding: 12px 18px; cursor: pointer; min-height: 44px;
+}
+.game-mode-tabs button[aria-pressed="true"], .campaign-mode button[aria-pressed="true"] { background: #e8d49c; color: #172e29; border-color: #e8d49c; }
+.game-page:has(.arcade-session) .game-mode-tabs { display: none; }
+.campaign-selection { margin-bottom: 28px; padding: 22px; border: 1px solid #355c4e; border-radius: 20px; background: #0a2824; }
+.campaign-selection h2 { margin: 0 0 8px; color: #f4e6c3; font-size: clamp(22px,3vw,30px); }
+.campaign-selection p { color: #b6cfc2; line-height: 1.6; }
+.campaign-missions { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin-top: 20px; }
+.campaign-missions button { text-align: left; padding: 18px; background: #153a31; border: 1px solid #42695a; border-radius: 16px; color: #e7eee8; display: flex; flex-direction: column; gap: 8px; cursor: pointer; }
+.campaign-missions button[aria-pressed="true"] { border: 2px solid var(--mission-color); padding: 17px; background: #204b3f; }
+.campaign-missions button:disabled { opacity: .55; cursor: default; }
+.campaign-number { font-size: 30px; font-weight: 800; color: var(--mission-color); }
+.campaign-missions strong { font-size: 18px; }
+.campaign-missions small { color: #c4d7c9; }
+.campaign-brief { padding: 12px 16px; border-left: 3px solid #e4c681; margin-bottom: 0; background: #193d31; }
+.arena-online { color: #e8eee8; }
+.arena-intro { max-width: 760px; padding: 20px 0; }
+.arena-intro h1 { font-size: clamp(32px,5vw,52px); margin: 8px 0 12px; }
+.arena-intro p { font-size: 18px; line-height: 1.7; color: #bcd3c9; }
+.arena-rules { display: flex; flex-wrap: wrap; gap: 12px; color: #e6cb8a; }
+.arena-lobby-form, .arena-lobby-room { max-width: 720px; margin: 20px 0; padding: 24px; background: #12382f; border: 1px solid #416858; border-radius: 20px; display: grid; gap: 20px; }
+.arena-lobby-form label { display: grid; gap: 8px; }
+.arena-lobby-form input, .arena-lobby-form select { width: 100%; box-sizing: border-box; min-height: 48px; background: #09281f; border: 1px solid #577c68; color: #f1f2e9; border-radius: 10px; padding: 10px 12px; font: inherit; }
+.arena-join { display: flex; align-items: end; gap: 12px; }.arena-join label { flex: 1; min-width: 0; }
+.arena-code { display: block; font-size: clamp(26px,6vw,40px); letter-spacing: .14em; color: #f1d794; margin-top: 8px; }
+.arena-roster { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.arena-roster > div { display: grid; gap: 8px; padding: 20px 14px; border: 1px solid #5d8171; border-radius: 12px; }.arena-roster span { color: #bad3c2; }
+.arena-hud { justify-content: space-between; }.arena-hud strong { max-width: 30%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }.arena-hud strong:first-child { color: #9ad2ef; }.arena-hud strong:last-of-type { color: #f4cc8a; }
+.arena-assists { display: flex; flex-wrap: wrap; gap: 14px; padding: 14px; font-size: 13px; color: #bed1c8; }.arena-assists label { display: flex; align-items: center; gap: 6px; }.arena-assists input { accent-color: #eccd8b; }
+.arena-end { grid-column: 1 / -1; padding: 20px; text-align: center; background: #143c32; }.arena-end h2 { color: #f3db9e; }.arena-end button { margin: 8px; }
+.arena-online button:focus-visible, .campaign-selection button:focus-visible, .game-mode-tabs button:focus-visible { outline: 3px solid #9cd9e9; outline-offset: 3px; }
+@media (max-width: 650px) { .campaign-missions { grid-template-columns: 1fr; }.campaign-selection { padding: 16px; }.campaign-missions button { gap: 6px; }.campaign-number { font-size: 24px; }.arena-lobby-form, .arena-lobby-room { padding: 18px; }.game-mode-tabs button { flex: 1; padding: 10px; }.arena-hud { gap: 6px; font-size: 12px; } }
+.arena-session .arena-hud { display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr) auto; gap: 12px; }
+.arena-session .arena-hud strong { max-width: none; }
+.arena-session .arena-hud strong:last-of-type { text-align: right; }
+.arena-session .arcade-status { gap: 10px; flex-wrap: wrap; }
+.arena-option { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; white-space: nowrap; }
+.arena-option input { accent-color: #e6cb8a; }
+.arena-session canvas:focus-visible { outline: 2px solid #9cd9e9; outline-offset: -2px; }
+.game-page .game-page-content { flex-direction: column; align-items: center; justify-content: flex-start; }
+.game-mode-tabs { width: 100%; max-width: 1120px; box-sizing: border-box; }

@@ -5,6 +5,7 @@ import { spriteFrame } from "./animation.js";
 import { activePower } from "./powers.js";
 import { characterAnimation } from "./characterAnimation.js";
 import { atlasFrame, drawAtlasFrame } from "./spriteAtlas.js";
+import { missionById } from "./missions.js";
 
 function rounded(ctx, x, y, width, height, radius, color) {
   ctx.fillStyle = color;
@@ -169,9 +170,9 @@ function tree(ctx, x, y, size, lights) {
     }
 }
 
-function background(ctx, tick, reduced) {
+function background(ctx, tick, reduced, missionId) {
   const sky = ctx.createLinearGradient(0, 0, 0, HEIGHT);
-  sky.addColorStop(0, "#061c25");
+  sky.addColorStop(0, missionById(missionId)?.sky || "#061c25");
   sky.addColorStop(0.65, "#153d3c");
   sky.addColorStop(1, "#88b8ad");
   ctx.fillStyle = sky;
@@ -240,6 +241,10 @@ function drawEnemy(ctx, entity, image, boss = false) {
   ctx.save();
   ctx.translate(entity.x + entity.width / 2, entity.y + entity.height / 2);
   if (entity.flash) ctx.filter = "brightness(1.8)";
+  if (entity.pattern === "shooter" && entity.shot <= 30) {
+    ctx.strokeStyle = "#f2b286"; ctx.lineWidth = 3; ctx.beginPath();
+    ctx.arc(0, 0, entity.width * 0.58, 0, Math.PI * 2); ctx.stroke();
+  }
   if (image?.naturalWidth) {
     if (!boss) ctx.scale(-1, 1);
     const source = boss
@@ -263,6 +268,7 @@ const PICKUPS = {
   dual: ["II", "#946514"],
   spread: ["III", "#76529a"],
   bomb: ["B", "#a43a45"],
+  beacon: ["R", "#277eaa"],
 };
 
 export function drawGame(
@@ -273,7 +279,7 @@ export function drawGame(
   { reduced = false, seconds = state.tick / 60, actor = null, animation = null, presentation = null } = {},
 ) {
   ctx.save();
-  background(ctx, state.tick, reduced);
+  background(ctx, state.tick, reduced, state.missionId);
   if (!reduced && state.shake > 0.5)
     ctx.translate(
       Math.sin(state.tick * 2.3) * state.shake,

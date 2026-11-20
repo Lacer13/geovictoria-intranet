@@ -2,6 +2,8 @@
 
 Propuesta de producto y desarrollo · 18 de noviembre de 2026.
 
+**Prioridad actualizada · 20 de noviembre:** el usuario adelanta niveles y arena en línea 1 contra 1 antes de continuar las animaciones. Esta rama incorpora una campaña de tres misiones con objetivos y avance guardado, y un servidor de arena con salas privadas, resultado y revancha. [Entrega y comprobaciones](campana-arena-1v1.md). La arena está probada con dos clientes locales; elegir/publicar su alojamiento y comprobar dos dispositivos por Internet sigue pendiente. CierreIA queda en espera.
+
 **Objetivo:** convertir la pausa activa en un juego breve, agradable de controlar y con identidad propia; después incorporar una arena multijugador que avance desde 1 contra 1 hasta 5 contra 5.
 
 Este documento propone el alcance. Las funciones descritas como próximas todavía no están implementadas. Cada etapa se valida con una versión jugable antes de ampliar el alcance; las fechas y el presupuesto se estimarán con los resultados del primer prototipo.
@@ -186,8 +188,8 @@ Las decisiones que más cambian el alcance son: priorizar computadora o móvil, 
 
 ## 7. Primera entrega recomendada
 
-**Prioridad posterior a la ampliación del elenco:** mejorar la actuación y el disparo de los guardianes antes de ampliar contenido. El [roadmap de animación v2](roadmap-animacion-guardianes.md) registra TecnoIA integrado en main y publicado en producción: 203 sprites, emisor sincronizado y celebración completa. El usuario aceptó disparo y controles en su teléfono y se comprobó la versión publicada. El piloto de TecnoIA y la entrega de ConectIA están cerrados y publicados, con aceptación móvil. Continúa CierreIA, manteniendo un guardián por entrega. Esto no completa la prueba de ocho de diez personas de la etapa 1 ni las etapas de historia o multijugador.
+**Prioridad vigente desde el 20 de noviembre:** ampliar la aventura y preparar el piloto en línea antes de producir nuevas animaciones. El [roadmap de animación v2](roadmap-animacion-guardianes.md) conserva TecnoIA y ConectIA cerrados y publicados; CierreIA está en espera. La campaña y el servidor 1 contra 1 tienen una entrega revisable, sin declarar completas la prueba de ocho de diez personas ni las pruebas de Internet/equipos del roadmap.
 
-Empezar por **Pausa activa 2.0**: controles consistentes, pausa, colisiones y daño justos, HUD claro, sonido configurable y estructura preparada para niveles. Después producir la primera misión del bosque como muestra de la historia. Con esa base probada, abrir el prototipo 1 vs 1 y medirlo antes de ampliar equipos.
+La base de **Pausa activa 2.0** se conserva. La entrega actual añade tres misiones y una arena de dos clientes, todavía pendientes de piloto humano de campaña y publicación del servidor en Internet. Elegir el alojamiento y validar ese 1 contra 1 antes de ampliar a equipos o retomar nuevas animaciones.
 
 Cada entrega futura tendrá su cambio revisable en GitHub, comprobaciones correspondientes y publicación de la versión que se haya validado. El roadmap no contrata infraestructura. Las entregas jugables implementadas se registran en su ficha correspondiente.

@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-20",
+  "channel": "aventura-arena",
+  "url": "https://geovictoria-intranet-peru--aventura-arena-jzta4odk.web.app/juego",
+  "hostingVersion": "ec1a6c7bcd7505c9",
+  "expiresAt": "2026-11-27T14:35:38.249919224Z",
+  "productionDeployed": false,
+  "arenaPublicServer": "pending hosting choice",
+  "currentProjectBillingEnabled": false,
+  "testsPassed": 101,
+  "resources": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "bytes": 1546,
+      "sha256": "96f59891d1f99cefe05331442bb9dbbd5e762037399bf49804c16f1acc1e8665"
+    },
+    {
+      "path": "assets/GamePage-CkARHRxK.css",
+      "status": 200,
+      "bytes": 20613,
+      "sha256": "a072386c949f65299d4aaa179818fd8f16cf22d903c5e377084e289be7345271"
+    },
+    {
+      "path": "assets/GamePage-XPfKdScM.js",
+      "status": 200,
+      "bytes": 84579,
+      "sha256": "7228c3a4bc0c5fd40f5e03e9c29ab2ecf37277cb53c7df0f67d24779aacc2511"
+    }
+  ]
+}

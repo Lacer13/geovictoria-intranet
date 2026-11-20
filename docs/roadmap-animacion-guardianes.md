@@ -1,6 +1,6 @@
 # Roadmap de animación · Guardianes con gestos y disparos claros
 
-18 de noviembre de 2026 · Actualizado el 19 de noviembre de 2026. **Estado: TecnoIA y ConectIA v2 cerrados, integrados en main y publicados en producción, con aceptación móvil del usuario. Siguiente personaje: CierreIA.**
+18 de noviembre de 2026 · Actualizado el 20 de noviembre de 2026. **Estado: TecnoIA y ConectIA v2 cerrados y publicados. El usuario pausa nuevas animaciones para priorizar niveles y arena en línea 1 contra 1. CierreIA queda en espera.**
 
 ## Objetivo
 
@@ -208,7 +208,7 @@ Los recursos se publicarán como v2 junto a la v1 existente, con metadatos expl�
 
 El piloto definirá la cantidad final de poses, fotogramas, cuadrícula, tamaño de celdas y presupuesto de carga, partiendo del objetivo de celebración completa de la sección 3.E. No hay un máximo de 4×4 o 7×7; se usarán hojas mayores o varias páginas si la secuencia lo necesita y conserva la definición y el rendimiento. Se medirá el peso de las variantes y su legibilidad antes de repetirlas. No se prometen plazos para los doce personajes sin conocer ese resultado.
 
-**Siguiente acción:** preparar las poses propias de **CierreIA**, conservando su maletín y personalidad de Enterprise. Diferenciar el disparo normal de Gran cierre y mantener sus reglas de daño/cadencia. Reutilizar eventos, anclajes y recuperación de los dos personajes terminados, con celebración propia completa. TecnoIA y ConectIA están comprobados en [producción](https://geovictoria-intranet-peru.web.app/juego); las aceptaciones móviles no se extienden automáticamente al siguiente personaje. Historia y multijugador continúan en el [roadmap general](roadmap-videojuego.md).
+**Siguiente acción autorizada:** avanzar la [campaña y arena 1 contra 1](campana-arena-1v1.md), según el cambio de prioridad del usuario del 20 de noviembre. Al reanudar animaciones, continuará CierreIA: maletín e identidad de Enterprise conservados, disparo normal distinto de Gran cierre y celebración propia. TecnoIA y ConectIA permanecen en producción.
 
 ## 8. Primer hito · Poses y extracción (registro histórico)
 

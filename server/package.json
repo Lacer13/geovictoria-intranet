@@ -1,0 +1,7 @@
+{
+  "name": "geovictoria-arena",
+  "private": true,
+  "type": "module",
+  "scripts": { "start": "node server/arena.mjs" },
+  "dependencies": { "ws": "8.23.0" }
+}

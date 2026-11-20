@@ -82,6 +82,8 @@ La bienvenida v4 anima por separado el trineo, la cabeza y la mano de VictorIA. 
 
 ## Roadmap del videojuego
 
+**Prioridad del 20 de noviembre:** [campaña de tres niveles y arena en línea 1 contra 1](docs/campana-arena-1v1.md) antes de nuevas animaciones. La rama incorpora selección de misión, avance local, enemigos con patrones y jefe final, además de salas privadas y servidor de partidas. La arena está comprobada con dos clientes locales; su alojamiento público y prueba entre dispositivos por Internet están pendientes. `npm run arena:server` inicia el servidor de desarrollo. CierreIA queda en espera.
+
 El [roadmap de animación por personaje](docs/roadmap-animacion-guardianes.md) avanza de uno en uno. **[TecnoIA y ConectIA v2 ya están en producción](https://geovictoria-intranet-peru.web.app/juego)**: 203 y 221 sprites, emisores visibles, disparos sincronizados y celebraciones propias completas. El usuario aceptó claridad y respuesta en su teléfono para ambos. [ConectIA](design/characters/conectia/README-v2.md) conserva la reacción de cada descarga al activar o terminar Ráfaga y celebra con baliza y pulgar arriba durante 3 segundos (`npm run sprites:conectia-game`). Los PR #1 y #2 están integrados en main; fuentes, prompts, estudios, capturas y registros de restauración quedan versionados. El siguiente personaje es CierreIA; los otros diez guardianes conservan v1.
 
 Los [doce guardianes por área](docs/guardianes-navidad.md) incluyen 2.208 sprites, un poder y una celebración propios. El selector permite buscar por área y probar los movimientos. Los [atlas y prompts de ImageGen](design/characters/README.md) y el exportador `npm run sprites` quedan versionados.

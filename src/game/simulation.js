@@ -1,5 +1,6 @@
 import { activatePower, activePower, powerForCharacter } from "./powers.js";
 import { recordShot } from "./emission.js";
+import { missionById, missionObjective } from "./missions.js";
 // The arcade advances at 60 fixed steps per second, independently of rendering.
 export const WIDTH = 960;
 export const HEIGHT = 540;
@@ -64,8 +65,11 @@ export function normalizedMovement(input) {
   return length > 1 ? { x: x / length, y: y / length } : { x, y };
 }
 
-export function createGame(characterId = "tecnoia", { animationVersion = 1 } = {}) {
+export function createGame(characterId = "tecnoia", { animationVersion = 1, missionId = null } = {}) {
+  if (missionId !== null && !missionById(missionId)) throw new Error("Unknown mission");
   return {
+    missionId,
+    missionProgress: { kills: 0, beacons: 0, nextBeacon: 1200 },
     phase: "playing",
     tick: 0,
     shotSequence: 0,
@@ -175,6 +179,7 @@ function defeatEnemy(state, enemy, random, allowDrop = true) {
   if (enemy.dead) return;
   enemy.dead = true;
   state.score += 10;
+  if (state.missionId) state.missionProgress.kills++;
   state.events.push("hit");
   burst(state, enemy.x + 40, enemy.y + 40, "#f9dc95", random);
   if (allowDrop && random() < 0.25) {
@@ -190,6 +195,13 @@ function defeatEnemy(state, enemy, random, allowDrop = true) {
 }
 
 function collect(state, pickup, random) {
+  if (pickup.type === "beacon") {
+    state.missionProgress.beacons++;
+    state.score += 25;
+    announce(state, "¡BALIZA REPARADA!");
+    state.events.push("pickup");
+    return;
+  }
   const p = state.player;
   const labels = {
     heal: "+ VIDA",
@@ -235,6 +247,7 @@ export function stepGame(
 ) {
   if (state.phase !== "playing") return;
   state.tick++;
+  const mission = missionById(state.missionId);
   const p = state.player;
   for (const key of [
     "shot",
@@ -289,26 +302,31 @@ export function stepGame(
     recordShot(state, emitted);
   }
 
-  if (!state.bossSpawned && state.tick % 65 === 0)
+  if (!state.bossSpawned && state.tick % (mission?.spawnEvery || 65) === 0)
     state.enemies.push({
       x: WIDTH + 20,
       y: 32 + random() * (HEIGHT - 150),
       width: 80,
       height: 80,
-      speed: 2.8 + random() * 1.4,
+      speed: (mission?.speed || 2.8) + random() * 1.4,
+      pattern: mission ? mission.patterns[Math.floor(state.tick / mission.spawnEvery) % mission.patterns.length] : "scout",
+      bornAt: state.tick,
+      shot: 120,
       hp: 1,
       dead: false,
       flash: 0,
     });
-  if (state.score >= 100 && !state.bossSpawned) {
+  if (!state.bossSpawned && (mission
+    ? state.tick >= mission.seconds * 60 && state.missionProgress.kills >= mission.kills && state.missionProgress.beacons >= mission.beacons
+    : state.score >= 100)) {
     state.bossSpawned = true;
     state.boss = {
       x: WIDTH - 210,
       y: 160,
       width: 160,
       height: 160,
-      hp: 25,
-      maxHp: 25,
+      hp: mission?.bossHp || 25,
+      maxHp: mission?.bossHp || 25,
       dy: 1.6,
       shot: 100,
       flash: 0,
@@ -333,11 +351,19 @@ export function stepGame(
         vy: 0,
         enemy: true,
       });
-      b.shot = 100;
+      if (mission?.id === "faro" && b.hp <= b.maxHp / 2) {
+        for (const vy of [-2.2, 2.2]) state.bullets.push({ x: b.x, y: b.y + b.height / 2, width: 30, height: 8, vx: -6, vy, enemy: true });
+      }
+      b.shot = mission?.id === "faro" && b.hp <= b.maxHp / 2 ? 80 : 100;
     }
   }
   for (const enemy of state.enemies) {
     enemy.x -= enemy.speed * hostileSpeed;
+    if (enemy.pattern === "zigzag") enemy.y = clamp(enemy.y + Math.sin((state.tick - enemy.bornAt) / 24) * 1.8 * hostileSpeed, 24, HEIGHT - enemy.height - 24);
+    if (enemy.pattern === "shooter" && !enemy.dead && --enemy.shot <= 0 && enemy.x > p.x + p.width) {
+      state.bullets.push({ x: enemy.x, y: enemy.y + 40, width: 24, height: 7, vx: -5, vy: 0, enemy: true });
+      enemy.shot = 150;
+    }
     enemy.flash = Math.max(0, enemy.flash - 1);
     if (!enemy.dead && overlaps(inset(p, 26), inset(enemy, 16))) {
       enemy.dead = true;
@@ -418,6 +444,12 @@ export function stepGame(
     )
       bullet.dead = true;
   }
+  if (mission?.beacons && !state.bossSpawned && state.missionProgress.beacons < mission.beacons &&
+      state.tick >= state.missionProgress.nextBeacon && !state.pickups.some(item => item.type === "beacon")) {
+    state.pickups.push({ x: WIDTH - 60, y: 75 + (state.missionProgress.beacons % 3) * 130, width: 40, height: 40, type: "beacon" });
+    state.missionProgress.nextBeacon = state.tick + 1200;
+    announce(state, "¡NÚCLEO DE REPARACIÓN!");
+  }
   for (const pickup of state.pickups) {
     pickup.x -= 2;
     if (activePower(p, "magnet")) {
@@ -457,6 +489,9 @@ export function stepGame(
 export function gameSummary(state) {
   const p = state.player;
   return {
+    missionId: state.missionId,
+    objective: missionObjective(state),
+    elapsed: Math.floor(state.tick / 60),
     score: state.score,
     hp: p.hp,
     phase: state.phase,
