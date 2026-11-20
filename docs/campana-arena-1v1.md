@@ -45,11 +45,13 @@ Se incluyen:
 - `render.yaml`: servicio Free, comprobación `/health` y despliegues automáticos desactivados. Render documenta la suspensión por inactividad y el arranque de aproximadamente un minuto: adecuado para un piloto, no una garantía de disponibilidad. [Plan gratuito](https://render.com/docs/free), [WebSockets](https://render.com/docs/websocket).
 - `server/cloudrun.yaml`: una instancia como máximo, mínimo cero, 256 MiB, un CPU y timeout de una hora. Reemplazar imagen y cuenta de servicio por valores reales; la cuenta de arena no necesita roles de Firestore ni de administración del proyecto. Requiere facturación habilitada y acceso público al servicio. Las conexiones WebSocket abiertas consumen recursos facturables; las cuotas gratuitas no son un límite de gasto. [WebSockets en Cloud Run](https://docs.cloud.google.com/run/docs/triggering/websockets), [precios](https://cloud.google.com/run/pricing).
 
-La consulta de solo lectura al proyecto actual devolvió `billingEnabled: false`. No se habilitó facturación, no se creó un servicio externo y no se cambió Firestore. La publicación del servidor de arena depende de elegir el alojamiento y conectar la cuenta correspondiente.
+La consulta de solo lectura al proyecto actual devolvió `billingEnabled: false`. No se habilitó facturación, no se creó un servicio externo y no se cambió Firestore. El usuario eligió el piloto gratuito en Render. La publicación del servidor espera el inicio de sesión en Render y la conexión del repositorio; después se configurará `VITE_ARENA_URL` y se verificará una partida pública.
 
 ## Comprobaciones
 
 **101 pruebas y compilación correctos; lint de los archivos modificados sin avisos.** Pruebas de simulación: objetivos y tiempos de los tres niveles, reparación y reaparición de núcleos, segunda fase del jefe, avance secuencial y una campaña completa con vidas normales. Arena: movimiento simétrico, diagonales, obstáculos, esquiva, impactos, caída de luz, reaparición, cinco entregas, prórroga y resultado inmutable.
+
+El [PR #3](https://github.com/Lacer13/geovictoria-intranet/pull/3) conserva la implementación y la evidencia. La [verificación en GitHub Actions](https://github.com/Lacer13/geovictoria-intranet/actions/runs/44756333388) también pasó: instalación desde el lockfile, 101 pruebas, compilación y reglas de Firestore en emulador.
 
 Prueba de red con dos conexiones WebSocket: crear/unir, listos, misma ronda, rechazo de posición/puntaje inventados y mensajes antiguos, recuperación de credencial, mismo ganador y revancha. Revisión en dos pestañas independientes: invitación, recogida y entrega mediante teclado, marcador idéntico, recuperación tras recarga, resultado compartido y revancha. A 844×390 la arena y controles caben sin desplazamiento.
 
