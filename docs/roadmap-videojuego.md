@@ -2,7 +2,7 @@
 
 Propuesta de producto y desarrollo · 18 de noviembre de 2026.
 
-**Prioridad actualizada · 20 de noviembre:** el usuario adelanta niveles y arena en línea 1 contra 1 antes de continuar las animaciones. Esta rama incorpora una campaña de tres misiones con objetivos y avance guardado, y un servidor de arena con salas privadas, resultado y revancha. [Entrega y comprobaciones](campana-arena-1v1.md). La arena está probada con dos clientes locales; elegir/publicar su alojamiento y comprobar dos dispositivos por Internet sigue pendiente. CierreIA queda en espera.
+**Prioridad actualizada · 20 de noviembre:** el usuario adelanta niveles y arena en línea 1 contra 1 antes de continuar las animaciones. Esta entrega incorpora una campaña de tres misiones con objetivos y avance guardado, y un servidor de arena con salas privadas, resultado y revancha. [Entrega y comprobaciones](campana-arena-1v1.md). El servidor ya está publicado en Render Free y probado por Internet con dos navegadores independientes, marcador compartido y recuperación. El piloto humano en teléfonos y redes diferentes sigue pendiente. CierreIA queda en espera.
 
 **Objetivo:** convertir la pausa activa en un juego breve, agradable de controlar y con identidad propia; después incorporar una arena multijugador que avance desde 1 contra 1 hasta 5 contra 5.
 
@@ -190,6 +190,6 @@ Las decisiones que más cambian el alcance son: priorizar computadora o móvil, 
 
 **Prioridad vigente desde el 20 de noviembre:** ampliar la aventura y preparar el piloto en línea antes de producir nuevas animaciones. El [roadmap de animación v2](roadmap-animacion-guardianes.md) conserva TecnoIA y ConectIA cerrados y publicados; CierreIA está en espera. La campaña y el servidor 1 contra 1 tienen una entrega revisable, sin declarar completas la prueba de ocho de diez personas ni las pruebas de Internet/equipos del roadmap.
 
-La base de **Pausa activa 2.0** se conserva. La entrega actual añade tres misiones y una arena de dos clientes, todavía pendientes de piloto humano de campaña y publicación del servidor en Internet. Elegir el alojamiento y validar ese 1 contra 1 antes de ampliar a equipos o retomar nuevas animaciones.
+La base de **Pausa activa 2.0** se conserva. La entrega actual añade tres misiones y una arena de dos clientes, con servidor público en Render Free elegido por el usuario. Falta el piloto humano de campaña y arena en teléfonos y redes diferentes antes de ampliar a equipos o retomar nuevas animaciones.
 
 Cada entrega futura tendrá su cambio revisable en GitHub, comprobaciones correspondientes y publicación de la versión que se haya validado. El roadmap no contrata infraestructura. Las entregas jugables implementadas se registran en su ficha correspondiente.

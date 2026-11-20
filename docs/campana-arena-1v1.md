@@ -2,7 +2,7 @@
 
 20 de noviembre de 2026. Por pedido del usuario, niveles y multijugador pasan delante de las nuevas animaciones. TecnoIA y ConectIA conservan v2; CierreIA espera.
 
-[Vista previa de la campaña](https://geovictoria-intranet-peru--aventura-arena-jzta4odk.web.app/juego), hasta el 27 de noviembre de 2026 a las 09:35 (Lima). La arena pública aún no está configurada en ese build: su prueba de dos clientes utiliza el servidor local. [Registro y huellas](releases/aventura-arena-preview-2026-11-20.json).
+[Vista previa de campaña y arena](https://geovictoria-intranet-peru--aventura-arena-jzta4odk.web.app/juego), hasta el 27 de noviembre de 2026 a las 09:59 (Lima). El servidor del piloto está publicado en Render Free y la vista previa se conecta a él mediante WebSocket seguro. [Registro y huellas](releases/aventura-arena-preview-2026-11-20.json).
 
 ## Campaña implementada
 
@@ -39,13 +39,15 @@ Abrir `/juego`, seleccionar **Arena en línea · 1 vs 1**, crear sala y abrir su
 
 En Hosting HTTPS, el cliente requiere `VITE_ARENA_URL=wss://DOMINIO_DEL_SERVIDOR` en el build. No contiene una clave secreta. Sin esa configuración la aventura funciona y la arena informa que está en preparación, sin simular un rival en línea. Nunca colocar tokens de reconexión en variables de build o enlaces.
 
+`.env.production` configura el endpoint público `wss://geovictoria-arena.onrender.com`; desarrollo conserva el servidor local. Render usa el Dockerfile preparado, la rama `codex/campana-arena-1v1`, región Ohio, instancia Free, `/health` y despliegues automáticos desactivados. El [primer despliegue](https://dashboard.render.com/web/srv-dc05vvuc6qcc73b7l8jg/deploys/dep-dc0600ec6qcc73b7l9n0) ejecuta el commit `a5af131fbbe23287d0534a79405809dbedec83d9`. No hay diferencias posteriores en el código del servidor; los cambios del cliente requieren recompilar Firebase, y los del servidor requieren desplegar manualmente en Render.
+
 Se incluyen:
 
 - `server/Dockerfile` y lockfile mínimo de servidor: Node 22, usuario sin privilegios, solo `ws` y reglas de arena.
 - `render.yaml`: servicio Free, comprobación `/health` y despliegues automáticos desactivados. Render documenta la suspensión por inactividad y el arranque de aproximadamente un minuto: adecuado para un piloto, no una garantía de disponibilidad. [Plan gratuito](https://render.com/docs/free), [WebSockets](https://render.com/docs/websocket).
 - `server/cloudrun.yaml`: una instancia como máximo, mínimo cero, 256 MiB, un CPU y timeout de una hora. Reemplazar imagen y cuenta de servicio por valores reales; la cuenta de arena no necesita roles de Firestore ni de administración del proyecto. Requiere facturación habilitada y acceso público al servicio. Las conexiones WebSocket abiertas consumen recursos facturables; las cuotas gratuitas no son un límite de gasto. [WebSockets en Cloud Run](https://docs.cloud.google.com/run/docs/triggering/websockets), [precios](https://cloud.google.com/run/pricing).
 
-La consulta de solo lectura al proyecto actual devolvió `billingEnabled: false`. No se habilitó facturación, no se creó un servicio externo y no se cambió Firestore. El usuario eligió el piloto gratuito en Render. La publicación del servidor espera el inicio de sesión en Render y la conexión del repositorio; después se configurará `VITE_ARENA_URL` y se verificará una partida pública.
+La consulta de solo lectura al proyecto actual devolvió `billingEnabled: false`. El usuario eligió el piloto gratuito en Render y completó el acceso y la verificación de su cuenta. Se creó únicamente el servicio Free autorizado, usando la opción de repositorio público. No se habilitó facturación de Google Cloud ni se cambió Firestore.
 
 ## Comprobaciones
 
@@ -55,4 +57,6 @@ El [PR #3](https://github.com/Lacer13/geovictoria-intranet/pull/3) conserva la i
 
 Prueba de red con dos conexiones WebSocket: crear/unir, listos, misma ronda, rechazo de posición/puntaje inventados y mensajes antiguos, recuperación de credencial, mismo ganador y revancha. Revisión en dos pestañas independientes: invitación, recogida y entrega mediante teclado, marcador idéntico, recuperación tras recarga, resultado compartido y revancha. A 844×390 la arena y controles caben sin desplazamiento.
 
-Evidencia: [misiones](../design/gameplay/2026-11-20/campana-misiones.jpg), [campaña a 320 px](../design/gameplay/2026-11-20/campana-320.jpg), [arena con dos clientes](../design/gameplay/2026-11-20/arena-dos-clientes.jpg), [arena horizontal](../design/gameplay/2026-11-20/arena-horizontal.jpg). Campaña a 320×568 con controles grandes y arena a 844×390, sin desbordamiento. La prueba entre dos dispositivos por Internet queda pendiente de publicar el servidor.
+Verificación pública: `/health` devolvió HTTP 200 y `ok: true`. Dos navegadores independientes (Chrome y navegador integrado) entraron por código a través de Internet y mostraron el mismo marcador tras una entrega mediante teclado. Una recarga recuperada dentro de 15 segundos conservó la ronda y permitió otra entrega; superar ese plazo resolvió el abandono. Al terminar tres minutos, ambos mostraron el mismo ganador con marcador 0–1; una revancha reinició cuenta atrás y puntajes. Se cerraron las salas de prueba. Esto no sustituye el piloto humano en teléfonos y redes diferentes, que sigue pendiente.
+
+Evidencia: [misiones](../design/gameplay/2026-11-20/campana-misiones.jpg), [campaña a 320 px](../design/gameplay/2026-11-20/campana-320.jpg), [arena con dos clientes](../design/gameplay/2026-11-20/arena-dos-clientes.jpg), [arena horizontal](../design/gameplay/2026-11-20/arena-horizontal.jpg), [partida pública en Render](../design/gameplay/2026-11-20/arena-publica.jpg). Campaña a 320×568 con controles grandes y arena a 844×390, sin desbordamiento.
