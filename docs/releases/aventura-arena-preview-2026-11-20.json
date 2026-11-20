@@ -4,7 +4,7 @@
   "url": "https://geovictoria-intranet-peru--aventura-arena-jzta4odk.web.app/juego",
   "hostingVersion": "b043628e27f1a137",
   "expiresAt": "2026-11-27T14:59:45.992513975Z",
-  "productionDeployed": false,
+  "productionDeployed": true,
   "arenaPublicServer": "https://geovictoria-arena.onrender.com",
   "arenaWebSocket": "wss://geovictoria-arena.onrender.com/arena",
   "arenaSourceCommit": "a5af131fbbe23287d0534a79405809dbedec83d9",
@@ -41,5 +41,7 @@
     "disconnectDeadline": true,
     "normalTimeResult": true,
     "rematch": true
-  }
+  },
+  "productionUrl": "https://geovictoria-intranet-peru.web.app/juego",
+  "promotedAt": "2026-11-20T15:11:49.092Z"
 }

@@ -1,0 +1,159 @@
+{
+  "date": "2026-11-20",
+  "project": "geovictoria-intranet-peru",
+  "channel": "live",
+  "url": "https://geovictoria-intranet-peru.web.app/juego",
+  "sourceCommit": "9d78ea446d0e0f2ba1da9f3ea34fb25926f7bbc8",
+  "mergeCommit": "98a3d6eb6221b7bd4f4e14c47c3f158b4ad3f847",
+  "pullRequest": "https://github.com/Lacer13/geovictoria-intranet/pull/3",
+  "hostingVersion": "b043628e27f1a137",
+  "previousHostingVersion": "9f49c47de6d060b4",
+  "releaseTime": "2026-11-20T15:11:49.092Z",
+  "deployment": "Promoción por ID inmutable de la vista previa validada y autorizada por el usuario",
+  "rollbackCommand": "npx --yes firebase-tools@15.34.1 hosting:clone geovictoria-intranet-peru@9f49c47de6d060b4 geovictoria-intranet-peru:live --project geovictoria-intranet-peru --non-interactive",
+  "arenaPublicServer": "https://geovictoria-arena.onrender.com",
+  "arenaSourceCommit": "a5af131fbbe23287d0534a79405809dbedec83d9",
+  "renderService": "srv-dc05vvuc6qcc73b7l8jg",
+  "renderDeployment": "dep-dc0600ec6qcc73b7l9n0",
+  "renderPlan": "free",
+  "firestoreRulesDeployed": false,
+  "authenticationDomainsChanged": false,
+  "resources": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "bytes": 1546,
+      "sha256": "95f3b2cbf788ea75cfc5fe0ded13b3d3212b214e7586fcf94924a92c1010c022",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "assets/GamePage-CkARHRxK.css",
+      "status": 200,
+      "bytes": 20613,
+      "sha256": "a072386c949f65299d4aaa179818fd8f16cf22d903c5e377084e289be7345271",
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "path": "assets/GamePage-DkSfsWRw.js",
+      "status": 200,
+      "bytes": 84719,
+      "sha256": "df8e5b06d7b552e6e8d13b5c8c67c8d514caf25136ac7d11dde659762da8bc70",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/index-B8VyoyO0.js",
+      "status": 200,
+      "bytes": 59,
+      "sha256": "7b480ca151fb412bd67796554dced6a9f807151d694e2300d7b4f76de1ed48f3",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/rolldown-runtime-D2aABDIb.js",
+      "status": 200,
+      "bytes": 680,
+      "sha256": "760907b0f57761fcae7a1113e535296fa7e31deaa87aa6138e19917ae7e00a86",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/react-DbMM3Pz9.js",
+      "status": 200,
+      "bytes": 228576,
+      "sha256": "1aa337c1eaee5d0da619083f58824dc8b374974312d37eff98307fdc9c121acb",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/createLucideIcon-7eCvd4fb.js",
+      "status": 200,
+      "bytes": 1855,
+      "sha256": "9a447768920f4b44d21d49d9834058c8e7f1e45b94254ba1cd748ef70ba09e8a",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/sparkles-Bp2nlqxW.js",
+      "status": 200,
+      "bytes": 822,
+      "sha256": "f4de9244b211374f6fe4a909df24479daf50c6e607081c46bcdd8df8ec865ce3",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/arrow-right-B8hwxgWV.js",
+      "status": 200,
+      "bytes": 283,
+      "sha256": "639de16f192b1911494c961547f0cb25db028866d1d3a423d9929202e19a6b4a",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/firebase-core-Cpq8qxsJ.js",
+      "status": 200,
+      "bytes": 25641,
+      "sha256": "1b3cbb437984318282e005e9de18e82ad1858c413ec81bede419355c379735bc",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/firebase-auth-BRB5m8x-.js",
+      "status": 200,
+      "bytes": 88405,
+      "sha256": "a55e6cefe20c2aa4a1554d48b84ff38e7dc4b78ffd50e52f2c3ca732d1d37c69",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/firebase-Ce3zCdMU.js",
+      "status": 200,
+      "bytes": 305575,
+      "sha256": "bd748f8e30b53ed0f4b64044a4c36f8dd67ee615cc502c3444cdfd06dbf5e793",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/geovictoria-intranet-l2G-Zv1a.js",
+      "status": 200,
+      "bytes": 223477,
+      "sha256": "c6f3805602a6b1c9196a8f47c9c8e51c5439dac2e80b43ddf58b966762597429",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/geovictoria-intranet-aO8WF6Xb.css",
+      "status": 200,
+      "bytes": 114467,
+      "sha256": "b5694ee421063bc621cd1b01856f573afb3d14766f850628c72552bd326ae7bd",
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "path": "characters/conectia/portrait-v2.webp",
+      "status": 200,
+      "bytes": 20722,
+      "sha256": "aa4d3a20afbc314d88ec41d6c28352dc1464fd5d3c1c787bf2cb8e6ecabdecd4",
+      "contentType": "image/webp"
+    },
+    {
+      "path": "characters/conectia/rig-navidad-v2.png",
+      "status": 200,
+      "bytes": 1184001,
+      "sha256": "191e228d78c8ad94dda62001ec71397dd1f8e98887f5d45ca21414cee43e6106",
+      "contentType": "image/png"
+    }
+  ],
+  "verification": {
+    "route": "/juego",
+    "routeStatus": 200,
+    "resourcesMatchValidatedBuild": true,
+    "securityHeadersPresent": true,
+    "verifiedAt": "2026-11-20T15:12:19.903Z",
+    "createdRoomFromProduction": true,
+    "testRoomClosed": true
+  },
+  "testsPassed": 101,
+  "ci": {
+    "url": "https://github.com/Lacer13/geovictoria-intranet/actions/runs/44760645578",
+    "conclusion": "success"
+  },
+  "publicArenaChecks": {
+    "health": 200,
+    "independentBrowsers": 2,
+    "sharedScore": true,
+    "reloadResume": true,
+    "disconnectDeadline": true,
+    "normalTimeResult": true,
+    "rematch": true
+  },
+  "humanMultiDevicePilotPending": true
+}

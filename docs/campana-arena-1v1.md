@@ -2,6 +2,8 @@
 
 20 de noviembre de 2026. Por pedido del usuario, niveles y multijugador pasan delante de las nuevas animaciones. TecnoIA y ConectIA conservan v2; CierreIA espera.
 
+**Publicada en el [enlace principal del juego](https://geovictoria-intranet-peru.web.app/juego)** el 20 de noviembre a las 10:11 (Lima), con autorización del usuario. El PR #3 está integrado en `main`. Se promovió la versión inmutable `b043628e27f1a137` de la vista previa validada. La ruta, 16 recursos y sus cabeceras coinciden con la compilación; desde producción se creó y cerró una sala correctamente. [Registro y restauración](releases/aventura-arena-production-2026-11-20.json). La [verificación de main](https://github.com/Lacer13/geovictoria-intranet/actions/runs/44760645578) pasó instalación, 101 pruebas, build y reglas en emulador.
+
 [Vista previa de campaña y arena](https://geovictoria-intranet-peru--aventura-arena-jzta4odk.web.app/juego), hasta el 27 de noviembre de 2026 a las 09:59 (Lima). El servidor del piloto está publicado en Render Free y la vista previa se conecta a él mediante WebSocket seguro. [Registro y huellas](releases/aventura-arena-preview-2026-11-20.json).
 
 ## Campaña implementada
@@ -60,3 +62,5 @@ Prueba de red con dos conexiones WebSocket: crear/unir, listos, misma ronda, rec
 Verificación pública: `/health` devolvió HTTP 200 y `ok: true`. Dos navegadores independientes (Chrome y navegador integrado) entraron por código a través de Internet y mostraron el mismo marcador tras una entrega mediante teclado. Una recarga recuperada dentro de 15 segundos conservó la ronda y permitió otra entrega; superar ese plazo resolvió el abandono. Al terminar tres minutos, ambos mostraron el mismo ganador con marcador 0–1; una revancha reinició cuenta atrás y puntajes. Se cerraron las salas de prueba. Esto no sustituye el piloto humano en teléfonos y redes diferentes, que sigue pendiente.
 
 Evidencia: [misiones](../design/gameplay/2026-11-20/campana-misiones.jpg), [campaña a 320 px](../design/gameplay/2026-11-20/campana-320.jpg), [arena con dos clientes](../design/gameplay/2026-11-20/arena-dos-clientes.jpg), [arena horizontal](../design/gameplay/2026-11-20/arena-horizontal.jpg), [partida pública en Render](../design/gameplay/2026-11-20/arena-publica.jpg). Campaña a 320×568 con controles grandes y arena a 844×390, sin desbordamiento.
+
+La [sala creada desde producción](../design/gameplay/2026-11-20/arena-produccion.jpg) se cerró al terminar la comprobación; su código de la captura no es una invitación vigente.
