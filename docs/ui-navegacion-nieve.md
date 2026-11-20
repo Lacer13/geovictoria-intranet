@@ -2,7 +2,7 @@
 
 20 de noviembre de 2026. La entrega busca más espacio para el contenido y una Navidad legible sin recargar la pantalla.
 
-[Vista previa de la interfaz](https://geovictoria-intranet-peru--ui-navidad-sbzukf0q.web.app/navidad), disponible hasta el 27 de noviembre. El portal principal conserva su versión anterior hasta integrar y publicar esta entrega. [Registro y huellas de la vista previa](releases/ui-navidad-preview-2026-11-20.json).
+[Vista previa de la interfaz](https://geovictoria-intranet-peru--ui-navidad-sbzukf0q.web.app/navidad), disponible hasta el 27 de noviembre. La interfaz está publicada en el [portal principal](https://geovictoria-intranet-peru.web.app/navidad), tras la aprobación y fusión del [PR #5](https://github.com/Lacer13/geovictoria-intranet/pull/5). Se promovió la versión inmutable `10d019cf6a16bca5`. [Registro de producción](releases/ui-navidad-production-2026-11-20.json). [Registro y huellas de la vista previa](releases/ui-navidad-preview-2026-11-20.json).
 
 ## Cambios
 
@@ -27,3 +27,9 @@ Revisión local en navegador:
 Capturas: [escritorio](../design/ui/2026-11-20/escritorio.jpg), [ajustes](../design/ui/2026-11-20/ajustes.jpg), [móvil](../design/ui/2026-11-20/movil.jpg), [menú móvil](../design/ui/2026-11-20/menu-movil.jpg), [ajustes móviles](../design/ui/2026-11-20/ajustes-movil.jpg).
 
 En la vista previa pública se compararon 18 recursos por SHA-256 y las rutas de Navidad, directorio y juego. Se comprobó el menú y su cierre, los ajustes y el modo Festivo a 320 × 568: doce copos visibles, sin desbordamiento horizontal. Se restauró Suave y el tamaño habitual del navegador. [Captura pública](../design/ui/2026-11-20/preview-publica.jpg).
+
+## Publicación
+
+La versión principal pasó las 104 pruebas del portal y las 30 de permisos en [GitHub Actions](https://github.com/Lacer13/geovictoria-intranet/actions/runs/44812791106). Se compararon por SHA-256 los 18 recursos publicados con la compilación validada; inicio, Navidad, directorio y juego respondieron correctamente, con los encabezados de seguridad previstos.
+
+En producción se comprobó el contenido a todo el ancho, abrir y cerrar Menú con Escape y recuperar el foco, y los controles de tema y ambiente. Se conservaron las preferencias existentes. Una recarga mostró la versión recién publicada. [Captura de producción](../design/ui/2026-11-20/produccion.jpg). El registro incluye la versión anterior y el comando de reversión.

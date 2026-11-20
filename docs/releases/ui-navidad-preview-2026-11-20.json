@@ -4,7 +4,7 @@
   "url": "https://geovictoria-intranet-peru--ui-navidad-sbzukf0q.web.app/navidad",
   "hostingVersion": "10d019cf6a16bca5",
   "expiresAt": "2026-11-27T20:22:45.948220813Z",
-  "productionFrontendDeployed": false,
+  "productionFrontendDeployed": true,
   "testsPassed": 104,
   "firestoreRulesDeployed": false,
   "authenticationDomainsChanged": false,
@@ -154,5 +154,7 @@
     "snowFestiveMobile": 12,
     "preferencesRestoredToSoft": true,
     "viewportReset": true
-  }
+  },
+  "productionUrl": "https://geovictoria-intranet-peru.web.app/navidad",
+  "promotedAt": "2026-11-20T20:36:51.738Z"
 }

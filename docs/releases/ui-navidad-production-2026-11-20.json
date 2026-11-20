@@ -1,0 +1,205 @@
+{
+  "date": "2026-11-20",
+  "project": "geovictoria-intranet-peru",
+  "channel": "live",
+  "url": "https://geovictoria-intranet-peru.web.app/navidad",
+  "sourceCommit": "330d73114a4cb90a33ede8d5350eb3e7a8d318b9",
+  "mergeCommit": "c52bdec3cd322bc6193ab5b0ec773e05af931665",
+  "pullRequest": "https://github.com/Lacer13/geovictoria-intranet/pull/5",
+  "hostingVersion": "10d019cf6a16bca5",
+  "previousHostingVersion": "7f0f5874f9614a08",
+  "releaseTime": "2026-11-20T20:36:51.738Z",
+  "deployment": "Promoción por ID inmutable de la vista previa validada y autorizada por el usuario",
+  "rollbackCommand": "npx --yes firebase-tools@15.34.1 hosting:clone geovictoria-intranet-peru@7f0f5874f9614a08 geovictoria-intranet-peru:live --project geovictoria-intranet-peru --non-interactive",
+  "firestoreRulesDeployed": false,
+  "authenticationDomainsChanged": false,
+  "arenaServerChanged": false,
+  "testsPassed": 104,
+  "resources": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "bytes": 1544,
+      "sha256": "b391e243253e1e462d0da966b35099ab72661cf270d01ec9b1082bc431b21d8e",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "assets/index-CxNHFCME.js",
+      "status": 200,
+      "bytes": 59,
+      "sha256": "cc5a397eceb3536d33be2768088728f16472014ce47483c239f651e7b60b093a",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/rolldown-runtime-D2aABDIb.js",
+      "status": 200,
+      "bytes": 680,
+      "sha256": "760907b0f57761fcae7a1113e535296fa7e31deaa87aa6138e19917ae7e00a86",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/react-DbMM3Pz9.js",
+      "status": 200,
+      "bytes": 228576,
+      "sha256": "1aa337c1eaee5d0da619083f58824dc8b374974312d37eff98307fdc9c121acb",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/createLucideIcon-7eCvd4fb.js",
+      "status": 200,
+      "bytes": 1855,
+      "sha256": "9a447768920f4b44d21d49d9834058c8e7f1e45b94254ba1cd748ef70ba09e8a",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/season-DG87JeAL.js",
+      "status": 200,
+      "bytes": 1943,
+      "sha256": "55bb1d00923a1d7af9515bd68c430e2bc1fbc07f360312fa4e0c1288a1336181",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/arrow-right-B8hwxgWV.js",
+      "status": 200,
+      "bytes": 283,
+      "sha256": "639de16f192b1911494c961547f0cb25db028866d1d3a423d9929202e19a6b4a",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/firebase-core-Dr4l0nvq.js",
+      "status": 200,
+      "bytes": 25641,
+      "sha256": "a4d15ffbec27ff9f77ade6eb8dc274750be8cac0357ed9eb909775348acd0f42",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/firebase-auth-BUphmYD2.js",
+      "status": 200,
+      "bytes": 88405,
+      "sha256": "3bd2fa27848f7d8cc9e7c49edc3e52e8629c028e68fce6cb948d19f74203ce50",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/firebase-CKgx2io-.js",
+      "status": 200,
+      "bytes": 305651,
+      "sha256": "fd94849ebe2b8438f1e2d0154796e99f8ff19e7c36dafbfee58f2415a74a002c",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/geovictoria-intranet-BqRAwj1C.js",
+      "status": 200,
+      "bytes": 225478,
+      "sha256": "7fda13bc2bf1c7d78e08f3a77e53d7f2d4b38de9cc7b5c0456b1a547f503676a",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/geovictoria-intranet-Dk8WBFoS.css",
+      "status": 200,
+      "bytes": 118749,
+      "sha256": "f86cb7434b5c8c89fb606dfaf16c574dcdb58287dcf4dd8a6fd79dcb3bb7e6c9",
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "path": "assets/Admin-B4LyzdCB.js",
+      "status": 200,
+      "bytes": 85811,
+      "sha256": "d29669d5096d69267285c8ba8d901206e7e61b407476fd8321de2e9de78e6f6b",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/Christmas-DKERaw8s.js",
+      "status": 200,
+      "bytes": 5616,
+      "sha256": "107caa52edf789ba26e3daf0ea08127265b13579832beb46618beea318af4ce4",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/ChristmasWall-BmLnQZf2.js",
+      "status": 200,
+      "bytes": 11470,
+      "sha256": "508691d54e8344308b2394a83d79939427513af70ba4c35000b0d32cafecc38e",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/ChristmasWall-C4Eq8YsD.css",
+      "status": 200,
+      "bytes": 3816,
+      "sha256": "2077d68de83e4c518d88fa0c5950588bc93e07165b489c3fa141f19943ceffcd",
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "path": "assets/GamePage-BPIaeQHL.js",
+      "status": 200,
+      "bytes": 84719,
+      "sha256": "556cc3a7d70fc9f6bfbfdacc7dbf26e69bad104b38b069804ce891cdc6fd5f49",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/GamePage-CkARHRxK.css",
+      "status": 200,
+      "bytes": 20613,
+      "sha256": "a072386c949f65299d4aaa179818fd8f16cf22d903c5e377084e289be7345271",
+      "contentType": "text/css; charset=utf-8"
+    }
+  ],
+  "verification": {
+    "routes": [
+      {
+        "path": "/",
+        "status": 200
+      },
+      {
+        "path": "/navidad",
+        "status": 200
+      },
+      {
+        "path": "/directorio",
+        "status": 200
+      },
+      {
+        "path": "/juego",
+        "status": 200
+      }
+    ],
+    "resourcesMatchValidatedBuild": true,
+    "securityHeadersPresent": true,
+    "verifiedAt": "2026-11-20T20:37:41.192Z",
+    "publicUiChecks": {
+      "pageLoaded": true,
+      "menuOpenClose": true,
+      "escapeRestoresTrigger": true,
+      "appearanceControls": true,
+      "preferencesPreserved": true,
+      "screenshot": "design/ui/2026-11-20/produccion.jpg"
+    }
+  },
+  "localUiChecks": {
+    "desktopFullWidth": true,
+    "keyboardTabCycle": true,
+    "escapeRestoresTrigger": true,
+    "mobileNavigation": true,
+    "searchShortcut": true,
+    "themeAndAtmospherePersist": true,
+    "snowSvgOnly": true,
+    "snowSoftDesktop": 16,
+    "snowFestiveDesktop": 26,
+    "snowPaused": 0,
+    "snowSoftMobile": 8,
+    "mobile320NoHorizontalOverflow": true,
+    "gameImmersive": true
+  },
+  "previewUiChecks": {
+    "menuOpenClose": true,
+    "appearanceControls": true,
+    "mobile320NoHorizontalOverflow": true,
+    "snowFestiveMobile": 12,
+    "preferencesRestoredToSoft": true,
+    "viewportReset": true
+  },
+  "rulesTestsPassed": 30,
+  "ci": {
+    "url": "https://github.com/Lacer13/geovictoria-intranet/actions/runs/44812791106",
+    "conclusion": "success"
+  }
+}
