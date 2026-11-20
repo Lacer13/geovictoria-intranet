@@ -2,7 +2,9 @@
 
 20 de noviembre de 2026. El editor anterior solo copiaba el saludo. Esta entrega añade un periódico mural en `/navidad`, con publicación compartida, destinatario opcional, firma o «Anónimo» y fecha del servidor mostrada en hora de Lima. Se conserva la opción de copiar el saludo.
 
-[Vista previa del mural](https://geovictoria-intranet-peru--mural-navidad-pox6l5mb.web.app/navidad), disponible hasta el 27 de noviembre. Las reglas y el índice ya están publicados y comprobados; el cliente principal espera integrar esta entrega en `main`. La vista previa utiliza el mural compartido, por lo que los saludos que se publiquen allí serán reales. [Registro de comprobaciones](releases/mural-navidad-preview-2026-11-20.json).
+**Publicado en [Navidad en equipo](https://geovictoria-intranet-peru.web.app/navidad)** con autorización del usuario. El [PR #4](https://github.com/Lacer13/geovictoria-intranet/pull/4) está integrado en `main`; se promovió la versión inmutable `7f0f5874f9614a08` de la vista previa probada. Las reglas, el índice y el cliente están activos. [Registro de producción y restauración](releases/mural-navidad-production-2026-11-20.json).
+
+La [vista previa](https://geovictoria-intranet-peru--mural-navidad-pox6l5mb.web.app/navidad) sigue disponible hasta el 27 de noviembre y utiliza el mismo mural compartido. [Registro de la vista previa](releases/mural-navidad-preview-2026-11-20.json).
 
 ## Uso
 
@@ -27,5 +29,7 @@ El índice de `firestore.indexes.json` combina `visible` y `createdAt` para el l
 - Formulario a 320 × 568: controles dentro del ancho disponible, sin desplazamiento horizontal. Las pruebas y ejemplos utilizaron solo `demo-geovictoria` en emuladores locales.
 
 Evidencia local: [mural](../design/navidad/mural-2026-11-20/mural-local.jpg), [formulario móvil](../design/navidad/mural-2026-11-20/movil-local.jpg), [moderación](../design/navidad/mural-2026-11-20/admin-local.jpg). Los saludos de estas capturas son pruebas, no publicaciones reales del equipo.
+
+En producción se verificaron 18 recursos contra la compilación, las cabeceras de seguridad, la consulta pública y las rutas de Navidad, juego y Administración. La pantalla cargó el mural vacío, abrió el editor y cambió correctamente entre firma y anonimato. [Captura de producción](../design/navidad/mural-2026-11-20/produccion.jpg). La [verificación de main](https://github.com/Lacer13/geovictoria-intranet/actions/runs/44806192482) pasó instalación, 103 pruebas, compilación y 30 pruebas de reglas en emulador.
 
 Referencias de Firebase: [consultas y reglas](https://firebase.google.com/docs/firestore/security/rules-query), [actualizaciones en tiempo real](https://firebase.google.com/docs/firestore/query-data/listen).

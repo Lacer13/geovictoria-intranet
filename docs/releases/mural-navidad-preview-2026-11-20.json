@@ -4,7 +4,7 @@
   "channel": "mural-navidad",
   "hostingVersion": "7f0f5874f9614a08",
   "expiresAt": "2026-11-27T19:38:42.999830053Z",
-  "productionFrontendDeployed": false,
+  "productionFrontendDeployed": true,
   "backendPublished": true,
   "ruleset": "projects/geovictoria-intranet-peru/rulesets/8a67ed0a-cb8e-4e32-96c8-287231dc135f",
   "rulesSha256": "81064ed4b7b35378342c9e860b67413e9e8da25aa6f6404dd3cd940521d2dfbf",
@@ -127,5 +127,7 @@
     "emptyWallLoaded": true,
     "composerOpened": true,
     "testGreetingsOnlyInEmulator": true
-  }
+  },
+  "productionUrl": "https://geovictoria-intranet-peru.web.app/navidad",
+  "promotedAt": "2026-11-20T19:53:43.568Z"
 }
