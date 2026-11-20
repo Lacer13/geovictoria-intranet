@@ -300,6 +300,26 @@ service cloud.firestore {
         && request.resource.data.color.matches('^#[0-9a-fA-F]{6}$');
       allow delete: if isAdmin();
     }
+    match /christmasWalls/{year}/greetings/{id} {
+      function validGreeting(data) {
+        return year.matches('^[0-9]{4}$')
+          && data.keys().hasOnly(['recipient', 'authorName', 'isAnonymous', 'message', 'visible', 'createdAt'])
+          && data.recipient is string && data.recipient.size() <= 80
+          && data.recipient.matches('^[^\\r\\n\\t]*$')
+          && data.isAnonymous is bool && text(data.authorName, 80) && data.authorName.size() >= 2
+          && data.authorName.matches('^[^\\r\\n\\t]+$') && data.authorName.matches('.*[^ ].*')
+          && (!data.isAnonymous || data.authorName == 'Anónimo')
+          && text(data.message, 1000) && data.message.size() >= 3
+          && data.message.matches('(?s).*[^ \\t\\r\\n].*')
+          && data.visible == true && data.createdAt == request.time;
+      }
+      allow get, list: if isAdmin() || resource.data.visible == true;
+      allow create: if validGreeting(request.resource.data);
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['visible', 'moderatedAt'])
+        && request.resource.data.visible is bool && request.resource.data.moderatedAt == request.time;
+      allow delete: if false;
+    }
     match /feedbacks/{id} {
       allow read, delete: if isAdmin();
       allow create: if request.resource.data.keys().hasOnly(['isAnonymous', 'name', 'department', 'message', 'date', 'createdAt'])

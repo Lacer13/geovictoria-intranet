@@ -26,6 +26,7 @@ import AdminManagers from "./AdminManagers";
 import SecretSantaAdmin from "./SecretSantaAdmin";
 import ContentManager from "./ContentManager";
 import QuizAdmin from "./QuizAdmin";
+import ChristmasWall from "./ChristmasWall";
 
 const Admin = () => {
   const [params] = useSearchParams();
@@ -41,7 +42,9 @@ const Admin = () => {
       ? "quiz"
       : params.get("seccion") === "amigo-secreto"
         ? "santa"
-        : "feedbacks",
+        : params.get("seccion") === "mural"
+          ? "wall"
+          : "feedbacks",
   );
 
   // Data states
@@ -440,6 +443,7 @@ const Admin = () => {
           <option value="admins">Administradores</option>
           <option value="santa">Amigo secreto</option>
           <option value="quiz">Concurso en vivo</option>
+          <option value="wall">Mural navideño</option>
         </select>
       </label>
       <div className="admin-tabs" aria-label="Secciones de administración">
@@ -485,11 +489,19 @@ const Admin = () => {
         >
           <Trophy size={18} /> Concurso en vivo
         </button>
+        <button
+          className={`btn ${activeTab === "wall" ? "btn-forest" : "btn-secondary"}`}
+          onClick={() => setActiveTab("wall")}
+          aria-pressed={activeTab === "wall"}
+        >
+          <Gift size={18} /> Mural navideño
+        </button>
       </div>
 
       {activeTab === "admins" && <AdminManagers />}
       {activeTab === "santa" && <SecretSantaAdmin />}
       {activeTab === "quiz" && <QuizAdmin />}
+      {activeTab === "wall" && <ChristmasWall moderate />}
 
       {/* Tab Content: Feedbacks */}
       {activeTab === "feedbacks" && (

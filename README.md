@@ -29,7 +29,7 @@ npm run preview
 - Modos claro y oscuro, favoritos y preferencias guardados en el navegador. La intranet funciona aunque el almacenamiento de preferencias esté bloqueado.
 - Copos de nieve, luces intermitentes, árbol y destellos animados. El botón del copo permite pausar los efectos. Se respeta `prefers-reduced-motion` y se reducen las partículas en móviles.
 - Cuenta regresiva y calendario con fechas de Lima. El evento descargable `.ics` corresponde al 25 de diciembre; no se inventan actividades corporativas.
-- Ideas personales para compartir y editor de saludos que copia el mensaje sin enviarlo a terceros.
+- Ideas personales para compartir y un mural navideño con saludos en tiempo real, firma o publicación anónima, destinatario opcional y fecha. Administración puede ocultar y restaurar mensajes. [Funcionamiento del mural](docs/mural-navidad.md).
 - El QR corresponde al origen actual de la intranet, no a un dominio fijo de ejemplo.
 
 ## Datos
