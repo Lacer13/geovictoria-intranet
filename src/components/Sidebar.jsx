@@ -35,11 +35,23 @@ export default function Sidebar({ open, onClose, onWelcome }) {
       [...drawer.current.querySelectorAll("a, button")].filter(
         (el) => el.getClientRects().length,
       );
-    items()[0]?.focus();
+    const focusFrame = requestAnimationFrame(() =>
+      drawer.current
+        ?.querySelector(".sidebar-close")
+        ?.focus({ preventScroll: true }),
+    );
     const key = (e) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        e.preventDefault();
+        onClose();
+      }
       if (e.key === "Tab") {
         const list = items();
+        if (!drawer.current.contains(document.activeElement)) {
+          e.preventDefault();
+          (e.shiftKey ? list.at(-1) : list[0])?.focus({ preventScroll: true });
+          return;
+        }
         if (e.shiftKey && document.activeElement === list[0]) {
           e.preventDefault();
           list.at(-1)?.focus();
@@ -51,9 +63,10 @@ export default function Sidebar({ open, onClose, onWelcome }) {
     };
     document.addEventListener("keydown", key);
     return () => {
+      cancelAnimationFrame(focusFrame);
       document.body.style.overflow = overflow;
       document.removeEventListener("keydown", key);
-      previous?.focus();
+      previous?.focus({ preventScroll: true });
     };
   }, [open, onClose]);
   return (
@@ -67,19 +80,33 @@ export default function Sidebar({ open, onClose, onWelcome }) {
       )}
       <aside
         ref={drawer}
+        onTransitionEnd={(event) => {
+          if (
+            open &&
+            event.target === event.currentTarget &&
+            !drawer.current.contains(document.activeElement)
+          )
+            drawer.current
+              .querySelector(".sidebar-close")
+              ?.focus({ preventScroll: true });
+        }}
         onClick={(event) => {
           if (event.target.closest("a")) onClose();
         }}
         id="main-navigation"
         className={`sidebar ${open ? "is-open" : ""}`}
         aria-label="Menú del equipo"
+        role="dialog"
+        aria-modal={open || undefined}
+        aria-hidden={!open}
+        inert={!open || undefined}
       >
         <div className="sidebar-brand">
           <NavLink to="/" aria-label="GeoVictoria · Inicio">
             <img src="/Logo geovictoria.png" alt="GeoVictoria" />
           </NavLink>
           <button
-            className="icon-button mobile-only"
+            className="icon-button sidebar-close"
             onClick={onClose}
             aria-label="Cerrar menú"
           >
@@ -115,7 +142,6 @@ export default function Sidebar({ open, onClose, onWelcome }) {
           >
             <PlayCircle size={19} strokeWidth={1.7} />
             <span>Video de VictorIA</span>
-            <span className="victoria-video-badge">Ver</span>
           </button>
           <NavLink
             to="/navidad"
@@ -125,7 +151,6 @@ export default function Sidebar({ open, onClose, onWelcome }) {
           >
             <Gift size={19} strokeWidth={1.7} />
             <span>Navidad en equipo</span>
-            <span className="new-badge">Especial</span>
           </NavLink>
           <NavLink
             to="/amigo-secreto"
@@ -135,7 +160,6 @@ export default function Sidebar({ open, onClose, onWelcome }) {
           >
             <Shuffle size={19} strokeWidth={1.7} />
             <span>Amigo secreto</span>
-            <span className="new-badge">Nuevo</span>
           </NavLink>
           <NavLink
             to="/concurso"
@@ -145,7 +169,6 @@ export default function Sidebar({ open, onClose, onWelcome }) {
           >
             <Trophy size={19} strokeWidth={1.7} />
             <span>Concurso en vivo</span>
-            <span className="new-badge">Nuevo</span>
           </NavLink>
           <NavLink to="/juego" className="nav-item">
             <Gamepad2 size={19} strokeWidth={1.7} />
@@ -158,13 +181,6 @@ export default function Sidebar({ open, onClose, onWelcome }) {
             <Settings size={18} />
             <span>Administración</span>
           </NavLink>
-          <div className="sidebar-profile">
-            <span className="avatar">GV</span>
-            <div>
-              <strong>Hola, equipo</strong>
-            </div>
-            <span className="online-dot" title="Tu espacio de trabajo" />
-          </div>
         </div>
       </aside>
     </>

@@ -24,6 +24,7 @@ import { PortalProvider } from "./context/PortalContext";
 import { readPreference, savePreference } from "./lib/preferences";
 import { rememberWelcome, shouldShowWelcome } from "./lib/welcome";
 import LoadingScreen from "./components/LoadingScreen";
+import { atmospherePreference } from "./lib/appearance";
 
 const GamePage = lazy(() => import("./components/GamePage"));
 const OrgChart = lazy(() => import("./components/OrgChart"));
@@ -85,14 +86,19 @@ function AppContent() {
     () => readPreference("geoTheme", "light") !== "dark",
   );
   const [menuOpen, setMenuOpen] = useState(false);
-  const [festive, setFestive] = useState(
-    () => readPreference("geoChristmasMotion", "on") !== "off",
+  const [atmosphere, setAtmosphere] = useState(() =>
+    atmospherePreference(
+      readPreference("geoChristmasAtmosphere", ""),
+      readPreference("geoChristmasMotion", "on"),
+    ),
   );
-  const toggleFestive = () =>
-    setFestive((value) => {
-      savePreference("geoChristmasMotion", value ? "off" : "on");
-      return !value;
-    });
+  const festive = atmosphere !== "off";
+  const changeAtmosphere = (value) => {
+    const next = atmospherePreference(value, "on");
+    savePreference("geoChristmasAtmosphere", next);
+    savePreference("geoChristmasMotion", next === "off" ? "off" : "on");
+    setAtmosphere(next);
+  };
   const closeMenu = useCallback(() => setMenuOpen(false), []);
   const openWelcome = useCallback(() => {
     setMenuOpen(false);
@@ -113,7 +119,7 @@ function AppContent() {
   }, [location.pathname]);
   return (
     <div
-      className={`${game ? "game-shell" : projection ? "quiz-projection-shell" : "app-shell"} ${!festive ? "quiz-motion-off" : ""}`}
+      className={`${game ? "game-shell" : projection ? "quiz-projection-shell" : "app-shell"} atmosphere-${atmosphere} ${!festive ? "quiz-motion-off" : ""}`}
     >
       <a
         href="#main-content"
@@ -131,13 +137,15 @@ function AppContent() {
         <Sidebar open={menuOpen} onClose={closeMenu} onWelcome={openWelcome} />
       )}
       <div className="app-body" inert={menuOpen || undefined}>
-        {!immersive && <ChristmasEffects enabled={festive} />}
+        {!immersive && (
+          <ChristmasEffects enabled={festive} atmosphere={atmosphere} />
+        )}
         {!immersive && (
           <DynamicHeader
             isLightMode={isLightMode}
             toggleTheme={() => setLightMode((v) => !v)}
-            festive={festive}
-            toggleFestive={toggleFestive}
+            atmosphere={atmosphere}
+            setAtmosphere={changeAtmosphere}
             onMenu={() => setMenuOpen((v) => !v)}
             menuOpen={menuOpen}
           />

@@ -1,5 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { atmospherePreference } from "../src/lib/appearance.js";
+
 import {
   christmasInfo,
   limaDate,
@@ -10,6 +12,14 @@ import {
   readPreference,
   savePreference,
 } from "../src/lib/preferences.js";
+
+test("appearance preferences retain a previous pause and safely migrate missing or corrupt values", () => {
+  assert.equal(atmospherePreference(null, "on"), "soft");
+  assert.equal(atmospherePreference("", "off"), "off");
+  assert.equal(atmospherePreference("unknown", "off"), "off");
+  assert.equal(atmospherePreference("festive", "off"), "festive");
+  assert.equal(atmospherePreference("off", "on"), "off");
+});
 
 test("countdown uses the calendar day in Lima around UTC midnight", () => {
   assert.deepEqual(christmasInfo(new Date("2026-12-25T03:00:00Z")), {
