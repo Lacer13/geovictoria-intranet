@@ -1,0 +1,131 @@
+{
+  "date": "2026-11-20",
+  "url": "https://geovictoria-intranet-peru--mural-navidad-pox6l5mb.web.app/navidad",
+  "channel": "mural-navidad",
+  "hostingVersion": "7f0f5874f9614a08",
+  "expiresAt": "2026-11-27T19:38:42.999830053Z",
+  "productionFrontendDeployed": false,
+  "backendPublished": true,
+  "ruleset": "projects/geovictoria-intranet-peru/rulesets/8a67ed0a-cb8e-4e32-96c8-287231dc135f",
+  "rulesSha256": "81064ed4b7b35378342c9e860b67413e9e8da25aa6f6404dd3cd940521d2dfbf",
+  "index": "projects/geovictoria-intranet-peru/databases/(default)/collectionGroups/greetings/indexes/CICAgOjXh4EK",
+  "indexState": "READY",
+  "publishedRulesMatchTestedSource": true,
+  "previousRuleset": "projects/geovictoria-intranet-peru/rulesets/b7e99f84-4e06-41dc-9706-72b06a3cdc27",
+  "previousRulesSourceCommit": "b2823c9196a9b53eb7bc3c0dd64b6b44f38616fc",
+  "testsPassed": 103,
+  "rulesTestsPassed": 30,
+  "publicQuerySucceeded": true,
+  "localUiChecks": {
+    "namedPublication": true,
+    "anonymousPublication": true,
+    "anonymousNameDiscarded": true,
+    "twoBrowsersRealtime": true,
+    "adminHideRestore": true,
+    "mobileWidth320": true
+  },
+  "resources": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "bytes": 1544,
+      "sha256": "06ff33953c3d2f32edf263d8b628bec681742b92d938ba578b30f908a791a712"
+    },
+    {
+      "path": "assets/index-CiJmLUHE.js",
+      "status": 200,
+      "bytes": 59,
+      "sha256": "1db455b7e37f40934d032847b88e92510685595fbd8068d4689fb202302b5784"
+    },
+    {
+      "path": "assets/rolldown-runtime-D2aABDIb.js",
+      "status": 200,
+      "bytes": 680,
+      "sha256": "760907b0f57761fcae7a1113e535296fa7e31deaa87aa6138e19917ae7e00a86"
+    },
+    {
+      "path": "assets/react-DbMM3Pz9.js",
+      "status": 200,
+      "bytes": 228576,
+      "sha256": "1aa337c1eaee5d0da619083f58824dc8b374974312d37eff98307fdc9c121acb"
+    },
+    {
+      "path": "assets/createLucideIcon-7eCvd4fb.js",
+      "status": 200,
+      "bytes": 1855,
+      "sha256": "9a447768920f4b44d21d49d9834058c8e7f1e45b94254ba1cd748ef70ba09e8a"
+    },
+    {
+      "path": "assets/season-DG87JeAL.js",
+      "status": 200,
+      "bytes": 1943,
+      "sha256": "55bb1d00923a1d7af9515bd68c430e2bc1fbc07f360312fa4e0c1288a1336181"
+    },
+    {
+      "path": "assets/arrow-right-B8hwxgWV.js",
+      "status": 200,
+      "bytes": 283,
+      "sha256": "639de16f192b1911494c961547f0cb25db028866d1d3a423d9929202e19a6b4a"
+    },
+    {
+      "path": "assets/firebase-core-DA9Bs8IG.js",
+      "status": 200,
+      "bytes": 25641,
+      "sha256": "9b1e24ef8594b1f9fb5edf1cb8dcfcf47f37363a7fa77fbc7f77cbc9d306a731"
+    },
+    {
+      "path": "assets/firebase-auth-BIy4XP7j.js",
+      "status": 200,
+      "bytes": 88405,
+      "sha256": "3e1d3f432117f939d3f65b35128a34b99deea5ae3a7ad262f6cbdca6bb0cc3de"
+    },
+    {
+      "path": "assets/firebase-0DfxxbWd.js",
+      "status": 200,
+      "bytes": 305651,
+      "sha256": "8c8cb8aec648be94a0d29d494a5fb052186fca70b18a6340d2b6735b890ed201"
+    },
+    {
+      "path": "assets/geovictoria-intranet-BOt5ETNv.js",
+      "status": 200,
+      "bytes": 222504,
+      "sha256": "cd8ff6b65d950e628d87d4dab09ae6f86d875f29e688d7e300e28a38cdc789c3"
+    },
+    {
+      "path": "assets/geovictoria-intranet-aO8WF6Xb.css",
+      "status": 200,
+      "bytes": 114467,
+      "sha256": "b5694ee421063bc621cd1b01856f573afb3d14766f850628c72552bd326ae7bd"
+    },
+    {
+      "path": "assets/Admin-CgnQ7jQi.js",
+      "status": 200,
+      "bytes": 85811,
+      "sha256": "59a5f84bca4df5776b738704b3824a8fba33b1b6d732ca967d2d6835af6287e0"
+    },
+    {
+      "path": "assets/Christmas-B-hbqvIQ.js",
+      "status": 200,
+      "bytes": 5616,
+      "sha256": "897ecd90b4af095644922f3f3cf83624acecf69daee08171118fd3a6ff687ba4"
+    },
+    {
+      "path": "assets/ChristmasWall-C4Eq8YsD.css",
+      "status": 200,
+      "bytes": 3816,
+      "sha256": "2077d68de83e4c518d88fa0c5950588bc93e07165b489c3fa141f19943ceffcd"
+    },
+    {
+      "path": "assets/ChristmasWall-C75JJMVZ.js",
+      "status": 200,
+      "bytes": 11470,
+      "sha256": "bcdc1209f271145f7c83d63d5617b18d1233a8464931dc0fa0b3da14f82710d0"
+    }
+  ],
+  "rulesHashNormalization": "CRLF to LF; trim leading and trailing whitespace",
+  "publicUiChecks": {
+    "emptyWallLoaded": true,
+    "composerOpened": true,
+    "testGreetingsOnlyInEmulator": true
+  }
+}

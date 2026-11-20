@@ -17,7 +17,7 @@ export const portalPages = [
     detail: "Solicitudes y reportes",
     path: "/solicitudes",
   },
-  { title: "Navidad en equipo", detail: "Saludos e ideas", path: "/navidad" },
+  { title: "Navidad en equipo", detail: "Mural de saludos con firma o anónimos e ideas para celebrar", path: "/navidad" },
   {
     title: "Amigo secreto",
     detail: "Sorteo, invitación y regalos",

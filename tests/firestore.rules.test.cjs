@@ -19,6 +19,10 @@ const {
   updateDoc,
   deleteDoc,
   serverTimestamp,
+  query,
+  where,
+  orderBy,
+  limit,
 } = sdkRequire("firebase/firestore");
 
 let env;
@@ -50,6 +54,86 @@ const news = {
   date: "16 nov",
   timestamp: "2026-11-16T12:00:00Z",
 };
+
+const greeting = () => ({
+  recipient: "Equipo",
+  authorName: "Ana",
+  isAnonymous: false,
+  message: "Gracias por acompañarnos este año.",
+  visible: true,
+  createdAt: serverTimestamp(),
+});
+const wallPath = "christmasWalls/2026/greetings";
+test("wall accepts signed and anonymous greetings but rejects hidden identity, invalid text and forged dates", async () => {
+  const visitor = env.unauthenticatedContext().firestore();
+  await assertSucceeds(setDoc(doc(visitor, wallPath, "signed"), greeting()));
+  await assertSucceeds(
+    setDoc(doc(visitor, wallPath, "anonymous"), {
+      ...greeting(),
+      isAnonymous: true,
+      authorName: "Anónimo",
+    }),
+  );
+  for (const [id, fields] of Object.entries({
+    identity: { isAnonymous: true },
+    extra: { email: "private@example.test" },
+    blank: { message: " \n\t " },
+    oversized: { message: "x".repeat(1001) },
+    shortName: { authorName: "A" },
+    multilineName: { authorName: "Ana\nOtra" },
+    blankName: { authorName: "  " },
+    multilineRecipient: { recipient: "Equipo\nPersona" },
+    hidden: { visible: false },
+    date: { createdAt: new Date("2020-01-01") },
+  }))
+    await assertFails(
+      setDoc(doc(visitor, wallPath, id), { ...greeting(), ...fields }),
+    );
+});
+test("only administrators can hide or restore a greeting; hidden messages cannot be read by visitors", async () => {
+  const visitor = env.unauthenticatedContext().firestore(),
+    admin = env.authenticatedContext("wall-admin", { admin: true }).firestore();
+  const post = doc(visitor, wallPath, "moderation"),
+    adminPost = doc(admin, wallPath, "moderation");
+  await assertSucceeds(setDoc(post, greeting()));
+  await assertFails(
+    updateDoc(post, { visible: false, moderatedAt: serverTimestamp() }),
+  );
+  await assertFails(updateDoc(post, { authorName: "Otra persona" }));
+  await assertFails(deleteDoc(post));
+  await assertSucceeds(
+    updateDoc(adminPost, { visible: false, moderatedAt: serverTimestamp() }),
+  );
+  await assertFails(getDoc(post));
+  await assertFails(getDocs(collection(visitor, wallPath)));
+  const visible = await assertSucceeds(
+    getDocs(
+      query(
+        collection(visitor, wallPath),
+        where("visible", "==", true),
+        orderBy("createdAt", "desc"),
+        limit(30),
+      ),
+    ),
+  );
+  assert.ok(!visible.docs.some((d) => d.id === "moderation"));
+  await assertSucceeds(getDoc(adminPost));
+  await assertSucceeds(
+    getDocs(
+      query(
+        collection(admin, wallPath),
+        orderBy("createdAt", "desc"),
+        limit(30),
+      ),
+    ),
+  );
+  await assertFails(updateDoc(adminPost, { message: "Texto cambiado" }));
+  await assertSucceeds(
+    updateDoc(adminPost, { visible: true, moderatedAt: serverTimestamp() }),
+  );
+  await assertSucceeds(getDoc(post));
+  await assertFails(deleteDoc(adminPost));
+});
 
 test("anonymous visitors can submit a valid report but cannot read the inbox", async () => {
   const db = env.unauthenticatedContext().firestore();

@@ -4,12 +4,10 @@ import {
   ArrowDownToLine,
   ArrowRight,
   Check,
-  Copy,
   Gift,
-  Heart,
   Sparkles,
 } from "lucide-react";
-import toast from "react-hot-toast";
+import ChristmasWall from "./ChristmasWall";
 import ChristmasArt from "./ChristmasArt";
 import QRCodeSection from "./QRCodeSection";
 import { christmasInfo, downloadChristmasCalendar } from "../lib/season";
@@ -43,28 +41,12 @@ function loadIdeas() {
 export default function Christmas() {
   const { days, year } = christmasInfo();
   const [done, setDone] = useState(loadIdeas);
-  const [name, setName] = useState("");
-  const [message, setMessage] = useState(
-    "Gracias por ser parte de mi año. ¡Que tengas una Navidad llena de alegría!",
-  );
   const toggle = (id) => {
     const next = done.includes(id)
       ? done.filter((v) => v !== id)
       : [...done, id];
     setDone(next);
     savePreference("geoChristmasIdeas", JSON.stringify(next));
-  };
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(
-        `${name.trim() ? `Para ${name.trim()}:\n\n` : ""}${message.trim()}\n\nCon cariño, tu equipo GeoVictoria ✨`,
-      );
-      toast.success("Tu saludo está listo para compartir");
-    } catch {
-      toast.error(
-        "No pudimos copiar el saludo. Puedes seleccionar el texto y copiarlo.",
-      );
-    }
   };
   return (
     <div className="page-enter">
@@ -107,69 +89,7 @@ export default function Christmas() {
         </div>
         <ChristmasArt className="hero-art" />
       </section>
-      <details
-        className="disclosure panel seasonal-disclosure"
-        id="greeting-creator"
-      >
-        <summary>
-          <Heart size={21} />
-          <span>
-            Crear un saludo<small>Personaliza y copia tu mensaje</small>
-          </span>
-        </summary>
-        <section className="greeting-builder">
-          <div>
-            <div className="input-group">
-              <label htmlFor="greeting-name">
-                ¿A quién va dirigido? <span className="muted">(opcional)</span>
-              </label>
-              <input
-                id="greeting-name"
-                className="input-field"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                maxLength={80}
-                placeholder="Nombre de la persona"
-              />
-            </div>
-            <div className="input-group">
-              <label htmlFor="greeting-text">Tu mensaje</label>
-              <textarea
-                id="greeting-text"
-                className="input-field"
-                rows={4}
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                maxLength={1000}
-              />
-            </div>
-            <button
-              className="btn btn-forest"
-              disabled={!message.trim()}
-              onClick={copy}
-            >
-              <Copy size={16} /> Copiar saludo
-            </button>
-            <small className="greeting-privacy">
-              Se copia al portapapeles; tú eliges dónde compartirlo.
-            </small>
-          </div>
-          <div className="greeting-preview">
-            <span className="greeting-preview-star">✧</span>
-            <span className="eyebrow">UN DETALLE PARA TI</span>
-            <h3>{name.trim() ? `Para ${name.trim()}` : "Querido equipo,"}</h3>
-            <p>{message || "Tu mensaje aparecerá aquí…"}</p>
-            <span className="greeting-signature">
-              Con cariño,
-              <br />
-              <strong>tu equipo GeoVictoria</strong>
-            </span>
-            <span className="greeting-preview-sprig" aria-hidden="true">
-              ✳
-            </span>
-          </div>
-        </section>
-      </details>
+      <ChristmasWall />
       <details className="disclosure panel seasonal-disclosure">
         <summary>
           <Sparkles size={21} />
