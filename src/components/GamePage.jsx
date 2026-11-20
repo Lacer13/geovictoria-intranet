@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import ActiveBreak from "./ActiveBreak";
+import ArenaOnline from "../game/ArenaOnline.jsx";
 import { ChevronLeft, Snowflake } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const GamePage = () => {
+  const [gameMode, setGameMode] = useState(() => location.hash.includes("sala=") ? "arena" : "adventure");
   const navigate = useNavigate();
 
   const handleBack = () => {
@@ -35,8 +37,12 @@ const GamePage = () => {
 
       {/* Game Container */}
       <div className="game-page-content">
+        <nav className="game-mode-tabs" aria-label="Cómo quieres jugar">
+          <button aria-pressed={gameMode === "adventure"} onClick={() => setGameMode("adventure")}>Aventura individual</button>
+          <button aria-pressed={gameMode === "arena"} onClick={() => setGameMode("arena")}>Arena en línea · 1 vs 1</button>
+        </nav>
         <div className="game-stage">
-          <ActiveBreak />
+          {gameMode === "arena" ? <ArenaOnline /> : <ActiveBreak />}
         </div>
       </div>
     </div>

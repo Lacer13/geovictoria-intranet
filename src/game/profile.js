@@ -1,5 +1,14 @@
 import { readPreference, savePreference } from "../lib/preferences.js";
 import { CHARACTERS, FREE_CHARACTERS } from "./characters.js";
+import { campaignProgress } from "./missions.js";
+
+export function readCampaignProgress() {
+  try { return campaignProgress(JSON.parse(readPreference("geo_campaign_v1", "{}"))); }
+  catch { return campaignProgress(null); }
+}
+export function saveCampaignProgress(progress) {
+  savePreference("geo_campaign_v1", JSON.stringify(campaignProgress(progress)));
+}
 
 export function readGameProfile() {
   let unlocked = [];

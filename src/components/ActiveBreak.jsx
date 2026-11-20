@@ -42,7 +42,10 @@ import {
   readGameProfile,
   readGameSettings,
   saveGameProfile,
+  readCampaignProgress,
+  saveCampaignProgress,
 } from "../game/profile.js";
+import { MISSIONS, completeMission } from "../game/missions.js";
 import { savePreference } from "../lib/preferences.js";
 import CharacterPreview from "../game/CharacterPreview.jsx";
 import ScoreSubmitter from "../game/ScoreSubmitter.jsx";
@@ -151,6 +154,10 @@ function PauseDialog({ reason, settings, onChange, onResume, onMenu }) {
 }
 
 export default function ActiveBreak() {
+  const [adventure, setAdventure] = useState(true);
+  const [campaign, setCampaign] = useState(readCampaignProgress);
+  const campaignRef = useRef(campaign);
+  const [missionId, setMissionId] = useState(() => MISSIONS[Math.min(campaign.completed.length, MISSIONS.length - 1)].id);
   const [mode, setMode] = useState("menu");
   const modeRef = useRef("menu");
   const [profile, setProfile] = useState(readGameProfile);
@@ -252,11 +259,14 @@ export default function ActiveBreak() {
   }, [changeMode]);
   useGameInput(input, mode, pause, resume);
 
-  const start = () => {
+  const start = (nextMission = missionId) => {
     if (!assets || assets.characterId !== character.id) return;
     clearInput(input);
     credited.current = false;
-    game.current = createGame(character.id, { animationVersion: assets.animation?.version || 1 });
+    const missionIndex = MISSIONS.findIndex(m => m.id === nextMission);
+    if (adventure && (missionIndex < 0 || missionIndex > campaignRef.current.completed.length)) return;
+    setMissionId(nextMission);
+    game.current = createGame(character.id, { animationVersion: assets.animation?.version || 1, missionId: adventure ? nextMission : null });
     actor.current = createAnimator();
     setHud(gameSummary(game.current));
     void audio.current?.unlock();
@@ -312,6 +322,10 @@ export default function ActiveBreak() {
       if (game.current.phase !== "playing") {
         if (!credited.current) {
           credited.current = true;
+          if (game.current.phase === "victory" && game.current.missionId) {
+            const progress = completeMission(campaignRef.current, game.current.missionId, game.current.score);
+            campaignRef.current = progress; setCampaign(progress); saveCampaignProgress(progress);
+          }
           const next = {
             ...profileRef.current,
             coins: profileRef.current.coins + game.current.score,
@@ -359,15 +373,16 @@ export default function ActiveBreak() {
     <div className="arcade">
       {mode === "menu" && (
         <>
+
           <div className="arcade-intro">
             <div className="arcade-intro-copy">
               <span className="arcade-eyebrow">
-                Pausa activa 2.0 · Edición Navidad
+                {adventure ? "Aventura navideña · 3 niveles" : "Arcade rápido · Edición Navidad"}
               </span>
               <h1>
-                Una pausa.
+                {adventure ? "Una aventura." : "Una pausa."}
                 <br />
-                <em>Una misión navideña.</em>
+                <em>{adventure ? "Tres destinos." : "Una misión navideña."}</em>
               </h1>
               <p>
                 Esquiva, dispara y recupera las luces del taller con los
@@ -418,6 +433,25 @@ export default function ActiveBreak() {
               </label>
             </div>
           </div>
+          <section className="campaign-selection" aria-label="Elige tu aventura">
+            <div className="campaign-mode" role="group" aria-label="Modo individual">
+              <button type="button" aria-pressed={adventure} onClick={() => setAdventure(true)}>Aventura · 3 niveles</button>
+              <button type="button" aria-pressed={!adventure} onClick={() => setAdventure(false)}>Arcade rápido</button>
+            </div>
+            {adventure && <>
+              <h2>Una aventura, tres destinos</h2>
+              <p>Desbloquea la siguiente misión al completar la anterior. Tu avance se guarda en este dispositivo.</p>
+              <div className="campaign-missions">
+                {MISSIONS.map((mission, index) => <button type="button" key={mission.id} disabled={index > campaign.completed.length}
+                  aria-pressed={missionId === mission.id} onClick={() => setMissionId(mission.id)} style={{ "--mission-color": mission.color }}>
+                  <span className="campaign-number">{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{mission.title}</strong><span>{mission.subtitle}</span>
+                  <small>{campaign.completed.includes(mission.id) ? "Completada · volver a jugar" : index > campaign.completed.length ? "Completa la misión anterior" : "Disponible · 2–4 min aprox."}</small>
+                </button>)}
+              </div>
+              <p className="campaign-brief">{MISSIONS.find(m => m.id === missionId).description}</p>
+            </>}
+          </section>
           <section
             className="arcade-menu"
             aria-labelledby="arcade-select-title"
@@ -541,7 +575,7 @@ export default function ActiveBreak() {
               <button
                 className="arcade-button"
                 disabled={!assets || assets.characterId !== character.id}
-                onClick={start}
+                onClick={() => start()}
               >
                 <Play size={20} /> Iniciar misión
               </button>
@@ -583,9 +617,8 @@ export default function ActiveBreak() {
               <strong>{hud.score.toString().padStart(4, "0")}</strong>
             </div>
             <p className="arcade-objective">
-              {hud.boss
-                ? "Protege las luces · derrota al guardián"
-                : "Recupera 100 puntos para llegar al taller"}
+              {hud.missionId && <strong>Nivel {MISSIONS.findIndex(m => m.id === hud.missionId) + 1}/3 · </strong>}
+              {hud.objective}
             </p>
             <button
               className="arcade-icon-button"
@@ -678,7 +711,7 @@ export default function ActiveBreak() {
             </span>
             <h1 id="arcade-result-title" ref={resultHeading} tabIndex={-1}>
               {mode === "victory"
-                ? "¡El taller vuelve a brillar!"
+                ? game.current.missionId ? `${MISSIONS.find(m => m.id === game.current.missionId).title}: misión cumplida` : "¡El taller vuelve a brillar!"
                 : "Recarga y vuelve a intentarlo"}
             </h1>
             <p>
@@ -691,9 +724,11 @@ export default function ActiveBreak() {
               <strong>{hud.score}</strong>
               <span>puntos · +{hud.score} Data</span>
             </div>
-            <ScoreSubmitter key={mode} score={hud.score} />
+            {!game.current.missionId && <ScoreSubmitter key={mode} score={hud.score} />}
             <div className="arcade-result-actions">
-              <button className="arcade-button" onClick={start}>
+              {mode === "victory" && game.current.missionId && MISSIONS.findIndex(m => m.id === game.current.missionId) < MISSIONS.length - 1 &&
+                <button className="arcade-button" onClick={() => start(MISSIONS[MISSIONS.findIndex(m => m.id === game.current.missionId) + 1].id)}>Continuar al siguiente nivel</button>}
+              <button className="arcade-button" onClick={() => start()}>
                 <RotateCcw size={18} /> Jugar otra vez
               </button>
               <button className="arcade-button secondary" onClick={menu}>

@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-20",
+  "channel": "aventura-arena",
+  "url": "https://geovictoria-intranet-peru--aventura-arena-jzta4odk.web.app/juego",
+  "hostingVersion": "b043628e27f1a137",
+  "expiresAt": "2026-11-27T14:59:45.992513975Z",
+  "productionDeployed": false,
+  "arenaPublicServer": "https://geovictoria-arena.onrender.com",
+  "arenaWebSocket": "wss://geovictoria-arena.onrender.com/arena",
+  "arenaSourceCommit": "a5af131fbbe23287d0534a79405809dbedec83d9",
+  "renderService": "srv-dc05vvuc6qcc73b7l8jg",
+  "renderDeployment": "dep-dc0600ec6qcc73b7l9n0",
+  "renderPlan": "free",
+  "currentProjectBillingEnabled": false,
+  "testsPassed": 101,
+  "resources": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "bytes": 1546,
+      "sha256": "95f3b2cbf788ea75cfc5fe0ded13b3d3212b214e7586fcf94924a92c1010c022"
+    },
+    {
+      "path": "assets/GamePage-CkARHRxK.css",
+      "status": 200,
+      "bytes": 20613,
+      "sha256": "a072386c949f65299d4aaa179818fd8f16cf22d903c5e377084e289be7345271"
+    },
+    {
+      "path": "assets/GamePage-DkSfsWRw.js",
+      "status": 200,
+      "bytes": 84719,
+      "sha256": "df8e5b06d7b552e6e8d13b5c8c67c8d514caf25136ac7d11dde659762da8bc70"
+    }
+  ],
+  "publicArenaChecks": {
+    "health": 200,
+    "independentBrowsers": 2,
+    "sharedScore": true,
+    "reloadResume": true,
+    "disconnectDeadline": true,
+    "normalTimeResult": true,
+    "rematch": true
+  }
+}
