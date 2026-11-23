@@ -4,7 +4,7 @@
   "url": "https://geovictoria-intranet-peru--santa-enlaces-mlgn75mr.web.app/admin?seccion=amigo-secreto",
   "hostingVersion": "b1048f2f30f1f5ae",
   "expiresAt": "2026-11-30T15:35:30.058533965Z",
-  "productionFrontendDeployed": false,
+  "productionFrontendDeployed": true,
   "testsPassed": 107,
   "rulesTestsPassed": 30,
   "firestoreRulesDeployed": false,
@@ -171,5 +171,7 @@
       "sha256": "38b457354ee1b0ab6a36aa10e3a420e0dd7f4ae5133c1babb3e68ce75bd3364b"
     }
   ],
-  "verifiedAt": "2026-11-23T15:36:24.791Z"
+  "verifiedAt": "2026-11-23T15:36:24.791Z",
+  "productionUrl": "https://geovictoria-intranet-peru.web.app/admin?seccion=amigo-secreto",
+  "promotedAt": "2026-11-23T16:25:32.068Z"
 }
