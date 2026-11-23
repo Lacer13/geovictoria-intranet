@@ -50,9 +50,9 @@ test("quiz drafts keep incomplete work and require every configured question bef
     }),
   );
 });
-test("contests accept 1–10 questions with 2–6 distinct alternatives and a valid answer index", () => {
+test("contests accept 1–10 questions with 2–5 distinct alternatives and a valid answer index", () => {
   for (const count of [1, 3, 8, 10]) {
-    for (const options of [2, 3, 4, 5, 6]) {
+    for (const options of [2, 3, 4, 5]) {
       const q = {
         prompt: "Ensayo",
         options: Array.from({ length: options }, (_, i) => `Alternativa ${i}`),
@@ -69,7 +69,7 @@ test("contests accept 1–10 questions with 2–6 distinct alternatives and a va
       assert.ok(!quizQuestionReady({ ...q, correctIndex: options }));
     }
   }
-  for (const options of [["Una"], Array(7).fill("Demasiadas"), ["Sí", " sí "]])
+  for (const options of [["Una"], Array(6).fill("Demasiadas"), ["Sí", " sí "]])
     assert.ok(
       !quizQuestionReady({
         prompt: "Ensayo",
@@ -102,11 +102,11 @@ test("resizing preserves existing work, creates independent blanks and clears a 
   assert.equal(resizeQuizOptions({ ...q, correctIndex: 1 }, 3).correctIndex, 1);
   for (const count of [0, 11, 2.5])
     assert.throws(() => resizeQuizQuestions(original, count));
-  for (const count of [1, 7, 2.5])
+  for (const count of [1, 6, 2.5])
     assert.throws(() => resizeQuizOptions(q, count));
 });
-test("round tally counts precisely the current alternatives, including F, and rejects nonexistent choices", () => {
-  for (const count of [2, 3, 5, 6]) {
+test("round tally counts precisely the current alternatives, including E, and rejects nonexistent choices", () => {
+  for (const count of [2, 3, 5]) {
     const round = {
       options: Array(count).fill("Ensayo"),
       correctIndex: count - 1,

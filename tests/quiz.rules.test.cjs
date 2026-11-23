@@ -316,23 +316,23 @@ test("quiz questions lock when the lobby opens and archiving removes public acce
 });
 
 test("configurable contests validate every question and alternative at both supported boundaries", async () => {
-  const six = {
+  const five = {
     ...question,
-    options: ["A", "B", "C", "D", "E", "F"],
-    correctIndex: 5,
+    options: ["A", "B", "C", "D", "E"],
+    correctIndex: 4,
   };
   await assertSucceeds(
     lobby("FLEX2222", [{ ...question, options: ["Sí", "No"] }], true),
   );
-  await assertSucceeds(lobby("FLEX2223", Array(10).fill(six), true));
+  await assertSucceeds(lobby("FLEX2223", Array(10).fill(five), true));
   const data = (await getDoc(doc(admin, "quizEvents", "FLEX2223"))).data();
   for (const [index, questions] of [
     [],
-    Array(11).fill(six),
-    [{ ...six, options: ["Una"] }],
-    [{ ...six, options: Array(7).fill("Demasiadas") }],
-    [{ ...six, correctIndex: 6 }],
-    [...Array(9).fill(six), { ...six, correctIndex: 6 }],
+    Array(11).fill(five),
+    [{ ...five, options: ["Una"] }],
+    [{ ...five, options: Array(6).fill("Demasiadas") }],
+    [{ ...five, correctIndex: 5 }],
+    [...Array(9).fill(five), { ...five, correctIndex: 5 }],
   ].entries()) {
     await assertFails(
       setDoc(doc(admin, "quizEvents", `BADQ222${index + 2}`), {
@@ -353,17 +353,17 @@ test("configurable contests validate every question and alternative at both supp
   );
   await assertFails(
     updateDoc(doc(admin, "quizEvents", "FLEX2223"), {
-      questions: Array(3).fill(six),
+      questions: Array(3).fill(five),
       revision: 2,
       updatedAt: serverTimestamp(),
     }),
   );
 });
 
-test("answer rules follow the actual option count and support F on question ten", async () => {
+test("answer rules follow the actual option count and support E on question ten", async () => {
   for (const [code, count, index] of [
     ["FLEX2224", 2, 0],
-    ["FLEX2225", 6, 9],
+    ["FLEX2225", 5, 9],
   ]) {
     const q = {
       ...question,
@@ -372,6 +372,18 @@ test("answer rules follow the actual option count and support F on question ten"
     };
     await lobby(code, Array(index + 1).fill(q), true);
     const p = await join(code);
+    await assertFails(
+      start(
+        code,
+        false,
+        {
+          ...q,
+          options: ["A", "B", "C", "D", "E", "F"],
+          correctIndex: 5,
+        },
+        index,
+      ),
+    );
     await start(code, false, q, index);
     const ref = answerRef(visitor, code, p.token, String(index));
     await assertFails(setDoc(ref, { ...answer(p), selectedIndex: count }));
@@ -466,8 +478,8 @@ test("a verified delegated administrator can save and open the maximum configura
   const event = doc(delegated, "quizEvents", code);
   const q = {
     ...question,
-    options: ["A", "B", "C", "D", "E", "F"],
-    correctIndex: 5,
+    options: ["A", "B", "C", "D", "E"],
+    correctIndex: 4,
   };
   await assertSucceeds(
     setDoc(event, {

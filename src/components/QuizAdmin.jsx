@@ -431,6 +431,11 @@ function QuizEditor({ event, onDirty }) {
               onChange={(e) => chooseCount("options", Number(e.target.value))}
               disabled={busy || changedElsewhere}
             >
+              {q.options.length > QUIZ_MAX_OPTIONS && (
+                <option value={q.options.length} disabled>
+                  {q.options.length} anteriores · elige de 2 a 5
+                </option>
+              )}
               {Array.from(
                 { length: QUIZ_MAX_OPTIONS - QUIZ_MIN_OPTIONS + 1 },
                 (_, i) => i + QUIZ_MIN_OPTIONS,
@@ -441,6 +446,12 @@ function QuizEditor({ event, onDirty }) {
               ))}
             </select>
           </label>
+          {q.options.length > QUIZ_MAX_OPTIONS && (
+            <p className="form-error" role="alert">
+              Esta pregunta tiene más de cinco alternativas. Elige de 2 a 5
+              antes de guardar; te pediremos confirmar la reducción.
+            </p>
+          )}
           <fieldset className="quiz-editor-options">
             <legend>Alternativas · marca una respuesta correcta</legend>
             {q.options.map((option, i) => (

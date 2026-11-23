@@ -4,7 +4,7 @@
 
 1. Abre **Administración → Concurso en vivo** o `/admin?seccion=concurso` con tu cuenta autorizada.
 2. Pulsa **Nuevo concurso**. El título empieza como «Tickets de implementación · Reto navideño» y puedes cambiarlo.
-3. Elige la **Cantidad de preguntas**, de **1 a 10**, incluido el bonus. En cada pregunta selecciona **Alternativas de esta pregunta**, de **2 a 6**, y marca una respuesta correcta. El tiempo sigue siendo editable de 10 a 90 segundos. La última pregunta siempre es el **Bonus ×2**; un concurso de una sola pregunta consiste en el bonus.
+3. Elige la **Cantidad de preguntas**, de **1 a 10**, incluido el bonus. En cada pregunta selecciona **Alternativas de esta pregunta**, de **2 a 5**, y marca una respuesta correcta. El tiempo sigue siendo editable de 10 a 90 segundos. La última pregunta siempre es el **Bonus ×2**; un concurso de una sola pregunta consiste en el bonus.
 4. Puedes guardar un borrador incompleto y continuar otro día. El indicador muestra cuántas preguntas están listas. Para abrir el registro, todas las preguntas elegidas deben estar completas, con alternativas diferentes, respuesta correcta y cambios guardados.
 5. Pulsa **Abrir registro**. Desde ese momento se fijan las preguntas. Para corregirlas o repetir la exposición, usa **Duplicar guardado**: obtendrás un borrador nuevo con otro código y sin participantes ni puntajes anteriores.
 
@@ -100,3 +100,9 @@ También se comprobó que un administrador autorizado por correo verificado pued
 [Vista previa del editor](https://geovictoria-intranet-peru--quiz-config-iqgj13i5.web.app/admin?seccion=concurso), disponible hasta el 30 de noviembre. [Registro de verificación](releases/quiz-config-preview-2026-11-23.json).
 
 Se promovió la versión inmutable `1d9d565bffa2e499` de la vista previa aprobada. Se verificaron los hashes de 20 recursos, seis rutas del portal y la coincidencia de las reglas publicadas con la fuente probada. La entrada pública muestra «Preguntas a medida» y el enlace de administración. [Registro de producción y reversión](releases/quiz-config-production-2026-11-23.json) · [Captura de producción](../design/concurso/2026-11-23/produccion.jpg).
+
+## Ajuste del máximo de alternativas · 23 de noviembre de 2026
+
+El rango vigente es de **2 a 5 alternativas (A–E)** por pregunta, con **1–10 preguntas**. El selector, la validación del borrador y las reglas de Firestore aplican el mismo límite. Se conserva el bonus en la última pregunta y toda la lógica de tiempos, puntajes, clasificación y CSV. Las referencias a seis alternativas de la entrega anterior describen su validación histórica.
+
+La revisión del ajuste comprobó el selector con solo 2, 3, 4 y 5 alternativas; un borrador ficticio anterior con seis conserva su contenido hasta confirmar la reducción a cinco, desmarca F y permite guardar tras marcar E. [Captura del ensayo con cinco alternativas](../design/concurso/2026-11-23/cinco-alternativas.jpg). Se aprobaron las 110 pruebas del portal, las 34 de permisos y la compilación.

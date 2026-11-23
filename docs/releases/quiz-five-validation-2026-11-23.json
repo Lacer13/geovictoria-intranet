@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-23",
+  "minimumOptions": 2,
+  "maximumOptions": 5,
+  "minimumQuestions": 1,
+  "maximumQuestions": 10,
+  "testsPassed": 110,
+  "rulesTestsPassed": 34,
+  "buildPassed": true,
+  "uiChecks": {
+    "selectableOptions": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "oldSixOptionDraftPreservedUntilConfirmation": true,
+    "reduceToFiveConfirmed": true,
+    "removedCorrectAnswerCleared": true,
+    "optionECorrectSaved": true
+  },
+  "screenshot": "design/concurso/2026-11-23/cinco-alternativas.jpg",
+  "productionFixturesCreated": false
+}
