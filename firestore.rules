@@ -130,13 +130,12 @@ service cloud.firestore {
     // Live quiz: private authoring, public stage, capability-protected answers.
     function quizCode(code) { return code.matches('^[A-HJ-NP-Z2-9]{8}$'); }
     function quizOptions(options) {
-      return options is list && options.size() >= 2 && options.size() <= 6
+      return options is list && options.size() >= 2 && options.size() <= 5
         && options[0] is string && options[0].size() <= 150
         && options[1] is string && options[1].size() <= 150
         && (options.size() <= 2 || (options[2] is string && options[2].size() <= 150))
         && (options.size() <= 3 || (options[3] is string && options[3].size() <= 150))
-        && (options.size() <= 4 || (options[4] is string && options[4].size() <= 150))
-        && (options.size() <= 5 || (options[5] is string && options[5].size() <= 150));
+        && (options.size() <= 4 || (options[4] is string && options[4].size() <= 150));
     }
     function quizQuestion(q) {
       let options = q.options;
@@ -146,7 +145,7 @@ service cloud.firestore {
       // Required field reads plus size == 4 reject missing or extra keys.
       return q.size() == 4
         && q.prompt.matches('(?s).{0,500}')
-        && options is list && count >= 2 && count <= 6
+        && options is list && count >= 2 && count <= 5
         && correct is int && correct >= -1 && correct < count
         && seconds is int && seconds >= 10 && seconds <= 90;
     }
