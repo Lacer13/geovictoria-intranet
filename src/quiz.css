@@ -1474,3 +1474,19 @@ button.quiz-option:disabled {
 .quiz-motion-off .quiz-score-track i {
   animation: none;
 }
+.quiz-projection .quiz-host-controls {
+  position: static;
+  background: #143a2c;
+  border: 1px solid #c6a35266;
+  color: #fff9ed;
+  margin-bottom: 20px;
+}
+.quiz-projection .quiz-host-controls h3,
+.quiz-projection .quiz-host-controls p {
+  color: #fff9ed;
+}
+.quiz-presenter-login {
+  display: inline-block;
+  color: #eed090;
+  margin: 0 0 16px;
+}

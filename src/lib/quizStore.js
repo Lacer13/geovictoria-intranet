@@ -72,6 +72,7 @@ export async function openQuizLobby(code, revision) {
   const eventRef = doc(db, "quizEvents", code);
   await runTransaction(db, async (t) => {
     const snapshot = await t.get(eventRef);
+    const previousRoom = await t.get(quizRoomRef(code));
     const event = snapshot.data();
     if (
       !snapshot.exists() ||
@@ -98,7 +99,9 @@ export async function openQuizLobby(code, revision) {
       answerCounts: [0, 0, 0, 0],
       leaderboard: [],
       createdBy: event.createdBy,
-      createdAt: serverTimestamp(),
+      createdAt: previousRoom.exists()
+        ? previousRoom.data().createdAt
+        : serverTimestamp(),
       updatedAt: serverTimestamp(),
     });
     t.set(doc(db, "quizRooms", code, "stats", "registration"), {
@@ -330,5 +333,70 @@ export async function archiveQuiz(code) {
         answerCounts: [0, 0, 0, 0],
         updatedAt: serverTimestamp(),
       });
+  });
+}
+
+export async function resetQuiz(code, expectedRevision) {
+  ensureAdmin();
+  const eventRef = doc(db, "quizEvents", code);
+  await runTransaction(db, async (t) => {
+    const event = (await t.get(eventRef)).data();
+    const room = await t.get(quizRoomRef(code));
+    if (!event || event.revision !== expectedRevision)
+      throw new Error(
+        "El concurso cambió. Vuelve a abrirlo antes de reiniciar.",
+      );
+    t.update(eventRef, {
+      status: "archived",
+      revision: event.revision + 1,
+      updatedAt: serverTimestamp(),
+    });
+    if (room.exists())
+      t.update(quizRoomRef(code), {
+        status: "archived",
+        question: null,
+        correctIndex: null,
+        leaderboard: [],
+        answerCounts: [0, 0, 0, 0],
+        updatedAt: serverTimestamp(),
+      });
+  });
+  // Stop public access first. Failed cleanup can safely be retried while archived.
+  const groups = ["players", "credentials", "names"];
+  const stats = await getDocFromServer(
+    doc(db, "quizRooms", code, "stats", "registration"),
+  );
+  const rounds = await getDocsFromServer(
+    collection(quizRoomRef(code), "rounds"),
+  );
+  const snapshots = await Promise.all([
+    ...groups.map((name) =>
+      getDocsFromServer(collection(quizRoomRef(code), name)),
+    ),
+    ...rounds.docs.map((round) =>
+      getDocsFromServer(collection(round.ref, "answers")),
+    ),
+  ]);
+  const refs = [
+    ...snapshots.flatMap((snapshot) => snapshot.docs.map((d) => d.ref)),
+    ...rounds.docs.map((d) => d.ref),
+    ...(stats.exists() ? [stats.ref] : []),
+  ];
+  for (let i = 0; i < refs.length; i += 400) {
+    const batch = writeBatch(db);
+    refs.slice(i, i + 400).forEach((ref) => batch.delete(ref));
+    await batch.commit();
+  }
+  await runTransaction(db, async (t) => {
+    const event = (await t.get(eventRef)).data();
+    if (event.status !== "archived" || event.revision !== expectedRevision + 1)
+      throw new Error(
+        "El concurso cambió durante el reinicio. Revisa su estado.",
+      );
+    t.update(eventRef, {
+      status: "draft",
+      revision: event.revision + 1,
+      updatedAt: serverTimestamp(),
+    });
   });
 }

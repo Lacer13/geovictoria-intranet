@@ -7,6 +7,7 @@ import {
   ExternalLink,
   Gift,
   Play,
+  RotateCcw,
   Plus,
   Save,
   Snowflake,
@@ -22,6 +23,7 @@ import {
   openQuizLobby,
   quizAnswersRef,
   saveQuizDraft,
+  resetQuiz,
 } from "../lib/quizStore";
 import {
   emptyQuiz,
@@ -57,6 +59,7 @@ export default function QuizAdmin() {
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [dirty, setDirty] = useState(false);
+  const [resetting, setResetting] = useState(false);
   const [retry, setRetry] = useState(0);
   useEffect(
     () =>
@@ -185,6 +188,15 @@ export default function QuizAdmin() {
             >
               <Copy size={16} /> Duplicar guardado
             </button>
+            {event.status !== "draft" && (
+              <button
+                className="btn btn-secondary"
+                disabled={busy}
+                onClick={() => setResetting(true)}
+              >
+                <RotateCcw size={16} /> Reiniciar este concurso
+              </button>
+            )}
           </div>
           {event.status === "draft" ? (
             <QuizEditor key={event.id} event={event} onDirty={setDirty} />
@@ -201,6 +213,48 @@ export default function QuizAdmin() {
             <QuizHost key={event.id} event={event} />
           )}
         </>
+      )}
+      {resetting && event && (
+        <Modal
+          title="Reiniciar este concurso"
+          onClose={() => !busy && setResetting(false)}
+        >
+          <p>
+            Se borrarán los participantes, respuestas y puntajes de esta
+            partida. Las preguntas, el título, el código y el enlace se
+            conservan para volver a usar el mismo concurso. Descarga el CSV
+            antes si necesitas guardar los resultados.
+          </p>
+          <div className="modal-actions">
+            <button
+              className="btn btn-secondary"
+              disabled={busy}
+              onClick={() => setResetting(false)}
+            >
+              Cancelar
+            </button>
+            <button
+              className="btn btn-primary"
+              disabled={busy}
+              onClick={async () => {
+                setBusy(true);
+                try {
+                  await resetQuiz(event.id, event.revision);
+                  setResetting(false);
+                  toast.success(
+                    "Concurso reiniciado. Abre el registro para empezar de nuevo.",
+                  );
+                } catch (e) {
+                  toast.error(e.message);
+                } finally {
+                  setBusy(false);
+                }
+              }}
+            >
+              {busy ? "Reiniciando…" : "Borrar partida y conservar preguntas"}
+            </button>
+          </div>
+        </Modal>
       )}
     </section>
   );
@@ -565,7 +619,7 @@ function QuizEditor({ event, onDirty }) {
     </div>
   );
 }
-function QuizHost({ event }) {
+export function QuizHost({ event, projection = false }) {
   const state = useQuizRoom(event.id);
   const { room, players } = state;
   const [busy, setBusy] = useState(false);
@@ -778,48 +832,59 @@ function QuizHost({ event }) {
           Reconectando. Espera la conexión antes de avanzar.
         </p>
       )}
-      <div className="quiz-sharing">
-        <a
-          className="btn btn-forest"
-          href={`/concurso/pantalla/${event.id}`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <ExternalLink size={16} /> Abrir pantalla para proyectar
-        </a>
-        <button
-          className="btn btn-secondary"
-          onClick={() =>
-            navigator.clipboard
-              .writeText(quizJoinUrl(event.id))
-              .then(() => toast.success("Enlace de ingreso copiado."))
-              .catch(() => toast.error("Copia el enlace que aparece debajo."))
-          }
-        >
-          <Copy size={16} /> Copiar enlace para participantes
-        </button>
-        <a href={quizJoinUrl(event.id)} target="_blank" rel="noreferrer">
-          {quizJoinUrl(event.id)}
-        </a>
-      </div>
-      <p className="quiz-preview-label">
-        Vista del público · Los controles del presentador no aparecen en la
-        proyección.
-      </p>
-      <QuizStage code={event.id} room={room} players={players} compact />
-      <div className="quiz-archive">
-        <p>
-          Descarga los resultados antes de archivar. Se conservarán las
-          preguntas para duplicarlas.
+      {!projection && (
+        <div className="quiz-sharing">
+          <a
+            className="btn btn-forest"
+            href={`/concurso/pantalla/${event.id}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <ExternalLink size={16} /> Abrir pantalla para proyectar
+          </a>
+          <button
+            className="btn btn-secondary"
+            onClick={() =>
+              navigator.clipboard
+                .writeText(quizJoinUrl(event.id))
+                .then(() => toast.success("Enlace de ingreso copiado."))
+                .catch(() => toast.error("Copia el enlace que aparece debajo."))
+            }
+          >
+            <Copy size={16} /> Copiar enlace para participantes
+          </button>
+          <a href={quizJoinUrl(event.id)} target="_blank" rel="noreferrer">
+            {quizJoinUrl(event.id)}
+          </a>
+        </div>
+      )}
+      {!projection && (
+        <p className="quiz-preview-label">
+          Vista del público · Los controles del presentador no aparecen en la
+          proyección.
         </p>
-        <button
-          className="text-link"
-          disabled={busy}
-          onClick={() => setConfirm("archive")}
-        >
-          Archivar concurso
-        </button>
-      </div>
+      )}
+      <QuizStage
+        code={event.id}
+        room={room}
+        players={players}
+        compact={!projection}
+      />
+      {!projection && (
+        <div className="quiz-archive">
+          <p>
+            Descarga los resultados antes de archivar. Se conservarán las
+            preguntas para duplicarlas.
+          </p>
+          <button
+            className="text-link"
+            disabled={busy}
+            onClick={() => setConfirm("archive")}
+          >
+            Archivar concurso
+          </button>
+        </div>
+      )}
       {confirm && (
         <Modal
           title={

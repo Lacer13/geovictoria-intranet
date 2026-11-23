@@ -16,6 +16,7 @@ const {
   getDoc,
   getDocs,
   setDoc,
+  deleteDoc,
   updateDoc,
   writeBatch,
   serverTimestamp,
@@ -542,4 +543,75 @@ test("a verified delegated administrator can save and open the maximum configura
     updatedAt: serverTimestamp(),
   });
   await assertSucceeds(batch.commit());
+});
+
+test("administrators reset an archived game and reuse its code; active data and visitor deletes stay protected", async () => {
+  const code = "RSET2345";
+  await lobby(code);
+  const p = await join(code);
+  await start(code);
+  await setDoc(answerRef(visitor, code, p.token), answer(p));
+  await assertFails(deleteDoc(playerRef(admin, code, p.id)));
+  const eventRef = doc(admin, "quizEvents", code);
+  const oldRoom = (await getDoc(roomRef(admin, code))).data();
+  const stop = writeBatch(admin);
+  stop.update(eventRef, {
+    status: "archived",
+    revision: 2,
+    updatedAt: serverTimestamp(),
+  });
+  stop.update(roomRef(admin, code), {
+    status: "archived",
+    question: null,
+    correctIndex: null,
+    leaderboard: [],
+    answerCounts: [0, 0, 0, 0],
+    updatedAt: serverTimestamp(),
+  });
+  await assertSucceeds(stop.commit());
+  await assertFails(deleteDoc(playerRef(visitor, code, p.id)));
+  const clear = writeBatch(admin);
+  for (const ref of [
+    answerRef(admin, code, p.token),
+    playerRef(admin, code, p.id),
+    doc(admin, "quizRooms", code, "credentials", p.id),
+    doc(admin, "quizRooms", code, "names", "ana de prueba"),
+    statsRef(admin, code),
+    doc(admin, "quizRooms", code, "rounds", "0"),
+  ])
+    clear.delete(ref);
+  await assertSucceeds(clear.commit());
+  await assertSucceeds(
+    updateDoc(eventRef, {
+      status: "draft",
+      revision: 3,
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  const reopen = writeBatch(admin);
+  reopen.update(eventRef, {
+    status: "live",
+    revision: 4,
+    updatedAt: serverTimestamp(),
+  });
+  reopen.set(roomRef(admin, code), {
+    ...oldRoom,
+    status: "lobby",
+    questionIndex: -1,
+    question: null,
+    startedAt: null,
+    correctIndex: null,
+    answerCounts: [0, 0, 0, 0],
+    leaderboard: [],
+    updatedAt: serverTimestamp(),
+  });
+  reopen.set(statsRef(admin, code), {
+    count: 0,
+    lastPlayerId: "",
+    updatedAt: serverTimestamp(),
+  });
+  await assertSucceeds(reopen.commit());
+  await assertSucceeds(join(code));
+  assert.equal((await getDoc(eventRef)).data().questions.length, 8);
+  await assertFails(setDoc(answerRef(visitor, code, p.token), answer(p)));
 });

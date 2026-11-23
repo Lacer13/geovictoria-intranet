@@ -16,7 +16,7 @@ No se incluyen preguntas supuestamente oficiales del módulo: el contenido real 
 
 ## Compartir y proyectar
 
-- **Abrir pantalla para proyectar** abre una página independiente, sin el menú de la intranet ni los controles de administración. Puedes usar **Pantalla completa** y salir con Escape del navegador.
+- **Abrir pantalla para proyectar** abre una página independiente, sin el menú de la intranet; si el navegador tiene una sesión administrativa autorizada, incluye los controles del presentador. Puedes usar **Pantalla completa** y salir con Escape del navegador.
 - La pantalla de espera incluye QR, código de ocho caracteres y nombres que aparecen en vivo al registrarse. También puedes copiar el enlace de ingreso.
 - Cada participante abre el enlace, escribe su nombre y conserva el mismo navegador durante el concurso. No necesita correo ni cuenta. El formulario avisa que su nombre y puntaje aparecerán en la pantalla.
 - Se admiten hasta 200 participantes. Un nombre ya registrado, sin distinguir mayúsculas, no puede usarse de nuevo. Si hay homónimos, deben añadir el apellido u otra distinción.
@@ -116,3 +116,11 @@ Se separan selección y envío. Todos esperan al cierre compartido antes de ver 
 Validación: 111 pruebas del portal, 34 de permisos y compilación. En un ensayo local de tres preguntas con dos participantes se comprobó cambiar de alternativa antes de enviar, la respuesta única confirmada, la espera sin revelar puntos, tres cierres automáticos, el reinicio de la selección, avance y bonus, cambio de líder y ganador. Ana terminó con 581 puntos y 2/3 aciertos; Ben, con 455 puntos. La clasificación móvil se revisó a 375 × 812 sin desbordamiento horizontal. No se usaron participantes ni concursos reales. [Captura de la espera](../design/concurso/2026-11-23/respuesta-en-espera.jpg).
 
 Publicado: [PR #9](https://github.com/Lacer13/geovictoria-intranet/pull/9) fusionado, GitHub Actions aprobado y versión `2df6f42cc48d874d` desplegada. Se verificaron 20 recursos por SHA-256, seis rutas y la conservación de las reglas de Firestore. [Administrar concurso](https://geovictoria-intranet-peru.web.app/admin?seccion=concurso) · [Registro de publicación y reversión](releases/quiz-flow-production-2026-11-23.json).
+
+## Controles en la presentación y reutilización del mismo concurso
+
+La pantalla para proyectar permite iniciar, cerrar y ver resultados, pasar a la siguiente pregunta y revelar al ganador cuando el presentador tiene una sesión administrativa autorizada en el mismo navegador. Para los demás sigue siendo una vista pública sin controles ni acceso a las preguntas privadas.
+
+En Administración → Concurso en vivo, **Reiniciar este concurso** conserva título, preguntas, código y QR. Tras confirmar, cierra la sala y borra participantes, reservas de nombres, credenciales, rondas, respuestas y puntajes. Descarga antes el CSV si lo necesitas. Después vuelve a ser un borrador: pulsa **Abrir registro** y podrán ingresar de nuevo con el mismo enlace. Si se interrumpe la limpieza, la sala queda archivada y se puede reintentar el reinicio. Solo administradores pueden limpiar datos y únicamente con la sala archivada.
+
+Comprobado con 111 pruebas del portal, 35 de permisos y compilación. La prueba de reinicio verifica el bloqueo de borrado en una partida activa, rechazo de visitantes, limpieza con la sala archivada, conservación de preguntas, reapertura del mismo código y nuevo registro.

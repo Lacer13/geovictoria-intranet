@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { lazy, Suspense, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   CheckCircle2,
@@ -25,6 +25,7 @@ import {
 } from "../lib/quiz";
 import QuizStage, { QuizRanking, QuizRoster } from "./QuizStage";
 import "../quiz.css";
+const QuizPresentation = lazy(() => import("./QuizPresentation"));
 
 export default function Quiz() {
   const [code, setCode] = useState("");
@@ -503,7 +504,17 @@ function Projection({ code }) {
         <p className="inline-notice">Reconectando con la sala…</p>
       )}
       {state.status === "ready" ? (
-        <QuizStage code={code} room={state.room} players={state.players} />
+        <Suspense
+          fallback={
+            <QuizStage code={code} room={state.room} players={state.players} />
+          }
+        >
+          <QuizPresentation
+            code={code}
+            room={state.room}
+            players={state.players}
+          />
+        </Suspense>
       ) : (
         <QuizUnavailable status={state.status} retry={state.retry} />
       )}

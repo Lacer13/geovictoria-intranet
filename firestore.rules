@@ -184,13 +184,15 @@ service cloud.firestore {
           || (request.resource.data.questions == resource.data.questions && request.resource.data.title == resource.data.title
             && ((resource.data.status == 'draft' && request.resource.data.status == 'live')
               || (resource.data.status == 'live' && request.resource.data.status == 'finished')
-              || (resource.data.status != 'archived' && request.resource.data.status == 'archived'))));
+              || (request.resource.data.status == 'archived')
+              || (resource.data.status == 'archived' && request.resource.data.status == 'draft'))));
       allow delete: if false;
     }
     match /quizRooms/{code} {
       function room() { return get(/databases/$(database)/documents/quizRooms/$(code)).data; }
       function active() { return quizCode(code) && room().status != 'archived'; }
       function lobby() { return quizCode(code) && room().status == 'lobby'; }
+      function canReset() { return isAdmin() && room().status == 'archived'; }
       function validRoom(d) {
         return quizCode(code) && d.keys().hasOnly(['title', 'status', 'questionIndex', 'questionCount', 'question', 'startedAt', 'correctIndex', 'answerCounts', 'leaderboard', 'createdBy', 'createdAt', 'updatedAt'])
           && text(d.title, 100) && d.status in ['lobby', 'question', 'closing', 'reveal', 'ranking', 'finished', 'archived']
@@ -214,7 +216,8 @@ service cloud.firestore {
         && request.resource.data.question == null && request.resource.data.startedAt == null
         && request.resource.data.leaderboard.size() == 0 && request.resource.data.createdAt == request.time;
       allow update: if isAdmin() && validRoom(request.resource.data)
-        && request.resource.data.get('questionCount', 8) == resource.data.get('questionCount', 8)
+        && (request.resource.data.get('questionCount', 8) == resource.data.get('questionCount', 8)
+          || (resource.data.status == 'archived' && request.resource.data.status == 'lobby'))
         && request.resource.data.createdAt == resource.data.createdAt && request.resource.data.createdBy == resource.data.createdBy;
       allow delete: if false;
       match /players/{playerId} {
@@ -227,7 +230,8 @@ service cloud.firestore {
           && getAfter(/databases/$(database)/documents/quizRooms/$(code)/names/$(request.resource.data.name.lower())).data.playerId == playerId
           && getAfter(/databases/$(database)/documents/quizRooms/$(code)/stats/registration).data.lastPlayerId == playerId
           && getAfter(/databases/$(database)/documents/quizRooms/$(code)/stats/registration).data.count == get(/databases/$(database)/documents/quizRooms/$(code)/stats/registration).data.count + 1;
-        allow update, delete: if false;
+        allow update: if false;
+        allow delete: if canReset();
       }
       match /credentials/{playerId} {
         allow read: if isAdmin();
@@ -235,7 +239,8 @@ service cloud.firestore {
           && request.resource.data.keys().hasOnly(['token', 'createdAt'])
           && request.resource.data.token.matches('^[a-f0-9]{64}$') && request.resource.data.createdAt == request.time
           && getAfter(/databases/$(database)/documents/quizRooms/$(code)/players/$(playerId)).data.joinedAt == request.time;
-        allow update, delete: if false;
+        allow update: if false;
+        allow delete: if canReset();
       }
       match /names/{nameKey} {
         allow get: if isAdmin() || active();
@@ -244,7 +249,8 @@ service cloud.firestore {
           && request.resource.data.createdAt == request.time
           && nameKey == getAfter(/databases/$(database)/documents/quizRooms/$(code)/players/$(request.resource.data.playerId)).data.name.lower()
           && getAfter(/databases/$(database)/documents/quizRooms/$(code)/players/$(request.resource.data.playerId)).data.joinedAt == request.time;
-        allow update, delete: if false;
+        allow update: if false;
+        allow delete: if canReset();
       }
       match /stats/registration {
         allow read: if isAdmin() || active();
@@ -254,11 +260,11 @@ service cloud.firestore {
           && request.resource.data.count is int && request.resource.data.count == resource.data.count + 1
           && request.resource.data.count <= 200 && request.resource.data.updatedAt == request.time
           && getAfter(/databases/$(database)/documents/quizRooms/$(code)/players/$(request.resource.data.lastPlayerId)).data.joinedAt == request.time;
-        allow delete: if false;
+        allow delete: if canReset();
       }
       match /rounds/{index} {
         allow read, create, update: if isAdmin();
-        allow delete: if false;
+        allow delete: if canReset();
         match /answers/{token} {
           // A 256-bit capability stays only in its owner's browser, never in a QR or player list.
           allow get: if isAdmin() || (active() && token.matches('^[a-f0-9]{64}$'));
@@ -273,7 +279,8 @@ service cloud.firestore {
             && get(/databases/$(database)/documents/quizRooms/$(code)/rounds/$(index)).data.closedAt == null
             && request.time >= get(/databases/$(database)/documents/quizRooms/$(code)/rounds/$(index)).data.startedAt
             && request.time < get(/databases/$(database)/documents/quizRooms/$(code)/rounds/$(index)).data.startedAt + duration.value(get(/databases/$(database)/documents/quizRooms/$(code)/rounds/$(index)).data.seconds, 's');
-          allow update, delete: if false;
+          allow update: if false;
+        allow delete: if canReset();
         }
       }
     }
