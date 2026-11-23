@@ -93,8 +93,10 @@ Pruebas: 110 del portal y 34 de permisos; compilación de producción. El ensayo
 
 Capturas con datos ficticios: [editor](../design/concurso/2026-11-23/editor.jpg), [editor móvil](../design/concurso/2026-11-23/editor-movil.jpg), [seis alternativas en móvil](../design/concurso/2026-11-23/seis-alternativas-movil.jpg).
 
-La publicación debe desplegar las reglas compatibles y el frontend validado como una misma entrega. Hasta entonces, la vista previa permite revisar la interfaz; los nuevos tamaños requieren las reglas de esta rama para guardarse.
+Publicado el 23 de noviembre con autorización del usuario: [PR #7](https://github.com/Lacer13/geovictoria-intranet/pull/7) fusionado en `main`, interfaz y reglas de Firestore desplegadas. [Administrar concurso](https://geovictoria-intranet-peru.web.app/admin?seccion=concurso). Las 110 pruebas del portal, 34 de permisos y la compilación pasaron también en [GitHub Actions de main](https://github.com/Lacer13/geovictoria-intranet/actions/runs/45245153028).
 
 También se comprobó que un administrador autorizado por correo verificado puede crear, editar y abrir un concurso de diez preguntas y seis alternativas. La consulta de autorización conserva el requisito de registro activo con rol `owner` o `admin`; se evita repetir la lectura del mismo documento.
 
 [Vista previa del editor](https://geovictoria-intranet-peru--quiz-config-iqgj13i5.web.app/admin?seccion=concurso), disponible hasta el 30 de noviembre. [Registro de verificación](releases/quiz-config-preview-2026-11-23.json).
+
+Se promovió la versión inmutable `1d9d565bffa2e499` de la vista previa aprobada. Se verificaron los hashes de 20 recursos, seis rutas del portal y la coincidencia de las reglas publicadas con la fuente probada. La entrada pública muestra «Preguntas a medida» y el enlace de administración. [Registro de producción y reversión](releases/quiz-config-production-2026-11-23.json) · [Captura de producción](../design/concurso/2026-11-23/produccion.jpg).

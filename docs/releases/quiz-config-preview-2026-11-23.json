@@ -4,11 +4,11 @@
   "url": "https://geovictoria-intranet-peru--quiz-config-iqgj13i5.web.app/admin?seccion=concurso",
   "hostingVersion": "1d9d565bffa2e499",
   "expiresAt": "2026-11-30T18:59:23.145144064Z",
-  "productionFrontendDeployed": false,
+  "productionFrontendDeployed": true,
   "testsPassed": 110,
   "rulesTestsPassed": 34,
-  "firestoreRulesDeployed": false,
-  "rulesDeploymentRequired": true,
+  "firestoreRulesDeployed": true,
+  "rulesDeploymentRequired": false,
   "rulesSourceSha256": "8e99a1b50c8adb70d140b3656d64c54594ce336b88d3272f992c9ed4ee5b9bf5",
   "authenticationDomainsChanged": false,
   "arenaServerChanged": false,
@@ -181,5 +181,7 @@
       "sha256": "0e7a4771e827bdcee1fabdaa829e62a62b625dd024c557d27f20873b629d3098"
     }
   ],
-  "verifiedAt": "2026-11-23T19:00:08.536Z"
+  "verifiedAt": "2026-11-23T19:00:08.536Z",
+  "productionUrl": "https://geovictoria-intranet-peru.web.app/admin?seccion=concurso",
+  "promotedAt": "2026-11-23T19:07:06.532Z"
 }

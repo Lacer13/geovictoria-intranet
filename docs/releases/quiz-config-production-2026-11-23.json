@@ -1,0 +1,231 @@
+{
+  "date": "2026-11-23",
+  "project": "geovictoria-intranet-peru",
+  "channel": "live",
+  "url": "https://geovictoria-intranet-peru.web.app/admin?seccion=concurso",
+  "sourceCommit": "c040a9fbeee0d7f62ae8d6c8ab5e31de40a6ffe7",
+  "mergeCommit": "c21c9db3516cff4c53fab539b2bddb119944c73d",
+  "pullRequest": "https://github.com/Lacer13/geovictoria-intranet/pull/7",
+  "hostingVersion": "1d9d565bffa2e499",
+  "previousHostingVersion": "b1048f2f30f1f5ae",
+  "releaseTime": "2026-11-23T19:07:06.532Z",
+  "deployment": "Promoción por ID inmutable de la vista previa validada y autorizada por el usuario",
+  "rollbackCommand": "npx --yes firebase-tools@15.34.1 hosting:clone geovictoria-intranet-peru@b1048f2f30f1f5ae geovictoria-intranet-peru:live --project geovictoria-intranet-peru --non-interactive",
+  "firestoreRulesDeployed": true,
+  "rules": {
+    "project": "geovictoria-intranet-peru",
+    "currentRuleset": "projects/geovictoria-intranet-peru/rulesets/6d1b97c3-0dd2-4c98-8db5-2a502beaa7f4",
+    "previousRuleset": "projects/geovictoria-intranet-peru/rulesets/8a67ed0a-cb8e-4e32-96c8-287231dc135f",
+    "rulesSourceSha256": "8e99a1b50c8adb70d140b3656d64c54594ce336b88d3272f992c9ed4ee5b9bf5",
+    "productionRulesMatchApprovedSource": true,
+    "verifiedAt": "2026-11-23T19:06:47.173Z"
+  },
+  "authenticationDomainsChanged": false,
+  "arenaServerChanged": false,
+  "testsPassed": 110,
+  "rulesTestsPassed": 34,
+  "emailsSentInProduction": false,
+  "resources": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "bytes": 1544,
+      "sha256": "0d30e73fa2f65c5e0d34eb86516d47be3077e5bfad5191ec7f98efe3c549c7e7",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "assets/index-CCBUMHjH.js",
+      "status": 200,
+      "bytes": 59,
+      "sha256": "5c73fcffa4e5895c8cbfcb5eff2050055871eb732cc09c6e112058c2c2972ddb",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/rolldown-runtime-D2aABDIb.js",
+      "status": 200,
+      "bytes": 680,
+      "sha256": "760907b0f57761fcae7a1113e535296fa7e31deaa87aa6138e19917ae7e00a86",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/react-DbMM3Pz9.js",
+      "status": 200,
+      "bytes": 228576,
+      "sha256": "1aa337c1eaee5d0da619083f58824dc8b374974312d37eff98307fdc9c121acb",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/createLucideIcon-7eCvd4fb.js",
+      "status": 200,
+      "bytes": 1855,
+      "sha256": "9a447768920f4b44d21d49d9834058c8e7f1e45b94254ba1cd748ef70ba09e8a",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/season-DG87JeAL.js",
+      "status": 200,
+      "bytes": 1943,
+      "sha256": "55bb1d00923a1d7af9515bd68c430e2bc1fbc07f360312fa4e0c1288a1336181",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/arrow-right-B8hwxgWV.js",
+      "status": 200,
+      "bytes": 283,
+      "sha256": "639de16f192b1911494c961547f0cb25db028866d1d3a423d9929202e19a6b4a",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/firebase-core-QgytaEf3.js",
+      "status": 200,
+      "bytes": 25641,
+      "sha256": "40aa2f76063cb5b2c3751de4f40ca9420ea6a9399464b50d5bdef1b9559007a5",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/firebase-auth-DE3U3gt7.js",
+      "status": 200,
+      "bytes": 88405,
+      "sha256": "afeef91969a0d4fb1f50e4b33e5a6043ce7d027631111b01b6e08979ea1bfc9f",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/firebase-CeA6kQtr.js",
+      "status": 200,
+      "bytes": 305651,
+      "sha256": "f33b426a94416997cafb3cf019e7cb96e78aa46e847d27599bdd4d30433151da",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/geovictoria-intranet-DlHdAfQL.js",
+      "status": 200,
+      "bytes": 225509,
+      "sha256": "55cfd86b9e6afe8a64ee244f21bb86dd34dcf05db31453bdc2c97aae773958f5",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/geovictoria-intranet-Dk8WBFoS.css",
+      "status": 200,
+      "bytes": 118749,
+      "sha256": "f86cb7434b5c8c89fb606dfaf16c574dcdb58287dcf4dd8a6fd79dcb3bb7e6c9",
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "path": "assets/Admin-BHRx6Lfd.js",
+      "status": 200,
+      "bytes": 91770,
+      "sha256": "6876d2d17558c0f94ad0f7118b4bd74c5fabe760cd17bc84dc1d81c922c2bcd6",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/Admin-lMyw9naM.css",
+      "status": 200,
+      "bytes": 3414,
+      "sha256": "eef15cd4973f0474c2dba8b6cbe20451edbc895d81d0b82e2c395026ebb592fe",
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "path": "assets/Christmas-wL-4XueP.js",
+      "status": 200,
+      "bytes": 5616,
+      "sha256": "4c658aed352f0ae34d9bf99deedd7bc7ac2cd2a25d7506c0255bd2e49fca167f",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/ChristmasWall-BBhhdozF.js",
+      "status": 200,
+      "bytes": 11470,
+      "sha256": "eec167f5b0e31c4320b5e105d4121fc4929d20c54228bdf888ac43cfafffea7d",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/ChristmasWall-C4Eq8YsD.css",
+      "status": 200,
+      "bytes": 3816,
+      "sha256": "2077d68de83e4c518d88fa0c5950588bc93e07165b489c3fa141f19943ceffcd",
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "path": "assets/GamePage-CkARHRxK.css",
+      "status": 200,
+      "bytes": 20613,
+      "sha256": "a072386c949f65299d4aaa179818fd8f16cf22d903c5e377084e289be7345271",
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "path": "assets/GamePage-Cu7yTHH4.js",
+      "status": 200,
+      "bytes": 84719,
+      "sha256": "3877cf109060ff4daadfc0eda8be9f590c0f2cd1ce60cda18770a6bf54f11310",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "assets/Quiz-CK-O_CJS.js",
+      "status": 200,
+      "bytes": 10574,
+      "sha256": "0e7a4771e827bdcee1fabdaa829e62a62b625dd024c557d27f20873b629d3098",
+      "contentType": "text/javascript; charset=utf-8"
+    }
+  ],
+  "verification": {
+    "routes": [
+      {
+        "path": "/",
+        "status": 200
+      },
+      {
+        "path": "/admin?seccion=concurso",
+        "status": 200
+      },
+      {
+        "path": "/concurso",
+        "status": 200
+      },
+      {
+        "path": "/concurso/pantalla/TEST2345",
+        "status": 200
+      },
+      {
+        "path": "/navidad",
+        "status": 200
+      },
+      {
+        "path": "/juego",
+        "status": 200
+      }
+    ],
+    "resourcesMatchValidatedBuild": true,
+    "securityHeadersPresent": true,
+    "verifiedAt": "2026-11-23T19:07:36.236Z",
+    "publicUiChecks": {
+      "entryLoaded": true,
+      "configuredQuestionCopy": true,
+      "adminLinkPresent": true,
+      "screenshot": "design/concurso/2026-11-23/produccion.jpg"
+    }
+  },
+  "localUiChecks": {
+    "questionCountExpandAndReduce": true,
+    "reduceConfirmation": true,
+    "removedCorrectAnswerCleared": true,
+    "savedDraft": true,
+    "lobbyQuestionCount": true,
+    "completeThreeQuestionGame": true,
+    "optionCounts": [
+      2,
+      3,
+      6
+    ],
+    "optionFStored": true,
+    "incorrectAnswerZeroPoints": true,
+    "finalPoints": 966,
+    "finalCorrect": 2,
+    "finalQuestions": 3,
+    "mobile375NoHorizontalOverflow": true,
+    "viewportReset": true
+  },
+  "ci": {
+    "url": "https://github.com/Lacer13/geovictoria-intranet/actions/runs/45245153028",
+    "conclusion": "success"
+  }
+}
