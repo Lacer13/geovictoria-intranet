@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   CheckCircle2,
   ChevronLeft,
   Maximize2,
   Radio,
+  Send,
   Snowflake,
   Trophy,
   Users,
@@ -126,6 +127,9 @@ function Participant({ code }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [sending, setSending] = useState(null);
+  const [selection, setSelection] = useState({ index: -1, value: null });
+  const [confirmed, setConfirmed] = useState({ index: -1, answer: null });
+  const sendLock = useRef(new Set());
   const [sendError, setSendError] = useState({ index: -1, message: "" });
   const registered = !!identity && players.some((p) => p.id === identity.id);
   const answerState = useQuizAnswer(
@@ -134,7 +138,11 @@ function Participant({ code }) {
     registered ? identity : null,
     room?.status !== "archived",
   );
-  const answer = answerState.answer;
+  const index = room?.questionIndex ?? -1;
+  const answer =
+    answerState.answer || (confirmed.index === index ? confirmed.answer : null);
+  const selectedIndex = selection.index === index ? selection.value : null;
+  const isSending = sending === index;
   const clock = useQuizClock(room);
   const own = room?.leaderboard?.find((p) => p.id === identity?.id);
   if (state.status !== "ready")
@@ -154,18 +162,34 @@ function Participant({ code }) {
       setBusy(false);
     }
   };
-  const send = async (selectedIndex) => {
-    if (sending !== null || answer || clock.remaining === 0 || state.cached)
+  const send = async () => {
+    if (
+      sendLock.current.has(index) ||
+      answer ||
+      selectedIndex === null ||
+      room.status !== "question" ||
+      clock.remaining === 0 ||
+      state.cached ||
+      answerState.loading ||
+      answerState.error
+    )
       return;
-    setSending(selectedIndex);
+    sendLock.current.add(index);
+    setSending(index);
     setSendError({ index: -1, message: "" });
-    const index = room.questionIndex;
     try {
-      await submitQuizAnswer(code, index, identity, selectedIndex);
+      const saved = await submitQuizAnswer(
+        code,
+        index,
+        identity,
+        selectedIndex,
+      );
+      setConfirmed({ index, answer: saved });
     } catch (e) {
       setSendError({ index, message: e.message });
     } finally {
-      setSending(null);
+      sendLock.current.delete(index);
+      setSending((current) => (current === index ? null : current));
     }
   };
   const revealed = ["reveal", "ranking", "finished"].includes(room.status);
@@ -284,7 +308,12 @@ function Participant({ code }) {
               final
             />
           ) : room.status === "ranking" ? (
-            <QuizRanking rows={room.leaderboard} ownId={identity.id} />
+            <QuizRanking
+              key={room.questionIndex}
+              rows={room.leaderboard}
+              ownId={identity.id}
+              room={room}
+            />
           ) : room.question ? (
             <div className="quiz-answer-card">
               <div className="quiz-question-meta">
@@ -306,17 +335,20 @@ function Participant({ code }) {
                 {room.question.options.map((option, i) => (
                   <button
                     key={`${room.questionIndex}:${i}`}
-                    className={`quiz-option option-${i} ${answer?.selectedIndex === i ? "is-selected" : ""} ${revealed && i === room.correctIndex ? "is-correct" : ""}`}
+                    className={`quiz-option option-${i} ${(answer?.selectedIndex ?? selectedIndex) === i ? "is-selected" : ""} ${revealed && i === room.correctIndex ? "is-correct" : ""}`}
+                    aria-pressed={
+                      (answer?.selectedIndex ?? selectedIndex) === i
+                    }
                     disabled={
                       room.status !== "question" ||
                       clock.remaining === 0 ||
                       !!answer ||
-                      sending !== null ||
+                      isSending ||
                       answerState.loading ||
                       answerState.error ||
                       state.cached
                     }
-                    onClick={() => send(i)}
+                    onClick={() => setSelection({ index, value: i })}
                   >
                     <b>{QUIZ_OPTION_LETTERS[i]}</b>
                     <span>{option}</span>
@@ -327,26 +359,64 @@ function Participant({ code }) {
                   </button>
                 ))}
               </div>
-              {sending !== null && (
+              {room.status === "question" && !answer && (
+                <div className="quiz-submit-panel">
+                  <p className="quiz-soft">
+                    {selectedIndex === null
+                      ? "Selecciona una alternativa para continuar."
+                      : `Opción ${QUIZ_OPTION_LETTERS[selectedIndex]} seleccionada. Puedes cambiarla antes de enviar.`}
+                  </p>
+                  <button
+                    className="btn btn-primary quiz-submit"
+                    onClick={send}
+                    disabled={
+                      selectedIndex === null ||
+                      isSending ||
+                      clock.remaining === 0 ||
+                      state.cached ||
+                      answerState.loading ||
+                      answerState.error
+                    }
+                  >
+                    <Send size={18} />{" "}
+                    {isSending ? "Enviando…" : "Enviar respuesta"}
+                  </button>
+                  <p className="quiz-soft">
+                    El tiempo sigue corriendo hasta que envíes. Solo se guarda
+                    una respuesta.
+                  </p>
+                </div>
+              )}
+              {isSending && (
                 <p className="quiz-status" role="status">
                   Enviando tu respuesta…
                 </p>
               )}
               {answer && !revealed && (
-                <p className="quiz-answer-confirmed" role="status">
-                  <CheckCircle2 size={20} /> Respuesta guardada. ¡Cruza los
-                  dedos!
-                </p>
-              )}
-              {!answer &&
-                sending === null &&
-                room.status === "question" &&
-                clock.remaining > 0 && (
-                  <p className="quiz-soft">
-                    Toca una opción para enviar. Una sola respuesta por
-                    pregunta.
+                <div className="quiz-answer-wait" role="status">
+                  <CheckCircle2 size={30} aria-hidden="true" />
+                  <strong>Respuesta recibida</strong>
+                  <span>
+                    Enviada en{" "}
+                    {(
+                      Math.max(
+                        0,
+                        milliseconds(answer.submittedAt) -
+                          milliseconds(room.startedAt),
+                      ) / 1000
+                    ).toLocaleString("es-PE", {
+                      minimumFractionDigits: 1,
+                      maximumFractionDigits: 1,
+                    })}{" "}
+                    s.
+                  </span>
+                  <p>
+                    {clock.remaining > 0
+                      ? "Esperando a que termine el tiempo. Los puntos aparecerán para todos a la vez."
+                      : "El tiempo terminó. Preparando los resultados para todos…"}
                   </p>
-                )}
+                </div>
+              )}
               {answerState.error && (
                 <p className="form-error" role="alert">
                   No pudimos recuperar tu respuesta. Recarga esta página para

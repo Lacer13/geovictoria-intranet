@@ -399,10 +399,27 @@ test("answer rules follow the actual option count and support E on question ten"
     );
     await assertSucceeds(
       updateDoc(roomRef(admin, code), {
-        status: "reveal",
+        status: "ranking",
         correctIndex: count - 1,
+        leaderboard: [
+          {
+            id: p.id,
+            name: "Ana de prueba",
+            rank: 1,
+            points: 497,
+            correct: 1,
+            elapsedMs: 1000,
+            previousPoints: 0,
+            previousRank: 1,
+            roundPoints: 497,
+          },
+        ],
         updatedAt: serverTimestamp(),
       }),
+    );
+    assert.equal(
+      (await getDoc(roomRef(visitor, code))).data().leaderboard[0].roundPoints,
+      497,
     );
     await assertFails(
       updateDoc(roomRef(admin, code), {

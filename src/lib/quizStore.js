@@ -13,7 +13,7 @@ import {
   createQuizCode,
   createQuizIdentity,
   normalizeQuizDraft,
-  rankQuizPlayers,
+  quizRoundStandings,
   readQuizIdentity,
   saveQuizIdentity,
   tallyQuizRound,
@@ -257,10 +257,11 @@ export async function closeQuizRound(code, index) {
     answersSnapshot.docs.map((d) => d.data()),
   );
   const players = playersSnapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
-  const leaderboard = rankQuizPlayers(players, [
-    ...rounds.filter((r) => r.tallied && r.questionIndex < index),
+  const leaderboard = quizRoundStandings(
+    players,
+    rounds.filter((r) => r.tallied && r.questionIndex < index),
     { ...current, results: tally.results },
-  ]);
+  );
   await runTransaction(db, async (t) => {
     const room = (await t.get(quizRoomRef(code))).data();
     const round = (await t.get(roundRef(code, index))).data();
@@ -271,7 +272,7 @@ export async function closeQuizRound(code, index) {
       );
     t.update(roundRef(code, index), { tallied: true, results: tally.results });
     t.update(quizRoomRef(code), {
-      status: "reveal",
+      status: "ranking",
       leaderboard,
       correctIndex: current.correctIndex,
       answerCounts: tally.counts,

@@ -238,6 +238,19 @@ export function rankQuizPlayers(players, rounds) {
     return { ...p, rank };
   });
 }
+export function quizRoundStandings(players, previousRounds, currentRound) {
+  const before = new Map(
+    rankQuizPlayers(players, previousRounds).map((p) => [p.id, p]),
+  );
+  return rankQuizPlayers(players, [...previousRounds, currentRound]).map(
+    (p) => ({
+      ...p,
+      previousPoints: before.get(p.id).points,
+      previousRank: before.get(p.id).rank,
+      roundPoints: p.points - before.get(p.id).points,
+    }),
+  );
+}
 export function createQuizIdentity(name) {
   const cleaned = String(name || "")
     .trim()

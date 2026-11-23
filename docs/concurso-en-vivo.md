@@ -25,12 +25,12 @@ No se incluyen preguntas supuestamente oficiales del módulo: el contenido real 
 ## Dirigir la competencia
 
 1. Cuando el equipo esté listo, pulsa **Iniciar pregunta 1**. La pregunta y sus alternativas aparecen simultáneamente en la proyección y los celulares.
-2. Cada persona toca una opción para enviar su única respuesta. «Respuesta guardada» significa que el servidor confirmó el envío. La elección se conserva al recargar.
-3. El contador del presentador muestra cuántas respuestas se recibieron. El tiempo de respuesta lo valida el servidor, no el reloj del celular.
-4. Pulsa **Cerrar y revelar respuesta**. Si todavía queda tiempo, aparece una confirmación antes de cerrar. Al llegar a cero, el servidor ya rechaza respuestas; el presentador sigue controlando cuándo se revela y avanza.
-5. Se muestra la respuesta correcta, el reparto de respuestas y los puntos de cada participante en su celular. Pulsa **Ver clasificación** para mostrar la tabla a todos.
-6. Inicia la siguiente pregunta y repite. Al llegar a la última pregunta aparece **Lanzar bonus doble**.
-7. Cierra el bonus, muestra la clasificación y pulsa **Revelar ganador**: aparecen el nombre, la corona, el podio y el confeti navideño.
+2. Cada persona selecciona una alternativa y pulsa **Enviar respuesta**. Puede cambiar su elección antes de enviar. Seleccionar no guarda ni detiene el tiempo; el servidor registra el instante en que recibe el envío y solo acepta una respuesta por pregunta.
+3. Después aparece **Respuesta recibida**, el tiempo empleado y la espera hasta que termine el contador. La respuesta correcta y los puntos de esa ronda permanecen ocultos durante la pregunta. «Recibida» significa que el servidor confirmó el envío; la elección enviada se conserva al recargar.
+4. **Mantén abierto el panel del presentador**. Al llegar el contador a cero, completa el cierre automáticamente y publica una misma actualización de resultados para participantes y proyección. Si el panel se cerró o perdió la conexión, vuelve a abrirlo para completar el cierre. El servidor rechaza envíos fuera del plazo. Se conserva **Cerrar pregunta y ver puntos** para un cierre anticipado con confirmación.
+5. La pantalla entre preguntas muestra la respuesta correcta, el reparto de respuestas desplegable, quién lidera y la clasificación. Cada fila muestra **+puntos de esta ronda**, el total que aumenta suavemente y las posiciones ganadas. El participante ve además su suma anterior + premio = total. Los efectos respetan movimiento reducido y la decoración quieta.
+6. Pulsa **Siguiente pregunta** cuando el equipo termine de revisar los resultados. El botón incluye el número siguiente y señala cuándo empieza el bonus. No avanza automáticamente ni salta esta pausa.
+7. Después del bonus, pulsa **Revelar ganador**: aparecen el nombre, la corona, el podio y el confeti navideño.
 
 Si se pierde la conexión al cerrar una pregunta, la sala puede permanecer en «Cerrando». **Completar cierre** retoma el cálculo; las respuestas aceptadas permanecen guardadas y no se suman dos veces. Recargar Administración permite retomar el estado compartido. Si dos presentadores intentan avanzar a la vez, las transacciones comprueban el estado y evitan saltar preguntas.
 
@@ -69,7 +69,7 @@ Las reglas usan escrituras atómicas y `getAfter` para validar que nombre, parti
 
 ## Validación
 
-El conjunto completo suma 110 pruebas del portal y 34 de reglas, incluidas pruebas específicas del concurso. Cubre opciones incompletas/repetidas, bonus, cierre anticipado, desempate, recuperación, registros parciales, nombre repetido, límite de 200, capacidades incorrectas, lectura de claves privadas, modificación de respuestas, tiempo falsificado, puntaje falsificado, respuesta futura/tardía y archivo.
+El conjunto completo suma 111 pruebas del portal y 34 de reglas, incluidas pruebas específicas del concurso. Cubre opciones incompletas/repetidas, bonus, cierre anticipado, desempate, recuperación, registros parciales, nombre repetido, límite de 200, capacidades incorrectas, lectura de claves privadas, modificación de respuestas, tiempo falsificado, puntaje falsificado, respuesta futura/tardía y archivo.
 
 El ensayo original de navegador utiliza `demo-geovictoria`, con presentador ficticio y preguntas identificadas como ENSAYO. En ese formato se verificaron edición y guardado de las ocho preguntas, apertura y QR, registro en vivo, respuesta única, recuperación al recargar, recorrido de las ocho preguntas, error sin puntos, bonus doble y ganador.
 
@@ -108,3 +108,9 @@ El rango vigente es de **2 a 5 alternativas (A–E)** por pregunta, con **1–10
 La revisión del ajuste comprobó el selector con solo 2, 3, 4 y 5 alternativas; un borrador ficticio anterior con seis conserva su contenido hasta confirmar la reducción a cinco, desmarca F y permite guardar tras marcar E. [Captura del ensayo con cinco alternativas](../design/concurso/2026-11-23/cinco-alternativas.jpg). Se aprobaron las 110 pruebas del portal, las 34 de permisos y la compilación.
 
 Publicado con autorización del usuario: [PR #8](https://github.com/Lacer13/geovictoria-intranet/pull/8) fusionado y versión `f5ad08a32a07ff10` desplegada con las reglas compatibles. Se verificaron 20 recursos por SHA-256 y seis rutas del portal. [Administrar concurso](https://geovictoria-intranet-peru.web.app/admin?seccion=concurso) · [Registro de publicación y reversión](releases/quiz-five-production-2026-11-23.json).
+
+## Envío, espera y resultados entre preguntas · 23 de noviembre de 2026
+
+Se separan selección y envío. Todos esperan al cierre compartido antes de ver la respuesta correcta y el premio. El panel del presentador cierra automáticamente al terminar el contador y muestra directamente la clasificación; el botón «Siguiente pregunta» controla el avance. Los premios por ronda y las posiciones anteriores se calculan a partir de las rondas guardadas sin cambiar la fórmula, el bonus, los desempates ni el CSV.
+
+Validación: 111 pruebas del portal, 34 de permisos y compilación. En un ensayo local de tres preguntas con dos participantes se comprobó cambiar de alternativa antes de enviar, la respuesta única confirmada, la espera sin revelar puntos, tres cierres automáticos, el reinicio de la selección, avance y bonus, cambio de líder y ganador. Ana terminó con 581 puntos y 2/3 aciertos; Ben, con 455 puntos. La clasificación móvil se revisó a 375 × 812 sin desbordamiento horizontal. No se usaron participantes ni concursos reales. [Captura de la espera](../design/concurso/2026-11-23/respuesta-en-espera.jpg).

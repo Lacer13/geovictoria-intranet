@@ -1253,3 +1253,224 @@ button.quiz-option:disabled {
 .quiz-motion-off .quiz-confetti {
   display: none;
 }
+.quiz-submit-panel {
+  margin-top: 24px;
+  display: grid;
+  gap: 12px;
+  text-align: center;
+}
+.quiz-submit-panel p {
+  margin: 0;
+  line-height: 1.6;
+  font-size: 0.875rem;
+}
+.quiz-submit {
+  min-height: 52px;
+  width: 100%;
+  justify-content: center;
+  font-size: 1rem;
+}
+.quiz-answer-wait {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 25px 18px;
+  margin-top: 24px;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  background: var(--muted-surface);
+  text-align: center;
+}
+.quiz-answer-wait svg {
+  color: var(--forest);
+}
+.quiz-answer-wait strong {
+  font-size: 1.125rem;
+}
+.quiz-answer-wait span,
+.quiz-answer-wait p {
+  font-size: 0.875rem;
+  line-height: 1.65;
+  margin: 0;
+}
+.quiz-answer-wait p {
+  max-width: 420px;
+  color: var(--text-muted);
+}
+.quiz-host-controls {
+  position: sticky;
+  top: 82px;
+  z-index: 8;
+  box-shadow: 0 8px 22px #0000000d;
+}
+.quiz-host-controls > div:first-child {
+  flex: 1 1 280px;
+}
+.quiz-host-help {
+  max-width: 580px;
+  line-height: 1.6;
+}
+.quiz-host-actions .btn-primary {
+  min-height: 50px;
+  font-size: 0.9375rem;
+}
+.quiz-correct-summary {
+  display: grid;
+  gap: 8px;
+  border-left: 3px solid #65a783;
+  background: var(--muted-surface);
+  padding: 18px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+}
+.quiz-correct-summary > span {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+.quiz-correct-summary strong {
+  font-size: 1.125rem;
+  overflow-wrap: anywhere;
+}
+.quiz-correct-summary details {
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+.quiz-correct-summary summary {
+  cursor: pointer;
+}
+.quiz-correct-summary details p {
+  margin: 10px 0 0;
+  overflow-wrap: anywhere;
+}
+.quiz-leader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid #bc8d2b66;
+  border-radius: 14px;
+  background: #bc8d2b12;
+  margin: 18px 0;
+}
+.quiz-leader > svg {
+  color: #bc8d2b;
+  flex-shrink: 0;
+}
+.quiz-leader > div {
+  display: grid;
+  flex: 1;
+  gap: 7px;
+  min-width: 0;
+}
+.quiz-leader span {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+.quiz-leader strong {
+  font-size: clamp(18px, 2.4vw, 28px);
+  overflow-wrap: anywhere;
+}
+.quiz-leader > b {
+  font-size: 1.125rem;
+  white-space: nowrap;
+}
+.quiz-personal-round {
+  display: grid;
+  gap: 8px;
+  border: 1px solid #bc8d2b55;
+  border-radius: 14px;
+  padding: 22px;
+  background: #bc8d2b0c;
+  text-align: center;
+}
+.quiz-personal-round > strong {
+  color: #aa791c;
+  font-size: 2rem;
+}
+.quiz-personal-round > span {
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+.quiz-points-gain {
+  display: block;
+  color: #268359;
+  font-size: 0.875rem;
+  margin-top: 4px;
+}
+.quiz-rank-rise {
+  display: block;
+  font-size: 0.8125rem;
+  color: #268359;
+  margin-top: 7px;
+}
+.quiz-score-track {
+  display: block;
+  height: 4px;
+  max-width: 360px;
+  border-radius: 5px;
+  background: #b3986c22;
+  overflow: hidden;
+  margin-top: 10px;
+}
+.quiz-score-track i {
+  display: block;
+  height: 100%;
+  background: #c79b42;
+  border-radius: inherit;
+  transform-origin: left;
+  animation: quiz-score-fill 1s ease-out both;
+}
+.quiz-next-hint {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  padding-top: 15px;
+}
+.quiz-stage .quiz-correct-summary {
+  background: #ffffff09;
+}
+.quiz-stage .quiz-points-gain,
+.quiz-stage .quiz-rank-rise {
+  color: #a8d9b8;
+}
+.quiz-ranking .quiz-rank-list small {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+@keyframes quiz-score-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@media (max-width: 600px) {
+  .quiz-host-controls {
+    position: static;
+  }
+  .quiz-leader {
+    flex-wrap: wrap;
+    padding: 17px;
+    gap: 12px;
+  }
+  .quiz-leader > b {
+    flex-basis: 100%;
+    padding-left: 42px;
+  }
+  .quiz-rank-list > li > b {
+    min-width: 70px;
+  }
+  .quiz-ranking .quiz-rank-list small {
+    font-size: 0.75rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .quiz-score-track i {
+    animation: none;
+  }
+}
+.quiz-motion-off .quiz-score-track i {
+  animation: none;
+}

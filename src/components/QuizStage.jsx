@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import {
   Crown,
   Gift,
@@ -18,6 +19,36 @@ import {
 } from "../lib/quiz";
 
 const letters = QUIZ_OPTION_LETTERS;
+function AnimatedPoints({ from, to }) {
+  const [value, setValue] = useState(from);
+  const element = useRef(null);
+  useEffect(() => {
+    if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      element.current?.closest(".quiz-motion-off") ||
+      from === to
+    ) {
+      setValue(to);
+      return;
+    }
+    let frame;
+    let start;
+    const tick = (now) => {
+      start ??= now;
+      const progress = Math.min(1, (now - start) / 1000);
+      setValue(Math.round(from + (to - from) * (1 - (1 - progress) ** 3)));
+      if (progress < 1) frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [from, to]);
+  return (
+    <span ref={element} aria-hidden="true">
+      {value.toLocaleString("es-PE")}
+    </span>
+  );
+}
+
 export function QuizRoster({ players }) {
   return (
     <div
@@ -48,8 +79,11 @@ export function QuizRanking({
   ownId,
   final = false,
   questionCount = 8,
+  room,
 }) {
   const winners = rows.filter((r) => r.rank === 1);
+  const own = rows.find((p) => p.id === ownId);
+  const topPoints = Math.max(1, ...rows.map((p) => p.points));
   return (
     <div className={`quiz-ranking ${final ? "quiz-finale" : ""}`}>
       {final && (
@@ -90,9 +124,63 @@ export function QuizRanking({
         </>
       )}
       {!final && (
-        <h2>
-          <Trophy size={25} /> Así va la competencia
-        </h2>
+        <>
+          <span className="quiz-kicker">
+            {room
+              ? `RESULTADOS · PREGUNTA ${room.questionIndex + 1} DE ${quizQuestionCount(room)}`
+              : "CLASIFICACIÓN EN VIVO"}
+          </span>
+          <h2>
+            <Trophy size={25} /> Así va la competencia
+          </h2>
+          {room?.question && (
+            <div className="quiz-correct-summary">
+              <span>Respuesta correcta · {letters[room.correctIndex]}</span>
+              <strong>{room.question.options[room.correctIndex]}</strong>
+              <details>
+                <summary>Ver reparto de respuestas</summary>
+                {room.question.options.map((option, i) => (
+                  <p key={i}>
+                    {letters[i]} · {option}:{" "}
+                    <b>{room.answerCounts[i]} respuestas</b>
+                  </p>
+                ))}
+              </details>
+            </div>
+          )}
+          {!!winners.length && (
+            <div className="quiz-leader" role="status">
+              <Crown size={30} aria-hidden="true" />
+              <div>
+                <span>
+                  {winners.length > 1
+                    ? "Empate en la cima"
+                    : "Lidera la competencia"}
+                </span>
+                <strong>
+                  {winners
+                    .slice(0, 3)
+                    .map((p) => p.name)
+                    .join(" · ")}
+                  {winners.length > 3 ? ` y ${winners.length - 3} más` : ""}
+                </strong>
+              </div>
+              <b>{winners[0].points.toLocaleString("es-PE")} pts</b>
+            </div>
+          )}
+          {own && Number.isFinite(own.roundPoints) && (
+            <div className="quiz-personal-round" role="status">
+              <span>
+                {own.roundPoints > 0 ? "¡Acertaste!" : "Esta ronda no sumaste"}
+              </span>
+              <strong>+{own.roundPoints} puntos</strong>
+              <span>
+                {own.previousPoints} + {own.roundPoints} = {own.points}{" "}
+                acumulados · Tu posición: #{own.rank}
+              </span>
+            </div>
+          )}
+        </>
       )}
       <ol className="quiz-rank-list" aria-label="Clasificación del concurso">
         {rows.map((p) => (
@@ -109,9 +197,29 @@ export function QuizRanking({
                 {p.correct} aciertos · {(p.elapsedMs / 1000).toFixed(2)} s
                 acumulados en aciertos
               </small>
+              {!final && p.previousRank > p.rank && (
+                <span className="quiz-rank-rise">
+                  Subió {p.previousRank - p.rank}{" "}
+                  {p.previousRank - p.rank === 1 ? "puesto" : "puestos"}
+                </span>
+              )}
+              {!final && (
+                <span className="quiz-score-track" aria-hidden="true">
+                  <i style={{ width: `${(p.points / topPoints) * 100}%` }} />
+                </span>
+              )}
             </span>
-            <b>
-              {p.points.toLocaleString("es-PE")}
+            <b
+              aria-label={`${p.points} puntos${!final && Number.isFinite(p.roundPoints) ? `, más ${p.roundPoints} en esta ronda` : ""}`}
+            >
+              {!final && Number.isFinite(p.previousPoints) ? (
+                <AnimatedPoints from={p.previousPoints} to={p.points} />
+              ) : (
+                p.points.toLocaleString("es-PE")
+              )}
+              {!final && Number.isFinite(p.roundPoints) && (
+                <span className="quiz-points-gain">+{p.roundPoints}</span>
+              )}
               <small>puntos</small>
             </b>
           </li>
@@ -121,6 +229,14 @@ export function QuizRanking({
         Desempate: más aciertos y menor tiempo acumulado en aciertos. Si
         coinciden, comparten posición.
       </p>
+      {!final && (
+        <p className="quiz-next-hint">
+          Los puntos de esta ronda ya están sumados.{" "}
+          {room?.questionIndex === quizQuestionCount(room) - 1
+            ? "El presentador revelará el resultado final."
+            : "El presentador iniciará la siguiente pregunta cuando el equipo esté listo."}
+        </p>
+      )}
     </div>
   );
 }
@@ -195,7 +311,12 @@ export default function QuizStage({
           final
         />
       ) : room.status === "ranking" ? (
-        <QuizRanking rows={room.leaderboard} ownId={ownId} />
+        <QuizRanking
+          key={room.questionIndex}
+          rows={room.leaderboard}
+          ownId={ownId}
+          room={room}
+        />
       ) : room.status === "archived" ? (
         <div className="quiz-wait">
           <Gift size={44} />

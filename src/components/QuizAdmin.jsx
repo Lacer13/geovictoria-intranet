@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import {
   Check,
@@ -573,6 +573,7 @@ function QuizHost({ event }) {
   const [confirm, setConfirm] = useState(null);
   const [responses, setResponses] = useState({ index: -1, count: 0 });
   const [responsesError, setResponsesError] = useState(false);
+  const autoClosed = useRef(new Set());
   const clock = useQuizClock(room);
   const counting = room?.status === "question" || room?.status === "closing";
   const index = room?.questionIndex ?? -1;
@@ -587,7 +588,7 @@ function QuizHost({ event }) {
       () => setResponsesError(true),
     );
   }, [event.id, index, counting]);
-  const run = async (action) => {
+  const run = useCallback(async (action) => {
     setBusy(true);
     setError("");
     setConfirm(null);
@@ -598,7 +599,29 @@ function QuizHost({ event }) {
     } finally {
       setBusy(false);
     }
-  };
+  }, []);
+  useEffect(() => {
+    if (
+      room?.status !== "question" ||
+      clock.remaining !== 0 ||
+      !Number.isFinite(milliseconds(room.startedAt)) ||
+      state.cached ||
+      busy ||
+      autoClosed.current.has(index)
+    )
+      return;
+    autoClosed.current.add(index);
+    run(() => closeQuizRound(event.id, index));
+  }, [
+    room?.status,
+    room?.startedAt,
+    clock.remaining,
+    state.cached,
+    busy,
+    index,
+    event.id,
+    run,
+  ]);
   const exportResults = () => {
     const cell = (value) =>
       `"${String(value)
@@ -664,6 +687,15 @@ function QuizHost({ event }) {
             {players.length} participantes
             {counting ? ` · ${responseCount} respuestas recibidas` : ""}
           </p>
+          <p className="quiz-host-help">
+            {room.status === "question"
+              ? "Al terminar el tiempo, los resultados se mostrarán a todos. Mantén este panel abierto."
+              : room.status === "ranking"
+                ? "Los puntos ya están sumados. Cuando terminen de ver la clasificación, continúa con el botón de al lado."
+                : room.status === "lobby"
+                  ? "Espera al equipo e inicia la primera pregunta."
+                  : "Controla aquí el avance del concurso."}
+          </p>
         </div>
         <div className="quiz-host-actions">
           {room.status === "lobby" && (
@@ -683,7 +715,7 @@ function QuizHost({ event }) {
                 clock.remaining > 0 ? setConfirm("early") : close()
               }
             >
-              Cerrar y revelar respuesta
+              Cerrar pregunta y ver puntos
             </button>
           )}
           {room.status === "closing" && (
@@ -703,7 +735,7 @@ function QuizHost({ event }) {
                 run(() => changeQuizPhase(event.id, "reveal", "ranking"))
               }
             >
-              <Trophy size={17} /> Ver clasificación
+              <Trophy size={17} /> Ver puntos y clasificación
             </button>
           )}
           {room.status === "ranking" && (
@@ -719,8 +751,8 @@ function QuizHost({ event }) {
               {index === event.questions.length - 1
                 ? "Revelar ganador"
                 : index === event.questions.length - 2
-                  ? "Lanzar bonus doble"
-                  : `Iniciar pregunta ${index + 2}`}
+                  ? `Siguiente pregunta · Bonus ×2 (${index + 2}/${event.questions.length})`
+                  : `Siguiente pregunta · ${index + 2}/${event.questions.length}`}
             </button>
           )}
           {room.leaderboard.length > 0 && (

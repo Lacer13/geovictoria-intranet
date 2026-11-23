@@ -16,6 +16,7 @@ import {
   resizeQuizQuestions,
   resizeQuizOptions,
   quizQuestionCount,
+  quizRoundStandings,
 } from "../src/lib/quiz.js";
 
 test("quiz drafts keep incomplete work and require every configured question before opening", () => {
@@ -213,6 +214,51 @@ test("ranking includes absent players, uses accuracy then time, and retains exac
   assert.equal(rows[0].points, 399);
   assert.ok(rows.every((r) => r.points % 7 === 0));
   assert.equal(rows[3].elapsedMs, 0);
+});
+test("round standings publish the gain and previous position without changing scores or ties", () => {
+  const players = ["Ana", "Bea", "Cris"].map((name) => ({ id: name, name }));
+  const previous = [
+    {
+      seconds: 30,
+      bonus: false,
+      results: [
+        { id: "Ana", correct: true, elapsedMs: 15000 },
+        { id: "Bea", correct: true, elapsedMs: 10000 },
+      ],
+    },
+  ];
+  const current = {
+    seconds: 30,
+    bonus: true,
+    results: [
+      { id: "Ana", correct: true, elapsedMs: 1000 },
+      { id: "Bea", correct: false, elapsedMs: 2000 },
+    ],
+  };
+  const rows = quizRoundStandings(players, previous, current);
+  assert.equal(rows[0].id, "Ana");
+  assert.equal(rows[0].previousRank, 2);
+  assert.equal(rows[0].rank, 1);
+  assert.equal(rows[0].roundPoints, 497);
+  assert.equal(rows[0].previousPoints, 252);
+  assert.equal(rows[0].points, 749);
+  assert.equal(rows[1].roundPoints, 0);
+  assert.equal(rows[2].points, 0);
+  assert.deepEqual(
+    rows.map(({ previousPoints, previousRank, roundPoints, ...p }) => p),
+    rankQuizPlayers(players, [...previous, current]),
+  );
+  assert.deepEqual(
+    quizRoundStandings(players, [], { seconds: 30, results: [] }).map((p) => [
+      p.rank,
+      p.roundPoints,
+    ]),
+    [
+      [1, 0],
+      [1, 0],
+      [1, 0],
+    ],
+  );
 });
 test("quiz room codes avoid ambiguous characters and participant capabilities stay out of names", () => {
   const codes = new Set(Array.from({ length: 200 }, createQuizCode));
