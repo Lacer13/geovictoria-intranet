@@ -131,4 +131,4 @@ npx firebase-tools@15.34.1 deploy --only firestore:rules,hosting
 
 Los encabezados de Hosting incorporan protección de tipo de contenido, bloqueo de iframes, política de referer y caché duradera para assets con hash. La subida a GitHub no despliega Firebase automáticamente.
 
-Concurso en vivo configurable: 1–10 preguntas, con 2–5 alternativas por pregunta y bonus en la última. Se conservan registro, puntaje, tiempos, clasificación y CSV. [Guía del concurso](docs/concurso-en-vivo.md).
+Concurso en vivo configurable: 1–10 preguntas, con 2–5 alternativas por pregunta y bonus en la última. Selección y envío de respuesta, espera hasta el cierre compartido y clasificación con puntos ganados entre rondas. Se conservan registro, puntaje, tiempos y CSV. [Guía del concurso](docs/concurso-en-vivo.md).

@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-23",
+  "testsPassed": 111,
+  "rulesTestsPassed": 34,
+  "buildPassed": true,
+  "firestoreRulesChanged": false,
+  "uiChecks": {
+    "selectionDoesNotSubmit": true,
+    "choiceCanChangeBeforeSend": true,
+    "explicitSend": true,
+    "serverReceivedElapsedTime": true,
+    "waitingWithoutRevealingPoints": true,
+    "threeAutomaticRoundClosures": true,
+    "nextQuestionButton": true,
+    "selectionResetsPerQuestion": true,
+    "roundGainsAndTotals": true,
+    "leaderChanges": true,
+    "bonusPreserved": true,
+    "finalWinner": {
+      "name": "Ana de ensayo",
+      "points": 581,
+      "correct": 2,
+      "questions": 3
+    },
+    "mobile375NoHorizontalOverflow": true,
+    "viewportReset": true
+  },
+  "screenshot": "design/concurso/2026-11-23/respuesta-en-espera.jpg",
+  "productionFixturesCreated": false
+}
