@@ -16,6 +16,7 @@ import {
   CircleAlert,
   Clock3,
   Copy,
+  Link2,
   Eye,
   EyeOff,
   Gift,
@@ -44,6 +45,7 @@ import {
   privateSantaLink,
   readableExchangeDate,
   safeCSV,
+  santaLinksCSV,
   validMailSettings,
 } from "../lib/secretSanta";
 import {
@@ -61,6 +63,9 @@ import {
 import { normalize } from "../lib/preferences";
 import { auth } from "../auth";
 import { mailSettingsVersion } from "../lib/secretSantaEmail";
+import SantaMailLimits from "./SantaMailLimits";
+import SantaInvitationsTable from "./SantaInvitationsTable";
+import "../secret-santa-links.css";
 
 const emptySettings = {
   enabled: false,
@@ -90,7 +95,7 @@ function SantaWorkflow({ drawn = false }) {
       {[
         [Users, "Grupo", "Detalles y participantes"],
         [Shuffle, "Sorteo", "Una pareja para cada persona"],
-        [Mail, "Envío", "Correo y recuperación"],
+        [Link2, "Compartir", "Enlace personal o correo"],
       ].map(([Icon, title, caption], index) => (
         <li
           key={title}
@@ -257,7 +262,7 @@ export default function SecretSantaAdmin() {
               ? "Prueba local: los envíos se simulan"
               : validMailSettings(settings)
                 ? "Identificadores de EmailJS guardados"
-                : "Correo pendiente de configurar"}
+                : "Correo opcional · Sin configurar"}
           </strong>
           <details className="inline-details">
             <summary>Detalles del envío</summary>
@@ -955,6 +960,7 @@ function SantaResults({ event, settings, configure }) {
   const [error, setError] = useState("");
   const [deliveryStatus, setDeliveryStatus] = useState("loading");
   const [filter, setFilter] = useState("all");
+  const emailPanel = useRef(null);
   const running = useRef(false);
   const stop = useRef(false);
   const alive = useRef(true);
@@ -1045,6 +1051,7 @@ function SantaResults({ event, settings, configure }) {
     stop.current = false;
     setError("");
     setProgress({ done: 0, total: choice.ids.length });
+    if (emailPanel.current) emailPanel.current.open = true;
     try {
       for (const [index, id] of choice.ids.entries()) {
         if (stop.current) break;
@@ -1086,6 +1093,19 @@ function SantaResults({ event, settings, configure }) {
     const a = document.createElement("a");
     a.href = url;
     a.download = `amigo-secreto-respaldo-${event.id}.csv`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+  const downloadLinks = () => {
+    if (archived) return;
+    const url = URL.createObjectURL(
+      new Blob([santaLinksCSV(event, window.location.origin)], {
+        type: "text/csv;charset=utf-8",
+      }),
+    );
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `amigo-secreto-enlaces-${event.id}.csv`;
     a.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
@@ -1154,43 +1174,20 @@ function SantaResults({ event, settings, configure }) {
           <span>requieren revisión</span>
         </div>
       </div>
-      {deliveryStatus === "loading" && (
-        <p className="santa-delivery-loading" role="status">
-          <LoaderCircle size={16} className="animate-spin" /> Consultando el
-          historial de envíos…
-        </p>
-      )}
-      {deliveryStatus === "error" && (
-        <p className="form-error" role="alert">
-          No pudimos consultar el historial. Recarga la página antes de enviar.
-        </p>
-      )}
-      {deliveryStatus === "ready" && !archived && (
-        <div className="santa-delivery-progress">
+      {!archived && (
+        <div className="santa-links-guide">
+          <Link2 size={22} />
           <div>
-            <span>
-              {isLocalDemo
-                ? "Avance de la simulación"
-                : "Solicitudes aceptadas por EmailJS"}
-            </span>
-            <strong>
-              {accepted} de {event.participantIds.length}
-            </strong>
+            <h4>Enlaces listos, con o sin correo</h4>
+            <p>
+              Ya se crearon al sortear. Comparte cada enlace solo con su
+              participante: podrá abrirlo sin iniciar sesión y descubrir a quién
+              le toca. No hace falta volver a sortear ni enviar un correo.
+            </p>
           </div>
-          <progress
-            value={accepted}
-            max={event.participantIds.length}
-            aria-label={
-              isLocalDemo
-                ? "Envíos simulados"
-                : "Solicitudes aceptadas por EmailJS"
-            }
-          />
-          <small>
-            {isLocalDemo
-              ? "Los mensajes de este entorno son de prueba."
-              : "La aceptación confirma la solicitud al proveedor. Revisa el historial si alguien no recibe su correo."}
-          </small>
+          <button className="btn btn-forest" onClick={downloadLinks}>
+            <ArrowDownToLine size={16} /> Descargar todos los enlaces
+          </button>
         </div>
       )}
       {archived && (
@@ -1199,101 +1196,18 @@ function SantaResults({ event, settings, configure }) {
           los enlaces privados están desactivados.
         </div>
       )}
-      {!archived && deliveryStatus === "ready" && (
-        <div
-          className={`santa-next-action ${review > 0 ? "needs-review" : ""}`}
-        >
-          <span className="santa-action-icon">
-            {!configured ? (
-              <Mail size={23} />
-            ) : review > 0 ? (
-              <CircleAlert size={23} />
-            ) : pending.length === 0 ? (
-              <CheckCircle2 size={23} />
-            ) : (
-              <Send size={23} />
-            )}
-          </span>
-          <div>
-            <strong>
-              {!configured
-                ? "Un último paso: conecta tu correo"
-                : review > 0
-                  ? "Hay envíos que necesitan una mirada"
-                  : pending.length === 0
-                    ? "Cada sorpresa tiene su invitación"
-                    : "Todo listo para compartir la sorpresa"}
-            </strong>
-            <p>
-              {!configured
-                ? "Tu sorteo ya está guardado. Conecta Gmail u Outlook para enviar las invitaciones."
-                : review > 0
-                  ? "Consulta el historial de EmailJS antes de reenviar un mensaje sin confirmación."
-                  : pending.length === 0
-                    ? isLocalDemo
-                      ? "Se completaron los envíos de prueba."
-                      : "Los correos aceptados están registrados. Puedes recuperar cada enlace cuando lo necesites."
-                    : `${pending.length} ${pending.length === 1 ? "persona espera" : "personas esperan"} su asignación. Cada correo incluirá su enlace privado.`}
-            </p>
-          </div>
-        </div>
-      )}
-      <div className="santa-send-toolbar">
-        {progress ? (
-          <>
-            <div role="status">
-              <LoaderCircle className="animate-spin" size={17} /> Procesados{" "}
-              {progress.done} de {progress.total}
-            </div>
-            <span>Mantén esta página abierta durante el envío.</span>
-            <button
-              className="btn btn-secondary"
-              onClick={() => {
-                stop.current = true;
-              }}
-            >
-              Detener después del actual
-            </button>
-          </>
-        ) : (
-          <>
-            <button
-              className="btn btn-forest"
-              disabled={
-                archived ||
-                !configured ||
-                pending.length === 0 ||
-                deliveryStatus !== "ready"
-              }
-              onClick={() => openSend()}
-            >
-              <Send size={16} /> Enviar correos pendientes
-            </button>
-            {!configured && (
-              <button className="text-link" onClick={configure}>
-                Conectar cuenta de correo
-              </button>
-            )}
-            <span>Los reintentos conservan la misma asignación.</span>
-            {review > 0 && (
-              <button className="text-link" onClick={() => setFilter("review")}>
-                Revisar {review} {review === 1 ? "envío" : "envíos"}{" "}
-                <ArrowRight size={14} />
-              </button>
-            )}
-          </>
-        )}
-      </div>
-      {error && (
-        <p className="form-error" role="alert">
-          {error}
-        </p>
-      )}
+      <p className="santa-links-privacy">
+        La tabla y el CSV son solo para administradores. Cada enlace permite ver
+        una asignación: comparte únicamente la fila que corresponde a esa
+        persona, nunca la tabla completa con el grupo.
+      </p>
       <div className="santa-recovery-heading">
         <div>
-          <h4>Las personas y sus invitaciones</h4>
+          <h4>Enlaces de cada participante</h4>
           <p>
-            Busca a una persona para recuperar su enlace o reenviar su correo.
+            Copia el enlace o un mensaje listo para compartir con esa persona.
+            Descargar todos los enlaces incluye al grupo completo, aunque
+            apliques filtros.
           </p>
         </div>
         <button
@@ -1301,7 +1215,7 @@ function SantaResults({ event, settings, configure }) {
           onClick={() => setVisible((v) => !v)}
         >
           {visible ? <EyeOff size={15} /> : <Eye size={15} />}
-          {visible ? "Ocultar asignaciones" : "Ver lista de respaldo"}
+          {visible ? "Ocultar parejas" : "Mostrar parejas"}
         </button>
       </div>
       {visible && (
@@ -1328,7 +1242,7 @@ function SantaResults({ event, settings, configure }) {
         </div>
         <div
           className="santa-delivery-filters"
-          aria-label="Filtrar invitaciones por estado"
+          aria-label="Filtrar por estado del correo"
         >
           {[
             ["all", "Todos", event.participantIds.length],
@@ -1364,100 +1278,163 @@ function SantaResults({ event, settings, configure }) {
           ) : null}
         </p>
       )}
-      <div className="santa-delivery-list">
-        {ids.map((id) => {
-          const person = event.people[id];
-          const delivery = deliveries[id];
-          return (
-            <article className="santa-delivery-row" key={id}>
-              <span className="santa-person-avatar" aria-hidden="true">
-                {person.name
-                  .trim()
-                  .split(/\s+/)
-                  .slice(0, 2)
-                  .map((part) => part[0])
-                  .join("")}
+      <SantaInvitationsTable
+        event={event}
+        ids={ids}
+        deliveries={deliveries}
+        visible={visible}
+        deliveryStatus={deliveryStatus}
+        sending={!!progress}
+        configured={configured}
+        onSend={openSend}
+        stateLabel={stateLabel}
+        onClear={() => {
+          setTerm("");
+          setFilter("all");
+        }}
+      />
+      <details className="santa-optional-email" ref={emailPanel}>
+        <summary>Correo automático (opcional)</summary>
+        <p className="santa-links-privacy">
+          También puedes enviar las invitaciones por correo. Compartir un enlace
+          no envía correos ni consume cuota de EmailJS.
+        </p>
+        <SantaMailLimits />
+        {deliveryStatus === "loading" && (
+          <p className="santa-delivery-loading" role="status">
+            <LoaderCircle size={16} className="animate-spin" /> Consultando el
+            historial de envíos…
+          </p>
+        )}
+        {deliveryStatus === "error" && (
+          <p className="form-error" role="alert">
+            No pudimos consultar el historial. Recarga la página antes de
+            enviar.
+          </p>
+        )}
+        {deliveryStatus === "ready" && !archived && (
+          <div className="santa-delivery-progress">
+            <div>
+              <span>
+                {isLocalDemo
+                  ? "Avance de la simulación"
+                  : "Solicitudes aceptadas por EmailJS"}
               </span>
-              <div className="santa-person-summary">
-                <strong>{person.name}</strong>
-                <span>{person.email}</span>
-                {visible && (
-                  <p className="santa-target">
-                    <Gift size={13} /> Le regala a:{" "}
-                    <strong>
-                      {event.people[event.assignments[id].recipientId].name}
-                    </strong>
-                  </p>
-                )}
-              </div>
-              <span
-                className={`santa-delivery-status ${delivery?.state || "pending"}`}
-              >
-                {delivery?.state === "accepted" ? (
-                  <CheckCircle2 size={12} />
-                ) : ["uncertain", "failed"].includes(delivery?.state) ? (
-                  <CircleAlert size={12} />
-                ) : (
-                  <Clock3 size={12} />
-                )}
-                {stateLabel(delivery)}
-              </span>
-              <div className="santa-delivery-actions">
-                <button
-                  className="icon-button"
-                  disabled={archived}
-                  title="Copiar enlace privado"
-                  aria-label={`Copiar enlace privado de ${person.name}`}
-                  onClick={() =>
-                    copyText(
-                      privateSantaLink(
-                        window.location.origin,
-                        event.assignments[id].cardId,
-                      ),
-                    )
-                  }
-                >
-                  <Copy size={15} />
-                  <span>Enlace</span>
-                </button>
-                <button
-                  className="btn btn-secondary"
-                  disabled={
-                    archived ||
-                    !!progress ||
-                    !configured ||
-                    deliveryStatus !== "ready"
-                  }
-                  onClick={() => openSend(id)}
-                  aria-label={`${delivery?.state === "accepted" ? "Reenviar" : "Enviar"} correo a ${person.name}`}
-                >
-                  <Mail size={14} />
-                  {delivery?.state === "accepted" ? "Reenviar" : "Enviar"}
-                </button>
-              </div>
-              {delivery?.lastError && (
-                <p className="santa-delivery-error">{delivery.lastError}</p>
-              )}
-            </article>
-          );
-        })}
-        {ids.length === 0 && (
-          <div className="santa-no-matches">
-            <Search size={25} />
-            <strong>No hay personas en esta vista</strong>
-            <p>Prueba otro estado o cambia la búsqueda.</p>
-            <button
-              className="text-link"
-              onClick={() => {
-                setTerm("");
-                setFilter("all");
-              }}
-            >
-              Ver todo el grupo <ArrowRight size={14} />
-            </button>
+              <strong>
+                {accepted} de {event.participantIds.length}
+              </strong>
+            </div>
+            <progress
+              value={accepted}
+              max={event.participantIds.length}
+              aria-label={
+                isLocalDemo
+                  ? "Envíos simulados"
+                  : "Solicitudes aceptadas por EmailJS"
+              }
+            />
+            <small>
+              {isLocalDemo
+                ? "Los mensajes de este entorno son de prueba."
+                : "La aceptación confirma la solicitud al proveedor. Revisa el historial si alguien no recibe su correo."}
+            </small>
           </div>
         )}
-      </div>
+        {!archived && deliveryStatus === "ready" && (
+          <div
+            className={`santa-next-action ${review > 0 ? "needs-review" : ""}`}
+          >
+            <span className="santa-action-icon">
+              {!configured ? (
+                <Mail size={23} />
+              ) : review > 0 ? (
+                <CircleAlert size={23} />
+              ) : pending.length === 0 ? (
+                <CheckCircle2 size={23} />
+              ) : (
+                <Send size={23} />
+              )}
+            </span>
+            <div>
+              <strong>
+                {!configured
+                  ? "Puedes compartir los enlaces ahora"
+                  : review > 0
+                    ? "Hay envíos que necesitan una mirada"
+                    : pending.length === 0
+                      ? "Cada sorpresa tiene su invitación"
+                      : "Todo listo para compartir la sorpresa"}
+              </strong>
+              <p>
+                {!configured
+                  ? "No necesitas conectar un correo. Usa la tabla de enlaces personales o configura EmailJS si también quieres enviar invitaciones por correo."
+                  : review > 0
+                    ? "Consulta el historial de EmailJS antes de reenviar un mensaje sin confirmación."
+                    : pending.length === 0
+                      ? isLocalDemo
+                        ? "Se completaron los envíos de prueba."
+                        : "Los correos aceptados están registrados. Puedes recuperar cada enlace cuando lo necesites."
+                      : `${pending.length} correos pendientes. Las invitaciones también se pueden compartir por enlace.`}
+              </p>
+            </div>
+          </div>
+        )}
+        <div className="santa-send-toolbar">
+          {progress ? (
+            <>
+              <div role="status">
+                <LoaderCircle className="animate-spin" size={17} /> Procesados{" "}
+                {progress.done} de {progress.total}
+              </div>
+              <span>Mantén esta página abierta durante el envío.</span>
+              <button
+                className="btn btn-secondary"
+                onClick={() => {
+                  stop.current = true;
+                }}
+              >
+                Detener después del actual
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                className="btn btn-forest"
+                disabled={
+                  archived ||
+                  !configured ||
+                  pending.length === 0 ||
+                  deliveryStatus !== "ready"
+                }
+                onClick={() => openSend()}
+              >
+                <Send size={16} /> Enviar correos pendientes
+              </button>
+              {!configured && (
+                <button className="text-link" onClick={configure}>
+                  Conectar cuenta de correo
+                </button>
+              )}
+              <span>Los reintentos conservan la misma asignación.</span>
+              {review > 0 && (
+                <button
+                  className="text-link"
+                  onClick={() => setFilter("review")}
+                >
+                  Revisar {review} {review === 1 ? "envío" : "envíos"}{" "}
+                  <ArrowRight size={14} />
+                </button>
+              )}
+            </>
+          )}
+        </div>
+      </details>
+      {error && (
+        <p className="form-error" role="alert">
+          {error}
+        </p>
+      )}
+
       <div className="santa-result-footer">
         {visible && (
           <button className="text-link" onClick={downloadBackup}>
@@ -1847,6 +1824,7 @@ function SantaMailSettings({ initial, onSaved }) {
           </div>
         )}
       </section>
+      <SantaMailLimits />
       {error && (
         <p className="form-error" role="alert">
           {error}

@@ -1,0 +1,175 @@
+{
+  "date": "2026-11-23",
+  "channel": "santa-enlaces",
+  "url": "https://geovictoria-intranet-peru--santa-enlaces-mlgn75mr.web.app/admin?seccion=amigo-secreto",
+  "hostingVersion": "b1048f2f30f1f5ae",
+  "expiresAt": "2026-11-30T15:35:30.058533965Z",
+  "productionFrontendDeployed": false,
+  "testsPassed": 107,
+  "rulesTestsPassed": 30,
+  "firestoreRulesDeployed": false,
+  "authenticationDomainsChanged": false,
+  "arenaServerChanged": false,
+  "emailsSentInProduction": false,
+  "localUiChecks": {
+    "drawAndSave": true,
+    "copyLink": true,
+    "copyPersonalMessage": true,
+    "filteredDownloadIncludesEntireGroup": true,
+    "csvHasThreeColumnsWithoutRecipient": true,
+    "revealWithoutSignIn": true,
+    "emailSimulationKeepsSavedLink": true,
+    "mobile375NoHorizontalOverflow": true,
+    "mobile320NoHorizontalOverflow": true,
+    "viewportReset": true
+  },
+  "routes": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/admin?seccion=amigo-secreto",
+      "status": 200
+    },
+    {
+      "path": "/amigo-secreto",
+      "status": 200
+    },
+    {
+      "path": "/amigo-secreto/ver",
+      "status": 200
+    },
+    {
+      "path": "/navidad",
+      "status": 200
+    },
+    {
+      "path": "/juego",
+      "status": 200
+    }
+  ],
+  "resources": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "bytes": 1544,
+      "sha256": "484c8687e515e98aa3cae87daa00c10f37cce307437aa7151516edd409d20b67"
+    },
+    {
+      "path": "assets/index-WOiX0f82.js",
+      "status": 200,
+      "bytes": 59,
+      "sha256": "3ddf5275204ed55f1c42119e5c6cea36c419a4285da8dba555039429a7da3c2e"
+    },
+    {
+      "path": "assets/rolldown-runtime-D2aABDIb.js",
+      "status": 200,
+      "bytes": 680,
+      "sha256": "760907b0f57761fcae7a1113e535296fa7e31deaa87aa6138e19917ae7e00a86"
+    },
+    {
+      "path": "assets/react-DbMM3Pz9.js",
+      "status": 200,
+      "bytes": 228576,
+      "sha256": "1aa337c1eaee5d0da619083f58824dc8b374974312d37eff98307fdc9c121acb"
+    },
+    {
+      "path": "assets/createLucideIcon-7eCvd4fb.js",
+      "status": 200,
+      "bytes": 1855,
+      "sha256": "9a447768920f4b44d21d49d9834058c8e7f1e45b94254ba1cd748ef70ba09e8a"
+    },
+    {
+      "path": "assets/season-DG87JeAL.js",
+      "status": 200,
+      "bytes": 1943,
+      "sha256": "55bb1d00923a1d7af9515bd68c430e2bc1fbc07f360312fa4e0c1288a1336181"
+    },
+    {
+      "path": "assets/arrow-right-B8hwxgWV.js",
+      "status": 200,
+      "bytes": 283,
+      "sha256": "639de16f192b1911494c961547f0cb25db028866d1d3a423d9929202e19a6b4a"
+    },
+    {
+      "path": "assets/firebase-core-DfAndtA8.js",
+      "status": 200,
+      "bytes": 25641,
+      "sha256": "f68dfc80f6944d3b9eb512d67d047ae62e2f8b0fac5bd527e185c2165fe801b9"
+    },
+    {
+      "path": "assets/firebase-auth-ezusTaT7.js",
+      "status": 200,
+      "bytes": 88405,
+      "sha256": "b7e2576a30163ed9eea05797c5851085460c96b90a7b93204a79f1e5442200cb"
+    },
+    {
+      "path": "assets/firebase-mQ7FyzuK.js",
+      "status": 200,
+      "bytes": 305651,
+      "sha256": "e2b73d651491e87a3060851cfcbd134bd0fa8a1ab415a1a92c6a6d4493f1e645"
+    },
+    {
+      "path": "assets/geovictoria-intranet-BSXSTGnV.js",
+      "status": 200,
+      "bytes": 225509,
+      "sha256": "12e7bd35f6a643cf56f5ee50277db0ff027a23a793a98af31021de4abce3873c"
+    },
+    {
+      "path": "assets/geovictoria-intranet-Dk8WBFoS.css",
+      "status": 200,
+      "bytes": 118749,
+      "sha256": "f86cb7434b5c8c89fb606dfaf16c574dcdb58287dcf4dd8a6fd79dcb3bb7e6c9"
+    },
+    {
+      "path": "assets/Admin-BztbkpMk.js",
+      "status": 200,
+      "bytes": 89558,
+      "sha256": "3c045af1c65479cd15bf9ec8317c33fbd0c756bc774e7eef6bef94a24db9c375"
+    },
+    {
+      "path": "assets/Admin-lMyw9naM.css",
+      "status": 200,
+      "bytes": 3414,
+      "sha256": "eef15cd4973f0474c2dba8b6cbe20451edbc895d81d0b82e2c395026ebb592fe"
+    },
+    {
+      "path": "assets/Christmas-Dt1Db8Rc.js",
+      "status": 200,
+      "bytes": 5616,
+      "sha256": "9da85fe7ef37ebd066f02f1ce05f11049c7f14104c597681bdb7735af9876612"
+    },
+    {
+      "path": "assets/ChristmasWall-C4Eq8YsD.css",
+      "status": 200,
+      "bytes": 3816,
+      "sha256": "2077d68de83e4c518d88fa0c5950588bc93e07165b489c3fa141f19943ceffcd"
+    },
+    {
+      "path": "assets/ChristmasWall-V3dq7Q2o.js",
+      "status": 200,
+      "bytes": 11470,
+      "sha256": "f0d7abf4a88a3f0a55d1c38ad35d7d0f5abc2c317153960beb4791aa2a178605"
+    },
+    {
+      "path": "assets/GamePage-B0P4pudG.js",
+      "status": 200,
+      "bytes": 84719,
+      "sha256": "95c4459f184c9904cba331ecf40ffd4307e7e85608d5325cd93adf50f07e9a58"
+    },
+    {
+      "path": "assets/GamePage-CkARHRxK.css",
+      "status": 200,
+      "bytes": 20613,
+      "sha256": "a072386c949f65299d4aaa179818fd8f16cf22d903c5e377084e289be7345271"
+    },
+    {
+      "path": "assets/SecretSanta-Dd9H4Lev.js",
+      "status": 200,
+      "bytes": 7185,
+      "sha256": "38b457354ee1b0ab6a36aa10e3a420e0dd7f4ae5133c1babb3e68ce75bd3364b"
+    }
+  ],
+  "verifiedAt": "2026-11-23T15:36:24.791Z"
+}

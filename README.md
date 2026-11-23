@@ -32,6 +32,8 @@ npm run preview
 - Ideas personales para compartir y un mural navideño con saludos en tiempo real, firma o publicación anónima, destinatario opcional y fecha. Administración puede ocultar y restaurar mensajes. [Funcionamiento del mural](docs/mural-navidad.md).
 - El QR corresponde al origen actual de la intranet, no a un dominio fijo de ejemplo.
 
+- Amigo secreto: tabla de enlaces personales con copia de enlace o mensaje, búsqueda y descarga CSV para administradores, sin mostrar parejas. Correo automático opcional y ayuda de cuotas. [Cómo compartir las invitaciones](docs/amigo-secreto.md#compartir-sin-correo).
+
 ## Datos
 
 Se conservan las colecciones existentes `news`, `directory`, `leaderboard` y `feedbacks`. Las lecturas públicas incluyen espera acotada, estado vacío, error visible y reintento. No se insertan contactos ni noticias automáticamente.

@@ -25,6 +25,25 @@ EmailJS permite [conectar servicios personales de correo](https://www.emailjs.co
 - Las parejas y el grupo quedan guardados de forma atómica y no se pueden volver a sortear ni editar en ese evento. Para otro intercambio crea un sorteo nuevo.
 - **Enviar correos pendientes** muestra una segunda confirmación. Mantén la página abierta hasta terminar. Puedes detener el lote después del mensaje actual.
 
+## Compartir sin correo
+
+Después de sortear, entra en **Administración → Amigo secreto** y selecciona el intercambio. La tabla **Enlaces de cada participante** utiliza los enlaces ya guardados, también para sorteos anteriores. No genera otras parejas y funciona aunque no hayas configurado EmailJS o se haya agotado su cuota.
+
+1. Busca a la persona por nombre o correo.
+2. Pulsa **Copiar enlace** o **Copiar mensaje** en su fila y compártelo únicamente con esa persona por el canal que elijas. La plataforma copia; no envía el mensaje por ti.
+3. La persona abre el enlace y pulsa **Descubrir mi amigo secreto**. No necesita cuenta. Puede guardar su enlace para consultar de nuevo el mismo resultado.
+4. **Descargar todos los enlaces** genera un CSV para Excel con participante, correo y enlace personal. Incluye a todo el grupo aunque la tabla esté filtrada. No añade una columna con las parejas.
+
+La tabla y el archivo completo son para administradores: quien recibe un enlace puede ver esa asignación. Comparte solo la fila individual, nunca el CSV completo con el grupo. **Mostrar parejas** es una acción separada; permite consultar y descargar el respaldo con asignaciones. En teléfono, cada fila se presenta como una tarjeta con los mismos controles.
+
+**Correo automático (opcional)** conserva el envío, historial, reintentos y controles de cuota. Compartir o abrir enlaces no realiza solicitudes de correo a EmailJS. El estado de correo indica solicitudes al proveedor, no si una persona recibió un enlace por otro canal o leyó su asignación.
+
+## Límites de correo
+
+Según la [tabla oficial de planes de EmailJS](https://www.emailjs.com/pricing/), consultada el 23 de noviembre de 2026, el plan gratuito incluye **200 solicitudes mensuales**. Las pruebas y los reenvíos usan cuota. La [API de envío](https://www.emailjs.com/docs/rest-api/send/) admite una solicitud por segundo; el lote de la intranet espera 1,2 segundos entre envíos y se detiene ante un límite o resultado incierto.
+
+El plan y el saldo real se revisan en el panel de la cuenta conectada; la intranet no puede consultarlos ni presenta un saldo calculado como si fuera oficial. El proveedor de correo conectado también puede aplicar sus propios límites. La ayuda sobre cuotas está disponible en la configuración y en el apartado opcional de correo del sorteo.
+
 ## Estados y reintentos
 
 - **Pendiente**: no hay un intento registrado.
@@ -37,10 +56,16 @@ El lote espera más de un segundo entre solicitudes y se detiene ante cuota agot
 
 ## Recuperación y privacidad
 
-Solo los administradores pueden leer el grupo completo, sus correos, el respaldo y el historial de intentos. La lista de parejas está oculta visualmente hasta pulsar **Ver lista de respaldo**. El CSV contiene datos privados; guárdalo únicamente donde corresponda.
+Solo los administradores pueden leer el grupo completo, sus correos, el respaldo y el historial de intentos. La lista de parejas está oculta visualmente hasta pulsar **Mostrar parejas**. Ambos CSV contienen enlaces privados; el respaldo de parejas incluye además las asignaciones. Guárdalos únicamente donde corresponda.
 
 Cada participante recibe un enlace con una clave aleatoria de 256 bits en el fragmento de la URL. Cualquiera que tenga ese enlace puede consultar esa asignación sin iniciar sesión. No se publica un listado de claves ni el correo de la persona destinataria. El enlace permite ocultar y volver a revelar el regalo.
 
 **Archivar sorteo** conserva el respaldo y desactiva sus enlaces públicos; restaurarlo reactiva las mismas parejas. El panel no elimina eventos ni rota enlaces individuales. Si se comparte un enlace por error, archiva el evento para suspenderlo.
 
 El modo de emuladores muestra un aviso visible y registra envíos simulados; nunca contacta a EmailJS. No se cargan participantes ni configuración de ejemplo en producción.
+
+## Verificación de la tabla de enlaces
+
+23 de noviembre de 2026: 107 pruebas del portal y 30 de permisos correctas, con compilación de producción. Se comprobó en el emulador crear y guardar un sorteo de tres personas, copiar enlace y mensaje, buscar por nombre y descargar a todo el grupo desde una vista filtrada. El CSV descargado contiene tres columnas sin destinatario del regalo. La invitación se abrió sin sesión y reveló la asignación; una simulación de correo conservó el mismo enlace. No se enviaron correos reales ni se crearon sorteos de prueba en producción.
+
+La tabla se revisó a 375 × 812 y 320 × 568 sin desbordamiento horizontal. Capturas con datos ficticios: [escritorio](../design/amigo-secreto/2026-11-23/tabla-escritorio.jpg), [móvil](../design/amigo-secreto/2026-11-23/tabla-movil.jpg), [invitación](../design/amigo-secreto/2026-11-23/invitacion-demo.jpg). [Vista previa](https://geovictoria-intranet-peru--santa-enlaces-mlgn75mr.web.app/admin?seccion=amigo-secreto), disponible hasta el 30 de noviembre. [Registro de verificación](releases/santa-enlaces-preview-2026-11-23.json).
