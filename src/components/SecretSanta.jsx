@@ -25,7 +25,7 @@ export default function SecretSanta() {
     const token = readPrivateSantaToken(invitation, window.location.origin);
     if (!token) {
       setError(
-        "Pega el enlace completo de esta intranet, tal como aparece en tu correo.",
+        "Pega el enlace completo de esta intranet que te compartió la organización.",
       );
       return;
     }
@@ -41,7 +41,7 @@ export default function SecretSanta() {
           <h2>
             Tu próxima <em>sorpresa.</em>
           </h2>
-          <p>Abre el enlace de tu correo y descubre a quién le regalarás.</p>
+          <p>Abre tu enlace personal y descubre a quién le regalarás.</p>
           <div className="santa-welcome-actions">
             <button
               className="btn btn-forest"
@@ -121,8 +121,9 @@ export default function SecretSanta() {
           <summary>¿Dónde encuentro mi enlace?</summary>
           <div className="disclosure-body">
             <p>
-              Busca el correo del sorteo, también en correo no deseado. Puedes
-              abrir la invitación directamente desde ahí.
+              La organización puede compartirlo contigo por mensaje o correo.
+              Abre ese enlace directamente o pégalo en «Abrir mi invitación». No
+              necesitas crear una cuenta.
             </p>
           </div>
         </details>

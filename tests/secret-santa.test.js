@@ -12,6 +12,9 @@ import {
   readPrivateSantaToken,
   randomInt,
   safeCSV,
+  santaInvitationMessage,
+  santaInvitationRows,
+  santaLinksCSV,
   validMailSettings,
 } from "../src/lib/secretSanta.js";
 
@@ -219,4 +222,73 @@ test("CSV recovery exports escape quotes and spreadsheet formulas", () => {
   assert.match(text, /"'=HYPERLINK\(""x""\)"/);
   assert.match(text, /"'\+SUM\(1\)"/);
   assert.match(text, /"'@formula"/);
+});
+
+const invitationEvent = () => ({
+  status: "drawn",
+  title: "Intercambio del equipo",
+  participantIds: ["a", "b"],
+  people: {
+    a: { name: "Ana", email: "ana@example.test" },
+    b: { name: "Bruno", email: "bruno@example.test" },
+  },
+  assignments: {
+    a: { recipientId: "b", cardId: "a".repeat(64) },
+    b: { recipientId: "a", cardId: "b".repeat(64) },
+  },
+});
+
+test("sharing export contains every saved invitation and never adds assignment columns", () => {
+  const event = invitationEvent();
+  const saved = JSON.stringify(event);
+  const rows = santaInvitationRows(event, "https://example.test");
+  assert.deepEqual(Object.keys(rows[0]), ["id", "name", "email", "url"]);
+  assert.equal(rows.length, 2);
+  assert.equal(
+    rows[0].url,
+    privateSantaLink("https://example.test", event.assignments.a.cardId),
+  );
+  const csv = santaLinksCSV(event, "https://example.test");
+  assert.equal(csv.split("\r\n").length, 3);
+  assert.equal(
+    csv.split("\r\n")[0],
+    '\ufeff"Participante","Correo","Enlace personal"',
+  );
+  assert.ok(csv.includes(rows[0].url) && csv.includes(rows[1].url));
+  assert.equal(JSON.stringify(event), saved);
+  event.people.a.name = '=HYPERLINK("x")';
+  assert.match(
+    santaLinksCSV(event, "https://example.test"),
+    /"'=HYPERLINK\(""x""\)"/,
+  );
+});
+
+test("a copied invitation message has only that participant's saved link, without revealing the recipient", () => {
+  const event = invitationEvent();
+  const text = santaInvitationMessage(event, "a", "https://example.test");
+  assert.ok(text.includes("Hola, Ana.") && text.includes(event.title));
+  assert.ok(
+    text.includes(
+      privateSantaLink("https://example.test", event.assignments.a.cardId),
+    ),
+  );
+  assert.ok(
+    !text.includes("Bruno") && !text.includes(event.assignments.b.cardId),
+  );
+  assert.ok(!text.includes("@example.test"));
+  assert.throws(
+    () => santaInvitationMessage(event, "missing", "https://example.test"),
+    /Participante/,
+  );
+});
+
+test("invitations cannot be exported or copied before the draw or while archived", () => {
+  for (const status of ["draft", "archived"]) {
+    const event = { ...invitationEvent(), status };
+    assert.throws(() => santaLinksCSV(event, "https://example.test"), /activo/);
+    assert.throws(
+      () => santaInvitationMessage(event, "a", "https://example.test"),
+      /activo/,
+    );
+  }
 });

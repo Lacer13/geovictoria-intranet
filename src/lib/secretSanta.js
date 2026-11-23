@@ -188,6 +188,36 @@ export function validMailSettings(settings) {
     )
   );
 }
+// Sharing exports contain invitations only. The full assignment backup stays separate.
+export function santaInvitationRows(event, origin) {
+  if (event.status !== "drawn")
+    throw new Error(
+      "Los enlaces solo se comparten mientras el sorteo está activo.",
+    );
+  return event.participantIds.map((id) => ({
+    id,
+    name: event.people[id].name,
+    email: event.people[id].email,
+    url: privateSantaLink(origin, event.assignments[id].cardId),
+  }));
+}
+export function santaLinksCSV(event, origin) {
+  return safeCSV([
+    ["Participante", "Correo", "Enlace personal"],
+    ...santaInvitationRows(event, origin).map(({ name, email, url }) => [
+      name,
+      email,
+      url,
+    ]),
+  ]);
+}
+export function santaInvitationMessage(event, giverId, origin) {
+  const invitation = santaInvitationRows(event, origin).find(
+    (person) => person.id === giverId,
+  );
+  if (!invitation) throw new Error("Participante no disponible.");
+  return `Hola, ${invitation.name}. Esta es tu invitación para ${event.title}:\n${invitation.url}\nAbre el enlace y pulsa «Descubrir mi amigo secreto». Es personal: no lo compartas con otras personas.`;
+}
 export function safeCSV(rows) {
   return (
     "\ufeff" +
