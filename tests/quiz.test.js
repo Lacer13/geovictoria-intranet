@@ -13,9 +13,12 @@ import {
   saveQuizIdentity,
   tallyQuizRound,
   validQuizCode,
+  resizeQuizQuestions,
+  resizeQuizOptions,
+  quizQuestionCount,
 } from "../src/lib/quiz.js";
 
-test("quiz drafts keep incomplete work but require seven complete questions and a bonus before opening", () => {
+test("quiz drafts keep incomplete work and require every configured question before opening", () => {
   const form = emptyQuiz();
   assert.equal(normalizeQuizDraft(form).questions.length, 8);
   assert.throws(() => normalizeQuizDraft(form, true));
@@ -38,7 +41,7 @@ test("quiz drafts keep incomplete work but require seven complete questions and 
   );
   assert.ok(!quizQuestionReady({ ...q, correctIndex: -1 }));
   assert.throws(() =>
-    normalizeQuizDraft({ ...form, questions: Array(9).fill(q) }),
+    normalizeQuizDraft({ ...form, questions: Array(11).fill(q) }),
   );
   assert.throws(() =>
     normalizeQuizDraft({
@@ -46,6 +49,81 @@ test("quiz drafts keep incomplete work but require seven complete questions and 
       questions: Array(8).fill({ ...q, seconds: 0 }),
     }),
   );
+});
+test("contests accept 1–10 questions with 2–6 distinct alternatives and a valid answer index", () => {
+  for (const count of [1, 3, 8, 10]) {
+    for (const options of [2, 3, 4, 5, 6]) {
+      const q = {
+        prompt: "Ensayo",
+        options: Array.from({ length: options }, (_, i) => `Alternativa ${i}`),
+        correctIndex: options - 1,
+        seconds: 30,
+      };
+      assert.equal(
+        normalizeQuizDraft(
+          { title: "Ensayo", questions: Array(count).fill(q) },
+          true,
+        ).questions.length,
+        count,
+      );
+      assert.ok(!quizQuestionReady({ ...q, correctIndex: options }));
+    }
+  }
+  for (const options of [["Una"], Array(7).fill("Demasiadas"), ["Sí", " sí "]])
+    assert.ok(
+      !quizQuestionReady({
+        prompt: "Ensayo",
+        options,
+        correctIndex: 0,
+        seconds: 30,
+      }),
+    );
+  assert.throws(() => normalizeQuizDraft({ title: "Vacío", questions: [] }));
+  assert.equal(quizQuestionCount({}), 8);
+  assert.equal(quizQuestionCount({ questionCount: 3 }), 3);
+});
+test("resizing preserves existing work, creates independent blanks and clears a removed correct answer", () => {
+  const original = emptyQuiz().questions;
+  original[0].prompt = "Trabajo guardado";
+  const expanded = resizeQuizQuestions(original, 10);
+  assert.equal(expanded[0].prompt, "Trabajo guardado");
+  expanded[8].options[0] = "Nueva";
+  assert.equal(expanded[9].options[0], "");
+  assert.equal(original.length, 8);
+  assert.equal(resizeQuizQuestions(expanded, 1)[0].prompt, "Trabajo guardado");
+  const q = {
+    ...original[0],
+    options: ["A", "B", "C", "D", "E", "F"],
+    correctIndex: 5,
+  };
+  assert.equal(resizeQuizOptions(q, 2).correctIndex, -1);
+  assert.deepEqual(resizeQuizOptions(q, 2).options, ["A", "B"]);
+  assert.equal(q.correctIndex, 5);
+  assert.equal(resizeQuizOptions({ ...q, correctIndex: 1 }, 3).correctIndex, 1);
+  for (const count of [0, 11, 2.5])
+    assert.throws(() => resizeQuizQuestions(original, count));
+  for (const count of [1, 7, 2.5])
+    assert.throws(() => resizeQuizOptions(q, count));
+});
+test("round tally counts precisely the current alternatives, including F, and rejects nonexistent choices", () => {
+  for (const count of [2, 3, 5, 6]) {
+    const round = {
+      options: Array(count).fill("Ensayo"),
+      correctIndex: count - 1,
+      seconds: 30,
+      startedAt: 1000,
+      closedAt: 10000,
+      bonus: true,
+    };
+    const tally = tallyQuizRound(round, [
+      { playerId: "valid", selectedIndex: count - 1, submittedAt: 2000 },
+      { playerId: "forged", selectedIndex: count, submittedAt: 2000 },
+    ]);
+    assert.equal(tally.counts.length, count);
+    assert.equal(tally.counts[count - 1], 1);
+    assert.equal(tally.results.length, 1);
+    assert.equal(tally.results[0].points, quizPoints(true, 1000, 30, true));
+  }
 });
 test("quiz scoring uses multiples of seven, caps every award at 497 and sums without rounding drift", () => {
   assert.equal(quizPoints(true, 0, 30), 497);

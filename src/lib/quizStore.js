@@ -91,6 +91,7 @@ export async function openQuizLobby(code, revision) {
       title: event.title,
       status: "lobby",
       questionIndex: -1,
+      questionCount: event.questions.length,
       question: null,
       startedAt: null,
       correctIndex: null,
@@ -195,18 +196,18 @@ export async function nextQuizQuestion(code, expectedIndex) {
     if (!players.data()?.count)
       throw new Error("Espera a que se registre al menos una persona.");
     const index = room.questionIndex + 1;
-    if (index > 7)
+    if (index >= event.questions.length)
       throw new Error("Ya se completó el bonus. Revela el resultado final.");
     const q = event.questions[index];
     const question = {
       prompt: q.prompt,
       options: q.options,
       seconds: q.seconds,
-      bonus: index === 7,
+      bonus: index === event.questions.length - 1,
     };
     t.set(roundRef(code, index), {
       ...q,
-      bonus: index === 7,
+      bonus: index === event.questions.length - 1,
       questionIndex: index,
       startedAt: serverTimestamp(),
       closedAt: null,
@@ -217,8 +218,9 @@ export async function nextQuizQuestion(code, expectedIndex) {
       status: "question",
       questionIndex: index,
       question,
+      questionCount: event.questions.length,
       correctIndex: null,
-      answerCounts: [0, 0, 0, 0],
+      answerCounts: q.options.map(() => 0),
       startedAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
     });
@@ -281,20 +283,20 @@ export async function changeQuizPhase(code, expectedStatus, nextStatus) {
   ensureAdmin();
   await runTransaction(db, async (t) => {
     const room = (await t.get(quizRoomRef(code))).data();
+    const eventRef = doc(db, "quizEvents", code);
+    const event = (await t.get(eventRef)).data();
     if (
       room?.status !== expectedStatus ||
       !(
         (expectedStatus === "reveal" && nextStatus === "ranking") ||
         (expectedStatus === "ranking" &&
-          room.questionIndex === 7 &&
+          room.questionIndex === event.questions.length - 1 &&
           nextStatus === "finished")
       )
     )
       throw new Error("La sala cambió. Revisa su estado antes de continuar.");
     if (nextStatus === "finished") {
-      const ref = doc(db, "quizEvents", code);
-      const event = (await t.get(ref)).data();
-      t.update(ref, {
+      t.update(eventRef, {
         status: "finished",
         revision: event.revision + 1,
         updatedAt: serverTimestamp(),

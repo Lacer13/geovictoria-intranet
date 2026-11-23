@@ -1,6 +1,11 @@
 import { randomHex } from "./secretSanta.js";
 
 export const QUIZ_QUESTIONS = 8;
+export const QUIZ_MIN_QUESTIONS = 1;
+export const QUIZ_MAX_QUESTIONS = 10;
+export const QUIZ_MIN_OPTIONS = 2;
+export const QUIZ_MAX_OPTIONS = 6;
+export const QUIZ_OPTION_LETTERS = "ABCDEF";
 export const QUIZ_LIMIT = 200;
 export const QUIZ_SCORE_STEP = 7;
 export const QUIZ_MAX_POINTS =
@@ -19,24 +24,64 @@ export function createQuizCode() {
     (n) => alphabet[n % 32],
   ).join("");
 }
+export const emptyQuizQuestion = () => ({
+  prompt: "",
+  options: ["", "", "", ""],
+  correctIndex: -1,
+  seconds: 30,
+});
 export const emptyQuiz = () => ({
   title: "Tickets de implementación · Reto navideño",
-  questions: Array.from({ length: QUIZ_QUESTIONS }, () => ({
-    prompt: "",
-    options: ["", "", "", ""],
-    correctIndex: -1,
-    seconds: 30,
-  })),
+  questions: Array.from({ length: QUIZ_QUESTIONS }, emptyQuizQuestion),
 });
+export function resizeQuizQuestions(questions, count) {
+  if (
+    !Number.isInteger(count) ||
+    count < QUIZ_MIN_QUESTIONS ||
+    count > QUIZ_MAX_QUESTIONS
+  )
+    throw new Error(
+      `Elige de ${QUIZ_MIN_QUESTIONS} a ${QUIZ_MAX_QUESTIONS} preguntas.`,
+    );
+  return Array.from(
+    { length: count },
+    (_, index) => questions[index] || emptyQuizQuestion(),
+  );
+}
+export function resizeQuizOptions(question, count) {
+  if (
+    !Number.isInteger(count) ||
+    count < QUIZ_MIN_OPTIONS ||
+    count > QUIZ_MAX_OPTIONS
+  )
+    throw new Error(
+      `Elige de ${QUIZ_MIN_OPTIONS} a ${QUIZ_MAX_OPTIONS} alternativas.`,
+    );
+  return {
+    ...question,
+    options: Array.from(
+      { length: count },
+      (_, index) => question.options[index] ?? "",
+    ),
+    correctIndex: question.correctIndex < count ? question.correctIndex : -1,
+  };
+}
+// Rooms created before configurable contests have eight questions.
+export function quizQuestionCount(room) {
+  return room?.questionCount ?? QUIZ_QUESTIONS;
+}
 export function normalizeQuizDraft(form, complete = false) {
   const title = String(form.title || "").trim();
   if (!title || title.length > 100)
     throw new Error("Escribe un título de hasta 100 caracteres.");
   if (
     !Array.isArray(form.questions) ||
-    form.questions.length !== QUIZ_QUESTIONS
+    form.questions.length < QUIZ_MIN_QUESTIONS ||
+    form.questions.length > QUIZ_MAX_QUESTIONS
   )
-    throw new Error("Prepara siete preguntas y una pregunta bonus.");
+    throw new Error(
+      `Prepara de ${QUIZ_MIN_QUESTIONS} a ${QUIZ_MAX_QUESTIONS} preguntas. La última será el bonus.`,
+    );
   const questions = form.questions.map((q, i) => {
     const prompt = String(q.prompt || "").trim();
     const options = Array.isArray(q.options)
@@ -44,27 +89,27 @@ export function normalizeQuizDraft(form, complete = false) {
       : [];
     if (
       prompt.length > 500 ||
-      options.length !== 4 ||
+      options.length < QUIZ_MIN_OPTIONS ||
+      options.length > QUIZ_MAX_OPTIONS ||
       options.some((v) => v.length > 150) ||
       !Number.isInteger(q.correctIndex) ||
       q.correctIndex < -1 ||
-      q.correctIndex > 3 ||
+      q.correctIndex >= options.length ||
       !Number.isInteger(q.seconds) ||
       q.seconds < 10 ||
       q.seconds > 90
     )
-      throw new Error(
-        `Revisa los datos de ${i === 7 ? "la pregunta bonus" : `la pregunta ${i + 1}`}.`,
-      );
+      throw new Error(`Revisa los datos de la pregunta ${i + 1}.`);
     if (
       complete &&
       (!prompt ||
         options.some((v) => !v) ||
         q.correctIndex < 0 ||
-        new Set(options.map((v) => v.toLocaleLowerCase("es"))).size !== 4)
+        new Set(options.map((v) => v.toLocaleLowerCase("es"))).size !==
+          options.length)
     )
       throw new Error(
-        `Completa ${i === 7 ? "la pregunta bonus" : `la pregunta ${i + 1}`} con cuatro opciones diferentes y una respuesta correcta.`,
+        `Completa la pregunta ${i + 1} con ${options.length} alternativas diferentes y una respuesta correcta.`,
       );
     return {
       prompt,
@@ -77,10 +122,7 @@ export function normalizeQuizDraft(form, complete = false) {
 }
 export function quizQuestionReady(question) {
   try {
-    normalizeQuizDraft(
-      { title: "Revisión", questions: Array(8).fill(question) },
-      true,
-    );
+    normalizeQuizDraft({ title: "Revisión", questions: [question] }, true);
     return true;
   } catch {
     return false;
@@ -113,7 +155,10 @@ export function milliseconds(value) {
   return NaN;
 }
 export function tallyQuizRound(round, answers) {
-  const counts = [0, 0, 0, 0];
+  const optionCount = round.options?.length ?? 4;
+  if (optionCount < QUIZ_MIN_OPTIONS || optionCount > QUIZ_MAX_OPTIONS)
+    throw new Error("La pregunta tiene una cantidad de alternativas inválida.");
+  const counts = Array(optionCount).fill(0);
   const seen = new Set();
   const results = [];
   const start = milliseconds(round.startedAt);
@@ -129,7 +174,7 @@ export function tallyQuizRound(round, answers) {
       seen.has(a.playerId) ||
       !Number.isInteger(a.selectedIndex) ||
       a.selectedIndex < 0 ||
-      a.selectedIndex > 3 ||
+      a.selectedIndex >= optionCount ||
       at < start ||
       at >= stop ||
       !Number.isFinite(at)
