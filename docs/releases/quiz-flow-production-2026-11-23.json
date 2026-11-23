@@ -1,0 +1,178 @@
+{
+  "date": "2026-11-23",
+  "project": "geovictoria-intranet-peru",
+  "url": "https://geovictoria-intranet-peru.web.app/admin?seccion=concurso",
+  "pullRequest": "https://github.com/Lacer13/geovictoria-intranet/pull/9",
+  "sourceCommit": "200baf3d4f03eba501c40b2375959dd0f3c5adc0",
+  "mergeCommit": "c0c4a1666945926819ea7860ef12c961c3d0e68f",
+  "minimumOptions": 2,
+  "maximumOptions": 5,
+  "hostingVersion": "2df6f42cc48d874d",
+  "previousHostingVersion": "f5ad08a32a07ff10",
+  "releaseTime": "2026-11-23T20:12:29.107Z",
+  "firestoreRulesDeployed": false,
+  "firestoreRulesChanged": false,
+  "ruleset": "projects/geovictoria-intranet-peru/rulesets/441e8c34-8448-410c-8943-0598a29d85ea",
+  "previousRuleset": "projects/geovictoria-intranet-peru/rulesets/441e8c34-8448-410c-8943-0598a29d85ea",
+  "rulesSourceSha256": "18ccd0a22df079ea364b52e1676ecfa38ed724a8e79cbec722a05ba73049bbab",
+  "productionRulesMatchValidatedSource": true,
+  "testsPassed": 111,
+  "rulesTestsPassed": 34,
+  "ci": "https://github.com/Lacer13/geovictoria-intranet/actions/runs/45256492555",
+  "validation": "docs/releases/quiz-flow-validation-2026-11-23.json",
+  "productionFixturesCreated": false,
+  "resources": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "sha256": "9fd61f5487b1b42200fe3fce0650962fc2a87d8b6aca82d0e2d474c0778259da",
+      "bytes": 1544
+    },
+    {
+      "path": "assets/index-C9hhMwX6.js",
+      "status": 200,
+      "sha256": "58cb373f685ad151044b2540f0c5df226ed363f06a03540d2e520ac9e1b0dfa1",
+      "bytes": 59
+    },
+    {
+      "path": "assets/rolldown-runtime-D2aABDIb.js",
+      "status": 200,
+      "sha256": "760907b0f57761fcae7a1113e535296fa7e31deaa87aa6138e19917ae7e00a86",
+      "bytes": 680
+    },
+    {
+      "path": "assets/react-DbMM3Pz9.js",
+      "status": 200,
+      "sha256": "1aa337c1eaee5d0da619083f58824dc8b374974312d37eff98307fdc9c121acb",
+      "bytes": 228576
+    },
+    {
+      "path": "assets/createLucideIcon-7eCvd4fb.js",
+      "status": 200,
+      "sha256": "9a447768920f4b44d21d49d9834058c8e7f1e45b94254ba1cd748ef70ba09e8a",
+      "bytes": 1855
+    },
+    {
+      "path": "assets/season-DG87JeAL.js",
+      "status": 200,
+      "sha256": "55bb1d00923a1d7af9515bd68c430e2bc1fbc07f360312fa4e0c1288a1336181",
+      "bytes": 1943
+    },
+    {
+      "path": "assets/arrow-right-B8hwxgWV.js",
+      "status": 200,
+      "sha256": "639de16f192b1911494c961547f0cb25db028866d1d3a423d9929202e19a6b4a",
+      "bytes": 283
+    },
+    {
+      "path": "assets/firebase-core-BoxtNgOR.js",
+      "status": 200,
+      "sha256": "2480460fd317e50c4dc860a4eb71529644d1c30053cefc61d6ba90df869c11aa",
+      "bytes": 25641
+    },
+    {
+      "path": "assets/firebase-auth-BxqmKkLm.js",
+      "status": 200,
+      "sha256": "aa72bf3a76c4758ff610de7e94fa84f7668a98caa65f6483ba353e121aa24f58",
+      "bytes": 88405
+    },
+    {
+      "path": "assets/firebase-DMdVjB43.js",
+      "status": 200,
+      "sha256": "5337950d08d832d83f216f34b84d9317e3ccc37770a4414939961da3e67b25fc",
+      "bytes": 305651
+    },
+    {
+      "path": "assets/geovictoria-intranet-CVQVG_eu.js",
+      "status": 200,
+      "sha256": "44a6fd416f4f27c8f943e71ef201c25d05ea36eb0e1c7ffbc3e3da22d49dff14",
+      "bytes": 225518
+    },
+    {
+      "path": "assets/geovictoria-intranet-Dk8WBFoS.css",
+      "status": 200,
+      "sha256": "f86cb7434b5c8c89fb606dfaf16c574dcdb58287dcf4dd8a6fd79dcb3bb7e6c9",
+      "bytes": 118749
+    },
+    {
+      "path": "assets/Admin-DFHcok2A.js",
+      "status": 200,
+      "sha256": "e0ce28f1d39f1b4689b8eb246bb542f32418e5ebbc51ea2de3a28b777c81ce89",
+      "bytes": 92877
+    },
+    {
+      "path": "assets/Admin-lMyw9naM.css",
+      "status": 200,
+      "sha256": "eef15cd4973f0474c2dba8b6cbe20451edbc895d81d0b82e2c395026ebb592fe",
+      "bytes": 3414
+    },
+    {
+      "path": "assets/Christmas-CVRql_0H.js",
+      "status": 200,
+      "sha256": "3391f00a4a0b98de6500c598b905f2ca23a005faa84aba9e00ae5062024c100b",
+      "bytes": 5616
+    },
+    {
+      "path": "assets/ChristmasWall-C4Eq8YsD.css",
+      "status": 200,
+      "sha256": "2077d68de83e4c518d88fa0c5950588bc93e07165b489c3fa141f19943ceffcd",
+      "bytes": 3816
+    },
+    {
+      "path": "assets/ChristmasWall-oNnXQFcC.js",
+      "status": 200,
+      "sha256": "318db1e7e68a2855eb801e8001a70543da90da658f70505fc3098e8411b2b825",
+      "bytes": 11470
+    },
+    {
+      "path": "assets/GamePage-CkARHRxK.css",
+      "status": 200,
+      "sha256": "a072386c949f65299d4aaa179818fd8f16cf22d903c5e377084e289be7345271",
+      "bytes": 20613
+    },
+    {
+      "path": "assets/GamePage-CykSDAGe.js",
+      "status": 200,
+      "sha256": "bfdc13d692bf79b3ba3f1683bf87777b160fc04103c13b5eac6fca3c3bc4ef23",
+      "bytes": 84719
+    },
+    {
+      "path": "assets/Quiz-BsEufCO7.js",
+      "status": 200,
+      "sha256": "272a7d12a48c345c23fd802e2f20f002c16bcca4c52a564614b5f4d3044c90fc",
+      "bytes": 11851
+    }
+  ],
+  "routes": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/admin?seccion=concurso",
+      "status": 200
+    },
+    {
+      "path": "/concurso",
+      "status": 200
+    },
+    {
+      "path": "/concurso/pantalla/TEST2345",
+      "status": 200
+    },
+    {
+      "path": "/navidad",
+      "status": 200
+    },
+    {
+      "path": "/juego",
+      "status": 200
+    }
+  ],
+  "verifiedAt": "2026-11-23T20:12:44.650Z",
+  "rollbackCommand": "npx --yes firebase-tools@15.34.1 hosting:clone geovictoria-intranet-peru@f5ad08a32a07ff10 geovictoria-intranet-peru:live --project geovictoria-intranet-peru --non-interactive",
+  "mainCi": {
+    "url": "https://github.com/Lacer13/geovictoria-intranet/actions/runs/45256753035",
+    "conclusion": "success"
+  }
+}
