@@ -45,11 +45,15 @@ const statsRef = (db, code) =>
 const playerRef = (db, code, id) => doc(db, "quizRooms", code, "players", id);
 const answerRef = (db, code, token, index = "0") =>
   doc(db, "quizRooms", code, "rounds", index, "answers", token);
-async function lobby(code) {
+async function lobby(
+  code,
+  questions = Array(8).fill(question),
+  configurable = false,
+) {
   const event = doc(admin, "quizEvents", code);
   await setDoc(event, {
     title: "Ensayo aislado",
-    questions: Array(8).fill(question),
+    questions,
     status: "draft",
     revision: 0,
     createdBy: "quiz-admin",
@@ -66,6 +70,7 @@ async function lobby(code) {
     title: "Ensayo aislado",
     status: "lobby",
     questionIndex: -1,
+    ...(configurable ? { questionCount: questions.length } : {}),
     question: null,
     startedAt: null,
     correctIndex: null,
@@ -112,14 +117,14 @@ async function join(
   await batch.commit();
   return { id, token };
 }
-async function start(code, old = false) {
+async function start(code, old = false, q = question, index = 0) {
   const time = old
     ? Timestamp.fromMillis(Date.now() - 40000)
     : serverTimestamp();
   const batch = writeBatch(admin);
-  batch.set(doc(admin, "quizRooms", code, "rounds", "0"), {
-    ...question,
-    questionIndex: 0,
+  batch.set(doc(admin, "quizRooms", code, "rounds", String(index)), {
+    ...q,
+    questionIndex: index,
     bonus: false,
     startedAt: time,
     closedAt: null,
@@ -128,14 +133,15 @@ async function start(code, old = false) {
   });
   batch.update(roomRef(admin, code), {
     status: "question",
-    questionIndex: 0,
+    questionIndex: index,
     question: {
-      prompt: question.prompt,
-      options: question.options,
-      seconds: question.seconds,
+      prompt: q.prompt,
+      options: q.options,
+      seconds: q.seconds,
       bonus: false,
     },
     startedAt: time,
+    answerCounts: q.options.map(() => 0),
     updatedAt: serverTimestamp(),
   });
   await batch.commit();
@@ -307,4 +313,204 @@ test("quiz questions lock when the lobby opens and archiving removes public acce
   await assertFails(getDocs(collection(visitor, "quizRooms", code, "players")));
   await assertFails(getDoc(answerRef(visitor, code, p.token)));
   await assertSucceeds(getDoc(playerRef(admin, code, p.id)));
+});
+
+test("configurable contests validate every question and alternative at both supported boundaries", async () => {
+  const six = {
+    ...question,
+    options: ["A", "B", "C", "D", "E", "F"],
+    correctIndex: 5,
+  };
+  await assertSucceeds(
+    lobby("FLEX2222", [{ ...question, options: ["Sí", "No"] }], true),
+  );
+  await assertSucceeds(lobby("FLEX2223", Array(10).fill(six), true));
+  const data = (await getDoc(doc(admin, "quizEvents", "FLEX2223"))).data();
+  for (const [index, questions] of [
+    [],
+    Array(11).fill(six),
+    [{ ...six, options: ["Una"] }],
+    [{ ...six, options: Array(7).fill("Demasiadas") }],
+    [{ ...six, correctIndex: 6 }],
+    [...Array(9).fill(six), { ...six, correctIndex: 6 }],
+  ].entries()) {
+    await assertFails(
+      setDoc(doc(admin, "quizEvents", `BADQ222${index + 2}`), {
+        ...data,
+        questions,
+        status: "draft",
+        revision: 0,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      }),
+    );
+  }
+  await assertFails(
+    updateDoc(roomRef(admin, "FLEX2223"), {
+      questionCount: 9,
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertFails(
+    updateDoc(doc(admin, "quizEvents", "FLEX2223"), {
+      questions: Array(3).fill(six),
+      revision: 2,
+      updatedAt: serverTimestamp(),
+    }),
+  );
+});
+
+test("answer rules follow the actual option count and support F on question ten", async () => {
+  for (const [code, count, index] of [
+    ["FLEX2224", 2, 0],
+    ["FLEX2225", 6, 9],
+  ]) {
+    const q = {
+      ...question,
+      options: Array.from({ length: count }, (_, i) => String(i)),
+      correctIndex: count - 1,
+    };
+    await lobby(code, Array(index + 1).fill(q), true);
+    const p = await join(code);
+    await start(code, false, q, index);
+    const ref = answerRef(visitor, code, p.token, String(index));
+    await assertFails(setDoc(ref, { ...answer(p), selectedIndex: count }));
+    await assertSucceeds(
+      setDoc(ref, { ...answer(p), selectedIndex: count - 1 }),
+    );
+    await assertFails(
+      updateDoc(roomRef(admin, code), {
+        status: "reveal",
+        correctIndex: count,
+        updatedAt: serverTimestamp(),
+      }),
+    );
+    await assertSucceeds(
+      updateDoc(roomRef(admin, code), {
+        status: "reveal",
+        correctIndex: count - 1,
+        updatedAt: serverTimestamp(),
+      }),
+    );
+    await assertFails(
+      updateDoc(roomRef(admin, code), {
+        questionIndex: index + 1,
+        updatedAt: serverTimestamp(),
+      }),
+    );
+  }
+});
+
+test("editable drafts keep Unicode, line breaks, changed counts and the original revision checks", async () => {
+  const ref = doc(admin, "quizEvents", "EDTT2345");
+  const q = {
+    ...question,
+    prompt: "¿Quién eligió la última?\nEnsayo navideño 🎄",
+    options: ["Sí", "No"],
+    correctIndex: 1,
+    seconds: 90,
+  };
+  await assertSucceeds(
+    setDoc(ref, {
+      title: "Ensayo de edición",
+      questions: Array(10).fill(q),
+      status: "draft",
+      revision: 0,
+      createdBy: "quiz-admin",
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertSucceeds(
+    updateDoc(ref, {
+      title: "Edición guardada",
+      questions: [q, { ...q, options: ["Sí", "No", "Quizá"], correctIndex: 2 }],
+      revision: 1,
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertFails(
+    updateDoc(ref, { revision: 1, updatedAt: serverTimestamp() }),
+  );
+  for (const patch of [
+    { extra: true },
+    { prompt: 42 },
+    { prompt: "x".repeat(501) },
+    { seconds: 9 },
+    { seconds: 91 },
+    { seconds: 30.5 },
+  ]) {
+    await assertFails(
+      updateDoc(ref, {
+        questions: [{ ...q, ...patch }],
+        revision: 2,
+        updatedAt: serverTimestamp(),
+      }),
+    );
+  }
+});
+
+test("a verified delegated administrator can save and open the maximum configurable contest", async () => {
+  const email = "quiz-delegated@example.test";
+  await env.withSecurityRulesDisabled(async (ctx) =>
+    setDoc(doc(ctx.firestore(), "administrators", email), {
+      email,
+      role: "admin",
+      active: true,
+    }),
+  );
+  const delegated = env
+    .authenticatedContext("delegated-host", { email, email_verified: true })
+    .firestore();
+  const code = "DELG2345";
+  const event = doc(delegated, "quizEvents", code);
+  const q = {
+    ...question,
+    options: ["A", "B", "C", "D", "E", "F"],
+    correctIndex: 5,
+  };
+  await assertSucceeds(
+    setDoc(event, {
+      title: "Ensayo delegado",
+      questions: Array(10).fill(q),
+      status: "draft",
+      revision: 0,
+      createdBy: "delegated-host",
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertSucceeds(
+    updateDoc(event, {
+      questions: Array(10).fill({ ...q, prompt: "Edición del delegado" }),
+      revision: 1,
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  const batch = writeBatch(delegated);
+  batch.update(event, {
+    status: "live",
+    revision: 2,
+    updatedAt: serverTimestamp(),
+  });
+  batch.set(roomRef(delegated, code), {
+    title: "Ensayo delegado",
+    status: "lobby",
+    questionCount: 10,
+    questionIndex: -1,
+    question: null,
+    startedAt: null,
+    correctIndex: null,
+    answerCounts: [0, 0, 0, 0],
+    leaderboard: [],
+    createdBy: "delegated-host",
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+  });
+  batch.set(statsRef(delegated, code), {
+    count: 0,
+    lastPlayerId: "",
+    updatedAt: serverTimestamp(),
+  });
+  await assertSucceeds(batch.commit());
 });

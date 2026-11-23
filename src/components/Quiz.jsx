@@ -19,6 +19,8 @@ import {
   QUIZ_SCORE_STEP,
   readQuizIdentity,
   validQuizCode,
+  quizQuestionCount,
+  QUIZ_OPTION_LETTERS,
 } from "../lib/quiz";
 import QuizStage, { QuizRanking, QuizRoster } from "./QuizStage";
 import "../quiz.css";
@@ -65,7 +67,7 @@ export default function Quiz() {
         </div>
       </form>
       <div className="quiz-entry-facts">
-        <span>7 preguntas</span>
+        <span>Preguntas a medida</span>
         <span>Bonus ×2 · Máx. {QUIZ_MAX_POINTS}</span>
         <span>
           {QUIZ_SCORE_STEP}–{QUIZ_MAX_POINTS} pts · Múltiplos de{" "}
@@ -275,7 +277,12 @@ function Participant({ code }) {
               <QuizRoster players={players} />
             </>
           ) : room.status === "finished" ? (
-            <QuizRanking rows={room.leaderboard} ownId={identity.id} final />
+            <QuizRanking
+              rows={room.leaderboard}
+              ownId={identity.id}
+              questionCount={quizQuestionCount(room)}
+              final
+            />
           ) : room.status === "ranking" ? (
             <QuizRanking rows={room.leaderboard} ownId={identity.id} />
           ) : room.question ? (
@@ -284,7 +291,7 @@ function Participant({ code }) {
                 <span>
                   {room.question.bonus
                     ? "BONUS TRACK · ×2"
-                    : `PREGUNTA ${room.questionIndex + 1} DE 7`}
+                    : `PREGUNTA ${room.questionIndex + 1} DE ${quizQuestionCount(room)}`}
                 </span>
                 <span
                   className={`quiz-timer ${clock.remaining <= 5 && room.status === "question" ? "is-urgent" : ""}`}
@@ -311,7 +318,7 @@ function Participant({ code }) {
                     }
                     onClick={() => send(i)}
                   >
-                    <b>{"ABCD"[i]}</b>
+                    <b>{QUIZ_OPTION_LETTERS[i]}</b>
                     <span>{option}</span>
                     {answer?.selectedIndex === i && <small>Tu respuesta</small>}
                     {revealed && room.correctIndex === i && (

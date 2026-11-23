@@ -5,15 +5,13 @@ service cloud.firestore {
       return request.auth != null && (
         request.auth.token.get('admin', false) == true || (
           request.auth.token.get('email_verified', false) == true &&
-          request.auth.token.get('email', '') != '' &&
-          authorizedEmail(request.auth.token.email.lower())
+          authorizedEmail(request.auth.token.get('email', '').lower())
         )
       );
     }
     function authorizedEmail(email) {
-      return exists(/databases/$(database)/documents/administrators/$(email)) &&
-        get(/databases/$(database)/documents/administrators/$(email)).data.active == true &&
-        get(/databases/$(database)/documents/administrators/$(email)).data.role in ['owner', 'admin'];
+      let authorization = get(/databases/$(database)/documents/administrators/$(email)).data;
+      return authorization.active == true && authorization.role in ['owner', 'admin'];
     }
     function text(value, max) {
       return value is string && value.size() > 0 && value.size() <= max;
@@ -132,39 +130,58 @@ service cloud.firestore {
     // Live quiz: private authoring, public stage, capability-protected answers.
     function quizCode(code) { return code.matches('^[A-HJ-NP-Z2-9]{8}$'); }
     function quizOptions(options) {
-      return options is list && options.size() == 4
+      return options is list && options.size() >= 2 && options.size() <= 6
         && options[0] is string && options[0].size() <= 150
         && options[1] is string && options[1].size() <= 150
-        && options[2] is string && options[2].size() <= 150
-        && options[3] is string && options[3].size() <= 150;
+        && (options.size() <= 2 || (options[2] is string && options[2].size() <= 150))
+        && (options.size() <= 3 || (options[3] is string && options[3].size() <= 150))
+        && (options.size() <= 4 || (options[4] is string && options[4].size() <= 150))
+        && (options.size() <= 5 || (options[5] is string && options[5].size() <= 150));
     }
     function quizQuestion(q) {
-      return q is map && q.keys().hasOnly(['prompt', 'options', 'correctIndex', 'seconds'])
-        && q.prompt is string && q.prompt.size() <= 500
-        && q.options is list && q.options.size() == 4
-        && q.correctIndex is int && q.correctIndex >= -1 && q.correctIndex <= 3
-        && q.seconds is int && q.seconds >= 10 && q.seconds <= 90;
+      let options = q.options;
+      let count = options.size();
+      let correct = q.correctIndex;
+      let seconds = q.seconds;
+      // Required field reads plus size == 4 reject missing or extra keys.
+      return q.size() == 4
+        && q.prompt.matches('(?s).{0,500}')
+        && options is list && count >= 2 && count <= 6
+        && correct is int && correct >= -1 && correct < count
+        && seconds is int && seconds >= 10 && seconds <= 90;
     }
     match /quizEvents/{code} {
+      function validQuestions(questions) {
+        let count = questions.size();
+        return questions is list && count >= 1 && count <= 10
+          && quizQuestion(questions[0])
+          && (count <= 1 || quizQuestion(questions[1]))
+          && (count <= 2 || quizQuestion(questions[2]))
+          && (count <= 3 || quizQuestion(questions[3]))
+          && (count <= 4 || quizQuestion(questions[4]))
+          && (count <= 5 || quizQuestion(questions[5]))
+          && (count <= 6 || quizQuestion(questions[6]))
+          && (count <= 7 || quizQuestion(questions[7]))
+          && (count <= 8 || quizQuestion(questions[8]))
+          && (count <= 9 || quizQuestion(questions[9]));
+      }
       function validEvent(d) {
         return quizCode(code) && d.keys().hasOnly(['title', 'questions', 'status', 'revision', 'createdBy', 'createdAt', 'updatedAt'])
-          && text(d.title, 100) && d.questions is list && d.questions.size() == 8
-          && quizQuestion(d.questions[0]) && quizQuestion(d.questions[1])
-          && quizQuestion(d.questions[2]) && quizQuestion(d.questions[3])
-          && quizQuestion(d.questions[4]) && quizQuestion(d.questions[5])
-          && quizQuestion(d.questions[6]) && quizQuestion(d.questions[7])
+          && text(d.title, 100) && d.questions is list && d.questions.size() >= 1 && d.questions.size() <= 10
           && d.status in ['draft', 'live', 'finished', 'archived']
           && d.revision is int && d.updatedAt == request.time;
       }
       allow read: if isAdmin();
       allow create: if isAdmin() && validEvent(request.resource.data)
+        && validQuestions(request.resource.data.questions)
         && request.resource.data.status == 'draft' && request.resource.data.revision == 0
         && request.resource.data.createdBy == request.auth.uid && request.resource.data.createdAt == request.time;
       allow update: if isAdmin() && validEvent(request.resource.data)
         && request.resource.data.createdBy == resource.data.createdBy
         && request.resource.data.createdAt == resource.data.createdAt
         && request.resource.data.revision == resource.data.revision + 1
-        && ((resource.data.status == 'draft' && request.resource.data.status == 'draft')
+        && ((resource.data.status == 'draft' && request.resource.data.status == 'draft'
+            && validQuestions(request.resource.data.questions))
           || (request.resource.data.questions == resource.data.questions && request.resource.data.title == resource.data.title
             && ((resource.data.status == 'draft' && request.resource.data.status == 'live')
               || (resource.data.status == 'live' && request.resource.data.status == 'finished')
@@ -176,26 +193,29 @@ service cloud.firestore {
       function active() { return quizCode(code) && room().status != 'archived'; }
       function lobby() { return quizCode(code) && room().status == 'lobby'; }
       function validRoom(d) {
-        return quizCode(code) && d.keys().hasOnly(['title', 'status', 'questionIndex', 'question', 'startedAt', 'correctIndex', 'answerCounts', 'leaderboard', 'createdBy', 'createdAt', 'updatedAt'])
+        return quizCode(code) && d.keys().hasOnly(['title', 'status', 'questionIndex', 'questionCount', 'question', 'startedAt', 'correctIndex', 'answerCounts', 'leaderboard', 'createdBy', 'createdAt', 'updatedAt'])
           && text(d.title, 100) && d.status in ['lobby', 'question', 'closing', 'reveal', 'ranking', 'finished', 'archived']
-          && d.questionIndex is int && d.questionIndex >= -1 && d.questionIndex <= 7
+          && d.get('questionCount', 8) is int && d.get('questionCount', 8) >= 1 && d.get('questionCount', 8) <= 10
+          && d.questionIndex is int && d.questionIndex >= -1 && d.questionIndex < d.get('questionCount', 8)
           && d.leaderboard is list && d.leaderboard.size() <= 200
-          && d.answerCounts is list && d.answerCounts.size() == 4
+          && d.answerCounts is list && d.answerCounts.size() == (d.question == null ? 4 : d.question.options.size())
           && d.updatedAt == request.time
           && (d.question == null || (d.question is map && d.question.keys().hasOnly(['prompt', 'options', 'seconds', 'bonus'])
             && text(d.question.prompt, 500) && quizOptions(d.question.options)
             && d.question.seconds is int && d.question.seconds >= 10 && d.question.seconds <= 90 && d.question.bonus is bool))
           && ((d.status in ['lobby', 'question', 'closing', 'archived'] && d.correctIndex == null)
-            || (d.status in ['reveal', 'ranking', 'finished'] && d.correctIndex is int && d.correctIndex >= 0 && d.correctIndex <= 3));
+            || (d.status in ['reveal', 'ranking', 'finished'] && d.question != null && d.correctIndex is int && d.correctIndex >= 0 && d.correctIndex < d.question.options.size()));
       }
       allow get: if quizCode(code);
       allow list: if isAdmin();
       allow create: if isAdmin() && validRoom(request.resource.data)
         && getAfter(/databases/$(database)/documents/quizEvents/$(code)).data.status == 'live'
+        && request.resource.data.get('questionCount', 8) == getAfter(/databases/$(database)/documents/quizEvents/$(code)).data.questions.size()
         && request.resource.data.status == 'lobby' && request.resource.data.questionIndex == -1
         && request.resource.data.question == null && request.resource.data.startedAt == null
         && request.resource.data.leaderboard.size() == 0 && request.resource.data.createdAt == request.time;
       allow update: if isAdmin() && validRoom(request.resource.data)
+        && request.resource.data.get('questionCount', 8) == resource.data.get('questionCount', 8)
         && request.resource.data.createdAt == resource.data.createdAt && request.resource.data.createdBy == resource.data.createdBy;
       allow delete: if false;
       match /players/{playerId} {
@@ -248,7 +268,7 @@ service cloud.firestore {
             && request.resource.data.keys().hasOnly(['playerId', 'selectedIndex', 'submittedAt'])
             && request.resource.data.playerId.matches('^[a-f0-9]{32}$')
             && get(/databases/$(database)/documents/quizRooms/$(code)/credentials/$(request.resource.data.playerId)).data.token == token
-            && request.resource.data.selectedIndex is int && request.resource.data.selectedIndex >= 0 && request.resource.data.selectedIndex <= 3
+            && request.resource.data.selectedIndex is int && request.resource.data.selectedIndex >= 0 && request.resource.data.selectedIndex < room().question.options.size()
             && request.resource.data.submittedAt == request.time
             && room().status == 'question' && string(room().questionIndex) == index
             && get(/databases/$(database)/documents/quizRooms/$(code)/rounds/$(index)).data.closedAt == null

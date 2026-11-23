@@ -9,9 +9,15 @@ import {
 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { useQuizClock } from "../lib/quizHooks";
-import { quizJoinUrl, QUIZ_MAX_POINTS, QUIZ_SCORE_STEP } from "../lib/quiz";
+import {
+  quizJoinUrl,
+  quizQuestionCount,
+  QUIZ_MAX_POINTS,
+  QUIZ_SCORE_STEP,
+  QUIZ_OPTION_LETTERS,
+} from "../lib/quiz";
 
-const letters = ["A", "B", "C", "D"];
+const letters = QUIZ_OPTION_LETTERS;
 export function QuizRoster({ players }) {
   return (
     <div
@@ -37,7 +43,12 @@ export function QuizRoster({ players }) {
     </div>
   );
 }
-export function QuizRanking({ rows = [], ownId, final = false }) {
+export function QuizRanking({
+  rows = [],
+  ownId,
+  final = false,
+  questionCount = 8,
+}) {
   const winners = rows.filter((r) => r.rank === 1);
   return (
     <div className={`quiz-ranking ${final ? "quiz-finale" : ""}`}>
@@ -63,7 +74,7 @@ export function QuizRanking({ rows = [], ownId, final = false }) {
           {!!winners.length && (
             <p>
               {winners[0].points.toLocaleString("es-PE")} puntos ·{" "}
-              {winners[0].correct}/8 aciertos
+              {winners[0].correct}/{questionCount} aciertos
             </p>
           )}
           <div className="quiz-podium">
@@ -122,6 +133,7 @@ export default function QuizStage({
 }) {
   const clock = useQuizClock(room);
   const q = room.question;
+  const questionCount = quizQuestionCount(room);
   const reveal = ["reveal", "ranking", "finished"].includes(room.status);
   return (
     <div className={`quiz-stage ${compact ? "quiz-stage-compact" : ""}`}>
@@ -147,7 +159,8 @@ export default function QuizStage({
                 </em>
               </h2>
               <p>
-                7 preguntas + 1 bonus doble (tope {QUIZ_MAX_POINTS}).
+                {questionCount} {questionCount === 1 ? "pregunta" : "preguntas"}{" "}
+                · La última es bonus doble (tope {QUIZ_MAX_POINTS}).
                 <br />
                 Acierta y responde rápido para sumar más.
               </p>
@@ -175,7 +188,12 @@ export default function QuizStage({
           <QuizRoster players={players} />
         </>
       ) : room.status === "finished" ? (
-        <QuizRanking rows={room.leaderboard} ownId={ownId} final />
+        <QuizRanking
+          rows={room.leaderboard}
+          ownId={ownId}
+          questionCount={questionCount}
+          final
+        />
       ) : room.status === "ranking" ? (
         <QuizRanking rows={room.leaderboard} ownId={ownId} />
       ) : room.status === "archived" ? (
@@ -193,7 +211,7 @@ export default function QuizStage({
                   <Gift size={20} /> BONUS TRACK · PUNTOS ×2
                 </>
               ) : (
-                `PREGUNTA ${room.questionIndex + 1} DE 7`
+                `PREGUNTA ${room.questionIndex + 1} DE ${questionCount}`
               )}
             </span>
             <span
