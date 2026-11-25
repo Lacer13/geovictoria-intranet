@@ -1,0 +1,122 @@
+{
+  "publishedAtUtc": "2026-11-25T04:26:33.670Z",
+  "project": "geovictoria-intranet-peru",
+  "url": "https://geovictoria-intranet-peru.web.app/juego",
+  "sourceCommit": "9c2515095c64a9d79fffd0de32bf2f1d91ae4ea8",
+  "sourceTree": "db7878f4c59afb10dc52a195b0f2840525922104",
+  "pullRequest": "https://github.com/Lacer13/geovictoria-intranet/pull/10",
+  "checks": {
+    "testsPassed": 116,
+    "build": "passed",
+    "githubActions": "https://github.com/Lacer13/geovictoria-intranet/actions/runs/45545984837",
+    "browser": "Local review and actual Arcade with VictorIA Classic; no console warnings/errors; no ranking submissions; prior selection restored",
+    "physicalPhoneFps": "not measured"
+  },
+  "hostingVersion": "a20ef71d4fd41da7",
+  "previousVersion": "f773561b43e6280f",
+  "rollbackCommand": "npx --yes firebase-tools@15.34.1 hosting:clone geovictoria-intranet-peru@f773561b43e6280f geovictoria-intranet-peru:live --project geovictoria-intranet-peru --non-interactive",
+  "changedServices": [
+    "hosting"
+  ],
+  "firestoreRulesChanged": false,
+  "authoredPoses": 8,
+  "exportedSprites": 168,
+  "verification": [
+    {
+      "path": "/juego",
+      "bytes": 1521,
+      "sha256": "9744a06c6ece7504c0d44f3a186f1b5f27b2f01c062a073734ce610d918eb10d",
+      "matchesBuild": true
+    },
+    {
+      "path": "/assets/index-co1ckqfn.js",
+      "bytes": 59,
+      "sha256": "74c2184e6ae107bd08ee1561b2ef4c9230e1d8e2dceb16d3d3e570b16bc755dc",
+      "matchesBuild": true
+    },
+    {
+      "path": "/assets/rolldown-runtime-D2aABDIb.js",
+      "bytes": 680,
+      "sha256": "760907b0f57761fcae7a1113e535296fa7e31deaa87aa6138e19917ae7e00a86",
+      "matchesBuild": true
+    },
+    {
+      "path": "/assets/react-DbMM3Pz9.js",
+      "bytes": 228576,
+      "sha256": "1aa337c1eaee5d0da619083f58824dc8b374974312d37eff98307fdc9c121acb",
+      "matchesBuild": true
+    },
+    {
+      "path": "/assets/createLucideIcon-7eCvd4fb.js",
+      "bytes": 1855,
+      "sha256": "9a447768920f4b44d21d49d9834058c8e7f1e45b94254ba1cd748ef70ba09e8a",
+      "matchesBuild": true
+    },
+    {
+      "path": "/assets/season-DG87JeAL.js",
+      "bytes": 1943,
+      "sha256": "55bb1d00923a1d7af9515bd68c430e2bc1fbc07f360312fa4e0c1288a1336181",
+      "matchesBuild": true
+    },
+    {
+      "path": "/assets/arrow-right-B8hwxgWV.js",
+      "bytes": 283,
+      "sha256": "639de16f192b1911494c961547f0cb25db028866d1d3a423d9929202e19a6b4a",
+      "matchesBuild": true
+    },
+    {
+      "path": "/assets/firebase-core-rUKQUm7e.js",
+      "bytes": 25641,
+      "sha256": "229a31c770b122956821ad643c9746bca7c048131c8da5b664825adf6a951601",
+      "matchesBuild": true
+    },
+    {
+      "path": "/assets/firebase-auth-BbVMUr_a.js",
+      "bytes": 88472,
+      "sha256": "594862f81b04f9e04a9159eb8542bccc27dada54ffc8c3aed41a968340fb6738",
+      "matchesBuild": true
+    },
+    {
+      "path": "/assets/firebase-ht3x1p1I.js",
+      "bytes": 305651,
+      "sha256": "89562cd2a41630175e5fa6a409a7ec800dbad6b4f5a5e309ea037a1479b0b9a2",
+      "matchesBuild": true
+    },
+    {
+      "path": "/assets/geovictoria-intranet-gK-7yunt.js",
+      "bytes": 225588,
+      "sha256": "6020a842590554013a596d5ee013a217a9f7516c7d1f8549a361351634c1f858",
+      "matchesBuild": true
+    },
+    {
+      "path": "/assets/geovictoria-intranet-Dk8WBFoS.css",
+      "bytes": 118749,
+      "sha256": "f86cb7434b5c8c89fb606dfaf16c574dcdb58287dcf4dd8a6fd79dcb3bb7e6c9",
+      "matchesBuild": true
+    },
+    {
+      "path": "/assets/GamePage-C3bi0Fhc.js",
+      "bytes": 111951,
+      "sha256": "0203075e9552259b54e71c72d01f7b2445badfce838a89f19650343e5f679834",
+      "matchesBuild": true
+    },
+    {
+      "path": "/assets/GamePage-CkARHRxK.css",
+      "bytes": 20613,
+      "sha256": "a072386c949f65299d4aaa179818fd8f16cf22d903c5e377084e289be7345271",
+      "matchesBuild": true
+    },
+    {
+      "path": "/enemies/desfase/sprites-v1.webp",
+      "bytes": 1691336,
+      "sha256": "c7589190b45fb468ca90d5f8960648b53d29b8b933ab37210afe3b521576a201",
+      "matchesBuild": true
+    },
+    {
+      "path": "/enemies/desfase/sprites-v1.json",
+      "bytes": 57262,
+      "sha256": "0d9a3368d121edcdeadf271e300e65049caef2c9b0fb471269a345004008a5cf",
+      "matchesBuild": true
+    }
+  ]
+}
