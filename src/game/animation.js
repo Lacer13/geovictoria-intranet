@@ -118,6 +118,15 @@ export function interpolateScene(state, previous, alpha) {
   const amount = Math.max(0, Math.min(1, alpha));
   const entity = (e) => {
     const old = previous?.get(e);
+    if (!old && e.enemy && e.bornAt === state.tick && e.enemyEmitter) {
+      const emitterBefore = previous?.get(e.enemyEmitter);
+      const dx = emitterBefore ? e.enemyEmitter.x - emitterBefore.x : 0;
+      const dy = emitterBefore ? e.enemyEmitter.y - emitterBefore.y : 0;
+      return { ...e,
+        x: e.emissionX + (e.x - e.emissionX) * amount - dx * (1 - amount),
+        y: e.emissionY + (e.y - e.emissionY) * amount - dy * (1 - amount),
+      };
+    }
     if (!old && !e.enemy && e.bornAt === state.tick && Number.isFinite(e.emissionX)) {
       const playerBefore = previous?.get(state.player);
       const dx = e.followsEmitter && playerBefore ? state.player.x - playerBefore.x : 0;

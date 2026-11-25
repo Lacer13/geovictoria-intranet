@@ -288,6 +288,7 @@ export default function ActiveBreak() {
     const clock = createClock();
     let previous = capturePositions(game.current);
     let frame;
+    let victoryStarted = null;
     const loop = (time) => {
       if (modeRef.current !== "playing") return;
       clock.advance(time, () => {
@@ -315,6 +316,7 @@ export default function ActiveBreak() {
         assets.images,
         character,
         { ...settingsRef.current, actor: actor.current, animation: assets.animation,
+          defeatElapsed: victoryStarted === null ? 0 : (time - victoryStarted) / 1000,
           presentation: assets.animation ? characterAnimation(character).present(game.current, actor.current, clock.alpha) : null },
       );
       if (game.current.tick % 6 === 0 || game.current.phase !== "playing")
@@ -335,6 +337,13 @@ export default function ActiveBreak() {
           saveGameProfile(next);
         }
         clearInput(input);
+        if (game.current.phase === "victory" && !settingsRef.current.reduced) {
+          victoryStarted ??= time;
+          if (time - victoryStarted < 750) {
+            frame = requestAnimationFrame(loop);
+            return;
+          }
+        }
         changeMode(game.current.phase);
         return;
       }

@@ -6,6 +6,8 @@ import { activePower } from "./powers.js";
 import { characterAnimation } from "./characterAnimation.js";
 import { atlasFrame, drawAtlasFrame } from "./spriteAtlas.js";
 import { missionById } from "./missions.js";
+import enemyAtlas from "../../public/enemies/desfase/sprites-v1.json" with { type: "json" };
+import { ENEMY_ATLAS_URL, enemyMuzzle, enemyPresentation } from "./enemyAnimation.js";
 
 function rounded(ctx, x, y, width, height, radius, color) {
   ctx.fillStyle = color;
@@ -237,7 +239,23 @@ function background(ctx, tick, reduced, missionId) {
   }
 }
 
-function drawEnemy(ctx, entity, image, boss = false) {
+export function drawEnemy(ctx, entity, images, tick, boss = false, reduced = false) {
+  const atlasImage = images[ENEMY_ATLAS_URL];
+  const view = enemyPresentation(entity, tick, boss);
+  if ((atlasImage?.naturalWidth || atlasImage?.width) === enemyAtlas.pages[0].width &&
+      (atlasImage?.naturalHeight || atlasImage?.height) === enemyAtlas.pages[0].height) {
+    const frame = atlasFrame(enemyAtlas, view.pose, view.elapsed, reduced);
+    const origin = enemyMuzzle(entity, boss), scale = entity.width / frame.w;
+    ctx.save();
+    if (entity.flash) ctx.filter = "brightness(1.35)";
+    drawAtlasFrame(ctx, [atlasImage], enemyAtlas, view.pose, view.elapsed, {
+      x: origin.x - frame.anchors.muzzle.x * scale,
+      y: origin.y - frame.anchors.muzzle.y * scale, width: entity.width, reduced,
+    });
+    ctx.restore();
+    return;
+  }
+  const image = images[boss ? "/Boss.png" : "/Robot combatiente.png"];
   ctx.save();
   ctx.translate(entity.x + entity.width / 2, entity.y + entity.height / 2);
   if (entity.flash) ctx.filter = "brightness(1.8)";
@@ -248,7 +266,7 @@ function drawEnemy(ctx, entity, image, boss = false) {
   if (image?.naturalWidth) {
     if (!boss) ctx.scale(-1, 1);
     const source = boss
-      ? [0, 0, image.naturalWidth / 2, image.naturalHeight / 2]
+      ? [view.pose === "charge" || view.pose === "shooting" ? image.naturalWidth / 2 : 0, 0, image.naturalWidth / 2, image.naturalHeight / 2]
       : [485, 670, 340, 300];
     ctx.drawImage(
       image,
@@ -260,6 +278,10 @@ function drawEnemy(ctx, entity, image, boss = false) {
     );
   } else fallbackRobot(ctx, entity.width, true);
   ctx.restore();
+  // Even the bitmap-free fallback keeps a visible emitter at the real origin.
+  const origin = enemyMuzzle(entity, boss);
+  rounded(ctx, origin.x, origin.y - 4, entity.width * 0.16, 8, 3, "#6f3240");
+  rounded(ctx, origin.x - 2, origin.y - 3, 4, 6, 2, "#ffd1ac");
 }
 
 const PICKUPS = {
@@ -276,7 +298,7 @@ export function drawGame(
   state,
   images,
   character,
-  { reduced = false, seconds = state.tick / 60, actor = null, animation = null, presentation = null } = {},
+  { reduced = false, seconds = state.tick / 60, actor = null, animation = null, presentation = null, defeatElapsed = 0 } = {},
 ) {
   ctx.save();
   background(ctx, state.tick, reduced, state.missionId);
@@ -307,7 +329,9 @@ export function drawGame(
       bullet.enemy ? "#ed6372" : "#faf3bd",
     );
   for (const enemy of state.enemies)
-    drawEnemy(ctx, enemy, images["/Robot combatiente.png"]);
+    drawEnemy(ctx, enemy, images, state.tick, false, reduced);
+  for (const enemy of state.defeatedEnemies || [])
+    drawEnemy(ctx, enemy, images, state.tick + defeatElapsed * 60, enemy.boss, reduced);
   if (state.boss) {
     const b = state.boss;
     if (b.shot <= 30) {
@@ -326,7 +350,7 @@ export function drawGame(
       ctx.textAlign = "right";
       ctx.fillText("¡ESQUIVA!", b.x + b.width, b.y - 27);
     }
-    drawEnemy(ctx, b, images["/Boss.png"], true);
+    drawEnemy(ctx, b, images, state.tick, true, reduced);
     rounded(ctx, b.x, b.y - 18, b.width, 10, 5, "#30222c");
     rounded(ctx, b.x, b.y - 18, (b.width * b.hp) / b.maxHp, 10, 5, "#f07b88");
   }
