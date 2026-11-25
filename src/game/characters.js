@@ -1,6 +1,7 @@
 import { AREA_CHARACTERS } from "./roster.js";
 import { sampleRig } from "./rig.js";
 import { validateAnimationAtlas } from "./spriteAtlas.js";
+import { ENEMY_ATLAS_URL } from "./enemyAnimation.js";
 export { AREA_CHARACTERS } from "./roster.js";
 
 export const LEGACY_CHARACTERS = [
@@ -32,7 +33,7 @@ export const CHARACTERS = [...AREA_CHARACTERS, ...LEGACY_CHARACTERS];
 export const FREE_CHARACTERS = CHARACTERS.filter((c) => c.cost === 0).map(
   (c) => c.id,
 );
-export const ASSET_SOURCES = ["/Boss.png", "/Robot combatiente.png"];
+export const ASSET_SOURCES = [ENEMY_ATLAS_URL, "/Boss.png", "/Robot combatiente.png"];
 
 // Manually verified padded source rectangles; the generated parts remain intact.
 export const TECNOIA_PARTS = {

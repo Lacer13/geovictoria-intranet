@@ -1,6 +1,8 @@
 # Roadmap de animación · Guardianes con gestos y disparos claros
 
-18 de noviembre de 2026 · Actualizado el 20 de noviembre de 2026. **Estado: TecnoIA y ConectIA v2 cerrados y publicados. El usuario pausa nuevas animaciones para priorizar niveles y arena en línea 1 contra 1. CierreIA queda en espera.**
+18 de noviembre de 2026 · Actualizado el 24 de noviembre de 2026. **Estado: TecnoIA y ConectIA v2 cerrados y publicados. Campaña y arena 1 contra 1 integradas. La prioridad actual del usuario es animar al rival de VictorIA; CierreIA queda en espera.**
+
+**24 de noviembre · Rival animado:** El Desfase y los centinelas reciben ocho poses originales y 168 fotogramas: entrada, flotación, avance, preparación/carga, emisión/retroceso/recuperación, impacto y desactivación. El cañón apunta a VictorIA, la boquilla coincide con el nacimiento interpolado del proyectil y se conservan colisiones, daño, velocidad, cadencias y aviso. La desactivación no vuelve a colisionar ni entrega puntos adicionales. Hay movimiento reducido y recuperación del arte anterior si falla la hoja. Fuente, prompt, extracción reproducible, revisión interactiva y capturas en [design/enemies/desfase](../design/enemies/desfase/README.md). Verificación local: 116 pruebas aprobadas, compilación y revisión en navegador sin errores; publicación registrada por separado.
 
 ## Objetivo
 

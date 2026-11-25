@@ -1,6 +1,7 @@
 import { activatePower, activePower, powerForCharacter } from "./powers.js";
 import { recordShot } from "./emission.js";
 import { missionById, missionObjective } from "./missions.js";
+import { recordEnemyShot } from "./enemyAnimation.js";
 // The arcade advances at 60 fixed steps per second, independently of rendering.
 export const WIDTH = 960;
 export const HEIGHT = 540;
@@ -107,6 +108,7 @@ export function createGame(characterId = "tecnoia", { animationVersion = 1, miss
       activatedAt: -1,
     },
     enemies: [],
+    defeatedEnemies: [],
     bullets: [],
     pickups: [],
     particles: [],
@@ -178,6 +180,7 @@ function damage(state, random) {
 function defeatEnemy(state, enemy, random, allowDrop = true) {
   if (enemy.dead) return;
   enemy.dead = true;
+  state.defeatedEnemies.push({ ...enemy, defeatedAt: state.tick, boss: false });
   state.score += 10;
   if (state.missionId) state.missionProgress.kills++;
   state.events.push("hit");
@@ -228,10 +231,12 @@ function hitBoss(state, amount, random) {
   const boss = state.boss;
   boss.hp = Math.max(0, boss.hp - amount);
   boss.flash = 5;
+  boss.hurtAt = state.tick;
   state.events.push("hit");
   burst(state, boss.x + 60, boss.y + 70, "#94e4d6", random, 4);
   if (boss.hp === 0) {
     state.score += 100;
+    state.defeatedEnemies.push({ ...boss, defeatedAt: state.tick, boss: true });
     burst(state, boss.x + 80, boss.y + 80, "#f9dc95", random, 30);
     state.boss = null;
     state.phase = "victory";
@@ -330,6 +335,7 @@ export function stepGame(
       dy: 1.6,
       shot: 100,
       flash: 0,
+      bornAt: state.tick,
     };
     announce(state, "¡GUARDIÁN DEL TALLER!");
     state.events.push("boss");
@@ -342,7 +348,7 @@ export function stepGame(
     b.shot--;
     if (b.shot === 30) state.events.push("warning");
     if (b.shot <= 0) {
-      state.bullets.push({
+      const emitted = [{
         x: b.x,
         y: b.y + b.height / 2,
         width: 36,
@@ -350,10 +356,12 @@ export function stepGame(
         vx: -7,
         vy: 0,
         enemy: true,
-      });
+      }];
       if (mission?.id === "faro" && b.hp <= b.maxHp / 2) {
-        for (const vy of [-2.2, 2.2]) state.bullets.push({ x: b.x, y: b.y + b.height / 2, width: 30, height: 8, vx: -6, vy, enemy: true });
+        for (const vy of [-2.2, 2.2]) emitted.push({ x: b.x, y: b.y + b.height / 2, width: 30, height: 8, vx: -6, vy, enemy: true });
       }
+      recordEnemyShot(b, emitted, state.tick);
+      state.bullets.push(...emitted);
       b.shot = mission?.id === "faro" && b.hp <= b.maxHp / 2 ? 80 : 100;
     }
   }
@@ -361,7 +369,9 @@ export function stepGame(
     enemy.x -= enemy.speed * hostileSpeed;
     if (enemy.pattern === "zigzag") enemy.y = clamp(enemy.y + Math.sin((state.tick - enemy.bornAt) / 24) * 1.8 * hostileSpeed, 24, HEIGHT - enemy.height - 24);
     if (enemy.pattern === "shooter" && !enemy.dead && --enemy.shot <= 0 && enemy.x > p.x + p.width) {
-      state.bullets.push({ x: enemy.x, y: enemy.y + 40, width: 24, height: 7, vx: -5, vy: 0, enemy: true });
+      const emitted = [{ x: enemy.x, y: enemy.y + 40, width: 24, height: 7, vx: -5, vy: 0, enemy: true }];
+      recordEnemyShot(enemy, emitted, state.tick);
+      state.bullets.push(...emitted);
       enemy.shot = 150;
     }
     enemy.flash = Math.max(0, enemy.flash - 1);
@@ -468,6 +478,7 @@ export function stepGame(
     if (pickup.x < -50) pickup.dead = true;
   }
   state.enemies = state.enemies.filter((e) => !e.dead);
+  state.defeatedEnemies = state.defeatedEnemies.filter((e) => state.tick - e.defeatedAt < 45);
   state.bullets = state.bullets.filter((b) => !b.dead);
   state.pickups = state.pickups.filter((pickup) => !pickup.dead);
   for (const particle of state.particles) {
