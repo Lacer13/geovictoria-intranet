@@ -7,7 +7,7 @@ import { characterAnimation } from "./characterAnimation.js";
 import { atlasFrame, drawAtlasFrame } from "./spriteAtlas.js";
 import { missionById } from "./missions.js";
 import enemyAtlas from "../../public/enemies/desfase/sprites-v1.json" with { type: "json" };
-import { ENEMY_ATLAS_URL, enemyMuzzle, enemyPresentation } from "./enemyAnimation.js";
+import { ENEMY_ATLAS_URL, enemyMuzzle, enemyPresentation, enemyVisualMotion } from "./enemyAnimation.js";
 
 function rounded(ctx, x, y, width, height, radius, color) {
   ctx.fillStyle = color;
@@ -246,7 +246,12 @@ export function drawEnemy(ctx, entity, images, tick, boss = false, reduced = fal
       (atlasImage?.naturalHeight || atlasImage?.height) === enemyAtlas.pages[0].height) {
     const frame = atlasFrame(enemyAtlas, view.pose, view.elapsed, reduced);
     const origin = enemyMuzzle(entity, boss), scale = entity.width / frame.w;
+    const motion = enemyVisualMotion(view, entity.width, reduced);
     ctx.save();
+    const cx = entity.x + entity.width / 2, cy = entity.y + entity.height / 2;
+    ctx.translate(cx + motion.x, cy + motion.y);
+    ctx.rotate(motion.angle);
+    ctx.translate(-cx, -cy);
     if (entity.flash) ctx.filter = "brightness(1.35)";
     drawAtlasFrame(ctx, [atlasImage], enemyAtlas, view.pose, view.elapsed, {
       x: origin.x - frame.anchors.muzzle.x * scale,

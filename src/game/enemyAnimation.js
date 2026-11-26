@@ -36,6 +36,32 @@ export function enemyPresentation(entity, tick, boss = false) {
   return { pose: age < 0.6 ? "arrival" : boss ? "idle" : "moving", elapsed: age };
 }
 
+// The atlas's 2.2 px hover becomes less than one screen pixel on a phone.
+// Apply a visible, size-relative performance without moving simulation bodies.
+// The barrel stays at its physical origin at the instant a shot is emitted.
+export function enemyVisualMotion(view, width, reduced = false) {
+  if (reduced) return { x: 0, y: 0, angle: 0 };
+  const time = Math.max(0, view.elapsed);
+  if (view.pose === "idle" || view.pose === "moving") {
+    const moving = view.pose === "moving";
+    const phase = time * Math.PI * 2 / (moving ? 0.8 : 1);
+    return {
+      x: moving ? Math.sin(phase) * width * 0.018 : 0,
+      y: Math.sin(phase) * width * (moving ? 0.065 : 0.04),
+      angle: Math.sin(phase) * (moving ? 0.055 : 0.035),
+    };
+  }
+  if (view.pose === "shooting") {
+    const recoil = Math.sin(Math.min(1, time / 0.3) * Math.PI);
+    return { x: recoil * width * 0.055, y: 0, angle: -recoil * 0.035 };
+  }
+  if (view.pose === "damage") {
+    const reaction = Math.sin(Math.min(1, time / 0.3) * Math.PI);
+    return { x: reaction * width * 0.035, y: 0, angle: reaction * 0.07 };
+  }
+  return { x: 0, y: 0, angle: 0 };
+}
+
 // Eight authored key poses, with easing between the physical beats of a shot.
 // These are sampled into actual atlas cells rather than transformed at runtime.
 export function sampleEnemyFrame(pose, seconds = 0, reduced = false) {
