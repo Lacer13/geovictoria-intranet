@@ -1,0 +1,163 @@
+{
+  "date": "2026-11-26",
+  "url": "https://geovictoria-intranet-peru--cierreia-v2-h6hw6f5r.web.app/juego",
+  "channel": "cierreia-v2",
+  "version": "90958abb317e8aec",
+  "expires": "2026-12-03T19:14:46.631809239Z",
+  "productionDeployed": false,
+  "resources": [
+    {
+      "path": "/juego",
+      "status": 200,
+      "bytes": 1556,
+      "sha256": "172e839ed814600135507e19b330e1b5b36a983eb9bf8f5d51c9437a0c3b37fc",
+      "contentType": "text/html; charset=utf-8",
+      "nosniff": "nosniff",
+      "frameOptions": "DENY"
+    },
+    {
+      "path": "/assets/index-BFh7arJX.js",
+      "status": 200,
+      "bytes": 59,
+      "sha256": "13dbff40a576fefc0b1afe20a05ee8212175e7cb722f28499d9f7a5616ae20ee",
+      "contentType": "text/javascript; charset=utf-8",
+      "nosniff": "nosniff",
+      "frameOptions": "DENY"
+    },
+    {
+      "path": "/assets/rolldown-runtime-8BhlS34s.js",
+      "status": 200,
+      "bytes": 807,
+      "sha256": "1cb5c6ead7e29370203f12e2d5cdf50ec1f02dd70ee2d050d909afbf2406f6b1",
+      "contentType": "text/javascript; charset=utf-8",
+      "nosniff": "nosniff",
+      "frameOptions": "DENY"
+    },
+    {
+      "path": "/assets/react-BVNqbF40.js",
+      "status": 200,
+      "bytes": 228576,
+      "sha256": "ffc267103e7c1c4f6aee8d59dfbac804cc8ca717f0d0313c139da8164843005a",
+      "contentType": "text/javascript; charset=utf-8",
+      "nosniff": "nosniff",
+      "frameOptions": "DENY"
+    },
+    {
+      "path": "/assets/createLucideIcon-DkgbDv7J.js",
+      "status": 200,
+      "bytes": 1855,
+      "sha256": "61b1726789437c53165e7fab35ff4f565215009f8eca768e878a4cba166075c8",
+      "contentType": "text/javascript; charset=utf-8",
+      "nosniff": "nosniff",
+      "frameOptions": "DENY"
+    },
+    {
+      "path": "/assets/arrow-down-to-line-DMzm3Wb4.js",
+      "status": 200,
+      "bytes": 327,
+      "sha256": "9eed83fd6eff6ce6e2b1ed5c24f282876f7233eae533990e994c52fe43d26ccb",
+      "contentType": "text/javascript; charset=utf-8",
+      "nosniff": "nosniff",
+      "frameOptions": "DENY"
+    },
+    {
+      "path": "/assets/arrow-right-DFBgXtwZ.js",
+      "status": 200,
+      "bytes": 283,
+      "sha256": "076668e01e47a0753b7a04504b63999d55d5303b8f02c9357be875624150b61c",
+      "contentType": "text/javascript; charset=utf-8",
+      "nosniff": "nosniff",
+      "frameOptions": "DENY"
+    },
+    {
+      "path": "/assets/firebase-core-2E4O62zH.js",
+      "status": 200,
+      "bytes": 25641,
+      "sha256": "65f8d995722b3511a11a553328e38cbf1c705b702d5c1977b1fdbb7a4831f34f",
+      "contentType": "text/javascript; charset=utf-8",
+      "nosniff": "nosniff",
+      "frameOptions": "DENY"
+    },
+    {
+      "path": "/assets/firebase-auth-D3vpZ8DF.js",
+      "status": 200,
+      "bytes": 88760,
+      "sha256": "2f1218e87bc4be5e9f9947e0ce7ad2317cf93ddf6b5fca61e6ba57032017adeb",
+      "contentType": "text/javascript; charset=utf-8",
+      "nosniff": "nosniff",
+      "frameOptions": "DENY"
+    },
+    {
+      "path": "/assets/firebase-DY54VuKT.js",
+      "status": 200,
+      "bytes": 305411,
+      "sha256": "5c62647d1d618d20b8327a6d20542474f242b9f2b67cb79d796124358ed9dce8",
+      "contentType": "text/javascript; charset=utf-8",
+      "nosniff": "nosniff",
+      "frameOptions": "DENY"
+    },
+    {
+      "path": "/assets/geovictoria-intranet-wekMt8Mi.js",
+      "status": 200,
+      "bytes": 227745,
+      "sha256": "027c001fffb9847b2f32ca02004586e8c084193e5b257b10ed81e411b26a6f3a",
+      "contentType": "text/javascript; charset=utf-8",
+      "nosniff": "nosniff",
+      "frameOptions": "DENY"
+    },
+    {
+      "path": "/assets/geovictoria-intranet-Dk8WBFoS.css",
+      "status": 200,
+      "bytes": 118749,
+      "sha256": "f86cb7434b5c8c89fb606dfaf16c574dcdb58287dcf4dd8a6fd79dcb3bb7e6c9",
+      "contentType": "text/css; charset=utf-8",
+      "nosniff": "nosniff",
+      "frameOptions": "DENY"
+    },
+    {
+      "path": "/characters/cierreia/portrait-v2.webp",
+      "status": 200,
+      "bytes": 19564,
+      "sha256": "eca792a27a1f556d4c2a656749b0838bcdbfdff049676274d0bfea87c97d5501",
+      "contentType": "image/webp",
+      "nosniff": "nosniff",
+      "frameOptions": "DENY"
+    },
+    {
+      "path": "/characters/cierreia/rig-navidad-v2.png",
+      "status": 200,
+      "bytes": 1082627,
+      "sha256": "caedcfa15d0e0dca77020b1ca005de1ee1e0c2b3963fed7d1ff2ffba71c4d288",
+      "contentType": "image/png",
+      "nosniff": "nosniff",
+      "frameOptions": "DENY"
+    },
+    {
+      "path": "/characters/cierreia/sprites-v2-1.webp",
+      "status": 200,
+      "bytes": 1783156,
+      "sha256": "734f6d03d9b5c280bf3ce62b9dbdfa2272667a85427755c9be6a856e5de4c0ef",
+      "contentType": "image/webp",
+      "nosniff": "nosniff",
+      "frameOptions": "DENY"
+    },
+    {
+      "path": "/characters/cierreia/sprites-v2-2.webp",
+      "status": 200,
+      "bytes": 356312,
+      "sha256": "89f581e8e793fde02be538622d11819db92e29ae9b5d9f7c0b0fa0f0fc84699a",
+      "contentType": "image/webp",
+      "nosniff": "nosniff",
+      "frameOptions": "DENY"
+    },
+    {
+      "path": "/characters/cierreia/sprites-v2.json",
+      "status": 200,
+      "bytes": 89506,
+      "sha256": "53c52939e603999a4fb8d0a6440f182b52540c1df07cc67d9076ae0297bafc9a",
+      "contentType": "application/json",
+      "nosniff": "nosniff",
+      "frameOptions": "DENY"
+    }
+  ]
+}
