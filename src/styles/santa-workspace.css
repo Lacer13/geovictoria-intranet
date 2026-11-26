@@ -1,0 +1,1012 @@
+/* Secret Santa: a guided, readable organizer workspace. */
+.santa-admin-heading {
+  position: relative;
+  overflow: hidden;
+  padding: 28px 32px;
+  border: 1px solid color-mix(in srgb, var(--forest) 16%, transparent);
+  border-radius: 16px;
+  background: linear-gradient(115deg, var(--forest-bg), var(--cream));
+  min-height: 190px;
+  margin-bottom: 22px;
+}
+.santa-admin-heading > div:first-child {
+  position: relative;
+  z-index: 1;
+  max-width: 76%;
+}
+.santa-organizer-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--forest);
+  font-size: 9px;
+  letter-spacing: 1.4px;
+  font-weight: 650;
+}
+.santa-admin-heading h2 {
+  font-size: clamp(24px, 2.7vw, 35px);
+  letter-spacing: -1.2px;
+  line-height: 1.25;
+  margin: 12px 0 9px;
+}
+.santa-admin-heading p {
+  font-size: 14px;
+}
+.santa-hero-caption {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--text-muted);
+  margin-top: 16px;
+  font-size: 10px;
+}
+.santa-admin-heading > .santa-admin-art {
+  position: absolute;
+  display: block;
+  right: 35px;
+  bottom: 22px;
+  color: var(--forest);
+  opacity: 0.7;
+  transform: rotate(-12deg);
+}
+.santa-admin-art > span {
+  position: absolute;
+  top: -20px;
+  left: -25px;
+  font-size: 35px;
+  color: var(--festive-gold, #b39148);
+}
+.santa-admin-art > i {
+  position: absolute;
+  top: 20px;
+  right: -20px;
+  font-size: 18px;
+  color: var(--festive-red, #a8353f);
+  font-style: normal;
+}
+.santa-module-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin: 24px 0;
+}
+.santa-module-toolbar > div {
+  display: flex;
+  gap: 10px;
+}
+.santa-module-toolbar > div:first-child {
+  flex-direction: column;
+  gap: 3px;
+}
+.santa-module-toolbar strong {
+  font-size: 14px;
+  font-weight: 650;
+}
+.santa-module-toolbar span {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.santa-module-toolbar .btn {
+  font-size: 12px;
+  min-height: 42px;
+}
+.santa-workflow {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 0 24px;
+  padding: 0;
+}
+.santa-workflow li {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 15px 16px;
+  background: var(--surface-color);
+  color: var(--text-muted);
+  min-width: 0;
+  position: relative;
+}
+.santa-workflow li > span {
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
+  background: var(--muted-surface);
+  flex-shrink: 0;
+}
+.santa-workflow li.current {
+  border-color: color-mix(in srgb, var(--forest) 35%, transparent);
+  box-shadow: inset 0 -3px var(--forest);
+  color: var(--forest);
+}
+.santa-workflow li.current > span,
+.santa-workflow li.complete > span {
+  background: var(--forest-bg);
+  color: var(--forest);
+}
+.santa-workflow strong {
+  font-size: 11px;
+  display: block;
+  font-weight: 650;
+}
+.santa-workflow small {
+  font-size: 9px;
+  display: block;
+  margin-top: 3px;
+  color: var(--text-muted);
+}
+.santa-workflow b {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-size: 9px;
+  font-weight: 450;
+  opacity: 0.5;
+}
+.santa-mail-notice {
+  padding: 14px 18px;
+  border-radius: 10px;
+  margin-bottom: 22px;
+}
+.santa-admin-layout {
+  grid-template-columns: 230px minmax(0, 1fr);
+}
+.santa-event-filter {
+  display: block;
+  font-size: 10px;
+  color: var(--text-muted);
+  padding: 0 6px 12px;
+}
+.santa-event-filter select {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--border-color);
+  background: var(--surface-color);
+  color: var(--text-main);
+  border-radius: 7px;
+  margin-top: 5px;
+  padding: 8px;
+  font-size: 11px;
+}
+.santa-events-nav > button {
+  position: relative;
+  padding: 13px 12px;
+  border-color: var(--border-color);
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+.santa-events-nav > button:hover {
+  border-color: color-mix(in srgb, var(--forest) 35%, transparent);
+  background: var(--muted-surface);
+}
+.santa-events-nav small {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 8px 0;
+}
+.santa-events-nav em {
+  font-style: normal;
+  font-size: 9px;
+  border-radius: 5px;
+  padding: 3px 7px;
+  background: var(--muted-surface);
+  color: var(--text-muted);
+  display: inline-block;
+}
+.santa-events-nav .event-drawn em {
+  color: var(--forest);
+  background: var(--forest-bg);
+}
+.santa-events-nav .active em {
+  background: var(--surface-color);
+}
+.santa-first-event {
+  min-height: 430px;
+  padding: 48px 28px;
+  background: radial-gradient(
+    ellipse at 50% 0,
+    var(--cream),
+    var(--surface-color) 65%
+  );
+}
+.santa-empty-gift {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100px;
+  height: 100px;
+  background: var(--forest-bg);
+  color: var(--forest);
+  border-radius: 28px;
+  margin: 0 auto 25px;
+  transform: rotate(-7deg);
+}
+.santa-empty-gift i {
+  position: absolute;
+  color: var(--festive-gold, #b39148);
+  right: -9px;
+  top: -13px;
+  font-size: 35px;
+  font-style: normal;
+}
+.santa-first-event h3 {
+  font-size: 28px;
+  letter-spacing: -0.7px;
+  margin-top: 10px;
+}
+.santa-first-event > p {
+  max-width: 380px;
+  margin: 12px auto;
+  font-size: 13px;
+  line-height: 1.9;
+}
+.santa-empty-facts {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 22px 0 28px;
+}
+.santa-empty-facts span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+.santa-draft,
+.santa-results {
+  border-radius: 14px;
+  padding: 28px;
+}
+.santa-draft-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+  margin: -5px -28px 26px;
+  padding: 0 28px;
+  gap: 25px;
+}
+.santa-draft-tabs > button {
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: 12px 0 15px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.santa-draft-tabs > button.active {
+  border-color: var(--forest);
+  color: var(--forest);
+  font-weight: 650;
+}
+.santa-draft-tabs > button > span {
+  font-size: 9px;
+  border-radius: 5px;
+  padding: 3px 5px;
+  background: var(--muted-surface);
+}
+.santa-draft-tabs b {
+  border-radius: 20px;
+  background: var(--forest-bg);
+  padding: 1px 7px;
+  font-size: 10px;
+  font-weight: 500;
+}
+.santa-detail-tip,
+.santa-ready-note,
+.santa-draft-recap {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--muted-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 15px 17px;
+}
+.santa-detail-tip > svg,
+.santa-ready-note > svg {
+  flex-shrink: 0;
+  color: var(--forest);
+  margin-top: 3px;
+}
+.santa-detail-tip p,
+.santa-ready-note p {
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--text-muted);
+}
+.santa-draft-recap {
+  align-items: center;
+  background: var(--cream);
+}
+.santa-draft-recap > svg {
+  color: var(--forest);
+  flex-shrink: 0;
+}
+.santa-draft-recap > div {
+  flex: 1;
+  min-width: 0;
+}
+.santa-draft-recap strong {
+  font-size: 12px;
+  display: block;
+  overflow-wrap: anywhere;
+}
+.santa-draft-recap span {
+  font-size: 10px;
+  display: block;
+  margin-top: 3px;
+  color: var(--text-muted);
+}
+.santa-draft-recap .text-link {
+  font-size: 10px;
+  flex-shrink: 0;
+}
+.santa-import-button {
+  font-size: 10px;
+  padding: 8px 10px;
+  min-height: 36px;
+}
+.santa-bulk p {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin: 0 0 12px;
+  line-height: 1.8;
+}
+.santa-roster {
+  gap: 10px;
+  max-height: 620px;
+  overflow-y: auto;
+  padding: 3px;
+}
+.santa-person-input {
+  grid-template-columns: 28px minmax(0, 1fr) minmax(0, 1.2fr) 32px;
+  padding: 13px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 9px;
+  background: var(--surface-color);
+}
+.santa-person-input > span {
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  background: var(--forest-bg);
+  color: var(--forest);
+  border-radius: 7px;
+}
+.santa-person-input.has-error {
+  border-color: var(--festive-red, #b4434b);
+  background: var(--coral-soft);
+}
+.santa-row-issue {
+  grid-column: 2 / -1;
+  font-size: 10px;
+  color: var(--festive-red, #b4434b);
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  margin-top: 3px;
+}
+.santa-row-issue svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.santa-add-person {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 13px;
+  border: 1px dashed color-mix(in srgb, var(--forest) 35%, transparent);
+  border-radius: 9px;
+  background: var(--forest-bg);
+  font-size: 12px;
+  color: var(--forest);
+  transition: background 0.18s;
+}
+.santa-add-person:hover {
+  background: color-mix(in srgb, var(--forest-bg), var(--forest) 9%);
+}
+.santa-roster-help {
+  font-size: 10px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 12px 0 23px;
+}
+.santa-ready-note {
+  margin-top: 22px;
+}
+.santa-ready-note.ready {
+  background: var(--forest-bg);
+  border-color: color-mix(in srgb, var(--forest) 18%, transparent);
+}
+.santa-ready-note strong {
+  font-size: 12px;
+  color: var(--forest);
+}
+.santa-ready-note p {
+  margin-top: 4px;
+}
+.santa-draft-actions {
+  align-items: center;
+  gap: 16px;
+}
+.santa-draft-actions > div {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.santa-save-status {
+  color: var(--forest);
+  font-size: 10px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.santa-save-status.unsaved {
+  color: var(--text-muted);
+}
+.santa-event-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 9px;
+  border-radius: 20px;
+  background: var(--forest-bg);
+  color: var(--forest);
+  font-size: 10px;
+}
+.santa-event-status.archived {
+  color: var(--text-muted);
+  background: var(--muted-surface);
+}
+.santa-result-summary {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  background: transparent;
+  border: 0;
+  padding: 0;
+  gap: 10px;
+}
+.santa-result-summary > div {
+  border: 1px solid var(--border-color);
+  border-radius: 11px;
+  padding: 17px 10px;
+  text-align: left;
+  background: var(--muted-surface);
+}
+.santa-result-summary > div:nth-child(2) {
+  background: var(--forest-bg);
+}
+.santa-result-summary > div > svg {
+  color: var(--forest);
+  opacity: 0.7;
+  margin-bottom: 9px;
+}
+.santa-result-summary strong {
+  font-size: 30px;
+  line-height: 1.2;
+}
+.santa-result-summary span {
+  margin-top: 6px;
+  font-size: 10px;
+}
+.santa-delivery-progress {
+  margin: 0 0 25px;
+}
+.santa-delivery-progress > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 11px;
+  margin-bottom: 9px;
+}
+.santa-delivery-progress strong {
+  font-weight: 550;
+  color: var(--forest);
+}
+.santa-delivery-progress progress {
+  width: 100%;
+  height: 6px;
+  border: 0;
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--muted-surface);
+  accent-color: var(--forest);
+}
+.santa-delivery-progress progress::-webkit-progress-bar {
+  background: var(--muted-surface);
+  border-radius: 10px;
+}
+.santa-delivery-progress progress::-webkit-progress-value {
+  background: var(--forest);
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+.santa-delivery-progress small {
+  display: block;
+  font-size: 10px;
+  line-height: 1.8;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+.santa-delivery-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+.santa-next-action {
+  display: flex;
+  gap: 13px;
+  align-items: flex-start;
+  padding: 19px 20px;
+  background: var(--forest-bg);
+  border: 1px solid color-mix(in srgb, var(--forest) 15%, transparent);
+  border-radius: 11px 11px 0 0;
+}
+.santa-action-icon {
+  display: grid;
+  place-items: center;
+  width: 39px;
+  height: 39px;
+  flex-shrink: 0;
+  color: var(--forest);
+  background: var(--surface-color);
+  border-radius: 11px;
+}
+.santa-next-action strong {
+  display: block;
+  font-size: 13px;
+  color: var(--forest);
+}
+.santa-next-action p {
+  color: var(--text-muted);
+  font-size: 11px;
+  line-height: 1.8;
+  margin-top: 5px;
+}
+.santa-next-action.needs-review {
+  background: var(--gold-soft);
+}
+.santa-send-toolbar {
+  padding: 16px 20px;
+  border: 1px solid var(--border-color);
+  border-top: 0;
+  border-radius: 0 0 11px 11px;
+  background: var(--surface-color);
+  gap: 10px;
+}
+.santa-send-toolbar .text-link {
+  font-size: 11px;
+}
+.santa-backup-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--gold-soft);
+  border: 1px solid var(--border-color);
+  padding: 13px;
+  border-radius: 9px;
+  margin-bottom: 17px;
+}
+.santa-backup-notice > svg {
+  flex-shrink: 0;
+  color: var(--festive-gold, #a58235);
+  margin-top: 3px;
+}
+.santa-backup-notice p {
+  font-size: 11px;
+  line-height: 1.8;
+  flex: 1;
+}
+.santa-backup-notice .text-link {
+  font-size: 10px;
+  flex-shrink: 0;
+}
+.santa-delivery-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.santa-delivery-filters {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.santa-delivery-filters > button {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  padding: 7px 10px;
+  border-radius: 7px;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+.santa-delivery-filters > button.active {
+  background: var(--forest-bg);
+  border-color: color-mix(in srgb, var(--forest) 25%, transparent);
+  color: var(--forest);
+}
+.santa-delivery-filters span {
+  font-size: 9px;
+  padding: 1px 5px;
+  background: var(--muted-surface);
+  border-radius: 4px;
+}
+.santa-list-count {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 10px;
+  color: var(--text-muted);
+  padding: 16px 0 0;
+}
+.santa-list-count .text-link {
+  font-size: 10px;
+}
+.santa-delivery-list {
+  margin-top: 7px;
+}
+.santa-delivery-row {
+  padding: 17px 0;
+  gap: 11px;
+}
+.santa-person-avatar {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 11px;
+  background: var(--cream);
+  color: var(--forest);
+  font-size: 11px;
+  font-weight: 650;
+  text-transform: uppercase;
+}
+.santa-delivery-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 9px;
+}
+.santa-delivery-status > svg {
+  flex-shrink: 0;
+}
+.santa-delivery-actions > .icon-button {
+  display: flex;
+  gap: 5px;
+  width: auto;
+  min-width: 40px;
+  padding: 8px;
+  font-size: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+}
+.santa-delivery-actions > .btn {
+  min-height: 35px;
+}
+.santa-no-matches {
+  text-align: center;
+  padding: 35px 15px;
+  color: var(--text-muted);
+}
+.santa-no-matches > svg {
+  color: var(--forest);
+  margin-bottom: 12px;
+}
+.santa-no-matches strong {
+  display: block;
+  color: var(--text-main);
+  font-size: 13px;
+}
+.santa-no-matches p {
+  font-size: 11px;
+  margin: 5px 0 15px;
+}
+.santa-no-matches .text-link {
+  font-size: 11px;
+}
+@media (max-width: 1190px) {
+  .santa-admin-layout {
+    grid-template-columns: 1fr;
+  }
+  .santa-events-nav {
+    max-height: 240px;
+    padding: 13px;
+  }
+  .santa-event-filter {
+    min-width: 180px;
+    max-width: 190px;
+    padding: 4px 8px;
+    flex-shrink: 0;
+  }
+  .santa-workflow li {
+    padding: 14px 12px;
+    gap: 9px;
+  }
+  .santa-workflow small {
+    font-size: 9px;
+  }
+  .santa-events-nav > button {
+    margin: 0;
+  }
+}
+@media (max-width: 720px) {
+  .santa-admin-heading {
+    min-height: 210px;
+    padding: 24px;
+  }
+  .santa-admin-heading > div:first-child {
+    max-width: 100%;
+  }
+  .santa-admin-heading h2 {
+    font-size: 28px;
+    max-width: 240px;
+  }
+  .santa-admin-heading p {
+    font-size: 12px;
+    max-width: 220px;
+  }
+  .santa-organizer-label {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+  .santa-admin-heading > .santa-admin-art {
+    opacity: 0.13;
+    right: 18px;
+    bottom: 22px;
+  }
+  .santa-hero-caption {
+    font-size: 10px;
+    max-width: 240px;
+    align-items: flex-start;
+  }
+  .santa-hero-caption svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .santa-module-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 13px;
+  }
+  .santa-module-toolbar > div:last-child {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .santa-module-toolbar .btn {
+    font-size: 11px;
+    padding: 10px 9px;
+  }
+  .santa-workflow {
+    gap: 7px;
+  }
+  .santa-workflow li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 9px;
+    padding: 14px 10px;
+  }
+  .santa-workflow strong {
+    font-size: 10px;
+    line-height: 1.7;
+  }
+  .santa-workflow small {
+    display: none;
+  }
+  .santa-workflow li > span {
+    width: 29px;
+    height: 29px;
+    border-radius: 8px;
+  }
+  .santa-workflow li > span > svg {
+    width: 16px;
+  }
+  .santa-mail-notice {
+    margin-bottom: 18px;
+  }
+  .santa-draft,
+  .santa-results {
+    padding: 22px 17px;
+  }
+  .santa-draft-tabs {
+    margin: 0 -17px 23px;
+    padding: 0 17px;
+    gap: 20px;
+  }
+  .santa-draft-tabs > button {
+    font-size: 12px;
+    gap: 6px;
+  }
+  .santa-section-heading {
+    gap: 10px;
+  }
+  .santa-section-heading h3 {
+    font-size: 19px;
+  }
+  .santa-section-heading .department-pill {
+    margin-left: 0;
+  }
+  .santa-draft .input-field {
+    font-size: 16px;
+  }
+  .santa-draft-recap {
+    flex-wrap: wrap;
+    padding: 14px;
+    gap: 9px;
+  }
+  .santa-draft-recap .text-link {
+    margin-left: 28px;
+  }
+  .santa-draft-recap span {
+    line-height: 1.8;
+  }
+  .santa-roster-heading {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .santa-roster-heading h4 {
+    font-size: 13px;
+  }
+  .santa-person-input {
+    grid-template-columns: 25px minmax(0, 1fr) 30px;
+    padding: 13px 9px;
+  }
+  .santa-person-input > input:first-of-type {
+    grid-column: 2;
+  }
+  .santa-person-input > input:last-of-type {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .santa-person-input > .icon-button {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+  }
+  .santa-row-issue {
+    grid-column: 2 / -1;
+    font-size: 11px;
+  }
+  .santa-draft-actions {
+    align-items: stretch;
+  }
+  .santa-draft-actions > div {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .santa-save-status {
+    font-size: 11px;
+  }
+  .santa-draft-actions .btn {
+    width: 100%;
+    min-height: 44px;
+  }
+  .santa-detail-tip p,
+  .santa-ready-note p {
+    font-size: 12px;
+  }
+  .santa-result-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .santa-result-summary > div {
+    padding: 17px;
+  }
+  .santa-result-summary strong {
+    font-size: 28px;
+  }
+  .santa-result-summary span {
+    font-size: 11px;
+  }
+  .santa-delivery-progress > div {
+    font-size: 11px;
+  }
+  .santa-delivery-progress small {
+    font-size: 11px;
+  }
+  .santa-next-action {
+    padding: 17px 14px;
+    gap: 10px;
+  }
+  .santa-next-action strong {
+    font-size: 13px;
+  }
+  .santa-next-action p {
+    font-size: 12px;
+  }
+  .santa-send-toolbar {
+    padding: 15px 14px;
+  }
+  .santa-send-toolbar .btn {
+    width: 100%;
+    font-size: 12px;
+    min-height: 44px;
+  }
+  .santa-send-toolbar > span {
+    font-size: 11px;
+  }
+  .santa-delivery-filters {
+    gap: 5px;
+  }
+  .santa-delivery-filters > button {
+    padding: 8px;
+    min-height: 36px;
+  }
+  .santa-recovery-heading {
+    align-items: flex-start;
+  }
+  .santa-recovery-heading h4 {
+    font-size: 16px;
+  }
+  .santa-recovery-heading p {
+    font-size: 12px;
+  }
+  .santa-backup-notice {
+    flex-wrap: wrap;
+  }
+  .santa-backup-notice p {
+    font-size: 12px;
+  }
+  .santa-backup-notice .text-link {
+    margin-left: 27px;
+  }
+  .santa-person-summary {
+    min-width: 170px;
+  }
+  .santa-delivery-status {
+    margin-left: 47px;
+    font-size: 10px;
+  }
+  .santa-delivery-actions {
+    margin-left: auto;
+  }
+  .santa-delivery-row {
+    column-gap: 10px;
+    row-gap: 13px;
+  }
+  .santa-delivery-actions > .icon-button,
+  .santa-delivery-actions > .btn {
+    min-height: 40px;
+  }
+  .santa-list-count {
+    font-size: 11px;
+  }
+  .santa-first-event {
+    padding: 35px 20px;
+  }
+  .santa-first-event h3 {
+    font-size: 24px;
+  }
+  .santa-empty-facts {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .santa-empty-facts span {
+    font-size: 11px;
+  }
+}

@@ -1,0 +1,137 @@
+.admin-layout {
+  padding-top: 10px;
+}
+.admin-login {
+  max-width: 430px;
+  margin: 40px auto;
+  padding: 30px;
+}
+.admin-login .input-group {
+  margin-top: 12px;
+}
+.admin-login h1 {
+  font-size: 25px;
+  margin: 15px 0 9px;
+}
+.admin-login p {
+  font-size: 12px;
+  line-height: 1.8;
+}
+.admin-login form {
+  margin-top: 22px;
+}
+.admin-login .btn {
+  width: 100%;
+  margin-top: 10px;
+}
+.admin-login .form-error {
+  margin-top: 15px;
+}
+.admin-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.admin-section-select {
+  display: none;
+}
+.admin-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 12px;
+}
+.admin-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.admin-top h1 {
+  font-size: 25px;
+}
+.admin-top p {
+  font-size: 11px;
+  margin-top: 8px;
+}
+.admin-top .btn {
+  flex-shrink: 0;
+}
+.admin-status {
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 12px 0;
+}
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+.animate-fade-in {
+  animation: page-enter 0.35s ease-out;
+}
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.bento-span-2 {
+  grid-column: span 2;
+}
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-color);
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+.loading-video {
+  width: 240px;
+  max-width: 80vw;
+  border-radius: 16px;
+}
+.loading-screen.fade-out {
+  opacity: 0;
+}
+.glass-panel-hover:hover {
+  border-color: var(--forest);
+}
+.glow-effect {
+  box-shadow: var(--glow-primary);
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes soft-pulse {
+  50% {
+    opacity: 0.3;
+  }
+}
+@keyframes float {
+  50% {
+    transform: translateY(-5px);
+  }
+}

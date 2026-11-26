@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-25",
+  "timezone": "America/Lima",
+  "status": "validated-locally-not-deployed",
+  "baseCommit": "11fc01a48a4dcbb449a8ff260f5127178e39ead5",
+  "deploymentRequired": [
+    "firestore.rules",
+    "hosting"
+  ],
+  "productionDataChanged": false,
+  "realUsersAssigned": false,
+  "validation": {
+    "generalTests": {
+      "passed": 116,
+      "failed": 0
+    },
+    "firestoreRulesTests": {
+      "passed": 49,
+      "failed": 0
+    },
+    "build": "passed",
+    "changedCodeLint": "passed without warnings",
+    "repositoryLint": "passed with three pre-existing unused-parameter warnings in tests/quiz.test.js",
+    "browser": {
+      "desktopWidth": 1440,
+      "mobileWidth": 390,
+      "mobileDocumentWidth": 390,
+      "verified": [
+        "create templates and custom profiles",
+        "invite and reassign member",
+        "review and save profile edits",
+        "duplicate permissions and unsaved-change protection",
+        "live permission changes with same session",
+        "revocation closes an open editor",
+        "restoration returns authorized modules",
+        "Santa consultation hides management and mail controls"
+      ]
+    },
+    "css": {
+      "modules": 21,
+      "orderedContentSha256": "9406d50037bff143138d7b915845cab564f7377f7436755024b2120854b3ecb1",
+      "preserved": true
+    }
+  },
+  "hashes": {
+    "firestoreRules": "1a31c3387c3f9b20db2bcdd2280d58cf3cb1d6937008fd2f16919f9a613cf865",
+    "permissions": "1a989d494d0b94d8e26e8ed110b6cf3874f1ca234e49d309c87378089a0c2593"
+  },
+  "screenshots": [
+    "design/admin-access/2026-11-25/perfiles-escritorio.jpg",
+    "design/admin-access/2026-11-25/perfil-confirmacion-movil.jpg"
+  ]
+}

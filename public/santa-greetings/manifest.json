@@ -1,0 +1,343 @@
+{
+  "version": 1,
+  "width": 512,
+  "height": 256,
+  "characters": [
+    {
+      "id": "tecnoia",
+      "source": "/characters/tecnoia/rig-navidad-v1.png",
+      "sourceSha256": "9ef5ff673aa79b334493073a89d67e0d698a58d0c2e93c31091377ceb2505fce",
+      "atlas": "/santa-greetings/tecnoia.webp",
+      "atlasSha256": "8046ae18b5749e121bd40282e9ca98a33fef595335aded28d46d01ce14dfa97b",
+      "bytes": 29754,
+      "parts": {
+        "head": [
+          8,
+          18,
+          240,
+          219
+        ],
+        "tool": [
+          264,
+          20,
+          112,
+          183
+        ],
+        "hand": [
+          392,
+          35,
+          112,
+          121
+        ]
+      }
+    },
+    {
+      "id": "ordenia",
+      "source": "/characters/ordenia/rig-navidad-v1.png",
+      "sourceSha256": "4e55b0072e0ef99ac56e839217d491e46d39a695518365b2521b90508d31def9",
+      "atlas": "/santa-greetings/ordenia.webp",
+      "atlasSha256": "c0aa13b39511d1d43b7084def69797b616fd35e619c3f7d2030d26a7115f5bdb",
+      "bytes": 38546,
+      "parts": {
+        "head": [
+          8,
+          17,
+          240,
+          221
+        ],
+        "tool": [
+          264,
+          36,
+          112,
+          151
+        ],
+        "hand": [
+          392,
+          36,
+          112,
+          120
+        ]
+      }
+    },
+    {
+      "id": "balance",
+      "source": "/characters/balance/rig-navidad-v1.png",
+      "sourceSha256": "4c2c644a83403655a9b369fa7109d5e2ff3ca71beb7870d67f891e29340cd1fe",
+      "atlas": "/santa-greetings/balance.webp",
+      "atlasSha256": "fd3018ee50dfc472713257ba1efffacda2c81bf224746145404f6e54cbaf3ac4",
+      "bytes": 32272,
+      "parts": {
+        "head": [
+          8,
+          14,
+          240,
+          227
+        ],
+        "tool": [
+          264,
+          23,
+          112,
+          178
+        ],
+        "hand": [
+          392,
+          33,
+          112,
+          125
+        ]
+      }
+    },
+    {
+      "id": "conectia",
+      "source": "/characters/conectia/rig-navidad-v1.png",
+      "sourceSha256": "305a6b09fce2d4c9327f8df3ad42e956db383f49c727703c59dfeefdff062d56",
+      "atlas": "/santa-greetings/conectia.webp",
+      "atlasSha256": "6e9a278b446b9b1462eb9add199f67bb22c612fc47bf082aa86387778447f194",
+      "bytes": 32238,
+      "parts": {
+        "head": [
+          8,
+          17,
+          240,
+          221
+        ],
+        "tool": [
+          264,
+          9,
+          112,
+          205
+        ],
+        "hand": [
+          392,
+          35,
+          112,
+          121
+        ]
+      }
+    },
+    {
+      "id": "norte",
+      "source": "/characters/norte/rig-navidad-v1.png",
+      "sourceSha256": "ede29a958c44fc2b95b59a562a5ae3146b14468827d607dc76960e06771245e6",
+      "atlas": "/santa-greetings/norte.webp",
+      "atlasSha256": "057d133c3eea1e477ced5d68ee7108601256bfe2e15b8887eb67bcaa6c7fe07e",
+      "bytes": 31596,
+      "parts": {
+        "head": [
+          8,
+          14,
+          240,
+          228
+        ],
+        "tool": [
+          264,
+          30,
+          112,
+          164
+        ],
+        "hand": [
+          392,
+          35,
+          112,
+          121
+        ]
+      }
+    },
+    {
+      "id": "cierreia",
+      "source": "/characters/cierreia/rig-navidad-v1.png",
+      "sourceSha256": "db9feca0246822f2314d2700ac1dd4404c272c8fa16d085d2faf3a4379f7fe04",
+      "atlas": "/santa-greetings/cierreia.webp",
+      "atlasSha256": "fec4ece0aefa254cf569b4ddee22d9d4db1ab3ad557537cac8c8a74d3de4da4e",
+      "bytes": 29702,
+      "parts": {
+        "head": [
+          8,
+          14,
+          240,
+          227
+        ],
+        "tool": [
+          264,
+          35,
+          112,
+          154
+        ],
+        "hand": [
+          392,
+          34,
+          112,
+          124
+        ]
+      }
+    },
+    {
+      "id": "festivia",
+      "source": "/characters/festivia/rig-navidad-v1.png",
+      "sourceSha256": "88e632587a04477b0023e57ed116e03012e304854fbd906384332b9926f01d27",
+      "atlas": "/santa-greetings/festivia.webp",
+      "atlasSha256": "bc40e9871c3ee38e30d0439672e43fe5b44fd9bf986b0af90ca3d6445f039576",
+      "bytes": 38204,
+      "parts": {
+        "head": [
+          8,
+          18,
+          240,
+          219
+        ],
+        "tool": [
+          264,
+          51,
+          112,
+          122
+        ],
+        "hand": [
+          392,
+          35,
+          112,
+          122
+        ]
+      }
+    },
+    {
+      "id": "aliania",
+      "source": "/characters/aliania/rig-navidad-v1.png",
+      "sourceSha256": "bc993daeaa5735e5e4b7ca77b7b1a32292ccb4eab9041a1b4dae3ea4eb7016fd",
+      "atlas": "/santa-greetings/aliania.webp",
+      "atlasSha256": "4b3e6d50dfd34d5ad0b5f763c783a1f1f9e4a761f48fb6a181a58a63a14c7487",
+      "bytes": 31458,
+      "parts": {
+        "head": [
+          8,
+          16,
+          240,
+          224
+        ],
+        "tool": [
+          264,
+          21,
+          112,
+          181
+        ],
+        "hand": [
+          392,
+          34,
+          112,
+          123
+        ]
+      }
+    },
+    {
+      "id": "prisma",
+      "source": "/characters/prisma/rig-navidad-v1.png",
+      "sourceSha256": "616036e56dd353913bd60445db14512af18e1c1d43a05a2ea290ede44c737df1",
+      "atlas": "/santa-greetings/prisma.webp",
+      "atlasSha256": "82bd441e4b2fc10d037dd0b7f5cdb38badb5ff4b62d93ad6bbb8f6f1ec127a96",
+      "bytes": 28950,
+      "parts": {
+        "head": [
+          8,
+          15,
+          240,
+          225
+        ],
+        "tool": [
+          264,
+          24,
+          112,
+          176
+        ],
+        "hand": [
+          392,
+          36,
+          112,
+          120
+        ]
+      }
+    },
+    {
+      "id": "armonia",
+      "source": "/characters/armonia/rig-navidad-v1.png",
+      "sourceSha256": "e8654702ad1131eb8d1081b82655ad4f1a83dd7cedf36e03692131b67de8d74d",
+      "atlas": "/santa-greetings/armonia.webp",
+      "atlasSha256": "a60aca5c22a7e7e9f2f26585bd744da31d022098eb21c7158afdd43509c2fc66",
+      "bytes": 30228,
+      "parts": {
+        "head": [
+          8,
+          14,
+          240,
+          227
+        ],
+        "tool": [
+          264,
+          22,
+          112,
+          179
+        ],
+        "hand": [
+          392,
+          35,
+          112,
+          122
+        ]
+      }
+    },
+    {
+      "id": "radaria",
+      "source": "/characters/radaria/rig-navidad-v1.png",
+      "sourceSha256": "31fdc58f80ba716d440dec8919d2c618a5e172273737a178177a9ff9e4d97585",
+      "atlas": "/santa-greetings/radaria.webp",
+      "atlasSha256": "fba922fde97a1c2ad42a33ec2a65e6822276ff05e38df519e5740e710a7d8376",
+      "bytes": 31650,
+      "parts": {
+        "head": [
+          8,
+          15,
+          240,
+          226
+        ],
+        "tool": [
+          264,
+          8,
+          112,
+          207
+        ],
+        "hand": [
+          392,
+          36,
+          112,
+          120
+        ]
+      }
+    },
+    {
+      "id": "agilia",
+      "source": "/characters/agilia/rig-navidad-v1.png",
+      "sourceSha256": "7b280bef6f4306275ae9b55c205a79c994b195050df547a1eb61a547958c0513",
+      "atlas": "/santa-greetings/agilia.webp",
+      "atlasSha256": "9eb4888783b7a8c2333d8dd2a82f5a7c315de02dab2c11b18d5ffca0922faab0",
+      "bytes": 32834,
+      "parts": {
+        "head": [
+          8,
+          17,
+          240,
+          222
+        ],
+        "tool": [
+          264,
+          40,
+          112,
+          144
+        ],
+        "hand": [
+          392,
+          37,
+          112,
+          117
+        ]
+      }
+    }
+  ]
+}

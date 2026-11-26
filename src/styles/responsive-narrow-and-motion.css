@@ -1,0 +1,92 @@
+@media (max-width: 390px) {
+  .main-content {
+    padding: 22px 16px;
+  }
+  .hero-copy {
+    padding: 24px 20px;
+  }
+  .hero-copy h2 {
+    font-size: 27px;
+  }
+  .quick-card {
+    padding: 14px 12px;
+  }
+  .quick-card h3 {
+    font-size: 9px;
+  }
+  .dashboard-secondary {
+    grid-template-columns: 1fr;
+  }
+  .leaderboard-panel {
+    grid-column: auto;
+  }
+  .countdown-card {
+    min-height: auto;
+  }
+  .calendar-days > button {
+    width: 30px;
+    height: 29px;
+    font-size: 10px;
+  }
+  .calendar-weekdays {
+    font-size: 9px;
+  }
+  .calendar-month strong {
+    font-size: 11px;
+  }
+  .calendar-footnote {
+    font-size: 9px;
+  }
+  .calendar-panel .panel-heading h2 {
+    font-size: 12px;
+  }
+  .contact-grid,
+  .knowledge-grid,
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+  .contact-top {
+    flex-direction: row;
+    align-items: center;
+  }
+  .contact-actions .btn {
+    font-size: 11px;
+    gap: 8px;
+  }
+  .contact-actions .btn > span {
+    display: block;
+  }
+  .knowledge-card h2 {
+    font-size: 16px;
+  }
+  .contact-card h2 {
+    font-size: 17px;
+  }
+  .season-news-art {
+    width: 70px;
+  }
+  .season-news h3 {
+    font-size: 11px;
+  }
+  .tabs {
+    gap: 16px;
+  }
+  .greeting-preview {
+    padding: 25px 20px;
+  }
+  .welcome-row h1 {
+    font-size: 26px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *:before,
+  *:after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .page-enter {
+    opacity: 1;
+  }
+}

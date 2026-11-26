@@ -44,6 +44,11 @@ export default function DynamicHeader({
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [appearanceOpen, setAppearanceOpen] = useState(false);
   const [term, setTerm] = useState("");
+  const [appleKeyboard] = useState(() =>
+    /Mac|iPhone|iPad|iPod/i.test(
+      navigator.userAgentData?.platform || navigator.platform || "",
+    ),
+  );
   const navigate = useNavigate();
   const location = useLocation();
   const { directory, news, unreadNews, readNews, markNewsRead } = usePortal();
@@ -112,12 +117,20 @@ export default function DynamicHeader({
           <button
             className="global-search"
             aria-label="Buscar en la intranet"
+            aria-keyshortcuts={appleKeyboard ? "Meta+K" : "Control+K"}
+            title={`Buscar (${appleKeyboard ? "⌘ K" : "Ctrl + K"})`}
             onClick={() => setSearchOpen(true)}
           >
             <Search size={16} />
             <span>Buscar en el portal</span>
-            <kbd>
-              <Command size={11} /> K
+            <kbd aria-hidden="true">
+              {appleKeyboard ? (
+                <>
+                  <Command size={11} /> K
+                </>
+              ) : (
+                "Ctrl + K"
+              )}
             </kbd>
           </button>
           <span className="topbar-divider" />

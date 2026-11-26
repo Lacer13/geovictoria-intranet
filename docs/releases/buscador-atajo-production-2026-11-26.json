@@ -1,0 +1,336 @@
+{
+  "date": "2026-11-26",
+  "status": "published",
+  "hostingVersion": "0105b32654548068",
+  "previousHostingVersion": "fe167166f639f8ea",
+  "scope": "Hosting; platform-specific search shortcut indicator only",
+  "source": {
+    "path": "src/components/DynamicHeader.jsx",
+    "sha256": "7c722cdb79058c625da09e9a19ebf9d3dfab13cdfcb3d1399e553fd926285f41"
+  },
+  "validation": {
+    "build": "passed",
+    "lint": "passed",
+    "nonAppleIndicator": "Ctrl + K",
+    "ctrlKOpensSearch": true,
+    "escapeClosesSearch": true
+  },
+  "rulesetUnchanged": "projects/geovictoria-intranet-peru/rulesets/943695b0-a0a0-402d-8656-bcebec1af8b7",
+  "resources": [
+    {
+      "path": "index.html",
+      "sha256": "aecfd7abf46ffc106689e9ce0edfa290d47e7e9ab82f8343764270289198422f",
+      "status": 200
+    },
+    {
+      "path": "assets/AccessManagement-CCWJrR-K.js",
+      "sha256": "e690f30ef1042017c5b9932b2898ed2cca0ef12b71bcd9dfc1211512316b0888",
+      "status": 200
+    },
+    {
+      "path": "assets/Admin-CC4CAI_b.js",
+      "sha256": "2b1d3fd8769078590475f625e7042c3f027039b3263788b63f9c136b3f80629b",
+      "status": 200
+    },
+    {
+      "path": "assets/Admin-CWKXHQ2z.css",
+      "sha256": "b3506f7c134535a820a81115db339091709f00d081c9273152a2b19c1907ca3b",
+      "status": 200
+    },
+    {
+      "path": "assets/arrow-down-to-line-DMzm3Wb4.js",
+      "sha256": "9eed83fd6eff6ce6e2b1ed5c24f282876f7233eae533990e994c52fe43d26ccb",
+      "status": 200
+    },
+    {
+      "path": "assets/arrow-left-Cowx0KOi.js",
+      "sha256": "3261687f5c1f4a8f33cd0a5fcaf573292d17138cc5cbd9ed310b8ae54352f014",
+      "status": 200
+    },
+    {
+      "path": "assets/arrow-right-DFBgXtwZ.js",
+      "sha256": "076668e01e47a0753b7a04504b63999d55d5303b8f02c9357be875624150b61c",
+      "status": 200
+    },
+    {
+      "path": "assets/auth-DAXQzNDA.js",
+      "sha256": "21a9092041037608b623c613f374618f5bb8ff42da5994ae501cad6b5fbead91",
+      "status": 200
+    },
+    {
+      "path": "assets/check-BIjFlQQA.js",
+      "sha256": "4f2768029a874d92e5da62d8183472ee4497bb4ece1366082d35d9f555901a9e",
+      "status": 200
+    },
+    {
+      "path": "assets/Christmas-B3VluFad.js",
+      "sha256": "caa290f9b55893f38de71900ceb6654cdf5de48c37e7a1097a802cab5f7b96d5",
+      "status": 200
+    },
+    {
+      "path": "assets/ChristmasWall-C4Eq8YsD.css",
+      "sha256": "2077d68de83e4c518d88fa0c5950588bc93e07165b489c3fa141f19943ceffcd",
+      "status": 200
+    },
+    {
+      "path": "assets/ChristmasWall-CZvT3NKQ.js",
+      "sha256": "636a9da24a59bed5cc449d1fc2d4d39d135457e9c1a23b220903f13a23f93ff4",
+      "status": 200
+    },
+    {
+      "path": "assets/circle-check-BSEiGgV7.js",
+      "sha256": "ccfa3d22098dd705f11537761faec1993bbd5b966423b15664570dfebb85efa1",
+      "status": 200
+    },
+    {
+      "path": "assets/clock-3-DGnoHHVj.js",
+      "sha256": "999f3145564294d80fb37fbd1f9a18ca7ff870d897b41350865831a96f542452",
+      "status": 200
+    },
+    {
+      "path": "assets/ContentSection-DtAXTM6z.js",
+      "sha256": "2e916be81988e902694a8a6e71d6de865872df31d351c3b97b961074daa06ace",
+      "status": 200
+    },
+    {
+      "path": "assets/copy-C-O0DyBg.js",
+      "sha256": "068a584ae0e4a2fa0674f54f15fbf0f8479a0eb7f474986a0a6b464da3de55b0",
+      "status": 200
+    },
+    {
+      "path": "assets/createLucideIcon-DkgbDv7J.js",
+      "sha256": "61b1726789437c53165e7fab35ff4f565215009f8eca768e878a4cba166075c8",
+      "status": 200
+    },
+    {
+      "path": "assets/DeleteRecordDialog-Ce1uARbq.js",
+      "sha256": "3fe124f9f80e26465f9e3e86acfa519c56fa66ab041fac08b847556faf72ec86",
+      "status": 200
+    },
+    {
+      "path": "assets/download-CVh2wH3z.js",
+      "sha256": "33fdb2b1a703ea638bd3c789c5f87f6d0c3ed3e624b4514e4ea239e56339135d",
+      "status": 200
+    },
+    {
+      "path": "assets/esm-BLwCZdJv.js",
+      "sha256": "b73f57f2be714c4d4d26209a30e913876105221613e38d8684d7b046b3b2b10e",
+      "status": 200
+    },
+    {
+      "path": "assets/eye-off-B3NcHYDk.js",
+      "sha256": "58b818bbe3fa09f4f2b781b7cc4e9262f59ca81fc93cfffc05f15a07d4e3e181",
+      "status": 200
+    },
+    {
+      "path": "assets/eye-XF-crv-5.js",
+      "sha256": "e7ad2ca9db95a778a43d6dc14a32d20db88458452d87c83badac4e885c44de09",
+      "status": 200
+    },
+    {
+      "path": "assets/FeedbackForm-BPwxFWYl.js",
+      "sha256": "8e9124be6661ad2ff8ffd765a72932dfb88d5561f417929c975494062f06cd5a",
+      "status": 200
+    },
+    {
+      "path": "assets/firebase-auth-CZ-WDckr.js",
+      "sha256": "6fbfe3085f767e463591c4c66352061006e50a517c371586250d862ffeab0686",
+      "status": 200
+    },
+    {
+      "path": "assets/firebase-BUBYWhC2.js",
+      "sha256": "3b111b889cff2396588553b160bd5d7ebca2a09aabc88f6873f4cfc4866c56eb",
+      "status": 200
+    },
+    {
+      "path": "assets/firebase-core-DRfFITpx.js",
+      "sha256": "85330c829b9d9a3c533f2db35e6ab95f383861456571621784d605d12691bb7d",
+      "status": 200
+    },
+    {
+      "path": "assets/GamePage-CkARHRxK.css",
+      "sha256": "a072386c949f65299d4aaa179818fd8f16cf22d903c5e377084e289be7345271",
+      "status": 200
+    },
+    {
+      "path": "assets/GamePage-DK39hkYc.js",
+      "sha256": "044eb673f01260d499c2f33141f62fd7428f4ad19b34fb1b61dbe89221d549aa",
+      "status": 200
+    },
+    {
+      "path": "assets/geovictoria-intranet-CBVFgfZe.js",
+      "sha256": "8efbc0680f3a24d3cc120a9c995fecb9a6c66cee5c5cefcaaa47672710c894ae",
+      "status": 200
+    },
+    {
+      "path": "assets/geovictoria-intranet-Dk8WBFoS.css",
+      "sha256": "f86cb7434b5c8c89fb606dfaf16c574dcdb58287dcf4dd8a6fd79dcb3bb7e6c9",
+      "status": 200
+    },
+    {
+      "path": "assets/HelpDirectory-BwqmYQd5.js",
+      "sha256": "f49809d3bedb250e55d029dfad5e142a81e0df2a27fa64c5792da3ffc30cd140",
+      "status": 200
+    },
+    {
+      "path": "assets/index-CmzRWJFj.js",
+      "sha256": "e9412d52f52416782698f7816c60d399d637d7b62e08e0e7fc8e0662b149b520",
+      "status": 200
+    },
+    {
+      "path": "assets/lock-keyhole-IQ4xWgMv.js",
+      "sha256": "5ab062bf0f3a2a6e511960d894bf4113071b72006edd501d21f3a7c67d9eb208",
+      "status": 200
+    },
+    {
+      "path": "assets/mail-cFAW8Yjt.js",
+      "sha256": "062d5541769a291e60a7feedcc07b08f9807d138218796901c90ff738518c41b",
+      "status": 200
+    },
+    {
+      "path": "assets/NewsPage-BQBJjk7S.js",
+      "sha256": "3a937a7f7cda3b12ac213375501017288fa93653c267819c8ef022868fac6683",
+      "status": 200
+    },
+    {
+      "path": "assets/OrgChart-DG9q1Oak.js",
+      "sha256": "0df2f68b5e5878ed534ad63da7072b25d594d199a3ecc08fbee4666d14cd71a4",
+      "status": 200
+    },
+    {
+      "path": "assets/pencil-anzgP7Ck.js",
+      "sha256": "6734eb2699a45cae27974ab123065792256f0dbd1252d434c17fd87173f16718",
+      "status": 200
+    },
+    {
+      "path": "assets/plus-COsp5OOR.js",
+      "sha256": "26f568a4f8e73027eb9c25cbcc173ceaf1738866a0d56afef90dac00281f19e4",
+      "status": 200
+    },
+    {
+      "path": "assets/quiz-ChGAa421.css",
+      "sha256": "caf23fc982d6eccde323660cf809cfb7ad5ace8e2e2f8c6187e0b6ee13a21de8",
+      "status": 200
+    },
+    {
+      "path": "assets/quiz-DkCuAUcp.js",
+      "sha256": "579b02387f91165f3bb8a884bc9796d20ab8e440b5fd8a3916582ee3fdffe04b",
+      "status": 200
+    },
+    {
+      "path": "assets/Quiz-OHU_AL4f.js",
+      "sha256": "3fe1614fe471857def5229606aad9f74c7ffb9429919e0421fb663215c601bc1",
+      "status": 200
+    },
+    {
+      "path": "assets/QuizAdmin-qswxsy8Z.js",
+      "sha256": "e66161236ad53a6d1e4f91feb5133f9c9c41943a968314da249f0824520cbd57",
+      "status": 200
+    },
+    {
+      "path": "assets/QuizHost-CMloCCp5.js",
+      "sha256": "688c1261e84f66040b9c3c2c9d1e26192655f06e0fc8402ff8f74b283bb99150",
+      "status": 200
+    },
+    {
+      "path": "assets/QuizPresentation-CEf7hanH.js",
+      "sha256": "e7fd68de697f38789da8c073cfaf93c980332ece87d7eef941cfd3dcca48f1a8",
+      "status": 200
+    },
+    {
+      "path": "assets/react-BVNqbF40.js",
+      "sha256": "ffc267103e7c1c4f6aee8d59dfbac804cc8ca717f0d0313c139da8164843005a",
+      "status": 200
+    },
+    {
+      "path": "assets/ReportsSection-B8mKLgPB.js",
+      "sha256": "c7a3df5644399a22a42bab1619b549eca8b6bbc45a14138db3c179b05f474326",
+      "status": 200
+    },
+    {
+      "path": "assets/rolldown-runtime-8BhlS34s.js",
+      "sha256": "1cb5c6ead7e29370203f12e2d5cdf50ec1f02dd70ee2d050d909afbf2406f6b1",
+      "status": 200
+    },
+    {
+      "path": "assets/roster-G1CiA_va.js",
+      "sha256": "0190556bc262b7fdabcdc0b894788737cc3e66bbc9c3ba4bcc84b282ec5b81b7",
+      "status": 200
+    },
+    {
+      "path": "assets/SantaGreeting-2WFRsXaA.css",
+      "sha256": "d5442c7ec0f830a87ac37c9ee5fd18165dc48a0fd1c9b88d3b2e3a8313068126",
+      "status": 200
+    },
+    {
+      "path": "assets/SantaGreeting-CD7u07U2.js",
+      "sha256": "2443647267f98e37892e546f6d4f700d4f779f2113adbafe897f77625715b05d",
+      "status": 200
+    },
+    {
+      "path": "assets/ScoresSection-C1mE3Ic3.js",
+      "sha256": "b34cbf5f428145428b923c3f59a71298b8472f088fd8e9ad7c55dfdbb2b05745",
+      "status": 200
+    },
+    {
+      "path": "assets/SearchPage-BbyPeggi.js",
+      "sha256": "4efb470834f82c7965c387b29bfbc91dd26f5b594d34253cac51725c7fa82bf3",
+      "status": 200
+    },
+    {
+      "path": "assets/secret-santa-experience-BN-DL_r9.js",
+      "sha256": "5ceeb2852c9b2b063d4988cd72f80b6119716da2d22a04a75f1a1cebb0e014db",
+      "status": 200
+    },
+    {
+      "path": "assets/secret-santa-experience-DuRqXPGs.css",
+      "sha256": "4c55327207c0a65264520b1e2560a66dc6edfe27641e929405192cacaf32d19f",
+      "status": 200
+    },
+    {
+      "path": "assets/secretSanta-BAl3A6SF.js",
+      "sha256": "e1e3df162a38148f0a21a087aa7c58f6aba9f048f9fb08379ba10ad9f1b90c2d",
+      "status": 200
+    },
+    {
+      "path": "assets/SecretSanta-D3huszul.js",
+      "sha256": "36b1474adb7b63934c7b54ab6f96763d0286ceeed28ef75bfd9ff49b0236ab92",
+      "status": 200
+    },
+    {
+      "path": "assets/SecretSantaAdmin-B8RxZOd8.js",
+      "sha256": "92fab1f2ba1d6a9602381b943dfe2b9e0c73d8f713492e5d0ef1349a775a5841",
+      "status": 200
+    },
+    {
+      "path": "assets/SecretSantaAdmin-D9eqvj4x.css",
+      "sha256": "c33a4e70fd0493fd3db29069b6d4173591ad2bf79351801c03f8d92a8402bf86",
+      "status": 200
+    },
+    {
+      "path": "assets/send-CMBKyrk-.js",
+      "sha256": "e381d4970c035cbaeb757d661ea2c0c961b5e3c9d03e360c044990393764001e",
+      "status": 200
+    },
+    {
+      "path": "assets/settings-2-CetWwxZa.js",
+      "sha256": "cb160110228bb9de19f5f7395ce536789187123187da71541a481132d9e255f9",
+      "status": 200
+    },
+    {
+      "path": "assets/shield-check-CLVg30K7.js",
+      "sha256": "46a210e359f48f8c076cd58c9ebc08d7aa76eb6cb0832af7903428c954390a47",
+      "status": 200
+    },
+    {
+      "path": "assets/useAdminAccess-Bxs5rUAo.js",
+      "sha256": "f387049025e4af58d053c231a9086adb169852579af565172869415400394af2",
+      "status": 200
+    },
+    {
+      "path": "assets/Wiki-DND7aqtI.js",
+      "sha256": "23eff99fcaf2d9e3699d0cc229e58ad61cd71076ae111ac42b448b26a453e0d1",
+      "status": 200
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Manrope:wght@400;500;600;650;700;750;800&display=swap");
+
+:root {
+  --geo-primary: #ff8d83;
+  --geo-primary-light: #ffc3b7;
+  --geo-primary-dark: #ae0e17;
+  --geo-secondary: #9acfb1;
+  --geo-accent: #e8c46c;
+  --geo-success: #91c9a8;
+  --bg-color: #101c17;
+  --surface-color: #192a22;
+  --surface-color-hover: #23392d;
+  --text-main: #fffdf6;
+  --text-muted: #c0cec3;
+  --border-color: #3c5043;
+  --glass-bg: var(--surface-color);
+  --glass-border: var(--border-color);
+  --shadow-card: 0 3px 15px #0000000a;
+  --forest: #a1d9b4;
+  --forest-bg: #213c2c;
+  --cream: #333123;
+  --hero-bg: #124a32;
+  --hero-text: #ffffff;
+  --muted-surface: #22342a;
+  --blue-soft: #213c2c;
+  --green-soft: #213c2c;
+  --purple-soft: #353123;
+  --coral-soft: #482923;
+  --gold-soft: #393322;
+  --festive-red: #ff9c8f;
+  --festive-gold: #ebc971;
+  --festive-evergreen: #124a32;
+  --font-heading: "Manrope", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+  --transition-fast: 0.18s ease;
+  --transition-normal: 0.25s ease;
+  --transition-slow: 0.4s;
+  --glow-primary: 0 4px 15px #ce171f22;
+  --glow-secondary: 0 4px 15px #135e4017;
+}
+body.light-mode {
+  --geo-primary: #ce171f;
+  --geo-primary-light: #e0252d;
+  --geo-secondary: #135e40;
+  --bg-color: #fcfbf7;
+  --surface-color: #ffffff;
+  --surface-color-hover: #fff4ec;
+  --text-main: #24372c;
+  --text-muted: #627066;
+  --border-color: #e5e5d8;
+  --forest: #135e40;
+  --forest-bg: #edf5ec;
+  --cream: #fffaed;
+  --hero-bg: #135e40;
+  --hero-text: #ffffff;
+  --muted-surface: #f4f5ee;
+  --blue-soft: #edf5ec;
+  --green-soft: #edf5ec;
+  --purple-soft: #fff5d9;
+  --coral-soft: #fff0eb;
+  --gold-soft: #fff5d9;
+  --festive-red: #ce171f;
+  --festive-gold: #8b6218;
+  --festive-evergreen: #135e40;
+  --shadow-card: 0 3px 15px #202c3503;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: var(--font-body);
+  background: var(--bg-color);
+  color: var(--text-main);
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+button,
+a,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+svg {
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+button {
+  color: inherit;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  line-height: 1.35;
+  font-weight: 750;
+  letter-spacing: -0.04em;
+}
+h1 {
+  font-size: 30px;
+}
+h2 {
+  font-size: 18px;
+}
+h3 {
+  font-size: 15px;
+}
+p {
+  color: var(--text-muted);
+}
+:focus-visible {
+  outline: 3px solid var(--geo-primary);
+  outline-offset: 4px;
+}
+main:focus {
+  outline: none;
+}
+::selection {
+  background: #bfd4c3;
+  color: #183e2c;
+}

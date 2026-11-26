@@ -1,0 +1,295 @@
+/* Reading sizes are shared by all layouts, including narrow desktop windows. */
+.nav-item {
+  font-size: 12px;
+}
+.nav-caption {
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+.sidebar-note p {
+  font-size: 11px;
+}
+.sidebar-profile strong {
+  font-size: 12px;
+}
+.sidebar-profile div > span {
+  font-size: 10px;
+}
+.workspace-label {
+  font-size: 11px;
+}
+.new-badge {
+  font-size: 9px;
+}
+.breadcrumb {
+  font-size: 12px;
+}
+.global-search {
+  font-size: 12px;
+}
+.global-search kbd {
+  font-size: 10px;
+}
+.welcome-eyebrow {
+  font-size: 9px;
+}
+.welcome-row h1 {
+  font-size: 32px;
+}
+.welcome-row p {
+  font-size: 13px;
+}
+.today-date {
+  font-size: 12px;
+}
+.hero-copy h2 {
+  font-size: 40px;
+  letter-spacing: -1.5px;
+}
+.hero-copy p {
+  font-size: 12px;
+}
+.hero-copy .btn {
+  font-size: 11px;
+}
+.season-pill {
+  font-size: 8px;
+}
+.hero-footnote {
+  font-size: 10px;
+}
+.hero-edition {
+  font-size: 7px;
+}
+.section-title h2 {
+  font-size: 16px;
+}
+.section-title > span {
+  font-size: 11px;
+}
+.quick-card {
+  padding: 20px 17px;
+}
+.quick-card h3 {
+  font-size: 13px;
+  white-space: normal;
+}
+.quick-card p {
+  font-size: 11px;
+  white-space: normal;
+  line-height: 1.7;
+}
+.quick-icon {
+  width: 40px;
+  height: 40px;
+}
+.panel-heading h2 {
+  font-size: 16px;
+}
+.text-link.small {
+  font-size: 11px;
+}
+.tabs > button {
+  font-size: 12px;
+  padding-top: 15px;
+  padding-bottom: 12px;
+}
+.category-label {
+  font-size: 9px;
+}
+.season-news h3,
+.news-item h3 {
+  font-size: 16px;
+  line-height: 1.55;
+}
+.season-news p,
+.news-item p {
+  font-size: 12px;
+}
+.season-news .text-link {
+  font-size: 11px;
+}
+.news-bottom-link {
+  font-size: 10px;
+  padding: 15px 19px;
+}
+.data-state.compact strong {
+  font-size: 12px;
+}
+.data-state.compact p {
+  font-size: 11px;
+}
+.data-state.compact .text-link {
+  font-size: 11px;
+}
+.wellbeing-card h3 {
+  font-size: 14px;
+}
+.wellbeing-card p {
+  font-size: 11px;
+}
+.wellbeing-card .category-label {
+  font-size: 8px;
+}
+.wellbeing-card .btn {
+  font-size: 10px;
+}
+.countdown-card > span:not(.countdown-star) {
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+.countdown-card > p {
+  font-size: 11px;
+}
+.countdown-card > .text-link {
+  font-size: 10px;
+}
+.calendar-panel .panel-heading h2 {
+  font-size: 13px;
+}
+.calendar-panel .text-link {
+  font-size: 10px;
+}
+.calendar-month strong {
+  font-size: 12px;
+}
+.calendar-weekdays {
+  font-size: 10px;
+}
+.calendar-days > button {
+  font-size: 11px;
+  width: 27px;
+  height: 27px;
+}
+.calendar-footnote {
+  font-size: 9px;
+}
+.leaderboard-panel .panel-heading h2 {
+  font-size: 13px;
+}
+.leaderboard-link {
+  font-size: 11px;
+}
+.leaderboard-list li,
+.leaderboard-list strong,
+.rank {
+  font-size: 12px;
+}
+.app-footer {
+  font-size: 10px;
+}
+.knowledge-card p,
+.team-card > p,
+.contact-card > p {
+  font-size: 12px;
+}
+.knowledge-card .category-label {
+  font-size: 10px;
+}
+.knowledge-card-bottom {
+  font-size: 11px;
+}
+.filter-pills > button {
+  font-size: 12px;
+}
+.results-count {
+  font-size: 12px;
+}
+.contact-email {
+  font-size: 12px;
+}
+.department-pill {
+  font-size: 10px;
+}
+.input-group > label,
+.input-label {
+  font-size: 12px;
+}
+.input-field,
+.search-field input {
+  font-size: 14px;
+}
+.form-error {
+  font-size: 12px;
+}
+.anonymous-option strong {
+  font-size: 12px;
+}
+.anonymous-option small {
+  font-size: 10px;
+}
+.field-caption {
+  font-size: 10px;
+}
+.feedback-aside > small {
+  font-size: 11px;
+}
+.feedback-aside div p {
+  font-size: 12px;
+}
+.feedback-form .btn {
+  font-size: 13px;
+}
+.article-meta,
+.bookmark-button {
+  font-size: 12px;
+}
+.help-banner strong {
+  font-size: 14px;
+}
+.help-banner p {
+  font-size: 12px;
+}
+.help-banner > .text-link {
+  font-size: 12px;
+}
+.inline-notice {
+  font-size: 12px;
+}
+.search-results strong {
+  font-size: 14px;
+}
+.search-results small {
+  font-size: 12px;
+}
+.search-caption {
+  font-size: 10px;
+}
+.search-hint {
+  font-size: 10px;
+}
+.idea-card p {
+  font-size: 13px;
+}
+.idea-card .text-link {
+  font-size: 12px;
+}
+.local-save-caption {
+  font-size: 11px;
+}
+.greeting-builder p {
+  font-size: 13px;
+}
+.greeting-privacy,
+.qr-panel small {
+  font-size: 11px;
+}
+.greeting-builder .btn,
+.qr-actions .btn {
+  font-size: 12px;
+}
+.greeting-preview p {
+  font-size: 14px;
+}
+.qr-panel p {
+  font-size: 13px;
+}
+.team-card .text-link {
+  font-size: 12px;
+}
+.team-people > div {
+  font-size: 13px;
+}
+.team-card h2 {
+  font-size: 18px;
+}

@@ -1,17 +1,53 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    function isAdmin() {
+    function allPermissions() {
+      return ['reports.view', 'reports.delete', 'news.create', 'news.edit', 'news.delete', 'directory.create', 'directory.edit', 'directory.delete', 'santa.view', 'santa.manage', 'santa.mail', 'quiz.manage', 'wall.moderate', 'scores.manage', 'access.manage'];
+    }
+    function verified() { return request.auth != null && request.auth.token.get('email_verified', false) == true; }
+    function membershipExists() {
+      return request.auth != null && request.auth.token.get('email', '') != ''
+        && exists(/databases/$(database)/documents/administrators/$(request.auth.token.get('email', '').lower()));
+    }
+    function membership() { return get(/databases/$(database)/documents/administrators/$(request.auth.token.get('email', '').lower())).data; }
+    function isOwner() {
       return request.auth != null && (
-        request.auth.token.get('admin', false) == true || (
-          request.auth.token.get('email_verified', false) == true &&
-          authorizedEmail(request.auth.token.get('email', '').lower())
-        )
+        (request.auth.token.get('admin', false) == true && !membershipExists())
+        || (membershipExists() && verified() && membership().active == true && membership().role == 'owner')
       );
     }
-    function authorizedEmail(email) {
-      let authorization = get(/databases/$(database)/documents/administrators/$(email)).data;
-      return authorization.active == true && authorization.role in ['owner', 'admin'];
+    function memberPermissions() {
+      let member = membership();
+      return !member.keys().hasAny(['profileId']) ? allPermissions()
+        : (exists(/databases/$(database)/documents/accessProfiles/$(member.profileId))
+          && get(/databases/$(database)/documents/accessProfiles/$(member.profileId)).data.active == true
+          ? get(/databases/$(database)/documents/accessProfiles/$(member.profileId)).data.permissions : []);
+    }
+    function profileAllows(profileId, permission) {
+      let path = /databases/$(database)/documents/accessProfiles/$(profileId);
+      return exists(path) && get(path).data.active == true && permission in get(path).data.permissions;
+    }
+    function memberAllows(permission) {
+      let member = membership();
+      return member.active == true && member.role in ['owner', 'admin']
+        && (!member.keys().hasAny(['profileId']) || member.role == 'owner' || profileAllows(member.profileId, permission));
+    }
+    function hasPermission(permission) {
+      // A custom claim is a bootstrap fallback only when no explicit membership exists.
+      return request.auth != null && (
+        (request.auth.token.get('admin', false) == true && !membershipExists())
+        || (request.auth.token.get('email_verified', false) == true && memberAllows(permission))
+      );
+    }
+    function canGrant(permissions) { return isOwner() || memberPermissions().hasAll(permissions); }
+    function assignedPermissions(data) {
+      return !data.keys().hasAny(['profileId']) ? allPermissions()
+        : get(/databases/$(database)/documents/accessProfiles/$(data.profileId)).data.permissions;
+    }
+    function validAssignedProfile(data) {
+      return !data.keys().hasAny(['profileId']) || (data.profileId is string && data.profileId.matches('^[a-zA-Z0-9_-]{1,80}$')
+        && exists(/databases/$(database)/documents/accessProfiles/$(data.profileId))
+        && (!data.active || get(/databases/$(database)/documents/accessProfiles/$(data.profileId)).data.active == true));
     }
     function text(value, max) {
       return value is string && value.size() > 0 && value.size() <= max;
@@ -34,8 +70,8 @@ service cloud.firestore {
         && data.updatedAt == request.time;
     }
     match /portalSettings/secretSantaEmail {
-      allow read: if isAdmin();
-      allow create, update: if isAdmin()
+      allow read: if hasPermission('santa.mail');
+      allow create, update: if hasPermission('santa.mail')
         && request.resource.data.keys().hasOnly(['enabled', 'serviceId', 'templateId', 'publicKey', 'updatedBy', 'updatedAt'])
         && request.resource.data.enabled is bool
         && request.resource.data.serviceId is string && request.resource.data.serviceId.size() <= 100
@@ -46,13 +82,13 @@ service cloud.firestore {
       allow delete: if false;
     }
     match /secretSantaEvents/{eventId} {
-      allow read: if isAdmin();
-      allow create: if isAdmin() && santaEventValid(request.resource.data)
+      allow read: if hasPermission('santa.view');
+      allow create: if hasPermission('santa.manage') && santaEventValid(request.resource.data)
         && request.resource.data.status == 'draft' && request.resource.data.assignments.size() == 0
         && !request.resource.data.keys().hasAny(['drawnAt'])
         && request.resource.data.revision == 0 && request.resource.data.createdBy == request.auth.uid
         && request.resource.data.createdAt == request.time;
-      allow update: if isAdmin() && santaEventValid(request.resource.data)
+      allow update: if hasPermission('santa.manage') && santaEventValid(request.resource.data)
         && request.resource.data.revision == resource.data.revision + 1
         && request.resource.data.createdBy == resource.data.createdBy
         && request.resource.data.createdAt == resource.data.createdAt && (
@@ -79,21 +115,23 @@ service cloud.firestore {
             && data.provider in ['emailjs', 'demo']
             && data.lastError is string && data.lastError.size() <= 500;
         }
-        function eventReady() {
+        function eventReady(completing) {
           let event = get(/databases/$(database)/documents/secretSantaEvents/$(eventId)).data;
-          return event.status == 'drawn' && giverId in event.participantIds;
+          // Archiving stops new sends, but must preserve receipts for in-flight requests.
+          return (event.status == 'drawn' || (completing && event.status == 'archived'))
+            && giverId in event.participantIds;
         }
-        allow read: if isAdmin();
-        allow create: if isAdmin() && eventReady() && validDelivery(request.resource.data)
+        allow read: if hasPermission('santa.view');
+        allow create: if hasPermission('santa.mail') && eventReady(false) && validDelivery(request.resource.data)
           && request.resource.data.state == 'sending' && request.resource.data.attempts == 1
           && request.resource.data.startedAt == request.time;
-        allow update: if isAdmin() && eventReady() && validDelivery(request.resource.data) && (
-          (resource.data.state == 'sending' && request.resource.data.state in ['accepted', 'failed', 'uncertain']
+        allow update: if hasPermission('santa.mail') && validDelivery(request.resource.data) && (
+          (eventReady(true) && resource.data.state == 'sending' && request.resource.data.state in ['accepted', 'failed', 'uncertain']
             && request.resource.data.attemptId == resource.data.attemptId
             && request.resource.data.attempts == resource.data.attempts
             && request.resource.data.startedAt == resource.data.startedAt
             && request.resource.data.provider == resource.data.provider) ||
-          (request.resource.data.state == 'sending'
+          (eventReady(false) && request.resource.data.state == 'sending'
             && (resource.data.state != 'sending' || request.time >= resource.data.startedAt + duration.value(90, 's'))
             && request.resource.data.attemptId != resource.data.attemptId
             && request.resource.data.attempts == resource.data.attempts + 1
@@ -122,9 +160,9 @@ service cloud.firestore {
           && data.title == event.title && data.exchangeDate == event.exchangeDate
           && data.budget == event.budget && data.notes == event.notes;
       }
-      allow get: if isAdmin() || activeCard();
+      allow get: if hasPermission('santa.view') || activeCard();
       allow list: if false;
-      allow create: if isAdmin() && cardMatchesDraw();
+      allow create: if hasPermission('santa.manage') && cardMatchesDraw();
       allow update, delete: if false;
     }
     // Live quiz: private authoring, public stage, capability-protected answers.
@@ -145,15 +183,16 @@ service cloud.firestore {
       // Required field reads plus size == 4 reject missing or extra keys.
       return q.size() == 4
         && q.prompt.matches('(?s).{0,500}')
-        && options is list && count >= 2 && count <= 5
+        && options is list && count in [2, 3, 4, 5]
         && correct is int && correct >= -1 && correct < count
-        && seconds is int && seconds >= 10 && seconds <= 90;
+        // Same integer 10–90 range, expressed compactly to leave room for profile checks.
+        && seconds is int && string(seconds).matches('([1-8][0-9]|90)');
     }
     match /quizEvents/{code} {
       function validQuestions(questions) {
         let count = questions.size();
-        return questions is list && count >= 1 && count <= 10
-          && quizQuestion(questions[0])
+        // validEvent already checked the list type and its 1–10 bounds.
+        return quizQuestion(questions[0])
           && (count <= 1 || quizQuestion(questions[1]))
           && (count <= 2 || quizQuestion(questions[2]))
           && (count <= 3 || quizQuestion(questions[3]))
@@ -170,12 +209,13 @@ service cloud.firestore {
           && d.status in ['draft', 'live', 'finished', 'archived']
           && d.revision is int && d.updatedAt == request.time;
       }
-      allow read: if isAdmin();
-      allow create: if isAdmin() && validEvent(request.resource.data)
-        && validQuestions(request.resource.data.questions)
+      allow read: if hasPermission('quiz.manage');
+      // Share authorization and shape checks across set/update to keep ten-question drafts within budget.
+      allow create, update: if hasPermission('quiz.manage') && validEvent(request.resource.data) && (
+        (request.method == 'create' && validQuestions(request.resource.data.questions)
         && request.resource.data.status == 'draft' && request.resource.data.revision == 0
-        && request.resource.data.createdBy == request.auth.uid && request.resource.data.createdAt == request.time;
-      allow update: if isAdmin() && validEvent(request.resource.data)
+        && request.resource.data.createdBy == request.auth.uid && request.resource.data.createdAt == request.time)
+        || (request.method == 'update'
         && request.resource.data.createdBy == resource.data.createdBy
         && request.resource.data.createdAt == resource.data.createdAt
         && request.resource.data.revision == resource.data.revision + 1
@@ -185,14 +225,15 @@ service cloud.firestore {
             && ((resource.data.status == 'draft' && request.resource.data.status == 'live')
               || (resource.data.status == 'live' && request.resource.data.status == 'finished')
               || (request.resource.data.status == 'archived')
-              || (resource.data.status == 'archived' && request.resource.data.status == 'draft'))));
+              || (resource.data.status == 'archived' && request.resource.data.status == 'draft')))))
+      );
       allow delete: if false;
     }
     match /quizRooms/{code} {
       function room() { return get(/databases/$(database)/documents/quizRooms/$(code)).data; }
       function active() { return quizCode(code) && room().status != 'archived'; }
       function lobby() { return quizCode(code) && room().status == 'lobby'; }
-      function canReset() { return isAdmin() && room().status == 'archived'; }
+      function canReset() { return hasPermission('quiz.manage') && room().status == 'archived'; }
       function validRoom(d) {
         return quizCode(code) && d.keys().hasOnly(['title', 'status', 'questionIndex', 'questionCount', 'question', 'startedAt', 'correctIndex', 'answerCounts', 'leaderboard', 'createdBy', 'createdAt', 'updatedAt'])
           && text(d.title, 100) && d.status in ['lobby', 'question', 'closing', 'reveal', 'ranking', 'finished', 'archived']
@@ -208,20 +249,20 @@ service cloud.firestore {
             || (d.status in ['reveal', 'ranking', 'finished'] && d.question != null && d.correctIndex is int && d.correctIndex >= 0 && d.correctIndex < d.question.options.size()));
       }
       allow get: if quizCode(code);
-      allow list: if isAdmin();
-      allow create: if isAdmin() && validRoom(request.resource.data)
+      allow list: if hasPermission('quiz.manage');
+      allow create: if hasPermission('quiz.manage') && validRoom(request.resource.data)
         && getAfter(/databases/$(database)/documents/quizEvents/$(code)).data.status == 'live'
         && request.resource.data.get('questionCount', 8) == getAfter(/databases/$(database)/documents/quizEvents/$(code)).data.questions.size()
         && request.resource.data.status == 'lobby' && request.resource.data.questionIndex == -1
         && request.resource.data.question == null && request.resource.data.startedAt == null
         && request.resource.data.leaderboard.size() == 0 && request.resource.data.createdAt == request.time;
-      allow update: if isAdmin() && validRoom(request.resource.data)
+      allow update: if hasPermission('quiz.manage') && validRoom(request.resource.data)
         && (request.resource.data.get('questionCount', 8) == resource.data.get('questionCount', 8)
           || (resource.data.status == 'archived' && request.resource.data.status == 'lobby'))
         && request.resource.data.createdAt == resource.data.createdAt && request.resource.data.createdBy == resource.data.createdBy;
       allow delete: if false;
       match /players/{playerId} {
-        allow read: if isAdmin() || active();
+        allow read: if hasPermission('quiz.manage') || active();
         allow create: if lobby() && playerId.matches('^[a-f0-9]{32}$')
           && request.resource.data.keys().hasOnly(['name', 'joinedAt'])
           && text(request.resource.data.name, 32) && request.resource.data.name.size() >= 2
@@ -234,7 +275,7 @@ service cloud.firestore {
         allow delete: if canReset();
       }
       match /credentials/{playerId} {
-        allow read: if isAdmin();
+        allow read: if hasPermission('quiz.manage');
         allow create: if lobby() && playerId.matches('^[a-f0-9]{32}$')
           && request.resource.data.keys().hasOnly(['token', 'createdAt'])
           && request.resource.data.token.matches('^[a-f0-9]{64}$') && request.resource.data.createdAt == request.time
@@ -243,8 +284,8 @@ service cloud.firestore {
         allow delete: if canReset();
       }
       match /names/{nameKey} {
-        allow get: if isAdmin() || active();
-        allow list: if isAdmin();
+        allow get: if hasPermission('quiz.manage') || active();
+        allow list: if hasPermission('quiz.manage');
         allow create: if lobby() && request.resource.data.keys().hasOnly(['playerId', 'createdAt'])
           && request.resource.data.createdAt == request.time
           && nameKey == getAfter(/databases/$(database)/documents/quizRooms/$(code)/players/$(request.resource.data.playerId)).data.name.lower()
@@ -253,8 +294,8 @@ service cloud.firestore {
         allow delete: if canReset();
       }
       match /stats/registration {
-        allow read: if isAdmin() || active();
-        allow create: if isAdmin() && request.resource.data.keys().hasOnly(['count', 'lastPlayerId', 'updatedAt'])
+        allow read: if hasPermission('quiz.manage') || active();
+        allow create: if hasPermission('quiz.manage') && request.resource.data.keys().hasOnly(['count', 'lastPlayerId', 'updatedAt'])
           && request.resource.data.count == 0 && request.resource.data.lastPlayerId == '' && request.resource.data.updatedAt == request.time;
         allow update: if lobby() && request.resource.data.keys().hasOnly(['count', 'lastPlayerId', 'updatedAt'])
           && request.resource.data.count is int && request.resource.data.count == resource.data.count + 1
@@ -263,12 +304,12 @@ service cloud.firestore {
         allow delete: if canReset();
       }
       match /rounds/{index} {
-        allow read, create, update: if isAdmin();
+        allow read, create, update: if hasPermission('quiz.manage');
         allow delete: if canReset();
         match /answers/{token} {
           // A 256-bit capability stays only in its owner's browser, never in a QR or player list.
-          allow get: if isAdmin() || (active() && token.matches('^[a-f0-9]{64}$'));
-          allow list: if isAdmin();
+          allow get: if hasPermission('quiz.manage') || (active() && token.matches('^[a-f0-9]{64}$'));
+          allow list: if hasPermission('quiz.manage');
           allow create: if quizCode(code) && token.matches('^[a-f0-9]{64}$')
             && request.resource.data.keys().hasOnly(['playerId', 'selectedIndex', 'submittedAt'])
             && request.resource.data.playerId.matches('^[a-f0-9]{32}$')
@@ -284,47 +325,77 @@ service cloud.firestore {
         }
       }
     }
+    match /accessProfiles/{profileId} {
+      function validProfile(data) {
+        return profileId.matches('^[a-zA-Z0-9_-]{1,80}$')
+          && data.keys().hasOnly(['name', 'description', 'permissions', 'active', 'revision', 'createdBy', 'createdAt', 'updatedAt'])
+          && text(data.name, 60) && data.name.matches('.*[^ ].*')
+          && data.description is string && data.description.size() <= 200
+          && data.permissions is list && data.permissions.size() > 0
+          && data.permissions.size() == data.permissions.toSet().size()
+          && data.permissions.hasOnly(allPermissions())
+          && (!data.permissions.hasAny(['reports.delete']) || data.permissions.hasAll(['reports.view']))
+          && (!data.permissions.hasAny(['santa.manage', 'santa.mail']) || data.permissions.hasAll(['santa.view']))
+          && data.active is bool && data.revision is int && data.revision >= 0
+          && data.createdBy is string && data.createdAt is timestamp && data.updatedAt == request.time;
+      }
+      allow get: if hasPermission('access.manage') || (verified() && membershipExists() && membership().active == true && membership().get('profileId', '') == profileId);
+      allow list: if hasPermission('access.manage');
+      allow create: if hasPermission('access.manage') && validProfile(request.resource.data)
+        && canGrant(request.resource.data.permissions) && request.resource.data.revision == 0
+        && request.resource.data.createdBy == request.auth.uid && request.resource.data.createdAt == request.time;
+      allow update: if hasPermission('access.manage') && validProfile(request.resource.data)
+        && (isOwner() || membership().get('profileId', '') != profileId)
+        && canGrant(resource.data.permissions) && canGrant(request.resource.data.permissions)
+        && request.resource.data.revision == resource.data.revision + 1
+        && request.resource.data.createdBy == resource.data.createdBy && request.resource.data.createdAt == resource.data.createdAt;
+      allow delete: if false;
+    }
     match /administrators/{email} {
-      allow read: if isAdmin() || (
-        request.auth != null &&
-        request.auth.token.get('email_verified', false) == true &&
-        request.auth.token.get('email', '').lower() == email
-      );
-      allow create: if isAdmin()
-        && request.resource.data.keys().hasOnly(['email', 'role', 'active', 'createdBy', 'createdAt'])
+      allow get: if hasPermission('access.manage') || (request.auth != null
+        && (verified() || request.auth.token.get('admin', false) == true)
+        && request.auth.token.get('email', '').lower() == email);
+      allow list: if hasPermission('access.manage');
+      allow create: if hasPermission('access.manage')
+        && request.resource.data.keys().hasOnly(['email', 'role', 'active', 'profileId', 'revision', 'createdBy', 'createdAt', 'updatedAt'])
         && request.resource.data.email == email && email == email.lower()
+        && email != request.auth.token.get('email', '').lower()
         && text(email, 254) && email.matches('^[^@ /]+@[^@ /]+[.][^@ /]+$')
         && request.resource.data.role == 'admin' && request.resource.data.active == true
-        && request.resource.data.createdBy == request.auth.uid
-        && request.resource.data.createdAt == request.time;
-      allow update: if isAdmin() && resource.data.role == 'admin'
+        && validAssignedProfile(request.resource.data) && canGrant(assignedPermissions(request.resource.data))
+        && request.resource.data.get('revision', 0) == 0
+        && request.resource.data.createdBy == request.auth.uid && request.resource.data.createdAt == request.time
+        && request.resource.data.get('updatedAt', request.time) == request.time;
+      allow update: if hasPermission('access.manage') && resource.data.role == 'admin'
         && email != request.auth.token.get('email', '').lower()
-        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['active', 'updatedAt'])
-        && request.resource.data.active is bool
-        && request.resource.data.updatedAt == request.time;
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['active', 'profileId', 'revision', 'updatedAt'])
+        && request.resource.data.active is bool && request.resource.data.updatedAt == request.time
+        && validAssignedProfile(request.resource.data)
+        && canGrant(assignedPermissions(resource.data)) && canGrant(assignedPermissions(request.resource.data))
+        && (!request.resource.data.keys().hasAny(['revision']) || request.resource.data.revision == resource.data.get('revision', 0) + 1);
       allow delete: if false;
     }
     match /news/{id} {
       allow read: if true;
-      allow create, update: if isAdmin()
+      allow create, update: if ((request.method == 'create' && hasPermission('news.create')) || (request.method == 'update' && hasPermission('news.edit')))
         && request.resource.data.keys().hasOnly(['title', 'desc', 'type', 'date', 'timestamp'])
         && text(request.resource.data.title, 100)
         && text(request.resource.data.desc, 10000)
         && request.resource.data.type in ['anuncio', 'logro', 'cumpleaños']
         && text(request.resource.data.date, 100)
         && text(request.resource.data.timestamp, 50);
-      allow delete: if isAdmin();
+      allow delete: if hasPermission('news.delete');
     }
     match /directory/{id} {
       allow read: if true;
-      allow create, update: if isAdmin()
+      allow create, update: if ((request.method == 'create' && hasPermission('directory.create')) || (request.method == 'update' && hasPermission('directory.edit')))
         && request.resource.data.keys().hasOnly(['department', 'name', 'email', 'color'])
         && text(request.resource.data.department, 100)
         && text(request.resource.data.name, 100)
         && text(request.resource.data.email, 254)
         && request.resource.data.email.matches('^[^@ ]+@[^@ ]+[.][^@ ]+$')
         && request.resource.data.color.matches('^#[0-9a-fA-F]{6}$');
-      allow delete: if isAdmin();
+      allow delete: if hasPermission('directory.delete');
     }
     match /christmasWalls/{year}/greetings/{id} {
       function validGreeting(data) {
@@ -339,15 +410,16 @@ service cloud.firestore {
           && data.message.matches('(?s).*[^ \\t\\r\\n].*')
           && data.visible == true && data.createdAt == request.time;
       }
-      allow get, list: if isAdmin() || resource.data.visible == true;
+      allow get, list: if hasPermission('wall.moderate') || resource.data.visible == true;
       allow create: if validGreeting(request.resource.data);
-      allow update: if isAdmin()
+      allow update: if hasPermission('wall.moderate')
         && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['visible', 'moderatedAt'])
         && request.resource.data.visible is bool && request.resource.data.moderatedAt == request.time;
       allow delete: if false;
     }
     match /feedbacks/{id} {
-      allow read, delete: if isAdmin();
+      allow read: if hasPermission('reports.view');
+      allow delete: if hasPermission('reports.delete');
       allow create: if request.resource.data.keys().hasOnly(['isAnonymous', 'name', 'department', 'message', 'date', 'createdAt'])
         && request.resource.data.isAnonymous is bool
         && text(request.resource.data.name, 100)
@@ -366,7 +438,7 @@ service cloud.firestore {
         && request.resource.data.score is int
         && request.resource.data.score >= 0 && request.resource.data.score <= 10000000
         && text(request.resource.data.date, 50);
-      allow delete: if isAdmin();
+      allow delete: if hasPermission('scores.manage');
       allow update: if false;
     }
     match /{document=**} {

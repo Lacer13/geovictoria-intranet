@@ -1,0 +1,206 @@
+.santa-pairings {
+  margin: 20px 0;
+}
+.santa-pairings-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  background: var(--muted-surface);
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+.santa-pairings-notice > svg {
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+.santa-pairings-notice p {
+  margin: 0;
+  flex: 1;
+  line-height: 1.7;
+}
+.santa-pairings-notice strong {
+  display: block;
+}
+.santa-pairings .btn {
+  min-height: 44px;
+  gap: 8px;
+}
+.santa-pairings-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 200px;
+  gap: 14px;
+  align-items: end;
+}
+.santa-pairings-controls .search-field {
+  margin: 0;
+  min-height: 48px;
+}
+.santa-pairings-controls input {
+  min-width: 0;
+}
+.santa-pairings-sort {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.santa-pairings-sort .input-field {
+  min-height: 48px;
+  margin: 0;
+  width: 100%;
+}
+.santa-pairings-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin: 14px 0;
+}
+.santa-pairings-toolbar p {
+  margin: 0;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.santa-pairings-toolbar > label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.santa-pairings-toolbar input {
+  accent-color: var(--forest);
+  width: 18px;
+  height: 18px;
+}
+.santa-pairings-toolbar > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.santa-pairings-scroll {
+  max-height: min(65vh, 650px);
+  overflow: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--surface-color);
+  overscroll-behavior: contain;
+}
+.santa-pairings-scroll:focus-visible {
+  outline: 2px solid var(--forest);
+  outline-offset: 3px;
+}
+.santa-pairings table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+}
+.santa-pairings th,
+.santa-pairings td {
+  padding: 12px 16px;
+  width: 50%;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: top;
+  overflow-wrap: anywhere;
+  line-height: 1.5;
+}
+.santa-pairings thead th {
+  position: sticky;
+  top: 0;
+  background: var(--muted-surface);
+  z-index: 1;
+  font-size: 14px;
+  color: var(--forest);
+  border-bottom-width: 2px;
+}
+.santa-pairings tbody th {
+  font-weight: 600;
+}
+.santa-pairings tbody th > span:last-child {
+  display: inline-block;
+  max-width: calc(100% - 32px);
+  vertical-align: top;
+}
+.santa-pairing-position {
+  display: inline-block;
+  width: 25px;
+  margin-right: 6px;
+  color: var(--text-muted);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+}
+.santa-pairings tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--forest) 3%, var(--surface-color));
+}
+.santa-pairings tbody tr:hover {
+  background: color-mix(in srgb, var(--forest) 7%, var(--surface-color));
+}
+.santa-pairings tbody tr:last-child > * {
+  border-bottom: 0;
+}
+.santa-pairings small {
+  display: block;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--text-muted);
+  padding-top: 3px;
+}
+.santa-pairings > .field-caption {
+  margin-top: 12px;
+}
+.santa-pairings-status {
+  color: var(--forest);
+  font-size: 14px;
+}
+@media (max-width: 600px) {
+  .santa-pairings-notice {
+    flex-wrap: wrap;
+    padding: 14px;
+  }
+  .santa-pairings-notice p {
+    flex-basis: calc(100% - 32px);
+    font-size: 14px;
+  }
+  .santa-pairings-notice .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .santa-pairings-controls {
+    grid-template-columns: 1fr;
+  }
+  .santa-pairings-controls .search-field input,
+  .santa-pairings-sort select {
+    font-size: 16px;
+  }
+  .santa-pairings-toolbar > div {
+    width: 100%;
+  }
+  .santa-pairings-toolbar > div .btn {
+    flex: 1;
+    justify-content: center;
+    padding: 10px;
+    font-size: 13px;
+  }
+  .santa-pairings th,
+  .santa-pairings td {
+    padding: 12px 10px;
+    font-size: 14px;
+  }
+  .santa-pairing-position {
+    width: 20px;
+    margin-right: 4px;
+    font-size: 11px;
+  }
+  .santa-pairings tbody th > span:last-child {
+    max-width: calc(100% - 24px);
+  }
+}

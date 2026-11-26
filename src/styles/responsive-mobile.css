@@ -1,0 +1,595 @@
+@media (max-width: 720px) {
+  .sidebar {
+    position: fixed;
+    width: 265px;
+    height: 100dvh;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    transition: transform 0.2s;
+    visibility: hidden;
+    padding: 25px 19px 0;
+  }
+  .sidebar.is-open {
+    transform: translateX(0);
+    visibility: visible;
+  }
+  .sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 44;
+    background: #10251d66;
+    backdrop-filter: blur(2px);
+    border: 0;
+  }
+  .sidebar-brand {
+    padding-left: 12px;
+  }
+  .sidebar-brand img {
+    width: 175px;
+  }
+  .sidebar-brand .mobile-only {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 24px;
+  }
+  .sidebar-brand > span {
+    font-size: 8px;
+  }
+  .nav-item {
+    font-size: 11px;
+    gap: 10px;
+    min-height: 43px;
+  }
+  .nav-item.active:before {
+    left: -19px;
+  }
+  .nav-caption {
+    font-size: 8px;
+  }
+  .nav-item svg {
+    width: 19px;
+  }
+  .workspace-label {
+    font-size: 11px;
+  }
+  .workspace-badge {
+    font-size: 8px;
+  }
+  .sidebar-note p {
+    font-size: 10px;
+  }
+  .mobile-only {
+    display: inline-flex;
+  }
+  .topbar {
+    height: 64px;
+    padding: 0 17px;
+    gap: 8px;
+  }
+  .breadcrumb {
+    font-size: 10px;
+    gap: 9px;
+    min-width: 0;
+  }
+  .breadcrumb-home,
+  .breadcrumb > svg {
+    display: none;
+  }
+  .breadcrumb strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .breadcrumb .icon-button {
+    margin-left: -5px;
+  }
+  .topbar-actions {
+    gap: 5px;
+  }
+  .header-avatar {
+    display: none;
+  }
+  .global-search {
+    width: 32px;
+    height: 32px;
+    justify-content: center;
+  }
+  .topbar-actions .icon-button {
+    width: 30px;
+  }
+  .main-content {
+    padding: 25px 20px;
+  }
+  .welcome-row {
+    margin-bottom: 22px;
+  }
+  .welcome-row h1 {
+    font-size: 28px;
+  }
+  .welcome-eyebrow {
+    font-size: 7px;
+    letter-spacing: 0.9px;
+  }
+  .welcome-row p {
+    font-size: 10px;
+    max-width: 310px;
+    line-height: 1.8;
+  }
+  .hero-copy {
+    padding: 25px;
+    max-width: 90%;
+  }
+  .hero-copy h2 {
+    font-size: 29px;
+    margin-top: 17px;
+  }
+  .hero-copy p {
+    font-size: 10px;
+    max-width: 255px;
+  }
+  .christmas-hero {
+    min-height: 360px;
+  }
+  .hero-art {
+    width: 70%;
+    height: auto;
+    right: -42px;
+    top: auto;
+    bottom: -3px;
+    max-height: 230px;
+    opacity: 0.5;
+    z-index: 0;
+  }
+  .hero-copy .btn {
+    font-size: 10px;
+  }
+  .hero-copy .hero-footnote {
+    font-size: 8px;
+    margin-top: 16px;
+    max-width: 200px;
+  }
+  .hero-edition {
+    font-size: 5px;
+    right: 15px;
+    bottom: 13px;
+  }
+  .section-title {
+    margin-top: 25px;
+    align-items: start;
+  }
+  .section-title h2 {
+    font-size: 13px;
+  }
+  .section-title > span {
+    display: none;
+  }
+  .quick-links {
+    gap: 11px;
+  }
+  .quick-card {
+    padding: 16px 14px;
+  }
+  .quick-card h3 {
+    font-size: 10px;
+  }
+  .quick-card p {
+    font-size: 8px;
+    white-space: normal;
+  }
+  .quick-arrow {
+    right: 12px;
+    top: 17px;
+  }
+  .dashboard-columns {
+    margin-top: 23px;
+  }
+  .dashboard-secondary {
+    gap: 15px;
+  }
+  .countdown-card {
+    padding: 18px 14px;
+  }
+  .calendar-panel .panel-heading h2 {
+    font-size: 10px;
+  }
+  .calendar-panel .panel-heading {
+    padding: 15px 12px 0;
+  }
+  .calendar-month {
+    margin: 12px 12px 10px;
+  }
+  .calendar-grid {
+    padding: 0 8px 12px;
+  }
+  .calendar-days > button {
+    height: 24px;
+    width: 24px;
+  }
+  .calendar-weekdays,
+  .calendar-days {
+    gap: 3px;
+  }
+  .countdown-card {
+    min-height: 235px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .countdown-number {
+    font-size: 44px;
+  }
+  .countdown-card > .text-link {
+    margin-top: 13px;
+  }
+  .countdown-card > span:not(.countdown-star) {
+    font-size: 6px;
+    line-height: 1.8;
+  }
+  .countdown-card > p {
+    font-size: 9px;
+  }
+  .leaderboard-panel {
+    grid-column: span 2;
+  }
+  .app-footer {
+    margin: 0 20px;
+    font-size: 8px;
+    flex-direction: column;
+    gap: 9px;
+    padding: 20px;
+  }
+  .season-news-art {
+    width: 90px;
+    min-height: 120px;
+  }
+  .season-news h3 {
+    font-size: 12px;
+  }
+  .season-news p {
+    font-size: 10px;
+  }
+  .category-label {
+    font-size: 6px;
+  }
+  .news-content {
+    padding: 18px;
+  }
+  .news-bottom-link {
+    padding: 13px 15px;
+    line-height: 1.7;
+  }
+  .news-bottom-link strong {
+    display: block;
+  }
+  .wellbeing-card {
+    padding: 17px;
+    flex-wrap: wrap;
+  }
+  .wellbeing-card h3 {
+    font-size: 11px;
+  }
+  .wellbeing-card p {
+    font-size: 9px;
+  }
+  .wellbeing-card > div {
+    flex: 1;
+    min-width: 170px;
+  }
+  .wellbeing-card .btn {
+    margin-left: 73px;
+  }
+  .page-heading {
+    margin: 0 0 24px;
+  }
+  .page-heading h1 {
+    font-size: 27px;
+    line-height: 1.4;
+    letter-spacing: -1px;
+  }
+  .page-heading > p {
+    font-size: 12px;
+  }
+  .page-heading .eyebrow {
+    font-size: 8px;
+  }
+  .directory-toolbar {
+    padding: 12px;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .area-select {
+    max-width: none;
+  }
+  .contact-grid,
+  .knowledge-grid,
+  .team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .contact-card {
+    padding: 17px;
+  }
+  .contact-top {
+    flex-direction: column;
+    align-items: start;
+    gap: 12px;
+  }
+  .contact-card h2 {
+    font-size: 14px;
+  }
+  .contact-card > p {
+    font-size: 10px;
+  }
+  .contact-email {
+    font-size: 9px;
+    margin: 13px 0;
+  }
+  .contact-actions {
+    gap: 3px;
+  }
+  .contact-actions .btn {
+    font-size: 0;
+    gap: 0;
+  }
+  .contact-actions .btn svg {
+    width: 17px;
+    height: 17px;
+  }
+  .contact-actions .btn > span {
+    display: none;
+  }
+  .contact-actions > .icon-button {
+    width: 27px;
+  }
+  .help-banner {
+    padding: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .help-banner > div {
+    min-width: 180px;
+  }
+  .help-banner > .text-link {
+    width: 100%;
+    margin-top: 7px;
+    font-size: 11px;
+  }
+  .help-banner > svg {
+    display: none;
+  }
+  .knowledge-toolbar {
+    gap: 10px;
+    flex-direction: column;
+  }
+  .knowledge-toolbar > .btn {
+    align-self: start;
+    font-size: 10px;
+  }
+  .filter-pills {
+    gap: 6px;
+    margin-top: 20px;
+  }
+  .filter-pills > button {
+    font-size: 9px;
+    padding: 7px 10px;
+  }
+  .knowledge-card {
+    padding: 17px;
+  }
+  .knowledge-card h2 {
+    font-size: 13px;
+  }
+  .knowledge-card p {
+    font-size: 10px;
+    margin-bottom: 16px;
+  }
+  .knowledge-card .category-label {
+    font-size: 7px;
+  }
+  .knowledge-card-bottom {
+    font-size: 8px;
+  }
+  .knowledge-card-top .quick-icon {
+    width: 33px;
+    height: 33px;
+  }
+  .knowledge-card-top .quick-icon svg {
+    width: 18px;
+  }
+  .article-content {
+    padding: 22px;
+  }
+  .article-content > section {
+    gap: 12px;
+    margin-bottom: 25px;
+  }
+  .article-content h2 {
+    font-size: 16px;
+  }
+  .article-content p {
+    font-size: 12px;
+  }
+  .article-note p {
+    font-size: 9px;
+  }
+  .team-intro {
+    padding: 24px;
+    gap: 16px;
+  }
+  .team-intro > div:nth-child(2) {
+    flex: 1;
+    min-width: 170px;
+  }
+  .team-intro h2 {
+    font-size: 20px;
+  }
+  .team-stat {
+    margin-left: 0;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .team-stat strong {
+    font-size: 25px;
+  }
+  .team-card {
+    padding: 18px;
+  }
+  .team-card h2 {
+    font-size: 15px;
+  }
+  .team-people > div {
+    font-size: 10px;
+  }
+  .team-card .text-link {
+    font-size: 9px;
+  }
+  .inline-notice {
+    font-size: 9px;
+    align-items: start;
+    line-height: 1.8;
+  }
+  .feedback-form {
+    padding: 20px;
+  }
+  .feedback-form .panel-heading {
+    flex-wrap: wrap;
+    padding-bottom: 20px;
+  }
+  .feedback-form .panel-heading h2 {
+    font-size: 16px;
+  }
+  .anonymous-option {
+    padding: 13px;
+    gap: 10px;
+  }
+  .anonymous-option strong {
+    font-size: 10px;
+  }
+  .anonymous-option small {
+    font-size: 8px;
+  }
+  .anonymous-option > svg {
+    width: 18px;
+  }
+  .form-two-columns {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .field-caption {
+    font-size: 8px;
+  }
+  .feedback-aside h2 {
+    font-size: 23px;
+  }
+  .christmas-page-hero {
+    min-height: 380px;
+  }
+  .christmas-page-hero .hero-copy {
+    padding: 25px;
+    max-width: 100%;
+  }
+  .christmas-page-hero .hero-copy h2 {
+    font-size: 29px;
+  }
+  .christmas-page-hero .hero-copy > p {
+    max-width: 255px;
+  }
+  .christmas-page-hero .hero-art {
+    opacity: 0.35;
+  }
+  .christmas-page-hero .hero-copy > .text-link {
+    font-size: 8px;
+    max-width: 220px;
+    line-height: 1.8;
+  }
+  .christmas-section-title h2 {
+    font-size: 21px;
+    line-height: 1.5;
+  }
+  .christmas-section-title .eyebrow {
+    font-size: 7px;
+  }
+  .idea-card {
+    padding: 23px;
+  }
+  .idea-card p {
+    font-size: 12px;
+  }
+  .idea-card .text-link {
+    font-size: 11px;
+  }
+  .greeting-builder {
+    padding: 23px;
+    gap: 30px;
+  }
+  .greeting-builder h2 {
+    font-size: 23px;
+  }
+  .greeting-preview {
+    padding: 30px 25px;
+  }
+  .greeting-preview h3 {
+    font-size: 24px;
+  }
+  .qr-panel {
+    flex-direction: column;
+    align-items: start;
+    padding: 24px;
+  }
+  .qr-panel h2 {
+    font-size: 23px;
+  }
+  .qr-code {
+    align-self: center;
+  }
+  .qr-actions .btn {
+    font-size: 10px;
+  }
+  .qr-actions .text-link {
+    font-size: 10px;
+  }
+  .modal-backdrop {
+    padding: 8vh 12px 20px;
+  }
+  .modal {
+    padding: 21px;
+  }
+  .modal-heading h2 {
+    font-size: 18px;
+  }
+  .search-hint > span {
+    display: none;
+  }
+  .search-results > button {
+    padding: 12px 5px;
+  }
+  .search-field input {
+    font-size: 12px;
+  }
+  .admin-login {
+    padding: 25px;
+    margin: 15px auto;
+  }
+  .admin-top {
+    align-items: start;
+    flex-direction: column;
+  }
+  .admin-top h1 {
+    font-size: 23px;
+  }
+  .admin-tabs .btn {
+    font-size: 10px;
+  }
+  .admin-grid {
+    gap: 20px;
+  }
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+  .bento-span-2 {
+    grid-column: auto;
+  }
+}

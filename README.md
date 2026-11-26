@@ -56,15 +56,19 @@ Antes de publicar esta versión en producción, el responsable de Firebase debe:
 
 ### Añadir y retirar administradores
 
-Desde **Administración → Administradores**, una persona autorizada puede:
+Desde **Administración → Personas y perfiles**, una persona con permiso de gestionar accesos puede:
 
-- Autorizar un correo de trabajo y copiar su enlace de activación.
+- Crear o duplicar perfiles y elegir sus permisos por módulo y acción, sin cambiar código.
+- Autorizar un correo de trabajo, asignarle un perfil y copiar su enlace de activación.
+- Reasignar personas y habilitar o deshabilitar perfiles con efecto en las sesiones abiertas.
 - Retirar el acceso de otros administradores y reactivarlo después.
 - Consultar la cuenta principal y su estado protegido.
 
 La persona invitada crea su propia cuenta desde el enlace, verifica su correo y vuelve a ingresar. Si ya tiene una cuenta o se ha preparado su acceso sin contraseña, utiliza **Activar o recuperar acceso**. Los enlaces de verificación y recuperación se solicitan expresamente desde la pantalla; autorizar a alguien no envía correos automáticamente. No se comparte una contraseña entre administradores.
 
-Los administradores no pueden desactivar la cuenta principal ni su propio acceso, asignarse el rol `owner`, modificar los campos de una autorización o eliminar registros de autorización. Las reglas comprueban la pertenencia activa en cada operación protegida. La pantalla también escucha los cambios de acceso para cerrar la sesión si se revoca una autorización.
+Los administradores no pueden desactivar la cuenta principal ni su propio acceso, asignarse el rol `owner` o eliminar autorizaciones. Tampoco pueden modificar su propio perfil ni otorgar permisos que no tienen. Las reglas comprueban los permisos vigentes en cada operación protegida. La pantalla escucha los cambios y bloquea el panel y sus editores cuando se revoca una autorización. Los administradores anteriores sin perfil conservan su acceso completo hasta que se les asigne uno. Consulta [la guía de perfiles y permisos](docs/perfiles-y-permisos.md).
+
+La gestión de perfiles está publicada desde el 26 de noviembre de 2026, junto con la tabla rápida de parejas y la elección de contraseña propia en el primer ingreso de las cuentas preparadas. La [guía de perfiles](docs/perfiles-y-permisos.md) detalla la configuración y la [revisión de arquitectura](docs/arquitectura.md) describe cómo se separaron las pantallas administrativas, Amigo secreto, Concursos y los estilos globales.
 
 Las reglas restringen la lectura y eliminación de reportes a administradores, validan campos y tamaños, restringen la edición de noticias/contactos y bloquean colecciones desconocidas. Noticias, contactos y ranking **siguen siendo de lectura pública**, conforme al acceso de la aplicación actual. El ranking admite puntajes enviados por clientes; no es una competencia con validación de servidor ni un sistema antifraude. Una intranet privada para todos los colaboradores requeriría añadir identidad corporativa y adaptar estas lecturas.
 
@@ -79,6 +83,8 @@ Desde **Administración → Amigo secreto** se pueden guardar grupos de 2 a 100 
 El panel registra cada intento y permite consultar el respaldo, descargarlo o recuperar el enlace privado de una persona. Los correos requieren confirmación del administrador; guardar o sortear no los envía. Consulta [la guía de configuración y operación](docs/amigo-secreto.md).
 
 La preparación separa los detalles del intercambio y las personas. Señala correos incompletos o repetidos y avisa antes de descartar cambios al cambiar de sorteo. La entrega tiene un resumen, progreso y filtros por pendientes, aceptados y envíos que requieren revisión. Los participantes pueden pegar su enlace desde la página pública para abrir su invitación.
+
+Las invitaciones privadas también incluyen un [saludo navideño de los guardianes](docs/saludos-navidenos-invitaciones.md): uno de los doce personajes decora un árbol y saluda junto a un reno. Cambia al volver a entrar, puede pausarse y respeta la preferencia de movimiento reducido. La consulta del resultado sigue disponible durante la bienvenida.
 
 La bienvenida v4 anima por separado el trineo, la cabeza y la mano de VictorIA. Conserva su cabeza y dos manos flotantes sin torso, con una llegada desde el fondo, desaceleración, balanceo, nieve y destellos. Por pedido del usuario, la voz propia se grabará después: «¡Jo, jo, jo! ¡Feliz Navidad!». Mientras tanto se publica con música original de campanas, celesta y cascabeles. Comienza sin sonido; **Ver con música** lo reinicia con audio. Tiene subtítulos en español que pueden ocultarse, y al terminar permanece abierto para repetirlo. Con movimiento reducido o los efectos pausados, espera a que la persona pulse reproducir. Las fuentes, prompts y el proceso de render están en [la guía del video](docs/victoria-navidad.md).
 

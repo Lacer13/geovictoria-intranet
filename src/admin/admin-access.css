@@ -1,0 +1,507 @@
+.admin-shell {
+  display: grid;
+  gap: 24px;
+}
+.admin-shell .admin-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+.admin-shell .admin-top h1 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(24px, 3vw, 30px);
+}
+.admin-shell .admin-top p {
+  margin: 9px 0;
+  overflow-wrap: anywhere;
+}
+.admin-shell .admin-top strong {
+  font-weight: 500;
+  color: var(--forest);
+}
+.admin-session-exit {
+  display: flex;
+  margin: 18px auto;
+}
+.access-management,
+.admin-records {
+  display: grid;
+  gap: 22px;
+}
+.access-management .admin-management-heading {
+  margin-bottom: 0;
+}
+.access-management .admin-management-heading h2 {
+  font-size: 25px;
+}
+.access-management .admin-management-heading p {
+  font-size: 14px;
+  line-height: 1.8;
+}
+.access-tabs,
+.access-card-actions,
+.access-member-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.access-tabs .btn {
+  min-height: 44px;
+  font-size: 14px;
+}
+.access-tabs .btn > span {
+  border: 1px solid currentColor;
+  padding: 0 7px;
+  border-radius: 12px;
+  font-size: 11px;
+}
+.access-badge {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  padding: 4px 10px;
+  background: var(--muted-surface);
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 12px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.access-badge.active {
+  background: var(--forest-bg);
+  color: var(--forest);
+}
+.access-toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: flex-start;
+  margin-bottom: 22px;
+}
+.access-toolbar h3 {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+.access-toolbar p {
+  font-size: 14px;
+  line-height: 1.8;
+}
+.access-toolbar .btn {
+  min-height: 44px;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.access-search {
+  max-width: none;
+  min-height: 46px;
+  margin: 18px 0;
+}
+.access-search input {
+  min-width: 0;
+  width: 100%;
+  font-size: 14px;
+}
+.access-profile-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.access-profile-card {
+  min-width: 0;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: 16px;
+}
+.access-card-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.access-card-heading > div {
+  min-width: 0;
+}
+.access-card-heading h3 {
+  font-size: 19px;
+  overflow-wrap: anywhere;
+  margin: 0 0 8px;
+}
+.access-profile-card > p {
+  font-size: 14px;
+  line-height: 1.8;
+}
+.access-profile-card > small {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+.access-card-actions {
+  margin-top: auto;
+}
+.access-card-actions .btn {
+  font-size: 13px;
+  min-height: 42px;
+}
+.access-module-tags {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+.access-module-tags span {
+  padding: 4px 9px;
+  border-radius: 7px;
+  background: var(--muted-surface);
+  color: var(--text-muted);
+  font-size: 12px;
+}
+.access-empty {
+  padding: 40px 24px;
+  min-height: 260px;
+}
+.access-empty > svg {
+  color: var(--forest);
+}
+.access-empty p {
+  max-width: 500px;
+  font-size: 14px;
+  line-height: 1.9;
+}
+.access-invite {
+  padding: 26px;
+  border-radius: 16px;
+}
+.access-invite h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+.access-invite > p {
+  font-size: 14px;
+  line-height: 1.8;
+  max-width: 780px;
+}
+.access-invite form {
+  margin-top: 22px;
+}
+.access-invite fieldset {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 16px;
+}
+.access-invite .input-group {
+  margin: 0;
+  min-width: 0;
+}
+.access-invite .input-group > span {
+  font-size: 13px;
+}
+.access-invite .input-field {
+  font-size: 15px;
+  min-height: 46px;
+  width: 100%;
+}
+.access-invite .btn {
+  min-height: 46px;
+  font-size: 14px;
+}
+.access-invite .inline-notice {
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.access-members {
+  display: grid;
+  gap: 12px;
+}
+.access-member {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 22px;
+  border-radius: 14px;
+}
+.access-member-copy {
+  min-width: 0;
+  flex: 1;
+}
+.access-member-copy h3 {
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+.access-member-copy p {
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 5px 0 9px;
+}
+.access-member-actions {
+  justify-content: flex-end;
+}
+.access-member-actions .btn {
+  font-size: 13px;
+  min-height: 44px;
+}
+.access-member-actions .icon-button {
+  width: 44px;
+  height: 44px;
+}
+.access-state {
+  padding: 24px;
+}
+.access-state .btn {
+  margin-top: 16px;
+}
+.access-profile-modal {
+  width: min(850px, calc(100vw - 32px));
+  max-width: 850px;
+}
+.access-intro {
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 22px;
+}
+.access-profile-modal .input-field {
+  font-size: 15px;
+  min-height: 44px;
+}
+.access-profile-modal .input-group {
+  margin-bottom: 20px;
+}
+.access-profile-modal .input-group > span {
+  font-size: 13px;
+}
+.access-permission-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 26px 0 16px;
+}
+.access-permission-heading h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 17px;
+}
+.access-permission-heading > span {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.access-permission-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.access-permission-grid .access-permission-group {
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 10px 16px 14px;
+  margin: 0;
+  min-width: 0;
+}
+.access-permission-group legend {
+  padding: 0 5px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--forest);
+}
+.access-permission-group label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 9px 0;
+  font-size: 13px;
+  line-height: 1.7;
+  cursor: pointer;
+}
+.access-permission-group input,
+.access-switch input {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  accent-color: var(--forest);
+  flex-shrink: 0;
+}
+.access-permission-group label:has(input:disabled) {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+.access-switch {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 14px;
+  margin: 22px 0;
+  cursor: pointer;
+}
+.access-review {
+  margin: 18px 0;
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--gold-soft);
+  font-size: 14px;
+  line-height: 1.8;
+}
+.access-review p {
+  font-size: 14px;
+  line-height: 1.8;
+}
+.access-profile-modal .inline-notice {
+  font-size: 13px;
+  line-height: 1.8;
+  margin-top: 18px;
+}
+.access-profile-modal .modal-actions .btn {
+  min-height: 44px;
+  font-size: 14px;
+}
+.admin-report {
+  padding: 24px;
+  border-radius: 14px;
+}
+.admin-report header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+.admin-report h3 {
+  font-size: 18px;
+}
+.admin-report header p {
+  margin-top: 8px;
+  font-size: 13px;
+}
+.admin-report-message {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: var(--text-main);
+  line-height: 1.9;
+  font-size: 14px;
+}
+.santa-readonly-roster {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  padding: 0;
+}
+.santa-readonly-roster li {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 13px;
+  border-bottom: 1px solid var(--border-color);
+  overflow-wrap: anywhere;
+}
+.santa-readonly-roster li span {
+  color: var(--text-muted);
+}
+@media (max-width: 900px) {
+  .access-invite fieldset {
+    grid-template-columns: 1fr 1fr;
+  }
+  .access-invite fieldset > .btn {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+  .access-member {
+    flex-wrap: wrap;
+  }
+  .access-member-actions {
+    width: 100%;
+  }
+}
+@media (max-width: 640px) {
+  .admin-shell .admin-top {
+    flex-direction: column;
+    gap: 14px;
+  }
+  .admin-shell .admin-top > .btn {
+    align-self: flex-start;
+  }
+  .access-profile-list,
+  .access-permission-grid {
+    grid-template-columns: 1fr;
+  }
+  .access-toolbar {
+    flex-direction: column;
+  }
+  .access-toolbar > .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .access-tabs .btn {
+    flex: 1;
+    justify-content: center;
+  }
+  .access-invite,
+  .access-member,
+  .access-profile-card {
+    padding: 20px;
+  }
+  .access-invite fieldset {
+    grid-template-columns: 1fr;
+  }
+  .access-invite fieldset > .btn {
+    width: 100%;
+    justify-self: stretch;
+  }
+  .access-invite .input-field,
+  .access-profile-modal .input-field {
+    font-size: 16px;
+  }
+  .access-member > .quick-icon {
+    display: none;
+  }
+  .access-member-actions {
+    justify-content: flex-start;
+  }
+  .access-permission-heading {
+    flex-wrap: wrap;
+  }
+}
+
+.admin-password-setup fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.admin-password-setup .input-group {
+  display: grid;
+  gap: 8px;
+  text-align: left;
+}
+.admin-password-setup .input-group input {
+  width: 100%;
+}
+.admin-password-setup > .text-link {
+  margin-top: 20px;
+}
+.admin-password-visibility {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 12px 0 20px;
+  min-height: 44px;
+}
+.admin-password-setup fieldset > .btn {
+  width: 100%;
+  min-height: 48px;
+}
+.admin-password-setup .inline-notice .text-link {
+  display: block;
+  margin-top: 12px;
+}

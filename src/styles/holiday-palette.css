@@ -1,0 +1,610 @@
+/* Santa red, snow white, pine green and warm gold form the Christmas palette. */
+.sidebar {
+  background: linear-gradient(165deg, #d21721, #b80d18);
+  color: #ffffff;
+  border-right-color: #b80d18;
+  border-top: 4px solid #e4c36c;
+  --text-main: #ffffff;
+  --text-muted: #fff3dd;
+  --border-color: #ec7670;
+  --muted-surface: #d22e34;
+  --forest: #ffffff;
+  --forest-bg: #ffffff16;
+  --blue-soft: #ffffff;
+  --geo-primary: #ffffff;
+}
+.sidebar-brand > a {
+  display: block;
+  background: #fff;
+  padding: 12px 10px;
+  border-radius: 9px;
+  margin: 0 -6px;
+}
+.sidebar-brand img {
+  display: block;
+}
+.sidebar .nav-caption {
+  color: #ffe8bc;
+}
+.sidebar .nav-item {
+  color: #fffaf0;
+}
+.sidebar .nav-item:hover {
+  color: #ffffff;
+  background: #ffffff18;
+}
+.sidebar .nav-item.active {
+  background: #ffffff;
+  color: #b80d18;
+  box-shadow: 0 3px 12px #650b1025;
+}
+.sidebar .nav-item.active:before {
+  background: #ffffff;
+}
+.sidebar .christmas-nav {
+  color: #ffffff;
+}
+.sidebar .new-badge {
+  background: #ffffff20;
+  color: #ffffff;
+}
+.sidebar .nav-item.active .new-badge {
+  background: #fff3e8;
+  color: #b80d18;
+}
+.sidebar .workspace-label {
+  background: #ffffff06;
+}
+.sidebar .workspace-badge {
+  background: #ffffff;
+  color: #b80d18;
+  font-weight: 650;
+}
+.sidebar .sidebar-note {
+  background: #ffffff10;
+  border-color: #ffffff35;
+}
+.sidebar .sidebar-note p,
+.sidebar .sidebar-note > svg {
+  color: #fff5de;
+}
+.sidebar .avatar {
+  background: #ffffff;
+  color: #b80d18;
+  border-color: #e7b264;
+}
+.sidebar .icon-button {
+  color: #ffffff;
+}
+.topbar {
+  border-bottom: 2px solid
+    color-mix(in srgb, var(--festive-gold) 35%, var(--border-color));
+  background: color-mix(in srgb, var(--surface-color) 95%, var(--cream));
+}
+.header-avatar {
+  background: var(--coral-soft);
+  color: var(--festive-red);
+}
+.new-badge {
+  color: var(--festive-red);
+}
+.btn-primary {
+  background: #ce171f;
+  color: #fff;
+}
+.btn-primary:hover {
+  background: #ae0e17;
+}
+.btn-forest {
+  background: #ce171f;
+  border-color: #ce171f;
+  color: #ffffff;
+}
+.btn-forest:hover {
+  background: #ae0e17;
+}
+.christmas-hero {
+  background:
+    radial-gradient(ellipse at 85% 15%, #3e805334, transparent 55%),
+    linear-gradient(120deg, var(--hero-bg), #0b3d29);
+  border-color: #b9984b;
+  box-shadow: 0 12px 32px #b80d1814;
+}
+.hero-copy h2 em {
+  color: #f4d37b;
+}
+.hero-copy .btn-forest {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #b80d18;
+}
+.hero-copy .btn-forest:hover {
+  background: #fff4d4;
+}
+.hero-copy .season-pill {
+  color: #ffffff;
+  border-color: #ffffff66;
+}
+.hero-copy .season-pill > span {
+  background: #f4d37b;
+}
+.welcome-replay {
+  background: none;
+  border: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10px;
+  color: #f0d49a;
+  padding: 0;
+  margin-top: 15px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.welcome-replay:hover {
+  color: #fff5dc;
+}
+.countdown-card {
+  background: linear-gradient(140deg, #d21721, #b80d18);
+  color: #ffffff;
+  border-color: #b9984b;
+}
+.countdown-card strong,
+.countdown-card > p,
+.countdown-card .text-link,
+.countdown-card > span {
+  color: #ffffff;
+}
+.quick-icon.blue {
+  color: var(--festive-red);
+  background: var(--coral-soft);
+}
+.quick-icon.purple {
+  color: var(--festive-gold);
+  background: var(--gold-soft);
+}
+.santa-welcome {
+  background: linear-gradient(125deg, var(--forest-bg), var(--cream));
+  border-color: color-mix(in srgb, var(--forest) 18%, transparent);
+  --hero-text: var(--text-main);
+}
+.santa-welcome em {
+  color: var(--festive-red);
+}
+.santa-gift-art {
+  color: var(--festive-red);
+}
+.santa-gift-art > span,
+.santa-gift-art > i {
+  color: var(--festive-gold);
+}
+.santa-gift-art:before {
+  border-color: color-mix(in srgb, var(--festive-gold) 23%, transparent);
+}
+.santa-reveal {
+  background: radial-gradient(
+    ellipse at 50% 0,
+    var(--cream),
+    var(--surface-color) 70%
+  );
+  border-top: 4px solid var(--festive-red);
+}
+.santa-reveal-emblem {
+  color: var(--festive-red);
+  background: var(--coral-soft);
+}
+.santa-reveal-emblem > i {
+  color: var(--festive-gold);
+}
+.santa-recipient {
+  border: 1px solid color-mix(in srgb, var(--festive-gold) 30%, transparent);
+  background: var(--forest-bg);
+}
+.santa-recipient > span {
+  color: var(--festive-gold);
+}
+.santa-admin-heading {
+  border-top: 3px solid var(--festive-red);
+}
+.santa-mail-notice {
+  border-left: 3px solid var(--festive-gold);
+}
+.santa-workflow li.current {
+  box-shadow: inset 0 -3px var(--festive-red);
+}
+.modal-backdrop:has(> .victoria-welcome-modal) {
+  align-items: safe center;
+  padding: 20px;
+}
+.victoria-welcome-modal {
+  width: min(1080px, 100%, calc((100dvh - 180px) * 16 / 9));
+  flex-shrink: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #d2b36880;
+  background: #123c2a;
+  border-radius: 20px;
+  color: #ffffff;
+  box-shadow: 0 30px 120px #0008;
+}
+.victoria-welcome-modal > .modal-heading {
+  display: none;
+}
+.victoria-welcome-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #123c2a;
+  isolation: isolate;
+  overflow: hidden;
+}
+.victoria-welcome-stage > video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.victoria-welcome-stage > video::cue {
+  color: white;
+  background-color: #102b23e8;
+  font-size: 16px;
+}
+.victoria-video-controls > button[aria-pressed="true"] {
+  border-color: #f4d37b;
+  color: #f4d37b;
+}
+.victoria-welcome-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    #082c1cf5 0%,
+    #082c1c90 29%,
+    transparent 62%
+  );
+  pointer-events: none;
+}
+.victoria-welcome-copy {
+  position: absolute;
+  inset: 0 auto 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 50px 40px;
+  width: 46%;
+}
+.victoria-welcome-copy > span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #f4d37b;
+  font-size: 10px;
+  letter-spacing: 1.4px;
+}
+.victoria-welcome-copy h2 {
+  font-size: clamp(28px, 3.7vw, 46px);
+  line-height: 1.17;
+  letter-spacing: -1.6px;
+  color: #ffffff;
+  margin: 20px 0 16px;
+}
+.victoria-welcome-copy p {
+  color: #fff4dc;
+  font-size: 13px;
+  line-height: 1.8;
+  max-width: 280px;
+}
+.victoria-enter {
+  background: #ce171f;
+  color: #fff6e8;
+  border: 1px solid #dc786f80;
+  margin-top: 25px;
+  font-size: 12px;
+  min-height: 43px;
+}
+.victoria-enter:hover {
+  background: #ae0e17;
+}
+.victoria-skip {
+  position: absolute;
+  right: 20px;
+  top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid #ffffff42;
+  background: #153f2bdd;
+  color: #ffffff;
+  padding: 9px 12px;
+  font-size: 11px;
+  border-radius: 25px;
+}
+.victoria-video-controls {
+  position: absolute;
+  right: 20px;
+  bottom: 19px;
+  display: flex;
+  gap: 8px;
+}
+.victoria-video-controls > button {
+  border: 1px solid #ffffff40;
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 9px 11px;
+  min-height: 38px;
+  background: #153f2bdd;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10px;
+}
+.victoria-video-progress {
+  position: absolute;
+  height: 3px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ffffff25;
+}
+.victoria-video-progress > span {
+  display: block;
+  height: 100%;
+  background: #ebc174;
+  transition: width 0.2s linear;
+}
+.victoria-welcome-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 17px 22px;
+  color: var(--forest);
+  background: var(--surface-color);
+  font-size: 11px;
+  flex-wrap: wrap;
+}
+.victoria-welcome-foot > svg {
+  flex-shrink: 0;
+}
+.victoria-welcome-foot > small {
+  color: var(--text-muted);
+  font-size: 10px;
+  margin-left: auto;
+}
+.victoria-welcome-modal :focus-visible {
+  outline-color: #f4d37b;
+}
+.santa-welcome-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.santa-welcome-actions .btn {
+  font-size: 12px;
+}
+.santa-welcome small {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 10px;
+}
+.santa-open-invitation {
+  margin: 20px 0;
+  padding: 28px;
+  border-top: 3px solid var(--festive-gold);
+}
+.santa-open-invitation > div > svg {
+  color: var(--forest);
+  margin-bottom: 12px;
+}
+.santa-open-invitation h2 {
+  font-size: 22px;
+}
+.santa-open-invitation p {
+  font-size: 12px;
+  line-height: 1.8;
+  margin: 8px 0 20px;
+}
+.santa-open-invitation form > label {
+  display: block;
+  font-size: 12px;
+  font-weight: 550;
+  margin-bottom: 8px;
+}
+.santa-open-invitation form > div {
+  display: flex;
+  gap: 10px;
+}
+.santa-open-invitation .input-field {
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+}
+.santa-open-invitation > small {
+  display: block;
+  font-size: 11px;
+  line-height: 1.9;
+  color: var(--text-muted);
+  margin-top: 17px;
+}
+.santa-mail-settings ol {
+  list-style: none;
+  padding: 0;
+  counter-reset: mail-setup;
+}
+.santa-mail-settings li {
+  counter-increment: mail-setup;
+  position: relative;
+  padding: 16px 17px 16px 53px;
+  background: var(--muted-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.santa-mail-settings li:before {
+  content: counter(mail-setup);
+  position: absolute;
+  top: 17px;
+  left: 15px;
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--forest-bg);
+  color: var(--forest);
+  font-size: 12px;
+  font-weight: 650;
+}
+.santa-mail-settings fieldset {
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+}
+.santa-mail-settings .modal-actions {
+  margin-top: 20px;
+}
+@media (max-width: 720px) {
+  .sidebar-brand > a {
+    max-width: 190px;
+  }
+  .sidebar-brand > .icon-button {
+    right: -3px;
+  }
+  .admin-tabs {
+    display: none;
+  }
+  .admin-section-select {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--text-muted);
+    font-size: 11px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .admin-section-select select {
+    color: var(--text-main);
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 9px;
+    padding: 13px;
+    font-size: 16px;
+    width: 100%;
+  }
+  .victoria-welcome-modal {
+    border-radius: 15px;
+  }
+  .victoria-welcome-stage {
+    aspect-ratio: auto;
+    height: min(72dvh, 610px);
+    min-height: 475px;
+  }
+  .victoria-welcome-stage > video {
+    position: absolute;
+    top: 30px;
+    height: 62%;
+    width: 100%;
+    object-position: 67% center;
+  }
+  .victoria-welcome-shade {
+    background: linear-gradient(
+      0deg,
+      #123c2a 12%,
+      #123c2aeb 25%,
+      transparent 62%
+    );
+  }
+  .victoria-welcome-copy {
+    inset: auto 0 35px;
+    width: 100%;
+    padding: 0 24px;
+    align-items: center;
+    text-align: center;
+  }
+  .victoria-welcome-copy > span {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+  .victoria-welcome-copy h2 {
+    font-size: 31px;
+    margin: 13px 0 10px;
+    line-height: 1.15;
+  }
+  .victoria-welcome-copy p {
+    font-size: 12px;
+    max-width: 260px;
+  }
+  .victoria-enter {
+    margin-top: 18px;
+    width: 100%;
+    min-height: 43px;
+  }
+  .victoria-skip {
+    right: 12px;
+    top: 12px;
+    font-size: 10px;
+  }
+  .victoria-video-controls {
+    right: 12px;
+    bottom: auto;
+    top: 57px;
+  }
+  .victoria-video-controls > button {
+    min-height: 36px;
+    padding: 8px;
+  }
+  .victoria-video-controls span {
+    display: none;
+  }
+  .victoria-welcome-foot {
+    padding: 15px 20px;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 10px;
+  }
+  .victoria-welcome-foot > span {
+    flex: 1;
+  }
+  .victoria-welcome-foot > small {
+    margin-left: 24px;
+    flex-basis: calc(100% - 24px);
+  }
+  .welcome-replay {
+    font-size: 11px;
+  }
+  .santa-welcome-actions {
+    flex-direction: column;
+  }
+  .santa-welcome-actions .btn {
+    width: 100%;
+    min-height: 44px;
+  }
+  .santa-welcome small {
+    align-items: flex-start;
+    line-height: 1.8;
+    font-size: 11px;
+  }
+  .santa-welcome small svg {
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .santa-open-invitation {
+    padding: 23px 20px;
+  }
+  .santa-open-invitation h2 {
+    font-size: 21px;
+  }
+  .santa-open-invitation form > div {
+    flex-direction: column;
+  }
+  .santa-open-invitation .input-field {
+    font-size: 16px;
+  }
+  .santa-open-invitation .btn {
+    min-height: 44px;
+  }
+  .santa-mail-settings fieldset {
+    padding: 15px;
+  }
+}
