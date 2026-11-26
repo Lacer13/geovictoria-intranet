@@ -37,3 +37,5 @@ Capturas: [emisión](revision-disparo.jpg), [retroceso](revision-retroceso.jpg) 
 ## Legibilidad en teléfono · 26 de noviembre
 
 El usuario veía el diseño nuevo, pero lo percibía inmóvil. Los recursos estaban publicados y coincidían con GitHub; la oscilación original de 2,2 px quedaba en una fracción de píxel al reducirse a un centinela en teléfono. La presentación añade flotación e inclinación según el tamaño, retroceso y reacción de impacto, manteniendo la boquilla en el origen físico al disparar y las poses quietas al reducir movimiento. [Comprobaciones y contacto](../../../docs/qa-villano-movimiento-2026-11-26.md). La simulación y la fuente ilustrada se conservan.
+
+El [PR #13](https://github.com/Lacer13/geovictoria-intranet/pull/13) está fusionado en main y publicado con autorización del usuario. Pasaron 142 pruebas generales, 50 de permisos y compilación. Se comprobaron 70 recursos y el combate en producción, sin errores de consola ni envío de puntajes. [Publicación y restauración](../../../docs/releases/villano-movimiento-production-2026-11-26.json).

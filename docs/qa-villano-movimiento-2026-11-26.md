@@ -18,3 +18,11 @@ La comparación inicial contra producción verificó:
 La fuente ilustrada y sus 168 fotogramas se conservan; esta corrección refuerza su presentación en el juego.
 
 La revisión local del navegador comprobó avance a 80 px en dos momentos del ciclo, disparo y retroceso a 160 px con boquilla visible y movimiento reducido. No hubo errores ni advertencias en consola. La compilación y las 142 pruebas generales pasaron; siete pruebas específicas cubren el villano. No se enviaron puntos al ranking.
+
+## Publicación
+
+El [PR #13](https://github.com/Lacer13/geovictoria-intranet/pull/13) pasó 142 pruebas generales, 50 de permisos y compilación en [GitHub Actions](https://github.com/Lacer13/geovictoria-intranet/actions/runs/45885748666). Se fusionó en main como `a329a083ecd492612d41ef99a91e12327fb48622`.
+
+Con la autorización explícita del usuario se promovió la versión inmutable `91dd01d6591f4ab5` al [juego principal](https://geovictoria-intranet-peru.web.app/juego). Se comprobaron 70 recursos por SHA-256, incluidos JS/CSS, el villano y CierreIA. En producción se revisaron recarga, inicio de misión, centinelas, disparo, pausa/reanudación y salida, sin errores ni advertencias de consola y sin enviar puntajes. No se modificaron ajustes. [Registro y restauración](releases/villano-movimiento-production-2026-11-26.json).
+
+La corrección está publicada. Su aceptación posterior en un teléfono físico y una medición de FPS no forman parte de las comprobaciones realizadas.

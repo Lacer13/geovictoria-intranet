@@ -1,0 +1,540 @@
+{
+  "date": "2026-11-26",
+  "status": "published",
+  "project": "geovictoria-intranet-peru",
+  "url": "https://geovictoria-intranet-peru.web.app/juego",
+  "sourceCommit": "dd212126339ae94526c3e8aa1d0485bce2aa5ae6",
+  "mergeCommit": "a329a083ecd492612d41ef99a91e12327fb48622",
+  "pullRequest": "https://github.com/Lacer13/geovictoria-intranet/pull/13",
+  "hostingVersion": "91dd01d6591f4ab5",
+  "previousHostingVersion": "90958abb317e8aec",
+  "releaseTime": "2026-11-26T19:46:04.835Z",
+  "deployment": "Promoción por ID inmutable de la corrección validada",
+  "publicationAuthorization": "El usuario autorizó explícitamente publicar la corrección del villano del PR #13 en el chat",
+  "rollbackCommand": "firebase hosting:clone geovictoria-intranet-peru@90958abb317e8aec geovictoria-intranet-peru:live --project geovictoria-intranet-peru --non-interactive",
+  "firestoreRulesDeployed": false,
+  "authenticationDomainsChanged": false,
+  "illustratedSourceChanged": false,
+  "simulationChanged": false,
+  "validation": {
+    "generalTestsPassed": 142,
+    "rulesTestsPassed": 50,
+    "specificEnemyTestsPassed": 7,
+    "build": "passed",
+    "githubActions": "https://github.com/Lacer13/geovictoria-intranet/actions/runs/45885748666",
+    "verifiedAt": "2026-11-26T19:47:02.643Z",
+    "resourcesMatchValidatedBuild": true,
+    "securityHeadersPresent": true
+  },
+  "phone": {
+    "initialUserReport": "Veo el nuevo, pero parece inmóvil",
+    "fixAcceptedOnPhysicalPhone": false,
+    "fpsMeasured": false
+  },
+  "resources": [
+    {
+      "path": "/juego",
+      "status": 200,
+      "bytes": 1556,
+      "sha256": "ae2f3fc5efe8c23760533bee7ee515b489bb63a60d26219b93e52afb0a6a8e3a",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "/assets/AccessManagement-DFMW_lb-.js",
+      "status": 200,
+      "bytes": 19914,
+      "sha256": "2f4b6f0aa189fd9f066674649ee39a376464358a33777bcd295d5fa89221ffd4",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/Admin-CWKXHQ2z.css",
+      "status": 200,
+      "bytes": 7620,
+      "sha256": "b3506f7c134535a820a81115db339091709f00d081c9273152a2b19c1907ca3b",
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "path": "/assets/Admin-Dq6NE7KG.js",
+      "status": 200,
+      "bytes": 17417,
+      "sha256": "b49e6c9f2b012b1e9b3d7ff980677156f5d961475d3d11ab90ea409c03dd1f24",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/arrow-down-to-line-DMzm3Wb4.js",
+      "status": 200,
+      "bytes": 327,
+      "sha256": "9eed83fd6eff6ce6e2b1ed5c24f282876f7233eae533990e994c52fe43d26ccb",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/arrow-left-Cowx0KOi.js",
+      "status": 200,
+      "bytes": 283,
+      "sha256": "3261687f5c1f4a8f33cd0a5fcaf573292d17138cc5cbd9ed310b8ae54352f014",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/arrow-right-DFBgXtwZ.js",
+      "status": 200,
+      "bytes": 283,
+      "sha256": "076668e01e47a0753b7a04504b63999d55d5303b8f02c9357be875624150b61c",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/auth-Jedzb3UM.js",
+      "status": 200,
+      "bytes": 293,
+      "sha256": "686f836a5bd36ff20b4dc06f42f91abd073788a3821f9a998ebb38ab61299710",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/check-BIjFlQQA.js",
+      "status": 200,
+      "bytes": 242,
+      "sha256": "4f2768029a874d92e5da62d8183472ee4497bb4ece1366082d35d9f555901a9e",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/Christmas-BvSnlCmg.js",
+      "status": 200,
+      "bytes": 5669,
+      "sha256": "4bf2712b7d4ff095d647c2acfa40e98b0e1edba804e4c630c913bc4376bcd402",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/ChristmasWall-C4Eq8YsD.css",
+      "status": 200,
+      "bytes": 3816,
+      "sha256": "2077d68de83e4c518d88fa0c5950588bc93e07165b489c3fa141f19943ceffcd",
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "path": "/assets/ChristmasWall-CWGk6035.js",
+      "status": 200,
+      "bytes": 10648,
+      "sha256": "8c137d949d9afbd0b1f4162d7963dd855683c5d145693ad971ff00af015f1fc7",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/circle-check-BSEiGgV7.js",
+      "status": 200,
+      "bytes": 296,
+      "sha256": "ccfa3d22098dd705f11537761faec1993bbd5b966423b15664570dfebb85efa1",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/clock-3-DGnoHHVj.js",
+      "status": 200,
+      "bytes": 287,
+      "sha256": "999f3145564294d80fb37fbd1f9a18ca7ff870d897b41350865831a96f542452",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/ContentSection-mkIJWemn.js",
+      "status": 200,
+      "bytes": 9291,
+      "sha256": "42cb49354ba433f3872e56c500e02a5dc3dcd4787ae3e235c8409e99ec0c4004",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/copy-C-O0DyBg.js",
+      "status": 200,
+      "bytes": 354,
+      "sha256": "068a584ae0e4a2fa0674f54f15fbf0f8479a0eb7f474986a0a6b464da3de55b0",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/createLucideIcon-DkgbDv7J.js",
+      "status": 200,
+      "bytes": 1855,
+      "sha256": "61b1726789437c53165e7fab35ff4f565215009f8eca768e878a4cba166075c8",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/DeleteRecordDialog-N66MetZs.js",
+      "status": 200,
+      "bytes": 2786,
+      "sha256": "434a9c71d97bcd00ccdf5027b95498b349b11a20331aaaee51e65aceb6664e8b",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/download-CVh2wH3z.js",
+      "status": 200,
+      "bytes": 350,
+      "sha256": "33fdb2b1a703ea638bd3c789c5f87f6d0c3ed3e624b4514e4ea239e56339135d",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/esm-BLwCZdJv.js",
+      "status": 200,
+      "bytes": 16256,
+      "sha256": "b73f57f2be714c4d4d26209a30e913876105221613e38d8684d7b046b3b2b10e",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/eye-off-B3NcHYDk.js",
+      "status": 200,
+      "bytes": 548,
+      "sha256": "58b818bbe3fa09f4f2b781b7cc4e9262f59ca81fc93cfffc05f15a07d4e3e181",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/eye-XF-crv-5.js",
+      "status": 200,
+      "bytes": 374,
+      "sha256": "e7ad2ca9db95a778a43d6dc14a32d20db88458452d87c83badac4e885c44de09",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/FeedbackForm-B1or3E_9.js",
+      "status": 200,
+      "bytes": 5920,
+      "sha256": "7cd8206a84da292113cae144dafb4577eaa8bde64c172a3a41cd54043d4b3b7c",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/firebase-auth-l52wMhvu.js",
+      "status": 200,
+      "bytes": 88760,
+      "sha256": "3a9835db95cf82c23beb744659d12e62f3b34be7563ccdda0e4b93e5807f2c95",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/firebase-Bx60FotG.js",
+      "status": 200,
+      "bytes": 305411,
+      "sha256": "93b4a179c039260815f30d5e25197c61f126efeb272c3fe1725bba2dd1f412a9",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/firebase-core-Byla0wAc.js",
+      "status": 200,
+      "bytes": 25641,
+      "sha256": "c6288b23608970e6537f447c69108c20d5fcc96e8ebf7840c72eafe4285f2726",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/GamePage-CkARHRxK.css",
+      "status": 200,
+      "bytes": 20613,
+      "sha256": "a072386c949f65299d4aaa179818fd8f16cf22d903c5e377084e289be7345271",
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "path": "/assets/GamePage-DkmNrRfK.js",
+      "status": 200,
+      "bytes": 112694,
+      "sha256": "b60569c257a88e7e3eecd593ea3b882f58111ed74e636dd5fe22b3f6473fa942",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/geovictoria-intranet-Dk8WBFoS.css",
+      "status": 200,
+      "bytes": 118749,
+      "sha256": "f86cb7434b5c8c89fb606dfaf16c574dcdb58287dcf4dd8a6fd79dcb3bb7e6c9",
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "path": "/assets/geovictoria-intranet-DMb-UBri.js",
+      "status": 200,
+      "bytes": 227745,
+      "sha256": "1c3ccce7d52ec22a252e38dbf3dd8e21b1a6059c4eff4a302e7efbbc54e99488",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/HelpDirectory-C7JofTI2.js",
+      "status": 200,
+      "bytes": 4101,
+      "sha256": "b33091df22b7428efc3d7d244d2197216ba05ecbe18d02580c7c655ef3787ff0",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/index-DALOohbO.js",
+      "status": 200,
+      "bytes": 59,
+      "sha256": "a5669f2db1a16e1951ed505600dd6ab04d885000bccfa40f01b65b90f89e1211",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/lock-keyhole-IQ4xWgMv.js",
+      "status": 200,
+      "bytes": 373,
+      "sha256": "5ab062bf0f3a2a6e511960d894bf4113071b72006edd501d21f3a7c67d9eb208",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/mail-cFAW8Yjt.js",
+      "status": 200,
+      "bytes": 331,
+      "sha256": "062d5541769a291e60a7feedcc07b08f9807d138218796901c90ff738518c41b",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/NewsPage-CJJ1174W.js",
+      "status": 200,
+      "bytes": 3350,
+      "sha256": "6aa836fb3df0cd2820b1f5d2aec31432eb49df4c41f03fe0df814c4f490e61af",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/OrgChart-DMYVOpIY.js",
+      "status": 200,
+      "bytes": 2511,
+      "sha256": "2a21a4dad7bb79fbe8c0edf8d73e3de15ffe20fcea10eeccdd8587e0cfe5383a",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/pencil-anzgP7Ck.js",
+      "status": 200,
+      "bytes": 394,
+      "sha256": "6734eb2699a45cae27974ab123065792256f0dbd1252d434c17fd87173f16718",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/plus-COsp5OOR.js",
+      "status": 200,
+      "bytes": 271,
+      "sha256": "26f568a4f8e73027eb9c25cbcc173ceaf1738866a0d56afef90dac00281f19e4",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/Quiz-BRGdOF1c.js",
+      "status": 200,
+      "bytes": 12838,
+      "sha256": "4f80b166d0146f2ba0d4fd9b88de7447ea12eea32190dba9526ef2e8ce9504b6",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/quiz-ChGAa421.css",
+      "status": 200,
+      "bytes": 22714,
+      "sha256": "caf23fc982d6eccde323660cf809cfb7ad5ace8e2e2f8c6187e0b6ee13a21de8",
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "path": "/assets/quiz-DU-IcoAW.js",
+      "status": 200,
+      "bytes": 23659,
+      "sha256": "83fd4a0f5b5d2c9e456a6e949140b64020bd556fc0b6fd9f064b3da3d9bbc752",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/QuizAdmin-CTWGE3mP.js",
+      "status": 200,
+      "bytes": 12950,
+      "sha256": "c79bf4c2167052ea6277db78e2b6ce306f9eebfb49eb5d463fb5b4441d52d14a",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/QuizHost-BkKEBYaF.js",
+      "status": 200,
+      "bytes": 6919,
+      "sha256": "1a0df9f3387f14c2d5eb8eb5adebb0dae893903e3e2dccc629164cdf706dcf9b",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/QuizPresentation-DF1sYFtP.js",
+      "status": 200,
+      "bytes": 1079,
+      "sha256": "eaa1a692ff9e776dbc2bc3a090afefec24c21470064a1501ad11aff87d53c6db",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/react-BVNqbF40.js",
+      "status": 200,
+      "bytes": 228576,
+      "sha256": "ffc267103e7c1c4f6aee8d59dfbac804cc8ca717f0d0313c139da8164843005a",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/ReportsSection-DeImlj2Q.js",
+      "status": 200,
+      "bytes": 1904,
+      "sha256": "edeb7b812f5ad8f643f2c173580dddd17e5b6898f5d7b9a6b8402dd01ee972f1",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/rolldown-runtime-8BhlS34s.js",
+      "status": 200,
+      "bytes": 807,
+      "sha256": "1cb5c6ead7e29370203f12e2d5cdf50ec1f02dd70ee2d050d909afbf2406f6b1",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/roster-DQGKTreL.js",
+      "status": 200,
+      "bytes": 6128,
+      "sha256": "1f178200b66d55686af4b2d76915a214b83b6e46f3dc77b52cb6bd4def208305",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/SantaGreeting-2WFRsXaA.css",
+      "status": 200,
+      "bytes": 1420,
+      "sha256": "d5442c7ec0f830a87ac37c9ee5fd18165dc48a0fd1c9b88d3b2e3a8313068126",
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "path": "/assets/SantaGreeting-BWc82EXK.js",
+      "status": 200,
+      "bytes": 9812,
+      "sha256": "63d355bf62516ff4bc1fe520ee3a25f3e53994060008dce1b2f49adaa3342dfa",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/ScoresSection-B1gm0Upv.js",
+      "status": 200,
+      "bytes": 1295,
+      "sha256": "e9bfd78f49684c7b0ce1389ba218a6b616f1a2cc44d7a58a13be12320f4c4f74",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/SearchPage-CveQ6PL3.js",
+      "status": 200,
+      "bytes": 2867,
+      "sha256": "f4a116c0af918f0e31f232de19936fbd38c363409a081aa8762356e9633a1e00",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/secret-santa-experience-BrOTPZeP.js",
+      "status": 200,
+      "bytes": 7064,
+      "sha256": "6f1bdd469a24b81126faeebcf4aed34be4ca1425bdd6a9d945da3013689bbb06",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/secret-santa-experience-DuRqXPGs.css",
+      "status": 200,
+      "bytes": 20747,
+      "sha256": "4c55327207c0a65264520b1e2560a66dc6edfe27641e929405192cacaf32d19f",
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "path": "/assets/secretSanta-BAl3A6SF.js",
+      "status": 200,
+      "bytes": 4370,
+      "sha256": "e1e3df162a38148f0a21a087aa7c58f6aba9f048f9fb08379ba10ad9f1b90c2d",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/SecretSanta-C8RRf6Ic.js",
+      "status": 200,
+      "bytes": 12777,
+      "sha256": "7eaad087d40c32450deef7212454a006737ea7651e62907d01bccedc7320f245",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/SecretSantaAdmin-Bl8KFeR9.js",
+      "status": 200,
+      "bytes": 55372,
+      "sha256": "e17b2af8836f184c07eed156785b296f8cdc6bb8b00f7412440293d57f8471b6",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/SecretSantaAdmin-D9eqvj4x.css",
+      "status": 200,
+      "bytes": 6819,
+      "sha256": "c33a4e70fd0493fd3db29069b6d4173591ad2bf79351801c03f8d92a8402bf86",
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "path": "/assets/send-CMBKyrk-.js",
+      "status": 200,
+      "bytes": 408,
+      "sha256": "e381d4970c035cbaeb757d661ea2c0c961b5e3c9d03e360c044990393764001e",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/settings-2-CetWwxZa.js",
+      "status": 200,
+      "bytes": 370,
+      "sha256": "cb160110228bb9de19f5f7395ce536789187123187da71541a481132d9e255f9",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/shield-check-CLVg30K7.js",
+      "status": 200,
+      "bytes": 438,
+      "sha256": "46a210e359f48f8c076cd58c9ebc08d7aa76eb6cb0832af7903428c954390a47",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/useAdminAccess-DlyfFl8J.js",
+      "status": 200,
+      "bytes": 7837,
+      "sha256": "c85e82e6f48d48572af4600bbce2d791180a1a9b7dd07dccce440fe3e8d8a5f1",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/assets/Wiki-CMe-4xmS.js",
+      "status": 200,
+      "bytes": 5672,
+      "sha256": "0528b16de60bc13b73c56d7d7fe9a967b114780903cb0661258a7c903987d00d",
+      "contentType": "text/javascript; charset=utf-8"
+    },
+    {
+      "path": "/enemies/desfase/sprites-v1.webp",
+      "status": 200,
+      "bytes": 1691336,
+      "sha256": "c7589190b45fb468ca90d5f8960648b53d29b8b933ab37210afe3b521576a201",
+      "contentType": "image/webp"
+    },
+    {
+      "path": "/enemies/desfase/sprites-v1.json",
+      "status": 200,
+      "bytes": 60747,
+      "sha256": "64e9b777c0831b2fdfad3547731a2b7a62f238b6bd8591ebfc0cd4ac38f453ba",
+      "contentType": "application/json"
+    },
+    {
+      "path": "/characters/cierreia/sprites-v2.json",
+      "status": 200,
+      "bytes": 89506,
+      "sha256": "53c52939e603999a4fb8d0a6440f182b52540c1df07cc67d9076ae0297bafc9a",
+      "contentType": "application/json"
+    },
+    {
+      "path": "/characters/cierreia/sprites-v2-1.webp",
+      "status": 200,
+      "bytes": 1783156,
+      "sha256": "734f6d03d9b5c280bf3ce62b9dbdfa2272667a85427755c9be6a856e5de4c0ef",
+      "contentType": "image/webp"
+    },
+    {
+      "path": "/characters/cierreia/sprites-v2-2.webp",
+      "status": 200,
+      "bytes": 356312,
+      "sha256": "89f581e8e793fde02be538622d11819db92e29ae9b5d9f7c0b0fa0f0fc84699a",
+      "contentType": "image/webp"
+    },
+    {
+      "path": "/characters/cierreia/rig-navidad-v2.png",
+      "status": 200,
+      "bytes": 1082627,
+      "sha256": "caedcfa15d0e0dca77020b1ca005de1ee1e0c2b3963fed7d1ff2ffba71c4d288",
+      "contentType": "image/png"
+    },
+    {
+      "path": "/characters/cierreia/portrait-v2.webp",
+      "status": 200,
+      "bytes": 19564,
+      "sha256": "eca792a27a1f556d4c2a656749b0838bcdbfdff049676274d0bfea87c97d5501",
+      "contentType": "image/webp"
+    }
+  ],
+  "browserVerification": {
+    "checks": [
+      "Recarga del juego principal con la corrección",
+      "Inicio de misión con ConectIA",
+      "Centinelas visibles durante el avance",
+      "Disparo normal",
+      "Pausa y reanudación",
+      "Salida al selector"
+    ],
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "rankingSubmitted": false,
+    "settingsChanged": false
+  }
+}
