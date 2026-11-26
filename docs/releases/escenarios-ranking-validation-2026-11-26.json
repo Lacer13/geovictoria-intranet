@@ -1,0 +1,28 @@
+{
+  "date": "2026-11-26",
+  "feature": "escenarios-ranking",
+  "testsPassed": 148,
+  "rulesTestsPassed": 52,
+  "build": "passed",
+  "productionDeployed": false,
+  "previewUrl": "https://geovictoria-intranet-peru--escenarios-ranking-2v4i79m6.web.app/juego",
+  "hostingVersion": "3c3a422332c8aa5e",
+  "expires": "2026-12-03T20:19:36.315103921Z",
+  "productionRulesPending": true,
+  "sceneRuntimeBytes": 242390,
+  "uiChecks": {
+    "nameRequiredBeforeStart": true,
+    "nameVisibleInHorizontalHud": true,
+    "sharedScoreBetweenTabsInEmulator": true,
+    "doubleClickSingleEntry": true,
+    "ranking320NoOverflow": true,
+    "sceneBosque": true,
+    "sceneTaller": true,
+    "sceneFaro": true,
+    "reducedMotion": true,
+    "viewportRestored": true,
+    "localNameCleared": true,
+    "productionScoresSubmitted": false
+  },
+  "realPhoneTested": false
+}

@@ -415,7 +415,7 @@ export default function Dashboard({ onWelcome }) {
           <section className="panel leaderboard-panel">
             <div className="panel-heading">
               <h2>
-                <Trophy size={17} /> Equipo con energía
+                <Trophy size={17} /> Récords de Arcade
               </h2>
             </div>
             {leaderboard.data.length > 0 ? (
@@ -441,7 +441,7 @@ export default function Dashboard({ onWelcome }) {
               />
             )}
             <Link to="/juego" className="leaderboard-link">
-              Ver juego <ArrowRight size={14} />
+              Ver niveles y puntajes <ArrowRight size={14} />
             </Link>
           </section>
         </aside>
