@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-26",
+  "character": "cierreia",
+  "baseMain": "fda6801806b6741cab051e718c9be6c1c503e14f",
+  "testsPassed": 140,
+  "specificTestsPassed": 8,
+  "rulesTestsPassedInBase": 50,
+  "firestoreRulesUnchanged": true,
+  "mechanicsChanged": false,
+  "frames": 233,
+  "pages": 2,
+  "celebrationFrames": 72,
+  "celebrationSeconds": 3,
+  "sourceSha256": "caedcfa15d0e0dca77020b1ca005de1ee1e0c2b3963fed7d1ff2ffba71c4d288",
+  "uiChecks": {
+    "selector": true,
+    "closingPower": true,
+    "normalShot": true,
+    "pauseResume": true,
+    "reducedEffects": true,
+    "mobile320LargeControlsNoOverflow": true,
+    "horizontal844": true,
+    "settingsRestored": true,
+    "viewportReset": true,
+    "scoresSubmitted": false
+  },
+  "realPhoneAccepted": false,
+  "productionDeployed": false
+}

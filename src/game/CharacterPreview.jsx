@@ -22,9 +22,10 @@ export default function CharacterPreview({
       if (loading) return;
       const elapsed = (time - started) / 1000;
       const burst = animation && character.id === "conectia" && pose === "power";
+      const closing = animation && character.id === "cierreia" && pose === "power";
       const interval = burst ? 0.1 : 0.2;
       const previewTime = animation && pose === "shooting" ? elapsed % interval : elapsed;
-      const presentation = burst ? { pose: "power", elapsed: elapsed % 0.6, armed: true, shotElapsed: elapsed % interval, shotClip: "burst", shotDuration: interval } : null;
+      const presentation = burst ? { pose: "power", elapsed: elapsed % 0.6, armed: true, shotElapsed: elapsed % interval, shotClip: "burst", shotDuration: interval } : closing ? { pose: "power", elapsed: elapsed % 1.8, armed: false, shotElapsed: elapsed % 1.8, shotClip: "closing", shotDuration: 0.3 } : null;
       drawCharacter(
         ctx,
         character,
@@ -37,10 +38,12 @@ export default function CharacterPreview({
         reduced,
         { sprite: image ? null : sprite, animation, presentation },
       );
-      if (animation && (pose === "shooting" || burst) && !reduced) {
-        const muzzle = characterAnimation(character).muzzle({ x: 200 - 295 / 2, y: 170 - 295 / 2, width: 295, height: 295 });
-        ctx.fillStyle = "#a9fbff";
-        ctx.beginPath(); ctx.ellipse(muzzle.x + (elapsed % interval) * 420, muzzle.y, 8, 2.5, 0, 0, Math.PI * 2); ctx.fill();
+      if (animation && (pose === "shooting" || burst || closing && elapsed % 1.8 < 0.7) && !reduced) {
+        const implementation = characterAnimation(character);
+        const sample = closing ? implementation.sample("closing", 0) : undefined;
+        const muzzle = implementation.muzzle({ x: 200 - 295 / 2, y: 170 - 295 / 2, width: 295, height: 295 }, sample);
+        ctx.fillStyle = closing ? "#ffe3a0" : "#a9fbff";
+        ctx.beginPath(); ctx.ellipse(muzzle.x + (elapsed % (closing ? 1.8 : interval)) * 420, muzzle.y, closing ? 13 : 8, closing ? 5 : 2.5, 0, 0, Math.PI * 2); ctx.fill();
       }
       if (!reduced) frame = requestAnimationFrame(draw);
     };

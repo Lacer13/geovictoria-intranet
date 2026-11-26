@@ -32,7 +32,7 @@ export const AREA_CHARACTERS = entries.map(
     cost: 0,
     parts: CHARACTER_PARTS[id],
     power: powerForCharacter(id),
-    ...(["tecnoia", "conectia"].includes(id) ? {
+    ...(["tecnoia", "conectia", "cierreia"].includes(id) ? {
       thumbnail: `/characters/${id}/portrait-v2.webp`,
       animation: { version: 2, metadata: `/characters/${id}/sprites-v2.json`, src: `/characters/${id}/rig-navidad-v2.png` },
     } : {}),

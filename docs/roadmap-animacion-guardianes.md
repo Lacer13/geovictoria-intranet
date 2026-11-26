@@ -1,6 +1,6 @@
 # Roadmap de animación · Guardianes con gestos y disparos claros
 
-18 de noviembre de 2026 · Actualizado el 24 de noviembre de 2026. **Estado: TecnoIA y ConectIA v2 cerrados y publicados. Campaña y arena 1 contra 1 integradas. La prioridad actual del usuario es animar al rival de VictorIA; CierreIA queda en espera.**
+18 de noviembre de 2026 · Actualizado el 26 de noviembre de 2026. **Estado: TecnoIA y ConectIA v2 publicados; rivales animados integrados. El usuario retoma la animación de los guardianes. CierreIA v2 está implementado y en validación individual; Prisma espera su cierre.**
 
 **24 de noviembre · Rival animado:** El Desfase y los centinelas reciben ocho poses originales y 168 fotogramas: entrada, flotación, avance, preparación/carga, emisión/retroceso/recuperación, impacto y desactivación. El cañón apunta a VictorIA, la boquilla coincide con el nacimiento interpolado del proyectil y se conservan colisiones, daño, velocidad, cadencias y aviso. La desactivación no vuelve a colisionar ni entrega puntos adicionales. Hay movimiento reducido y recuperación del arte anterior si falla la hoja. Fuente, prompt, extracción reproducible, revisión interactiva y capturas en [design/enemies/desfase](../design/enemies/desfase/README.md). Verificación local: 116 pruebas aprobadas, compilación y revisión en navegador sin errores; publicación registrada por separado.
 
@@ -314,3 +314,11 @@ El usuario aceptó claridad de Ráfaga y respuesta de controles en su teléfono.
 Se promovió por ID inmutable la versión `9f49c47de6d060b4` a [producción](https://geovictoria-intranet-peru.web.app/juego), el 19 de noviembre de 2026 a las 17:30 (Lima). `/juego` y 19 recursos comprobados responden 200 y coinciden por SHA-256 con el build. La revisión de producción verificó selección, partida, disparo asistido, Ráfaga, pausa/reanudación y salida; sin errores ni advertencias de consola y sin enviar puntos al ranking.
 
 [Captura](../design/characters/conectia/produccion-v2-rafaga.jpg) y [registro con versión anterior y restauración](releases/conectia-v2-production-2026-11-19.json). No se desplegaron reglas Firestore ni se cambiaron dominios de Authentication. **ConectIA queda cerrado; sigue CierreIA.**
+
+## CierreIA · Retoma del roadmap el 26 de noviembre
+
+CierreIA v2 incorpora tres expresiones y seis manos/accesorios ilustrados, 233 sprites jugables en dos páginas y diez clips. Su disparo normal tiene 12 fotogramas; Gran cierre, 18 con retroceso más marcado y emisión dorada. La celebración propia dura tres segundos: presenta el maletín, asiente, confirma el acuerdo con el pulgar y regresa al reposo. Se conserva el emblema comercial, la identidad de Enterprise y el arte v1 como respaldo.
+
+Las boquillas normal y especial coinciden con los orígenes físicos existentes. Ocho pruebas específicas verifican alfa, márgenes, anclajes, composición, interpolación al moverse/esquivar, recuperación ante fallos y una partida completa equivalente a v1. La revisión local cubrió selector/poder, combate, pausa, movimiento reducido y controles grandes a 320×568, además de 844×390. No se publicaron puntos en el ranking.
+
+[Fuente, secuencias y capturas](../design/characters/cierreia/README-v2.md) · [Matriz de QA](qa-cierreia-v2.md). La aceptación en teléfono real y la publicación individual siguen siendo los criterios de cierre antes de comenzar Prisma.
