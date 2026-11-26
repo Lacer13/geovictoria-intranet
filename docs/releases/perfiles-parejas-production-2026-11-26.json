@@ -1,0 +1,1054 @@
+{
+  "date": "2026-11-26",
+  "timezone": "America/Lima",
+  "project": "geovictoria-intranet-peru",
+  "url": "https://geovictoria-intranet-peru.web.app/admin",
+  "status": "published",
+  "baseCommit": "11fc01a48a4dcbb449a8ff260f5127178e39ead5",
+  "sourceState": "Validated workspace changes; identified by hashes",
+  "hostingVersion": "6de8189098d1d5d9",
+  "previousHostingVersion": "570004e6d01e286b",
+  "rulesetName": "projects/geovictoria-intranet-peru/rulesets/943695b0-a0a0-402d-8656-bcebec1af8b7",
+  "previousRulesetName": "projects/geovictoria-intranet-peru/rulesets/77fc3719-50e3-48ea-9fd6-c98586da8c6f",
+  "source": [
+    {
+      "path": "src\\ui-shell.css",
+      "sha256": "f1143f5bef7222241e9e4f83b8455a309a3c0031af29e0ac57d1ff715de60450"
+    },
+    {
+      "path": "src\\styles\\welcome.css",
+      "sha256": "9b35e481e45c1e45fb6aaf005f7c67964874ccb9d96567fd4ce9f14064a911e2"
+    },
+    {
+      "path": "src\\styles\\team-and-feedback.css",
+      "sha256": "5ad77f0dcbc345a1b8503d3f55f3c1e16ad90c3ac095eff6fd9415d5d4816838"
+    },
+    {
+      "path": "src\\styles\\santa-workspace.css",
+      "sha256": "6ee2417e6971890d9201e33c86fdc588be36af4ee7211629c091f1a007b75089"
+    },
+    {
+      "path": "src\\styles\\santa-base.css",
+      "sha256": "6c57efabc989e1353f1553944d3e9c952c51210f34e6656e49a550283a7b7d94"
+    },
+    {
+      "path": "src\\styles\\responsive-tablet.css",
+      "sha256": "69a9409ecf4ca67376620b963b022005f6a729dc199b29211844c6335d78c13f"
+    },
+    {
+      "path": "src\\styles\\responsive-narrow-and-motion.css",
+      "sha256": "6e4cbde5502b978b04ed3449e5a005ccc542ebd96b0996bbf5131c3ec23afa2f"
+    },
+    {
+      "path": "src\\styles\\responsive-mobile.css",
+      "sha256": "fada8fe84155595cc117690d61ff989f392c6f8f6e670883fb3d02f4cf2157e6"
+    },
+    {
+      "path": "src\\styles\\responsive-desktop.css",
+      "sha256": "a2bc7dcbc3223b54df4920953f42f378b9d3fb1d28bff9dc743ade80beed6497"
+    },
+    {
+      "path": "src\\styles\\readability.css",
+      "sha256": "11f829c9df58a581ff4093ea942530a493767f0b0f3bfa9a878ae5a66e6609ff"
+    },
+    {
+      "path": "src\\styles\\page-widgets.css",
+      "sha256": "5b94922a9b23f8afc728dfd261b37edc5c7f894c74a845e7073da7d656c4b574"
+    },
+    {
+      "path": "src\\styles\\layout-and-controls.css",
+      "sha256": "e1d72d3a7202349b2a31225b81996befcd8d6c8d6917827a7b33a4b6bc4711f8"
+    },
+    {
+      "path": "src\\styles\\holiday-palette.css",
+      "sha256": "f1ce03ca41a304380b5f0c60b9886edc52fee20e4fe432585ca247b55f0538d7"
+    },
+    {
+      "path": "src\\styles\\foundation.css",
+      "sha256": "3515062b91fec8eeb3e8f2aa42e95c386b79483b1d4eacc17a6820c1ea6b1a9a"
+    },
+    {
+      "path": "src\\styles\\directory-and-knowledge.css",
+      "sha256": "5b56fa0e7dbc21cd77e8d743044fba63d342d6f500fdcf37d8957678afab8f99"
+    },
+    {
+      "path": "src\\styles\\dashboard-and-calendar.css",
+      "sha256": "259df627c11d5b16b1cf4b2fb716f1e22ef88bb082caa5256d47a2073ac5a01f"
+    },
+    {
+      "path": "src\\styles\\content-editing.css",
+      "sha256": "5cf10ac0fe2297f0d36f17889fa5d18c9966bdff5851869c950f9b93dac08227"
+    },
+    {
+      "path": "src\\styles\\christmas-effects.css",
+      "sha256": "a3e78e9968d338754491e7a657cdfbd3db33f87971c5329559115dd0d84ac56f"
+    },
+    {
+      "path": "src\\styles\\christmas-and-search.css",
+      "sha256": "f7fe12a179ce5443229e58b52dcaad533b89bde494e195b8b1313403843bd42e"
+    },
+    {
+      "path": "src\\styles\\admin-base.css",
+      "sha256": "93484fdbe2d40d1f5d85ae57c8baba0a8a4b4d67460153b6f574741e60b45b0e"
+    },
+    {
+      "path": "src\\styles\\admin-accounts.css",
+      "sha256": "69cdfe39667dd7f1fc05b4aa44c6d01a6a67102415e10d0ee5da36f03002e956"
+    },
+    {
+      "path": "src\\styles\\adaptive-readability.css",
+      "sha256": "a99b3d1471ce68d4dd8aeda6e7b8052f2241bb009e78c97d25192f3e1a691a7a"
+    },
+    {
+      "path": "src\\secret-santa-links.css",
+      "sha256": "a093f1d8c9f3b8fff8f3632310ef62c3fe63ae782baad6f4c4935a76b61080c7"
+    },
+    {
+      "path": "src\\secret-santa-experience.css",
+      "sha256": "9a0efdccc19a182b6f56951d9c276b931f414e0885194c4725e1eb01c2f41e8f"
+    },
+    {
+      "path": "src\\santa-pairings.css",
+      "sha256": "d97265a08f0913e80e11e14308e8c1da414b0f506395aa3f47c4cc98369e5f03"
+    },
+    {
+      "path": "src\\quiz.css",
+      "sha256": "27e4dfdf49bb0f8172d9dd1ed9c77d89d36546f62f6b577b7a155538f9dd8bbc"
+    },
+    {
+      "path": "src\\main.jsx",
+      "sha256": "03677cab256c97d3e034da2c38cd1a20b254d1070f07684c47ed79894cd314ca"
+    },
+    {
+      "path": "src\\lib\\welcome.js",
+      "sha256": "9f3ef7f8a483dc2ccc85374795f43c727bff2668160f2878eaba92329fbd2cf1"
+    },
+    {
+      "path": "src\\lib\\secretSantaStore.js",
+      "sha256": "1103546d9defc03a225ead0ab2494215e56c2a7db8c522283c7144b010cb16f2"
+    },
+    {
+      "path": "src\\lib\\secretSantaRoster.js",
+      "sha256": "6579549e8cd5389538e896bf17bccfb0564cae08cd5b44dc326fdc0b6f46da40"
+    },
+    {
+      "path": "src\\lib\\secretSantaEmail.js",
+      "sha256": "2be29b5ae1defa9d821809fb76b87c6ccffb0a2c37f1cda5a2f842e40716279e"
+    },
+    {
+      "path": "src\\lib\\secretSanta.js",
+      "sha256": "c82a066c80d73297fa9c474d79dc7a0bc458fb7407e2889f696e44a7d081c58e"
+    },
+    {
+      "path": "src\\lib\\season.js",
+      "sha256": "afb976e97da8fb7c1b496ba4199df4b03e39510216f341f227f229e106641738"
+    },
+    {
+      "path": "src\\lib\\search.js",
+      "sha256": "64ff9fe0b3d60e5b8c9990404ed22c9a97c49f612431fb56dae001881f8f9fbe"
+    },
+    {
+      "path": "src\\lib\\santaPairings.js",
+      "sha256": "a8b4d6e879ef79c6ce24319ec3b394494ae1336679bf7117edac650125c076ad"
+    },
+    {
+      "path": "src\\lib\\quizStore.js",
+      "sha256": "51df35cad4bc576393c38d156b2914280ceb2e737fb5b952c9b318284619beb2"
+    },
+    {
+      "path": "src\\lib\\quizHooks.js",
+      "sha256": "86825a7e180942fe2b99cb9b338bab792a5221aa6d26bed3229dd70b24ad5e99"
+    },
+    {
+      "path": "src\\lib\\quiz.js",
+      "sha256": "694efba858937f6706956c685d5cab5a859b09a884774a839685dfe492349db3"
+    },
+    {
+      "path": "src\\lib\\preferences.js",
+      "sha256": "7cb61355c63034d3f0aec09106a80810da79603da389c9b215ce50f3035a5428"
+    },
+    {
+      "path": "src\\lib\\news.js",
+      "sha256": "6c1ae3960406798bef705439a91a86b999399bf112741da1d710cea6c3c65223"
+    },
+    {
+      "path": "src\\lib\\greetings.js",
+      "sha256": "780173d9f6d92594e15fc0a66a2ba5b4fe3c789708599c078e0e88eec51e0675"
+    },
+    {
+      "path": "src\\lib\\content.js",
+      "sha256": "8a6b33ba99fc7fe02ac403fd1ad888a11a6cc494a2a5bb445ac2faa48aa017e4"
+    },
+    {
+      "path": "src\\lib\\appearance.js",
+      "sha256": "417e3cf38beef54cb21e36b5226a2fb01a08695dd23f47a7f5e9da43903efc6b"
+    },
+    {
+      "path": "src\\lib\\adminPassword.js",
+      "sha256": "2e5bd73837b739393c8e97eab9568b389bdb3183bf2ffe7918897306f942421c"
+    },
+    {
+      "path": "src\\index.css",
+      "sha256": "35208b0609d6226a765fde08f39e19d1d7bfb0aa252cab86fa73bd8cfaf52e29"
+    },
+    {
+      "path": "src\\game\\TouchControls.jsx",
+      "sha256": "daa315b65a5621a11cb277779fc37d54dfe5598f80e24bfd5633d4200d1b764b"
+    },
+    {
+      "path": "src\\game\\tecnoiaV2Review.js",
+      "sha256": "04fe7408a951f53989be4f7e491937155af96f496fd75d6ce8d39e15559b2c3b"
+    },
+    {
+      "path": "src\\game\\tecnoiaV2.js",
+      "sha256": "3a218c6d197119e65b3a1ebe18182a293119df46a60de1b80a5863b1e6ddedb2"
+    },
+    {
+      "path": "src\\game\\tecnoiaGameplay.js",
+      "sha256": "0c19cbde062068a5a5b89934dbd696bee10620de080d69357f5d2f71de5dcae1"
+    },
+    {
+      "path": "src\\game\\spriteLayout.js",
+      "sha256": "26af94d6425f2f7d463b0296f3c410b11bc6a7a6ca28eec517a8107006710e85"
+    },
+    {
+      "path": "src\\game\\spriteAtlas.js",
+      "sha256": "0482d756a008724daa29e1665e1cb11191791b80e7c12c973ab0a421183fd67b"
+    },
+    {
+      "path": "src\\game\\simulation.js",
+      "sha256": "e184fb89c22fe3489cd664d241f40b935cb86b6883ec0d8067d4c3dbc35a616f"
+    },
+    {
+      "path": "src\\game\\ScoreSubmitter.jsx",
+      "sha256": "3c718ed11d6c2dbb694ad88e7e424eabd5fd2d0511aaeed7c7262cd262b63b11"
+    },
+    {
+      "path": "src\\game\\roster.js",
+      "sha256": "bae4e12a9e7cc8b76d69160d3a994795b6e5705ef57ccf03b5cd591172e2cd6b"
+    },
+    {
+      "path": "src\\game\\rig.js",
+      "sha256": "55d0cb90ae12b96937d22f225102aa62673af78f5693300436ea1f8c9c4c0b33"
+    },
+    {
+      "path": "src\\game\\render.js",
+      "sha256": "49c679d941b4384eacedaa650dd0568acd418fd2ef7006f3b0e4d6d5ca9182af"
+    },
+    {
+      "path": "src\\game\\profile.js",
+      "sha256": "24e4aa91496bc6411c40f8adc51c08690f4fda14a87fdb190386683448f8bfd3"
+    },
+    {
+      "path": "src\\game\\powers.js",
+      "sha256": "296ee720b7933eb14785a278fdd886697832b638550b6e7a2165bd06c87e08aa"
+    },
+    {
+      "path": "src\\game\\missions.js",
+      "sha256": "2b8d71b2b5de38a0a4dd35c890e780951e36f197e79d3c3d072bca59a0159db1"
+    },
+    {
+      "path": "src\\game\\input.js",
+      "sha256": "352ca29a0d5f327f6c030aee1c94f0939f8e4056b95d0b03dd74eec0ea2b2c3b"
+    },
+    {
+      "path": "src\\game\\emission.js",
+      "sha256": "a119671e32a15aad0b9371b107918139ab45297914c3cf0da8edee87134f8446"
+    },
+    {
+      "path": "src\\game\\conectiaV2Review.js",
+      "sha256": "aa5d7873d19e5b30c5bf964ed6a0e4b6ea04fa0be788a33b891fbab40926c2d3"
+    },
+    {
+      "path": "src\\game\\conectiaV2.js",
+      "sha256": "388d3b516dc33ef3e92104e770b048e8e30eb0d1aa65b142a758f9649e2500bd"
+    },
+    {
+      "path": "src\\game\\conectiaGameplay.js",
+      "sha256": "41a2a42f922bb67acfc6e222235de8586a5ff622b688fc0e488c80d701bacce4"
+    },
+    {
+      "path": "src\\game\\characters.js",
+      "sha256": "0bf57ac17a605e62443ae6cd7977bd8943faf0822f9470abfee5dafaf2b4e46f"
+    },
+    {
+      "path": "src\\game\\CharacterPreview.jsx",
+      "sha256": "b837192421bdbaecf9312bd764d3e6d2a5ac56782cf206eb93283e6a5e341d6e"
+    },
+    {
+      "path": "src\\game\\characterParts.js",
+      "sha256": "c3f172c23fb77bd48eb15c42d3714fe8a2ad922ee0e6504eb5791a08304b0e0b"
+    },
+    {
+      "path": "src\\game\\characterAnimation.js",
+      "sha256": "9b747e1b80b03002cb4c2875d7097aa722f115bac0e3b88da79af426bbaacf50"
+    },
+    {
+      "path": "src\\game\\audio.js",
+      "sha256": "44a79a75912a57af8100bc566c82ede04ce098eba845efa5e0d2473cfd9432be"
+    },
+    {
+      "path": "src\\game\\arenaSimulation.js",
+      "sha256": "1f561d3b819bed5ba0b74fd307b6c3c1c25cbe7ef1d4131fd7f89f636c630da2"
+    },
+    {
+      "path": "src\\game\\arenaRender.js",
+      "sha256": "fca69b6153bf46eb6cf51a5192cde181e7275d2b46c6f4734aac7e046f01ae3c"
+    },
+    {
+      "path": "src\\game\\ArenaOnline.jsx",
+      "sha256": "cdb60e54017bc9fcdaf311faa6b89d4392587e8ddfdefd1aac3495bde276773f"
+    },
+    {
+      "path": "src\\game\\arenaConnection.js",
+      "sha256": "a2947aabee71845e33a6c4f5f073808966bd3ac7a2f949a83422bc2a25d89d9d"
+    },
+    {
+      "path": "src\\game\\arcade.css",
+      "sha256": "5defebd143b673eba63726c1367891f953b55651732d354590c4fff9008cc857"
+    },
+    {
+      "path": "src\\game\\animation.js",
+      "sha256": "1f63e68f6ffdb7091f8b9d731716d8039d4a462bfa236538217fbc6d1e1540b5"
+    },
+    {
+      "path": "src\\firebase.js",
+      "sha256": "0c94aa5a5454d832b547b548fae785880e1018dba5da4caeb03ce6dc446137c4"
+    },
+    {
+      "path": "src\\data\\secretSantaTemplate.js",
+      "sha256": "ebde363eccbfbff1dedb14c363698cc261e636730a31b2290d4b42e3f1905965"
+    },
+    {
+      "path": "src\\data\\knowledge.js",
+      "sha256": "57fdbecb8474eea98c644ff994868b21acc5765492a62d6c65df89b837dd940c"
+    },
+    {
+      "path": "src\\context\\PortalContext.jsx",
+      "sha256": "0b3100a30a58f6b98273685afc6c1ba33b87f572755d5a6e2d97327658394d81"
+    },
+    {
+      "path": "src\\context\\portal.js",
+      "sha256": "2521dd24dc5b8454ba2a3357ea85abaa453af8d6d634c519504e42572b4247c6"
+    },
+    {
+      "path": "src\\components\\Wiki.jsx",
+      "sha256": "4830f6e838d327df2859e1251d63498dc2984e3073c3e1b627cc214d72c5b6e0"
+    },
+    {
+      "path": "src\\components\\Sidebar.jsx",
+      "sha256": "482a9c4abb9b423efab9a2885387b8efe7cc2fa31c1c01bce71d1d01dff0f76e"
+    },
+    {
+      "path": "src\\components\\SecretSantaAdmin.jsx",
+      "sha256": "cdd793a311d088b967a12290a3251e7c5a7394a006aca62b906626162d9d377e"
+    },
+    {
+      "path": "src\\components\\SecretSanta.jsx",
+      "sha256": "e703e2d0351f68ce34bf69098e773140d6c7bc012583271b0a07b1ef6872a6a4"
+    },
+    {
+      "path": "src\\components\\secretSanta\\shared.js",
+      "sha256": "524ebc4e0cf22d1dcb57ee0ebfba7fca410665d79faebecacd63c669b957d6a7"
+    },
+    {
+      "path": "src\\components\\secretSanta\\SecretSantaWorkspace.jsx",
+      "sha256": "92d4336f644f1dff4f4cdc850ec429d0c6adce88412aa37f30e135e870878818"
+    },
+    {
+      "path": "src\\components\\secretSanta\\SantaWorkflow.jsx",
+      "sha256": "c1874f5f3de98536ef7fbd1a0e258e1f1b5cb213873b1e9128df8372e5a28d20"
+    },
+    {
+      "path": "src\\components\\secretSanta\\SantaResults.jsx",
+      "sha256": "38b36a8a2c060e100411f90a3ed6025241afe0c121784150abc658e348cab4e9"
+    },
+    {
+      "path": "src\\components\\secretSanta\\SantaReadOnlyDraft.jsx",
+      "sha256": "9a8aa569f69f4b5a3c3cfe47261b6ed5e57a5765de953871826b8a3cba016b66"
+    },
+    {
+      "path": "src\\components\\secretSanta\\SantaPairingsTable.jsx",
+      "sha256": "c04da756037ac313b5935ff2ac9094a59293865218365a2ba6b83ec61356d96b"
+    },
+    {
+      "path": "src\\components\\secretSanta\\SantaMailSettings.jsx",
+      "sha256": "b3a7ba0e7cd890c13fca8ea2c94759e524af7267c2c4f54875b64773968e7fb9"
+    },
+    {
+      "path": "src\\components\\secretSanta\\SantaEmailPanel.jsx",
+      "sha256": "8fd831315d81c13465c6aff410d8adab31731944333a9f5e1b4f89216408e31b"
+    },
+    {
+      "path": "src\\components\\secretSanta\\SantaDraft.jsx",
+      "sha256": "e02320ed89430deda72aaa3d01929c4c0d88d2d080b9430068860a74c45df386"
+    },
+    {
+      "path": "src\\components\\SearchPage.jsx",
+      "sha256": "49474c510962e15145d2c443e1c3f0c7de2d729e88dc7c0d4aa0230e3f72c69b"
+    },
+    {
+      "path": "src\\components\\SantaMailLimits.jsx",
+      "sha256": "7c4bab44bcf4151987c57bf16df6e1872bde3c99e7ff4e75e472c541ee833f38"
+    },
+    {
+      "path": "src\\components\\SantaInvitationsTable.jsx",
+      "sha256": "d041ffea44f2e4109ed6aef8278f3b8f7eb2071f47c553c1a6c626d6b0c0c380"
+    },
+    {
+      "path": "src\\components\\QuizStage.jsx",
+      "sha256": "649d0e33ce80dc52b199c9611339f7e8680e8cf2f35c524bc3b3ba19ad237d06"
+    },
+    {
+      "path": "src\\components\\QuizPresentation.jsx",
+      "sha256": "4343fe1a5ba3bca9794a2b3b2fb6d108b167dc855fd9510020afcc68225e7a6f"
+    },
+    {
+      "path": "src\\components\\QuizAdmin.jsx",
+      "sha256": "634955e2ab6892f70ef4e293f4a33cd738745c9c201e760b505e3bc2534a8706"
+    },
+    {
+      "path": "src\\components\\quizAdmin\\shared.js",
+      "sha256": "130e2c7904d6447d950e343a2e07a6aa7871394dd5a6a8e94375b32a676b4f2c"
+    },
+    {
+      "path": "src\\components\\quizAdmin\\QuizWorkspace.jsx",
+      "sha256": "85026611d51c4cb44f6b3cb83076d9d705f7898d8ee78a69e242eab9b91aaab3"
+    },
+    {
+      "path": "src\\components\\quizAdmin\\QuizHost.jsx",
+      "sha256": "fbbde2fbaf1a1c597e79eeefdff7f9f72d6c06ae5bff1a345c97b2a849edb212"
+    },
+    {
+      "path": "src\\components\\quizAdmin\\QuizEditor.jsx",
+      "sha256": "81fa104eb479def3ae7995c0adff636fbcc50eb6abc433e7e6b000006ab0b5a6"
+    },
+    {
+      "path": "src\\components\\Quiz.jsx",
+      "sha256": "b7919fb98efc7413a4c954f8f2fa601569996ec64873ae685118d866e45d7661"
+    },
+    {
+      "path": "src\\components\\QRCodeSection.jsx",
+      "sha256": "e9c8a25222a0cafa4b088c36d675dfedfeec1c1cb509eff302f5b15c4b0a1839"
+    },
+    {
+      "path": "src\\components\\OrgChart.jsx",
+      "sha256": "08be93836ad552a21fbbf6f310cac31c091a1f61b7f09560032d49bb857e9a5f"
+    },
+    {
+      "path": "src\\components\\NewsPage.jsx",
+      "sha256": "7112fa35535b75fcdb92d08896d08edefafedc000720b7eaeb03e65a7b914648"
+    },
+    {
+      "path": "src\\components\\Modal.jsx",
+      "sha256": "ba4c37e0f08d3a6931f8038166ee1471736c4cd9325fb99cba3cfa66475ca411"
+    },
+    {
+      "path": "src\\components\\LoadingScreen.jsx",
+      "sha256": "8347f09394528ec02f458178d2964ecc1b657f2a9ac94239f6b3380837ec1622"
+    },
+    {
+      "path": "src\\components\\HelpDirectory.jsx",
+      "sha256": "e25bfc8c694c8fd7dd8b9956c126c0079092dbdaf1337c0f1592852f37d6106d"
+    },
+    {
+      "path": "src\\components\\GamePage.jsx",
+      "sha256": "0bd0b496dab919cb721c6e588b91b24ed1bbbe0a022021615637a52922185654"
+    },
+    {
+      "path": "src\\components\\FeedbackForm.jsx",
+      "sha256": "706cd771c38a45130c008049200b84b2d1f40adb571eb401bf29d193a4b11456"
+    },
+    {
+      "path": "src\\components\\DynamicHeader.jsx",
+      "sha256": "acb1f682996d01e956c8c3dc030ae9b3ba5653927dad407e37601715f1dffd84"
+    },
+    {
+      "path": "src\\components\\Dashboard.jsx",
+      "sha256": "61974e2db7188fade8c61326a014a034843bafd36947d1131783686670d5933f"
+    },
+    {
+      "path": "src\\components\\ContentManager.jsx",
+      "sha256": "824d4fe63c8d35b0a7e485ab868612f96a2812cdfca8786b9634790a1bc59838"
+    },
+    {
+      "path": "src\\components\\ChristmasWall.jsx",
+      "sha256": "cd26a0c0de9386e9513d16ee97d4653133a4b333f22806648bcfd2e986a775e1"
+    },
+    {
+      "path": "src\\components\\ChristmasEffects.jsx",
+      "sha256": "eae562ad6fd29bf56e9fbfc0fe558179f807d51513e014979558839a7735d1a2"
+    },
+    {
+      "path": "src\\components\\ChristmasArt.jsx",
+      "sha256": "7df50d852c5ee6914ecee70b5cc88aa866cfc777f45887b0aaf2584eb46caf54"
+    },
+    {
+      "path": "src\\components\\Christmas.jsx",
+      "sha256": "67f94b98b14294b255ceba9681d13eb2818d1808066f7931f02a8bdd4ef30f22"
+    },
+    {
+      "path": "src\\components\\christmas-wall.css",
+      "sha256": "3f5d1222a8b762994740fd4d39d797311fc4d0e9aa87a58cabd1ea6d8d868740"
+    },
+    {
+      "path": "src\\components\\AppearanceSettings.jsx",
+      "sha256": "1e75c0f912ea65f4d27b3cd452e409be8093bef51e539d4858573e1f083adf75"
+    },
+    {
+      "path": "src\\components\\AdminManagers.jsx",
+      "sha256": "bdeccdcde6307e8762dfac7f6564ea389c86fc5349f8596dfd263b120ebd114e"
+    },
+    {
+      "path": "src\\components\\AdminLogin.jsx",
+      "sha256": "b6a90c207fff0ad37ce70dcfd1f1308d6ca9cbb3ae0e6bd74f29179aa41cdbef"
+    },
+    {
+      "path": "src\\components\\Admin.jsx",
+      "sha256": "f361e4cc42b185f9e46df5e978a4466325c6a377dc849d97b52b5921ac636b34"
+    },
+    {
+      "path": "src\\components\\ActiveBreak.jsx",
+      "sha256": "89aefe10a99c91e3e53aef46eb4daf407c0a62198b9e3cee40d3ba801f1777c5"
+    },
+    {
+      "path": "src\\auth.js",
+      "sha256": "8eeb6d93a4c9f081a13cda8f04649bd56d829904279e15954fa9be1a997cc3b8"
+    },
+    {
+      "path": "src\\App.jsx",
+      "sha256": "25a1b9a9f857b776e1d32dda075034c5af7af10527e57b2eb308ac833dcd41f8"
+    },
+    {
+      "path": "src\\admin\\useAdminCollection.js",
+      "sha256": "d47eeea1a9fab10ff50a854a26ff85e2a1d2377f7f130d7c18d5f4f2a530188f"
+    },
+    {
+      "path": "src\\admin\\useAdminAccess.js",
+      "sha256": "a55cabeb57239663db7a05710933c4cfc9770dc832ffb8ae4ca5617542bef1e3"
+    },
+    {
+      "path": "src\\admin\\ScoresSection.jsx",
+      "sha256": "495ee99793b0be9bab3b65d151eae4b3ce16189ded90a8408d8ffea1417c0a1b"
+    },
+    {
+      "path": "src\\admin\\ReportsSection.jsx",
+      "sha256": "30f4f236ca8fcde3b5e88c23831e2c96abfbfacf5164b4d67e017bacca8049ac"
+    },
+    {
+      "path": "src\\admin\\permissions.js",
+      "sha256": "1a989d494d0b94d8e26e8ed110b6cf3874f1ca234e49d309c87378089a0c2593"
+    },
+    {
+      "path": "src\\admin\\passwordStatus.js",
+      "sha256": "0e4018f506d7822796f8a6f50beecfc22e11ae1310586b33a47fcf7fbc32d661"
+    },
+    {
+      "path": "src\\admin\\PasswordSetup.jsx",
+      "sha256": "bc193a271246d2393a495e1ab4362d4a345c839c310962412525317085f0cdb7"
+    },
+    {
+      "path": "src\\admin\\modules.js",
+      "sha256": "c41d04ff05f4fe05c54b0b0246cce5f19e6b4c7551cc374c3f62ec7830131170"
+    },
+    {
+      "path": "src\\admin\\DeleteRecordDialog.jsx",
+      "sha256": "1a0bdce6c9b4ecbefc4c803a371aac573bcee720374bc7dc660bf048492b2e9f"
+    },
+    {
+      "path": "src\\admin\\ContentSection.jsx",
+      "sha256": "38869fdd1d0b02689776830c2adbb5bf161397af4d7e3e0128f1b9256bd4e778"
+    },
+    {
+      "path": "src\\admin\\CollectionState.jsx",
+      "sha256": "e8e4754c6d7e7281058d73f042433c7debb52e0f6167c3ce6a4c35db81ca7a11"
+    },
+    {
+      "path": "src\\admin\\AdminNavigation.jsx",
+      "sha256": "903467be0792f4a5ac717ce3ef823e9464b2948a937132e38c7073716a3dbc12"
+    },
+    {
+      "path": "src\\admin\\admin-access.css",
+      "sha256": "628daa418ba3d15a09e3e7fc7bb0806dbb5cee296fd4791f2a2835716581a176"
+    },
+    {
+      "path": "src\\admin\\accessStore.js",
+      "sha256": "6fec3744399ce9708e5ff1e0c0ceec686c0794525e69db15a7ec14894f6cb03f"
+    },
+    {
+      "path": "src\\admin\\access\\useAccessDirectory.js",
+      "sha256": "1eab028231ff14c5114177e83fe997f3b138eb59a03ac5389913e1e3c712c20e"
+    },
+    {
+      "path": "src\\admin\\access\\ProfilesPanel.jsx",
+      "sha256": "a132663769a57379d1e6d221a00214b277e044b98dfc15eae75b5466f25e9464"
+    },
+    {
+      "path": "src\\admin\\access\\ProfileEditor.jsx",
+      "sha256": "3a1374dff432f4e5b9ad194f0213d9da45af8526e73d413244cb85d8ae6dc31b"
+    },
+    {
+      "path": "src\\admin\\access\\MembersPanel.jsx",
+      "sha256": "048aa336255d305f975b9c8123af515390487209faa7fc9d9a57b487b0dd7b41"
+    },
+    {
+      "path": "src\\admin\\access\\MemberEditor.jsx",
+      "sha256": "71f55663b2a1fad7b01674b47a96ea1981de7cbb783ae9bbfd705418d268432c"
+    },
+    {
+      "path": "src\\admin\\access\\AccessManagement.jsx",
+      "sha256": "db27669e94b3b7c927ca0cf79bad360e6b5c5d9246f6121b3755b19f1ed0c377"
+    },
+    {
+      "path": "firestore.rules",
+      "sha256": "1a31c3387c3f9b20db2bcdd2280d58cf3cb1d6937008fd2f16919f9a613cf865"
+    },
+    {
+      "path": "package.json",
+      "sha256": "4da9c63b8b7c1f0440bd85bb01b8c58f88442b50e3b573d8cd29a0cdff1a3d5e"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "353c62a0e81471385860a6cd5877342a03e9bb6573989ccd4d268176b62cd426"
+    },
+    {
+      "path": "vite.config.js",
+      "sha256": "2f1e01018db88e3c945c24fc0fe516efcf03bf6d98906a2c442a495f4bc43d40"
+    },
+    {
+      "path": "firebase.json",
+      "sha256": "1e2cbf499e123e6433694c66c18c72b6ce34432a46e0a22a8d68d4846f461e68"
+    }
+  ],
+  "resources": [
+    {
+      "path": "index.html",
+      "sha256": "ade13e770e8ee62968c2865f09bcc97410bdc3141858f1133347ee71a06a4a25",
+      "bytes": 1556,
+      "status": 200
+    },
+    {
+      "path": "assets/AccessManagement-C9HkgS_T.js",
+      "sha256": "cb2c2692465fc661bdd1de0baf3071d04735efdd345e33d6d999d8f7120ce61e",
+      "bytes": 19914,
+      "status": 200
+    },
+    {
+      "path": "assets/Admin-C4Q1Yah4.js",
+      "sha256": "c1cea617de3af9d396ddf0a30b80b2907df11b4ff1a0370f9a0dab7073e15826",
+      "bytes": 16169,
+      "status": 200
+    },
+    {
+      "path": "assets/Admin-CWKXHQ2z.css",
+      "sha256": "b3506f7c134535a820a81115db339091709f00d081c9273152a2b19c1907ca3b",
+      "bytes": 7620,
+      "status": 200
+    },
+    {
+      "path": "assets/arrow-down-to-line-DMzm3Wb4.js",
+      "sha256": "9eed83fd6eff6ce6e2b1ed5c24f282876f7233eae533990e994c52fe43d26ccb",
+      "bytes": 327,
+      "status": 200
+    },
+    {
+      "path": "assets/arrow-left-Cowx0KOi.js",
+      "sha256": "3261687f5c1f4a8f33cd0a5fcaf573292d17138cc5cbd9ed310b8ae54352f014",
+      "bytes": 283,
+      "status": 200
+    },
+    {
+      "path": "assets/arrow-right-DFBgXtwZ.js",
+      "sha256": "076668e01e47a0753b7a04504b63999d55d5303b8f02c9357be875624150b61c",
+      "bytes": 283,
+      "status": 200
+    },
+    {
+      "path": "assets/auth-oPSI3HwQ.js",
+      "sha256": "c0d92910c54662c43e586fb37ed1dd08b958b76180792c93716871a0f692c97a",
+      "bytes": 293,
+      "status": 200
+    },
+    {
+      "path": "assets/check-BIjFlQQA.js",
+      "sha256": "4f2768029a874d92e5da62d8183472ee4497bb4ece1366082d35d9f555901a9e",
+      "bytes": 242,
+      "status": 200
+    },
+    {
+      "path": "assets/Christmas-ClbFux2a.js",
+      "sha256": "0fe9cfd7ad66dc1e745bb6adef8faca6c5941fe33a6eb7b6647f3141e1af527e",
+      "bytes": 5669,
+      "status": 200
+    },
+    {
+      "path": "assets/ChristmasWall-C4Eq8YsD.css",
+      "sha256": "2077d68de83e4c518d88fa0c5950588bc93e07165b489c3fa141f19943ceffcd",
+      "bytes": 3816,
+      "status": 200
+    },
+    {
+      "path": "assets/ChristmasWall-D19vvY2_.js",
+      "sha256": "a5d55955e3fe5245111ba650b2797fdae3aa19b979c954fec7f6ceb061ecfadf",
+      "bytes": 10648,
+      "status": 200
+    },
+    {
+      "path": "assets/circle-check-BSEiGgV7.js",
+      "sha256": "ccfa3d22098dd705f11537761faec1993bbd5b966423b15664570dfebb85efa1",
+      "bytes": 296,
+      "status": 200
+    },
+    {
+      "path": "assets/clock-3-DGnoHHVj.js",
+      "sha256": "999f3145564294d80fb37fbd1f9a18ca7ff870d897b41350865831a96f542452",
+      "bytes": 287,
+      "status": 200
+    },
+    {
+      "path": "assets/ContentSection-BwfQ22La.js",
+      "sha256": "97262cbcad2208ba9e37f8978cc79e1ea62383fee4f7c66b6d0b96d1d8cc9fdf",
+      "bytes": 9291,
+      "status": 200
+    },
+    {
+      "path": "assets/copy-C-O0DyBg.js",
+      "sha256": "068a584ae0e4a2fa0674f54f15fbf0f8479a0eb7f474986a0a6b464da3de55b0",
+      "bytes": 354,
+      "status": 200
+    },
+    {
+      "path": "assets/createLucideIcon-DkgbDv7J.js",
+      "sha256": "61b1726789437c53165e7fab35ff4f565215009f8eca768e878a4cba166075c8",
+      "bytes": 1855,
+      "status": 200
+    },
+    {
+      "path": "assets/DeleteRecordDialog-1nyaXmGF.js",
+      "sha256": "a12dc059bde8347febfc01c6f34fb9a17a91e8d5926ad9df7454d39277e6f5fa",
+      "bytes": 2786,
+      "status": 200
+    },
+    {
+      "path": "assets/download-CVh2wH3z.js",
+      "sha256": "33fdb2b1a703ea638bd3c789c5f87f6d0c3ed3e624b4514e4ea239e56339135d",
+      "bytes": 350,
+      "status": 200
+    },
+    {
+      "path": "assets/esm-BLwCZdJv.js",
+      "sha256": "b73f57f2be714c4d4d26209a30e913876105221613e38d8684d7b046b3b2b10e",
+      "bytes": 16256,
+      "status": 200
+    },
+    {
+      "path": "assets/eye-off-B3NcHYDk.js",
+      "sha256": "58b818bbe3fa09f4f2b781b7cc4e9262f59ca81fc93cfffc05f15a07d4e3e181",
+      "bytes": 548,
+      "status": 200
+    },
+    {
+      "path": "assets/eye-XF-crv-5.js",
+      "sha256": "e7ad2ca9db95a778a43d6dc14a32d20db88458452d87c83badac4e885c44de09",
+      "bytes": 374,
+      "status": 200
+    },
+    {
+      "path": "assets/FeedbackForm-B6UoyTOj.js",
+      "sha256": "dccbd1ce479847991779e88798d2bf4db45fc11d02f99fef81a0bac9afd79416",
+      "bytes": 5920,
+      "status": 200
+    },
+    {
+      "path": "assets/firebase-auth-DDEE1d6g.js",
+      "sha256": "028f5e011225d6d813bc704818d8f32b10ce0020b4784b4fa89a9b0043086460",
+      "bytes": 88709,
+      "status": 200
+    },
+    {
+      "path": "assets/firebase-core-csnan9sr.js",
+      "sha256": "e9165fb44cc6b5f869f2f919434420bae4d2ecefc4d80c5eea67b50cd0d9ce0f",
+      "bytes": 25641,
+      "status": 200
+    },
+    {
+      "path": "assets/firebase-Du2_SFTw.js",
+      "sha256": "45a3b0a9a367b440941b03ca787d11a6edc705417aa9facd9449bdb6ffe35b82",
+      "bytes": 305411,
+      "status": 200
+    },
+    {
+      "path": "assets/GamePage-BtXxF4fq.js",
+      "sha256": "b379aa876f9f85477a88c91bc7f9637eec30721fee8037b10d7f3da1f3a8daab",
+      "bytes": 84725,
+      "status": 200
+    },
+    {
+      "path": "assets/GamePage-CkARHRxK.css",
+      "sha256": "a072386c949f65299d4aaa179818fd8f16cf22d903c5e377084e289be7345271",
+      "bytes": 20613,
+      "status": 200
+    },
+    {
+      "path": "assets/geovictoria-intranet-ChFv245L.js",
+      "sha256": "c218011ac83e1ea9f2eafaf4800b483c716e4b5e50574b606ecf6ecd3d2ee823",
+      "bytes": 227448,
+      "status": 200
+    },
+    {
+      "path": "assets/geovictoria-intranet-Dk8WBFoS.css",
+      "sha256": "f86cb7434b5c8c89fb606dfaf16c574dcdb58287dcf4dd8a6fd79dcb3bb7e6c9",
+      "bytes": 118749,
+      "status": 200
+    },
+    {
+      "path": "assets/HelpDirectory-CozH7uyL.js",
+      "sha256": "7b8dd0bb0d8d6b989adb3943b925d543d79131b15b0868c168e6ad0daf0f0ca5",
+      "bytes": 4101,
+      "status": 200
+    },
+    {
+      "path": "assets/index-CGiaGXeU.js",
+      "sha256": "ced69084c2cde2807f0acbbb2eac49614e93f56b41ec6fe2b01f5d8b8a84a155",
+      "bytes": 59,
+      "status": 200
+    },
+    {
+      "path": "assets/lock-keyhole-IQ4xWgMv.js",
+      "sha256": "5ab062bf0f3a2a6e511960d894bf4113071b72006edd501d21f3a7c67d9eb208",
+      "bytes": 373,
+      "status": 200
+    },
+    {
+      "path": "assets/mail-cFAW8Yjt.js",
+      "sha256": "062d5541769a291e60a7feedcc07b08f9807d138218796901c90ff738518c41b",
+      "bytes": 331,
+      "status": 200
+    },
+    {
+      "path": "assets/NewsPage-DqTD6ENb.js",
+      "sha256": "f158ff5e2abaa76be7cc679a5b6629fbf417f949b97ab87c2d6ef310cdb6e78b",
+      "bytes": 3350,
+      "status": 200
+    },
+    {
+      "path": "assets/OrgChart-BbQtW8su.js",
+      "sha256": "9f3693de1fa97ebe82474842a8ddce2ef13f23bcc379dea129835cad952c2011",
+      "bytes": 2511,
+      "status": 200
+    },
+    {
+      "path": "assets/pencil-anzgP7Ck.js",
+      "sha256": "6734eb2699a45cae27974ab123065792256f0dbd1252d434c17fd87173f16718",
+      "bytes": 394,
+      "status": 200
+    },
+    {
+      "path": "assets/plus-COsp5OOR.js",
+      "sha256": "26f568a4f8e73027eb9c25cbcc173ceaf1738866a0d56afef90dac00281f19e4",
+      "bytes": 271,
+      "status": 200
+    },
+    {
+      "path": "assets/Quiz-7RwBEDAC.js",
+      "sha256": "7b4453efb6d21abfbe1726c5334736880526ec2a479fb8c4ea891ecf038283bb",
+      "bytes": 12838,
+      "status": 200
+    },
+    {
+      "path": "assets/quiz-ChGAa421.css",
+      "sha256": "caf23fc982d6eccde323660cf809cfb7ad5ace8e2e2f8c6187e0b6ee13a21de8",
+      "bytes": 22714,
+      "status": 200
+    },
+    {
+      "path": "assets/quiz-Ov5f8D6a.js",
+      "sha256": "47a1bacf0dbf1055fffaa526fb8a22c39bc22c27ac4122420e0eac86405d9aa9",
+      "bytes": 23659,
+      "status": 200
+    },
+    {
+      "path": "assets/QuizAdmin-ChjJ-iGF.js",
+      "sha256": "738884ba28c2a2b784efbd611b79a7750b1c62f73a1d23eda5d17572bddb2d4c",
+      "bytes": 12950,
+      "status": 200
+    },
+    {
+      "path": "assets/QuizHost-CBeuLcAN.js",
+      "sha256": "029bbb564620b834457eea4087122003c82a551044474ae759538d227377a905",
+      "bytes": 6919,
+      "status": 200
+    },
+    {
+      "path": "assets/QuizPresentation-BQVjaJv5.js",
+      "sha256": "3eb23c3999e3e056855c5604adca21f46d905acdd24ec50205c7ae46f3ac4013",
+      "bytes": 1079,
+      "status": 200
+    },
+    {
+      "path": "assets/react-BVNqbF40.js",
+      "sha256": "ffc267103e7c1c4f6aee8d59dfbac804cc8ca717f0d0313c139da8164843005a",
+      "bytes": 228576,
+      "status": 200
+    },
+    {
+      "path": "assets/ReportsSection-BUre8EIQ.js",
+      "sha256": "44736f5523192c80b9357bb1e39b09f58736e1de693020d8e96cf19427c0c23f",
+      "bytes": 1904,
+      "status": 200
+    },
+    {
+      "path": "assets/rolldown-runtime-8BhlS34s.js",
+      "sha256": "1cb5c6ead7e29370203f12e2d5cdf50ec1f02dd70ee2d050d909afbf2406f6b1",
+      "bytes": 807,
+      "status": 200
+    },
+    {
+      "path": "assets/ScoresSection-hGK3YUGh.js",
+      "sha256": "66410e259890bff53513b8c2fda82479ca9996e032cb4dfcddd3af05bd4f39e3",
+      "bytes": 1295,
+      "status": 200
+    },
+    {
+      "path": "assets/SearchPage-BSXG0INR.js",
+      "sha256": "b5c51f79b680e1453f37eaec2b3a5ca14873fe59161f43eed6630229961f29ae",
+      "bytes": 2867,
+      "status": 200
+    },
+    {
+      "path": "assets/secret-santa-experience-5wa_AxLQ.js",
+      "sha256": "11468e9688e25ca3bd5035090216caca03d1b114babdb586e4f36ca8a9afe17f",
+      "bytes": 7064,
+      "status": 200
+    },
+    {
+      "path": "assets/secret-santa-experience-DuRqXPGs.css",
+      "sha256": "4c55327207c0a65264520b1e2560a66dc6edfe27641e929405192cacaf32d19f",
+      "bytes": 20747,
+      "status": 200
+    },
+    {
+      "path": "assets/secretSanta-BAl3A6SF.js",
+      "sha256": "e1e3df162a38148f0a21a087aa7c58f6aba9f048f9fb08379ba10ad9f1b90c2d",
+      "bytes": 4370,
+      "status": 200
+    },
+    {
+      "path": "assets/SecretSanta-juRPWYDk.js",
+      "sha256": "0b5e5c646ebbc53adebaddf362919849e9fe378e189fb026d86f8f3288501836",
+      "bytes": 11786,
+      "status": 200
+    },
+    {
+      "path": "assets/SecretSantaAdmin-CsUHkL-O.js",
+      "sha256": "fcf372699fdf2c98f779c1dacf4da350e3ba715538bf7da9dc870b950e6868bb",
+      "bytes": 55372,
+      "status": 200
+    },
+    {
+      "path": "assets/SecretSantaAdmin-D9eqvj4x.css",
+      "sha256": "c33a4e70fd0493fd3db29069b6d4173591ad2bf79351801c03f8d92a8402bf86",
+      "bytes": 6819,
+      "status": 200
+    },
+    {
+      "path": "assets/send-CMBKyrk-.js",
+      "sha256": "e381d4970c035cbaeb757d661ea2c0c961b5e3c9d03e360c044990393764001e",
+      "bytes": 408,
+      "status": 200
+    },
+    {
+      "path": "assets/settings-2-CetWwxZa.js",
+      "sha256": "cb160110228bb9de19f5f7395ce536789187123187da71541a481132d9e255f9",
+      "bytes": 370,
+      "status": 200
+    },
+    {
+      "path": "assets/shield-check-CLVg30K7.js",
+      "sha256": "46a210e359f48f8c076cd58c9ebc08d7aa76eb6cb0832af7903428c954390a47",
+      "bytes": 438,
+      "status": 200
+    },
+    {
+      "path": "assets/useAdminAccess-DHSbTrtE.js",
+      "sha256": "a413d5d0b0ac1ea577d9df2a98b52da4a48403314270ed8f3d7d8ad7cbbe25a0",
+      "bytes": 6888,
+      "status": 200
+    },
+    {
+      "path": "assets/Wiki-D4pLECI3.js",
+      "sha256": "aa742814a97a9ab2a2c284837db9e3fe66bbbf295661f658eaa6a4cf96aff656",
+      "bytes": 5672,
+      "status": 200
+    }
+  ],
+  "routes": [
+    {
+      "path": "/admin",
+      "status": 200
+    },
+    {
+      "path": "/admin?seccion=accesos",
+      "status": 200
+    },
+    {
+      "path": "/admin?seccion=amigo-secreto",
+      "status": 200
+    },
+    {
+      "path": "/amigo-secreto",
+      "status": 200
+    },
+    {
+      "path": "/amigo-secreto/ver",
+      "status": 200
+    }
+  ],
+  "validation": {
+    "generalTests": 120,
+    "firestoreRulesTests": 50,
+    "build": "passed",
+    "localProviderPasswordChange": "passed",
+    "browser": {
+      "massPairTable100": true,
+      "searchesBothPeople": true,
+      "copyAndCsv": true,
+      "mobile390": true,
+      "firstLoginScreen": true,
+      "restrictedProfileAfterPasswordSetup": true,
+      "productionLoginReviewed": true
+    }
+  },
+  "accountsApplied": true,
+  "realDrawsChanged": false,
+  "realInvitationsSent": false,
+  "accountChanges": {
+    "limitedAdministrator": {
+      "email": "ldiazr@geovictoria.com",
+      "profileId": "admin-sin-amigo-secreto",
+      "santaAccess": false,
+      "existingPasswordPreserved": true
+    },
+    "initialPasswordSetup": [
+      {
+        "email": "abautista@geovictoria.com",
+        "configured": true,
+        "verificationRequired": true
+      },
+      {
+        "email": "nlarriega@geovictoria.com",
+        "configured": true,
+        "verificationRequired": true
+      }
+    ],
+    "principalRolePreserved": true,
+    "passwordsStoredInSourceOrRelease": false
+  },
+  "screenshots": [
+    "design/admin-access/2026-11-26/tabla-parejas-escritorio.jpg",
+    "design/admin-access/2026-11-26/tabla-parejas-movil.jpg",
+    "design/admin-access/2026-11-26/primer-ingreso-movil.jpg",
+    "design/admin-access/2026-11-26/perfil-sin-amigo-secreto.jpg",
+    "design/admin-access/2026-11-26/acceso-produccion.jpg"
+  ]
+}

@@ -1,0 +1,92 @@
+.santa-greeting {
+  width: min(100%, 570px);
+  margin: 4px auto 20px;
+}
+.santa-greeting canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1000 / 420;
+}
+.santa-greeting-caption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.7;
+  margin-top: -6px;
+}
+.santa-greeting-caption > span {
+  display: inline;
+}
+.santa-greeting-caption strong {
+  font-weight: 600;
+  color: var(--text-main);
+}
+.santa-greeting-caption i {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+.santa-greeting-caption .text-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 40px;
+  font-size: 12px;
+}
+.santa-greeting-caption .text-link:disabled {
+  opacity: 0.65;
+  cursor: default;
+}
+.santa-greeting-caption > small {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.santa-greeting-fallback {
+  min-height: 170px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+.santa-greeting-fallback img {
+  object-fit: contain;
+}
+.santa-greeting-fallback span {
+  font-family: Georgia, serif;
+  color: var(--forest);
+  font-size: 22px;
+}
+@media (max-width: 600px) {
+  .santa-greeting {
+    width: calc(100% + 28px);
+    max-width: none;
+    margin: 8px -14px 14px;
+  }
+  .santa-greeting-caption {
+    margin-top: 0;
+    padding: 0 8px;
+    gap: 0 10px;
+  }
+  .santa-greeting-caption .text-link {
+    min-height: 44px;
+  }
+  .santa-greeting-fallback {
+    min-height: 135px;
+    gap: 8px;
+  }
+  .santa-greeting-fallback img {
+    width: 125px;
+    height: 120px;
+  }
+  .santa-greeting-fallback span {
+    font-size: 18px;
+  }
+}

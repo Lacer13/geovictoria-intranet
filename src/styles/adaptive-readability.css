@@ -1,0 +1,416 @@
+@media (min-width: 1100px) {
+  .dashboard-columns {
+    grid-template-columns: minmax(0, 1fr) 290px;
+  }
+  .hero-copy {
+    padding: 32px 34px;
+  }
+  .christmas-hero {
+    min-height: 330px;
+  }
+  .christmas-page-hero {
+    min-height: 350px;
+  }
+  .hero-copy {
+    max-width: 67%;
+  }
+  .hero-art {
+    width: 50%;
+  }
+}
+@media (min-width: 721px) and (max-width: 1100px) {
+  .nav-item {
+    font-size: 10.5px;
+  }
+  .nav-caption {
+    font-size: 7px;
+  }
+  .sidebar-note p {
+    font-size: 9px;
+  }
+  .breadcrumb {
+    font-size: 10px;
+  }
+  .hero-copy h2 {
+    font-size: 33px;
+  }
+  .hero-copy p {
+    font-size: 11px;
+  }
+  .hero-footnote {
+    font-size: 9px;
+  }
+  .quick-card h3 {
+    font-size: 12px;
+  }
+  .quick-card p {
+    font-size: 10px;
+  }
+  .christmas-hero {
+    min-height: 300px;
+  }
+  .section-title > span {
+    font-size: 9px;
+  }
+}
+@media (max-width: 720px) {
+  .nav-item {
+    font-size: 13px;
+  }
+  .nav-caption {
+    font-size: 9px;
+  }
+  .sidebar-note p {
+    font-size: 11px;
+  }
+  .welcome-row h1 {
+    font-size: 29px;
+  }
+  .welcome-row p {
+    font-size: 12px;
+  }
+  .welcome-eyebrow {
+    font-size: 8px;
+    line-height: 1.8;
+  }
+  .hero-copy h2 {
+    font-size: 32px;
+  }
+  .hero-copy p {
+    font-size: 12px;
+    max-width: 275px;
+  }
+  .hero-copy {
+    max-width: 100%;
+  }
+  .hero-copy .btn {
+    font-size: 12px;
+  }
+  .hero-footnote {
+    font-size: 9px;
+  }
+  .hero-art {
+    opacity: 0.25;
+  }
+  .christmas-hero {
+    min-height: 380px;
+  }
+  .quick-card {
+    padding: 18px 14px;
+  }
+  .quick-card h3 {
+    font-size: 12px;
+  }
+  .quick-card p {
+    font-size: 11px;
+  }
+  .section-title h2 {
+    font-size: 15px;
+  }
+  .dashboard-secondary {
+    grid-template-columns: 1fr;
+  }
+  .leaderboard-panel {
+    grid-column: auto;
+  }
+  .countdown-card {
+    min-height: auto;
+    padding: 22px;
+  }
+  .calendar-panel .panel-heading h2 {
+    font-size: 15px;
+  }
+  .calendar-month strong {
+    font-size: 13px;
+  }
+  .calendar-days > button {
+    width: 33px;
+    height: 33px;
+    font-size: 12px;
+  }
+  .calendar-weekdays {
+    font-size: 11px;
+  }
+  .calendar-footnote {
+    font-size: 11px;
+  }
+  .calendar-grid {
+    padding: 0 16px 16px;
+  }
+  .calendar-month {
+    margin: 16px;
+  }
+  .panel-heading h2 {
+    font-size: 15px;
+  }
+  .tabs {
+    gap: 17px;
+  }
+  .tabs > button {
+    font-size: 11px;
+  }
+  .season-news {
+    gap: 13px;
+  }
+  .season-news-art {
+    width: 70px;
+    min-height: 130px;
+  }
+  .season-news h3 {
+    font-size: 14px;
+    margin-top: 7px;
+  }
+  .season-news p {
+    font-size: 12px;
+  }
+  .category-label {
+    font-size: 8px;
+  }
+  .news-bottom-link {
+    font-size: 10px;
+  }
+  .news-content {
+    padding: 18px;
+  }
+  .data-state.compact {
+    padding: 22px 5px 7px;
+  }
+  .wellbeing-card h3 {
+    font-size: 14px;
+  }
+  .wellbeing-card p {
+    font-size: 12px;
+  }
+  .wellbeing-card .btn {
+    font-size: 11px;
+  }
+  .wellbeing-card > div {
+    min-width: 170px;
+  }
+  .app-footer {
+    font-size: 10px;
+  }
+  .contact-grid,
+  .knowledge-grid,
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+  .contact-top {
+    flex-direction: row;
+    align-items: center;
+  }
+  .contact-card {
+    padding: 22px;
+  }
+  .contact-card h2 {
+    font-size: 18px;
+  }
+  .contact-actions .btn {
+    font-size: 12px;
+    gap: 8px;
+  }
+  .contact-actions .btn > span {
+    display: block;
+  }
+  .knowledge-card h2 {
+    font-size: 18px;
+  }
+  .knowledge-card p {
+    font-size: 13px;
+  }
+  .knowledge-card {
+    padding: 23px;
+  }
+  .knowledge-card-bottom {
+    font-size: 11px;
+  }
+  .article-content h2 {
+    font-size: 19px;
+  }
+  .article-content p {
+    font-size: 14px;
+  }
+  .article-note p {
+    font-size: 12px;
+  }
+  .input-field,
+  .search-field input {
+    font-size: 16px;
+  }
+  .anonymous-option strong {
+    font-size: 11px;
+  }
+  .anonymous-option small {
+    font-size: 10px;
+  }
+  .field-caption {
+    font-size: 9px;
+  }
+  .christmas-page-hero .hero-copy h2 {
+    font-size: 29px;
+  }
+  .christmas-page-hero .hero-copy > .text-link {
+    font-size: 11px;
+    max-width: 250px;
+  }
+  .christmas-page-hero {
+    min-height: 415px;
+  }
+  .greeting-preview p {
+    font-size: 14px;
+  }
+  .qr-panel h2 {
+    font-size: 24px;
+  }
+  .qr-actions .text-link {
+    font-size: 12px;
+  }
+  .inline-notice {
+    font-size: 11px;
+  }
+  .team-intro p {
+    font-size: 12px;
+  }
+  .team-stat {
+    font-size: 12px;
+  }
+  .team-people > div {
+    font-size: 14px;
+  }
+  .search-hint {
+    font-size: 10px;
+  }
+  .modal-heading h2 {
+    font-size: 19px;
+  }
+}
+.game-page {
+  min-height: 100dvh;
+  width: 100%;
+  background: radial-gradient(
+    ellipse at 75% 0%,
+    #214e3e 0,
+    #0b2926 45%,
+    #061d1e 100%
+  );
+  display: flex;
+  flex-direction: column;
+  --text-main: #fff;
+  --text-muted: #a5b6c9;
+  --surface-color: #1a2235;
+  --border-color: #ffffff20;
+  --geo-secondary: #73c4b3;
+}
+.game-page-header {
+  padding: 20px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.game-page-season {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #d8deb9;
+  font-size: 14px;
+}
+.game-instructions {
+  font-size: 12px;
+  line-height: 1.8;
+  text-align: center;
+  color: #a5b6c9;
+  padding: 0 24px 20px;
+}
+.game-page-content {
+  flex: 1;
+  padding: 0 28px 28px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.game-stage {
+  width: 100%;
+  max-width: 1120px;
+}
+.game-stage canvas {
+  object-fit: contain !important;
+}
+.game-stage .character-choice {
+  font: inherit;
+}
+.game-score-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.game-score-form > div {
+  display: flex;
+  gap: 8px;
+}
+.game-score-form .form-error {
+  max-width: 300px;
+  font-size: 11px;
+}
+.game-stage h3 {
+  font-size: clamp(24px, 5vw, 64px) !important;
+  text-align: center;
+}
+.game-stage .score-hud {
+  top: 14px !important;
+  left: 14px !important;
+  gap: 10px !important;
+}
+.game-stage .score-hud > div {
+  padding: 10px 15px !important;
+}
+.game-stage .score-hud svg {
+  width: 20px;
+  height: 20px;
+}
+@media (max-width: 720px) {
+  .game-page-header {
+    padding: 16px;
+  }
+  .game-page-content {
+    padding: 0 12px 20px;
+  }
+  .game-stage {
+    height: auto;
+    min-height: 0;
+  }
+  .game-instructions {
+    font-size: 11px;
+    padding: 0 20px 16px;
+  }
+  .game-stage .character-choice {
+    min-width: 125px !important;
+    padding: 12px !important;
+  }
+  .game-stage > :not(.arcade) h1 {
+    font-size: 30px !important;
+  }
+  .game-page-season {
+    font-size: 13px;
+  }
+  .game-stage .mobile-game-controls {
+    padding: 20px !important;
+  }
+  .game-stage .score-hud > div {
+    padding: 8px 10px !important;
+  }
+  .game-stage .score-hud > div > span:last-child {
+    font-size: 24px !important;
+  }
+  .game-stage .score-hud svg {
+    width: 17px;
+    height: 17px;
+  }
+  .game-stage .score-hud > div > span:first-child {
+    font-size: 9px !important;
+  }
+  .game-stage .character-list {
+    gap: 10px !important;
+    padding: 10px !important;
+  }
+}

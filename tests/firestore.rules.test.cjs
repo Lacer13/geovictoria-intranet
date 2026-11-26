@@ -696,6 +696,45 @@ test("the maximum group can be stored atomically within Firestore rule access li
   );
 });
 
+test("archiving lets an in-flight email finish but blocks new sends and retries", async () => {
+  const admin = santaAdmin();
+  const event = santaDraftData(4);
+  const eventId = "archive-during-email";
+  const eventRef = doc(admin, "secretSantaEvents", eventId);
+  await setDoc(eventRef, event);
+  await santaDrawBatch(admin, eventId, event).batch.commit();
+  const attempt = {
+    state: "sending",
+    attemptId: "d".repeat(32),
+    attempts: 1,
+    startedAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+    provider: "emailjs",
+    lastError: "",
+  };
+  // Each possible provider outcome must still be recordable after archiving.
+  for (const giver of event.participantIds.slice(0, 3))
+    await setDoc(doc(eventRef, "deliveries", giver), attempt);
+  await updateDoc(eventRef, {
+    status: "archived",
+    revision: 2,
+    updatedAt: serverTimestamp(),
+  });
+  await assertFails(
+    setDoc(doc(eventRef, "deliveries", event.participantIds[3]), attempt),
+  );
+  for (const [index, state] of ["accepted", "failed", "uncertain"].entries()) {
+    const ref = doc(eventRef, "deliveries", event.participantIds[index]);
+    await assertFails(
+      setDoc(ref, { ...attempt, attemptId: "e".repeat(32), attempts: 2 }),
+    );
+    await assertSucceeds(updateDoc(ref, { state, updatedAt: serverTimestamp() }));
+    await assertFails(
+      setDoc(ref, { ...attempt, attemptId: "f".repeat(32), attempts: 2 }),
+    );
+  }
+});
+
 test("editing published content keeps authorization checks and field constraints", async () => {
   const admin = env
     .authenticatedContext("content-editor", { admin: true })

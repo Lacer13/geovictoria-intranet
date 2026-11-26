@@ -1,0 +1,247 @@
+/* Decorative effects never intercept input or change document layout. */
+.christmas-effects {
+  position: fixed;
+  inset: 77px 0 0 252px;
+  pointer-events: none;
+  z-index: 36;
+  overflow: hidden;
+  contain: strict;
+}
+.festive-garland {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  color: #1a603e;
+}
+.festive-garland > svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.garland-bulb {
+  animation: light-twinkle 3.8s ease-in-out infinite;
+  animation-delay: var(--light-delay);
+  filter: drop-shadow(0 1px 2px #d5ad6888);
+}
+.snowfall {
+  position: absolute;
+  inset: 0;
+}
+.snowflake {
+  position: absolute;
+  left: var(--x);
+  top: -26px;
+  width: var(--size);
+  height: var(--size);
+  animation: snow-drift var(--duration) linear infinite;
+  animation-delay: var(--delay);
+  will-change: transform;
+  opacity: 0;
+}
+.festive-toggle.enabled {
+  color: var(--forest);
+  background: var(--forest-bg);
+}
+.festive-art {
+  animation: festive-float 8s ease-in-out infinite;
+  transform-origin: 65% 70%;
+}
+.tree-light {
+  animation: tree-twinkle 2.8s ease-in-out infinite;
+}
+.tree-light:nth-of-type(2n) {
+  animation-delay: -1.7s;
+}
+.tree-light:nth-of-type(3n) {
+  animation-delay: -0.8s;
+}
+.ornament-glow {
+  animation: ornament-shimmer 5s ease-in-out infinite;
+}
+.greeting-spark,
+.little-star,
+.countdown-star,
+.greeting-preview-star {
+  animation: star-shimmer 5s ease-in-out infinite;
+  transform-origin: center;
+}
+.greeting-preview-star {
+  animation-delay: -2s;
+}
+.countdown-star {
+  animation-delay: -1s;
+}
+.season-news-art > span,
+.season-news-art > i {
+  animation: star-shimmer 4s ease-in-out infinite;
+}
+.quick-card {
+  animation: card-arrive 0.5s ease-out both;
+}
+.quick-card:nth-child(2) {
+  animation-delay: 0.06s;
+}
+.quick-card:nth-child(3) {
+  animation-delay: 0.12s;
+}
+.quick-card:nth-child(4) {
+  animation-delay: 0.18s;
+}
+.idea-card {
+  animation: card-arrive 0.6s ease-out both;
+}
+.idea-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.idea-card:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.festive-paused .seasonal-motion,
+.festive-paused .greeting-spark,
+.festive-paused .little-star,
+.festive-paused .countdown-star,
+.festive-paused .greeting-preview-star,
+.festive-paused .season-news-art > span,
+.festive-paused .season-news-art > i {
+  animation-play-state: paused !important;
+}
+.festive-paused .snowfall {
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.festive-paused .quick-card,
+.festive-paused .idea-card {
+  animation: none;
+}
+@keyframes snow-drift {
+  0% {
+    transform: translate3d(0, -20px, 0) rotate(0);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.45;
+  }
+  45% {
+    transform: translate3d(calc(var(--drift) * -0.45), 48vh, 0) rotate(100deg);
+    opacity: 0.3;
+  }
+  90% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate3d(var(--drift), 105vh, 0) rotate(220deg);
+    opacity: 0;
+  }
+}
+@keyframes light-twinkle {
+  0%,
+  100% {
+    opacity: 0.45;
+    filter: drop-shadow(0 0 1px #e0b65e33);
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 4px #e0b65ecc);
+  }
+}
+@keyframes festive-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-0.4deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(0.5deg);
+  }
+}
+@keyframes tree-twinkle {
+  0%,
+  100% {
+    opacity: 0.6;
+    filter: drop-shadow(0 0 0 #f6dc9b);
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 4px #f6dc9b);
+  }
+}
+@keyframes ornament-shimmer {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.12);
+  }
+}
+@keyframes star-shimmer {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.95) rotate(-5deg);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.08) rotate(5deg);
+  }
+}
+@keyframes card-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(9px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (max-width: 1190px) {
+  .christmas-effects {
+    left: 227px;
+  }
+}
+@media (max-width: 960px) {
+  .christmas-effects {
+    left: 210px;
+  }
+}
+@media (max-width: 720px) {
+  .christmas-effects {
+    left: 0;
+    top: 64px;
+  }
+  .snowflake:nth-child(n + 23) {
+    display: none;
+  }
+  .festive-garland {
+    height: 22px;
+  }
+  .topbar-actions {
+    gap: 2px;
+  }
+  .breadcrumb {
+    font-size: 11px;
+    gap: 5px;
+  }
+  .hero-copy h2 {
+    font-size: 31px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *:before,
+  *:after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .snowfall {
+    display: none;
+  }
+  .quick-card,
+  .idea-card {
+    opacity: 1;
+    transform: none;
+  }
+}

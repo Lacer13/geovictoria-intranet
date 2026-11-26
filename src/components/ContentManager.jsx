@@ -16,6 +16,9 @@ export default function ContentManager({
   items,
   onSavedRecord,
   onDelete,
+  canCreate = false,
+  canEdit = false,
+  canDelete = false,
 }) {
   const [query, setQuery] = useState("");
   const [editor, setEditor] = useState(null);
@@ -33,7 +36,7 @@ export default function ContentManager({
     else setEditor(null);
   }, []);
   const open = (item) => {
-    if (busyRef.current) return;
+    if (busyRef.current || (item ? !canEdit : !canCreate)) return;
     setValues(item ? { ...item } : { ...empty[kind] });
     setEditor({ original: item ? { ...item } : null });
     dirty.current = false;
@@ -47,7 +50,7 @@ export default function ContentManager({
   };
   const save = async (event) => {
     event.preventDefault();
-    if (lock.current) return;
+    if (lock.current || (editor?.original ? !canEdit : !canCreate)) return;
     setError("");
     let payload;
     try {
@@ -118,10 +121,12 @@ export default function ContentManager({
             {items.length} {news ? "publicaciones" : "contactos"}
           </p>
         </div>
-        <button className="btn btn-forest" onClick={() => open(null)}>
-          <Plus size={17} />
-          {news ? "Nueva publicación" : "Nuevo contacto"}
-        </button>
+        {canCreate && (
+          <button className="btn btn-forest" onClick={() => open(null)}>
+            <Plus size={17} />
+            {news ? "Nueva publicación" : "Nuevo contacto"}
+          </button>
+        )}
       </div>
       <div className="search-field panel content-search">
         <Search size={18} />
@@ -147,21 +152,25 @@ export default function ContentManager({
               <p>{news ? item.desc : item.email}</p>
             </div>
             <div className="content-record-actions">
-              <button
-                className="btn btn-secondary"
-                onClick={() => open(item)}
-                aria-label={`Editar ${news ? item.title : item.name}`}
-              >
-                <Pencil size={16} />
-                Editar
-              </button>
-              <button
-                className="icon-button danger-action"
-                aria-label={`Eliminar ${news ? item.title : item.name}`}
-                onClick={() => onDelete(item.id)}
-              >
-                <Trash2 size={17} />
-              </button>
+              {canEdit && (
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => open(item)}
+                  aria-label={`Editar ${news ? item.title : item.name}`}
+                >
+                  <Pencil size={16} />
+                  Editar
+                </button>
+              )}
+              {canDelete && (
+                <button
+                  className="icon-button danger-action"
+                  aria-label={`Eliminar ${news ? item.title : item.name}`}
+                  onClick={() => onDelete(item.id)}
+                >
+                  <Trash2 size={17} />
+                </button>
+              )}
             </div>
           </article>
         ))}
@@ -178,7 +187,9 @@ export default function ContentManager({
             <p>
               {query
                 ? "Prueba otra palabra."
-                : "Usa el botón de arriba para añadir el primero."}
+                : canCreate
+                  ? "Usa el botón de arriba para añadir el primero."
+                  : "Todavía no hay registros disponibles."}
             </p>
           </div>
         )}

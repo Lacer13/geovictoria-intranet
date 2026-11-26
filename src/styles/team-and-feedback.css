@@ -1,0 +1,223 @@
+.team-intro {
+  background: var(--hero-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 32px;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  color: var(--hero-text);
+}
+.team-emblem {
+  width: 76px;
+  height: 76px;
+  border: 1px solid color-mix(in srgb, var(--hero-text) 18%, transparent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.team-intro .eyebrow {
+  font-size: 8px;
+  color: var(--hero-text);
+}
+.team-intro h2 {
+  font-size: 23px;
+  margin: 8px 0;
+}
+.team-intro p {
+  font-size: 11px;
+  color: color-mix(in srgb, var(--hero-text) 70%, transparent);
+}
+.team-stat {
+  margin-left: auto;
+  text-align: center;
+  font-size: 10px;
+  white-space: nowrap;
+}
+.team-stat strong {
+  display: block;
+  font-size: 34px;
+  font-family: var(--font-heading);
+}
+.inline-notice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 17px;
+  background: var(--muted-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+  font-size: 10px;
+  color: var(--text-muted);
+  margin: 20px 0;
+}
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 17px;
+}
+.team-card {
+  padding: 24px;
+}
+.team-card h2 {
+  font-size: 17px;
+  margin-bottom: 6px;
+}
+.team-card > p {
+  font-size: 10px;
+}
+.team-people {
+  margin: 20px 0;
+  border-top: 1px solid var(--border-color);
+  padding-top: 8px;
+}
+.team-people > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 11px;
+  font-size: 11px;
+}
+.team-people strong {
+  font-weight: 500;
+}
+.mini-avatar {
+  width: 27px;
+  height: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--muted-surface);
+  color: var(--text-muted);
+  font-size: 10px;
+}
+.team-card > .text-link {
+  font-size: 10px;
+}
+.feedback-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(230px, 1fr);
+  gap: 35px;
+  align-items: start;
+}
+.feedback-form {
+  padding: 26px;
+}
+.feedback-form .panel-heading {
+  padding: 0 0 24px;
+}
+.feedback-form .panel-heading h2 {
+  font-size: 17px;
+}
+.feedback-form .panel-heading h2 svg {
+  color: var(--forest);
+}
+.anonymous-option {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  background: var(--forest-bg);
+  border: 1px solid color-mix(in srgb, var(--forest) 12%, transparent);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+  cursor: pointer;
+}
+.anonymous-option input {
+  accent-color: var(--forest);
+  width: 15px;
+  height: 15px;
+}
+.anonymous-option strong {
+  display: block;
+  font-size: 11px;
+  font-weight: 550;
+}
+.anonymous-option small {
+  display: block;
+  font-size: 9px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.anonymous-option > svg {
+  margin-left: auto;
+  color: var(--forest);
+}
+.form-two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.field-caption {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  font-size: 9px;
+  color: var(--text-muted);
+}
+.field-caption > span {
+  white-space: nowrap;
+}
+.form-error {
+  font-size: 11px;
+  color: #ba5d50;
+  background: var(--coral-soft);
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 18px;
+}
+.feedback-form .btn {
+  font-size: 11px;
+}
+.feedback-aside {
+  padding: 17px 10px;
+}
+.feedback-aside h2 {
+  font-size: 24px;
+  margin: 5px 0 17px;
+}
+.feedback-aside > p {
+  font-size: 12px;
+  line-height: 1.9;
+}
+.feedback-aside > div {
+  border-top: 1px solid var(--border-color);
+  padding-top: 20px;
+  margin-top: 20px;
+}
+.feedback-aside strong {
+  font-size: 12px;
+  font-weight: 600;
+}
+.feedback-aside div p {
+  font-size: 11px;
+  line-height: 1.85;
+  margin-top: 9px;
+}
+.feedback-aside > small {
+  display: block;
+  font-size: 9px;
+  color: var(--text-muted);
+  margin-top: 25px;
+  line-height: 1.8;
+}
+.feedback-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  text-align: center;
+  padding: 50px 15px;
+  color: var(--forest);
+}
+.feedback-success p {
+  font-size: 12px;
+  line-height: 1.8;
+  max-width: 340px;
+}
+.feedback-success h2 {
+  font-size: 25px;
+}

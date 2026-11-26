@@ -1,0 +1,588 @@
+{
+  "date": "2026-11-26",
+  "timezone": "America/Lima",
+  "status": "published",
+  "project": "geovictoria-intranet-peru",
+  "url": "https://geovictoria-intranet-peru.web.app/amigo-secreto",
+  "hostingVersion": "fe167166f639f8ea",
+  "previousHostingVersion": "6de8189098d1d5d9",
+  "deploymentScope": "hosting only; preserves the completed access-session fixes",
+  "unchangedRuleset": "projects/geovictoria-intranet-peru/rulesets/943695b0-a0a0-402d-8656-bcebec1af8b7",
+  "source": [
+    {
+      "path": "src/components/SecretSanta.jsx",
+      "sha256": "f794450b109e17acded69b4ebfae125f6022d300d856a9b2720f6a99f9e9be9b"
+    },
+    {
+      "path": "src/components/secretSanta/SantaGreeting.jsx",
+      "sha256": "4653b80ecbe61d14b69d8cb353cf697f95b616160d3e11b6146c4c5506f83440"
+    },
+    {
+      "path": "src/components/secretSanta/SantaGreetingBoundary.jsx",
+      "sha256": "dd7f4961d5030f431395e8b5857efd967c0064ec70606c3042fdf167f858cca5"
+    },
+    {
+      "path": "src/components/secretSanta/greetingScene.js",
+      "sha256": "54251cdc4b226faec8958145ad4e151b6a335593f97fa0db34047d91df128f3f"
+    },
+    {
+      "path": "src/lib/santaGreeting.js",
+      "sha256": "5f855fe586566b56de67de03bb65fc108b56ac9fae2d5f5e181db874d9ee93aa"
+    },
+    {
+      "path": "src/santa-greeting.css",
+      "sha256": "ff0962886a6816673274d0ebf171c77225abaca3cd54a8c28b324725bac83228"
+    },
+    {
+      "path": "scripts/build-santa-greetings.mjs",
+      "sha256": "a3a631d88c9a6b0181f97102f26e69c84885b4a497141c975362feb868cf6f8d"
+    },
+    {
+      "path": "tests/santa-greeting.test.js",
+      "sha256": "1db63fbb8cb61bbd74d8fec5862c1c4a518b9bad590b34055dc08eafcae817a1"
+    },
+    {
+      "path": "package.json",
+      "sha256": "c7c4ba860fc7790383327d780d0fe79202a8ae031606dd9e563cedea48cc3f94"
+    },
+    {
+      "path": "src/components/AdminLogin.jsx",
+      "sha256": "b4993cdeba6ceff0eb53c805fd6e05e5bcdd8b68c7b6b9a7fb7b0df5c15a4dcd"
+    },
+    {
+      "path": "src/components/Admin.jsx",
+      "sha256": "1628b38369b85e319cf29f051df27719de08da701d71d315026a4f49254a7125"
+    },
+    {
+      "path": "src/admin/useAdminAccess.js",
+      "sha256": "272d857b908364404f88beee618edecabc212e2698cef95e87468cb5115e7be0"
+    },
+    {
+      "path": "src/admin/PasswordSetup.jsx",
+      "sha256": "3c6a2659b038d07bc1fb98fddbc0c7cbaa4afeb2c9007483b063a1891f80c5bb"
+    },
+    {
+      "path": "src/admin/session.js",
+      "sha256": "3d0886f973f1edace7dc025867462e437c9d73d355df1d76af96b97517b3dd6a"
+    }
+  ],
+  "resources": [
+    {
+      "path": "index.html",
+      "bytes": 1556,
+      "sha256": "119f34726b84cf7e0e8a1927eee66d2d6b9d62a68ec596914cf17116e4818bc8",
+      "status": 200
+    },
+    {
+      "path": "assets/AccessManagement-GTq6NBNF.js",
+      "bytes": 19914,
+      "sha256": "c4eca93e01e766324517b88320fbe9ad75c8043e7c2aa8faff3578cd12573f76",
+      "status": 200
+    },
+    {
+      "path": "assets/Admin-CWKXHQ2z.css",
+      "bytes": 7620,
+      "sha256": "b3506f7c134535a820a81115db339091709f00d081c9273152a2b19c1907ca3b",
+      "status": 200
+    },
+    {
+      "path": "assets/Admin-Db1SgDrE.js",
+      "bytes": 17417,
+      "sha256": "df400638acec429eeca3cd2c5b41244c4407e4b18f73b4f19aeded0c0c5b0a38",
+      "status": 200
+    },
+    {
+      "path": "assets/arrow-down-to-line-DMzm3Wb4.js",
+      "bytes": 327,
+      "sha256": "9eed83fd6eff6ce6e2b1ed5c24f282876f7233eae533990e994c52fe43d26ccb",
+      "status": 200
+    },
+    {
+      "path": "assets/arrow-left-Cowx0KOi.js",
+      "bytes": 283,
+      "sha256": "3261687f5c1f4a8f33cd0a5fcaf573292d17138cc5cbd9ed310b8ae54352f014",
+      "status": 200
+    },
+    {
+      "path": "assets/arrow-right-DFBgXtwZ.js",
+      "bytes": 283,
+      "sha256": "076668e01e47a0753b7a04504b63999d55d5303b8f02c9357be875624150b61c",
+      "status": 200
+    },
+    {
+      "path": "assets/auth-DPqGlzOw.js",
+      "bytes": 293,
+      "sha256": "9a2f08de7a04f02000b3447d36a3b0f21cd50390e9945fed02cbe809cad364f4",
+      "status": 200
+    },
+    {
+      "path": "assets/check-BIjFlQQA.js",
+      "bytes": 242,
+      "sha256": "4f2768029a874d92e5da62d8183472ee4497bb4ece1366082d35d9f555901a9e",
+      "status": 200
+    },
+    {
+      "path": "assets/Christmas-B_CU25E7.js",
+      "bytes": 5669,
+      "sha256": "aece1fdbe42e952261500e320a82bf39687a238ef3cf6d0331bfcc32e9957415",
+      "status": 200
+    },
+    {
+      "path": "assets/ChristmasWall-C4Eq8YsD.css",
+      "bytes": 3816,
+      "sha256": "2077d68de83e4c518d88fa0c5950588bc93e07165b489c3fa141f19943ceffcd",
+      "status": 200
+    },
+    {
+      "path": "assets/ChristmasWall-CUtEmVy0.js",
+      "bytes": 10648,
+      "sha256": "c53ce838c8e34927243b3f386dbc7816e12bafe81ba92a4127071fdb8cbe0423",
+      "status": 200
+    },
+    {
+      "path": "assets/circle-check-BSEiGgV7.js",
+      "bytes": 296,
+      "sha256": "ccfa3d22098dd705f11537761faec1993bbd5b966423b15664570dfebb85efa1",
+      "status": 200
+    },
+    {
+      "path": "assets/clock-3-DGnoHHVj.js",
+      "bytes": 287,
+      "sha256": "999f3145564294d80fb37fbd1f9a18ca7ff870d897b41350865831a96f542452",
+      "status": 200
+    },
+    {
+      "path": "assets/ContentSection-Do0u3Cub.js",
+      "bytes": 9291,
+      "sha256": "fe2619923744fb94af45f211c2753a4eb48e7936d97adc8c7f9cc911c743ecd6",
+      "status": 200
+    },
+    {
+      "path": "assets/copy-C-O0DyBg.js",
+      "bytes": 354,
+      "sha256": "068a584ae0e4a2fa0674f54f15fbf0f8479a0eb7f474986a0a6b464da3de55b0",
+      "status": 200
+    },
+    {
+      "path": "assets/createLucideIcon-DkgbDv7J.js",
+      "bytes": 1855,
+      "sha256": "61b1726789437c53165e7fab35ff4f565215009f8eca768e878a4cba166075c8",
+      "status": 200
+    },
+    {
+      "path": "assets/DeleteRecordDialog-LTG_V-IS.js",
+      "bytes": 2786,
+      "sha256": "06d5246aa95b5d808eb2d6521a7dfa51b60c719f980dcd209e1fe777b108547e",
+      "status": 200
+    },
+    {
+      "path": "assets/download-CVh2wH3z.js",
+      "bytes": 350,
+      "sha256": "33fdb2b1a703ea638bd3c789c5f87f6d0c3ed3e624b4514e4ea239e56339135d",
+      "status": 200
+    },
+    {
+      "path": "assets/esm-BLwCZdJv.js",
+      "bytes": 16256,
+      "sha256": "b73f57f2be714c4d4d26209a30e913876105221613e38d8684d7b046b3b2b10e",
+      "status": 200
+    },
+    {
+      "path": "assets/eye-off-B3NcHYDk.js",
+      "bytes": 548,
+      "sha256": "58b818bbe3fa09f4f2b781b7cc4e9262f59ca81fc93cfffc05f15a07d4e3e181",
+      "status": 200
+    },
+    {
+      "path": "assets/eye-XF-crv-5.js",
+      "bytes": 374,
+      "sha256": "e7ad2ca9db95a778a43d6dc14a32d20db88458452d87c83badac4e885c44de09",
+      "status": 200
+    },
+    {
+      "path": "assets/FeedbackForm-CFXH8MC9.js",
+      "bytes": 5920,
+      "sha256": "2d1559da2439bae10e07bb44690ba973ef22dd58aed6c8057af111f4b17261be",
+      "status": 200
+    },
+    {
+      "path": "assets/firebase-auth-D8Cbwubl.js",
+      "bytes": 88760,
+      "sha256": "17628b61bd1c79f0ec70a079d99805e12f9f9ffa431f5c960f74792ea4bcc823",
+      "status": 200
+    },
+    {
+      "path": "assets/firebase-Cicykctr.js",
+      "bytes": 305411,
+      "sha256": "7a87cd359672e0b1a3c64d461a3f1b1ae0737c875ed25c45a15fd598788ce017",
+      "status": 200
+    },
+    {
+      "path": "assets/firebase-core-DxzjUijE.js",
+      "bytes": 25641,
+      "sha256": "8407fd12b9056276ca3b01174cf52a581269eddce39d816f423ea1783b8201b7",
+      "status": 200
+    },
+    {
+      "path": "assets/GamePage-buWZGLRp.js",
+      "bytes": 78840,
+      "sha256": "0345bd5e0d79b272495441bb116e5c9a05cc15c3b7c01123cb8a0d3367e280d1",
+      "status": 200
+    },
+    {
+      "path": "assets/GamePage-CkARHRxK.css",
+      "bytes": 20613,
+      "sha256": "a072386c949f65299d4aaa179818fd8f16cf22d903c5e377084e289be7345271",
+      "status": 200
+    },
+    {
+      "path": "assets/geovictoria-intranet-DJwh3K5H.js",
+      "bytes": 227479,
+      "sha256": "7505c058bcc098d205da912f0263123d50ca0b2e5e1f214c1255880862a3a7d3",
+      "status": 200
+    },
+    {
+      "path": "assets/geovictoria-intranet-Dk8WBFoS.css",
+      "bytes": 118749,
+      "sha256": "f86cb7434b5c8c89fb606dfaf16c574dcdb58287dcf4dd8a6fd79dcb3bb7e6c9",
+      "status": 200
+    },
+    {
+      "path": "assets/HelpDirectory-BZWswd2-.js",
+      "bytes": 4101,
+      "sha256": "38c80739f67dc576019782e67198a9957baee01e27511f3403b65fb56dda8dd3",
+      "status": 200
+    },
+    {
+      "path": "assets/index-0aKf4z1I.js",
+      "bytes": 59,
+      "sha256": "f986466ccdbf10c03c8eb009f1a65d1f568068675ac9c97162ce363231d0930c",
+      "status": 200
+    },
+    {
+      "path": "assets/lock-keyhole-IQ4xWgMv.js",
+      "bytes": 373,
+      "sha256": "5ab062bf0f3a2a6e511960d894bf4113071b72006edd501d21f3a7c67d9eb208",
+      "status": 200
+    },
+    {
+      "path": "assets/mail-cFAW8Yjt.js",
+      "bytes": 331,
+      "sha256": "062d5541769a291e60a7feedcc07b08f9807d138218796901c90ff738518c41b",
+      "status": 200
+    },
+    {
+      "path": "assets/NewsPage-JmYk-0n-.js",
+      "bytes": 3350,
+      "sha256": "f5412ec9670907109c6f8e3c4f346e39141c88d8f565d2b8c367cb9a37c4e86b",
+      "status": 200
+    },
+    {
+      "path": "assets/OrgChart-BTlZSQC1.js",
+      "bytes": 2511,
+      "sha256": "dd6dd962bc62f20ebc46a4590ea144206b7661800ab75eb4c1c5df6b86144da4",
+      "status": 200
+    },
+    {
+      "path": "assets/pencil-anzgP7Ck.js",
+      "bytes": 394,
+      "sha256": "6734eb2699a45cae27974ab123065792256f0dbd1252d434c17fd87173f16718",
+      "status": 200
+    },
+    {
+      "path": "assets/plus-COsp5OOR.js",
+      "bytes": 271,
+      "sha256": "26f568a4f8e73027eb9c25cbcc173ceaf1738866a0d56afef90dac00281f19e4",
+      "status": 200
+    },
+    {
+      "path": "assets/quiz-ChGAa421.css",
+      "bytes": 22714,
+      "sha256": "caf23fc982d6eccde323660cf809cfb7ad5ace8e2e2f8c6187e0b6ee13a21de8",
+      "status": 200
+    },
+    {
+      "path": "assets/Quiz-Cyi3kb21.js",
+      "bytes": 12838,
+      "sha256": "9c7038cbfd110676b07463d4315e8304d6c2f32cb2e63461219b184f92501377",
+      "status": 200
+    },
+    {
+      "path": "assets/quiz-Du1jZU53.js",
+      "bytes": 23659,
+      "sha256": "623d758269a1e84aa0675d0d47d96e9c55ef4d2dc64101b21f7b555eadf63938",
+      "status": 200
+    },
+    {
+      "path": "assets/QuizAdmin-CWPwYCF1.js",
+      "bytes": 12950,
+      "sha256": "7e055fbdeece2496778243b93612e77f7a8781ee0aadf256d08b40c4402d9123",
+      "status": 200
+    },
+    {
+      "path": "assets/QuizHost-CeXIlI0y.js",
+      "bytes": 6919,
+      "sha256": "f02063e1bb1a84597dc84e5e24b356e62b924cf928f9458370405aeee620afda",
+      "status": 200
+    },
+    {
+      "path": "assets/QuizPresentation-Di_KnTPO.js",
+      "bytes": 1079,
+      "sha256": "b1ebdfb59d8a148d28c91a6c7749cc40ec66c7972ded0aaf6ffa3a9ae0dc293c",
+      "status": 200
+    },
+    {
+      "path": "assets/react-BVNqbF40.js",
+      "bytes": 228576,
+      "sha256": "ffc267103e7c1c4f6aee8d59dfbac804cc8ca717f0d0313c139da8164843005a",
+      "status": 200
+    },
+    {
+      "path": "assets/ReportsSection-fuJHfLe2.js",
+      "bytes": 1904,
+      "sha256": "903a92b65a38ea473e3591e20f526627f16993c5efae6dbb319a52204d809404",
+      "status": 200
+    },
+    {
+      "path": "assets/rolldown-runtime-8BhlS34s.js",
+      "bytes": 807,
+      "sha256": "1cb5c6ead7e29370203f12e2d5cdf50ec1f02dd70ee2d050d909afbf2406f6b1",
+      "status": 200
+    },
+    {
+      "path": "assets/roster-G1CiA_va.js",
+      "bytes": 6117,
+      "sha256": "0190556bc262b7fdabcdc0b894788737cc3e66bbc9c3ba4bcc84b282ec5b81b7",
+      "status": 200
+    },
+    {
+      "path": "assets/SantaGreeting-2WFRsXaA.css",
+      "bytes": 1420,
+      "sha256": "d5442c7ec0f830a87ac37c9ee5fd18165dc48a0fd1c9b88d3b2e3a8313068126",
+      "status": 200
+    },
+    {
+      "path": "assets/SantaGreeting-DihRCYUA.js",
+      "bytes": 9812,
+      "sha256": "db2c1f39f53498693b90977648fd347c4847bcbef360eb3aabedfbd00ec60fd5",
+      "status": 200
+    },
+    {
+      "path": "assets/ScoresSection-DwNNcoK4.js",
+      "bytes": 1295,
+      "sha256": "72a2f11e5c7d232cc6361d7e5a30ad4f1fa6024bb028e0d3cfb58ef1b5b26091",
+      "status": 200
+    },
+    {
+      "path": "assets/SearchPage-BooaRMEA.js",
+      "bytes": 2867,
+      "sha256": "93e7294247fc05398d2c355911051f7fa0749a4df60e48cbd1f5a7f4a864c314",
+      "status": 200
+    },
+    {
+      "path": "assets/secret-santa-experience-D1YT1R_o.js",
+      "bytes": 7064,
+      "sha256": "7cdc42327435416f5d5e4d39ac00c39cb42057d21b8130d075a2801b15c78147",
+      "status": 200
+    },
+    {
+      "path": "assets/secret-santa-experience-DuRqXPGs.css",
+      "bytes": 20747,
+      "sha256": "4c55327207c0a65264520b1e2560a66dc6edfe27641e929405192cacaf32d19f",
+      "status": 200
+    },
+    {
+      "path": "assets/secretSanta-BAl3A6SF.js",
+      "bytes": 4370,
+      "sha256": "e1e3df162a38148f0a21a087aa7c58f6aba9f048f9fb08379ba10ad9f1b90c2d",
+      "status": 200
+    },
+    {
+      "path": "assets/SecretSanta-DRi8go2X.js",
+      "bytes": 12777,
+      "sha256": "c6772e83e7b1db574813493fc5af7af7025c138f016eaf9f7ad762b7ea366b64",
+      "status": 200
+    },
+    {
+      "path": "assets/SecretSantaAdmin-D3-7h5ho.js",
+      "bytes": 55372,
+      "sha256": "ed2d2f1a97c947de368f173f7a9c2d92eb6750c15720e601a62fb2d5910b34b8",
+      "status": 200
+    },
+    {
+      "path": "assets/SecretSantaAdmin-D9eqvj4x.css",
+      "bytes": 6819,
+      "sha256": "c33a4e70fd0493fd3db29069b6d4173591ad2bf79351801c03f8d92a8402bf86",
+      "status": 200
+    },
+    {
+      "path": "assets/send-CMBKyrk-.js",
+      "bytes": 408,
+      "sha256": "e381d4970c035cbaeb757d661ea2c0c961b5e3c9d03e360c044990393764001e",
+      "status": 200
+    },
+    {
+      "path": "assets/settings-2-CetWwxZa.js",
+      "bytes": 370,
+      "sha256": "cb160110228bb9de19f5f7395ce536789187123187da71541a481132d9e255f9",
+      "status": 200
+    },
+    {
+      "path": "assets/shield-check-CLVg30K7.js",
+      "bytes": 438,
+      "sha256": "46a210e359f48f8c076cd58c9ebc08d7aa76eb6cb0832af7903428c954390a47",
+      "status": 200
+    },
+    {
+      "path": "assets/useAdminAccess-OOyVKBoe.js",
+      "bytes": 7837,
+      "sha256": "1aab872842dc987def27a36f2a96a4efd99a32136d37f60c865d01b158f90672",
+      "status": 200
+    },
+    {
+      "path": "assets/Wiki-CeQQ_cZj.js",
+      "bytes": 5672,
+      "sha256": "0333d42dcf58f5df4fba3924e5215c88aa81663497a2714365765749a4805eff",
+      "status": 200
+    },
+    {
+      "path": "santa-greetings/manifest.json",
+      "bytes": 7581,
+      "sha256": "346a199340ef3da2ac445f239cc3afeda6a8df3178a4995461f1fe86338821b1",
+      "status": 200
+    },
+    {
+      "path": "santa-greetings/tecnoia.webp",
+      "bytes": 29754,
+      "sha256": "8046ae18b5749e121bd40282e9ca98a33fef595335aded28d46d01ce14dfa97b",
+      "status": 200
+    },
+    {
+      "path": "santa-greetings/ordenia.webp",
+      "bytes": 38546,
+      "sha256": "c0aa13b39511d1d43b7084def69797b616fd35e619c3f7d2030d26a7115f5bdb",
+      "status": 200
+    },
+    {
+      "path": "santa-greetings/balance.webp",
+      "bytes": 32272,
+      "sha256": "fd3018ee50dfc472713257ba1efffacda2c81bf224746145404f6e54cbaf3ac4",
+      "status": 200
+    },
+    {
+      "path": "santa-greetings/conectia.webp",
+      "bytes": 32238,
+      "sha256": "6e9a278b446b9b1462eb9add199f67bb22c612fc47bf082aa86387778447f194",
+      "status": 200
+    },
+    {
+      "path": "santa-greetings/norte.webp",
+      "bytes": 31596,
+      "sha256": "057d133c3eea1e477ced5d68ee7108601256bfe2e15b8887eb67bcaa6c7fe07e",
+      "status": 200
+    },
+    {
+      "path": "santa-greetings/cierreia.webp",
+      "bytes": 29702,
+      "sha256": "fec4ece0aefa254cf569b4ddee22d9d4db1ab3ad557537cac8c8a74d3de4da4e",
+      "status": 200
+    },
+    {
+      "path": "santa-greetings/festivia.webp",
+      "bytes": 38204,
+      "sha256": "bc40e9871c3ee38e30d0439672e43fe5b44fd9bf986b0af90ca3d6445f039576",
+      "status": 200
+    },
+    {
+      "path": "santa-greetings/aliania.webp",
+      "bytes": 31458,
+      "sha256": "4b3e6d50dfd34d5ad0b5f763c783a1f1f9e4a761f48fb6a181a58a63a14c7487",
+      "status": 200
+    },
+    {
+      "path": "santa-greetings/prisma.webp",
+      "bytes": 28950,
+      "sha256": "82bd441e4b2fc10d037dd0b7f5cdb38badb5ff4b62d93ad6bbb8f6f1ec127a96",
+      "status": 200
+    },
+    {
+      "path": "santa-greetings/armonia.webp",
+      "bytes": 30228,
+      "sha256": "a60aca5c22a7e7e9f2f26585bd744da31d022098eb21c7158afdd43509c2fc66",
+      "status": 200
+    },
+    {
+      "path": "santa-greetings/radaria.webp",
+      "bytes": 31650,
+      "sha256": "fba922fde97a1c2ad42a33ec2a65e6822276ff05e38df519e5740e710a7d8376",
+      "status": 200
+    },
+    {
+      "path": "santa-greetings/agilia.webp",
+      "bytes": 32834,
+      "sha256": "9eb4888783b7a8c2333d8dd2a82f5a7c315de02dab2c11b18d5ffca0922faab0",
+      "status": 200
+    }
+  ],
+  "routes": [
+    {
+      "path": "/amigo-secreto",
+      "status": 200
+    },
+    {
+      "path": "/amigo-secreto/ver",
+      "status": 200
+    },
+    {
+      "path": "/admin",
+      "status": 200
+    },
+    {
+      "path": "/admin?seccion=amigo-secreto",
+      "status": 200
+    },
+    {
+      "path": "/juego",
+      "status": 200
+    }
+  ],
+  "validation": {
+    "generalTests": {
+      "passed": 127,
+      "failed": 0
+    },
+    "firestoreRulesTests": {
+      "passed": 50,
+      "failed": 0
+    },
+    "build": "passed",
+    "changedCodeLint": "passed",
+    "characters": 12,
+    "largestCharacterAtlasBytes": 38546,
+    "browser": {
+      "desktop1280": true,
+      "mobile390NoOverflow": true,
+      "pauseResumeReplay": true,
+      "randomCharacterChangesAfterReload": true,
+      "sameRecipientAfterReload": true,
+      "revealHide": true,
+      "copyActionConfirms": true,
+      "darkTheme": true,
+      "quietAppearance": true,
+      "archiveBlocksInvitation": true,
+      "restoreKeepsSamePair": true,
+      "imageFailureKeepsResultAvailable": true
+    },
+    "productionPublicEntryReviewed": true,
+    "noGreetingMountedOnPublicLanding": true
+  },
+  "productionDataModified": false,
+  "accountsModified": false,
+  "gameArtworkModified": false,
+  "emailsSent": false,
+  "screenshots": [
+    "design/amigo-secreto/2026-11-26/saludo-invitacion-escritorio.jpg",
+    "design/amigo-secreto/2026-11-26/saludo-invitacion-movil.jpg",
+    "design/amigo-secreto/2026-11-26/saludo-movil-oscuro.jpg"
+  ]
+}

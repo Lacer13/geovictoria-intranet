@@ -10,7 +10,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../auth";
 
-export default function AdminLogin({ loading, accessError, unverifiedUser }) {
+export default function AdminLogin({ loading, accessError, unverifiedUser, onRefresh }) {
   const [params] = useSearchParams();
   const [email, setEmail] = useState(params.get("correo") || "");
   const [password, setPassword] = useState("");
@@ -19,6 +19,7 @@ export default function AdminLogin({ loading, accessError, unverifiedUser }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
+  const [showSignIn, setShowSignIn] = useState(false);
   const submit = async (event) => {
     event.preventDefault();
     if (busy) return;
@@ -36,7 +37,9 @@ export default function AdminLogin({ loading, accessError, unverifiedUser }) {
           email.trim().toLowerCase(),
           password,
         );
-      else await signInWithEmailAndPassword(auth, email.trim(), password);
+      else await signInWithEmailAndPassword(auth, (unverifiedUser?.email || email).trim(), password);
+      setShowSignIn(false);
+      onRefresh();
       setPassword("");
       setConfirmation("");
     } catch (err) {
@@ -62,8 +65,9 @@ export default function AdminLogin({ loading, accessError, unverifiedUser }) {
     setError("");
     setNotice("");
     try {
-      await sendPasswordResetEmail(auth, email.trim(), {
-        url: `${window.location.origin}/admin`,
+      const address = unverifiedUser?.email || email.trim();
+      await sendPasswordResetEmail(auth, address, {
+        url: `${window.location.origin}/admin?correo=${encodeURIComponent(address)}`,
       });
       setNotice(
         "Si el correo tiene una cuenta, recibirás un enlace para establecer tu contraseña. Revisa también la carpeta de correo no deseado.",
@@ -100,11 +104,11 @@ export default function AdminLogin({ loading, accessError, unverifiedUser }) {
     setError("");
     try {
       await unverifiedUser.reload();
-      await unverifiedUser.getIdToken(true);
       if (!unverifiedUser.emailVerified)
         setError(
           "Tu correo todavía no está verificado. Abre el enlace de verificación.",
         );
+      else onRefresh();
     } catch {
       setError(
         "No pudimos comprobar la verificación. Vuelve a iniciar sesión.",
@@ -120,20 +124,20 @@ export default function AdminLogin({ loading, accessError, unverifiedUser }) {
       </span>
       <span className="eyebrow">ADMINISTRACIÓN</span>
       <h1>
-        {unverifiedUser
+        {unverifiedUser && !showSignIn
           ? "Verifica tu correo."
           : register
             ? "Crea tu acceso."
             : "Cuidamos este espacio."}
       </h1>
       <p>
-        {unverifiedUser
+        {unverifiedUser && !showSignIn
           ? `Para proteger el portal, confirma que eres titular de ${unverifiedUser.email}. Tu correo también debe estar autorizado por un administrador.`
           : register
             ? "Utiliza el correo autorizado por tu administrador. Crear una cuenta no concede permisos de administración."
             : "Ingresa con tu cuenta autorizada para gestionar el espacio de nuestro equipo."}
       </p>
-      {unverifiedUser ? (
+      {unverifiedUser && !showSignIn ? (
         <div className="admin-activation">
           <button
             className="btn btn-forest"
@@ -151,11 +155,28 @@ export default function AdminLogin({ loading, accessError, unverifiedUser }) {
           </button>
           <button
             className="text-link"
+            disabled={busy || loading}
+            onClick={() => {
+              setEmail(unverifiedUser.email || "");
+              setRegister(false);
+              setShowSignIn(true);
+              setError("");
+              setNotice("");
+            }}
+          >
+            Ingresar con mi nueva contraseña
+          </button>
+          <button
+            className="text-link"
             disabled={busy}
             onClick={() => signOut(auth)}
           >
             Usar otra cuenta
           </button>
+          <p className="field-caption">
+            Si cambiaste tu contraseña desde un correo, puedes ingresar con ella aquí.
+            Comprobaremos la verificación automáticamente al volver del enlace.
+          </p>
         </div>
       ) : (
         <>
@@ -171,7 +192,7 @@ export default function AdminLogin({ loading, accessError, unverifiedUser }) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                disabled={busy || loading}
+                disabled={busy || loading || !!unverifiedUser}
               />
             </div>
             <div className="input-group">
@@ -227,7 +248,7 @@ export default function AdminLogin({ loading, accessError, unverifiedUser }) {
             >
               Activar o recuperar acceso
             </button>
-            <button
+            {!unverifiedUser && <button
               className="text-link"
               disabled={busy || loading}
               onClick={() => {
@@ -239,7 +260,8 @@ export default function AdminLogin({ loading, accessError, unverifiedUser }) {
               }}
             >
               {register ? "Ya tengo una cuenta" : "Crear acceso con invitación"}
-            </button>
+            </button>}
+            {unverifiedUser && <button className="text-link" disabled={busy || loading} onClick={() => setShowSignIn(false)}>Volver a la verificación</button>}
           </div>
         </>
       )}

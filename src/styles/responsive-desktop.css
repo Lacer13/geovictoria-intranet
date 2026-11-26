@@ -1,0 +1,176 @@
+@media (min-width: 1500px) {
+  .main-content {
+    padding: 38px 48px;
+  }
+  .hero-copy {
+    padding: 33px 40px;
+  }
+  .christmas-hero {
+    min-height: 325px;
+  }
+  .hero-copy h2 {
+    font-size: 39px;
+  }
+  .hero-copy p {
+    font-size: 12px;
+  }
+  .hero-copy .btn {
+    font-size: 11px;
+  }
+  .hero-footnote {
+    font-size: 9px;
+  }
+  .hero-art {
+    width: 51%;
+  }
+  .welcome-row h1 {
+    font-size: 32px;
+  }
+  .quick-card h3 {
+    font-size: 12px;
+  }
+  .quick-card p {
+    font-size: 10px;
+  }
+  .dashboard-columns {
+    grid-template-columns: minmax(0, 1fr) 305px;
+  }
+  .season-news h3 {
+    font-size: 15px;
+  }
+  .season-news p {
+    font-size: 11px;
+  }
+  .category-label {
+    font-size: 8px;
+  }
+  .panel-heading h2 {
+    font-size: 15px;
+  }
+  .today-date {
+    font-size: 11px;
+  }
+  .quick-card {
+    padding: 20px;
+  }
+  .topbar {
+    padding: 0 48px;
+  }
+  .app-footer {
+    margin: 0 48px;
+  }
+}
+@media (max-width: 1190px) {
+  .sidebar {
+    width: 227px;
+    flex-basis: 227px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .nav-item.active:before {
+    left: -14px;
+  }
+  .nav-item {
+    font-size: 10px;
+    gap: 8px;
+  }
+  .sidebar-brand {
+    padding-left: 10px;
+  }
+  .sidebar-brand img {
+    width: 165px;
+  }
+  .workspace-label {
+    font-size: 10px;
+  }
+  .nav-caption {
+    font-size: 7px;
+  }
+  .main-content {
+    padding: 27px;
+  }
+  .topbar {
+    padding: 0 27px;
+  }
+  .topbar-actions {
+    gap: 8px;
+  }
+  .global-search {
+    width: 210px;
+  }
+  .dashboard-columns {
+    grid-template-columns: minmax(0, 1fr) 235px;
+    gap: 16px;
+  }
+  .hero-copy h2 {
+    font-size: 29px;
+  }
+  .hero-copy {
+    padding: 25px 27px;
+  }
+  .hero-art {
+    right: -23px;
+    width: 55%;
+  }
+  .quick-card {
+    padding: 14px 11px;
+  }
+  .quick-card h3 {
+    font-size: 9px;
+  }
+  .quick-card p {
+    font-size: 7px;
+  }
+  .quick-links {
+    gap: 10px;
+  }
+  .wellbeing-card {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .wellbeing-card .btn {
+    margin-left: 70px;
+  }
+  .today-date {
+    font-size: 8px;
+  }
+  .contact-grid,
+  .knowledge-grid,
+  .team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .greeting-builder {
+    gap: 25px;
+  }
+  .christmas-ideas {
+    gap: 12px;
+  }
+  .idea-card {
+    padding: 20px;
+  }
+  .app-footer {
+    margin: 0 27px;
+  }
+  .season-news-art {
+    width: 80px;
+  }
+  .season-news {
+    gap: 12px;
+  }
+  .season-news h3 {
+    font-size: 11px;
+  }
+  .news-content {
+    padding: 17px;
+  }
+  .news-bottom-link {
+    font-size: 7px;
+    padding: 12px;
+  }
+  .quick-card h3 {
+    white-space: nowrap;
+  }
+  .welcome-row h1 {
+    font-size: 26px;
+  }
+}
