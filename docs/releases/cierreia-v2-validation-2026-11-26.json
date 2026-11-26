@@ -24,6 +24,9 @@
     "viewportReset": true,
     "scoresSubmitted": false
   },
-  "realPhoneAccepted": false,
-  "productionDeployed": false
+  "realPhoneAccepted": true,
+  "productionDeployed": true,
+  "rulesTestsPassed": 50,
+  "githubActions": "https://github.com/Lacer13/geovictoria-intranet/actions/runs/45883344198",
+  "productionRecord": "cierreia-v2-production-2026-11-26.json"
 }

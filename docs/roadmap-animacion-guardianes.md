@@ -1,6 +1,6 @@
 # Roadmap de animación · Guardianes con gestos y disparos claros
 
-18 de noviembre de 2026 · Actualizado el 26 de noviembre de 2026. **Estado: TecnoIA y ConectIA v2 publicados; rivales animados integrados. El usuario retoma la animación de los guardianes. CierreIA v2 está implementado y en validación individual; Prisma espera su cierre.**
+18 de noviembre de 2026 · Actualizado el 26 de noviembre de 2026. **Estado: TecnoIA, ConectIA y CierreIA v2 publicados y aceptados en teléfono; rivales animados integrados. Los avances de ambas laptops están reunidos en main. El siguiente guardián es Prisma.**
 
 **24 de noviembre · Rival animado:** El Desfase y los centinelas reciben ocho poses originales y 168 fotogramas: entrada, flotación, avance, preparación/carga, emisión/retroceso/recuperación, impacto y desactivación. El cañón apunta a VictorIA, la boquilla coincide con el nacimiento interpolado del proyectil y se conservan colisiones, daño, velocidad, cadencias y aviso. La desactivación no vuelve a colisionar ni entrega puntos adicionales. Hay movimiento reducido y recuperación del arte anterior si falla la hoja. Fuente, prompt, extracción reproducible, revisión interactiva y capturas en [design/enemies/desfase](../design/enemies/desfase/README.md). Verificación local: 116 pruebas aprobadas, compilación y revisión en navegador sin errores; publicación registrada por separado.
 
@@ -321,4 +321,8 @@ CierreIA v2 incorpora tres expresiones y seis manos/accesorios ilustrados, 233 s
 
 Las boquillas normal y especial coinciden con los orígenes físicos existentes. Ocho pruebas específicas verifican alfa, márgenes, anclajes, composición, interpolación al moverse/esquivar, recuperación ante fallos y una partida completa equivalente a v1. La revisión local cubrió selector/poder, combate, pausa, movimiento reducido y controles grandes a 320×568, además de 844×390. No se publicaron puntos en el ranking.
 
-[Fuente, secuencias y capturas](../design/characters/cierreia/README-v2.md) · [Matriz de QA](qa-cierreia-v2.md). La aceptación en teléfono real y la publicación individual siguen siendo los criterios de cierre antes de comenzar Prisma.
+[Fuente, secuencias y capturas](../design/characters/cierreia/README-v2.md) · [Matriz de QA](qa-cierreia-v2.md).
+
+El usuario confirmó en su teléfono «Sí, se ve y responde bien» sobre Gran cierre y controles. El [PR #12](https://github.com/Lacer13/geovictoria-intranet/pull/12) pasó 140 pruebas generales, 50 de permisos y compilación en GitHub Actions y se fusionó en main como `678b99f5ba2f8e00fdc8bb178cf1d28b53a0158b`.
+
+El 26 de noviembre a las 14:26 (Lima) se promovió la versión validada `90958abb317e8aec` por ID inmutable a [producción](https://geovictoria-intranet-peru.web.app/juego). Se verificaron 68 archivos por SHA-256 y el recorrido de selección, Gran cierre, disparo, pausa/reanudación y salida, sin errores de consola ni envío de puntajes. [Registro con restauración](releases/cierreia-v2-production-2026-11-26.json). **CierreIA queda cerrado; sigue Prisma, con cristal y penetración legibles.**

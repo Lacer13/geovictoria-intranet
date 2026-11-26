@@ -1,6 +1,6 @@
 # CierreIA v2 · Disparo y acuerdo cerrado
 
-26 de noviembre de 2026. Implementación jugable en validación; aún no sustituye la versión de producción. [Probar la vista previa](https://geovictoria-intranet-peru--cierreia-v2-h6hw6f5r.web.app/juego), disponible hasta el 3 de diciembre. Fuente creada con **ImageGen integrado**, con la identidad de CierreIA v1 como referencia. Alfa local según el procedimiento autorizado por el usuario.
+26 de noviembre de 2026. **Publicado y comprobado en el [juego principal](https://geovictoria-intranet-peru.web.app/juego)**, con claridad de Gran cierre y controles aceptados por el usuario en su teléfono. Fuente creada con **ImageGen integrado**, con la identidad de CierreIA v1 como referencia. Alfa local según el procedimiento autorizado por el usuario.
 
 ## Actuación propia
 
@@ -36,6 +36,6 @@ La exportación valida todas las celdas, márgenes y anclajes. El cargador solic
 
 Ocho pruebas específicas: piezas y alfa, 233 celdas, origen normal/especial, composición de acciones, celebración sin bucle, carga con fallos, partida completa equivalente a v1 y nacimiento de Gran cierre al moverse/esquivar. Se conservan cadencias, velocidad, daño, colisiones, recarga de diez segundos y puntaje; no cambia la simulación ni las reglas de Firestore.
 
-Revisión local de selector, poder, combate, disparo asistido, pausa/reanudación y movimiento reducido a 844×390 y 320×568. A 320 px no hay desbordamiento horizontal y los controles grandes permanecen dentro del área visible. No se enviaron puntos al ranking; se restauraron los ajustes temporales y el tamaño del navegador. Sin errores ni advertencias en la página de revisión. Falta la aceptación en teléfono real y el cierre de publicación individual antes de Prisma.
+Revisión local de selector, poder, combate, disparo asistido, pausa/reanudación y movimiento reducido a 844×390 y 320×568. A 320 px no hay desbordamiento horizontal y los controles grandes permanecen dentro del área visible. No se enviaron puntos al ranking; se restauraron los ajustes temporales y el tamaño del navegador. Sin errores ni advertencias en la página de revisión. El usuario aceptó claridad de Gran cierre y respuesta de los controles en teléfono real; dispositivo no informado, sin medición de FPS.
 
-La integración sobre la plataforma sincronizada pasó **140 pruebas generales y build**; conserva exactamente las reglas verificadas por las 50 pruebas de permisos del PR #11.
+La integración sobre la plataforma sincronizada pasó **140 pruebas generales, 50 de permisos y build** en GitHub Actions. El [PR #12](https://github.com/Lacer13/geovictoria-intranet/pull/12) está integrado en main. Se promovió la vista previa validada por ID inmutable y se comprobaron 68 recursos y el recorrido de combate en producción. [Registro y restauración](../../../docs/releases/cierreia-v2-production-2026-11-26.json). CierreIA queda cerrado; sigue Prisma.
