@@ -33,3 +33,7 @@ El prompt y la referencia se registran en [prompt-v1.txt](prompt-v1.txt). Las pr
 116 pruebas aprobadas y compilación correcta. En navegador se comprobaron combate simulado con jefe y centinela tirador, emisión y retroceso en fotogramas separados, movimiento reducido y respaldo sin imágenes. En `/juego` se inició Arcade con VictorIA Clásica, se disparó contra centinelas, se pausó y se salió sin guardar resultados ni sumar Data. Se restauraron CierreIA y Aventura, que estaban seleccionados antes de la prueba. No hubo errores ni advertencias en las consolas de ambas páginas.
 
 Capturas: [emisión](revision-disparo.jpg), [retroceso](revision-retroceso.jpg) y [partida integrada en pausa](integracion-v1-partida.jpg). No se ha realizado una medición de FPS en un teléfono físico.
+
+## Legibilidad en teléfono · 26 de noviembre
+
+El usuario veía el diseño nuevo, pero lo percibía inmóvil. Los recursos estaban publicados y coincidían con GitHub; la oscilación original de 2,2 px quedaba en una fracción de píxel al reducirse a un centinela en teléfono. La presentación añade flotación e inclinación según el tamaño, retroceso y reacción de impacto, manteniendo la boquilla en el origen físico al disparar y las poses quietas al reducir movimiento. [Comprobaciones y contacto](../../../docs/qa-villano-movimiento-2026-11-26.md). La simulación y la fuente ilustrada se conservan.

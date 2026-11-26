@@ -5,7 +5,7 @@ import crypto from "node:crypto";
 import { createCanvas, loadImage } from "@napi-rs/canvas";
 import { createGame, stepGame, emptyInput } from "../src/game/simulation.js";
 import { capturePositions, interpolateScene } from "../src/game/animation.js";
-import { enemyMuzzle, enemyPresentation, ENEMY_ATLAS_URL } from "../src/game/enemyAnimation.js";
+import { enemyMuzzle, enemyPresentation, enemyVisualMotion, ENEMY_ATLAS_URL } from "../src/game/enemyAnimation.js";
 import { validateAnimationAtlas, atlasFrame } from "../src/game/spriteAtlas.js";
 import { inspectFramePixels } from "../src/game/spriteLayout.js";
 import { drawEnemy } from "../src/game/render.js";
@@ -85,4 +85,36 @@ test("enemy rendering handles actual sprites, reduced motion, broken atlas and c
       assert.ok(inspectFramePixels(ctx.getImageData(0, 0, 400, 400).data, 400, 400).occupied > 1000);
     }
   }
+});
+
+test("small enemies visibly hover between frames while reduced motion remains still", async () => {
+  const image = await loadImage("public" + ENEMY_ATLAS_URL), canvas = createCanvas(300, 300), ctx = canvas.getContext("2d");
+  const entity = { x: 90, y: 90, width: 80, height: 80, pattern: "scout", shot: 100, bornAt: 0 };
+  const center = (tick, reduced) => {
+    ctx.clearRect(0, 0, 300, 300); drawEnemy(ctx, entity, { [ENEMY_ATLAS_URL]: image }, tick, false, reduced);
+    const pixels = ctx.getImageData(0, 0, 300, 300).data;
+    let weight = 0, totalY = 0;
+    for (let i = 3; i < pixels.length; i += 4) { weight += pixels[i]; totalY += Math.floor(i / 4 / 300) * pixels[i]; }
+    return totalY / weight;
+  };
+  const ys = [108, 120, 132, 144].map(tick => center(tick, false));
+  // Eight game pixels become roughly 2.4 px even on a 320 px phone canvas.
+  assert.ok(Math.max(...ys) - Math.min(...ys) >= 8, `Hover range: ${Math.max(...ys) - Math.min(...ys)}`);
+  close(center(108, true), center(132, true));
+});
+
+test("visual recoil preserves shot birth, settles on time and never mutates enemy physics", () => {
+  const entity = { x: 400, y: 120, width: 160, height: 160, lastShotAt: 100, shot: 100 };
+  const before = structuredClone(entity);
+  for (const boss of [false, true]) {
+    const birth = enemyPresentation(entity, 100, boss);
+    assert.deepEqual(enemyVisualMotion(birth, entity.width), { x: 0, y: 0, angle: -0 });
+    const recoil = enemyVisualMotion(enemyPresentation(entity, 109, boss), entity.width);
+    assert.ok(recoil.x >= 8, "Recoil is visible at boss size");
+    const settled = enemyVisualMotion({ pose: "shooting", elapsed: 0.3 }, entity.width);
+    close(settled.x, 0); close(settled.angle, 0);
+    for (const pose of ["idle", "moving", "shooting", "damage", "charge", "defeat"])
+      assert.deepEqual(enemyVisualMotion({ pose, elapsed: 0.15 }, entity.width, true), { x: 0, y: 0, angle: 0 });
+  }
+  assert.deepEqual(entity, before);
 });
