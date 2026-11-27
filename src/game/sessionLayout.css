@@ -1,0 +1,74 @@
+/* Fit the whole solo match, including its HUD and controls, to the visible screen. */
+.game-page:has(.solo-session) {
+  position: fixed;
+  inset: 0;
+  height: 100dvh;
+  min-height: 0;
+}
+.game-page:has(.solo-session) .game-page-header {
+  display: none;
+}
+.game-page:has(.solo-session) .game-page-content {
+  min-height: 0;
+  padding: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+}
+.game-page:has(.solo-session) .game-stage {
+  height: 100%;
+  min-height: 0;
+  max-width: 1400px;
+}
+.game-stage:has(.solo-session) > .arcade {
+  height: 100%;
+  min-height: 0;
+  max-width: none;
+  margin: 0;
+}
+.arcade .solo-session {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+.solo-session > :not(.arcade-viewport) {
+  flex-shrink: 0;
+}
+.solo-session .arcade-viewport {
+  flex: 1;
+  min-height: 0;
+  aspect-ratio: auto;
+  display: grid;
+  place-items: center;
+  container-type: size;
+}
+.solo-session .arcade-viewport canvas {
+  width: min(100cqw, calc(100cqh * 16 / 9));
+  height: auto;
+  max-height: 100%;
+  aspect-ratio: 16 / 9;
+}
+.solo-session .arcade-hud {
+  min-height: 60px;
+  padding: 8px 16px;
+  gap: 14px;
+}
+.solo-session .arcade-status {
+  padding: 6px 14px;
+  gap: 10px;
+}
+.solo-session .arcade-keyboard-hint {
+  padding: 7px 12px;
+  font-size: 12px;
+}
+@media (max-width: 720px) {
+  .solo-session .arcade-hud { padding: 7px 10px; gap: 8px; }
+  .solo-session .arcade-objective { font-size: 12px; }
+  .solo-session .arcade-orientation-hint { padding: 4px 10px; font-size: 11px; }
+  .solo-session .arcade-touch { padding: 8px 10px; }
+}
+/* Preserve the side controls on short landscape phones. */
+@media (max-width: 1000px) and (max-height: 520px) and (orientation: landscape) {
+  .arcade .solo-session { display: grid; }
+  .solo-session .arcade-hud { min-height: 0; padding: 2px 10px; }
+  .solo-session .arcade-viewport { height: 100%; }
+  .solo-session .arcade-status { padding: 4px 10px; }
+}

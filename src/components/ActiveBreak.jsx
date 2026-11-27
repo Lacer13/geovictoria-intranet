@@ -472,7 +472,7 @@ export default function ActiveBreak({initialAdventure=true}) {
       )}
 
       {active && (
-        <div className="arcade-session">
+        <div className="arcade-session solo-session">
           <header className="arcade-hud">
             <div
               className="arcade-lives"

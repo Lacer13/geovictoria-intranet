@@ -7,6 +7,7 @@ import MiniGames from "../game/MiniGames.jsx";
 import ScoreBoard from "../game/ScoreBoard.jsx";
 import { gameViewFromHash } from "../game/gameNavigation.js";
 import "../game/gameHub.css";
+import "../game/sessionLayout.css";
 
 const games = [
   { id:"aventura", title:"Operación Estrella", tag:"Aventura · 3 niveles", time:"2–4 min por nivel", text:"Rescata regalos, repara el taller y acompaña al núcleo. Cada jefe tiene su estrategia.", image:"/scenery/bosque-preview.webp", action:"Elegir nivel" },
