@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createGame, stepGame, emptyInput, gameSummary } from "../src/game/simulation.js";
 import { MISSIONS, campaignProgress, completeMission } from "../src/game/missions.js";
+import { activeRepairStation } from "../src/game/missionObjectives.js";
 const tick = s => stepGame(s, emptyInput(), { random: () => 0.99 });
 
 test("campaign missions require their own elapsed time and objective rather than the old score threshold", () => {
@@ -9,25 +10,26 @@ test("campaign missions require their own elapsed time and objective rather than
     const s = createGame("tecnoia", { missionId: mission.id });
     s.score = 100000; s.tick = mission.seconds * 60 - 2;
     s.missionProgress.kills = mission.kills; s.missionProgress.beacons = mission.beacons;
+    if(mission.id==="bosque")s.missionProgress.rescued=6;
+    if(mission.id==="faro")s.missionProgress.escort.progress=s.missionProgress.escort.required;
     tick(s); assert.equal(s.bossSpawned, false);
     tick(s); assert.equal(s.bossSpawned, true); assert.equal(s.boss.maxHp, mission.bossHp);
     assert.match(gameSummary(s).objective, /guardián/);
   }
   assert.throws(() => createGame("tecnoia", { missionId: "missing" }), /mission/);
 });
-test("workshop requires three collected repair cores and retries a core missed offscreen", () => {
+test("workshop repairs three timed stations by staying nearby and preserves partial work after moving away", () => {
   const s = createGame("conectia", { missionId: "taller" });
-  s.tick = 1199; tick(s);
-  assert.equal(s.pickups.filter(p => p.type === "beacon").length, 1);
-  s.pickups[0].x = -100; tick(s);
-  s.tick = 2399; s.enemies = []; tick(s);
-  assert.equal(s.pickups.filter(p => p.type === "beacon").length, 1);
-  s.tick = 6300; s.score = 100000; s.enemies = []; s.pickups = [];
-  tick(s); assert.equal(s.bossSpawned, false);
-  for (let i = 0; i < 3; i++) {
-    s.pickups = [{ x: s.player.x + 20, y: s.player.y + 20, width: 40, height: 40, type: "beacon" }];
-    tick(s); assert.equal(s.missionProgress.beacons, i + 1);
+  const first=s.missionProgress.stations[0];
+  s.tick=first.availableAt-2;s.player.x=first.x-56;s.player.y=first.y-56;tick(s);assert.equal(first.charge,0);
+  tick(s);assert.equal(first.charge,1);s.player.y=400;tick(s);assert.equal(first.charge,1);
+  for(let i=0;i<3;i++){
+    const station=s.missionProgress.stations[i];s.tick=station.availableAt;s.enemies=[];s.bullets=[];
+    s.player.x=station.x-56;s.player.y=station.y-56;
+    while(s.missionProgress.beacons===i)tick(s);
+    assert.equal(station.charge,150);assert.equal(s.missionProgress.beacons,i+1);
   }
+  assert.equal(s.score,105);s.tick=6300;
   tick(s); assert.equal(s.bossSpawned, true);
 });
 test("campaign final boss changes firing pattern below half energy and classic stays unchanged", () => {
@@ -54,9 +56,19 @@ test("all three missions can be completed in sequence with normal health, powers
     let seed = 8128;
     const random = () => { seed = seed * 16807 % 2147483647; return (seed - 1) / 2147483646; };
     while (state.phase === "playing" && state.tick < 24000) {
-      const target = state.pickups.find(p => p.type === "beacon") || state.boss || state.enemies.find(e => e.x > state.player.x + 150);
+      const station=activeRepairStation(state),escort=state.missionProgress.escort;
+      const objective=state.pickups.find(p=>p.type==="gift") || station || (escort&&escort.progress<escort.required?escort:null);
+      const target = objective || state.boss || state.enemies.find(e => e.x > state.player.x + 150);
       const input = { ...emptyInput(), fire: true, power: state.player.powerCooldown === 0 };
-      if (target) { const y = target.y + target.height / 2 - 60; input.up = state.player.y > y + 4; input.down = state.player.y < y - 4; }
+      if (target) {
+        const y=target.y+(target.height||0)/2-56;
+        input.up=state.player.y>y+4;input.down=state.player.y<y-4;
+        if(objective){const x=target.x+(target.width||0)/2-56-(target===escort?100:0);input.left=state.player.x>x+4;input.right=state.player.x<x-4;}
+      }
+      const threat=state.bullets.find(b=>b.enemy&&b.x>state.player.x&&b.x<state.player.x+230&&Math.abs(b.y-state.player.y-56)<48);
+      if(threat){input.up=state.player.y>190;input.down=!input.up;}
+      const contact=state.enemies.find(e=>e.x>state.player.x-40&&e.x<state.player.x+230&&Math.abs(e.y+40-state.player.y-56)<85);
+      if(contact){input.up=state.player.y+56<=contact.y+40;input.down=!input.up;}
       stepGame(state, input, { random }); state.events = [];
     }
     assert.equal(state.phase, "victory", mission.id); assert.ok(state.player.hp > 0);

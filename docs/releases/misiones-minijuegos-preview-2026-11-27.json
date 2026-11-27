@@ -1,0 +1,433 @@
+{
+  "date": "2026-11-27",
+  "url": "https://geovictoria-intranet-peru--misiones-minijuegos-pho2hrf3.web.app/juego#minijuegos",
+  "version": "b412e75695e84b52",
+  "expires": "2026-12-04T15:28:19.733196736Z",
+  "testsPassed": 157,
+  "build": "passed",
+  "productionDeployed": false,
+  "firestoreRulesChanged": false,
+  "productionScoresSubmitted": false,
+  "resources": [
+    {
+      "path": "/assets/AccessManagement-Bm_B37v-.js",
+      "status": 200,
+      "bytes": 19914,
+      "sha256": "312ae70833ba830b8615bb4564e0f52ee8e23f62050876544311170341cc1571"
+    },
+    {
+      "path": "/assets/Admin-CWKXHQ2z.css",
+      "status": 200,
+      "bytes": 7620,
+      "sha256": "b3506f7c134535a820a81115db339091709f00d081c9273152a2b19c1907ca3b"
+    },
+    {
+      "path": "/assets/Admin-DWB9roEp.js",
+      "status": 200,
+      "bytes": 17452,
+      "sha256": "f917566d79b1453ca1be1540abd5aca7182d5284af7c5eb6f788e48399e0ebf0"
+    },
+    {
+      "path": "/assets/arrow-down-to-line-DMzm3Wb4.js",
+      "status": 200,
+      "bytes": 327,
+      "sha256": "9eed83fd6eff6ce6e2b1ed5c24f282876f7233eae533990e994c52fe43d26ccb"
+    },
+    {
+      "path": "/assets/arrow-left-Cowx0KOi.js",
+      "status": 200,
+      "bytes": 283,
+      "sha256": "3261687f5c1f4a8f33cd0a5fcaf573292d17138cc5cbd9ed310b8ae54352f014"
+    },
+    {
+      "path": "/assets/arrow-right-DFBgXtwZ.js",
+      "status": 200,
+      "bytes": 283,
+      "sha256": "076668e01e47a0753b7a04504b63999d55d5303b8f02c9357be875624150b61c"
+    },
+    {
+      "path": "/assets/auth-BWw07yM7.js",
+      "status": 200,
+      "bytes": 293,
+      "sha256": "1c6c256c1b001f962da0cb3c51213d4cb0d5a302f12142723696a59b531e9e76"
+    },
+    {
+      "path": "/assets/check-BIjFlQQA.js",
+      "status": 200,
+      "bytes": 242,
+      "sha256": "4f2768029a874d92e5da62d8183472ee4497bb4ece1366082d35d9f555901a9e"
+    },
+    {
+      "path": "/assets/Christmas-DTzhA2mn.js",
+      "status": 200,
+      "bytes": 5669,
+      "sha256": "b00c9e4a0357c7ee023f3c3cc66e4957522e59e3ba559a8f6ffbc50e0559ed90"
+    },
+    {
+      "path": "/assets/ChristmasWall-C4Eq8YsD.css",
+      "status": 200,
+      "bytes": 3816,
+      "sha256": "2077d68de83e4c518d88fa0c5950588bc93e07165b489c3fa141f19943ceffcd"
+    },
+    {
+      "path": "/assets/ChristmasWall-Pki0PphF.js",
+      "status": 200,
+      "bytes": 10648,
+      "sha256": "e6a4a06727d9c9053f9fde69e2dbbef66088996b2253918b4c7a8a5cbbae6d8d"
+    },
+    {
+      "path": "/assets/circle-check-BSEiGgV7.js",
+      "status": 200,
+      "bytes": 296,
+      "sha256": "ccfa3d22098dd705f11537761faec1993bbd5b966423b15664570dfebb85efa1"
+    },
+    {
+      "path": "/assets/clock-3-DGnoHHVj.js",
+      "status": 200,
+      "bytes": 287,
+      "sha256": "999f3145564294d80fb37fbd1f9a18ca7ff870d897b41350865831a96f542452"
+    },
+    {
+      "path": "/assets/ContentSection-DOpFeXhy.js",
+      "status": 200,
+      "bytes": 9291,
+      "sha256": "1350d737827d5c5e039353d75a717ae76ca0f141463adb5ba1fa2afbddcbbc8b"
+    },
+    {
+      "path": "/assets/copy-C-O0DyBg.js",
+      "status": 200,
+      "bytes": 354,
+      "sha256": "068a584ae0e4a2fa0674f54f15fbf0f8479a0eb7f474986a0a6b464da3de55b0"
+    },
+    {
+      "path": "/assets/createLucideIcon-DkgbDv7J.js",
+      "status": 200,
+      "bytes": 1855,
+      "sha256": "61b1726789437c53165e7fab35ff4f565215009f8eca768e878a4cba166075c8"
+    },
+    {
+      "path": "/assets/DeleteRecordDialog-CWMgrsm4.js",
+      "status": 200,
+      "bytes": 2786,
+      "sha256": "798cde1a7257a2a02f7378e6906ccd291a799fabc35cd7ef36e91fdb4d60dc56"
+    },
+    {
+      "path": "/assets/download-CVh2wH3z.js",
+      "status": 200,
+      "bytes": 350,
+      "sha256": "33fdb2b1a703ea638bd3c789c5f87f6d0c3ed3e624b4514e4ea239e56339135d"
+    },
+    {
+      "path": "/assets/esm-BLwCZdJv.js",
+      "status": 200,
+      "bytes": 16256,
+      "sha256": "b73f57f2be714c4d4d26209a30e913876105221613e38d8684d7b046b3b2b10e"
+    },
+    {
+      "path": "/assets/eye-off-B3NcHYDk.js",
+      "status": 200,
+      "bytes": 548,
+      "sha256": "58b818bbe3fa09f4f2b781b7cc4e9262f59ca81fc93cfffc05f15a07d4e3e181"
+    },
+    {
+      "path": "/assets/eye-XF-crv-5.js",
+      "status": 200,
+      "bytes": 374,
+      "sha256": "e7ad2ca9db95a778a43d6dc14a32d20db88458452d87c83badac4e885c44de09"
+    },
+    {
+      "path": "/assets/FeedbackForm-BzBi1_3g.js",
+      "status": 200,
+      "bytes": 5920,
+      "sha256": "249b4b4623a3b16371f52b3a686ca620fdbf47893bbee6435ae0b86e8607ee25"
+    },
+    {
+      "path": "/assets/firebase-auth-DDiZOxjw.js",
+      "status": 200,
+      "bytes": 88760,
+      "sha256": "7d354bc75b07720d1983d828333428b3efd6c4dc09fe765a806a276d3c50ed54"
+    },
+    {
+      "path": "/assets/firebase-core-bsNn-Ovv.js",
+      "status": 200,
+      "bytes": 25641,
+      "sha256": "4a5bf635b2b4f5ea5e5227739862483c32f44310c7668f44b0e6985736d77aef"
+    },
+    {
+      "path": "/assets/firebase-CvjrlLZZ.js",
+      "status": 200,
+      "bytes": 305411,
+      "sha256": "c3e2490178cc944e69aaa5cfb98e95c7a05a66f52555642403ec5999b6fe06cf"
+    },
+    {
+      "path": "/assets/GamePage-BWyxbKsK.js",
+      "status": 200,
+      "bytes": 133665,
+      "sha256": "977765b72988d881523d945a1e06b9dacbc98e65224879cbe26a43eaa13fdff7"
+    },
+    {
+      "path": "/assets/GamePage-YycTZFFr.css",
+      "status": 200,
+      "bytes": 28367,
+      "sha256": "0656a72b1d1c971f9b125035ddd8515600f89b3ce668bc6986a022156d1a03a7"
+    },
+    {
+      "path": "/assets/geovictoria-intranet-BcMKQhgG.css",
+      "status": 200,
+      "bytes": 119143,
+      "sha256": "4db74bf16d6a934c93869170900f6b4102bb61284f2ea5cbd4c51e57412be1e1"
+    },
+    {
+      "path": "/assets/geovictoria-intranet-K778SsmO.js",
+      "status": 200,
+      "bytes": 228121,
+      "sha256": "6fdba7b2452c9b1a73676e195904521591c89981f47ecaf612c578854b6634c7"
+    },
+    {
+      "path": "/assets/HelpDirectory-CaHZ5D6V.js",
+      "status": 200,
+      "bytes": 4101,
+      "sha256": "fed7fa9bb4e6ed070bacd23b3b70265d3df54867270f802d66a9ed86d22c1e92"
+    },
+    {
+      "path": "/assets/index-Dzz6DQlA.js",
+      "status": 200,
+      "bytes": 59,
+      "sha256": "8666d9d49f3f45780106228a40f2e845b43020140147d85097e25edb257703d5"
+    },
+    {
+      "path": "/assets/lock-keyhole-IQ4xWgMv.js",
+      "status": 200,
+      "bytes": 373,
+      "sha256": "5ab062bf0f3a2a6e511960d894bf4113071b72006edd501d21f3a7c67d9eb208"
+    },
+    {
+      "path": "/assets/mail-cFAW8Yjt.js",
+      "status": 200,
+      "bytes": 331,
+      "sha256": "062d5541769a291e60a7feedcc07b08f9807d138218796901c90ff738518c41b"
+    },
+    {
+      "path": "/assets/NewsPage-DNfXWMHf.js",
+      "status": 200,
+      "bytes": 3350,
+      "sha256": "99d606d65cad916748be1e5b8d30994809381a7ad0c48dca180d18c73f4bc5fc"
+    },
+    {
+      "path": "/assets/OrgChart-DshIOBfD.js",
+      "status": 200,
+      "bytes": 2511,
+      "sha256": "6df3338745975f71feed82b77bc919146245dd880c52da3f23f0bdc68d2b93af"
+    },
+    {
+      "path": "/assets/pencil-anzgP7Ck.js",
+      "status": 200,
+      "bytes": 394,
+      "sha256": "6734eb2699a45cae27974ab123065792256f0dbd1252d434c17fd87173f16718"
+    },
+    {
+      "path": "/assets/plus-COsp5OOR.js",
+      "status": 200,
+      "bytes": 271,
+      "sha256": "26f568a4f8e73027eb9c25cbcc173ceaf1738866a0d56afef90dac00281f19e4"
+    },
+    {
+      "path": "/assets/quiz-ChGAa421.css",
+      "status": 200,
+      "bytes": 22714,
+      "sha256": "caf23fc982d6eccde323660cf809cfb7ad5ace8e2e2f8c6187e0b6ee13a21de8"
+    },
+    {
+      "path": "/assets/Quiz-CXxbR71S.js",
+      "status": 200,
+      "bytes": 12838,
+      "sha256": "a70216c2cac58acfa562a0a5d980669af360349ea4c8b920fded89a1a895caef"
+    },
+    {
+      "path": "/assets/quiz-DQDp_V1x.js",
+      "status": 200,
+      "bytes": 23659,
+      "sha256": "718d9628236fdb6c8bfa8455d1ecb7596a8234b83f15db5c1d2af04e2a600e1e"
+    },
+    {
+      "path": "/assets/QuizAdmin-Bd4kbBNm.js",
+      "status": 200,
+      "bytes": 12950,
+      "sha256": "f7771c8f52ab6f865e6f936ab91a466519cb1f0c5970917a4dd576750bc405da"
+    },
+    {
+      "path": "/assets/QuizHost-dfdxh-3r.js",
+      "status": 200,
+      "bytes": 6919,
+      "sha256": "1649b1d09e703b39b194d882353e87e9a198f13ccc6dfd09ef99397e71f6ce92"
+    },
+    {
+      "path": "/assets/QuizPresentation-DfHcObNk.js",
+      "status": 200,
+      "bytes": 1079,
+      "sha256": "bdd9956baf3b82c5060f5a43ab4233fd93713dac4d1b6e1738c8e9b5ef6f1eaf"
+    },
+    {
+      "path": "/assets/react-BVNqbF40.js",
+      "status": 200,
+      "bytes": 228576,
+      "sha256": "ffc267103e7c1c4f6aee8d59dfbac804cc8ca717f0d0313c139da8164843005a"
+    },
+    {
+      "path": "/assets/ReportsSection-C2pc8p3r.js",
+      "status": 200,
+      "bytes": 1904,
+      "sha256": "01b9d0ae17ff449e53013dff3c4f4749740fa23944ad7cd8c45c0deb77747ebf"
+    },
+    {
+      "path": "/assets/rolldown-runtime-8BhlS34s.js",
+      "status": 200,
+      "bytes": 807,
+      "sha256": "1cb5c6ead7e29370203f12e2d5cdf50ec1f02dd70ee2d050d909afbf2406f6b1"
+    },
+    {
+      "path": "/assets/roster-DQGKTreL.js",
+      "status": 200,
+      "bytes": 6128,
+      "sha256": "1f178200b66d55686af4b2d76915a214b83b6e46f3dc77b52cb6bd4def208305"
+    },
+    {
+      "path": "/assets/SantaGreeting-2WFRsXaA.css",
+      "status": 200,
+      "bytes": 1420,
+      "sha256": "d5442c7ec0f830a87ac37c9ee5fd18165dc48a0fd1c9b88d3b2e3a8313068126"
+    },
+    {
+      "path": "/assets/SantaGreeting-BLC9MgiC.js",
+      "status": 200,
+      "bytes": 9812,
+      "sha256": "6631f3d9b232359471ed2b34c3c19dc2910ecbc414153b6620b17185a4399ce8"
+    },
+    {
+      "path": "/assets/scoreboard-CF8uncVt.js",
+      "status": 200,
+      "bytes": 4109,
+      "sha256": "7ef4e04a37835dbf682df4861dd24d099cb44ffa3b1db792394af07c9dde8897"
+    },
+    {
+      "path": "/assets/ScoresSection-BJtg0IXJ.js",
+      "status": 200,
+      "bytes": 1688,
+      "sha256": "a022073c6455f770387d9948bf10afff081e3d5a2dfec63183078d8b3111d008"
+    },
+    {
+      "path": "/assets/SearchPage-DnZ9Sbvx.js",
+      "status": 200,
+      "bytes": 2867,
+      "sha256": "9a1ab24bf43bd585f8f77f8c7e1f9fa09752b2513b3cbbe86291b5851a870f19"
+    },
+    {
+      "path": "/assets/secret-santa-experience-5KcDTusq.js",
+      "status": 200,
+      "bytes": 7064,
+      "sha256": "95679017abf81679f0e14ee0e59207534a02321da9145ac5bc8438f02b0811fe"
+    },
+    {
+      "path": "/assets/secret-santa-experience-DuRqXPGs.css",
+      "status": 200,
+      "bytes": 20747,
+      "sha256": "4c55327207c0a65264520b1e2560a66dc6edfe27641e929405192cacaf32d19f"
+    },
+    {
+      "path": "/assets/secretSanta-BAl3A6SF.js",
+      "status": 200,
+      "bytes": 4370,
+      "sha256": "e1e3df162a38148f0a21a087aa7c58f6aba9f048f9fb08379ba10ad9f1b90c2d"
+    },
+    {
+      "path": "/assets/SecretSanta-C-fn0xLM.js",
+      "status": 200,
+      "bytes": 12777,
+      "sha256": "7135f01cfcf3b6b28b15a425abbddb60920708ff4a8dc3adf8ec27ae3f012a7b"
+    },
+    {
+      "path": "/assets/SecretSantaAdmin-B5eqHHPw.js",
+      "status": 200,
+      "bytes": 55372,
+      "sha256": "fb36f9cdb5b5a6645b748fb33b7719de2b365267065730f7ac2ebfcb47f5d286"
+    },
+    {
+      "path": "/assets/SecretSantaAdmin-D9eqvj4x.css",
+      "status": 200,
+      "bytes": 6819,
+      "sha256": "c33a4e70fd0493fd3db29069b6d4173591ad2bf79351801c03f8d92a8402bf86"
+    },
+    {
+      "path": "/assets/send-CMBKyrk-.js",
+      "status": 200,
+      "bytes": 408,
+      "sha256": "e381d4970c035cbaeb757d661ea2c0c961b5e3c9d03e360c044990393764001e"
+    },
+    {
+      "path": "/assets/settings-2-CetWwxZa.js",
+      "status": 200,
+      "bytes": 370,
+      "sha256": "cb160110228bb9de19f5f7395ce536789187123187da71541a481132d9e255f9"
+    },
+    {
+      "path": "/assets/shield-check-CLVg30K7.js",
+      "status": 200,
+      "bytes": 438,
+      "sha256": "46a210e359f48f8c076cd58c9ebc08d7aa76eb6cb0832af7903428c954390a47"
+    },
+    {
+      "path": "/assets/useAdminAccess-DHZwQW2u.js",
+      "status": 200,
+      "bytes": 7837,
+      "sha256": "213c7520aba87cbabca5d58cc2196b9cb49696e7e41b17ddf26b19f09b3319e0"
+    },
+    {
+      "path": "/assets/Wiki-D7u95LQt.js",
+      "status": 200,
+      "bytes": 5672,
+      "sha256": "2b1e4308a8607dee39aa6b1930677cad9b0763a39419ccdc3364abf610d9fcda"
+    },
+    {
+      "path": "/juego",
+      "status": 200,
+      "bytes": 1556,
+      "sha256": "2156c61f64d2b760d5f2e84daf608d2a1eb710aba7e0405d849c8e68d6e025e1"
+    },
+    {
+      "path": "/scenery/bosque-preview.webp",
+      "status": 200,
+      "bytes": 16726,
+      "sha256": "1be8580642edfc8e88424082b96aeaaf480eb7b39473e5588077e259d9ba9aa5"
+    },
+    {
+      "path": "/scenery/bosque-v1.webp",
+      "status": 200,
+      "bytes": 80690,
+      "sha256": "3c6824ad698872647faf1b57ac077deab8bf5b2db230e3c401357da8fd29cda6"
+    },
+    {
+      "path": "/scenery/faro-preview.webp",
+      "status": 200,
+      "bytes": 11138,
+      "sha256": "062595e89d6aaabaef6872325c3faee7e967be6d56545d931af60015154663bf"
+    },
+    {
+      "path": "/scenery/faro-v1.webp",
+      "status": 200,
+      "bytes": 59962,
+      "sha256": "3b918c08f2edc83427e57037464c99de2fbd95412214a36e025a9f1c23397ee3"
+    },
+    {
+      "path": "/scenery/taller-preview.webp",
+      "status": 200,
+      "bytes": 21752,
+      "sha256": "81a140850043d0bb8d0146228365ae2efa5895c4c892437168bb9c0c3f11aeba"
+    },
+    {
+      "path": "/scenery/taller-v1.webp",
+      "status": 200,
+      "bytes": 101738,
+      "sha256": "48415f7a24602f1caf04627547b67cd9495f20061fa84c7ee3da1b2420ef7b93"
+    }
+  ]
+}
