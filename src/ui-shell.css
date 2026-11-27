@@ -32,7 +32,6 @@
   min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
-  scrollbar-width: thin;
   padding: 0 3px 12px;
 }
 .app-shell .sidebar-bottom {
