@@ -1,7 +1,7 @@
 import { readPreference, savePreference } from "../lib/preferences.js";
 import { MISSIONS } from "./missions.js";
 
-export const SCORE_BOARDS = [...MISSIONS.map(m => ({ id: m.id, label: m.title })), { id: "arcade", label: "Arcade rápido" }];
+export const SCORE_BOARDS = [...MISSIONS.map(m => ({ id: m.id, label: m.title, play: "aventura", category: "Aventura" })), { id: "arcade", label: "Arcade rápido", play: "arcade", category: "Arcade" }, { id: "memory", label: "Memoria de guardianes", play: "memoria", category: "Minijuegos" }, { id: "aim", label: "Faro de reflejos", play: "reflejos", category: "Minijuegos" }];
 export function scoreBoard(id) {
   const board = SCORE_BOARDS.find(b => b.id === id);
   if (!board) throw new Error("Clasificación desconocida");

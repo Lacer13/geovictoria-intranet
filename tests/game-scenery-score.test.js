@@ -5,6 +5,7 @@ import crypto from "node:crypto";
 import { createCanvas, loadImage } from "@napi-rs/canvas";
 import { SCENERY, drawScenery, loadScenery, getScenery } from "../src/game/scenery.js";
 import { gameScorePayload, normalizePlayerName, validPlayerName, readPlayerName, savePlayerName, rankGameScores, scoreBoardPath } from "../src/game/scoreboard.js";
+import { gameViewFromHash } from "../src/game/gameNavigation.js";
 
 test("each level has its own compact opaque background and preserved source fingerprint", async () => {
   const manifest = JSON.parse(await fs.readFile("design/scenery/manifest-v1.json"));
@@ -54,8 +55,15 @@ test("player names normalize spaces, preserve accents and remain optional browse
 
 test("level tables stay separate from the existing Arcade records and reject unknown paths", () => {
   assert.equal(scoreBoardPath("arcade"),"leaderboard");
-  for(const id of ["bosque","taller","faro"])assert.equal(scoreBoardPath(id),`gameLeaderboards/${id}/entries`);
+  for(const id of ["bosque","taller","faro","memory","aim"])assert.equal(scoreBoardPath(id),`gameLeaderboards/${id}/entries`);
   assert.throws(()=>scoreBoardPath("../private"));assert.throws(()=>scoreBoardPath("unknown"));
+});
+
+test("game links preserve rooms, select each game and recover from unknown hashes",()=>{
+  assert.equal(gameViewFromHash(""),"juegos");
+  for(const id of ["aventura","arcade","memoria","reflejos","clasificaciones","minijuegos"])assert.equal(gameViewFromHash("#"+id),id);
+  assert.equal(gameViewFromHash("#sala=ABCD1234"),"arena");
+  assert.equal(gameViewFromHash("#unknown"),"juegos");
 });
 
 test("published results reject malformed values and rank equal scores without inventing a winner", () => {

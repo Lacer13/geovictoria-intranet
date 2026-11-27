@@ -157,12 +157,15 @@ function PauseDialog({ reason, settings, onChange, onResume, onMenu }) {
   );
 }
 
-export default function ActiveBreak() {
+export default function ActiveBreak({initialAdventure=true}) {
+  const [setupStep,setSetupStep] = useState(0);
+  const setupHeading = useRef(null);
+  useEffect(()=>{setupHeading.current?.focus();},[setupStep]);
   const [playerName, setPlayerName] = useState(readPlayerName);
   const [nameError, setNameError] = useState(false);
   const nameInput = useRef(null);
   const run = useRef(null);
-  const [adventure, setAdventure] = useState(true);
+  const [adventure, setAdventure] = useState(initialAdventure);
   const [campaign, setCampaign] = useState(readCampaignProgress);
   const campaignRef = useRef(campaign);
   const [missionId, setMissionId] = useState(() => MISSIONS[Math.min(campaign.completed.length, MISSIONS.length - 1)].id);
@@ -396,11 +399,13 @@ export default function ActiveBreak() {
   const result = mode === "victory" || mode === "gameover";
 
   return (
-    <div className="arcade">
+    <div className={`arcade ${mode === "menu" ? "arcade-setup" : ""}`}>
       {mode === "menu" && (
         <>
 
-          <div className="arcade-intro">
+          <header className="arcade-setup-heading"><span className="arcade-eyebrow">{adventure?"Operación Estrella":"Arcade rápido"}</span><h1 ref={setupHeading} tabIndex={-1}>{["Elige tu desafío","Encuentra a tu guardián","Todo listo para jugar"][setupStep]}</h1><p>{["Selecciona un nivel. Tu avance se conserva en este dispositivo.","Elige un personaje y conoce su poder. Puedes cambiarlo en cada partida.","Escribe tu alias, revisa los controles y despega."][setupStep]}</p></header>
+          <nav className="arcade-setup-nav" aria-label="Preparar partida">{["1. Nivel","2. Guardián","3. Jugar"].map((label,i)=><button key={label} aria-current={setupStep===i?"step":undefined} onClick={()=>setSetupStep(i)}>{label}</button>)}</nav>
+          <div className="arcade-intro" hidden={setupStep!==1}>
             <div className="arcade-intro-copy">
               <span className="arcade-eyebrow">
                 {adventure ? "Aventura navideña · 3 niveles" : "Arcade rápido · Edición Navidad"}
@@ -459,7 +464,8 @@ export default function ActiveBreak() {
               </label>
             </div>
           </div>
-          <section className="arcade-player-card" aria-labelledby="arcade-player-title">
+          {setupStep===2&&<div className="arcade-setup-summary"><strong>{adventure?MISSIONS.find(m=>m.id===missionId).title:"Arcade rápido"}</strong><br/>{character.name} · {power.name}<br/><small>3 vidas · Pausa disponible · Publicar tu puntaje es opcional</small></div>}
+          <section className="arcade-player-card" aria-labelledby="arcade-player-title" hidden={setupStep!==2}>
             <div><span className="arcade-eyebrow">Antes de despegar</span><h2 id="arcade-player-title">¿Cómo te llamas?</h2><p>Tu nombre o alias aparecerá junto a tus puntos cuando elijas publicarlos.</p></div>
             <div className="arcade-player-field"><label htmlFor="arcade-player-name">Nombre en el juego</label><input id="arcade-player-name" ref={nameInput} value={playerName} maxLength={24} autoComplete="nickname" placeholder="Por ejemplo, Ana o Luis D."
               aria-describedby={nameError ? "arcade-name-help arcade-name-error" : "arcade-name-help"} aria-invalid={nameError}
@@ -468,7 +474,7 @@ export default function ActiveBreak() {
               {nameError && <p id="arcade-name-error" role="alert">Escribe al menos dos caracteres para iniciar.</p>}
             </div>
           </section>
-          <section className="campaign-selection" aria-label="Elige tu aventura">
+          <section className="campaign-selection" aria-label="Elige tu aventura" hidden={setupStep!==0}>
             <div className="campaign-mode" role="group" aria-label="Modo individual">
               <button type="button" aria-pressed={adventure} onClick={() => setAdventure(true)}>Aventura · 3 niveles</button>
               <button type="button" aria-pressed={!adventure} onClick={() => setAdventure(false)}>Arcade rápido</button>
@@ -492,7 +498,9 @@ export default function ActiveBreak() {
           <section
             className="arcade-menu"
             aria-labelledby="arcade-select-title"
+            hidden={setupStep===0}
           >
+            <div hidden={setupStep!==1}>
             <div className="arcade-menu-heading">
               <h2 id="arcade-select-title">Elige a tu guardián</h2>
               <span>
@@ -587,6 +595,7 @@ export default function ActiveBreak() {
                 Shift o botón Poder · recarga {power.cooldown / 60} s
               </small>
             </p>
+            </div>
             {notice && (
               <p role="status" className="arcade-notice">
                 {notice}
@@ -608,13 +617,13 @@ export default function ActiveBreak() {
                 </button>
               </p>
             )}
-            <div className="arcade-start-row">
+            <div className="arcade-start-row" hidden={setupStep!==2}>
               <button
                 className="arcade-button"
                 disabled={!assets || assets.characterId !== character.id}
                 onClick={() => start()}
               >
-                <Play size={20} /> Iniciar misión
+                <Play size={20} /> {adventure?"Iniciar misión":"Jugar Arcade"}
               </button>
               <p>
                 Flechas o WASD · Espacio para disparar
@@ -622,14 +631,14 @@ export default function ActiveBreak() {
                 Shift para tu poder · Esc para pausar
               </p>
             </div>
-            <details className="arcade-settings-details">
+            <details className="arcade-settings-details" hidden={setupStep!==2}>
               <summary>
                 <Settings2 size={18} /> Ajustar controles y sonido
               </summary>
               <Settings settings={settings} onChange={updateSettings} />
             </details>
           </section>
-          <ScoreBoard boardId={adventure ? missionId : "arcade"} selectable />
+          <div className="arcade-setup-footer">{setupStep>0?<button className="arcade-button secondary" onClick={()=>setSetupStep(s=>s-1)}>Anterior</button>:<span/>}{setupStep<2&&<button className="arcade-button" onClick={()=>setSetupStep(s=>s+1)}>{setupStep===0?"Elegir guardián →":"Continuar →"}</button>}</div>
         </>
       )}
 

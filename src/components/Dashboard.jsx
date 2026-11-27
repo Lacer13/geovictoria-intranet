@@ -19,6 +19,7 @@ import {
   Users,
 } from "lucide-react";
 import ChristmasArt from "./ChristmasArt";
+import ScoreBoard from "../game/ScoreBoard.jsx";
 import { usePortal } from "../context/portal";
 import {
   christmasInfo,
@@ -302,7 +303,6 @@ export default function Dashboard({ onWelcome }) {
   );
   const greeting =
     hour < 12 ? "Buenos días" : hour < 19 ? "Buenas tardes" : "Buenas noches";
-  const { leaderboard } = usePortal();
   return (
     <div className="dashboard page-enter">
       <div className="welcome-row">
@@ -385,6 +385,7 @@ export default function Dashboard({ onWelcome }) {
           className="dashboard-secondary"
           aria-label="Calendario y comunidad"
         >
+          <ScoreBoard compact selectable/>
           <section className="countdown-card">
             <div className="countdown-icon">
               <Gift size={18} />
@@ -412,38 +413,6 @@ export default function Dashboard({ onWelcome }) {
             </span>
           </section>
           <MiniCalendar />
-          <section className="panel leaderboard-panel">
-            <div className="panel-heading">
-              <h2>
-                <Trophy size={17} /> Récords de Arcade
-              </h2>
-            </div>
-            {leaderboard.data.length > 0 ? (
-              <ol className="leaderboard-list">
-                {leaderboard.data.map((entry, i) => (
-                  <li key={entry.id}>
-                    <span className={i === 0 ? "rank first" : "rank"}>
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span>{entry.name}</span>
-                    <strong>
-                      {Number(entry.score).toLocaleString("es-PE")}{" "}
-                      <small>pts</small>
-                    </strong>
-                  </li>
-                ))}
-              </ol>
-            ) : (
-              <DataState
-                resource={leaderboard}
-                compact
-                empty="Aún no hay récords"
-              />
-            )}
-            <Link to="/juego" className="leaderboard-link">
-              Ver niveles y puntajes <ArrowRight size={14} />
-            </Link>
-          </section>
         </aside>
       </div>
     </div>
