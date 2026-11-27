@@ -1,0 +1,570 @@
+{
+  "date": "2026-11-27",
+  "feature": "resultados-centrados",
+  "url": "https://geovictoria-intranet-peru--resultados-centrados-3encf86g.web.app/juego#arcade",
+  "version": "7fa87e0888bdcbc0",
+  "expires": "2026-12-04T19:48:57.390579391Z",
+  "productionDeployed": false,
+  "firestoreRulesChanged": false,
+  "build": "passed",
+  "uiChecks": {
+    "naturalGameoverTransition": true,
+    "resultsCenteredOnLaptop": true,
+    "primaryResultVisibleAt1280x600": true,
+    "headingOutlineRemoved": true,
+    "keyboardButtonFocusPreserved": true,
+    "rankingTitle18px": true,
+    "rankingCanExpandAndCollapse": true,
+    "mobileNoHorizontalOverflow": true,
+    "mobileAndExpandedRankingUseNaturalVerticalScroll": true,
+    "consoleErrors": 0,
+    "viewportReset": true,
+    "physicalPhonePending": true,
+    "productionScoresSubmitted": false,
+    "postPublicationAutoOpenNotExercised": true
+  },
+  "measurements": [
+    {
+      "label": "desktop-1280x600-final",
+      "document": {
+        "height": 612,
+        "width": 1280
+      },
+      "headingOutline": "none",
+      "headingSize": "34px",
+      "publishButtonHeight": 46.400001525878906,
+      "rankingHeadingSize": null,
+      "rankingOpen": false,
+      "result": {
+        "bottom": 592.2625122070312,
+        "height": 468.2625122070313,
+        "width": 1040,
+        "x": 120,
+        "y": 124
+      },
+      "scrollY": 0,
+      "viewport": {
+        "height": 600,
+        "width": 1280
+      }
+    },
+    {
+      "label": "laptop-1366x768-final",
+      "document": {
+        "height": 768,
+        "width": 1366
+      },
+      "headingOutline": "none",
+      "headingSize": "34px",
+      "publishButtonHeight": 46.400001525878906,
+      "rankingHeadingSize": null,
+      "rankingOpen": false,
+      "result": {
+        "bottom": 670.1250152587891,
+        "height": 468.2625122070313,
+        "width": 1040,
+        "x": 163.1999969482422,
+        "y": 201.8625030517578
+      },
+      "scrollY": 0,
+      "viewport": {
+        "height": 768,
+        "width": 1366
+      }
+    },
+    {
+      "label": "laptop-ranking-open",
+      "document": {
+        "height": 850,
+        "width": 1366
+      },
+      "headingOutline": "none",
+      "headingSize": "34px",
+      "publishButtonHeight": 46.400001525878906,
+      "rankingHeadingSize": "18px",
+      "rankingOpen": true,
+      "result": {
+        "bottom": 830.4625244140625,
+        "height": 706.4625244140625,
+        "width": 1040,
+        "x": 163.1999969482422,
+        "y": 124
+      },
+      "scrollY": 0,
+      "viewport": {
+        "height": 768,
+        "width": 1366
+      }
+    },
+    {
+      "label": "phone-320x568-ranking-open",
+      "document": {
+        "height": 1268,
+        "width": 320
+      },
+      "headingOutline": "none",
+      "headingSize": "26px",
+      "publishButtonHeight": 44,
+      "rankingHeadingSize": "18px",
+      "rankingOpen": true,
+      "result": {
+        "bottom": 1247.6500244140625,
+        "height": 1135.6500244140625,
+        "width": 296,
+        "x": 12,
+        "y": 112
+      },
+      "scrollY": 0,
+      "viewport": {
+        "height": 568,
+        "width": 320
+      }
+    },
+    {
+      "label": "phone-320x568-ranking-closed",
+      "document": {
+        "height": 811,
+        "width": 320
+      },
+      "headingOutline": "none",
+      "headingSize": "26px",
+      "publishButtonHeight": 44,
+      "rankingHeadingSize": null,
+      "rankingOpen": false,
+      "result": {
+        "bottom": 547.5999908447266,
+        "height": 678.7999877929688,
+        "width": 296,
+        "x": 12,
+        "y": -131.1999969482422
+      },
+      "scrollY": 243.1999969482422,
+      "viewport": {
+        "height": 568,
+        "width": 320
+      }
+    }
+  ],
+  "resources": [
+    {
+      "path": "/",
+      "status": 200,
+      "bytes": 1546,
+      "sha256": "de33e867decb8c06afa06dd0bbabfb3333c0becb7a8b4d954e7e6ae286d2a11a"
+    },
+    {
+      "path": "/assets/AccessManagement-CJKENUlQ.js",
+      "status": 200,
+      "bytes": 19990,
+      "sha256": "eba875a9ac2f1d2967eeedac554a298055144f37661df81659f36b847db99bd2"
+    },
+    {
+      "path": "/assets/Admin-BWae4Ckq.js",
+      "status": 200,
+      "bytes": 17370,
+      "sha256": "532f428a0807c29380d64aac9ff5a077c8ec89e7c0baa2843e23b13333a326aa"
+    },
+    {
+      "path": "/assets/Admin-CWKXHQ2z.css",
+      "status": 200,
+      "bytes": 7620,
+      "sha256": "b3506f7c134535a820a81115db339091709f00d081c9273152a2b19c1907ca3b"
+    },
+    {
+      "path": "/assets/arrow-left-Cowx0KOi.js",
+      "status": 200,
+      "bytes": 283,
+      "sha256": "3261687f5c1f4a8f33cd0a5fcaf573292d17138cc5cbd9ed310b8ae54352f014"
+    },
+    {
+      "path": "/assets/auth-6DDmcFBi.js",
+      "status": 200,
+      "bytes": 286,
+      "sha256": "b603db72a368f3f8fbedd9f9f30d5fd3c2857c24b1fe41d12d66b81782e50074"
+    },
+    {
+      "path": "/assets/check-BIjFlQQA.js",
+      "status": 200,
+      "bytes": 242,
+      "sha256": "4f2768029a874d92e5da62d8183472ee4497bb4ece1366082d35d9f555901a9e"
+    },
+    {
+      "path": "/assets/Christmas-B3LrtCOL.js",
+      "status": 200,
+      "bytes": 5627,
+      "sha256": "a346e5232e1e5938cddfca9cc5ef86de792d6142411f61eafe6c49b7bdeb9ae5"
+    },
+    {
+      "path": "/assets/ChristmasWall-C4Eq8YsD.css",
+      "status": 200,
+      "bytes": 3816,
+      "sha256": "2077d68de83e4c518d88fa0c5950588bc93e07165b489c3fa141f19943ceffcd"
+    },
+    {
+      "path": "/assets/ChristmasWall-DMLpNQSh.js",
+      "status": 200,
+      "bytes": 10684,
+      "sha256": "eb61c01a6b8aee054d8d80cf075414e8023378d678e67ee2b238dfaa0a22be1d"
+    },
+    {
+      "path": "/assets/circle-check-BSEiGgV7.js",
+      "status": 200,
+      "bytes": 296,
+      "sha256": "ccfa3d22098dd705f11537761faec1993bbd5b966423b15664570dfebb85efa1"
+    },
+    {
+      "path": "/assets/clock-3-DGnoHHVj.js",
+      "status": 200,
+      "bytes": 287,
+      "sha256": "999f3145564294d80fb37fbd1f9a18ca7ff870d897b41350865831a96f542452"
+    },
+    {
+      "path": "/assets/ContentSection-9efKo0nq.js",
+      "status": 200,
+      "bytes": 9373,
+      "sha256": "a82e0b61022ae50cf8446d609db47012a0e0cafd13064344ef04a0f75d35f263"
+    },
+    {
+      "path": "/assets/copy-C-O0DyBg.js",
+      "status": 200,
+      "bytes": 354,
+      "sha256": "068a584ae0e4a2fa0674f54f15fbf0f8479a0eb7f474986a0a6b464da3de55b0"
+    },
+    {
+      "path": "/assets/createLucideIcon-DkgbDv7J.js",
+      "status": 200,
+      "bytes": 1855,
+      "sha256": "61b1726789437c53165e7fab35ff4f565215009f8eca768e878a4cba166075c8"
+    },
+    {
+      "path": "/assets/DeleteRecordDialog-CivbQ65c.js",
+      "status": 200,
+      "bytes": 2822,
+      "sha256": "a4fc17c034a043d127ad6b802b75c96d3aec3ac1194afb794825b7e245f0ff21"
+    },
+    {
+      "path": "/assets/download-CVh2wH3z.js",
+      "status": 200,
+      "bytes": 350,
+      "sha256": "33fdb2b1a703ea638bd3c789c5f87f6d0c3ed3e624b4514e4ea239e56339135d"
+    },
+    {
+      "path": "/assets/esm-BLwCZdJv.js",
+      "status": 200,
+      "bytes": 16256,
+      "sha256": "b73f57f2be714c4d4d26209a30e913876105221613e38d8684d7b046b3b2b10e"
+    },
+    {
+      "path": "/assets/eye-off-B3NcHYDk.js",
+      "status": 200,
+      "bytes": 548,
+      "sha256": "58b818bbe3fa09f4f2b781b7cc4e9262f59ca81fc93cfffc05f15a07d4e3e181"
+    },
+    {
+      "path": "/assets/eye-XF-crv-5.js",
+      "status": 200,
+      "bytes": 374,
+      "sha256": "e7ad2ca9db95a778a43d6dc14a32d20db88458452d87c83badac4e885c44de09"
+    },
+    {
+      "path": "/assets/FeedbackForm-D2_--wMy.js",
+      "status": 200,
+      "bytes": 5956,
+      "sha256": "4f588ef458f7e6249416493b21960964659b1a16783b22a1b352c9c5ca9457c8"
+    },
+    {
+      "path": "/assets/firebase-auth-_NPQmi1t.js",
+      "status": 200,
+      "bytes": 88760,
+      "sha256": "c35ad4569468931ffce58cf4a5bfb929452bef9aa657dda089a4dabe7d50f41b"
+    },
+    {
+      "path": "/assets/firebase-core-DWPvHpC5.js",
+      "status": 200,
+      "bytes": 25629,
+      "sha256": "ec9e6da7193f48b19f697fd88347fccddf0e3ad2c9c4800f5203741b2059df72"
+    },
+    {
+      "path": "/assets/firebase-Cu0ARhY5.js",
+      "status": 200,
+      "bytes": 147905,
+      "sha256": "1af53e4d3b7af5ee59a2c78d20eb6cd7748eaf70133d4c42e688b2cb7eb8feb3"
+    },
+    {
+      "path": "/assets/firebase-DIS0Dk25.js",
+      "status": 200,
+      "bytes": 305387,
+      "sha256": "970ca4ac34c008a9cb8260ac4f050ba09c50e6c9169be540f80ec2cd0a9a276f"
+    },
+    {
+      "path": "/assets/GamePage-ck5i6R1Z.css",
+      "status": 200,
+      "bytes": 46938,
+      "sha256": "b7a9126c7a3d0a72ed420ff1362e7c9e9c88a6d450ec39a64299b300cb0ff2b5"
+    },
+    {
+      "path": "/assets/GamePage-DrKDE2yq.js",
+      "status": 200,
+      "bytes": 143549,
+      "sha256": "ceb56b0a309a8351683c10bfcedff6a47a9540472c978f76a843bd5a422d0249"
+    },
+    {
+      "path": "/assets/geovictoria-intranet-BmPnCGYP.js",
+      "status": 200,
+      "bytes": 87146,
+      "sha256": "de3d2baf8a2b5517cffa862c6337e15a8bbe0574713420f6f688ea99357b40c2"
+    },
+    {
+      "path": "/assets/geovictoria-intranet-CMFoqA1s.css",
+      "status": 200,
+      "bytes": 122404,
+      "sha256": "ad32125aa5582569a11e6ba6d31342143f6daf19ba9343767f38c116071c79d3"
+    },
+    {
+      "path": "/assets/HelpDirectory-DYCOsdEM.js",
+      "status": 200,
+      "bytes": 4105,
+      "sha256": "cd597fb5ac022918a505941544bfaa287550dcd3e31166b938910e1dced44185"
+    },
+    {
+      "path": "/assets/index-_5bnYqip.js",
+      "status": 200,
+      "bytes": 59,
+      "sha256": "6419d94a779f086fc6db3c3dc2a8672c4b38a42ea728f5f7d8eacfda5bc36f1d"
+    },
+    {
+      "path": "/assets/lock-keyhole-IQ4xWgMv.js",
+      "status": 200,
+      "bytes": 373,
+      "sha256": "5ab062bf0f3a2a6e511960d894bf4113071b72006edd501d21f3a7c67d9eb208"
+    },
+    {
+      "path": "/assets/mail-cFAW8Yjt.js",
+      "status": 200,
+      "bytes": 331,
+      "sha256": "062d5541769a291e60a7feedcc07b08f9807d138218796901c90ff738518c41b"
+    },
+    {
+      "path": "/assets/NewsPage-xGwK8KmT.js",
+      "status": 200,
+      "bytes": 3308,
+      "sha256": "898b56e65afd3dbb4920fd40a178cd742891a7c610b428bc0e0e03626de12349"
+    },
+    {
+      "path": "/assets/OrgChart-CQ_PWMQH.js",
+      "status": 200,
+      "bytes": 2474,
+      "sha256": "15ee6f0816232017bb8944314cc3874bf62ff10bdc28732d78958695a95faae6"
+    },
+    {
+      "path": "/assets/pencil-anzgP7Ck.js",
+      "status": 200,
+      "bytes": 394,
+      "sha256": "6734eb2699a45cae27974ab123065792256f0dbd1252d434c17fd87173f16718"
+    },
+    {
+      "path": "/assets/plus-COsp5OOR.js",
+      "status": 200,
+      "bytes": 271,
+      "sha256": "26f568a4f8e73027eb9c25cbcc173ceaf1738866a0d56afef90dac00281f19e4"
+    },
+    {
+      "path": "/assets/preferences-DJoDou0T.js",
+      "status": 200,
+      "bytes": 351,
+      "sha256": "3129de25b3451824b22984bb8d5c15514ff3fbeff200bd8cc678ce01a5a3f1ff"
+    },
+    {
+      "path": "/assets/Quiz-BjCCIw6M.js",
+      "status": 200,
+      "bytes": 12828,
+      "sha256": "bccfa4a02e9eee5c275ee4fea2c242d238821482feaa3c872cfd485492827d53"
+    },
+    {
+      "path": "/assets/quiz-ChGAa421.css",
+      "status": 200,
+      "bytes": 22714,
+      "sha256": "caf23fc982d6eccde323660cf809cfb7ad5ace8e2e2f8c6187e0b6ee13a21de8"
+    },
+    {
+      "path": "/assets/quiz-Cw57koRf.js",
+      "status": 200,
+      "bytes": 23691,
+      "sha256": "9800e59e522b84277f8ac57c2e6155e0e8616f0db9fa7c26440a33ee055b5d8e"
+    },
+    {
+      "path": "/assets/QuizAdmin-Db_UldFX.js",
+      "status": 200,
+      "bytes": 12990,
+      "sha256": "55c662b9bdd548b230702e73ed6a05bf6982eaa2b9eff9e9b45ece26738ebcd5"
+    },
+    {
+      "path": "/assets/QuizHost-CYEcjj4U.js",
+      "status": 200,
+      "bytes": 6921,
+      "sha256": "7243bc7de3ff8e3fa3dca08248009b23ba04cc0cd36a9b53a20c9f2a2fc52e42"
+    },
+    {
+      "path": "/assets/QuizPresentation-W2mK37x0.js",
+      "status": 200,
+      "bytes": 1072,
+      "sha256": "c78867916f6566f5a16d3279b01ff9019b37b1374824f852cd508b05a95f256a"
+    },
+    {
+      "path": "/assets/react-BVNqbF40.js",
+      "status": 200,
+      "bytes": 228576,
+      "sha256": "ffc267103e7c1c4f6aee8d59dfbac804cc8ca717f0d0313c139da8164843005a"
+    },
+    {
+      "path": "/assets/ReportsSection-agm83VBB.js",
+      "status": 200,
+      "bytes": 1904,
+      "sha256": "0a8be3debb991b2a3800fc344053105ea99bceacb2d734f416f8f65ed4b202f9"
+    },
+    {
+      "path": "/assets/rolldown-runtime-8BhlS34s.js",
+      "status": 200,
+      "bytes": 807,
+      "sha256": "1cb5c6ead7e29370203f12e2d5cdf50ec1f02dd70ee2d050d909afbf2406f6b1"
+    },
+    {
+      "path": "/assets/roster-DQGKTreL.js",
+      "status": 200,
+      "bytes": 6128,
+      "sha256": "1f178200b66d55686af4b2d76915a214b83b6e46f3dc77b52cb6bd4def208305"
+    },
+    {
+      "path": "/assets/SantaGreeting-2WFRsXaA.css",
+      "status": 200,
+      "bytes": 1420,
+      "sha256": "d5442c7ec0f830a87ac37c9ee5fd18165dc48a0fd1c9b88d3b2e3a8313068126"
+    },
+    {
+      "path": "/assets/SantaGreeting-FHxbbS2e.js",
+      "status": 200,
+      "bytes": 9816,
+      "sha256": "14d46857359ef796982c271d074a3a324d38282b4a5796344d874b57eb7af2dc"
+    },
+    {
+      "path": "/assets/ScoresSection-C5YLwFxT.js",
+      "status": 200,
+      "bytes": 1721,
+      "sha256": "bbf4e3058e25c7dbfefa1e3b9b9af5f7f2d80eef6da2864c4dbe3560b03f4c8c"
+    },
+    {
+      "path": "/assets/SearchPage-WnTWGjgf.js",
+      "status": 200,
+      "bytes": 2832,
+      "sha256": "d70df86175fa760f33355040ba24d7d6e683cc6693b1fb30398d68dccf744c17"
+    },
+    {
+      "path": "/assets/secret-santa-experience-DuRqXPGs.css",
+      "status": 200,
+      "bytes": 20747,
+      "sha256": "4c55327207c0a65264520b1e2560a66dc6edfe27641e929405192cacaf32d19f"
+    },
+    {
+      "path": "/assets/secret-santa-experience-DV0_Ifyf.js",
+      "status": 200,
+      "bytes": 7052,
+      "sha256": "b32de4c06fece652a68a8ff18032019510fc823b58b15e7375e28f5f48e62633"
+    },
+    {
+      "path": "/assets/secretSanta-BAl3A6SF.js",
+      "status": 200,
+      "bytes": 4370,
+      "sha256": "e1e3df162a38148f0a21a087aa7c58f6aba9f048f9fb08379ba10ad9f1b90c2d"
+    },
+    {
+      "path": "/assets/SecretSanta-MfSyXjni.js",
+      "status": 200,
+      "bytes": 12730,
+      "sha256": "7a022dc6c16b8d81c0ddc9d2040442a41020ff735c4814cf5d1bc8ee711d46dc"
+    },
+    {
+      "path": "/assets/SecretSantaAdmin-D9eqvj4x.css",
+      "status": 200,
+      "bytes": 6819,
+      "sha256": "c33a4e70fd0493fd3db29069b6d4173591ad2bf79351801c03f8d92a8402bf86"
+    },
+    {
+      "path": "/assets/SecretSantaAdmin-Dwk52SK6.js",
+      "status": 200,
+      "bytes": 55130,
+      "sha256": "74d83ad6c0bc5754065bff2ba6ba2ef9c3606b07182a2cbc6883517298b1c7b5"
+    },
+    {
+      "path": "/assets/send-CMBKyrk-.js",
+      "status": 200,
+      "bytes": 408,
+      "sha256": "e381d4970c035cbaeb757d661ea2c0c961b5e3c9d03e360c044990393764001e"
+    },
+    {
+      "path": "/assets/settings-2-CU2NyIM4.js",
+      "status": 200,
+      "bytes": 624,
+      "sha256": "4586af286dc34f0a6cf3450182c054e804ea9274939aa452ca6ed8ce8540b930"
+    },
+    {
+      "path": "/assets/shield-check-CLVg30K7.js",
+      "status": 200,
+      "bytes": 438,
+      "sha256": "46a210e359f48f8c076cd58c9ebc08d7aa76eb6cb0832af7903428c954390a47"
+    },
+    {
+      "path": "/assets/useAdminAccess-w04D1YRj.js",
+      "status": 200,
+      "bytes": 7815,
+      "sha256": "7342c0f9e78e84ab0cb719f1d6538d49a249529d7d7b73487c22b74e43c678b6"
+    },
+    {
+      "path": "/assets/Wiki-CaQIGLHN.js",
+      "status": 200,
+      "bytes": 5676,
+      "sha256": "4b4f5e1dff91dd9594d0873dd466ac5f79c0d223a8daad34d0646862d1fc8b88"
+    },
+    {
+      "path": "/juego",
+      "status": 200,
+      "bytes": 1546,
+      "sha256": "de33e867decb8c06afa06dd0bbabfb3333c0becb7a8b4d954e7e6ae286d2a11a"
+    },
+    {
+      "path": "/scenery/bosque-preview.webp",
+      "status": 200,
+      "bytes": 16726,
+      "sha256": "1be8580642edfc8e88424082b96aeaaf480eb7b39473e5588077e259d9ba9aa5"
+    },
+    {
+      "path": "/scenery/bosque-v1.webp",
+      "status": 200,
+      "bytes": 80690,
+      "sha256": "3c6824ad698872647faf1b57ac077deab8bf5b2db230e3c401357da8fd29cda6"
+    },
+    {
+      "path": "/scenery/faro-preview.webp",
+      "status": 200,
+      "bytes": 11138,
+      "sha256": "062595e89d6aaabaef6872325c3faee7e967be6d56545d931af60015154663bf"
+    },
+    {
+      "path": "/scenery/faro-v1.webp",
+      "status": 200,
+      "bytes": 59962,
+      "sha256": "3b918c08f2edc83427e57037464c99de2fbd95412214a36e025a9f1c23397ee3"
+    },
+    {
+      "path": "/scenery/taller-preview.webp",
+      "status": 200,
+      "bytes": 21752,
+      "sha256": "81a140850043d0bb8d0146228365ae2efa5895c4c892437168bb9c0c3f11aeba"
+    },
+    {
+      "path": "/scenery/taller-v1.webp",
+      "status": 200,
+      "bytes": 101738,
+      "sha256": "48415f7a24602f1caf04627547b67cd9495f20061fa84c7ee3da1b2420ef7b93"
+    }
+  ]
+}

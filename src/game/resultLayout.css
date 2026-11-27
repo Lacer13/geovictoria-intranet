@@ -1,0 +1,59 @@
+/* Programmatic focus announces headings without drawing a box around prose.
+   Interactive controls retain their visible keyboard focus. */
+.game-page :is(h1, h2, h3)[tabindex="-1"]:focus {
+  outline: none;
+}
+.game-page:has(.arcade-results) .game-page-content {
+  justify-content: center;
+  padding-bottom: 20px;
+}
+.game-page:has(.arcade-results) .game-stage {
+  max-width: 1040px;
+}
+.game-page:has(.arcade-results) .game-mode-tabs { display: none; }
+.arcade .arcade-results {
+  min-height: 0;
+  grid-template-columns: minmax(140px, 220px) minmax(0, 1fr);
+  gap: 28px;
+  padding: 24px;
+  border: 1px solid #567a654d;
+  border-radius: 22px;
+  background: radial-gradient(ellipse at left, #244f3d77, #12362f);
+}
+.arcade-results .arcade-character-preview {
+  max-width: 220px;
+  justify-self: center;
+}
+.arcade-results .arcade-result-copy { min-width: 0; }
+.arcade-results .arcade-eyebrow { margin-bottom: 8px; font-size: 12px; }
+.arcade-results h1 { font-size: clamp(26px, 3vw, 34px); margin-bottom: 10px; }
+.arcade-results .arcade-result-copy > p { font-size: 14px; }
+.arcade-results .arcade-result-score { margin: 16px 0; }
+.arcade-results .arcade-result-score strong { font-size: 32px; }
+.arcade-results .arcade-result-actions { margin: 0 0 20px; gap: 8px; }
+.arcade-results .arcade-button { padding: 10px 16px; min-height: 44px; font-size: 14px; }
+.arcade-results .arcade-score-form { gap: 8px; }
+.arcade-results .arcade-score-form label { font-size: 13px; }
+.arcade-results .arcade-score-form input { min-height: 44px; font-size: 16px; }
+.arcade-results .arcade-score-form .arcade-button { white-space: nowrap; flex-shrink: 0; }
+.arcade-results .arcade-score-form small { color: var(--arcade-muted); font-size: 12px; line-height: 1.6; }
+.arcade-result-ranking { margin-top: 16px; }
+.arcade-result-ranking summary {
+  color: #e9d9ac;
+  border: 1px solid #698870;
+  border-radius: 10px;
+  padding: 12px;
+  min-height: 44px;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.arcade-result-ranking[open] summary { margin-bottom: 12px; }
+@media (max-width: 650px) {
+  .arcade .arcade-results { display: flex; gap: 10px; padding: 18px; }
+  .arcade-results .arcade-character-preview { width: 96px; }
+  .arcade-results h1 { font-size: 26px; }
+  .arcade-results .arcade-result-actions { margin-bottom: 16px; }
+  .arcade-results .arcade-score-form > div { flex-direction: column; }
+  .arcade-results .arcade-score-form .arcade-button { width: 100%; }
+}

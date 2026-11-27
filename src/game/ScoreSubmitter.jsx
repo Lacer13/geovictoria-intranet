@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { publishGameScore } from "./scoreStore.js";
 import { normalizePlayerName, savePlayerName, scoreBoard, validPlayerName } from "./scoreboard.js";
 
-export default function ScoreSubmitter({ score, boardId, runId, initialName, onNameChange }) {
+export default function ScoreSubmitter({ score, boardId, runId, initialName, onNameChange, onPublished }) {
   const [name, setName] = useState(initialName), [status, setStatus] = useState("idle");
   const lock = useRef(false), mounted = useRef(true), date = useRef(new Date().toISOString());
   useEffect(() => { mounted.current = true; return () => { mounted.current = false; }; }, []);
@@ -14,7 +14,7 @@ export default function ScoreSubmitter({ score, boardId, runId, initialName, onN
     try {
       await publishGameScore({ boardId, runId, name, score, date: date.current });
       savePlayerName(name);
-      if (mounted.current) setStatus("saved");
+      if (mounted.current) { setStatus("saved"); onPublished?.(); }
     } catch { if (mounted.current) setStatus("error"); lock.current = false; }
   }}>
     <label htmlFor="arcade-ranking-name">Publica tus {score.toLocaleString("es-PE")} puntos · {scoreBoard(boardId).label}</label>
