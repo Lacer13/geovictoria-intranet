@@ -49,6 +49,9 @@ import { MISSIONS, completeMission } from "../game/missions.js";
 import { savePreference } from "../lib/preferences.js";
 import CharacterPreview from "../game/CharacterPreview.jsx";
 import ScoreSubmitter from "../game/ScoreSubmitter.jsx";
+import ScoreBoard from "../game/ScoreBoard.jsx";
+import { normalizePlayerName, readPlayerName, savePlayerName, validPlayerName } from "../game/scoreboard.js";
+import { getScenery, loadScenery } from "../game/scenery.js";
 import TouchControls from "../game/TouchControls.jsx";
 import "../game/arcade.css";
 
@@ -154,6 +157,10 @@ function PauseDialog({ reason, settings, onChange, onResume, onMenu }) {
 }
 
 export default function ActiveBreak() {
+  const [playerName, setPlayerName] = useState(readPlayerName);
+  const [nameError, setNameError] = useState(false);
+  const nameInput = useRef(null);
+  const run = useRef(null);
   const [adventure, setAdventure] = useState(true);
   const [campaign, setCampaign] = useState(readCampaignProgress);
   const campaignRef = useRef(campaign);
@@ -184,6 +191,7 @@ export default function ActiveBreak() {
   const character =
     CHARACTERS.find((c) => c.id === profile.selected) || CHARACTERS[0];
   const power = character.power || powerForCharacter(character.id);
+  useEffect(() => { void loadScenery(adventure ? missionId : "bosque"); }, [adventure, missionId]);
   const normalize = (text) =>
     text
       .normalize("NFD")
@@ -261,11 +269,18 @@ export default function ActiveBreak() {
 
   const start = (nextMission = missionId) => {
     if (!assets || assets.characterId !== character.id) return;
+    if (!validPlayerName(playerName)) {
+      setNameError(true); nameInput.current?.focus(); return;
+    }
     clearInput(input);
     credited.current = false;
     const missionIndex = MISSIONS.findIndex(m => m.id === nextMission);
     if (adventure && (missionIndex < 0 || missionIndex > campaignRef.current.completed.length)) return;
     setMissionId(nextMission);
+    const name = normalizePlayerName(playerName);
+    setPlayerName(name); savePlayerName(name); setNameError(false);
+    run.current = { id: crypto.randomUUID(), name, boardId: adventure ? nextMission : "arcade" };
+    void loadScenery(adventure ? nextMission : "bosque");
     game.current = createGame(character.id, { animationVersion: assets.animation?.version || 1, missionId: adventure ? nextMission : null });
     actor.current = createAnimator();
     setHud(gameSummary(game.current));
@@ -316,6 +331,7 @@ export default function ActiveBreak() {
         assets.images,
         character,
         { ...settingsRef.current, actor: actor.current, animation: assets.animation,
+          scenery: getScenery(game.current.missionId),
           defeatElapsed: victoryStarted === null ? 0 : (time - victoryStarted) / 1000,
           presentation: assets.animation ? characterAnimation(character).present(game.current, actor.current, clock.alpha) : null },
       );
@@ -442,6 +458,15 @@ export default function ActiveBreak() {
               </label>
             </div>
           </div>
+          <section className="arcade-player-card" aria-labelledby="arcade-player-title">
+            <div><span className="arcade-eyebrow">Antes de despegar</span><h2 id="arcade-player-title">¿Cómo te llamas?</h2><p>Tu nombre o alias aparecerá junto a tus puntos cuando elijas publicarlos.</p></div>
+            <div className="arcade-player-field"><label htmlFor="arcade-player-name">Nombre en el juego</label><input id="arcade-player-name" ref={nameInput} value={playerName} maxLength={24} autoComplete="nickname" placeholder="Por ejemplo, Ana o Luis D."
+              aria-describedby={nameError ? "arcade-name-help arcade-name-error" : "arcade-name-help"} aria-invalid={nameError}
+              onChange={e => { setPlayerName(e.target.value); if (validPlayerName(e.target.value)) setNameError(false); }} onBlur={() => savePlayerName(playerName)} />
+              <small id="arcade-name-help">De 2 a 24 caracteres. Se recuerda en este navegador.</small>
+              {nameError && <p id="arcade-name-error" role="alert">Escribe al menos dos caracteres para iniciar.</p>}
+            </div>
+          </section>
           <section className="campaign-selection" aria-label="Elige tu aventura">
             <div className="campaign-mode" role="group" aria-label="Modo individual">
               <button type="button" aria-pressed={adventure} onClick={() => setAdventure(true)}>Aventura · 3 niveles</button>
@@ -453,6 +478,7 @@ export default function ActiveBreak() {
               <div className="campaign-missions">
                 {MISSIONS.map((mission, index) => <button type="button" key={mission.id} disabled={index > campaign.completed.length}
                   aria-pressed={missionId === mission.id} onClick={() => setMissionId(mission.id)} style={{ "--mission-color": mission.color }}>
+                  <img className="campaign-scene-preview" src={`/scenery/${mission.id}-preview.webp`} alt="" loading="lazy" />
                   <span className="campaign-number">{String(index + 1).padStart(2, "0")}</span>
                   <strong>{mission.title}</strong><span>{mission.subtitle}</span>
                   <small>{campaign.completed.includes(mission.id) ? "Completada · volver a jugar" : index > campaign.completed.length ? "Completa la misión anterior" : "Disponible · 2–4 min aprox."}</small>
@@ -601,6 +627,7 @@ export default function ActiveBreak() {
               <Settings settings={settings} onChange={updateSettings} />
             </details>
           </section>
+          <ScoreBoard boardId={adventure ? missionId : "arcade"} selectable />
         </>
       )}
 
@@ -622,8 +649,8 @@ export default function ActiveBreak() {
               ))}
             </div>
             <div className="arcade-score">
-              <span>Puntos</span>
-              <strong>{hud.score.toString().padStart(4, "0")}</strong>
+              <span className="arcade-score-player" title={run.current?.name}>{run.current?.name}</span>
+              <strong aria-label={`${hud.score} puntos`}>{hud.score.toString().padStart(4, "0")}</strong>
             </div>
             <p className="arcade-objective">
               {hud.missionId && <strong>Nivel {MISSIONS.findIndex(m => m.id === hud.missionId) + 1}/3 · </strong>}
@@ -733,7 +760,8 @@ export default function ActiveBreak() {
               <strong>{hud.score}</strong>
               <span>puntos · +{hud.score} Data</span>
             </div>
-            {!game.current.missionId && <ScoreSubmitter key={mode} score={hud.score} />}
+            <ScoreSubmitter key={run.current.id} score={hud.score} boardId={run.current.boardId} runId={run.current.id} initialName={run.current.name} onNameChange={setPlayerName} />
+            <ScoreBoard boardId={run.current.boardId} publishedId={run.current.id} />
             <div className="arcade-result-actions">
               {mode === "victory" && game.current.missionId && MISSIONS.findIndex(m => m.id === game.current.missionId) < MISSIONS.length - 1 &&
                 <button className="arcade-button" onClick={() => start(MISSIONS[MISSIONS.findIndex(m => m.id === game.current.missionId) + 1].id)}>Continuar al siguiente nivel</button>}

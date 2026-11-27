@@ -8,6 +8,7 @@ import { atlasFrame, drawAtlasFrame } from "./spriteAtlas.js";
 import { missionById } from "./missions.js";
 import enemyAtlas from "../../public/enemies/desfase/sprites-v1.json" with { type: "json" };
 import { ENEMY_ATLAS_URL, enemyMuzzle, enemyPresentation, enemyVisualMotion } from "./enemyAnimation.js";
+import { drawScenery } from "./scenery.js";
 
 function rounded(ctx, x, y, width, height, radius, color) {
   ctx.fillStyle = color;
@@ -172,7 +173,8 @@ function tree(ctx, x, y, size, lights) {
     }
 }
 
-function background(ctx, tick, reduced, missionId) {
+function background(ctx, tick, reduced, missionId, scenery) {
+  if (drawScenery(ctx, scenery, tick, reduced, WIDTH, HEIGHT)) return;
   const sky = ctx.createLinearGradient(0, 0, 0, HEIGHT);
   sky.addColorStop(0, missionById(missionId)?.sky || "#061c25");
   sky.addColorStop(0.65, "#153d3c");
@@ -303,10 +305,10 @@ export function drawGame(
   state,
   images,
   character,
-  { reduced = false, seconds = state.tick / 60, actor = null, animation = null, presentation = null, defeatElapsed = 0 } = {},
+  { reduced = false, seconds = state.tick / 60, actor = null, animation = null, presentation = null, defeatElapsed = 0, scenery = null } = {},
 ) {
   ctx.save();
-  background(ctx, state.tick, reduced, state.missionId);
+  background(ctx, state.tick, reduced, state.missionId, scenery);
   if (!reduced && state.shake > 0.5)
     ctx.translate(
       Math.sin(state.tick * 2.3) * state.shake,

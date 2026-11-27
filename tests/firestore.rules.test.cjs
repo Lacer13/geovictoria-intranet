@@ -223,6 +223,31 @@ test("unknown collections deny every read and write", async () => {
   await assertFails(getDoc(doc(db, "private", "unknown")));
 });
 
+test("level scores accept public named results and ranked reads only for the three known missions", async () => {
+  const db = env.unauthenticatedContext().firestore();
+  for (const mission of ["bosque", "taller", "faro"]) {
+    const path = `gameLeaderboards/${mission}/entries`;
+    await assertSucceeds(setDoc(doc(db,path,"score"),{name:"Ana Díaz",score:240,date:"2026-11-26T20:00:00Z"}));
+    const rows = await assertSucceeds(getDocs(query(collection(db,path),orderBy("score","desc"),limit(20))));
+    assert.equal(rows.docs[0].data().name,"Ana Díaz");
+  }
+  await assertFails(getDocs(collection(db,"gameLeaderboards/unknown/entries")));
+  await assertFails(setDoc(doc(db,"gameLeaderboards/unknown/entries/score"),{name:"Ana",score:20,date:"today"}));
+});
+
+test("level scores reject blank names, invalid scores, extra fields, edits and visitor deletion", async () => {
+  const db = env.unauthenticatedContext().firestore(), path="gameLeaderboards/bosque/entries";
+  const score={name:"Luis",score:120,date:"2026-11-26T20:00:00Z"};
+  for(const [id,patch] of Object.entries({blank:{name:"  "},short:{name:"A"},long:{name:"x".repeat(25)},newline:{name:"Ana\nDíaz"},negative:{score:-1},fraction:{score:2.5},oversize:{score:10000001},hidden:{email:"private@example.test"}}))
+    await assertFails(setDoc(doc(db,path,id),{...score,...patch}));
+  await assertSucceeds(setDoc(doc(db,path,"immutable"),score));
+  await assertFails(setDoc(doc(db,path,"immutable"),score));
+  await assertFails(updateDoc(doc(db,path,"immutable"),{score:999}));
+  await assertFails(deleteDoc(doc(db,path,"immutable")));
+  const admin=env.authenticatedContext("scores-root",{admin:true}).firestore();
+  await assertSucceeds(deleteDoc(doc(admin,path,"immutable")));
+});
+
 const delegatedEmail = "delegado@example.test";
 const anotherEmail = "otro@example.test";
 const membership = (email) => ({

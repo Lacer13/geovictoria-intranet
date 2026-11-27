@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "generator": "ImageGen integrado",
+  "scenes": [
+    {
+      "id": "bosque",
+      "source": "design/scenery/bosque-v1.png",
+      "sourceWidth": 1672,
+      "sourceHeight": 941,
+      "sourceSha256": "b468e43bd9f996dd1c4d7c4e327d6760499a052bdc4dcf711992a66f03645db0",
+      "output": "public/scenery/bosque-v1.webp",
+      "width": 1440,
+      "height": 810,
+      "bytes": 80690,
+      "sha256": "3c6824ad698872647faf1b57ac077deab8bf5b2db230e3c401357da8fd29cda6"
+    },
+    {
+      "id": "taller",
+      "source": "design/scenery/taller-v1.png",
+      "sourceWidth": 1672,
+      "sourceHeight": 941,
+      "sourceSha256": "753dda53081bec87f288106b32c4e0e197c08157de712a6db905fa4e164b2860",
+      "output": "public/scenery/taller-v1.webp",
+      "width": 1440,
+      "height": 810,
+      "bytes": 101738,
+      "sha256": "48415f7a24602f1caf04627547b67cd9495f20061fa84c7ee3da1b2420ef7b93"
+    },
+    {
+      "id": "faro",
+      "source": "design/scenery/faro-v1.png",
+      "sourceWidth": 1672,
+      "sourceHeight": 941,
+      "sourceSha256": "ce50fc578101434be83ff98b41ddd5a268d8a5ce83e707c43954ce388275e4b7",
+      "output": "public/scenery/faro-v1.webp",
+      "width": 1440,
+      "height": 810,
+      "bytes": 59962,
+      "sha256": "3b918c08f2edc83427e57037464c99de2fbd95412214a36e025a9f1c23397ee3"
+    }
+  ]
+}
