@@ -37,10 +37,26 @@ test("scenery loads only the requested scene, shares requests and recovers after
 });
 
 test("depth layers animate normally, freeze with reduced motion and allow the drawn fallback", async () => {
-  const image = await loadImage("public/scenery/bosque-v1.webp"), canvas = createCanvas(960, 540), ctx = canvas.getContext("2d");
-  const frame = (tick, reduced) => { ctx.clearRect(0,0,960,540); assert.equal(drawScenery(ctx,image,tick,reduced,960,540), true); return crypto.createHash("sha256").update(ctx.getImageData(0,0,960,540).data).digest("hex"); };
-  assert.equal(frame(0,true), frame(600,true)); assert.notEqual(frame(0,false), frame(600,false));
-  assert.equal(drawScenery(ctx,null,0,false,960,540), false);
+  for(const id of ["bosque","taller","faro"]){
+    const image = await loadImage(`public/scenery/${id}-v1.webp`), canvas = createCanvas(960, 540), ctx = canvas.getContext("2d");
+    const frame = (tick, reduced) => { ctx.clearRect(0,0,960,540); assert.equal(drawScenery(ctx,image,tick,reduced,960,540,id), true); return crypto.createHash("sha256").update(ctx.getImageData(0,0,960,540).data).digest("hex"); };
+    assert.equal(frame(0,true), frame(600,true),id);assert.notEqual(frame(0,false),frame(120,false),id);
+    assert.equal(drawScenery(ctx,null,0,false,960,540,id),false);
+  }
+});
+
+test("moving scenery covers every edge throughout the camera cycle and restores canvas state",async()=>{
+  for(const id of ["bosque","taller","faro"]){
+    const image=await loadImage(`public/scenery/${id}-v1.webp`);
+    for(const [w,h] of [[960,540],[320,568]]){
+      const ctx=createCanvas(w,h).getContext("2d");
+      for(const tick of [0,471,942,1414,100000000]){
+        ctx.clearRect(0,0,w,h);drawScenery(ctx,image,tick,false,w,h,id);
+        for(const [x,y] of [[0,0],[w-1,0],[0,h-1],[w-1,h-1]])assert.equal(ctx.getImageData(x,y,1,1).data[3],255,`${id}: ${tick} ${x},${y}`);
+        assert.equal(ctx.globalAlpha,1);assert.equal(ctx.getTransform().a,1);assert.equal(ctx.getTransform().e,0);
+      }
+    }
+  }
 });
 
 test("player names normalize spaces, preserve accents and remain optional browser preferences", () => {

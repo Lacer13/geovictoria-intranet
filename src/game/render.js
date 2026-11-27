@@ -176,7 +176,7 @@ function tree(ctx, x, y, size, lights) {
 }
 
 function background(ctx, tick, reduced, missionId, scenery) {
-  if (drawScenery(ctx, scenery, tick, reduced, WIDTH, HEIGHT)) return;
+  if (drawScenery(ctx, scenery, tick, reduced, WIDTH, HEIGHT, missionId)) return;
   const sky = ctx.createLinearGradient(0, 0, 0, HEIGHT);
   sky.addColorStop(0, missionById(missionId)?.sky || "#061c25");
   sky.addColorStop(0.65, "#153d3c");
