@@ -1,0 +1,959 @@
+{
+  "date": "2026-11-27",
+  "feature": "partida-centrada",
+  "url": "https://geovictoria-intranet-peru.web.app/juego#aventura",
+  "version": "816a8901c8b77a48",
+  "productionDeployed": true,
+  "firestoreRulesChanged": false,
+  "build": "passed",
+  "uiChecks": {
+    "noHorizontalOrVerticalOverflow": true,
+    "canvasRatioPreserved": true,
+    "canvasHorizontallyCentered": true,
+    "hudAndControlsInsideViewport": true,
+    "normalAndLargeTouchControls": true,
+    "pauseResumeAndReturnToMenu": true,
+    "menuRestoresNormalLayout": true,
+    "consoleErrors": 0,
+    "viewportReset": true,
+    "physicalPhonePending": true,
+    "productionScoresSubmitted": false
+  },
+  "measurements": [
+    {
+      "label": "laptop-1366x768-paused",
+      "document": {
+        "height": 768,
+        "width": 1366
+      },
+      "elements": [
+        {
+          "bottom": 760,
+          "display": "flex",
+          "height": 752,
+          "right": 1358.4000244140625,
+          "selector": ".solo-session",
+          "width": 1350.4000244140625,
+          "x": 8,
+          "y": 8
+        },
+        {
+          "bottom": 68.80000019073486,
+          "display": "flex",
+          "height": 60,
+          "right": 1357.60004901886,
+          "selector": ".arcade-hud",
+          "width": 1348.800048828125,
+          "x": 8.800000190734863,
+          "y": 8.800000190734863
+        },
+        {
+          "bottom": 674.5875396728516,
+          "display": "block",
+          "height": 605.7875366210938,
+          "right": 1221.675033569336,
+          "selector": ".arcade-viewport canvas",
+          "width": 1076.9625244140625,
+          "x": 144.71250915527344,
+          "y": 68.80000305175781
+        },
+        {
+          "bottom": 726.6000366210938,
+          "display": "flex",
+          "height": 52,
+          "right": 1357.60004901886,
+          "selector": ".arcade-status",
+          "width": 1348.800048828125,
+          "x": 8.800000190734863,
+          "y": 674.6000366210938
+        },
+        {
+          "selector": ".arcade-touch",
+          "visible": false
+        },
+        {
+          "selector": ".arcade-touch-actions",
+          "visible": false
+        },
+        {
+          "selector": ".arcade-stick",
+          "visible": false
+        }
+      ],
+      "viewport": {
+        "height": 768,
+        "width": 1366
+      }
+    },
+    {
+      "label": "short-desktop-1280x600-playing",
+      "document": {
+        "height": 600,
+        "width": 1280
+      },
+      "elements": [
+        {
+          "bottom": 592,
+          "display": "flex",
+          "height": 584,
+          "right": 1272,
+          "selector": ".solo-session",
+          "width": 1264,
+          "x": 8,
+          "y": 8
+        },
+        {
+          "bottom": 68.80000019073486,
+          "display": "flex",
+          "height": 60,
+          "right": 1271.2000246047974,
+          "selector": ".arcade-hud",
+          "width": 1262.4000244140625,
+          "x": 8.800000190734863,
+          "y": 8.800000190734863
+        },
+        {
+          "bottom": 506.58750915527344,
+          "display": "block",
+          "height": 437.7875061035156,
+          "right": 1029.1499938964844,
+          "selector": ".arcade-viewport canvas",
+          "width": 778.2999877929688,
+          "x": 250.8500061035156,
+          "y": 68.80000305175781
+        },
+        {
+          "bottom": 558.6000061035156,
+          "display": "flex",
+          "height": 52,
+          "right": 1271.2000246047974,
+          "selector": ".arcade-status",
+          "width": 1262.4000244140625,
+          "x": 8.800000190734863,
+          "y": 506.6000061035156
+        },
+        {
+          "bottom": 0,
+          "display": "none",
+          "height": 0,
+          "right": 0,
+          "selector": ".arcade-touch",
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "bottom": 0,
+          "display": "block",
+          "height": 0,
+          "right": 0,
+          "selector": ".arcade-touch-actions",
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "bottom": 0,
+          "display": "block",
+          "height": 0,
+          "right": 0,
+          "selector": ".arcade-stick",
+          "width": 0,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "viewport": {
+        "height": 600,
+        "width": 1280
+      }
+    },
+    {
+      "label": "phone-320x568-playing",
+      "document": {
+        "height": 568,
+        "width": 320
+      },
+      "elements": [
+        {
+          "bottom": 560,
+          "display": "flex",
+          "height": 552,
+          "right": 312,
+          "selector": ".solo-session",
+          "width": 304,
+          "x": 8,
+          "y": 8
+        },
+        {
+          "bottom": 88.80000019073486,
+          "display": "flex",
+          "height": 80,
+          "right": 311.19999408721924,
+          "selector": ".arcade-hud",
+          "width": 302.3999938964844,
+          "x": 8.800000190734863,
+          "y": 8.800000190734863
+        },
+        {
+          "bottom": 340.5375061035156,
+          "display": "block",
+          "height": 170.08750915527344,
+          "right": 311.1875123977661,
+          "selector": ".arcade-viewport canvas",
+          "width": 302.38751220703125,
+          "x": 8.800000190734863,
+          "y": 170.4499969482422
+        },
+        {
+          "bottom": 0,
+          "display": "none",
+          "height": 0,
+          "right": 0,
+          "selector": ".arcade-status",
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "bottom": 559.2000122070312,
+          "display": "flex",
+          "height": 96,
+          "right": 311.19999408721924,
+          "selector": ".arcade-touch",
+          "width": 302.3999938964844,
+          "x": 8.800000190734863,
+          "y": 463.2000122070313
+        },
+        {
+          "bottom": 551.2000122070312,
+          "display": "flex",
+          "height": 80,
+          "right": 301.1999969482422,
+          "selector": ".arcade-touch-actions",
+          "width": 156,
+          "x": 145.1999969482422,
+          "y": 471.2000122070313
+        },
+        {
+          "bottom": 551.2000122070312,
+          "display": "grid",
+          "height": 80,
+          "right": 98.80000114440918,
+          "selector": ".arcade-stick",
+          "width": 80,
+          "x": 18.80000114440918,
+          "y": 471.2000122070313
+        }
+      ],
+      "viewport": {
+        "height": 568,
+        "width": 320
+      }
+    },
+    {
+      "label": "phone-320x568-large-controls",
+      "document": {
+        "height": 568,
+        "width": 320
+      },
+      "elements": [
+        {
+          "bottom": 560,
+          "display": "flex",
+          "height": 552,
+          "right": 312,
+          "selector": ".solo-session",
+          "width": 304,
+          "x": 8,
+          "y": 8
+        },
+        {
+          "bottom": 88.80000019073486,
+          "display": "flex",
+          "height": 80,
+          "right": 311.19999408721924,
+          "selector": ".arcade-hud",
+          "width": 302.3999938964844,
+          "x": 8.800000190734863,
+          "y": 8.800000190734863
+        },
+        {
+          "bottom": 334.13751220703125,
+          "display": "block",
+          "height": 170.08750915527344,
+          "right": 311.1875123977661,
+          "selector": ".arcade-viewport canvas",
+          "width": 302.38751220703125,
+          "x": 8.800000190734863,
+          "y": 164.0500030517578
+        },
+        {
+          "bottom": 0,
+          "display": "none",
+          "height": 0,
+          "right": 0,
+          "selector": ".arcade-status",
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "bottom": 559.1999969482422,
+          "display": "flex",
+          "height": 108.8000030517578,
+          "right": 311.19999408721924,
+          "selector": ".arcade-touch",
+          "width": 302.3999938964844,
+          "x": 8.800000190734863,
+          "y": 450.3999938964844
+        },
+        {
+          "bottom": 551.1999969482422,
+          "display": "flex",
+          "height": 92.8000030517578,
+          "right": 301.20001220703125,
+          "selector": ".arcade-touch-actions",
+          "width": 168.8000030517578,
+          "x": 132.40000915527344,
+          "y": 458.3999938964844
+        },
+        {
+          "bottom": 551.1999969482422,
+          "display": "grid",
+          "height": 92.8000030517578,
+          "right": 111.600004196167,
+          "selector": ".arcade-stick",
+          "width": 92.8000030517578,
+          "x": 18.80000114440918,
+          "y": 458.3999938964844
+        }
+      ],
+      "viewport": {
+        "height": 568,
+        "width": 320
+      }
+    },
+    {
+      "label": "landscape-844x390-large-controls",
+      "document": {
+        "height": 390,
+        "width": 844
+      },
+      "elements": [
+        {
+          "bottom": 382.3999938964844,
+          "display": "grid",
+          "height": 374.3999938964844,
+          "right": 836,
+          "selector": ".solo-session",
+          "width": 828,
+          "x": 8,
+          "y": 8
+        },
+        {
+          "bottom": 56.80000019073486,
+          "display": "flex",
+          "height": 48,
+          "right": 835.2000246047974,
+          "selector": ".arcade-hud",
+          "width": 826.4000244140625,
+          "x": 8.800000190734863,
+          "y": 8.800000190734863
+        },
+        {
+          "bottom": 381.5875053405762,
+          "display": "block",
+          "height": 324.7875061035156,
+          "right": 710.7000427246094,
+          "selector": ".arcade-viewport canvas",
+          "width": 577.4125366210938,
+          "x": 133.28750610351562,
+          "y": 56.79999923706055
+        },
+        {
+          "bottom": 0,
+          "display": "none",
+          "height": 0,
+          "right": 0,
+          "selector": ".arcade-status",
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "bottom": 0,
+          "display": "contents",
+          "height": 0,
+          "right": 0,
+          "selector": ".arcade-touch",
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "bottom": 303.37501525878906,
+          "display": "flex",
+          "height": 168.35000610351562,
+          "right": 831.2000122070312,
+          "selector": ".arcade-touch-actions",
+          "width": 108,
+          "x": 723.2000122070312,
+          "y": 135.02500915527344
+        },
+        {
+          "bottom": 273.1999969482422,
+          "display": "grid",
+          "height": 108,
+          "right": 120.80000019073486,
+          "selector": ".arcade-stick",
+          "width": 108,
+          "x": 12.800000190734863,
+          "y": 165.1999969482422
+        }
+      ],
+      "viewport": {
+        "height": 390,
+        "width": 844
+      }
+    },
+    {
+      "label": "desktop-1920x900-playing",
+      "document": {
+        "height": 900,
+        "width": 1920
+      },
+      "elements": [
+        {
+          "bottom": 892,
+          "display": "flex",
+          "height": 884,
+          "right": 1660,
+          "selector": ".solo-session",
+          "width": 1400,
+          "x": 260,
+          "y": 8
+        },
+        {
+          "bottom": 68.80000019073486,
+          "display": "flex",
+          "height": 60,
+          "right": 1659.2000427246094,
+          "selector": ".arcade-hud",
+          "width": 1398.4000244140625,
+          "x": 260.8000183105469,
+          "y": 8.800000190734863
+        },
+        {
+          "bottom": 806.5875396728516,
+          "display": "block",
+          "height": 737.7875366210938,
+          "right": 1615.8125915527344,
+          "selector": ".arcade-viewport canvas",
+          "width": 1311.6375732421875,
+          "x": 304.1750183105469,
+          "y": 68.80000305175781
+        },
+        {
+          "bottom": 858.6000366210938,
+          "display": "flex",
+          "height": 52,
+          "right": 1659.2000427246094,
+          "selector": ".arcade-status",
+          "width": 1398.4000244140625,
+          "x": 260.8000183105469,
+          "y": 806.6000366210938
+        },
+        {
+          "bottom": 0,
+          "display": "none",
+          "height": 0,
+          "right": 0,
+          "selector": ".arcade-touch",
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "bottom": 0,
+          "display": "block",
+          "height": 0,
+          "right": 0,
+          "selector": ".arcade-touch-actions",
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "bottom": 0,
+          "display": "block",
+          "height": 0,
+          "right": 0,
+          "selector": ".arcade-stick",
+          "width": 0,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "viewport": {
+        "height": 900,
+        "width": 1920
+      }
+    }
+  ],
+  "resources": [
+    {
+      "path": "/",
+      "status": 200,
+      "bytes": 1546,
+      "sha256": "c4d1290b613ce7cd9a8287155be90a446025ebed2214d1511348d29866c41c9a"
+    },
+    {
+      "path": "/assets/AccessManagement-CbKqVK5u.js",
+      "status": 200,
+      "bytes": 19990,
+      "sha256": "66628022643009a61451198657fc916456d86c915b9a9f0a821202811d41ba41"
+    },
+    {
+      "path": "/assets/Admin-CWKXHQ2z.css",
+      "status": 200,
+      "bytes": 7620,
+      "sha256": "b3506f7c134535a820a81115db339091709f00d081c9273152a2b19c1907ca3b"
+    },
+    {
+      "path": "/assets/Admin-ZCXjyCXk.js",
+      "status": 200,
+      "bytes": 17370,
+      "sha256": "9549310a15ab47bc9b81cd9161aa8fefdae538ddeaaefa98d632ef5a77097105"
+    },
+    {
+      "path": "/assets/arrow-left-Cowx0KOi.js",
+      "status": 200,
+      "bytes": 283,
+      "sha256": "3261687f5c1f4a8f33cd0a5fcaf573292d17138cc5cbd9ed310b8ae54352f014"
+    },
+    {
+      "path": "/assets/auth-6DDmcFBi.js",
+      "status": 200,
+      "bytes": 286,
+      "sha256": "b603db72a368f3f8fbedd9f9f30d5fd3c2857c24b1fe41d12d66b81782e50074"
+    },
+    {
+      "path": "/assets/check-BIjFlQQA.js",
+      "status": 200,
+      "bytes": 242,
+      "sha256": "4f2768029a874d92e5da62d8183472ee4497bb4ece1366082d35d9f555901a9e"
+    },
+    {
+      "path": "/assets/Christmas-h8w-UL2L.js",
+      "status": 200,
+      "bytes": 5627,
+      "sha256": "d902bcba4b254605fdf314573b4fc3edc69cc6097892efc1711558e97a3f0116"
+    },
+    {
+      "path": "/assets/ChristmasWall-C4Eq8YsD.css",
+      "status": 200,
+      "bytes": 3816,
+      "sha256": "2077d68de83e4c518d88fa0c5950588bc93e07165b489c3fa141f19943ceffcd"
+    },
+    {
+      "path": "/assets/ChristmasWall-DGDGmXgF.js",
+      "status": 200,
+      "bytes": 10684,
+      "sha256": "009e58ff91a1f7ed5d50e56e9da353068a0a03484a5daec97c7bf2da720d6607"
+    },
+    {
+      "path": "/assets/circle-check-BSEiGgV7.js",
+      "status": 200,
+      "bytes": 296,
+      "sha256": "ccfa3d22098dd705f11537761faec1993bbd5b966423b15664570dfebb85efa1"
+    },
+    {
+      "path": "/assets/clock-3-DGnoHHVj.js",
+      "status": 200,
+      "bytes": 287,
+      "sha256": "999f3145564294d80fb37fbd1f9a18ca7ff870d897b41350865831a96f542452"
+    },
+    {
+      "path": "/assets/ContentSection-BTiYs3Rk.js",
+      "status": 200,
+      "bytes": 9373,
+      "sha256": "ae9a5bc8eaf776361d973a25abdb734981026473a7251f23079f7ec85750f4e0"
+    },
+    {
+      "path": "/assets/copy-C-O0DyBg.js",
+      "status": 200,
+      "bytes": 354,
+      "sha256": "068a584ae0e4a2fa0674f54f15fbf0f8479a0eb7f474986a0a6b464da3de55b0"
+    },
+    {
+      "path": "/assets/createLucideIcon-DkgbDv7J.js",
+      "status": 200,
+      "bytes": 1855,
+      "sha256": "61b1726789437c53165e7fab35ff4f565215009f8eca768e878a4cba166075c8"
+    },
+    {
+      "path": "/assets/DeleteRecordDialog-CxfLoEi5.js",
+      "status": 200,
+      "bytes": 2822,
+      "sha256": "13050d6b63243d3acc53adb78d50a219f0d82a1ef90c2f4ac9911201b69fc8c0"
+    },
+    {
+      "path": "/assets/download-CVh2wH3z.js",
+      "status": 200,
+      "bytes": 350,
+      "sha256": "33fdb2b1a703ea638bd3c789c5f87f6d0c3ed3e624b4514e4ea239e56339135d"
+    },
+    {
+      "path": "/assets/esm-BLwCZdJv.js",
+      "status": 200,
+      "bytes": 16256,
+      "sha256": "b73f57f2be714c4d4d26209a30e913876105221613e38d8684d7b046b3b2b10e"
+    },
+    {
+      "path": "/assets/eye-off-B3NcHYDk.js",
+      "status": 200,
+      "bytes": 548,
+      "sha256": "58b818bbe3fa09f4f2b781b7cc4e9262f59ca81fc93cfffc05f15a07d4e3e181"
+    },
+    {
+      "path": "/assets/eye-XF-crv-5.js",
+      "status": 200,
+      "bytes": 374,
+      "sha256": "e7ad2ca9db95a778a43d6dc14a32d20db88458452d87c83badac4e885c44de09"
+    },
+    {
+      "path": "/assets/FeedbackForm-DD6p7mEc.js",
+      "status": 200,
+      "bytes": 5956,
+      "sha256": "b12043828906e9290a97dfd84f85511f2f24099cdecae39a73edd211512d11e1"
+    },
+    {
+      "path": "/assets/firebase-auth-_NPQmi1t.js",
+      "status": 200,
+      "bytes": 88760,
+      "sha256": "c35ad4569468931ffce58cf4a5bfb929452bef9aa657dda089a4dabe7d50f41b"
+    },
+    {
+      "path": "/assets/firebase-core-DWPvHpC5.js",
+      "status": 200,
+      "bytes": 25629,
+      "sha256": "ec9e6da7193f48b19f697fd88347fccddf0e3ad2c9c4800f5203741b2059df72"
+    },
+    {
+      "path": "/assets/firebase-Cu0ARhY5.js",
+      "status": 200,
+      "bytes": 147905,
+      "sha256": "1af53e4d3b7af5ee59a2c78d20eb6cd7748eaf70133d4c42e688b2cb7eb8feb3"
+    },
+    {
+      "path": "/assets/firebase-DIS0Dk25.js",
+      "status": 200,
+      "bytes": 305387,
+      "sha256": "970ca4ac34c008a9cb8260ac4f050ba09c50e6c9169be540f80ec2cd0a9a276f"
+    },
+    {
+      "path": "/assets/GamePage-CVv-qvnS.css",
+      "status": 200,
+      "bytes": 44925,
+      "sha256": "f767ccf499ff43c0f6dc0fdbda4721ed133f979f9323c7ae4b07d527e042087b"
+    },
+    {
+      "path": "/assets/GamePage-DDFPwbCY.js",
+      "status": 200,
+      "bytes": 143166,
+      "sha256": "d5dcb7a550a17c40e0c9ea87ad4800eae6f6a221fa8205215233686de6dff90a"
+    },
+    {
+      "path": "/assets/geovictoria-intranet-BAViKfrf.js",
+      "status": 200,
+      "bytes": 87146,
+      "sha256": "df0ba7b63cc0fbc819c02456facf05afcfe9a9a350caca1e2c86ef1404708745"
+    },
+    {
+      "path": "/assets/geovictoria-intranet-BjepA01P.css",
+      "status": 200,
+      "bytes": 122375,
+      "sha256": "21d44618e535312287275c6e08080d19e93a892a67b6cb32575b6f76061502f9"
+    },
+    {
+      "path": "/assets/HelpDirectory-DpQiXyFI.js",
+      "status": 200,
+      "bytes": 4105,
+      "sha256": "624be029c38c5f327d1fd0c196b675b39991f09494d4e1ebc73b5a6ffba97c47"
+    },
+    {
+      "path": "/assets/index-DUxPMv8p.js",
+      "status": 200,
+      "bytes": 59,
+      "sha256": "92eb74d9853aaedab3772a02f50ea182feb86157620a981b66734dce8b89e00c"
+    },
+    {
+      "path": "/assets/lock-keyhole-IQ4xWgMv.js",
+      "status": 200,
+      "bytes": 373,
+      "sha256": "5ab062bf0f3a2a6e511960d894bf4113071b72006edd501d21f3a7c67d9eb208"
+    },
+    {
+      "path": "/assets/mail-cFAW8Yjt.js",
+      "status": 200,
+      "bytes": 331,
+      "sha256": "062d5541769a291e60a7feedcc07b08f9807d138218796901c90ff738518c41b"
+    },
+    {
+      "path": "/assets/NewsPage-CdTW05RM.js",
+      "status": 200,
+      "bytes": 3308,
+      "sha256": "5f01b9f83deaaf6254897d0764fd4e2a6018ffa2a30ff8218e78a1c169976059"
+    },
+    {
+      "path": "/assets/OrgChart--WD5RcRJ.js",
+      "status": 200,
+      "bytes": 2474,
+      "sha256": "6ccfac5200b04dc64c663abcf0ed626a2feb8d82595c1b0ed3d1a84c3eaa97e4"
+    },
+    {
+      "path": "/assets/pencil-anzgP7Ck.js",
+      "status": 200,
+      "bytes": 394,
+      "sha256": "6734eb2699a45cae27974ab123065792256f0dbd1252d434c17fd87173f16718"
+    },
+    {
+      "path": "/assets/plus-COsp5OOR.js",
+      "status": 200,
+      "bytes": 271,
+      "sha256": "26f568a4f8e73027eb9c25cbcc173ceaf1738866a0d56afef90dac00281f19e4"
+    },
+    {
+      "path": "/assets/preferences-DJoDou0T.js",
+      "status": 200,
+      "bytes": 351,
+      "sha256": "3129de25b3451824b22984bb8d5c15514ff3fbeff200bd8cc678ce01a5a3f1ff"
+    },
+    {
+      "path": "/assets/quiz-B0BwPrjh.js",
+      "status": 200,
+      "bytes": 23691,
+      "sha256": "14dac50c490a9b707aca9c201a85e0da4d2039b2cd3aaab14b701e73459a6344"
+    },
+    {
+      "path": "/assets/quiz-ChGAa421.css",
+      "status": 200,
+      "bytes": 22714,
+      "sha256": "caf23fc982d6eccde323660cf809cfb7ad5ace8e2e2f8c6187e0b6ee13a21de8"
+    },
+    {
+      "path": "/assets/Quiz-DCW8eqZq.js",
+      "status": 200,
+      "bytes": 12828,
+      "sha256": "9131e8b946adc9e2066215cc9dd4578abc67adfbd4e1afb23377123ad2ec3bcd"
+    },
+    {
+      "path": "/assets/QuizAdmin-De5ZwTjL.js",
+      "status": 200,
+      "bytes": 12990,
+      "sha256": "a74dd7940933fc912d795de524b330ca02a44de0b00a06f539824b336c8688d9"
+    },
+    {
+      "path": "/assets/QuizHost-B-kWNs3d.js",
+      "status": 200,
+      "bytes": 6921,
+      "sha256": "6c4ab5b59ecbc09b288bfb763f59ebdddad2b393afc716b3dfdf9b6de712d199"
+    },
+    {
+      "path": "/assets/QuizPresentation-DXh9GuIc.js",
+      "status": 200,
+      "bytes": 1072,
+      "sha256": "d5104066d849c812e94e6da423dfeb3cd7447d8696e539dce6fcd84a5ddfade6"
+    },
+    {
+      "path": "/assets/react-BVNqbF40.js",
+      "status": 200,
+      "bytes": 228576,
+      "sha256": "ffc267103e7c1c4f6aee8d59dfbac804cc8ca717f0d0313c139da8164843005a"
+    },
+    {
+      "path": "/assets/ReportsSection-CG250H2-.js",
+      "status": 200,
+      "bytes": 1904,
+      "sha256": "1b3ed9639014166ca50bd9bb38243a7be1a9731f5127f61aa79e49bc7c3dcefa"
+    },
+    {
+      "path": "/assets/rolldown-runtime-8BhlS34s.js",
+      "status": 200,
+      "bytes": 807,
+      "sha256": "1cb5c6ead7e29370203f12e2d5cdf50ec1f02dd70ee2d050d909afbf2406f6b1"
+    },
+    {
+      "path": "/assets/roster-DQGKTreL.js",
+      "status": 200,
+      "bytes": 6128,
+      "sha256": "1f178200b66d55686af4b2d76915a214b83b6e46f3dc77b52cb6bd4def208305"
+    },
+    {
+      "path": "/assets/SantaGreeting-2WFRsXaA.css",
+      "status": 200,
+      "bytes": 1420,
+      "sha256": "d5442c7ec0f830a87ac37c9ee5fd18165dc48a0fd1c9b88d3b2e3a8313068126"
+    },
+    {
+      "path": "/assets/SantaGreeting-C1sPlhqm.js",
+      "status": 200,
+      "bytes": 9816,
+      "sha256": "efd6c23c31abacb11dbf1769390b4b8cbaf436f0555a0d8ca3dcdf039049395c"
+    },
+    {
+      "path": "/assets/ScoresSection-B7Aq4KjK.js",
+      "status": 200,
+      "bytes": 1721,
+      "sha256": "1c89cc3278e329550977a6b101f00e636aa440be984705a0e077f00c42961df8"
+    },
+    {
+      "path": "/assets/SearchPage-B1Wdf3mf.js",
+      "status": 200,
+      "bytes": 2832,
+      "sha256": "546b05e128176d29a89e3418a80088332b30640f161294278a09f4387cec20f7"
+    },
+    {
+      "path": "/assets/secret-santa-experience-DuRqXPGs.css",
+      "status": 200,
+      "bytes": 20747,
+      "sha256": "4c55327207c0a65264520b1e2560a66dc6edfe27641e929405192cacaf32d19f"
+    },
+    {
+      "path": "/assets/secret-santa-experience-DV0_Ifyf.js",
+      "status": 200,
+      "bytes": 7052,
+      "sha256": "b32de4c06fece652a68a8ff18032019510fc823b58b15e7375e28f5f48e62633"
+    },
+    {
+      "path": "/assets/secretSanta-BAl3A6SF.js",
+      "status": 200,
+      "bytes": 4370,
+      "sha256": "e1e3df162a38148f0a21a087aa7c58f6aba9f048f9fb08379ba10ad9f1b90c2d"
+    },
+    {
+      "path": "/assets/SecretSanta-BNGHkw5k.js",
+      "status": 200,
+      "bytes": 12730,
+      "sha256": "c28033d03d518d0cf9de2c3a4f97adddf81d529b64edea55c7ad5d3092f9d236"
+    },
+    {
+      "path": "/assets/SecretSantaAdmin-B33sHORn.js",
+      "status": 200,
+      "bytes": 55130,
+      "sha256": "45c11e54a6b9f351dc1552edb1e6e53102831c9425d46196b2e7e3d28425e7b0"
+    },
+    {
+      "path": "/assets/SecretSantaAdmin-D9eqvj4x.css",
+      "status": 200,
+      "bytes": 6819,
+      "sha256": "c33a4e70fd0493fd3db29069b6d4173591ad2bf79351801c03f8d92a8402bf86"
+    },
+    {
+      "path": "/assets/send-CMBKyrk-.js",
+      "status": 200,
+      "bytes": 408,
+      "sha256": "e381d4970c035cbaeb757d661ea2c0c961b5e3c9d03e360c044990393764001e"
+    },
+    {
+      "path": "/assets/settings-2-CU2NyIM4.js",
+      "status": 200,
+      "bytes": 624,
+      "sha256": "4586af286dc34f0a6cf3450182c054e804ea9274939aa452ca6ed8ce8540b930"
+    },
+    {
+      "path": "/assets/shield-check-CLVg30K7.js",
+      "status": 200,
+      "bytes": 438,
+      "sha256": "46a210e359f48f8c076cd58c9ebc08d7aa76eb6cb0832af7903428c954390a47"
+    },
+    {
+      "path": "/assets/useAdminAccess-w04D1YRj.js",
+      "status": 200,
+      "bytes": 7815,
+      "sha256": "7342c0f9e78e84ab0cb719f1d6538d49a249529d7d7b73487c22b74e43c678b6"
+    },
+    {
+      "path": "/assets/Wiki-DbSVndzD.js",
+      "status": 200,
+      "bytes": 5676,
+      "sha256": "fb859e7f5f15692d745ebc2afd2da28265a654c3cbe24f79e47a08209de75dce"
+    },
+    {
+      "path": "/juego",
+      "status": 200,
+      "bytes": 1546,
+      "sha256": "c4d1290b613ce7cd9a8287155be90a446025ebed2214d1511348d29866c41c9a"
+    },
+    {
+      "path": "/scenery/bosque-preview.webp",
+      "status": 200,
+      "bytes": 16726,
+      "sha256": "1be8580642edfc8e88424082b96aeaaf480eb7b39473e5588077e259d9ba9aa5"
+    },
+    {
+      "path": "/scenery/bosque-v1.webp",
+      "status": 200,
+      "bytes": 80690,
+      "sha256": "3c6824ad698872647faf1b57ac077deab8bf5b2db230e3c401357da8fd29cda6"
+    },
+    {
+      "path": "/scenery/faro-preview.webp",
+      "status": 200,
+      "bytes": 11138,
+      "sha256": "062595e89d6aaabaef6872325c3faee7e967be6d56545d931af60015154663bf"
+    },
+    {
+      "path": "/scenery/faro-v1.webp",
+      "status": 200,
+      "bytes": 59962,
+      "sha256": "3b918c08f2edc83427e57037464c99de2fbd95412214a36e025a9f1c23397ee3"
+    },
+    {
+      "path": "/scenery/taller-preview.webp",
+      "status": 200,
+      "bytes": 21752,
+      "sha256": "81a140850043d0bb8d0146228365ae2efa5895c4c892437168bb9c0c3f11aeba"
+    },
+    {
+      "path": "/scenery/taller-v1.webp",
+      "status": 200,
+      "bytes": 101738,
+      "sha256": "48415f7a24602f1caf04627547b67cd9495f20061fa84c7ee3da1b2420ef7b93"
+    }
+  ],
+  "status": "published",
+  "sourceCommit": "a00d4a144ac1ab64047b08dd483b2b934fbe9bcd",
+  "mergeCommit": "bd75453e3f89de977e92c02bdf3f5c97158a3db1",
+  "pullRequest": "https://github.com/Lacer13/geovictoria-intranet/pull/20",
+  "previousHostingVersion": "9d002ee4d6646f3d",
+  "releaseTime": "2026-11-27T19:39:27.907Z",
+  "authorization": "El usuario autorizó: Sí, fusionar y publicar el juego centrado.",
+  "deployment": "Promoción por ID inmutable de la vista previa probada",
+  "firestoreRulesDeployed": false,
+  "rulesetUnchanged": "projects/geovictoria-intranet-peru/rulesets/53dfd830-258d-4add-bead-acf608f29029",
+  "githubActionsRun": 46057942998,
+  "githubActions": "success",
+  "generalTestsPassed": 162,
+  "rulesTestsPassed": 53,
+  "allResourceHashesMatchPreview": true,
+  "rollbackCommand": "firebase hosting:clone geovictoria-intranet-peru@9d002ee4d6646f3d geovictoria-intranet-peru:live --project geovictoria-intranet-peru --non-interactive",
+  "productionUiCheck": {
+    "viewport": {
+      "width": 1366,
+      "height": 768
+    },
+    "document": {
+      "width": 1366,
+      "height": 768
+    },
+    "allGameElementsVisible": true,
+    "canvasCentered": true,
+    "pauseAndReturnPassed": true,
+    "consoleErrors": 0,
+    "testAliasCleared": true,
+    "productionScoresSubmitted": false,
+    "viewportReset": true
+  }
+}
