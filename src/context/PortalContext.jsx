@@ -61,7 +61,6 @@ function useCollection(name, sort, count) {
 
 export function PortalProvider({ children }) {
   const news = useCollection("news", "timestamp");
-  const leaderboard = useCollection("leaderboard", "score", 5);
   const directory = useCollection("directory");
   const [readNews, setReadNews] = useState(() =>
     parseReadNews(readPreference(NEWS_READ_KEY, "{}")),
@@ -87,7 +86,6 @@ export function PortalProvider({ children }) {
     <PortalContext.Provider
       value={{
         news,
-        leaderboard,
         directory,
         readNews,
         unreadNews,

@@ -22,7 +22,7 @@ function ScoreRecords({ boardId }) {
 export default function ScoresSection() {
   const [boardId,setBoardId]=useState("arcade");
   return <section className="admin-records">
-    <h2>Puntajes del juego</h2><p>Elige el nivel o Arcade. Retira únicamente registros que deban corregirse o moderarse.</p>
+    <h2>Puntajes de juegos y minijuegos</h2><p>Elige la tabla que deseas moderar. Retira únicamente registros que deban corregirse o moderarse.</p>
     <label>Tabla de puntajes <select value={boardId} onChange={e=>setBoardId(e.target.value)}>{SCORE_BOARDS.map(board=><option key={board.id} value={board.id}>{board.label}</option>)}</select></label>
     <ScoreRecords key={boardId} boardId={boardId} />
   </section>;

@@ -4,6 +4,8 @@ import { AREA_CHARACTERS } from "./characters.js";
 import { createAimGame, createMemoryGame, flipMemory, hitAim, memoryScore, readMiniRecords, saveMiniRecord, settleMemory, stepAim } from "./miniGames.js";
 import { normalizePlayerName, readPlayerName, savePlayerName, validPlayerName } from "./scoreboard.js";
 import { useMiniClock, useMiniPause } from "./useMiniClock.js";
+import ScoreSubmitter from "./ScoreSubmitter.jsx";
+import ScoreBoard from "./ScoreBoard.jsx";
 
 const deck=AREA_CHARACTERS.slice(0,6);
 const labels={memory:"Memoria de guardianes",aim:"Faro de reflejos"};
@@ -11,11 +13,14 @@ const labels={memory:"Memoria de guardianes",aim:"Faro de reflejos"};
 function PauseButton({paused,onToggle}) {
   return <button className="arcade-button secondary" onClick={onToggle}>{paused?<Play size={17}/>:<Pause size={17}/>} {paused?"Continuar":"Pausar"}</button>;
 }
-function Result({score,detail,record,onAgain,onBack}) {
-  return <section className="mini-result" role="status">
+function Result({score,detail,record,onAgain,onBack,boardId,name}) {
+  const [runId] = useState(()=>crypto.randomUUID());
+  return <section className="mini-result">
     <Trophy size={32}/><h2>¡Buen trabajo!</h2><strong>{score.toLocaleString("es-PE")} puntos</strong><p>{detail}</p>
     {record?.best && <p>Récord en este navegador: <b>{record.best.score} pts</b> · {record.best.name}</p>}
     {record && !record.stored && <p>Este navegador no pudo guardar el récord. Tu resultado sigue aquí.</p>}
+    <ScoreSubmitter score={score} boardId={boardId} runId={runId} initialName={name}/>
+    <ScoreBoard boardId={boardId} publishedId={runId}/>
     <div><button className="arcade-button" onClick={onAgain}><RotateCcw size={17}/> Jugar otra vez</button><button className="arcade-button secondary" onClick={onBack}>Volver a minijuegos</button></div>
   </section>;
 }
@@ -34,7 +39,7 @@ function Memory({name,onAgain,onBack}) {
     saved.current=true;
     setRecord(saveMiniRecord("memory",{name,score:memoryScore(game.moves,clock.read()),date:new Date().toISOString()}));
   },[game.phase,game.moves,name,clock.read]);
-  if(game.phase==="won")return <Result score={memoryScore(game.moves,clock.read())} detail={`${game.moves} intentos · ${Math.floor(clock.read())} segundos`} record={record} onAgain={onAgain} onBack={onBack}/>;
+  if(game.phase==="won")return <Result boardId="memory" name={name} score={memoryScore(game.moves,clock.read())} detail={`${game.moves} intentos · ${Math.floor(clock.read())} segundos`} record={record} onAgain={onAgain} onBack={onBack}/>;
   return <section className="mini-playing" aria-label="Partida de memoria">
     <div className="mini-hud"><strong>{name}</strong><span>{game.cards.filter(c=>c.matched).length/2}/6 parejas · {game.moves} intentos · {Math.floor(clock.seconds)} s</span><PauseButton paused={paused} onToggle={()=>setPaused(v=>!v)}/></div>
     <p className="mini-instruction">Encuentra las seis parejas. El tiempo empieza al descubrir la primera carta.</p>
@@ -65,7 +70,7 @@ function Aim({name,onAgain,onBack}) {
     if(game.phase!=="finished"||saved.current)return;
     saved.current=true;setRecord(saveMiniRecord("aim",{name,score:game.score,date:new Date().toISOString()}));
   },[game.phase,game.score,name]);
-  if(game.phase==="finished")return <Result score={game.score} detail={`${game.hits} aciertos · ${game.misses} fallos · 30 segundos de juego`} record={record} onAgain={onAgain} onBack={onBack}/>;
+  if(game.phase==="finished")return <Result boardId="aim" name={name} score={game.score} detail={`${game.hits} aciertos · ${game.misses} fallos · 30 segundos de juego`} record={record} onAgain={onAgain} onBack={onBack}/>;
   return <section className="mini-playing" aria-label="Partida de reflejos">
     <div className="mini-hud"><strong>{name}</strong><span>{Math.max(0,30-Math.floor(clock.seconds))} s · {game.score} puntos · Racha {game.streak}</span><PauseButton paused={paused} onToggle={()=>setPaused(v=>!v)}/></div>
     <p className="mini-instruction">Pulsa el faro encendido o usa las teclas 1 a 9. Acertar rápido suma más; pulsar uno apagado resta 2 puntos.</p>
@@ -74,24 +79,25 @@ function Aim({name,onAgain,onBack}) {
   </section>;
 }
 
-export default function MiniGames() {
-  const [selected,setSelected]=useState(null),[playing,setPlaying]=useState(false),[attempt,setAttempt]=useState(0);
+export default function MiniGames({initialSelected=null}) {
+  const [selected,setSelected]=useState(initialSelected),[playing,setPlaying]=useState(false),[attempt,setAttempt]=useState(0);
   const [name,setName]=useState(readPlayerName),[error,setError]=useState(false);
   const nameInput=useRef(null),records=readMiniRecords();
   const start=()=>{
     if(!validPlayerName(name)){setError(true);nameInput.current?.focus();return;}
     const normalized=normalizePlayerName(name);setName(normalized);savePlayerName(normalized);setAttempt(n=>n+1);setPlaying(true);setError(false);
   };
-  const back=()=>{setPlaying(false);setSelected(null);};
+  const back=()=>{setPlaying(false);setSelected(initialSelected);};
   if(playing)return <div className="arcade mini-games"><h1>{labels[selected]}</h1>{selected==="memory"?<Memory key={attempt} name={name} onAgain={start} onBack={back}/>:<Aim key={attempt} name={name} onAgain={start} onBack={back}/>}</div>;
   return <section className="arcade mini-games">
-    <span className="arcade-eyebrow">Un descanso, otro reto</span><h1>Elige tu minijuego</h1><p className="mini-instruction">Partidas cortas, controles sencillos y récords guardados en este navegador.</p>
+    <span className="arcade-eyebrow">Un descanso, otro reto</span><h1>{selected?labels[selected]:"Elige tu minijuego"}</h1><p className="mini-instruction">Juega a tu ritmo. Al terminar puedes compartir tu puntaje con el equipo.</p>
     <div className="arcade-player-field mini-player"><label htmlFor="mini-name">Tu nombre o alias</label><input id="mini-name" ref={nameInput} value={name} maxLength={24} autoComplete="nickname" placeholder="Por ejemplo, Ana" aria-invalid={error} onChange={e=>{setName(e.target.value);setError(false);}}/>{error&&<p role="alert">Escribe al menos dos caracteres.</p>}</div>
-    <div className="mini-selection">{["memory","aim"].map(id=><button key={id} className={selected===id?"is-selected":""} aria-pressed={selected===id} onClick={()=>setSelected(id)}>
+    <div className={`mini-selection ${initialSelected?"mini-direct":""}`}>{(initialSelected?[initialSelected]:["memory","aim"]).map(id=><button key={id} className={selected===id?"is-selected":""} aria-pressed={selected===id} onClick={()=>setSelected(id)}>
       {id==="memory"?<Brain size={35}/>:<Crosshair size={35}/>}<strong>{labels[id]}</strong><span>{id==="memory"?"Encuentra seis parejas de guardianes a tu ritmo.":"Acumula aciertos y rachas durante 30 segundos."}</span>
       <small>{records[id]?`Récord: ${records[id].score} pts · ${records[id].name}`:"Tu primer récord te espera"}</small>
     </button>)}</div>
     {selected&&<div className="mini-start"><p>{selected==="memory"?"Abre dos cartas por intento. Menos intentos y menos tiempo dan más puntos.":"Toca el faro encendido o usa las teclas 1 a 9."} Puedes pausar; al cambiar de pestaña se pausa automáticamente.</p><button className="arcade-button" onClick={start}><Play size={18}/> Empezar {labels[selected]}</button></div>}
-    <p className="arcade-ranking-note">Estos récords son locales. Las clasificaciones compartidas de niveles y Arcade están en Aventura individual.</p>
+    <p className="arcade-ranking-note">Tu récord personal se guarda en este navegador. Solo se comparte un resultado cuando eliges «Publicar puntaje»; los récords anteriores no se publican automáticamente.</p>
+    {selected&&<details className="mini-ranking-details"><summary>Ver clasificación de {labels[selected]}</summary><ScoreBoard boardId={selected}/></details>}
   </section>;
 }

@@ -223,9 +223,9 @@ test("unknown collections deny every read and write", async () => {
   await assertFails(getDoc(doc(db, "private", "unknown")));
 });
 
-test("level scores accept public named results and ranked reads only for the three known missions", async () => {
+test("game scores accept public ranked reads only for known missions and minigames", async () => {
   const db = env.unauthenticatedContext().firestore();
-  for (const mission of ["bosque", "taller", "faro"]) {
+  for (const mission of ["bosque", "taller", "faro", "memory", "aim"]) {
     const path = `gameLeaderboards/${mission}/entries`;
     await assertSucceeds(setDoc(doc(db,path,"score"),{name:"Ana Díaz",score:240,date:"2026-11-26T20:00:00Z"}));
     const rows = await assertSucceeds(getDocs(query(collection(db,path),orderBy("score","desc"),limit(20))));
@@ -246,6 +246,20 @@ test("level scores reject blank names, invalid scores, extra fields, edits and v
   await assertFails(deleteDoc(doc(db,path,"immutable")));
   const admin=env.authenticatedContext("scores-root",{admin:true}).firestore();
   await assertSucceeds(deleteDoc(doc(admin,path,"immutable")));
+});
+
+test("minigame results allow optional public zero scores but protect edits, deletion and private fields", async()=>{
+  const db=env.unauthenticatedContext().firestore();
+  const moderator=env.authenticatedContext("mini-moderator",{admin:true}).firestore();
+  for(const id of ["memory","aim"]){
+    const path=`gameLeaderboards/${id}/entries`,score={name:"Ana",score:0,date:"2026-11-27T20:00:00Z"};
+    await assertSucceeds(setDoc(doc(db,path,"mini-zero"),score));
+    await assertFails(updateDoc(doc(db,path,"mini-zero"),{score:1000}));
+    await assertFails(deleteDoc(doc(db,path,"mini-zero")));
+    await assertFails(setDoc(doc(db,path,"private"),{...score,email:"private@example.test"}));
+    await assertFails(setDoc(doc(db,path,"fraction"),{...score,score:1.5}));
+    await assertSucceeds(deleteDoc(doc(moderator,path,"mini-zero")));
+  }
 });
 
 const delegatedEmail = "delegado@example.test";
