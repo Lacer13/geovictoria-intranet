@@ -1,8 +1,8 @@
 # Escenarios y puntajes · Verificación
 
-Estado: publicado el 27 de noviembre de 2026. El PR #14 está fusionado y la versión `3c3a422332c8aa5e` está activa en producción, con las reglas de puntajes por nivel.
+Estado: publicado el 27 de noviembre de 2026. El PR #14 está fusionado y las reglas de puntajes por nivel están activas. La promoción inicial fue `3c3a422332c8aa5e`; la versión final `b54f5119cad4ae0d` conserva además los créditos locales existentes de Finito y Ariehworkspace, ya sincronizados en main.
 
-Se verificaron los SHA-256 de los 70 recursos contra la vista previa y la lectura pública de las tres tablas en el navegador. No se enviaron puntajes de prueba a producción. [Registro de publicación](releases/escenarios-ranking-production-2026-11-27.json).
+Se verificaron los SHA-256 de los 70 recursos de la entrega final contra su compilación y la lectura pública de las tres tablas en el navegador. No se enviaron puntajes de prueba a producción. [Registro de publicación](releases/escenarios-ranking-production-2026-11-27.json).
 
 | Comprobación | Resultado |
 | --- | --- |
