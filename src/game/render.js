@@ -9,6 +9,8 @@ import { missionById } from "./missions.js";
 import enemyAtlas from "../../public/enemies/desfase/sprites-v1.json" with { type: "json" };
 import { ENEMY_ATLAS_URL, enemyMuzzle, enemyPresentation, enemyVisualMotion } from "./enemyAnimation.js";
 import { drawScenery } from "./scenery.js";
+import { BOSSES, bossAttackPlan, bossShielded } from "./bosses.js";
+import { activeRepairStation } from "./missionObjectives.js";
 
 function rounded(ctx, x, y, width, height, radius, color) {
   ctx.fillStyle = color;
@@ -254,7 +256,7 @@ export function drawEnemy(ctx, entity, images, tick, boss = false, reduced = fal
     ctx.translate(cx + motion.x, cy + motion.y);
     ctx.rotate(motion.angle);
     ctx.translate(-cx, -cy);
-    if (entity.flash) ctx.filter = "brightness(1.35)";
+    ctx.filter = [boss ? BOSSES[entity.kind]?.filter : "", entity.flash ? "brightness(1.35)" : ""].filter(Boolean).join(" ") || "none";
     drawAtlasFrame(ctx, [atlasImage], enemyAtlas, view.pose, view.elapsed, {
       x: origin.x - frame.anchors.muzzle.x * scale,
       y: origin.y - frame.anchors.muzzle.y * scale, width: entity.width, reduced,
@@ -292,6 +294,7 @@ export function drawEnemy(ctx, entity, images, tick, boss = false, reduced = fal
 }
 
 const PICKUPS = {
+  gift: ["", "#c95c64"],
   heal: ["+", "#be334d"],
   shield: ["E", "#236b9a"],
   dual: ["II", "#946514"],
@@ -299,6 +302,31 @@ const PICKUPS = {
   bomb: ["B", "#a43a45"],
   beacon: ["R", "#277eaa"],
 };
+
+function drawMissionGuide(ctx, state, reduced) {
+  if (state.bossSpawned) return;
+  const progress = state.missionProgress;
+  const active = activeRepairStation(state);
+  for (const [i, station] of (progress.stations || []).entries()) {
+    const repaired = i < progress.beacons, ready = station === active;
+    ctx.save(); ctx.globalAlpha = repaired || ready ? 1 : .35;
+    ctx.strokeStyle = repaired ? "#9fe2ba" : ready ? "#ffe2a1" : "#9bc2d5";
+    ctx.lineWidth = ready ? 3 : 2; ctx.beginPath(); ctx.arc(station.x,station.y,40,0,Math.PI*2); ctx.stroke();
+    if (ready) { ctx.globalAlpha=.15; ctx.beginPath();ctx.arc(station.x,station.y,85,0,Math.PI*2);ctx.fillStyle="#ffe2a1";ctx.fill();ctx.globalAlpha=1;
+      ctx.beginPath();ctx.arc(station.x,station.y,45,-Math.PI/2,-Math.PI/2+Math.PI*2*station.charge/150);ctx.stroke(); }
+    rounded(ctx,station.x-14,station.y-22,28,44,8,repaired?"#5caa92":"#47798a");
+    rounded(ctx,station.x-8,station.y-14,16,15,4,repaired?"#c4ffcf":"#c0e3ed");
+    ctx.font="bold 15px sans-serif";ctx.textAlign="center";ctx.fillStyle="#fff5d6";ctx.fillText(repaired?"✓":String(i+1),station.x,station.y+16);ctx.restore();
+  }
+  const escort=progress.escort;
+  if (escort) {
+    ctx.save();ctx.strokeStyle=escort.near?"#9ce5d1a0":"#f4d59488";ctx.lineWidth=2;ctx.setLineDash([7,10]);ctx.beginPath();ctx.arc(escort.x,escort.y,150,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);
+    const hover=reduced?0:Math.sin(state.tick/15)*3;
+    ctx.translate(escort.x,escort.y+hover);rounded(ctx,-24,-19,48,38,10,"#367783");rounded(ctx,-16,-12,32,24,7,"#c0f4e9");
+    ctx.fillStyle="#e9da9e";ctx.beginPath();ctx.ellipse(0,26,reduced?10:10+Math.sin(state.tick/5)*2,5,0,0,Math.PI*2);ctx.fill();
+    ctx.font="bold 14px sans-serif";ctx.textAlign="center";ctx.fillStyle="#fff6d6";ctx.fillText("NÚCLEO",0,-31);ctx.restore();
+  }
+}
 
 export function drawGame(
   ctx,
@@ -314,6 +342,7 @@ export function drawGame(
       Math.sin(state.tick * 2.3) * state.shake,
       (Math.cos(state.tick * 3.1) * state.shake) / 2,
     );
+  drawMissionGuide(ctx, state, reduced);
   for (const pickup of state.pickups) {
     const [label, color] = PICKUPS[pickup.type];
     rounded(ctx, pickup.x, pickup.y, 36, 36, 7, color);
@@ -341,25 +370,25 @@ export function drawGame(
     drawEnemy(ctx, enemy, images, state.tick + defeatElapsed * 60, enemy.boss, reduced);
   if (state.boss) {
     const b = state.boss;
+    const design = BOSSES[state.missionId], shield = bossShielded(b,state.missionId,state.tick), plan = bossAttackPlan(b,state.missionId);
     if (b.shot <= 30) {
-      ctx.fillStyle = "#f4536938";
-      ctx.fillRect(0, b.y + b.height / 2 - 8, b.x, 26);
       ctx.setLineDash([12, 10]);
       ctx.strokeStyle = "#ffa1a9";
       ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(0, b.y + b.height / 2 + 5);
-      ctx.lineTo(b.x, b.y + b.height / 2 + 5);
-      ctx.stroke();
+      const origin=enemyMuzzle(b,true);
+      for(const vy of plan.velocities){ctx.beginPath();ctx.moveTo(origin.x,origin.y);ctx.lineTo(0,origin.y+vy*origin.x/(vy===0?7:plan.speed));ctx.stroke();}
       ctx.setLineDash([]);
       ctx.fillStyle = "#fff1cf";
       ctx.font = "bold 16px sans-serif";
       ctx.textAlign = "right";
-      ctx.fillText("¡ESQUIVA!", b.x + b.width, b.y - 27);
+      ctx.fillText("¡ESQUIVA!", b.x + b.width, b.y - 47);
     }
+    if(design){ctx.save();ctx.strokeStyle=design.color;ctx.globalAlpha=shield ? 0.8 : 0.25;ctx.lineWidth=shield?6:2;ctx.beginPath();ctx.ellipse(b.x+b.width/2,b.y+b.height/2,95,100,0,0,Math.PI*2);ctx.stroke();ctx.restore();}
     drawEnemy(ctx, b, images, state.tick, true, reduced);
     rounded(ctx, b.x, b.y - 18, b.width, 10, 5, "#30222c");
     rounded(ctx, b.x, b.y - 18, (b.width * b.hp) / b.maxHp, 10, 5, "#f07b88");
+    if(design){ctx.fillStyle=design.color;ctx.textAlign="center";ctx.font="bold 14px sans-serif";ctx.fillText(design.name,b.x+b.width/2,b.y-29);
+      ctx.font="12px sans-serif";ctx.fillText(state.missionId==="bosque"?(shield?"Escudo activo":"¡Escudo abierto!"):state.missionId==="faro"?`Fase ${plan.phase}/3`:"Busca el hueco",b.x+b.width/2,b.y+b.height+20);}
   }
   const p = state.player;
   const centerX = p.x + p.width / 2,

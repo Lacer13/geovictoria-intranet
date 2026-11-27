@@ -52,6 +52,7 @@ import ScoreSubmitter from "../game/ScoreSubmitter.jsx";
 import ScoreBoard from "../game/ScoreBoard.jsx";
 import { normalizePlayerName, readPlayerName, savePlayerName, validPlayerName } from "../game/scoreboard.js";
 import { getScenery, loadScenery } from "../game/scenery.js";
+import { BOSSES } from "../game/bosses.js";
 import TouchControls from "../game/TouchControls.jsx";
 import "../game/arcade.css";
 
@@ -485,6 +486,7 @@ export default function ActiveBreak() {
                 </button>)}
               </div>
               <p className="campaign-brief">{MISSIONS.find(m => m.id === missionId).description}</p>
+              <p className="campaign-boss-brief"><strong>Jefe: {BOSSES[missionId].name}.</strong> {BOSSES[missionId].hint}</p>
             </>}
           </section>
           <section
