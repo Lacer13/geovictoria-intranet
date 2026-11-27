@@ -2,6 +2,8 @@
 
 Implementación del 27 de noviembre de 2026, sin servicios ni recursos de pago nuevos.
 
+**Publicado:** el PR #15 se fusionó con autorización del usuario y la versión probada `b412e75695e84b52` está activa en [el juego principal](https://geovictoria-intranet-peru.web.app/juego). [Abrir minijuegos](https://geovictoria-intranet-peru.web.app/juego#minijuegos). Se comprobaron 70 recursos por SHA-256 y la navegación de aventura y ambos minijuegos en producción, sin errores de consola ni envío de puntajes de prueba. [Registro y restauración](releases/misiones-minijuegos-production-2026-11-27.json).
+
 ## Aventura
 
 Se mantienen los tres niveles, el orden de desbloqueo y el progreso existente. Cambia la forma de superar sus objetivos:

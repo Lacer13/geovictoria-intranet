@@ -2,7 +2,7 @@
 
 Propuesta de producto y desarrollo · 18 de noviembre de 2026.
 
-**Avance · 27 de noviembre:** fondos ilustrados con profundidad, alias y tablas por nivel publicados en el PR #14. La siguiente entrega implementa objetivos de rescate, reparación y escolta, tres estrategias de jefe y dos minijuegos con récords locales. [Alcance y validación](misiones-jefes-minijuegos.md). Esta ampliación todavía requiere publicación y prueba en teléfono; se conserva el progreso existente. CierreIA ya está publicado y la siguiente animación individual del roadmap es Prisma.
+**Avance · 27 de noviembre:** fondos ilustrados con profundidad, alias y tablas por nivel publicados en el PR #14. El PR #15 también está fusionado y publicado: objetivos de rescate, reparación y escolta, tres estrategias de jefe y dos minijuegos con récords locales. [Alcance y validación](misiones-jefes-minijuegos.md). Se conserva el progreso existente; falta la aceptación de estos retos en un teléfono físico. CierreIA ya está publicado y la siguiente animación individual del roadmap es Prisma.
 
 **Prioridad actualizada · 20 de noviembre:** el usuario adelanta niveles y arena en línea 1 contra 1 antes de continuar las animaciones. Esta entrega incorpora una campaña de tres misiones con objetivos y avance guardado, y un servidor de arena con salas privadas, resultado y revancha. [Entrega y comprobaciones](campana-arena-1v1.md). El servidor ya está publicado en Render Free y probado por Internet con dos navegadores independientes, marcador compartido y recuperación. El piloto humano en teléfonos y redes diferentes sigue pendiente. CierreIA queda en espera.
 
