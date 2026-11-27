@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
-  Check,
   Heart,
   Pause,
   Play,
@@ -12,8 +11,6 @@ import {
 } from "lucide-react";
 import {
   CHARACTERS,
-  AREA_CHARACTERS,
-  LEGACY_CHARACTERS,
   characterPose,
   loadAssets,
 } from "../game/characters.js";
@@ -48,6 +45,8 @@ import {
 import { MISSIONS, completeMission } from "../game/missions.js";
 import { savePreference } from "../lib/preferences.js";
 import CharacterPreview from "../game/CharacterPreview.jsx";
+import GuardianSelector from "../game/GuardianSelector.jsx";
+import { selectGuardian } from "../game/guardianSelection.js";
 import ScoreSubmitter from "../game/ScoreSubmitter.jsx";
 import ScoreBoard from "../game/ScoreBoard.jsx";
 import { normalizePlayerName, readPlayerName, savePlayerName, validPlayerName } from "../game/scoreboard.js";
@@ -180,9 +179,6 @@ export default function ActiveBreak({initialAdventure=true}) {
   const [loadAttempt, setLoadAttempt] = useState(0);
   const lastLoadAttempt = useRef(0);
   const [notice, setNotice] = useState("");
-  const [catalog, setCatalog] = useState("areas");
-  const [query, setQuery] = useState("");
-  const [previewPose, setPreviewPose] = useState("idle");
   const [pauseReason, setPauseReason] = useState("manual");
   const game = useRef(createGame());
   const input = useRef(emptyInput());
@@ -196,16 +192,6 @@ export default function ActiveBreak({initialAdventure=true}) {
     CHARACTERS.find((c) => c.id === profile.selected) || CHARACTERS[0];
   const power = character.power || powerForCharacter(character.id);
   useEffect(() => { void loadScenery(adventure ? missionId : "bosque"); }, [adventure, missionId]);
-  const normalize = (text) =>
-    text
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase();
-  const filteredCharacters = (
-    catalog === "areas" ? AREA_CHARACTERS : LEGACY_CHARACTERS
-  ).filter((c) =>
-    normalize(c.name + " " + c.area).includes(normalize(query.trim())),
-  );
 
   useEffect(() => {
     if (mode === "victory" || mode === "gameover")
@@ -385,11 +371,8 @@ export default function ActiveBreak({initialAdventure=true}) {
       );
       return;
     }
-    const next = {
-      coins: current.coins - (unlocked ? 0 : item.cost),
-      unlocked: [...new Set([...current.unlocked, item.id])],
-      selected: item.id,
-    };
+    const next = selectGuardian(current, item.id);
+    if (!next) return;
     profileRef.current = next;
     setProfile(next);
     saveGameProfile(next);
@@ -405,65 +388,7 @@ export default function ActiveBreak({initialAdventure=true}) {
 
           <header className="arcade-setup-heading"><span className="arcade-eyebrow">{adventure?"Operación Estrella":"Arcade rápido"}</span><h1 ref={setupHeading} tabIndex={-1}>{["Elige tu desafío","Encuentra a tu guardián","Todo listo para jugar"][setupStep]}</h1><p>{["Selecciona un nivel. Tu avance se conserva en este dispositivo.","Elige un personaje y conoce su poder. Puedes cambiarlo en cada partida.","Escribe tu alias, revisa los controles y despega."][setupStep]}</p></header>
           <nav className="arcade-setup-nav" aria-label="Preparar partida">{["1. Nivel","2. Guardián","3. Jugar"].map((label,i)=><button key={label} aria-current={setupStep===i?"step":undefined} onClick={()=>setSetupStep(i)}>{label}</button>)}</nav>
-          <div className="arcade-intro" hidden={setupStep!==1}>
-            <div className="arcade-intro-copy">
-              <span className="arcade-eyebrow">
-                {adventure ? "Aventura navideña · 3 niveles" : "Arcade rápido · Edición Navidad"}
-              </span>
-              <h1>
-                {adventure ? "Una aventura." : "Una pausa."}
-                <br />
-                <em>{adventure ? "Tres destinos." : "Una misión navideña."}</em>
-              </h1>
-              <p>
-                Esquiva, dispara y recupera las luces del taller con los
-                guardianes de VictorIA.
-              </p>
-              <div className="arcade-intro-tags">
-                <span>
-                  <Heart size={16} /> 3 vidas
-                </span>
-                <span>
-                  <Shield size={16} /> Escudo y mejoras
-                </span>
-                <span>Un poder por área</span>
-              </div>
-            </div>
-            <div className="arcade-hero-character">
-              <CharacterPreview
-                character={character}
-                image={assets?.images[character.src]}
-                sprite={assets?.images[character.sprite]}
-                animation={assets?.animation}
-                loading={!assets || assets.characterId !== character.id}
-                pose={
-                  previewPose === "power" && power.id === "dash"
-                    ? "dash"
-                    : previewPose
-                }
-                reduced={settings.reduced}
-              />
-              <span>
-                {character.name} <small>{character.area}</small>
-              </span>
-              <label className="arcade-preview-select">
-                Ver movimiento
-                <select
-                  value={previewPose}
-                  onChange={(e) => setPreviewPose(e.target.value)}
-                  aria-label="Movimiento del guardián"
-                >
-                  <option value="idle">Reposo</option>
-                  <option value="moving">Volando</option>
-                  <option value="shooting">Disparando</option>
-                  <option value="power">Usando su poder</option>
-                  <option value="damage">Recibiendo un impacto</option>
-                  <option value="victory">Celebrando</option>
-                  <option value="defeat">Descansando</option>
-                </select>
-              </label>
-            </div>
-          </div>
+          {setupStep===1&&<GuardianSelector profile={profile} onChoose={choose} assets={assets} progress={progress} reduced={settings.reduced} onRetry={()=>setLoadAttempt(n=>n+1)}/>}
           {setupStep===2&&<div className="arcade-setup-summary"><strong>{adventure?MISSIONS.find(m=>m.id===missionId).title:"Arcade rápido"}</strong><br/>{character.name} · {power.name}<br/><small>3 vidas · Pausa disponible · Publicar tu puntaje es opcional</small></div>}
           <section className="arcade-player-card" aria-labelledby="arcade-player-title" hidden={setupStep!==2}>
             <div><span className="arcade-eyebrow">Antes de despegar</span><h2 id="arcade-player-title">¿Cómo te llamas?</h2><p>Tu nombre o alias aparecerá junto a tus puntos cuando elijas publicarlos.</p></div>
@@ -497,105 +422,9 @@ export default function ActiveBreak({initialAdventure=true}) {
           </section>
           <section
             className="arcade-menu"
-            aria-labelledby="arcade-select-title"
-            hidden={setupStep===0}
+            aria-label="Controles de la partida"
+            hidden={setupStep!==2}
           >
-            <div hidden={setupStep!==1}>
-            <div className="arcade-menu-heading">
-              <h2 id="arcade-select-title">Elige a tu guardián</h2>
-              <span>
-                {profile.coins} Data{" "}
-                <small>· progreso en este dispositivo</small>
-              </span>
-            </div>
-            <div className="arcade-catalog-tools">
-              <div role="group" aria-label="Colección de guardianes">
-                <button
-                  type="button"
-                  aria-pressed={catalog === "areas"}
-                  onClick={() => {
-                    setCatalog("areas");
-                    setQuery("");
-                  }}
-                >
-                  Áreas · 12
-                </button>
-                <button
-                  type="button"
-                  aria-pressed={catalog === "legacy"}
-                  onClick={() => {
-                    setCatalog("legacy");
-                    setQuery("");
-                  }}
-                >
-                  Clásicos · 2
-                </button>
-              </div>
-              <input
-                type="search"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                aria-label="Buscar área o guardián"
-                placeholder="Buscar área o guardián"
-              />
-            </div>
-            <div
-              className="arcade-character-list"
-              aria-label="Guardianes disponibles"
-            >
-              {filteredCharacters.map((item) => {
-                const unlocked = profile.unlocked.includes(item.id),
-                  selected = profile.selected === item.id;
-                return (
-                  <button
-                    type="button"
-                    className={`arcade-character-choice ${selected ? "selected" : ""}`}
-                    key={item.id}
-                    aria-pressed={selected}
-                    aria-label={`${item.name} · ${item.area}${unlocked ? "" : ` · ${item.cost} Data`}`}
-                    onClick={() => choose(item)}
-                    style={{ "--guardian-accent": item.accent || "#f4d693" }}
-                  >
-                    {item.thumbnail ? (
-                      <img
-                        className="arcade-choice-portrait"
-                        src={item.thumbnail}
-                        loading="lazy"
-                        decoding="async"
-                        alt=""
-                      />
-                    ) : (
-                      <span className="arcade-choice-legacy" aria-hidden="true">
-                        V
-                      </span>
-                    )}
-                    <span className="arcade-choice-copy">
-                      <span className="arcade-choice-name">
-                        {item.name}
-                        {selected && <Check size={20} />}
-                      </span>
-                      <span className="arcade-choice-area">{item.area}</span>
-                      {!unlocked && (
-                        <small>Desbloquear · {item.cost} Data</small>
-                      )}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-            {filteredCharacters.length === 0 && (
-              <p className="arcade-notice" role="status">
-                No encontramos ese guardián. Prueba con el nombre del área.
-              </p>
-            )}
-            <p className="arcade-selected-power">
-              <strong>{power.name}</strong>
-              <span>{power.description}</span>
-              <small>
-                Shift o botón Poder · recarga {power.cooldown / 60} s
-              </small>
-            </p>
-            </div>
             {notice && (
               <p role="status" className="arcade-notice">
                 {notice}
@@ -638,7 +467,7 @@ export default function ActiveBreak({initialAdventure=true}) {
               <Settings settings={settings} onChange={updateSettings} />
             </details>
           </section>
-          <div className="arcade-setup-footer">{setupStep>0?<button className="arcade-button secondary" onClick={()=>setSetupStep(s=>s-1)}>Anterior</button>:<span/>}{setupStep<2&&<button className="arcade-button" onClick={()=>setSetupStep(s=>s+1)}>{setupStep===0?"Elegir guardián →":"Continuar →"}</button>}</div>
+          <div className="arcade-setup-footer">{setupStep>0?<button className="arcade-button secondary" onClick={()=>setSetupStep(s=>s-1)}>Anterior</button>:<span/>}{setupStep<2&&<button className="arcade-button" onClick={()=>setSetupStep(s=>s+1)}>{setupStep===0?"Elegir guardián →":`Continuar con ${character.name} →`}</button>}</div>
         </>
       )}
 
