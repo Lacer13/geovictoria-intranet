@@ -231,6 +231,11 @@ function AppContent() {
               Hecho para nuestro equipo <Heart size={12} />{" "}
               <span className="footer-dot">·</span> Perú
             </span>
+            <small className="footer-credit">
+              <span>Designed by <strong>Finito</strong></span>
+              <span className="footer-credit-divider" aria-hidden="true">·</span>
+              <span>Powered by <strong>Ariehworkspace</strong></span>
+            </small>
           </footer>
         )}
       </div>

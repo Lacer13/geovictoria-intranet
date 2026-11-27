@@ -697,6 +697,7 @@
 }
 .app-footer {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
@@ -717,6 +718,34 @@
 .footer-dot {
   margin: 0 4px;
   color: #b8c1c4;
+}
+.footer-credit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 2px;
+  color: var(--text-muted);
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+.footer-credit > span {
+  white-space: nowrap;
+}
+.footer-credit strong {
+  font-weight: 600;
+}
+@media (max-width: 480px) {
+  .footer-credit {
+    flex-direction: column;
+    gap: 2px;
+  }
+  .footer-credit-divider {
+    display: none;
+  }
 }
 .page-heading {
   margin: 6px 0 28px;
