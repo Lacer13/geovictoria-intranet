@@ -162,6 +162,7 @@ export default function ActiveBreak({initialAdventure=true}) {
   useEffect(()=>{setupHeading.current?.focus();},[setupStep]);
   const [playerName, setPlayerName] = useState(readPlayerName);
   const [nameError, setNameError] = useState(false);
+  const [showRanking, setShowRanking] = useState(false);
   const nameInput = useRef(null);
   const run = useRef(null);
   const [adventure, setAdventure] = useState(initialAdventure);
@@ -194,8 +195,10 @@ export default function ActiveBreak({initialAdventure=true}) {
   useEffect(() => { void loadScenery(adventure ? missionId : "bosque"); }, [adventure, missionId]);
 
   useEffect(() => {
-    if (mode === "victory" || mode === "gameover")
+    if (mode === "victory" || mode === "gameover") {
+      window.scrollTo({ top: 0, behavior: "instant" });
       resultHeading.current?.focus({ preventScroll: true });
+    }
   }, [mode]);
 
   const changeMode = useCallback((next) => {
@@ -264,6 +267,7 @@ export default function ActiveBreak({initialAdventure=true}) {
     }
     clearInput(input);
     credited.current = false;
+    setShowRanking(false);
     const missionIndex = MISSIONS.findIndex(m => m.id === nextMission);
     if (adventure && (missionIndex < 0 || missionIndex > campaignRef.current.completed.length)) return;
     setMissionId(nextMission);
@@ -600,8 +604,6 @@ export default function ActiveBreak({initialAdventure=true}) {
               <strong>{hud.score}</strong>
               <span>puntos · +{hud.score} Data</span>
             </div>
-            <ScoreSubmitter key={run.current.id} score={hud.score} boardId={run.current.boardId} runId={run.current.id} initialName={run.current.name} onNameChange={setPlayerName} />
-            <ScoreBoard boardId={run.current.boardId} publishedId={run.current.id} />
             <div className="arcade-result-actions">
               {mode === "victory" && game.current.missionId && MISSIONS.findIndex(m => m.id === game.current.missionId) < MISSIONS.length - 1 &&
                 <button className="arcade-button" onClick={() => start(MISSIONS[MISSIONS.findIndex(m => m.id === game.current.missionId) + 1].id)}>Continuar al siguiente nivel</button>}
@@ -612,6 +614,11 @@ export default function ActiveBreak({initialAdventure=true}) {
                 Cambiar guardián
               </button>
             </div>
+            <ScoreSubmitter key={run.current.id} score={hud.score} boardId={run.current.boardId} runId={run.current.id} initialName={run.current.name} onNameChange={setPlayerName} onPublished={() => setShowRanking(true)} />
+            <details className="arcade-result-ranking" open={showRanking} onToggle={event => setShowRanking(event.currentTarget.open)}>
+              <summary>Ver clasificación de {game.current.missionId ? MISSIONS.find(m => m.id === game.current.missionId).title : "Arcade rápido"}</summary>
+              {showRanking && <ScoreBoard boardId={run.current.boardId} publishedId={run.current.id} />}
+            </details>
           </div>
         </section>
       )}
